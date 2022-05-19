@@ -1,11 +1,11 @@
-package kr.or.eum.community.model.dao;
+package kr.or.eum.review.model.dao;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
-@Repository
-public class RequestDao {
+@Service
+public class ReviewDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 

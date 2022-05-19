@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>프로젝트:이음</h1>
+	<h1>프로젝트:이음 입니다.</h1>
 </body>
 </html>

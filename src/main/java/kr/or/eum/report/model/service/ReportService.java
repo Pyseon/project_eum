@@ -8,7 +8,7 @@ import kr.or.eum.report.model.dao.ReportDao;
 @Service
 public class ReportService {
 	@Autowired
-	private ReportDao reportDao;
+	private ReportDao dao;
 	
 	
 }

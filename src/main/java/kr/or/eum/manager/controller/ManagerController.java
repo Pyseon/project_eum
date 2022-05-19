@@ -8,7 +8,7 @@ import kr.or.eum.manager.model.service.ManagerService;
 @Controller
 public class ManagerController {
 	@Autowired
-	private ManagerService service;
+	private ManagerService managerService;
 	
 	
 }

@@ -9,6 +9,5 @@ import kr.or.eum.ideamarket.model.dao.IdeamarketDao;
 public class IdeamarketService {
 	@Autowired
 	private IdeamarketDao ideamarketDao;
-		
-		
+			
 	}

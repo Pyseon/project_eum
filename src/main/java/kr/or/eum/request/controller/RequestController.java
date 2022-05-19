@@ -1,9 +1,9 @@
-package kr.or.eum.community.controller;
+package kr.or.eum.request.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
-import kr.or.eum.community.model.service.RequestService;
+import kr.or.eum.request.model.service.RequestService;
 
 
 @Controller

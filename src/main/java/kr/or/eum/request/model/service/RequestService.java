@@ -1,4 +1,4 @@
-package kr.or.eum.community.model.service;
+package kr.or.eum.request.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

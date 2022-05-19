@@ -8,7 +8,7 @@ import kr.or.eum.report.model.service.ReportService;
 @Controller
 public class ReportController {
 	@Autowired
-	private ReportService reportService;
+	private ReportService service;
 	
 	
 }

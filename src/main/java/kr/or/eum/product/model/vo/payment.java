@@ -1,4 +1,4 @@
-package kr.or.eum.payment.model.vo;
+package kr.or.eum.product.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

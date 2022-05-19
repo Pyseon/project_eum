@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Requeste {
+public class Request {
 	
 	private int memberNo;
 	private int reqNo;

@@ -6,8 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
-public class RequesteService {
+public class RequestService {
 	@Autowired
-	private RequesteService requesteService;
+	private RequestService requestService;
 
 }

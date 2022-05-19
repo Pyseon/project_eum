@@ -8,7 +8,7 @@ import kr.or.eum.manager.model.dao.ManagerDao;
 @Service
 public class ManagerService {
 	@Autowired
-	private ManagerDao dao;
+	private ManagerDao managerDao;
 	
 	
 }

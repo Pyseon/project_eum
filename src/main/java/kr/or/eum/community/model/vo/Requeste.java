@@ -1,4 +1,4 @@
-package kr.or.eum.requeste.model.vo;
+package kr.or.eum.community.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

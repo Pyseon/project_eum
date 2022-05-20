@@ -4,12 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>프로젝트 : 이음</title>
 </head>
 <body>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>	
 	<h1>프로젝트:이음 입니다.</h1>
 	<h1>프로젝트:이음 입니다2</h1>
 	<h1>프로젝트:이음 입니다3</h1>
-	<h1>프로젝트:이음 입니다4</h1>
+	<h1>프로젝트:이음 입니다455</h1>
 </body>
 </html>

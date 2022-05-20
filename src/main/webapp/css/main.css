@@ -99,7 +99,7 @@ h6 {
 }
 
 .navbar-toggle {
-  background-color: #000;
+  background-color: #3865f2;
 }
 
 a#scrollUp {
@@ -146,7 +146,7 @@ a#scrollUp i {
 
 .header-middle .container .row .col-sm-8 {
   padding-right: 0;
-  padding-top: 40px;
+  padding-top: 70px;
 }
 
 .usa {
@@ -365,6 +365,21 @@ ul.sub-menu2 {
 **************************/
 
 #footer {
+  background: #fff;
+}
+.customercenter ul li:first-child {
+  font-size: 20px;
+}
+
+.eum_logo {
+  background-image: url(/img/main-logo-eum.png);
+  width: 200px;
+  height: 180px;
+  background-size: 140px;
+  background-repeat: no-repeat;
+}
+.footer-widget .container>.row {
+  text-align: left;
   background: #f0f0e9;
 }
 
@@ -518,7 +533,7 @@ ul.sub-menu2 {
 
 .single-widget ul li a:hover {
   background: none;
-  color: #fe980f2;
+  color: ##3865f2;
   font-weight: bold;
   text-decoration: underline;
 }

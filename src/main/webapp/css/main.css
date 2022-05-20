@@ -431,6 +431,7 @@ ul.sub-menu2 {
   margin-bottom: 10px;
   border: 2px solid #ccccc6;
   border-radius: 3px;
+  z-index: 5;
 }
 
 .overlay-icon {
@@ -455,6 +456,7 @@ ul.sub-menu2 {
   position: relative;
   top: 50%;
   margin-top: -20px;
+  z-index: 5;
 }
 
 .video-gallery a:hover .overlay-icon {
@@ -482,6 +484,7 @@ ul.sub-menu2 {
   margin-top: 30px;
   position: relative;
   overflow: hidden;
+  z-index: 5;
 }
 .address img {
   width: 100%;
@@ -521,7 +524,7 @@ ul.sub-menu2 {
 
 .single-widget ul li a {
   color: #8c8c88;
-  font-family: "Roboto", sans-serif;
+  font-family: fs-light;
   font-size: 14px;
   font-weight: 300;
   padding: 5px 0;

@@ -13,4 +13,5 @@
 	<h1>프로젝트:이음 입니다3</h1>
 	<h1>프로젝트:이음 입니다455</h1>
 </body>
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>	
 </html>

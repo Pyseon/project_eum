@@ -163,7 +163,7 @@
                         <li><a href="#">물류관리</a></li>
                       </ul>
                     </li>
-                      <li><a href="#">심리/헬스
+                      <li><a href="#">심리/헬스</a>
                         <ul role="menu" class="sub-menu2">
                           <li><a href="#">마음건강</a></li>
                           <li><a href="#">MBTI</a></li>
@@ -175,7 +175,7 @@
                           <li><a href="#">가족</a></li>
                         </ul>
                       </a></li>
-                      <li><a href="#">학습
+                      <li><a href="#">학습</a>
                         <ul role="menu" class="sub-menu2">
                           <li><a href="#">대학교학습</a></li>
                           <li><a href="#">고등학교학습</a></li>
@@ -197,7 +197,7 @@
                           <li><a href="#">신용상담</a></li>
                         </ul>
                       </li>
-                      <li><a href="#">라이프
+                      <li><a href="#">라이프</a>
                         <ul role="menu" class="sub-menu2">
                           <li><a href="#">패션/스타일</a></li>
                           <li><a href="#">인테리어</a></li>
@@ -260,7 +260,7 @@
                           <li><a href="#">영상 촬영/편집</a></li>
                         </ul>
                       </li>
-                      <li><a href="#">자기계발
+                      <li><a href="#">자기계발</a>
                         <ul role="menu" class="sub-menu2">
                           <li><a href="#">코칭</a></li>
                           <li><a href="#">취업</a></li>

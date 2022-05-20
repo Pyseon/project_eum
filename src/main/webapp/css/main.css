@@ -99,7 +99,7 @@ h6 {
 }
 
 .navbar-toggle {
-  background-color: #3865f2;
+  background-color: #000;
 }
 
 a#scrollUp {
@@ -146,7 +146,7 @@ a#scrollUp i {
 
 .header-middle .container .row .col-sm-8 {
   padding-right: 0;
-  padding-top: 70px;
+  padding-top: 40px;
 }
 
 .usa {
@@ -245,7 +245,6 @@ a#scrollUp i {
 .mainmenu ul li:nth-child(n + 2):not(.sub-menu > li) a:hover,
 .mainmenu ul li:nth-child(n + 2) a.active {
   background: none;
-  background: none;
   font-weight: 700;
   border-bottom: 3px solid #3865f2;
 }
@@ -282,6 +281,15 @@ a#scrollUp i {
   animation: fadeInUp 400ms;
 }
 
+ul.sub-menu > li:hover > ul.sub-menu2 {
+  display: block;
+  -webkit-animation: fadeInUp 400ms;
+  -moz-animation: fadeInUp 400ms;
+  -ms-animation: fadeInUp 400ms;
+  -o-animation: fadeInUp 400ms;
+  animation: fadeInUp 400ms;
+}
+
 ul.sub-menu {
   position: absolute;
   top: 30px;
@@ -296,6 +304,22 @@ ul.sub-menu {
   display: none;
   z-index: 999;
 }
+ul.sub-menu2 {
+  position: absolute;
+  top: 0px;
+  left: 220px;
+  background: #fff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 220px;
+  -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 3px rgba(65, 28, 167, 0.1);
+  display: none;
+  z-index: 999;
+}
+
+
 
 .dropdown ul.sub-menu li .active {
   color: #3865f2;
@@ -341,21 +365,7 @@ ul.sub-menu {
 **************************/
 
 #footer {
-  background: #fff;
-}
-.customercenter ul li:first-child {
-  font-size: 20px;
-}
-
-.eum_logo {
-  background-image: url(/img/main-logo-eum.png);
-  width: 200px;
-  height: 180px;
-  background-size: 140px;
-  background-repeat: no-repeat;
-}
-.footer-widget .container>.row {
-  text-align: left;
+  background: #f0f0e9;
 }
 
 .footer-top .container {
@@ -508,7 +518,7 @@ ul.sub-menu {
 
 .single-widget ul li a:hover {
   background: none;
-  color: #3865f2;
+  color: #fe980f2;
   font-weight: bold;
   text-decoration: underline;
 }

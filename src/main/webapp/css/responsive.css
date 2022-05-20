@@ -37,7 +37,7 @@
 
 /* sm */
 @media (min-width: 768px) and (max-width: 991px) {
-   
+
 .shop-menu ul li a{
 	padding-left: 0;
 }
@@ -163,7 +163,7 @@
 }
 
 .mainmenu ul li{
-	background: rgba(0, 0, 0, 0.5);
+	background: rgba(0, 0, 0, 0.2);
     padding-top: 15px;
 	padding-bottom: 0;
 }
@@ -195,6 +195,15 @@ ul.sub-menu{
   background: transparent;
   box-shadow: none;
   top: 0;
+}
+ul.sub-menu2{
+	position: relative;
+  	width: auto;
+  	display: none;
+  	background: transparent;
+  	box-shadow: none;
+	  left: 0;
+  	top: 0;
 }
 
 .sub-menu li{
@@ -385,7 +394,6 @@ ul.sub-menu{
   top: 0;
 }
 
-
 .mainmenu .navbar-nav li ul.sub-menu li{
 	background: transparent;
 	padding-bottom:0;
@@ -399,7 +407,6 @@ ul.sub-menu{
   animation: none;
   box-shadow: none;
 }
-
 
 .item{
 	padding-left: 0;

@@ -5,172 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!-- 구글 폰트-->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Rubik+Moonrocks&display=swap"
-  rel="stylesheet"
-/>
-<link
-  href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
-  rel="stylesheet"
-  type="text/css"
-/>
-<!-- 구글 아이콘 -->
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
-<!-- jquery -->
-<script src="js/jquery-3.6.0.js"></script>
-<!-- 기본 js -->
-<script src="js/default.js"></script>
-<script src="js/sweetalert2.all.min.js"></script>
-<link href="css/bootstrap.min.css" rel="stylesheet" />
-<link href="css/font-awesome.min.css" rel="stylesheet" />
-<link href="css/prettyPhoto.css" rel="stylesheet" />
-<link href="css/price-range.css" rel="stylesheet" />
-<link href="css/animate.css" rel="stylesheet" />
-<link href="css/main.css" rel="stylesheet" />
-<link href="css/responsive.css" rel="stylesheet" />
-<!--[if lt IE 9]>
-  <script src="js/html5shiv.js"></script>
-  <script src="js/respond.min.js"></script>
-<![endif]-->
-<link rel="shortcut icon" href="images/ico/favicon.ico" />
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="144x144"
-  href="images/ico/apple-touch-icon-144-precomposed.png"
-/>
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="114x114"
-  href="images/ico/apple-touch-icon-114-precomposed.png"
-/>
-<link
-  rel="apple-touch-icon-precomposed"
-  sizes="72x72"
-  href="images/ico/apple-touch-icon-72-precomposed.png"
-/>
-<link
-  rel="apple-touch-icon-precomposed"
-  href="images/ico/apple-touch-icon-57-precomposed.png"
-/>
-<!-- 기본 CSS -->
-<link rel="stylesheet" href="css/default_city.css" />
-<link rel="stylesheet" href="css/sweetalert2.min.css" />
-<style>
-  #login-btn {
-    font-family: fs-regular;
-  }
-
-  #nav-all-category {
-    font-family: fs-bold;
-    color: #555;
-  }
-
-</style>
-</head>
-<!--/head-->
-
-<body>
-<header id="header">
-  <!--header-->
-  <div class="header-middle">
-    <!--header-middle-->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-4">
-          <div class="logo pull-left">
-            <a href="/"
-              ><img src="./img/main-logo-eum.png" alt="" style="width: 120px; vertical-align: middle; margin-top: 31px;"
-            /></a>
-          </div>
-        </div>
-        <div class="col-sm-8">
-          <div class="shop-menu pull-right">
-            <ul class="nav navbar-nav">
-              <li>
-                <a href="#" style="font-family: fs-bold; color: #555"
-                  >전문가 등록</a
-                >
-              </li>
-              <li>
-                <a href="#">회원가입</a>
-              </li>
-              <li>
-                <button class="btn bc1 bs6" id="login-btn">로그인</button>
-              </li>
-            </ul>
-          </div>
-          <div class="search_box pull-right">
-            <input type="text" placeholder="상담,클래스,지식마켓 검색" />
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/header-middle-->
-
-  <div class="header-bottom">
-    <!--header-bottom-->
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-9">
-          <div class="navbar-header">
-            <button
-              type="button"
-              class="navbar-toggle"
-              data-toggle="collapse"
-              data-target=".navbar-collapse"
-            >
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-          </div>
-          <div class="mainmenu pull-left">
-            <ul class="nav navbar-nav collapse navbar-collapse">
-              <li class="dropdown">
-                <a href="#" id="nav-all-category"
-                  >전체 카테고리<i class="fa fa-angle-down"></i
-                ></a>
-                <ul role="menu" class="sub-menu">
-                  <li><a href="shop.html">법률</a></li>
-                  <li><a href="product-details.html">세무</a></li>
-                  <li><a href="checkout.html">비즈니스</a></li>
-                  <li><a href="cart.html">Cart</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="login.html">Login</a></li>
-                  <li><a href="login.html">Login</a></li>
-                </ul>
-              </li>
-              <li><a href="404.html">전문가 상담</a></li>
-              <li><a href="404.html">클래스</a></li>
-              <li><a href="contact-us.html">지식마켓</a></li>
-              <li><a href="contact-us.html">커뮤니티</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-sm-3" style="text-align: right">
-          <a href="login.html" class="fc-1"
-            >원하시는없나요? 개설요청을 하세요!</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/header-bottom-->
-</header>
-<!--/header-->
+<%@ include file="/WEB-INF/views/common/header.jsp" %>	
    <div class="page-content">
       <div class="flex-wrap">
          <div>
@@ -428,6 +263,79 @@
          </div>
        </div>
        <br />
+ <!-- 커뮤니티 페이지처리 -->
+ 
+<div class="card-wrap">
+   <img class="card-img " src="./img/promo_big.jpg" alt="" onload="imgOnload(this)" style="display: inline;">
+  <figcaption> 
+   <div class="card-date-right card-reg">2022.05.21</div>
+       <div class="card-caption card-flex">
+            <span class="card-category fs-bold">요즘뭐하니</span>
+            <div class="card-icon card-flex">
+               <div class="card-like">
+                  <i class="fa-solid fa-heart"></i>
+                   <span class="noto-sb mb-1 fs-bold">7</span>
+               </div>
+               <div class="card-comment">
+                  <i class="fa-solid fa-message"></i>
+                   <span class="noto-sb mb-1 fs-bold">8</span>
+               </div>
+           </div>
+       </div>
+       <div class="card-title fs-bold">요즘 나의 은밀한 취미</div>
+       <div class="card-content">가족들 모르게 몰래 야식을 먹고 있습니다. 아주 맛있습니다 즐거워요! 행복합니다!! 빨리 야식두번 드세요 좋습니다 배달시키세요 당장</div>
+       <div class="card-info card-flex">
+           <div class="card-profile">
+              <div class="card-user-img-wrap">
+                 <img class="card-user-img" src="./img/toeic.png" alt="">
+               </div>
+               <span class="card-user-name">다이어터</span>
+               
+           </div>
+           <div class="card-readcount">
+               <span class="mr-1">조회수</span>
+               <span>912</span>
+           </div>
+       </div>
+  </figcaption> 
+</div>
+
+<div class="card-wrap">
+   <img class="card-img " src="./img/promo_big.jpg" alt="" onload="imgOnload(this)" style="display: inline;">
+  <figcaption> 
+       <div class="card-caption card-flex">
+            <span class="card-category fs-bold">요즘뭐하니</span>
+            <div class="card-icon card-flex">
+               <div class="card-like">
+                  <i class="fa-solid fa-heart"></i>
+                   <span class="noto-sb mb-1 fs-bold">7</span>
+               </div>
+               <div class="card-comment">
+                  <i class="fa-solid fa-message"></i>
+                   <span class="noto-sb mb-1 fs-bold">8</span>
+               </div>
+           </div>
+       </div>
+       <div class="card-title fs-bold">요즘 나의 은밀한 취미</div>
+       <div class="card-content">가족들 모르게 몰래 야식을 먹고 있습니다. 아주 맛있습니다 즐거워요! 행복합니다!! 빨리 야식두번 드세요 좋습니다 배달시키세요 당장</div>
+       <div class="card-info card-flex">
+           <div class="card-profile">
+              <div class="card-user-img-wrap">
+                 <img class="card-user-img" src="./img/toeic.png" alt="">
+               </div>
+               <span class="card-user-name">다이어터</span>
+               
+           </div>
+           <div class="card-readcount">
+               <span class="mr-1">조회수</span>
+               <span>912</span>
+           </div>
+       </div>
+       <div class="card-date-right card-reg">2022.05.21</div>
+  </figcaption> 
+</div>
+
+       
        <div>
          <h2>댓글출력</h2>
            <div class="comments-area">
@@ -660,80 +568,7 @@
          </div>
          <!-- 예약취소 modal 끝 -->
 
-
-      <!--Footer-->
-     <footer id="footer">
-      <div class="footer-widget">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-2">
-              <div class="single-widget eum_logo">
-                <h2></h2>
-                <ul class="nav nav-pills nav-stacked">
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="single-widget">
-                <h2></h2>
-                <ul class="nav nav-pills nav-stacked">
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="single-widget">
-                <h2></h2>
-                <ul class="nav nav-pills nav-stacked">
-                  <li></li>
-                  <li></li>
-                  <li></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="single-widget customercenter">
-                <h2>고객센터</h2>
-                <ul class="nav nav-pills nav-stacked">
-                  <li>070-0000-0000</li>
-                  <li>평일 09:00~16:30</li>
-                  <li>주말, 공휴일 휴무</li>
-                </ul>
-              </div>
-            </div>
-			<div class="col-sm-2">
-              <div class="single-widget">
-                <h2>이음</h2>
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#">서비스소개</a></li>
-                  <li><a href="#">이음 유튜브</a></li>
-                  <li><a href="#">이음 인스타그램</a></li>
-                  <li><a href="#">채용정보</a></li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-sm-2">
-              <div class="single-widget">
-                <h2>지원</h2>
-                <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#">공지사항</a></li>
-                  <li><a href="#">자주묻는질문</a></li>
-                  <li><a href="#">1:1문의</a></li>
-                  <li><a href="#">이용약관</a></li>
-                  <li><a href="#">개인정보처리방침</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!--/Footer-->
-
+<%@ include file="/WEB-INF/views/common/footer.jsp" %>	
+	<script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous"></script>
 </body>
 </html>

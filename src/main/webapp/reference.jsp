@@ -70,6 +70,7 @@
     font-family: fs-bold;
     color: #555;
   }
+
 </style>
 </head>
 <!--/head-->
@@ -620,7 +621,7 @@
             <div id="test-modal" class="modal-bg">
             <div class="modal-wrap">
             <div class="modal-head">
-            <h2>예약을 정말로 취소하시겠습니까?</h2>
+            <h2>신고하시겠습니까?</h2>
             <br>
             </div>
             <div class="modal-content">
@@ -658,10 +659,10 @@
             </div>
          </div>
          <!-- 예약취소 modal 끝 -->
-     <footer>
-     <footer id="footer">
-      <!--Footer-->
 
+
+      <!--Footer-->
+     <footer id="footer">
       <div class="footer-widget">
         <div class="container">
           <div class="row">
@@ -705,7 +706,7 @@
                 </ul>
               </div>
             </div>
-<div class="col-sm-2">
+			<div class="col-sm-2">
               <div class="single-widget">
                 <h2>이음</h2>
                 <ul class="nav nav-pills nav-stacked">
@@ -733,6 +734,6 @@
       </div>
     </footer>
     <!--/Footer-->
-    </footer>
+
 </body>
 </html>

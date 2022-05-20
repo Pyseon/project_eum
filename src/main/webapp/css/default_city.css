@@ -1,0 +1,736 @@
+/* 사용할 font 선언 */
+@font-face {
+  font-family: ns-thin;
+  src: url(../font/NotoSansKR-Thin.otf);
+}
+@font-face {
+  font-family: ns-light;
+  src: url(../font/NotoSansKR-Light.otf);
+}
+@font-face {
+  font-family: ns-m;
+  src: url(../font/NotoSansKR-Medium.otf);
+}
+@font-face {
+  font-family: ns-bold;
+  src: url(../font/NotoSansKR-Bold.otf);
+}
+@font-face {
+  font-family: ns-black;
+  src: url(../font/NotoSansKR-Black.otf);
+}
+@font-face {
+  font-family: ns-regular;
+  src: url(../font/NotoSansKR-Regular.otf);
+}
+
+@font-face {
+  font-family: fs-thin;
+  src: url(../font/SpoqaHanSansNeo-Thin.ttf);
+}
+@font-face {
+  font-family: fs-light;
+  src: url(../font/SpoqaHanSansNeo-Light.ttf);
+}
+@font-face {
+  font-family: fs-m;
+  src: url(../font/SpoqaHanSansNeo-Medium.ttf);
+}
+@font-face {
+  font-family: fs-bold;
+  src: url(../font/SpoqaHanSansNeo-Bold.ttf);
+}
+
+@font-face {
+  font-family: fs-regular;
+  src: url(../font/SpoqaHanSansNeo-Regular.ttf);
+}
+
+/* 전체태그 기본 margin, padding 제거 */
+/* 기본 글씨 색 및 폰트 설정 
+
+전체기본폰트색상: #333
+
+*/
+
+/*
+검은색상 : #333333
+대표파란색: #3865f2
+투명한옅은하늘: #cadbee
+초록계통: #1abc9c
+흰색: #fff
+노랑계통: #ff990d
+밝은노랑: #f2b81f
+다홍색: #f05454
+*/
+
+/* page - content */
+
+.page-content {
+  width: 1200px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  flex-grow: 1;
+}
+.page-title {
+  font-family: ns-bold;
+  padding: 20px 0px;
+  font-size: 1.5rem;
+}
+footer {
+  padding: 50px;
+  border-top: 1px solid #252a34;
+}
+footer > .footer-content {
+  width: 1200px;
+  margin: 0 auto;
+  padding: 0px 10px;
+}
+footer > .footer-content * {
+  font-size: 14px;
+}
+footer > .footer-content > ul {
+  list-style-type: none;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+footer > .footer-content > ul > li {
+  float: left;
+}
+footer > .footer-content > ul > li > a {
+  padding-right: 20px;
+}
+
+/* font 클래스*/
+.f-thin {
+  font-family: ns-thin;
+}
+.f-light {
+  font-family: ns-light;
+}
+.f-medium {
+  font-family: ns-m;
+}
+.f-bold {
+  font-family: ns-bold;
+}
+.f-black {
+  font-family: ns-black;
+}
+.f-title {
+  font-family: GFS Didot, serif;
+}
+
+.fs-thin {
+  font-family: fs-thin;
+}
+.fs-light {
+  font-family: fs-light;
+}
+.fs-medium {
+  font-family: fs-m;
+}
+.fs-bold {
+  font-family: fs-bold;
+}
+.fs-full {
+  font-family: ns-black;
+}
+
+/* 글씨 색 */
+.fc-1 {
+  color: #333333;
+}
+.fc-2 {
+  color: #555555;
+}
+.fc-3 {
+  color: #666666;
+}
+.fc-4 {
+  color: #a7a7a7a7;
+}
+.fc-5 {
+  color: #fff;
+}
+.fc-6 {
+  color: #432f31;
+}
+.fc-7 {
+  color: #3865f2;
+}
+.fc-8 {
+  color: #cadbee;
+}
+.fc-9 {
+  color: #f05454;
+}
+.fc-10 {
+  color: #ff990d;
+}
+
+/* 배경 색*/
+.bg-1 {
+  background-color: #333333;
+}
+.bg-2 {
+  background-color: #555555;
+}
+.bg-3 {
+  background-color: #666666;
+}
+.bg-4 {
+  background-color: #a7a7a7a7;
+}
+.bg-5 {
+  background-color: #fff;
+}
+.bg-6 {
+  background-color: #1abc9c;
+}
+.bg-7 {
+  background-color: #3865f2;
+}
+.bg-8 {
+  background-color: #cadbee;
+}
+.bg-9 {
+  background-color: #f05454;
+}
+.bg-10 {
+  background-color: #ff990d;
+}
+.bg-11 {
+  background-color: #f2b81f;
+}
+.bg-12 {
+  background-color: #f2bf38;
+}
+.bg-13 {
+  background-color: #f2e21f;
+}
+.bg-14 {
+  background-color: #ff990d;
+}
+
+/* 벨트 디자인*/
+.belt {
+  padding-top: 120px;
+  margin-bottom: 30px;
+  background: url(../img/belt.png) no-repeat 50% 60px;
+  text-align: center;
+  font-family: "GFS Didot", serif;
+  font-size: 43px;
+  font-weight: 400;
+}
+
+/* 테이블 디자인 */
+.tbl {
+  width: 100%;
+  border-spacing: 0px;
+  border-collapse: collapse;
+}
+.tbl th,
+.tbl td {
+  padding: 1rem;
+  text-align: center;
+}
+.tbl .tr-1 {
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+}
+.tbl .tr-2 {
+  background-color: #fff;
+}
+.tbl .tr-5 {
+  background-color: rgba(172, 158, 137, 0.15);
+}
+.tbl .tr-5 th,
+.tbl .tr-5 td {
+  /* color: #fff; */
+}
+
+.tbl.tbl-hover .tr-2:hover {
+  background-color: rgba(202, 219, 238, 0.35);
+}
+.tbl.tbl-hover .tr-3:hover {
+  background-color: rgba(172, 158, 137, 0.15);
+}
+.tbl.tbl-hover .tr-4:hover {
+  background-color: rgba(202, 219, 238, 0.35);
+}
+
+/* 버튼 디자인 */
+.btn {
+  border: none;
+  padding: 1rem;
+  display: inline-block;
+  box-sizing: border-box;
+  transition-duration: 0.5s;
+  font-size: 16px;
+  font-family: fs-light;
+}
+.bc1 {
+  background-color: #3865f2;
+  color: #fff;
+  font-weight: bold;
+  box-sizing: border-box;
+  border: 3px solid #3865f2;
+}
+.bc1:hover:not(#login-btn) {
+  background-color: #fff;
+  cursor: pointer;
+  border: 3px solid #3865f2;
+  color: #3865f2;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.bc2 {
+  background-color: #f05454;
+  color: #fff;
+  font-weight: bold;
+  box-sizing: border-box;
+  border: 1px solid #f05454;
+}
+.bc2:hover {
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid #e83434;
+  color: #e83434;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.bc3 {
+  background-color: #ccc;
+  color: #fff;
+  font-weight: bold;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+}
+.bc3:hover {
+  background-color: #fff;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  color: #ccc;
+  font-weight: bold;
+  box-sizing: border-box;
+}
+.bc4 {
+  background-color: #ff990d;
+  color: #fff;
+  font-weight: bold;
+  box-sizing: border-box;
+  border: 1px solid #ff990d;
+}
+.bc4:hover {
+  background-color: #432f31;
+  cursor: pointer;
+}
+.bc5 {
+  background-color: #1abc9c;
+  color: #fff;
+}
+.bc5:hover {
+  background-color: #666;
+  cursor: pointer;
+}
+.bc11 {
+  background-color: yellowgreen;
+  color: #fff;
+}
+.bc11:hover {
+  background-color: green;
+  cursor: pointer;
+}
+.bs1 {
+  padding: 1rem;
+}
+.bs2 {
+  padding: 1.5rem;
+  font-size: 1.1em;
+}
+.bs3 {
+  padding: 2rem;
+  font-size: 1.2em;
+}
+.bs4 {
+  width: 100%;
+  padding: 2rem;
+  font-size: 2.1em;
+}
+.bs5 {
+  padding: 2.5px 10px;
+  border-radius: 3px;
+  font-size: 1em;
+}
+.bs6 {
+  padding: 5px 28px;
+  border-radius: 4px;
+  font-size: 1.2em;
+}
+.bs7 {
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+
+/* image 디자인 */
+.img-0 {
+  margin: 10px;
+  width: 150px;
+  height: 90px;
+}
+.img-1 {
+  margin: 20px;
+  width: 450px;
+  height: 300px;
+}
+
+/* input 디자인 */
+.input-form {
+  width: 100%;
+  display: block;
+  padding: 0.8rem;
+  background-color: #fff;
+  outline: none;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+.input-form:focus {
+  box-shadow: 0 0 0 0.1rem #eee;
+}
+
+textarea.input-form {
+  resize: none;
+  min-height: 300px;
+}
+.input-form:read-only:not(select),
+.input-form:disabled {
+  background-color: #f7f7f9;
+}
+/* 페이징 디자인 */
+.pagination {
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.pagination > li {
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  overflow: hidden;
+}
+.pagination.circle-style > li {
+  border-radius: 0%;
+}
+.pagination > li > a.page-item {
+  display: block;
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  color: #333333;
+}
+.pagination > li > a.page-item > span.material-icons {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: 40px;
+}
+
+.pagination .page-item.active-page {
+  background-color: #fff;
+  color: #3865f2;
+  border: 2px solid #3865f2;
+  box-sizing: border-box;
+}
+
+.pagination .page-item.active-page {
+  background-color: #3865f2;
+  color: #fff;
+  /* border: 2px solid #3865f2; */
+  box-sizing: border-box;
+}
+
+/*게시물 표현*/
+.posting-wrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+.posting-wrap .posting-item {
+  box-sizing: border-box;
+  width: calc(100% / 5);
+  padding: 13px;
+}
+.posting-wrap .posting-item .posting-img img {
+  width: 100%;
+  height: 200px;
+}
+.posting-wrap .posting-item .posting-content {
+  width: 80%;
+  margin: 0 auto;
+}
+.posting-wrap .posting-item:hover {
+  box-shadow: 0 1px 8px 0 rgba(12, 8, 192, 0.159);
+}
+/* 댓글 */
+.posting-comment {
+  display: flex;
+  border-top: 2px solid #ccc;
+
+  list-style-type: none;
+}
+.posting-comment > li {
+  box-sizing: border-box;
+}
+.posting-comment > li:first-child {
+  width: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+  border-right: 1px solid #ccc;
+}
+.posting-comment.reply > li:first-child {
+  width: 20%;
+}
+.posting-comment > li:first-child .material-icons {
+  font-size: 80px;
+  color: #ccc;
+}
+.posting-comment.reply > li:first-child .material-icons:first-child {
+  font-size: 40px;
+  color: #ccc;
+}
+.posting-comment.reply > li:last-child {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+}
+.posting-comment > li:last-child {
+  display: flex;
+  flex-direction: column;
+  width: 85%;
+}
+.posting-comment > li:last-child > p {
+  width: 100%;
+  padding: 5px;
+  box-sizing: border-box;
+}
+.posting-comment > li:last-child > .comment-info > span {
+  padding: 0px 10px;
+}
+.posting-comment > li:last-child > .comment-info > span:not(:last-child) {
+  border-right: 2px solid #ccc;
+}
+.posting-comment > li:last-child > .comment-content {
+  padding: 0px 15px;
+}
+.posting-comment > li:last-child > .comment-link {
+  text-align: right;
+}
+.posting-comment > li:last-child > .comment-link > a {
+  margin: 0px 5px;
+}
+.posting-comment > li:last-child > .comment-link > a:hover {
+  text-decoration: underline;
+}
+
+/*-------------------------*/
+.review {
+  width: 950px;
+  margin: 0 auto;
+}
+.review-info > td:first-child {
+  padding-top: 30px;
+  padding-right: 25px;
+}
+.review-info > td:first-child > img {
+  width: 70px;
+  height: 70px;
+}
+.review-info > td:first-child > div {
+  text-align: center;
+  font-size: 18px;
+}
+.star-wrap {
+  width: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.star-on {
+  position: absolute;
+  left: 0;
+  width: 135px;
+  overflow: hidden;
+}
+.star-on > div {
+  width: 150px;
+  overflow: hidden;
+}
+.star-wrap span {
+  font-size: 30px;
+  float: left;
+  color: #ff990d;
+}
+.star-wrap > span:last-of-type {
+  color: rgb(211, 84, 0);
+  margin-left: 10px;
+  font-size: 25px;
+  font-weight: 900;
+}
+.review-book-info {
+  box-sizing: border-box;
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 7px;
+  padding-left: 20px;
+}
+.review-book-info * {
+  color: rgb(94, 94, 94);
+  font-size: 17px;
+}
+.review-info > td:last-child {
+  width: 200px;
+}
+.review-info > td:last-child > button {
+  width: 110px;
+  height: 40px;
+  float: right;
+  border: none;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: 500;
+}
+.review-content > td {
+  border: 1px solid rgb(204, 204, 204);
+  border-radius: 5px;
+  color: rgb(94, 94, 94);
+  font-size: 21px;
+  padding-left: 10px;
+  font-weight: 500;
+}
+.review-content > td > p {
+  margin: 0;
+  padding-top: 10px;
+}
+.review-image {
+  min-height: 10px;
+}
+.review-image > img {
+  padding-top: 30px;
+  padding-left: 10px;
+  padding-bottom: 20px;
+  width: 255px;
+  height: 150px;
+}
+
+/*모달*/
+.modal-bg {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  align-items: center;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+}
+.modal-wrap {
+  margin-top: 180px;
+  padding: 30px 60px;
+  width: 520px;
+  background: #fff;
+  height: auto;
+}
+.modal-wrap div {
+  padding: 0.5rem;
+}
+.modal-head > h2 {
+  color: rgb(221, 78, 34);
+}
+.modal-wrap div:not(:last-child) {
+  border-bottom: 2px solid #ccc;
+}
+.modal-wrap div.modal-head {
+  position: relative;
+}
+.close-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 30px;
+}
+.close-icon:hover {
+  cursor: pointer;
+}
+.modal-tbl-th {
+  text-align: left;
+  padding-bottom: 20px;
+}
+.modal-tbl-td {
+  padding-left: 20px;
+  padding-bottom: 20px;
+}
+.modal-btns-container {
+  display: flex;
+}
+#modal-btns-item {
+  border-radius: 6px;
+  margin: 0 auto;
+  font-weight: bold;
+}
+.modal-foot > p {
+  text-align: left;
+  padding-top: 5px;
+  padding-bottom: 20px;
+  font-size: medium;
+}
+
+/*푸터*/
+
+footer {
+  background-color: rgb(51, 51, 51);
+  padding: 0;
+}
+.footerBox {
+  width: 1400px;
+  height: 150px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.footer-left {
+  float: left;
+  width: 900px;
+  margin-top: 60px;
+}
+.footer-left > p {
+  font-family: ns-m;
+  font-size: 12px;
+  color: rgb(167, 167, 167);
+}
+.footer-right-wrap {
+  float: left;
+  width: 450px;
+  text-align: center;
+}
+.footer-right-wrap > .footerLogo {
+  width: 250px;
+  height: 50px;
+  margin-top: 30px;
+}
+.footer-right-bottom {
+  overflow: hidden;
+  margin-top: 17px;
+  margin-left: 80px;
+  text-align: center;
+}
+.footer-right-bottom > ul > li {
+  float: left;
+  margin: 0 7px;
+}
+.footer-right-bottom > ul > li > a {
+  font-size: 13px;
+  color: rgb(167, 167, 167);
+}

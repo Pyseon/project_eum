@@ -429,57 +429,93 @@
        <br />
        <div>
          <h2>댓글출력</h2>
-         <ul class="posting-comment">
-           <li>
-             <span class="material-icons">account_box</span>
-           </li>
-           <li>
-             <p class="comment-info">
-               <span>user01</span>
-               <span>2022-03-21 09:40</span>
-             </p>
-             <p class="comment-content">댓글내용댓글내용댓글내용</p>
-             <p class="comment-link">
-               <a href="#">수정</a>
-               <a href="#">삭제</a>
-               <a href="#">답글달기</a>
-             </p>
-           </li>
-         </ul>
-         <ul class="posting-comment">
-           <li>
-             <span class="material-icons">account_box</span>
-           </li>
-           <li>
-             <p class="comment-info">
-               <span>user01</span>
-               <span>2022-03-21 09:40</span>
-             </p>
-             <p class="comment-content">댓글내용댓글내용댓글내용</p>
-             <p class="comment-link">
-               <a href="#">수정</a>
-               <a href="#">삭제</a>
-               <a href="#">답글달기</a>
-             </p>
-           </li>
-         </ul>
-         <ul class="posting-comment reply">
-           <li>
-             <span class="material-icons">subdirectory_arrow_right</span>
-             <span class="material-icons">account_box</span>
-           </li>
-           <li>
-             <p class="comment-info">
-               <span>user01</span>
-               <span>2022-03-21 09:40</span>
-             </p>
-             <p class="comment-content">댓글내용댓글내용댓글내용</p>
-             <p class="comment-link">
-               <a href="#">수정</a>
-               <a href="#">삭제</a>
-             </p>
-           </li>
-         </ul>
+           <div class="comments-area">
+		      <div class="comment-list">
+		        <div class="single-comment justify-content-between d-flex">
+		          <div class="user justify-content-between d-flex">
+		            <div class="thumb">
+		              <img src="img/blog/c1.jpg" alt="" />
+		            </div>
+		            <div class="desc">
+		              <h5><a href="#">Emilly Blunt</a></h5>
+		              <p class="date">December 4, 2017 at 3:12 pm</p>
+		              <p class="comment">Never say goodbye till the end comes!</p>
+		            </div>
+		          </div>
+		          <div class="reply-btn">
+		            <a href="" class="btn-reply text-uppercase">reply</a>
+		          </div>
+		        </div>
+		      </div>
+		      <div class="comment-list left-padding">
+		        <div class="single-comment justify-content-between d-flex">
+		          <div class="user justify-content-between d-flex">
+		            <div class="thumb">
+		              <img src="img/blog/c2.jpg" alt="" />
+		            </div>
+		            <div class="desc">
+		              <h5><a href="#">Elsie Cunningham</a></h5>
+		              <p class="date">December 4, 2017 at 3:12 pm</p>
+		              <p class="comment">Never say goodbye till the end comes!</p>
+		            </div>
+		          </div>
+		          <div class="reply-btn">
+		            <a href="" class="btn-reply text-uppercase">reply</a>
+		          </div>
+		        </div>
+		      </div>
+		      <div class="comment-list left-padding">
+		        <div class="single-comment justify-content-between d-flex">
+		          <div class="user justify-content-between d-flex">
+		            <div class="thumb">
+		              <img src="img/blog/c3.jpg" alt="" />
+		            </div>
+		            <div class="desc">
+		              <h5><a href="#">Annie Stephens</a></h5>
+		              <p class="date">December 4, 2017 at 3:12 pm</p>
+		              <p class="comment">Never say goodbye till the end comes!</p>
+		            </div>
+		          </div>
+		          <div class="reply-btn">
+		            <a href="" class="btn-reply text-uppercase">reply</a>
+		          </div>
+		        </div>
+		      </div>
+		      <div class="comment-list">
+		        <div class="single-comment justify-content-between d-flex">
+		          <div class="user justify-content-between d-flex">
+		            <div class="thumb">
+		              <img src="img/blog/c4.jpg" alt="" />
+		            </div>
+		            <div class="desc">
+		              <h5><a href="#">Maria Luna</a></h5>
+		              <p class="date">December 4, 2017 at 3:12 pm</p>
+		              <p class="comment">Never say goodbye till the end comes!</p>
+		            </div>
+		          </div>
+		          <div class="reply-btn">
+		            <a href="" class="btn-reply text-uppercase">reply</a>
+		          </div>
+		        </div>
+		      </div>
+		      <div class="comment-list">
+		        <div class="single-comment justify-content-between d-flex">
+		          <div class="user justify-content-between d-flex">
+		            <div class="thumb">
+		              <img src="img/blog/c5.jpg" alt="" />
+		            </div>
+		            <div class="desc">
+		              <h5><a href="#">Ina Hayes</a></h5>
+		              <p class="date">December 4, 2017 at 3:12 pm</p>
+		              <p class="comment">Never say goodbye till the end comes!</p>
+		            </div>
+		          </div>
+		          <div class="reply-btn">
+		            <a href="" class="btn-reply text-uppercase">reply</a>
+		          </div>
+		        </div>
+		      </div>
+		    </div>
        </div>
             <br>
             <br>

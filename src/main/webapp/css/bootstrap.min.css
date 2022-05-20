@@ -282,7 +282,7 @@ img {
 }
 .img-responsive {
   display: block;
-  height: auto;
+  height: 450px;
   max-width: 100%;
 }
 .img-rounded {

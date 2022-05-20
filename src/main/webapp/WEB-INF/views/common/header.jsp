@@ -83,7 +83,7 @@
           <div class="row">
             <div class="col-sm-4">
               <div class="logo pull-left">
-                <a href="index.html"
+                <a href="/"
                   ><img src="./img/main-logo-eum.png" alt="" style="width: 120px; vertical-align: middle; margin-top: 31px;"
                 /></a>
               </div>
@@ -92,7 +92,7 @@
               <div class="shop-menu pull-right">
                 <ul class="nav navbar-nav">
                   <li>
-                    <a href="#" style="font-family: fs-bold; color: #555"
+                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555"
                       >전문가 등록</a
                     >
                   </li>

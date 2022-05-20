@@ -99,7 +99,7 @@ h6 {
 }
 
 .navbar-toggle {
-  background-color: #000;
+  background-color: #3865f2;
 }
 
 a#scrollUp {
@@ -341,7 +341,21 @@ ul.sub-menu {
 **************************/
 
 #footer {
-  background: #f0f0e9;
+  background: #fff;
+}
+.customercenter ul li:first-child {
+  font-size: 20px;
+}
+
+.eum_logo {
+  background-image: url(/img/main-logo-eum.png);
+  width: 200px;
+  height: 180px;
+  background-size: 140px;
+  background-repeat: no-repeat;
+}
+.footer-widget .container>.row {
+  text-align: left;
 }
 
 .footer-top .container {
@@ -494,7 +508,9 @@ ul.sub-menu {
 
 .single-widget ul li a:hover {
   background: none;
-  color: #fe980f;
+  color: #3865f2;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .searchform input {
@@ -1073,6 +1089,8 @@ h2.title {
   width: 100%;
 }
 
+/*
+
 .pagination {
   display: inline-block;
   margin-bottom: 25px;
@@ -1124,6 +1142,8 @@ h2.title {
   background: #fe980f;
   color: #fff;
 }
+
+*/
 
 /*************************
 *******Product Details CSS******

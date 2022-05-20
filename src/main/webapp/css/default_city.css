@@ -474,68 +474,173 @@ textarea.input-form {
 .posting-wrap .posting-item:hover {
   box-shadow: 0 1px 8px 0 rgba(12, 8, 192, 0.159);
 }
-/* 댓글 */
-.posting-comment {
-  display: flex;
-  border-top: 2px solid #ccc;
 
-  list-style-type: none;
+/* 댓글 */
+
+.comments-area {
+	border: 1px solid #eee;
+	padding: 50px 20px;
+	margin-top: 50px;
 }
-.posting-comment > li {
-  box-sizing: border-box;
+
+.comments-area h4 {
+	text-align: center;
+	margin-bottom: 50px;
 }
-.posting-comment > li:first-child {
-  width: 15%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100px;
-  border-right: 1px solid #ccc;
+
+.justify-content-between {
+	-ms-flex-pack: justify !important;
+	justify-content: space-between !important;
 }
-.posting-comment.reply > li:first-child {
-  width: 20%;
+
+.d-flex {
+	display: -ms-flexbox !important;
+	display: flex !important;
 }
-.posting-comment > li:first-child .material-icons {
-  font-size: 80px;
-  color: #ccc;
+
+.comments-area {
+	border: 1px solid #eee;
+	padding: 50px 20px;
+	margin-top: 50px;
 }
-.posting-comment.reply > li:first-child .material-icons:first-child {
-  font-size: 40px;
-  color: #ccc;
+
+@media (max-width: 414px) {
+  .comments-area {
+    padding: 50px 8px;
+  }
 }
-.posting-comment.reply > li:last-child {
-  display: flex;
-  flex-direction: column;
-  width: 80%;
+.comments-area h4 {
+  text-align: center;
+  margin-bottom: 50px;
 }
-.posting-comment > li:last-child {
-  display: flex;
-  flex-direction: column;
-  width: 85%;
+.comments-area a {
+  color: #222222;
 }
-.posting-comment > li:last-child > p {
+.comments-area .comment-list {
+  padding-bottom: 30px;
+}
+.comments-area .comment-list:last-child {
+  padding-bottom: 0px;
+}
+.comments-area .comment-list.left-padding {
+  padding-left: 25px;
+}
+@media (max-width: 413px) {
+  .comments-area .comment-list .single-comment h5 {
+    font-size: 12px;
+  }
+  .comments-area .comment-list .single-comment .date {
+    font-size: 11px;
+  }
+  .comments-area .comment-list .single-comment .comment {
+    font-size: 10px;
+  }
+}
+.comments-area .thumb {
+  margin-right: 20px;
+}
+.comments-area .date {
+  font-size: 13px;
+  color: #cccccc;
+}
+.comments-area .comment {
+  color: #777777;
+}
+.comments-area .btn-reply {
+  background-color: #fff;
+  color: #222222;
+  border: 1px solid #eee;
+  padding: 8px 30px;
+  display: block;
+  font-weight: 600;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
+}
+.comments-area .btn-reply:hover {
+  background-color: #222222;
+  color: #fff;
+}
+
+.comment-form {
+  text-align: center;
+  border: 1px solid #eee;
+  padding: 50px 20px;
+  margin-top: 50px;
+}
+.comment-form h4 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+.comment-form .name {
+  padding-left: 0px;
+}
+@media (max-width: 991px) {
+  .comment-form .name {
+    padding-right: 0px;
+  }
+}
+.comment-form .email {
+  padding-right: 0px;
+}
+@media (max-width: 991px) {
+  .comment-form .email {
+    padding-left: 0px;
+  }
+}
+.comment-form .form-control {
+  padding: 12px;
+  background: #fff;
+  border: none;
+  border-radius: 0px;
   width: 100%;
-  padding: 5px;
-  box-sizing: border-box;
+  font-size: 13px;
+  color: #777777;
+  border: 1px solid #eee;
 }
-.posting-comment > li:last-child > .comment-info > span {
-  padding: 0px 10px;
+.comment-form .form-control:focus {
+  box-shadow: none;
 }
-.posting-comment > li:last-child > .comment-info > span:not(:last-child) {
-  border-right: 2px solid #ccc;
+.comment-form ::-webkit-input-placeholder {
+  /* Chrome/Opera/Safari */
+  font-size: 13px;
+  color: #777;
 }
-.posting-comment > li:last-child > .comment-content {
-  padding: 0px 15px;
+.comment-form ::-moz-placeholder {
+  /* Firefox 19+ */
+  font-size: 13px;
+  color: #777;
 }
-.posting-comment > li:last-child > .comment-link {
-  text-align: right;
+.comment-form :-ms-input-placeholder {
+  /* IE 10+ */
+  font-size: 13px;
+  color: #777;
 }
-.posting-comment > li:last-child > .comment-link > a {
-  margin: 0px 5px;
+.comment-form :-moz-placeholder {
+  /* Firefox 18- */
+  font-size: 13px;
+  color: #777;
 }
-.posting-comment > li:last-child > .comment-link > a:hover {
-  text-decoration: underline;
+.comment-form .btn {
+  color: #fff;
+  line-height: 48px;
+  border-radius: 0px;
+  padding: 0px 32px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 0px;
+  text-transform: uppercase;
+  -webkit-transition: all 0.3s ease 0s;
+  -moz-transition: all 0.3s ease 0s;
+  -o-transition: all 0.3s ease 0s;
+  transition: all 0.3s ease 0s;
 }
+.comment-form .btn:hover {
+  box-shadow: 0px 10px 20px rgba(108, 39, 255, 0.3);
+}
+
+
 
 /*-------------------------*/
 .review {

@@ -139,7 +139,7 @@
                     ></a>
                     <ul role="menu" class="sub-menu">
                       <li><a href="#">법률/세무</a><ul role="menu" class="sub-menu2">
-                        <li><a href="#">변호사</a></li>
+                        <li><a href="/productDetail.do">변호사</a></li> <%--임시코드 상품 리스트 완성되면 지울게요.--%>
                         <li><a href="#">노무사</a></li>
                         <li><a href="#">변리사</a></li>
                         <li><a href="#">법무사</a></li>
@@ -266,7 +266,7 @@
                           <li><a href="#">취업</a></li>
                           <li><a href="#">공무원시험</a></li>
                           <li><a href="#">자격증시험</a></li>
-                          <li><a href="#">글쓰기/논술</a></li>
+                          <li><a href="#">글쓰기/논술</a></li> 
                         </ul>
                       </a></li>
                     </ul>

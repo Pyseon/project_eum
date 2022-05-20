@@ -610,7 +610,7 @@ ul.sub-menu2 {
 }
 
 .carousel-indicators li.active {
-  background: #fe980f;
+  background: #3865f2;
 }
 
 .item {
@@ -635,7 +635,7 @@ ul.sub-menu2 {
 }
 
 .item h1 span {
-  color: #fe980f;
+  color: #3865f2;
 }
 
 .item h2 {
@@ -655,7 +655,7 @@ ul.sub-menu2 {
 }
 
 .get {
-  background: #fe980f;
+  background: #3865f2;
   border: 0 none;
   border-radius: 0;
   color: #ffffff;

@@ -273,8 +273,8 @@
                     </ul>
                   </li>
                   <li><a href="404.html">전문가 상담</a></li>
-                  <li><a href="/WEB-INF/views/market/ClassList.jsp">클래스</a></li>
-                  <li><a href="/WEB-INF/views/market/IdeamarketList.jsp">지식마켓</a></li>
+                  <li><a href="/ClassList.jsp">클래스</a></li>
+                  <li><a href="/IdeamarketList.jsp">지식마켓</a></li>
                   <li><a href="contact-us.html">커뮤니티</a></li>
                 </ul>
               </div>

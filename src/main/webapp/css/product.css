@@ -1,11 +1,13 @@
 @charset "UTF-8";
 
+/*/////ul, li 공통/////*/
 ul, li {
 	list-style: none;
 	padding: 0;
 	margin: 0;
 }
 
+/*/////left-title 관련/////*/
 .left-title {
 	position:relative;
 	background-color: #3865f2;
@@ -60,7 +62,21 @@ ul, li {
 	width: 16px;
 	height: 16px;
 }
+/*/////left-title 관련 끝/////*/
 
+
+/*/////left-product-detail 관련/////*/
+.detail-title {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.detail-1{
+	margin-top: 20px;
+}
+
+
+/*/////전체적인 레이아웃/////*/
 *,
 ::after,
 ::before {
@@ -185,4 +201,5 @@ hr {
         max-width: 66.666667%
     }
 }
+/*/////전체적인 레이아웃 끝/////*/
 

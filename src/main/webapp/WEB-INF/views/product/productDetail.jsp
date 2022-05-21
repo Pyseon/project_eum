@@ -29,7 +29,11 @@
 							</ul>
 						</div><!-- line-bottom" -->
 					</div><!--left-title"-->
-					<div class="left-product-detaile">
+					
+					<div class="left-product-detail">
+						<div class="detail-1">
+							<span class="detail-title">상세내용</span>
+						</div>
 						<div>
 							<span>상담소개</span>
 							<hr>

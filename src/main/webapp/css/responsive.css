@@ -38,6 +38,15 @@
 /* sm */
 @media (min-width: 768px) and (max-width: 991px) {
 
+.cate-icon > tbody > tr > td{
+	text-align: center;
+	width: 110px;
+}
+	
+.cate-icon > tbody > tr > td > img{
+	width: 100px;
+	height: 100px;
+}
 .shop-menu ul li a{
 	padding-left: 0;
 }
@@ -124,6 +133,16 @@
 
 /* xs */
 @media (max-width: 767px) {
+
+.cate-icon > tbody > tr > td{
+	text-align: center;
+	width: 90px;
+}
+	
+.cate-icon > tbody > tr > td > img{
+	width: 80px;
+	height: 80px;
+}
 
 .header_top .col-sm-6:first-child{
 	display: inline-block;
@@ -289,6 +308,20 @@ ul.sub-menu2{
 
 /* XS Portrait */
 @media (max-width: 480px) {
+
+.cate-icon{ 
+	margin-left: 0;
+}
+
+.cate-icon > tbody > tr > td{
+	text-align: center;
+	width: 60px;
+}
+		
+.cate-icon > tbody > tr > td > img{
+	width: 50px;
+	height: 50px;
+}
 
 .contactinfo{
 	text-align: center;

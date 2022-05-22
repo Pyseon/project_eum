@@ -5,7 +5,9 @@
 		<!-- null 값이 발생하는 경우 빈칸이 아닌 null로 처리 -->
 		<setting name = "jdbcTypeForNull" value="NULL" />
 	</settings>
-
+	<typeAliases>
+		<typeAlias type="kr.or.eum.community.model.vo.Community" alias="com"/>
+	</typeAliases>
 
 
 

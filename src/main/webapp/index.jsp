@@ -84,29 +84,256 @@
 	<!--/slider-->
     <hr>
 	<div class="container" style="text-align: left;">
-		<p class="fs-bold">88개 카테고리에서 원하는 서비스를 찾아보세요!</p>
+		<h2 class="fs-bold">88개 카테고리에서 원하는 서비스를 찾아보세요!</h2>
 		<div>
 			<table class="cate-icon">
 				<tr>
 					<td><img src="./img/category/전체.png"><h3>전체</h3></td>
-					<td><img src="./img/category/법률.png"><h3>전체</h3></td>
-					<td><img src="./img/category/비즈니스.png"><h3>전체</h3></td>
-					<td><img src="./img/category/심리_헬스.png"><h3>전체</h3></td>
-					<td><img src="./img/category/학습.png"><h3>전체</h3></td>
-					<td><img src="./img/category/금융.png"><h3>전체</h3></td>
+					<td><img src="./img/category/법률.png"><h3>법률</h3></td>
+					<td><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></td>
+					<td><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></td>
+					<td><img src="./img/category/학습.png"><h3>학습</h3></td>
+					<td><img src="./img/category/금융.png"><h3>금융</h3></td>
           			</tr>
           			<tr>
-					<td><img src="./img/category/라이프.png"><h3>전체</h3></td>
-					<td><img src="./img/category/취미.png"><h3>전체</h3></td>
-					<td><img src="./img/category/어학.png"><h3>전체</h3></td>
-					<td><img src="./img/category/레저.png"><h3>전체</h3></td>
-					<td><img src="./img/category/it.png"><h3>전체</h3></td>
-					<td><img src="./img/category/자기개발.png"><h3>전체</h3></td>
+					<td><img src="./img/category/라이프.png"><h3>라이프</h3></td>
+					<td><img src="./img/category/취미.png"><h3>레저</h3></td>
+					<td><img src="./img/category/어학.png"><h3>어학</h3></td>
+					<td><img src="./img/category/레저.png"><h3>레저</h3></td>
+					<td><img src="./img/category/it.png"><h3>IT/테크</h3></td>
+					<td><img src="./img/category/자기개발.png"><h3>자기계발</h3></td>
 				</tr>
 			</table>
 		</div>
 	</div>
-
+	
+	<hr>
+	 <div class="recommended_items container">
+    <!--recommended_items-->
+    <h2 class="fs-bold">인기있는 클래스</h2>
+    <div
+      id="recommended-item-carousel"
+      class="carousel slide"
+      data-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend1.jpg" alt="" />
+                  <h2>쉽게배우는 JAVA</h2>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend2.jpg" alt="" />
+                  <h2>CSS만들기</h2>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend3.jpg" alt="" />
+                  <h2>jQuery 이렇게만 하면 된다!</h2>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend1.jpg" alt="" />
+                  <h2>$56</h2>
+                  <p>Easy Polo Black Edition</p>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend2.jpg" alt="" />
+                  <h2>$56</h2>
+                  <p>Easy Polo Black Edition</p>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend3.jpg" alt="" />
+                  <h2>$56</h2>
+                  <p>Easy Polo Black Edition</p>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a
+        class="left recommended-item-control"
+        href="#recommended-item-carousel"
+        data-slide="prev"
+      >
+        <i class="fa fa-angle-left"></i>
+      </a>
+      <a
+        class="right recommended-item-control"
+        href="#recommended-item-carousel"
+        data-slide="next"
+      >
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  <!--/recommended_items-->
+  
+  	<hr>
+	 <div class="recommended_items container">
+    <!--recommended_items-->
+    <h2 class="fs-bold">신규 클래스</h2>
+    <div
+      id="recommended-item-carousel"
+      class="carousel slide"
+      data-ride="carousel"
+    >
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend1.jpg" alt="" />
+                  <h2>쉽게배우는 JAVA</h2>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend2.jpg" alt="" />
+                  <h2>CSS만들기</h2>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend3.jpg" alt="" />
+                  <h2>jQuery 이렇게만 하면 된다!</h2>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend1.jpg" alt="" />
+                  <h2>$56</h2>
+                  <p>Easy Polo Black Edition</p>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend2.jpg" alt="" />
+                  <h2>$56</h2>
+                  <p>Easy Polo Black Edition</p>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="product-image-wrapper">
+              <div class="single-products">
+                <div class="productinfo text-center">
+                  <img src="images/home/recommend3.jpg" alt="" />
+                  <h2>$56</h2>
+                  <p>Easy Polo Black Edition</p>
+                  <a href="#" class="btn btn-default add-to-cart"
+                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a
+        class="left recommended-item-control"
+        href="#recommended-item-carousel"
+        data-slide="prev"
+      >
+        <i class="fa fa-angle-left"></i>
+      </a>
+      <a
+        class="right recommended-item-control"
+        href="#recommended-item-carousel"
+        data-slide="next"
+      >
+        <i class="fa fa-angle-right"></i>
+      </a>
+    </div>
+  </div>
+  <!--/recommended_items-->
 
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

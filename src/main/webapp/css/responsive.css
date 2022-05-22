@@ -133,6 +133,10 @@
 
 /* xs */
 @media (max-width: 767px) {
+	
+.cate-icon{
+	margin-left: 0px;
+}
 
 .cate-icon > tbody > tr > td{
 	text-align: center;
@@ -308,6 +312,10 @@ ul.sub-menu2{
 
 /* XS Portrait */
 @media (max-width: 480px) {
+	
+.cate-icon{
+	margin-left: 0px;
+}
 
 .cate-icon{ 
 	margin-left: 0;
@@ -315,7 +323,7 @@ ul.sub-menu2{
 
 .cate-icon > tbody > tr > td{
 	text-align: center;
-	width: 60px;
+	width: 50px;
 }
 		
 .cate-icon > tbody > tr > td > img{

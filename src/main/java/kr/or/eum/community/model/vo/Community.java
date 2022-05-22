@@ -11,6 +11,7 @@ public class Community {
 	private int comNo;
 	private int comCategory;
 	private int memberNo;
+	private String memberNick;
 	private String comTitle; 
 	private String comContent;
 	private String advantage; 

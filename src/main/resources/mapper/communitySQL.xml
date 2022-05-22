@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="community">
+	<select id="selectCommunityList" resultType="com">
+	select
+			com_no as comNo,
+			com_category as comCategory,
+			c.member_no as memberNo,
+            m.member_nick as memberNick,
+			com_title as comTitle,
+			com_content as comContent,
+			advantage,
+			weakness,
+			read_count as readCount,
+			com_date as comDate,
+			com_like as comLike,
+			com_filename as comFilename,
+			com_filepath as comFilepath
+		from community_tbl c, member_tbl m
+        where c.member_no = m.member_no
+	</select>
+</mapper>

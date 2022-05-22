@@ -305,9 +305,8 @@ ul.sub-menu {
   z-index: 999;
 }
 ul.sub-menu2 {
-  position: absolute;
-  top: 0px;
-  left: 220px;
+  position: relative;
+  left: 0 auto;
   background: #fff;
   list-style: none;
   padding: 0;
@@ -600,6 +599,22 @@ ul.sub-menu2 {
 /*************************
 ******* Home ******
 **************************/
+
+.cate-icon{
+	position: relative; 
+	margin-left: 50px;
+	width: fit-content;
+}
+
+.cate-icon > tbody > tr > td{
+	text-align: center;
+	width: 180px;
+}
+
+.cate-icon > tbody > tr > td > img{
+	width: 150px;
+	height: 150px;	
+}
 
 #slider {
   padding-bottom: 45px;

@@ -27,16 +27,18 @@ li{
 	
 	.t1{
 	float: left;
+	font-size:17px
 	}
 	.t2{
 	float: right;
+	font-size:15px
 	}
 	.t3{
         overflow: hidden;
   		text-overflow: ellipsis;
   		white-space: nowrap;
   		width: 200px;
-  		height: 100px;
+  		height: 30px;
 	}
 	.posting-item > img{
 	width: 100%;
@@ -90,10 +92,10 @@ li{
 			<img src="./img/test/testimg1.png">
 				<li>
 				<div class="t1">
-					<h3>${c.productTitle }</h3>
+					<h4>${c.productTitle }</h4>
 				</div>
 				<div class="t2">
-					<h3>${c.cost }원</h3>
+					<h4>${c.cost }원</h4>
 				</div>
 				</li>
 				<li>
@@ -103,7 +105,7 @@ li{
 				</li>
 				<li>
 				<div class="t1">
-				
+				${c.expertName }
 				</li>			
 	</div>
 	</c:forEach>

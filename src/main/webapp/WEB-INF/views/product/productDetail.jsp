@@ -45,7 +45,8 @@
 								<span class="detail-sub-title">상세설명</span>
 								<hr class="sub-title-bottom-line">
 								<div class="detail-main-content">
-									<div class="detail-content">최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+									<div class="detail-content">
+									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
 									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
 									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
 									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
@@ -211,51 +212,51 @@
 						<div class="right-fourth-box">
 							<div class="likeranking">
 								<ul>
+									<li><span class="likeranking-title">좋아요 순 상담&클래스 TOP 10</span></li>
 									<li><span class="material-icons icon-ranking">signal_cellular_alt</span></li>
-									<li><span class="likeranking-title">좋아요 순 상담&클래스 TOP 10</span></li><br>
 									<hr id="ranking-line">
 								</ul>
 							</div>
 							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">1</li>
 									<li class="likeranking-li"><a href="#">어디서든 잘자는 법</a></li>
 								</ul>
 								<ul>	
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">2</li>
 									<li class="likeranking-li"><a href="#">취향에 맞는 음악 찾고 싶으신가요?</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">3</li>
 									<li class="likeranking-li"><a href="#">유사과학 믿는 유전자 따로 있다?</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">4</li>
 									<li class="likeranking-li"><a href="#">이제부터는 낯 가리지 않아요</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">5</li>
 									<li class="likeranking-li"><a href="#">할말이 없지만 적는 비법</a></li>
 								</ul>	
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>	
+									<li class="ranking-number">6</li>
 									<li class="likeranking-li"><a href="#">브랜드별 치킨소스 따라하기</a></li>
 								</ul>	
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">7</li>
 									<li class="likeranking-li"><a href="#">모욕죄 고소 어렵지 않아요</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">8</li>
 									<li class="likeranking-li"><a href="#">종합소득세 신고 원스톱</a></li>								
 								</ul>	
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">9</li>
 									<li class="likeranking-li"><a href="#">생활법률 정복</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">10</li>
 									<li class="likeranking-li"><a href="#">고양이랑 소통하는 집사</a></li>
 								</ul>
 							</div><!-- likeranking-list-wrap -->
@@ -271,8 +272,12 @@
 	<script>
 		$(function(){
 			$("#moreBtn").on("click",function(){
-				const content = $(".detail-main-content");
-				content.css("-webkit-line-clamp","500"); /*더 좋은 코드가 많을텐데 일단 동작에 문제는 없어서 임시로...*/
+				const content = $('.detail-main-content');
+				if(content.css('-webkit-line-clamp','10')){
+					content.css('-webkit-line-clamp','500'); /*더 좋은 코드가 많을텐데 일단 동작에 문제는 없어서 임시로...*/
+					const btn = $(this);
+					btn.hide();
+				}
 			});
 		});
 	</script>

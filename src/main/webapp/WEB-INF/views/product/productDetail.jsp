@@ -274,7 +274,7 @@
 	<script>
 		$(function(){
 			$("#moreBtn").on("click",function(){
-				<%--내부컨텐츠 만큼 높이값을 잡아줘라 부모 높이값 안 주고 자식 늘리면 > 같이 늘어나지 이걸 이용해서--%>
+				<%--조언 : 내부컨텐츠 만큼 높이값을 잡아라 부모는 높이값이 없고, 자식은 높이값이 있으면 자식만큼 되니까--%>
 				const content = $('.detail-main-content');
 				if(content.css('-webkit-line-clamp','10')){
 					content.css('-webkit-line-clamp','unset');

@@ -152,13 +152,13 @@ th{
 }
 
 
-/*///////////////////////////////////////////////////////////////////////////////*/
 .detail-main-content{
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
    -webkit-line-clamp: 10; /*표시될 줄(line) 수*/
    -webkit-box-orient: vertical;
+   position: relative;
 }
 
 .detail-content {
@@ -171,7 +171,13 @@ th{
 	display: block;
 	margin-top: 20px;
 }
-/*///////////////////////////////////////////////////////////////////////////////*/
+.cover{
+	height: 100px;
+    background : linear-gradient(to top,#fff,transparent);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
 /*/////left-product 관련 끝/////*/
 
 

@@ -27,8 +27,14 @@ h1,h2,h3,h4,h5,h6{
 
 
 
+/*tab*/
+.tab-content {
+	visibility: hidden;
+}
 
-
+.tab-content.current {
+	visibility: visible;
+}
 
 /*/////left-title 관련/////*/
 .left-title {
@@ -98,8 +104,10 @@ h1,h2,h3,h4,h5,h6{
 .detail-title {
 	font-size: 18px;
 	font-weight: bold;
+}
+.detail-title:focus{
 	border-bottom: 3px solid #3865f2;
-	padding-bottom: 5px;
+	padding-bottom: 5px; 
 }
 
 .title1{
@@ -461,6 +469,60 @@ th{
 
 
 
+
+
+
+
+
+
+/*후기*/
+
+.real-review{
+	width: 100%;
+}
+.icon-star{
+	margin-left: 5px;
+}
+.reviewPicture{
+	width: 70px;
+    height: 70px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin: 0;
+}
+
+.member-picture{
+	display: inline;
+	float: left;
+}
+
+.star-wrap{
+	display: inline-block;
+	float: left;
+}
+
+.info-one{
+	margin-left: 77px;
+}
+.span-wrap{
+	vertical-align: top;
+    padding-top:9px;
+}
+.review-content{
+	margin: 10px;
+	background-color:#f6f7fc;
+	margin-left: 77px;
+	padding: 20px;
+	margin-top: -9px;
+}
+.review-btn{
+	position: relative;
+	left: 310px;
+	top: -10px;
+	display: inline-block;
+}
 
 
 

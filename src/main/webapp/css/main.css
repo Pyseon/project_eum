@@ -2483,3 +2483,47 @@ textarea {
 .contact-info .social-networks ul li a:hover {
   color: #fe980f;
 }
+
+/*************************
+*******manager CSS******
+**************************/
+.manager-leftmenuWrap{
+  height: 100%;
+  width: 250px;
+}
+
+.manager-leftmenu{
+  position: fixed;
+  text-align: center;
+}
+
+.manager-leftmenu ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+}
+
+.manager-leftmenu ul li a{
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  padding: 0 20px;
+}
+
+.manager-leftmenu ul li:hover{
+  background-color: #333;
+  color: #fff;
+}
+
+.userprofilebox{
+  width: 250px;
+  height: 250px;
+}
+
+.userprofile {
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 100%;
+}

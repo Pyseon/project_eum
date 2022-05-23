@@ -32,8 +32,10 @@
 					
 					<div class="left-product-detail">
 						<div class="detail-1">
-							<span class="detail-title">상세내용</span>
-						</div>
+							<span class="detail-title title1">상세내용</span>
+							<span data-tab="tab2" class="detail-title title2">후기</span> <!-- 후기 수 DB -->
+						</div>	
+						<div id="tabcontent"></div>
 						<div class="product-content">
 							<div class="detail-wrap">
 								<span class="detail-sub-title">상담소개</span>
@@ -65,7 +67,7 @@
 									<div class="cover"></div>
 									<!-- DB --><br>
 								</div>
-								<button class="btn bc1" id="moreBtn">상세설명 더보기</button>
+								<button class="btn bc3" id="moreBtn">상세설명 더보기</button>
 							</div>
 							<div class="detail-wrap">
 								<span class="detail-sub-title">판매자 정보</span>
@@ -170,13 +172,14 @@
 								<div class="picture">
 									<a href="#"><img class="testimg" src="img/testpicture.png"></a>	
 								</div>
-								
 								<div class="expert-profile">
 									<h3 class="expert-info">전문가이름</h3>
 									<img class="icon-shield shield2" src="img/product/icon-shield2.png">	
-									<h5 class="extpert-info info2">직업명</h5>			
-									<h5 class="extpert-info info2">자기소개</h5>
 								</div><!-- expert-profile -->
+								<div class="info-wrap">
+									<span><h5 class="extpert-info info2">변호사</h5></span>			
+									<span><h5 class="extpert-info info2">자기소개 글자수 test 승소율99%</h5></span>
+								</div><!-- info-wrap -->
 							</div><!-- right-second-box -->
 						</div><!-- single-sidebar-widget user-info-widget -->
 					</div> <!-- widget-wrap -->	
@@ -273,7 +276,7 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
 		$(function(){
-			$("#moreBtn").on("click",function(){
+			$('#moreBtn').on('click',function(){
 				<%--조언 : 내부컨텐츠 만큼 높이값을 잡아라 부모는 높이값이 없고, 자식은 높이값이 있으면 자식만큼 되니까--%>
 				const content = $('.detail-main-content');
 				if(content.css('-webkit-line-clamp','10')){
@@ -283,6 +286,20 @@
 					btn.hide();
 					cover.hide();
 				}
+			});
+			$('.detail-title').on('click',function(){
+				let activeTab = $(this).attr('data-tab');
+				$.ajax({
+					type : 'GET',                 //get방식으로 통신
+					url : "tab2.do",    //탭의 data-tab속성의 값으로 된 html파일로 통신        //html형식으로 값 읽기
+					dataType : "html",
+					error : function() {          //통신 실패시
+						alert('통신실패!');
+					},
+					success : function(data) {    //통신 성공시 탭 내용담는 div를 읽어들인 값으로 채운다.
+						$('#tabcontent').html(data);
+					}
+				});
 			});
 		});
 	</script>

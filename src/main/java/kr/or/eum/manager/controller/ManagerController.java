@@ -24,7 +24,7 @@ public class ManagerController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/selectAllMember.do")
+	@RequestMapping(value="/selectAllMember.do", produces = "application/json;charset=utf-8")
 	public String selectAllMember(Model model) {
 		ArrayList<Member> list = service.selectAllmember();
 		return new Gson().toJson(list);

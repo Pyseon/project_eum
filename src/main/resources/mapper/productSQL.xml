@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="product">
+
+	<select id="selectProductList" resultType="pro">
+	select
+			product_no as productNo,
+			p.expert_no as expertNo,
+			product_type as productType,
+			product_title as productTitle,
+            product_Category as productCategory,
+			product_intro as productIntro,
+			product_tag as productTag,
+			product_content as productContent,
+			cost,
+			product_qst as productQst,
+			product_ans as productAns,
+			product_addr as productAddr,
+			sale
+		from product_tbl p, expert_tbl e
+        where p.expert_no = e.expert_no
+	</select>
+</mapper>
+	

@@ -19,7 +19,6 @@ public class CommunityController {
 	public String communityList(Model model) {
 		ArrayList<Community> list = service.selectCommunityList();
 		model.addAttribute("list", list);
-		System.out.println("컨트롤러 불러온리스트: "+list);
 		return "community/communityList";
 	}
 	

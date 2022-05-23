@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 커뮤니티</title>
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 <body>
@@ -23,7 +23,13 @@
 	          src="./img/community/${com.comFilepath }"
 	        />
 	        <figcaption>
-	          <div class="card-date-right card-reg">${com.comDate }</div>
+	        <!-- 2022-05-01 형식의 데이터를 2022.05.01로 바꿔줌 -->
+	        <c:set var="oldDate" value="${com.comDate }" />
+	        <%
+				String oldDate = (String) pageContext.getAttribute("oldDate");      
+	        	String newDate = oldDate.replace('-', '.');
+	        %>
+	          <div class="card-date-right card-reg"><%=newDate %></div>
 	          <div class="card-caption card-flex">
 	          <c:if test="${com.comCategory eq 0}">
 	            <span class="card-category fs-bold">요즘뭐하니</span>         

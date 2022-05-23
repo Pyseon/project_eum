@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,23 +78,20 @@
    
 <div class="page-content">
 <div class="posting-wrap">
+	<c:forEach items="${list }" var="c" varStatus="i">
 	<div class="posting-item">
 			<img src="./img/test/testimg1.png">
-			<div id="header">
-			<div class="t1">
-			<h2>이름</h2>
-			</div>
-			<div class="t2">
-			<h2>가격</h2>
-			</div>
-			</div>
-			<div id="section">
-			<h3>내용</h3>
-			</div>
-						
+				<div class="t1">
+					<h2>이름</h2>
+				</div>
+				<div class="t2">
+					<h2>가격</h2>
+				</div>
+				<h3>내용</h3>
+			</tr>			
 	</div>
 	
-	
+	</c:forEach>
 </div>
 </div>
 

@@ -19,6 +19,7 @@ public class ProductController {
 	public String productList(Model model) {
 		ArrayList<Product> list = productService.selectProductList();
 		model.addAttribute("list",list);
+		System.out.println("리스트: "+list);
 		return "product/ClassList";
 	}
 	@RequestMapping(value = "/productDetail.do")

@@ -2527,3 +2527,22 @@ textarea {
   border: 1px solid black;
   border-radius: 100%;
 }
+
+.memberWrap{
+	position: relative;
+	display: block;
+	margin-top: 50px;
+	left: 250px;
+}
+
+.memberWrap div ul li{
+	list-style-type: none;
+	float: left;
+	margin-bottom: 15px;
+}
+
+.memberTbl {
+	width: 1050px;
+	clear: left;  /*float속성 해제*/
+	text-align: center;
+}

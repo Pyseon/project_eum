@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
 <mapper namespace="product">
+
 	<select id="selectProductList" resultType="pro">
 	select
 			product_no as productNo,
@@ -15,9 +17,9 @@
 			product_qst as productQst,
 			product_ans as productAns,
 			product_addr as productAddr,
-			sale,
-		from expert_tbl e, product_tbl p
-        where e.expert_no = p.expert_no
+			sale
+		from product_tbl p, expert_tbl e
+        where p.expert_no = e.expert_no
 	</select>
 </mapper>
 	

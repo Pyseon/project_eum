@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
 <configuration>
 	<settings>
 		<!-- null 값이 발생하는 경우 빈칸이 아닌 null로 처리 -->
@@ -9,7 +10,8 @@
 		<typeAlias type="kr.or.eum.community.model.vo.Community" alias="com"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>
 	</typeAliases>
-
-
+	<typeHandlers>
+        <typeHandler handler="kr.or.eum.LongHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+    </typeHandlers>
 
 </configuration>

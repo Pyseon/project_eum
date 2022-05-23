@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Member;
 
@@ -28,6 +29,12 @@ public class MemberController {
 			session.setAttribute("m", m);
 		}
 		return "redirect:/mypage.do";
+	}
+	@RequestMapping(value="answerView.do")
+	public String answerView() {
+		//Answer a = service.selectOneAnswer(ansNo);
+		
+		return null;
 	}
 	
 }

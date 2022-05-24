@@ -136,7 +136,10 @@
 									</div>
 									<div class="info">
 										<div class="info-one">
-											<span>닉네임</span> <br>
+											<span class="nickname">닉네임</span> 
+											<div class="review-btn-2">
+												<a href="#">수정</a> <a href="#">삭제</a> <br>
+											</div>	
 											<div class="star-wrap star-wrap-2">
 												<span class="material-icons">star_border</span> 
 												<span class="material-icons">star_border</span> 
@@ -167,12 +170,9 @@
 													</ul>
 												</div>
 											</div>
-											<div class="review-btn-2">
-												<a href="#">수정</a> <a href="#">삭제</a>
-											</div>	
 										</div><!--info-one  -->
 										<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-									</div>  
+									</div> <!-- info --> 
 								</div><!-- real review -->
 								<div class="real-review">
 									<div class="member-picture">
@@ -180,7 +180,10 @@
 									</div>
 									<div class="info">
 										<div class="info-one">
-											<span>닉네임</span> <br>
+											<span class="nickname">닉네임</span> 
+											<div class="review-btn-2">
+												<a href="#">수정</a> <a href="#">삭제</a> <br>
+											</div>	
 											<div class="star-wrap star-wrap-2">
 												<span class="material-icons">star_border</span> 
 												<span class="material-icons">star_border</span> 
@@ -211,12 +214,9 @@
 													</ul>
 												</div>
 											</div>
-											<div class="review-btn-2">
-												<a href="#">수정</a> <a href="#">삭제</a>
-											</div>	
 										</div><!--info-one  -->
 										<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-									</div>  
+									</div> <!-- info --> 
 								</div><!-- real review -->
 								<div class="real-review">
 									<div class="member-picture">
@@ -224,7 +224,10 @@
 									</div>
 									<div class="info">
 										<div class="info-one">
-											<span>닉네임</span> <br>
+											<span class="nickname">닉네임</span> 
+											<div class="review-btn-2">
+												<a href="#">수정</a> <a href="#">삭제</a> <br>
+											</div>	
 											<div class="star-wrap star-wrap-2">
 												<span class="material-icons">star_border</span> 
 												<span class="material-icons">star_border</span> 
@@ -255,12 +258,11 @@
 													</ul>
 												</div>
 											</div>
-											<div class="review-btn-2">
-												<a href="#">수정</a> <a href="#">삭제</a>
-											</div>	
 										</div><!--info-one  -->
-										<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-									</div>  
+										<div class="review-content">쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
+										쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
+										쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.</div>
+									</div> <!-- info --> 
 								</div><!-- real review -->
 							</div><!-- tab-content -->
 							

@@ -20,10 +20,4 @@ public class MemberService {
 		return member;
 	}
 	
-	public Member instantlogin(Member m) {
-		//즉시 로그인
-		Member member = dao.instantlogin(m);
-		return member;
-	}
-	
 }

@@ -99,7 +99,7 @@
 		                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555">전문가 등록</a>
 		                  </li>
 		                  <li>
-		                    <a href="#">회원가입</a>
+		                    <a href="/joinFrm.do">회원가입</a>
 		                  </li>
 		                  <li>
 		                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/loginFrm.do'">로그인</button>
@@ -113,7 +113,7 @@
 		                    <a href="#">마이페이지</a>
 		                  </li>
 		                  <li>
-		                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/loginout.do'">로그아웃</button>
+		                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/logout.do'">로그아웃</button>
 		                  </li>
 	                  </c:otherwise>
                  	</c:choose>

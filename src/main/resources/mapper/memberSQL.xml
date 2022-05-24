@@ -22,25 +22,4 @@
  			and member_Pw=#{memberPw}
  		</if>
  	</select>
- 	<!-- 즉시로그인 -->
- 	<select id="instantlogin" parameterType="member" resultType="member">
- 		select
- 			member_no as memberNo,
- 			member_id as memberId,
- 			member_pw as memberPw,
- 			member_nick as memberNick,
- 			member_phone as memberPhone,
- 			member_point as memberPoint,
- 			member_reportcount as memberReportCount,
- 			gender,
- 			birth,
- 			agreement,
- 			grade,
- 			member_picturename as memberPictureName,
- 			member_picturepath as memberPicturePath,
- 			enrolldate as enrollDate
- 		from member_tbl where member_id=admin
- 			and member_Pw=1555
- 		
- 	</select>
 </mapper>

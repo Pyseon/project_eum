@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="community">
-	<select id="selectCommunityList" resultType="com">
-		select 
-		    comm.com_no as comNo,
-		    com_category as comCategory,
-		    member_no as memberNo,
-		    (select member_nick from member_tbl m where comm.member_no = m.member_no) as memberNick, --멤버닉
-		    (select member_picturepath from member_tbl m where comm.member_no = m.member_no) as memberPicturepath, --멤버닉
-		    com_title as comTitle,
-		    com_content as comContent,
-		    read_count as readCount,
-		    com_date as comDate,
-		    com_like as comLike,
-		    com_filename as comFilename,
-		    com_filepath as comFilepath,
-		(select nvl(count(*),0) from communityco_tbl co where co.com_no = comm.com_no) as cmntCount
-		from community_tbl comm order by comm.com_no desc
+	<select id="selectCommunityList" resultType="comm" parameterType="map">
+		select * from
+			(select rownum as rnum, c.* from
+			(select 
+			    comm.com_no as comNo,
+			    com_category as comCategory,
+			    member_no as memberNo,
+			    (select member_nick from member_tbl m where comm.member_no = m.member_no) as memberNick, --멤버닉
+			    (select member_picturepath from member_tbl m where comm.member_no = m.member_no) as memberPicturepath, --멤버프로필사진
+			    com_title as comTitle,
+			    com_content as comContent,
+			    read_count as readCount,
+			    com_date as comDate,
+			    com_like as comLike,
+			    com_filename as comFilename,
+			    com_filepath as comFilepath,
+			(select nvl(count(*),0) from communityco_tbl co where co.com_no = comm.com_no) as cmntCount
+		from community_tbl comm order by comm.com_no desc) c)
+		where rnum between #{start} and #{end}
+	</select> 
+	<select id="selectTotalCount" resultType="int">
+		select count(*) from community_tbl
 	</select>
+	
 </mapper>

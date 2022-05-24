@@ -37,5 +37,5 @@ public class ProductController {
 		System.out.println(expert.getExpertName());
 		System.out.println(expert.getExpertEmail());
 		return "product/productDetail";
-	} //jsp로 이동하기 위한 임시 비즈니스로직, 재건님이 로직짜고 삭제해주세요.
+	}
 }

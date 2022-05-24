@@ -13,5 +13,6 @@ public class Review {
 	private String reviewNo;
 	private String reviewContent;
 	private int reviewStar;
+	private String reviewDate;
 	
 }

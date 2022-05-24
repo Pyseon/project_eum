@@ -26,11 +26,11 @@
 	
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">
-	select
+		select
 			product_no as productNo,
 			product_type as productType,
 			product_title as productTitle,
-            product_Category as productCategory,
+	        product_Category as productCategory,
 			product_intro as productIntro,
 			product_tag as productTag,
 			product_content as productContent,
@@ -39,8 +39,20 @@
 			product_ans as productAns,
 			product_addr as productAddr,
 			sale
-			from product_tbl 
-        	where product_no=#{productNo}
+		from product_tbl 
+        where product_no=#{productNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<select id="selectAllReview" resultType="review">
+		select
+			REVIEW_NO as reviewNo,
+			PAY_NO as payNo,
+			MEMBER_NO memberNO,
+			REVIEW_TITLE reviewTitle,
+			REVIEW_CONTENT reviewContent,
+			REVIEW_STAR reviewStar
+		from review_tbl	
 	</select>
 </mapper>
 	

@@ -20,12 +20,11 @@ public class ManagerService {
 		return dao.selectMember(selMemBtn);
 	}
 
-	public int registBlackList(int memberNo) {
-		return dao.registBlackList(memberNo);
-	}
-	
-	public int clearBlackList(int memberNo) {
-		return dao.clearBlackList(memberNo);
+	public int updateBlackList(int updateNo, int memberNo) {
+		HashMap<String, Integer> ubl = new HashMap<String, Integer>();
+		ubl.put("updateNo",updateNo);
+		ubl.put("memberNo",memberNo);
+		return dao.updateBlackList(ubl);
 	}
 	
 }

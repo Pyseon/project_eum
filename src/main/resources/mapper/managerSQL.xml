@@ -36,11 +36,18 @@
 				</otherwise>
 			</choose>
 	</select>
-	<update id="registBlackList" parameterType="int">
-		update member_tbl set grade=4 where member_no=#{memberNo}
-	</update>
-	<update id="clearBlackList" parameterType="int">
-		update member_tbl set grade=2 where member_no=#{memberNo}
+
+	<update id="updateBlackList" parameterType="map">
+		update member_tbl set
+		<choose>
+			<when test="updateNo == 0">
+				grade=4
+			</when>
+			<otherwise>
+				grade=2
+			</otherwise>
+		</choose>
+		where member_no=#{memberNo}
 	</update>
 	
 </mapper>

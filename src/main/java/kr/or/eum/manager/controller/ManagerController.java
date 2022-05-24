@@ -19,7 +19,9 @@ public class ManagerController {
 	private ManagerService service;
 	
 	@RequestMapping(value = "/manaMember.do")
-	public String manaMember() {
+	public String manaMember(Model model) {
+		ArrayList<Member> list = service.selectMember(0);
+		model.addAttribute("list",list);
 		return "manager/managementMember";
 	}
 	
@@ -30,16 +32,10 @@ public class ManagerController {
 		return new Gson().toJson(list);
 	}
 	
-	@RequestMapping(value = "/registBlackList.do")
-	public String registBlackList(int memberNo, int selectMemberBtn) {
-		int result = service.registBlackList(memberNo);
-		return "manager/managementMember";
-	}
-	
-	@RequestMapping(value = "/clearBlackList.do")
-	public String clearBlackList(int memberNo, int selectMemberBtn) {
-		int result = service.clearBlackList(memberNo);
-		return "redirect:/selectMember.do?selectMemberBtn="+selectMemberBtn;
+	@RequestMapping(value = "/updateBlackList.do")
+	public String updateBlackList(int updateNo, int memberNo) {
+		int result = service.updateBlackList(updateNo, memberNo);
+		return "redirect:/manaMember.do";
 	}
 	
 }

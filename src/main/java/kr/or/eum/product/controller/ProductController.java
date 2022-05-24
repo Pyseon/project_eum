@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.eum.member.model.service.MemberService;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Product;
 
@@ -14,6 +16,8 @@ import kr.or.eum.product.model.vo.Product;
 public class ProductController {
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private MemberService memberservice;
 	
 	@RequestMapping(value="/ClassList.do")
 	public String productList(Model model) {
@@ -22,8 +26,16 @@ public class ProductController {
 		System.out.println("리스트: "+list);
 		return "product/ClassList";
 	}
+	
+	//윤지
 	@RequestMapping(value = "/productDetail.do")
-	public String productDetail() {
+	public String productDetail(Model model, int productNo, int expertNo) {
+		Product product = productService.selectOneProduct(productNo);
+		Expert expert = memberservice.selectOneExpert(expertNo);
+		model.addAttribute("product", product);
+		model.addAttribute("expert", expert);
+		System.out.println(expert.getExpertName());
+		System.out.println(expert.getExpertEmail());
 		return "product/productDetail";
 	} //jsp로 이동하기 위한 임시 비즈니스로직, 재건님이 로직짜고 삭제해주세요.
 }

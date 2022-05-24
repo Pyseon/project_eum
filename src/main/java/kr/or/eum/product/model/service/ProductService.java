@@ -18,5 +18,10 @@ public class ProductService {
 	public ArrayList<Product> selectProductList() {
 		return productDao.selectProductList();
 	}
+	
+	//윤지
+	public Product selectOneProduct(int productNo) {
+		return productDao.selectOneProduct(productNo);
+	}
 
 }

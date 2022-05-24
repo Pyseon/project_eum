@@ -19,4 +19,10 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.selectProductList");
 		return (ArrayList<Product>)list;
 	}
+	
+	//윤지
+	public Product selectOneProduct(int productNo) {
+		Product product = sqlSession.selectOne("product.selectOneProduct",productNo);
+		return product;
+	}
 }

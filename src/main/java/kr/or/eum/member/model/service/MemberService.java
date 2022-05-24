@@ -7,6 +7,7 @@ import kr.or.eum.manager.model.vo.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.or.eum.member.model.dao.MemberDao;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 
 @Service
@@ -35,6 +36,11 @@ public class MemberService {
 		ArrayList<Question> list = dao.selectQuestionList();
 		
 		return list;
+	}
+	
+	//윤지
+	public Expert selectOneExpert(int expertNo) {
+		return dao.selectOneExpert(expertNo);
 	}
 
 /*

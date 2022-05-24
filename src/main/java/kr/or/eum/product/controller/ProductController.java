@@ -11,6 +11,8 @@ import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.Payment;
 
 @Controller
 public class ProductController {
@@ -32,10 +34,17 @@ public class ProductController {
 	public String productDetail(Model model, int productNo, int expertNo) {
 		Product product = productService.selectOneProduct(productNo);
 		Expert expert = memberservice.selectOneExpert(expertNo);
+		ArrayList<Review> review = productService.selectAllReview(); 
 		model.addAttribute("product", product);
 		model.addAttribute("expert", expert);
+		for(int i = 0; i < review.size(); i++) {
+			System.out.println(review.get(i).getReviewNo());
+			System.out.println(review.get(i).getReviewContent());
+		}
 		System.out.println(expert.getExpertName());
 		System.out.println(expert.getExpertEmail());
 		return "product/productDetail";
 	}
+	
+	
 }

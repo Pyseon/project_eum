@@ -15,10 +15,10 @@
 	<div class="memberWrap">
 		<div>
 			<ul>
-				<li><button id="allMember">회원</button></li>
-				<li><button id="allExpert">전문가</button></li>
-				<li><button id="notExpert">일반회원</button></li>
-				<li><button id="allCompany">사업자</button></li>
+				<li><button id="selectMemberBtn" value=0>회원</button></li>
+				<li><button class="selectMemberBtn" value=1>전문가</button></li>
+				<li><button class="selectMemberBtn" value=2>일반회원</button></li>
+				<li><button class="selectMemberBtn" value=3>사업자</button></li>
 			</ul>
 		</div>
 		<div id="resultTbl">
@@ -27,9 +27,9 @@
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
-		$("#allMember").on("click",function(){
+		$("#selectMemberBtn").on("click",function(){
 			$.ajax({
-				url : "/selectAllMember.do",
+				url : "/selectMember.do",
 				success : function(data){
 					const table = $("#resultTbl>table");
 					table.empty();
@@ -52,6 +52,7 @@
 				}
 			});
 		});
+
 	</script>
 </body>
 </html>

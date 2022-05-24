@@ -13,9 +13,10 @@ public class ManagerService {
 	@Autowired
 	private ManagerDao dao;
 
-	public ArrayList<Member> selectAllmember() {
-		return dao.selectAllMember();
+	public ArrayList<Member> selectMember(int selectMemberBtn) {
+		return dao.selectMember(selectMemberBtn);
 	}
+
 	
 	
 }

@@ -14,8 +14,8 @@ public class ManagerDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Member> selectAllMember() {
-		List list = sqlSession.selectList("manager.selectAllMember");
+	public ArrayList<Member> selectMember(int selectMemberBtn) {
+		List list = sqlSession.selectList("manager.selectAllMember", selectMemberBtn);
 		return (ArrayList<Member>)list;
 	}
 	

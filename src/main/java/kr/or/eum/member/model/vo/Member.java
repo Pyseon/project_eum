@@ -14,12 +14,12 @@ public class Member {
 	private String memberNick;
 	private String memberPhone;
 	private int memberPoint;
-	private int memberReportcount;
+	private int memberReportCount;
 	private int gender;
 	private String birth;
 	private int agreement;
 	private int grade;
-	private String memberPicturename;
-	private String memberPicturepath;
-	private String enrolldate;
+	private String memberPictureName;
+	private String memberPicturePath;
+	private String enrollDate;
 }

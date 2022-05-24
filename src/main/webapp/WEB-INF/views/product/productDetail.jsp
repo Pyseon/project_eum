@@ -32,91 +32,143 @@
 					
 					<div class="left-product-detail">
 						<div class="detail-1">
-							<span class="detail-title">상세내용</span>
-						</div>
+							<span data-tab="tab-1" class="detail-title title1 tab-link current">상세내용</span>
+							<span data-tab="tab-2" class="detail-title title2 tab-link">후기</span> <!-- 후기 수 DB -->
+						</div>	
 						<div class="product-content">
-							<div class="detail-wrap">
-								<span class="detail-sub-title">상담소개</span>
-								<hr class="sub-title-bottom-line">
-								<span class="detail-content">20 년 경력의 세무사가 상담해주는 정확한 상담//여기에 한마디칼럼</span>
-								<!-- DB -->
-							</div>
-							<div class="detail-wrap">
-								<span class="detail-sub-title">상세설명</span>
-								<hr class="sub-title-bottom-line">
-								<div class="detail-main-content">
-									<div class="detail-content">최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									<br><img src="img/testpicture.png"><br>최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									<br><img src="img/testpicture.png"><br>최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-									</div>
-									<!-- DB --><br>
+						
+							<div id="tab-1" class="tab-content current">
+								<div class="detail-wrap">
+									<span class="detail-sub-title">상담소개</span>
+									<hr class="sub-title-bottom-line">
+									<span class="detail-content">20 년 경력의 세무사가 상담해주는 정확한 상담//여기에 한마디칼럼</span>
+									<!-- DB -->
 								</div>
-								<button class="btn bc1" id="moreBtn">상세설명 더보기</button>
-							</div>
-							<div class="detail-wrap">
-								<span class="detail-sub-title">판매자 정보</span>
-								<hr class="sub-title-bottom-line">
-								<table class="detail-content tbl" border="1">
-									<tr>
-										<th>대표자</th>
-										<td>홍길동</td>
-										<th>상호명</th>
-										<td>백호법무법인</td>
-									</tr>
-									<tr>
-										<th>사업장주소</th>
-										<td>서울특별시 강남구 봉은사로</td>
-										<th>사업자등록번호</th>
-										<td>123-12-12123</td>
+								<div class="detail-wrap">
+									<span class="detail-sub-title"">상세설명</span>
+									<hr class="sub-title-bottom-line">
+									<div class="detail-main-content">
+										<div class="detail-content">
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										<br><img src="img/testpicture.png"><br>최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										<br><img src="img/testpicture.png">
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										<br><img src="img/testpicture.png"><br>최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										</div>
+										<div class="cover"></div>
+										<!-- DB --><br>
+									</div>
+									<button class="btn bc3" id="moreBtn">상세설명 더보기</button>
+								</div>
+								<div class="detail-wrap">
+									<span class="detail-sub-title">판매자 정보</span>
+									<hr class="sub-title-bottom-line">
+									<table class="detail-content tbl" border="1">
+										<tr>
+											<th>대표자</th>
+											<td>홍길동</td>
+											<th>상호명</th>
+											<td>백호법무법인</td>
+										</tr>
+										<tr>
+											<th>사업장주소</th>
+											<td>서울특별시 강남구 봉은사로</td>
+											<th>사업자등록번호</th>
+											<td>123-12-12123</td>
+											<!-- DB -->
+										</tr>
+										<tr>
+											<th>연락처</th>
+											<td>010-0000-0000</td>
+											<th>이메일</th>
+											<td>hong@naver.com</td>
+										</tr>
+									</table>
+								</div>
+								<div class="detail-wrap">
+									<span class="detail-sub-title">취소/환불</span>
+									<hr class="sub-title-bottom-line">
+									<ul class="detail-content content-bg">
+										<li>1. 전문가와 의뢰인 간의 상호 협의 후 거래 철회가 가능합니다.</li>
+										<li>2. 전문가의 귀책사유로 작업을 시작하지 않았거나 이에 준하는 보편적인 관점에서
+											심각하게 잘못 이행된 경우 결제 금액 전액 환불이 가능합니다.</li>
+										<li>3. 전문가가 지정된 서비스를 제공하지 못할 것이 확실할 경우 서비스 비용을 일할 계산하여 
+											진행 된 작업만큼 공제하고 잔여 금액을 환불합니다.</li>
+									</ul>
+								</div>
+								<div class="detail-wrap">
+									<span class="detail-sub-title">자주묻는 질문</span>
+									<hr class="sub-title-bottom-line">
+									<ul class="detail-content content-bg ">
+										<!-- for문으로 질문 등록한 수 만큼 가져오면 되는데 DB가 없는 것 같은데 -->
+										<li>Q. 꿈은 없고요 놀고 싶습니다.</li>
 										<!-- DB -->
-									</tr>
-									<tr>
-										<th>연락처</th>
-										<td>010-0000-0000</td>
-										<th>이메일</th>
-										<td>hong@naver.com</td>
-									</tr>
-								</table>
-							</div>
-							<div class="detail-wrap">
-								<span class="detail-sub-title">취소/환불</span>
-								<hr class="sub-title-bottom-line">
-								<ul class="detail-content content-bg">
-									<li>1. 전문가와 의뢰인 간의 상호 협의 후 거래 철회가 가능합니다.</li>
-									<li>2. 전문가의 귀책사유로 작업을 시작하지 않았거나 이에 준하는 보편적인 관점에서
-										심각하게 잘못 이행된 경우 결제 금액 전액 환불이 가능합니다.</li>
-									<li>3. 전문가가 지정된 서비스를 제공하지 못할 것이 확실할 경우 서비스 비용을 일할 계산하여 
-										진행 된 작업만큼 공제하고 잔여 금액을 환불합니다.</li>
-								</ul>
-							</div>
-							<div class="detail-wrap">
-								<span class="detail-sub-title">자주묻는 질문</span>
-								<hr class="sub-title-bottom-line">
-								<ul class="detail-content content-bg ">
-									<!-- for문으로 질문 등록한 수 만큼 가져오면 되는데 DB가 없는 것 같은데 -->
-									<li>Q. 꿈은 없고요 놀고 싶습니다.</li>
-									<!-- DB -->
-									<li>A. 안 궁금합니다.</li>
-									<!-- DB -->
-								</ul>
-								<ul class="detail-content content-bg ">
-									<li>Q. 대면상담 진행하면 유재석 볼 수 있나요?</li>
-									<!-- DB -->
-									<li>A. 아니요</li>
-									<!-- DB -->
-								</ul>
-							</div>
+										<li>A. 안 궁금합니다.</li>
+										<!-- DB -->
+									</ul>
+									<ul class="detail-content content-bg ">
+										<li>Q. 대면상담 진행하면 유재석 볼 수 있나요?</li>
+										<!-- DB -->
+										<li>A. 아니요</li>
+										<!-- DB -->
+									</ul>
+								</div><!-- detail-wrap -->
+							</div><!-- tab-content current -->
+							
+							
+							
+							
+							<!-- //////////////////////////////후기 -->
+							<div id="tab-2" class="tab-content">
+								<div class="real-review">
+									<div class="member-picture">
+										<img class="reviewPicture" src="/img/testpicture.png">
+									</div>
+									<div class="info">
+										<div class="info-one">
+											<span>닉네임</span> <br>
+											<div class="star-wrap">
+												<span class="material-icons">star_border</span> 
+												<span class="material-icons">star_border</span> 
+												<span class="material-icons">star_border</span> 
+												<span class="material-icons">star_border</span> 
+												<span class="material-icons">star_border</span>  
+												<span class="star-score">4.5</span>
+												<div class="star-on">
+													<div class="icon-star">
+														<span class="material-icons">star</span> 
+														<span class="material-icons">star</span>
+														<span class="material-icons">star</span>
+														<span class="material-icons">star</span>
+														<span class="material-icons">star</span>
+													</div>
+												</div>
+											</div>
+											<div class="span-wrap">
+												<sapn class="text">&nbsp;&nbsp;|&nbsp;&nbsp;</sapn>
+												<span class="text">2022.05.20</span>
+												<sapn class="text">&nbsp;&nbsp;|&nbsp;&nbsp;</sapn>
+												<span class="text">신고하기</span>
+											</div>
+											<div class="review-btn">
+												<a href="#">수정</a> <a href="#">삭제</a>
+											</div>
+										</div><!--info-one  -->
+										<div class="review-content">내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용</div>
+									</div>  
+								</div><!-- real review -->
+							</div><!-- tab-content -->
+							
 						</div><!-- product-content -->
 					</div> <!--left-product-detaile-->
 				</div><!-- col-lg-8 posts-list -->
@@ -167,13 +219,14 @@
 								<div class="picture">
 									<a href="#"><img class="testimg" src="img/testpicture.png"></a>	
 								</div>
-								
 								<div class="expert-profile">
 									<h3 class="expert-info">전문가이름</h3>
 									<img class="icon-shield shield2" src="img/product/icon-shield2.png">	
-									<h5 class="extpert-info info2">직업명</h5>			
-									<h5 class="extpert-info info2">자기소개</h5>
 								</div><!-- expert-profile -->
+								<div class="info-wrap">
+									<span><h5 class="extpert-info info2">변호사</h5></span>			
+									<span><h5 class="extpert-info info2">자기소개 글자수 test 승소율99%</h5></span>
+								</div><!-- info-wrap -->
 							</div><!-- right-second-box -->
 						</div><!-- single-sidebar-widget user-info-widget -->
 					</div> <!-- widget-wrap -->	
@@ -211,51 +264,51 @@
 						<div class="right-fourth-box">
 							<div class="likeranking">
 								<ul>
+									<li><span class="likeranking-title">좋아요 순 상담&클래스 TOP 10</span></li>
 									<li><span class="material-icons icon-ranking">signal_cellular_alt</span></li>
-									<li><span class="likeranking-title">좋아요 순 상담&클래스 TOP 10</span></li><br>
 									<hr id="ranking-line">
 								</ul>
 							</div>
 							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">1</li>
 									<li class="likeranking-li"><a href="#">어디서든 잘자는 법</a></li>
 								</ul>
 								<ul>	
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">2</li>
 									<li class="likeranking-li"><a href="#">취향에 맞는 음악 찾고 싶으신가요?</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">3</li>
 									<li class="likeranking-li"><a href="#">유사과학 믿는 유전자 따로 있다?</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">4</li>
 									<li class="likeranking-li"><a href="#">이제부터는 낯 가리지 않아요</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">5</li>
 									<li class="likeranking-li"><a href="#">할말이 없지만 적는 비법</a></li>
 								</ul>	
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>	
+									<li class="ranking-number">6</li>
 									<li class="likeranking-li"><a href="#">브랜드별 치킨소스 따라하기</a></li>
 								</ul>	
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">7</li>
 									<li class="likeranking-li"><a href="#">모욕죄 고소 어렵지 않아요</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">8</li>
 									<li class="likeranking-li"><a href="#">종합소득세 신고 원스톱</a></li>								
 								</ul>	
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">9</li>
 									<li class="likeranking-li"><a href="#">생활법률 정복</a></li>
 								</ul>
 								<ul>
-									<li><img class="icon-shield icon-favorite" src="img/product/icon-favorite.png"></li>
+									<li class="ranking-number">10</li>
 									<li class="likeranking-li"><a href="#">고양이랑 소통하는 집사</a></li>
 								</ul>
 							</div><!-- likeranking-list-wrap -->
@@ -270,9 +323,26 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
 		$(function(){
-			$("#moreBtn").on("click",function(){
-				const content = $(".detail-main-content");
-				content.css("-webkit-line-clamp","500"); /*더 좋은 코드가 많을텐데 일단 동작에 문제는 없어서 임시로...*/
+			$('#moreBtn').on('click',function(){
+				<%--조언 : 내부컨텐츠 만큼 높이값을 잡아라 부모는 높이값이 없고, 자식은 높이값이 있으면 자식만큼 되니까--%>
+				const content = $('.detail-main-content');
+				if(content.css('-webkit-line-clamp','10')){
+					content.css('-webkit-line-clamp','unset');
+					const btn = $(this);
+					const cover = $('.cover');
+					btn.hide();
+					cover.hide();
+				}
+			});
+			$('.tab-link').click(function() {
+				var tab_id = $(this).attr('data-tab');
+
+				$('.tab-link').removeClass('current');
+				$('.tab-content').removeClass('current');
+
+				$(this).addClass('current');
+				$("#" + tab_id).addClass('current');
+
 			});
 		});
 	</script>

@@ -9,9 +9,11 @@ import lombok.NoArgsConstructor;
 @Data
 public class Product {
 	
-	private int expertNo;
 	private int productNo;
+	private int expertNo;
 	private int productType;
+	private String expertName;
+	private String productTitle;
 	private String productCategory;
 	private String productIntro;
 	private String productTag;

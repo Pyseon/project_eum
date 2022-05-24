@@ -476,10 +476,34 @@ textarea.input-form {
 }
 
 /* 커뮤니티 페이지 */
-
-.card-flex{
-   display: flex;
+.comm-header {
+	margin: 30px 5px 10px 5px;
 }
+
+.comm-nav {
+	background-color: #fff;
+	color: #333;
+	border-radius: calc(0.5 * 44px);
+	border: 1px solid #ccc;
+	padding: 3px 12px;
+	box-sizing: border-box;
+	margin-right: 3px;
+}
+.comm-nav:hover {
+	cursor: pointer;
+	border: 1px solid #1abc9c;
+}
+
+.comm-nav:focus {
+	background-color: #1abc9c;
+	color: #fff;
+	border: 1px solid #1abc9c;
+}
+
+.card-flex {
+	display: flex;
+}
+
 .card-wrap{
    display: inline-block;
    width: 250px;

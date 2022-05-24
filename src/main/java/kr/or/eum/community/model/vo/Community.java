@@ -12,6 +12,7 @@ public class Community {
 	private int comCategory;
 	private int memberNo;
 	private String memberNick;
+	private String memberPicturepath;
 	private String comTitle; 
 	private String comContent;
 	private String advantage; 
@@ -21,4 +22,5 @@ public class Community {
 	private String comLike;
 	private String comFilename;
 	private String comFilepath;
+	private int cmntCount;
 }

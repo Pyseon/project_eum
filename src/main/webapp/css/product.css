@@ -27,8 +27,14 @@ h1,h2,h3,h4,h5,h6{
 
 
 
+/*tab*/
+.tab-content {
+	visibility: hidden;
+}
 
-
+.tab-content.current {
+	visibility: visible;
+}
 
 /*/////left-title 관련/////*/
 .left-title {
@@ -65,7 +71,7 @@ h1,h2,h3,h4,h5,h6{
 }
 
 .title {
-	font-size: 18px;
+	font-size: 23px;
 	font-weight: bold;
 	color: #fff;
 }
@@ -98,6 +104,14 @@ h1,h2,h3,h4,h5,h6{
 .detail-title {
 	font-size: 18px;
 	font-weight: bold;
+}
+.detail-title:focus{
+	border-bottom: 3px solid #3865f2;
+	padding-bottom: 5px; 
+}
+
+.title1{
+	margin-right: 10px;
 }
 
 .detail-1{
@@ -151,12 +165,14 @@ th{
 	background: #f6f7fc;
 }
 
+
 .detail-main-content{
    overflow: hidden;
    text-overflow: ellipsis;
    display: -webkit-box;
    -webkit-line-clamp: 10; /*표시될 줄(line) 수*/
    -webkit-box-orient: vertical;
+   position: relative;
 }
 
 .detail-content {
@@ -168,6 +184,16 @@ th{
 	margin: 0 auto;
 	display: block;
 	margin-top: 20px;
+	width: 100%;
+	height: 40px;
+}
+.cover{
+	height: 70px;
+    background : linear-gradient(to top,#fff,transparent);
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    opacity: 0.9;
 }
 /*/////left-product 관련 끝/////*/
 
@@ -186,7 +212,7 @@ th{
 	border: 1px solid #ececec;
 	border-radius:10px;
 	width: 100%;
-	height: 320px;
+	height: 305px;
 	margin-top: 20px;
 	padding-left: 20px;
 	padding-top: 20px;
@@ -276,9 +302,11 @@ th{
 	margin-top: 20px;
 	border: 1px solid #ececec;
 	border-radius: 10px;
-	box-shadow: 0px 5px 20px 1px #ececec;
+	box-shadow: 0px 1px 15px 1px #ececec;
 	width: 100%;
-	height: 320px;
+	height: 340px;
+	position: relative;
+	overflow: hidden;
 	
 }
 .picture{
@@ -305,6 +333,17 @@ th{
 	text-align:center;
 	float: left;
 }
+.info-wrap{
+	position:absolute;
+	background-color: #3865f2;
+	width: 100%;
+	height:100px;
+	text-align: center;
+	padding-top: 10px;
+}
+.info-wrap >span{
+	color: #fff;
+}
 .info2{
 	margin: 10px;
 }
@@ -317,7 +356,7 @@ th{
 .right-third-box{
 	border: 1px solid #ececec;
 	border-radius:10px;
-	margin-top: 30px;
+	margin-top: 20px;
 }
 .tag-title-wrap {
 	margin-top:20px;
@@ -363,7 +402,7 @@ th{
 .right-fourth-box{
 	border: 1px solid #ececec;
 	border-radius:10px;
-	margin-top: 30px;
+	margin-top: 20px;
 	width: 100%;
 	height: 420px;
 }
@@ -383,11 +422,20 @@ th{
 .likeranking-list-wrap>ul>li{
 	margin-bottom: 7px;
 }
+.likeranking-li>a{
+	line-height: 1.5;
+}
 .likeranking-li> a {
 	color: #333333;
 }
 .icon-ranking{
 	color: #f2b81f;
+}
+
+.likeranking-title{
+	float: left;
+	line-height: 2;
+	padding-right: 3px;
 }
 
 #ranking-line{
@@ -404,10 +452,77 @@ th{
 	color: #3865f2;
 	font-weight: bold;
 }
+.ranking-number{
+	width: 20px;
+	height: 20px;
+	background-color: #a7a7a7;
+	border: 1px solid #a7a7a7;
+	text-align: center;
+	color: #fff;
+	float: left;
+	margin-right: 5px;
+	font-size: 9px;
+	padding-top: 2px;
+}
 
 
 
 
+
+
+
+
+
+
+
+/*후기*/
+
+.real-review{
+	width: 100%;
+}
+.icon-star{
+	margin-left: 5px;
+}
+.reviewPicture{
+	width: 70px;
+    height: 70px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 30px;
+    margin: 0;
+}
+
+.member-picture{
+	display: inline;
+	float: left;
+}
+
+.star-wrap{
+	display: inline-block;
+	float: left;
+}
+
+.info-one{
+	margin-left: 77px;
+}
+.span-wrap{
+	vertical-align: top;
+    padding-top:9px;
+}
+.review-content{
+	margin: 10px;
+	background-color:#f6f7fc;
+	margin-left: 77px;
+	padding: 20px;
+	margin-top: -9px;
+}
+.review-btn{
+	position: relative;
+	left: 310px;
+	top: -10px;
+	display: inline-block;
+}
 
 
 

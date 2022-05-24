@@ -24,14 +24,11 @@ public class ManagerController {
 	}
 	
 	@ResponseBody
-	@RequestMapping(value="/selectAllMember.do", produces = "application/json;charset=utf-8")
-	public String selectAllMember(Model model) {
-		ArrayList<Member> list = service.selectAllmember();
+	@RequestMapping(value="/selectMember.do", produces = "application/json;charset=utf-8")
+	public String selectMember(Model model) {
+		int selectMemberBtn = 0;
+		ArrayList<Member> list = service.selectMember(selectMemberBtn);
 		return new Gson().toJson(list);
 	}
 	
-	@RequestMapping(value = "/selectAllExpert.do", produces = "application/json;charset=utf-8")
-	public String selectAllExpert(Model model) {
-		return null;
-	}
 }

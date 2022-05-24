@@ -29,11 +29,11 @@ h1,h2,h3,h4,h5,h6{
 
 /*tab*/
 .tab-content {
-	visibility: hidden;
+	display: none;
 }
 
 .tab-content.current {
-	visibility: visible;
+	display: block;
 }
 
 /*/////left-title 관련/////*/
@@ -254,9 +254,10 @@ th{
 }
 
 #star-score{
-	font-size: 9px;
+	font-size: 2.5px;
 	color: #333333;	
 	font-weight: bold;
+	padding-left: 5px;
 }
 
 #help-number{
@@ -276,6 +277,9 @@ th{
 	padding-left:2px;
 	font-size: 12px;
 	line-height: 3;
+}
+#report:hover{
+	text-decoration: underline;
 }
 .report-wrap{
 	width:100%;
@@ -457,6 +461,7 @@ th{
 	height: 20px;
 	background-color: #a7a7a7;
 	border: 1px solid #a7a7a7;
+	border-radius:5px;
 	text-align: center;
 	color: #fff;
 	float: left;
@@ -479,13 +484,17 @@ th{
 
 .real-review{
 	width: 100%;
+	margin-bottom: 30px;
 }
-.icon-star{
+.star-wrap-2{
+	margin-left: -5px;
+}
+.star-on{
 	margin-left: 5px;
 }
 .reviewPicture{
-	width: 70px;
-    height: 70px; 
+	width: 50px;
+    height: 50px; 
     border-radius: 70%;
     overflow: hidden;
     margin: 0 auto;
@@ -502,29 +511,50 @@ th{
 	display: inline-block;
 	float: left;
 }
+.star-wrap-2{
+	width:120px !important;
+	background-color: white;
+	margin-top: -6px;
+}
+.info {
+	position: relative;
+}
 
 .info-one{
-	margin-left: 77px;
+	margin-left: 62px;
+	position: relative;
+}
+.info-one:first-child{
+	margin-top: 15px;
 }
 .span-wrap{
 	vertical-align: top;
-    padding-top:9px;
+    padding-top:3px;
 }
 .review-content{
-	margin: 10px;
+	margin: 5px;
 	background-color:#f6f7fc;
-	margin-left: 77px;
-	padding: 20px;
-	margin-top: -9px;
+	margin-left: 62px;
+	padding: 10px;
+	margin-top: 2px;
 }
 .review-btn{
-	position: relative;
-	left: 310px;
-	top: -10px;
+	position: absolute;
+	right:13px;
+	top: 15px;
 	display: inline-block;
 }
+.review-btn-2>a:hover{
+	text-decoration: underline;
+}
+.review-btn-2{
+	margin-bottom: 2px;
+}
 
-
+.nickname{
+	float: left;
+	margin-right: 10px;
+}
 
 
 

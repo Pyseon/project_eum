@@ -515,7 +515,7 @@ figcaption{
 .card-title{
    margin-bottom: 10px;
 }
-.card-content{
+.card-intro{
    font-size: 14px;
    word-break: keep-all;
    display:-webkit-box;

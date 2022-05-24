@@ -5,20 +5,20 @@
 		select * from
 			(select rownum as rnum, c.* from
 			(select 
-			    comm.com_no as comNo,
-			    com_category as comCategory,
+			    comm.comm_no as commNo,
+			    comm_category as commCategory,
 			    member_no as memberNo,
 			    (select member_nick from member_tbl m where comm.member_no = m.member_no) as memberNick, --멤버닉
 			    (select member_picturepath from member_tbl m where comm.member_no = m.member_no) as memberPicturepath, --멤버프로필사진
-			    com_title as comTitle,
-			    com_content as comContent,
+			    comm_title as commTitle,
+			    comm_intro as commIntro,
 			    read_count as readCount,
-			    com_date as comDate,
-			    com_like as comLike,
-			    com_filename as comFilename,
-			    com_filepath as comFilepath,
-			(select nvl(count(*),0) from communityco_tbl co where co.com_no = comm.com_no) as cmntCount
-		from community_tbl comm order by comm.com_no desc) c)
+			    comm_date as commDate,
+			    comm_like as commLike,
+			    comm_filename as commFilename,
+			    comm_filepath as commFilepath,
+			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
+		from community_tbl comm order by comm.comm_no desc) c)
 		where rnum between #{start} and #{end}
 	</select> 
 	<select id="selectTotalCount" resultType="int">

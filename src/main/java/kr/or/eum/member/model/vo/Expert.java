@@ -21,4 +21,5 @@ public class Expert {
 	private String expertPhone;
 	private String expertEmail;
 	private String expertContent;
+	private String jobName;
 }

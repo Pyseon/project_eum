@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class payment {
 	private int payNo;
 	private int memberNo;
+	private int productNo;
 	private String payState;
 	private String payMethod;
 	private String payDate;

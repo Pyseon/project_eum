@@ -1,6 +1,7 @@
 package kr.or.eum.manager.model.dao;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -14,10 +15,19 @@ public class ManagerDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Member> selectMember(int selectMemberBtn) {
-		List list = sqlSession.selectList("manager.selectAllMember", selectMemberBtn);
+	public ArrayList<Member> selectMember(HashMap<String, Integer> selMembtn) {
+		List list = sqlSession.selectList("manager.selectAllMember", selMembtn);
 		return (ArrayList<Member>)list;
 	}
+
+	public int registBlackList(int memberNo) {
+		int result = sqlSession.update("manager.registBlackList", memberNo);
+		return result;
+	}
 	
+	public int clearBlackList(int memberNo) {
+		int result = sqlSession.update("manager.clearBlackList", memberNo);
+		return result;
+	}
 	
 }

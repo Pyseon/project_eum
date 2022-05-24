@@ -1,6 +1,7 @@
 package kr.or.eum.manager.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,17 @@ public class ManagerService {
 	private ManagerDao dao;
 
 	public ArrayList<Member> selectMember(int selectMemberBtn) {
-		return dao.selectMember(selectMemberBtn);
+		HashMap<String, Integer> selMemBtn = new HashMap<String, Integer>();
+		selMemBtn.put("selectMemberBtn", selectMemberBtn);
+		return dao.selectMember(selMemBtn);
 	}
 
+	public int registBlackList(int memberNo) {
+		return dao.registBlackList(memberNo);
+	}
 	
+	public int clearBlackList(int memberNo) {
+		return dao.clearBlackList(memberNo);
+	}
 	
 }

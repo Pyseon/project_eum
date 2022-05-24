@@ -25,10 +25,21 @@ public class ManagerController {
 	
 	@ResponseBody
 	@RequestMapping(value="/selectMember.do", produces = "application/json;charset=utf-8")
-	public String selectMember(Model model) {
-		int selectMemberBtn = 0;
+	public String selectMember(int selectMemberBtn) {
 		ArrayList<Member> list = service.selectMember(selectMemberBtn);
 		return new Gson().toJson(list);
+	}
+	
+	@RequestMapping(value = "/registBlackList.do")
+	public String registBlackList(int memberNo, int selectMemberBtn) {
+		int result = service.registBlackList(memberNo);
+		return "manager/managementMember";
+	}
+	
+	@RequestMapping(value = "/clearBlackList.do")
+	public String clearBlackList(int memberNo, int selectMemberBtn) {
+		int result = service.clearBlackList(memberNo);
+		return "redirect:/selectMember.do?selectMemberBtn="+selectMemberBtn;
 	}
 	
 }

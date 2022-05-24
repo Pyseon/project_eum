@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="manager">
-	<select id="selectAllMember" resultType="member" parameterType="int">
+	<select id="selectAllMember" resultType="member" parameterType="map">
 		select
 			member_no as memberNo,
 			member_id as memberId,
@@ -19,13 +19,28 @@
 			enrolldate as enrollDate
 			from member_tbl
 			<choose>
-				<when test="type.equals(0)">
-					where grade = 1 or grade = 2
+				<when test="selectMemberBtn == 0">
+					where grade = 1 or grade = 2 or grade = 3
+				</when>
+				<when test="selectMemberBtn == 1">
+					where grade = 1
+				</when>
+				<when test="selectMemberBtn == 2">
+					where grade = 2
+				</when>
+				<when test="selectMemberBtn == 3">
+					where grade = 3
 				</when>
 				<otherwise>
-					where grade = 3
+					where grade = 4
 				</otherwise>
 			</choose>
 	</select>
+	<update id="registBlackList" parameterType="int">
+		update member_tbl set grade=4 where member_no=#{memberNo}
+	</update>
+	<update id="clearBlackList" parameterType="int">
+		update member_tbl set grade=2 where member_no=#{memberNo}
+	</update>
 	
 </mapper>

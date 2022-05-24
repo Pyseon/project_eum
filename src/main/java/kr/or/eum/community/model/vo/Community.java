@@ -8,19 +8,20 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Community {
-	private int comNo;
-	private int comCategory;
+	private int commNo;
+	private int commCategory;
 	private int memberNo;
 	private String memberNick;
 	private String memberPicturepath;
-	private String comTitle; 
-	private String comContent;
+	private String commTitle; 
+	private String commIntro;
+	private String commContent;
 	private String advantage; 
 	private String weakness;
 	private int readCount;
-	private String comDate;
-	private String comLike;
-	private String comFilename;
-	private String comFilepath;
+	private String commDate;
+	private String commLike;
+	private String commFilename;
+	private String commFilepath;
 	private int cmntCount;
 }

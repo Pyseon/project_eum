@@ -12,17 +12,16 @@
 	
 	<table border="1">
 		<tr>
-			<th>제목</th><th>일자</th><th>답변상태</th>
+			<th>제목</th><th>작성일</th><th>답변상태</th>
 		</tr>
 		<tr>
-		<c:forEach var="a" items="${list }" varStatus="i">
-		<td><a href="/answerView.do?answerNo=${a.ansNo}">${a.ansTitle }</a></td>
-		<td>${a.ansDate} </td>
-		<!-- 답변상태확인 -->
-		<!-- <td>${a.answer }</td> -->
-		
+		<c:forEach var="q" items="${list }" varStatus="i">
+		<td><a href="/questionView.do?questionNo=${q.qstNo}">${q.qstTitle }</a></td> 
+		<td>${q.qstDate} </td>
 		</tr>
+		
 		</c:forEach>
 	</table>
+	
 </body>
 </html>

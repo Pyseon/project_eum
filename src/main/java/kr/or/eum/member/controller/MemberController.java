@@ -1,12 +1,17 @@
 package kr.or.eum.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import kr.or.eum.community.model.vo.Community;
 import kr.or.eum.manager.model.vo.Answer;
+import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Member;
 
@@ -30,11 +35,24 @@ public class MemberController {
 		}
 		return "redirect:/mypage.do";
 	}
-	@RequestMapping(value="answerView.do")
-	public String answerView() {
-		//Answer a = service.selectOneAnswer(ansNo);
-		
-		return null;
+	
+	@RequestMapping(value="/MyquestionList.do")
+	public String questionList(Model model) {
+		ArrayList<Question> list = service.selectQuestionList();
+		model.addAttribute("list", list);
+		System.out.println("list"+list);
+		return "MyquestionList";
 	}
+	/*
+	
+	@RequestMapping(value="questionView.do")
+	public String questionView(int qstNo, Model model) {
+		Question q = service.selectOneQuestion(qstNo);
+		model.addAttribute("q",q);
+		
+		return /;
+	}
+	*/
+	
 	
 }

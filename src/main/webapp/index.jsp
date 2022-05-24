@@ -110,7 +110,7 @@
 	<hr>
 	 <div class="recommended_items container">
     <!--recommended_items-->
-    <h2 class="fs-bold"><a href="/Mypage.do">인기있는 클래스</h2></a>
+    <h2 class="fs-bold"><a href="/MyquestionList.do">인기있는 클래스</h2></a>
     <div
       id="recommended-item-carousel"
       class="carousel slide"
@@ -124,7 +124,7 @@
                 <div class="productinfo text-center">
                   <img src="images/home/recommend1.jpg" alt="" />
                   <h2>쉽게배우는 JAVA</h2>
-                  <a href="#" class="btn btn-default add-to-cart"
+                  <a href="/manaMember.do" class="btn btn-default add-to-cart"
                     ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
                   >
                 </div>

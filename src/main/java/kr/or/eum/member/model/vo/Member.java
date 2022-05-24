@@ -18,7 +18,8 @@ public class Member {
 	private int gender;
 	private String birth;
 	private int agreement;
-	private int gradeNumer;
+	private int grade;
 	private String memberPictureName;
 	private String memberPicturePath;
+	private String enrollDate;
 }

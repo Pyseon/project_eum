@@ -2,21 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="community">
 	<select id="selectCommunityList" resultType="com">
-	select
-			com_no as comNo,
-			com_category as comCategory,
-			c.member_no as memberNo,
-            m.member_nick as memberNick,
-			com_title as comTitle,
-			com_content as comContent,
-			advantage,
-			weakness,
-			read_count as readCount,
-			com_date as comDate,
-			com_like as comLike,
-			com_filename as comFilename,
-			com_filepath as comFilepath
-		from community_tbl c, member_tbl m
-        where c.member_no = m.member_no
+		select 
+		    comm.com_no as comNo,
+		    com_category as comCategory,
+		    member_no as memberNo,
+		    (select member_nick from member_tbl m where comm.member_no = m.member_no) as memberNick, --멤버닉
+		    (select member_picturepath from member_tbl m where comm.member_no = m.member_no) as memberPicturepath, --멤버닉
+		    com_title as comTitle,
+		    com_content as comContent,
+		    read_count as readCount,
+		    com_date as comDate,
+		    com_like as comLike,
+		    com_filename as comFilename,
+		    com_filepath as comFilepath,
+		(select nvl(count(*),0) from communityco_tbl co where co.com_no = comm.com_no) as cmntCount
+		from community_tbl comm order by comm.com_no desc
 	</select>
 </mapper>

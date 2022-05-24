@@ -21,9 +21,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-
 public class LongHandler implements TypeHandler{
-
+	
 private static final Logger logger = LoggerFactory.getLogger(LongHandler.class);
 
 // 값을 받는 중요 값
@@ -37,7 +36,6 @@ ps.setCharacterStream(i, reader, s.length());
 }
 
 
-
 // 이외 ~로 칼럼값 불러오는 메소드
 
 @Override
@@ -47,12 +45,10 @@ return rs.getString(columnName);
 }
 
 
-
 @Override
 public Object getResult(ResultSet arg0, int arg1) throws SQLException {
 return arg0.getObject(arg1);
 }
-
 
 
 @Override

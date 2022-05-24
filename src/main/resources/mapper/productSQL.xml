@@ -8,6 +8,7 @@
 			product_no as productNo,
 			p.expert_no as expertNo,
 			product_type as productType,
+			e.expert_Name as expertName,
 			product_title as productTitle,
             product_Category as productCategory,
 			product_intro as productIntro,
@@ -20,6 +21,7 @@
 			sale
 		from product_tbl p, expert_tbl e
         where p.expert_no = e.expert_no
+          
 	</select>
 </mapper>
 	

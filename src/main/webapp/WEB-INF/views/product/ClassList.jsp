@@ -7,12 +7,13 @@
 <meta charset="UTF-8">
 <title>클래스목록</title>
 <style>
-	.page-content {
-    	width: 1200px;
-    	margin: 0 auto;
-    	margin-bottom: 10px;
-    	flex-grow: 1;
-	}
+
+li{
+   list-style:none;
+   padding-left:0px;
+   }
+
+
 	.posting-wrap {
     	display: flex;
     	flex-wrap: wrap;
@@ -26,14 +27,22 @@
 	
 	.t1{
 	float: left;
+	font-size:17px
 	}
 	.t2{
 	float: right;
+	font-size:15px
+	}
+	.t3{
+        overflow: hidden;
+  		text-overflow: ellipsis;
+  		white-space: nowrap;
+  		width: 200px;
+  		height: 30px;
 	}
 	.posting-item > img{
 	width: 100%;
 	height: 100px;
-		
 	}
 	.category{
 	width: 1000px;
@@ -76,21 +85,29 @@
           			</table>
    </div>
    
-<div class="page-content">
+<div class="container">
 <div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
 	<div class="posting-item">
 			<img src="./img/test/testimg1.png">
+				<li>
 				<div class="t1">
-					<h2>${c.productTitle }</h2>
+					<h4>${c.productTitle }</h4>
 				</div>
 				<div class="t2">
-					<h2>${c.productIntro }</h2>
+					<h4>${c.cost }원</h4>
 				</div>
-				<h3>내용</h3>
-			</tr>			
+				</li>
+				<li>
+				<div class="t3">
+				${c.productIntro }
+				</div>
+				</li>
+				<li>
+				<div class="t1">
+				${c.expertName }
+				</li>			
 	</div>
-	
 	</c:forEach>
 </div>
 </div>

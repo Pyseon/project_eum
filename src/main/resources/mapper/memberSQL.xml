@@ -11,4 +11,14 @@
 		birth = #{gender}  where member_no=#{memberNo}
 	
 	</update>
+	 <select id ="selectQuestionList" parameterType="map" resultType="q">
+ 		select
+ 		qst_no as qstNo,
+ 		qst_title as qstTitle,
+ 		qst_date as qstDate
+ 		
+ 		
+ 		from question_tbl
+  
+  </select>
 </mapper>

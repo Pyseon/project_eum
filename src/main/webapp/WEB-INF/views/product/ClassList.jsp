@@ -119,7 +119,8 @@ li{
 				<div class="t2">
 					${c.productCategory}
 				</div>
-				</li>			
+				</li>
+							
 	</div>
 	</c:forEach>
 </div>

@@ -1,6 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="member">
+
+	<update id="updateMember" parameterType="m" >
+	update into member_tbl set 
+		member_id =#{memberId}, 
+		member_nick =#{memberNick}, 
+		member_pw=#{memberPw}, 
+		member_Phone = #{memberPhone}, 
+		gender = #{gender}, 
+		birth = #{gender}  where member_no=#{memberNo}
+	
+	</update>
+	 <select id ="selectQuestionList" parameterType="map" resultType="q">
+ 		select
+ 		qst_no as qstNo,
+ 		qst_title as qstTitle,
+ 		qst_date as qstDate
+ 		
+ 		
+ 		from question_tbl
+  
+  </select>
+
 	<select id="selectOneMember" parameterType="member" resultType="member">
  		select
  			member_no as memberNo,
@@ -22,4 +44,5 @@
  			and member_Pw=#{memberPw}
  		</if>
  	</select>
+
 </mapper>

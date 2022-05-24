@@ -29,5 +29,10 @@ public class ManagerDao {
 		int result = sqlSession.update("manager.clearBlackList", memberNo);
 		return result;
 	}
+
+	public int updateBlackList(HashMap<String, Integer> ubl) {
+		int result = sqlSession.update("manager.updateBlackList", ubl);
+		return 0;
+	}
 	
 }

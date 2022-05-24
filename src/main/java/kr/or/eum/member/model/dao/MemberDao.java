@@ -16,5 +16,11 @@ public class MemberDao {
 		Member member = sqlSession.selectOne("member.selectOneMember", m);
 		return member;
 	}
+	//즉시로그인
+	public Member instantlogin(Member m) {
+		// TODO Auto-generated method stub
+		Member member = sqlSession.selectOne("member.instantlogin", m);
+		return member;
+	}
 	
 }

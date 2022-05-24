@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <!-- 구글 폰트-->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -62,43 +62,47 @@
 </head>
 <body>
 <div class="header-middle">
-	<div class="container">
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="logo pull-left">
-                <a href="/"
-                  ><img src="./img/main-logo-eum.png" alt="" style="width: 120px; vertical-align: middle; margin-top: 31px;"
-                /></a>
-              </div>
-            </div>
-            <div class="col-sm-8">
-              <div class="shop-menu pull-right">
-                <ul class="nav navbar-nav">
-                  <li>
-                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555"><a href="/login.do"/>임시로그인</a></a>
-                  </li>
-                  <li>
-                    <a href="#">회원가입</a>
-                  </li>
-                  <li>                   
-                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/loginFrm.do'">로그인</button>       
-                  </li>
-                </ul>
-              </div>
-          	</div>
-        </div>
-    </div>
-</div>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-4">
+					<div class="logo pull-left">
+						<a href="/"><img
+							src="./img/main-logo-eum.png" alt=""
+							style="width: 120px; vertical-align: middle; margin-top: 31px;" /></a>
+					</div>
+				</div>
+				<div class="col-sm-8">
+					<div class="shop-menu pull-right">
+						<ul class="nav navbar-nav">
+							<li>
+								<a href="/instantlogin.do?memberId=admin&memberPw=1555"
+								style="font-family: fs-bold; color: #555">임시로그인</a></li>
+							<li><a href="#">회원가입</a></li>
+							<li>
+								<button class="btn bc1 bs6" id="login-btn" type="button"
+									onclick="location.href='/loginFrm.do'">로그인</button>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 <hr>
 <div class="container2">
 	<form class="login-form" action="/login.do" method="post">
 		<fieldset>
 			<input type="text" class="input-form" name="memberId" placeholder="이메일을 입력해주세요."><br>
-			<input type="text" class="input-form" name="memberPw" placeholder="비밀번호를 입력해주세요."><br>
+			<input type="password" class="input-form" name="memberPw" placeholder="비밀번호를 입력해주세요."><br>
 			<button class="btn bc1 bs4" type="submit">로그인</button>
 		</fieldset>
 	</form>
 </div>
+<div>
+	<div><a href="/joinFrm.do">회원가입</a></div>
+	<div><a href="#">아이디/비밀번호찾기</a></div>
+</div>
+
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>

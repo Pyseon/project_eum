@@ -2533,6 +2533,7 @@ textarea {
 	display: block;
 	margin-top: 50px;
 	left: 250px;
+	width: 80%;
 }
 
 .memberWrap div ul li{
@@ -2541,8 +2542,12 @@ textarea {
 	margin-bottom: 15px;
 }
 
-.memberTbl {
-	width: 1050px;
-	clear: left;  /*float속성 해제*/
-	text-align: center;
+.selectMemberBtn:focus {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	color: #ccc;
+	font-weight: bold;
+	box-sizing: border-box;
+	
 }
+

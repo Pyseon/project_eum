@@ -16,9 +16,11 @@
 					<div class="left-title">
 						<div class="line-top">
 							<span class="title">상담제목</span><br> 
-							<img class="icon-shield" src="img/product/icon-shield1.png">&nbsp;
-							<span class="title-2">유재석&nbsp;&nbsp;&nbsp;/</span>&nbsp;&nbsp;&nbsp;
-							<span class="title-2">변호사</span> <!-- DB -->
+							<span class="material-icons icon-confirm confirm">verified</span>&nbsp;
+							<div class="top-box-name">
+								<span class="title-2">유재석&nbsp;&nbsp;/</span>&nbsp;
+								<span class="title-2">변호사</span> <!-- DB -->	
+							</div>
 						</div><!-- line-top -->
 						<hr>
 						<div class="line-bottom">
@@ -130,142 +132,192 @@
 							
 							<!-- //////////////////////////////후기 -->
 							<div id="tab-2" class="tab-content">
-								<div class="real-review">
-									<div class="member-picture">
-										<img class="reviewPicture" src="/img/testpicture.png">
+								<div class="topbox-summary">
+									<div class="review-count">
+										<div class="summary-content">
+											<div class="con1">상품 후기 수</div>
+											<div class="con2">100</div>
+										</div>
 									</div>
-									<div class="info">
-										<div class="info-one">
-											<span class="nickname">닉네임</span> 
-											<div class="review-btn-2">
-												<a href="#">수정</a> <a href="#">삭제</a> <br>
-											</div>	
-											<div class="star-wrap star-wrap-2">
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span>  
-												<span class="star-score star-score-2">5.0</span>
-												<div class="star-on">
-													<div class="icon-star">
-														<span class="material-icons">star</span> 
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
+									<div class="review-score-aver">
+										<div class="summary-content">
+											<div class="con1">상품 평균 별점</div>
+											<span class="material-icons summary-icons-star">star</span>
+											<span id="star-score-aver" class="con2">5.0</span>
+										</div>
+									</div>
+								</div>
+								<div class="real-review-wrap">
+									<div class="real-review">
+										<div class="member-picture">
+											<img class="reviewPicture" src="/img/testpicture.png">
+										</div>
+										<div class="info">
+											<div class="info-one">
+												<span class="nickname">닉네임</span> 
+												<div class="review-btn-2">
+													<a href="#">수정</a> <a href="#">삭제</a> <br>
+												</div>	
+												<div class="star-wrap star-wrap-2">
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span>  
+													<span class="star-score star-score-2">5.0</span>
+													<div class="star-on">
+														<div class="icon-star">
+															<span class="material-icons">star</span> 
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="span-wrap">
-												<sapn class="text">|&nbsp;&nbsp;</sapn>
-												<span class="text">2022.05.20</span>
-												<sapn class="text">&nbsp;&nbsp;&nbsp;&nbsp;</sapn>
-											</div>
-											<div class="review-btn">
-												<div class="report-wrap">
-													<ul>
-														<li><img id="icon-report" src="img/product/icon-report.png"></li>
-														<li><span id="report">신고</span></li>
-													</ul>
+												<div class="span-wrap">
+													<span class="text">|&nbsp;&nbsp;</span>
+													<span class="text">2022.05.20</span>
+													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 												</div>
-											</div>
-										</div><!--info-one  -->
-										<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-									</div> <!-- info --> 
-								</div><!-- real review -->
-								<div class="real-review">
-									<div class="member-picture">
-										<img class="reviewPicture" src="/img/testpicture.png">
-									</div>
-									<div class="info">
-										<div class="info-one">
-											<span class="nickname">닉네임</span> 
-											<div class="review-btn-2">
-												<a href="#">수정</a> <a href="#">삭제</a> <br>
-											</div>	
-											<div class="star-wrap star-wrap-2">
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span>  
-												<span class="star-score star-score-2">5.0</span>
-												<div class="star-on">
-													<div class="icon-star">
-														<span class="material-icons">star</span> 
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
+												<div class="review-btn">
+													<div class="report-wrap">
+														<ul>
+															<li><img id="icon-report" src="img/product/icon-report.png"></li>
+															<li><span id="report">신고</span></li>
+														</ul>
 													</div>
 												</div>
-											</div>
-											<div class="span-wrap">
-												<sapn class="text">|&nbsp;&nbsp;</sapn>
-												<span class="text">2022.05.20</span>
-												<sapn class="text">&nbsp;&nbsp;&nbsp;&nbsp;</sapn>
-											</div>
-											<div class="review-btn">
-												<div class="report-wrap">
-													<ul>
-														<li><img id="icon-report" src="img/product/icon-report.png"></li>
-														<li><span id="report">신고</span></li>
-													</ul>
-												</div>
-											</div>
-										</div><!--info-one  -->
-										<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-									</div> <!-- info --> 
-								</div><!-- real review -->
-								<div class="real-review">
-									<div class="member-picture">
-										<img class="reviewPicture" src="/img/testpicture.png">
-									</div>
-									<div class="info">
-										<div class="info-one">
-											<span class="nickname">닉네임</span> 
-											<div class="review-btn-2">
-												<a href="#">수정</a> <a href="#">삭제</a> <br>
-											</div>	
-											<div class="star-wrap star-wrap-2">
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span> 
-												<span class="material-icons">star_border</span>  
-												<span class="star-score star-score-2">5.0</span>
-												<div class="star-on">
-													<div class="icon-star">
-														<span class="material-icons">star</span> 
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
-														<span class="material-icons">star</span>
+											</div><!--info-one  -->
+											<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
+										</div> <!-- info --> 
+									</div><!-- real review -->
+									<div class="real-review">
+										<div class="member-picture">
+											<img class="reviewPicture" src="/img/testpicture.png">
+										</div>
+										<div class="info">
+											<div class="info-one">
+												<span class="nickname">닉네임</span> 
+												<div class="review-btn-2">
+													<a href="#">수정</a> <a href="#">삭제</a> <br>
+												</div>	
+												<div class="star-wrap star-wrap-2">
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span>  
+													<span class="star-score star-score-2">5.0</span>
+													<div class="star-on">
+														<div class="icon-star">
+															<span class="material-icons">star</span> 
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+														</div>
 													</div>
 												</div>
-											</div>
-											<div class="span-wrap">
-												<sapn class="text">|&nbsp;&nbsp;</sapn>
-												<span class="text">2022.05.20</span>
-												<sapn class="text">&nbsp;&nbsp;&nbsp;&nbsp;</sapn>
-											</div>
-											<div class="review-btn">
-												<div class="report-wrap">
-													<ul>
-														<li><img id="icon-report" src="img/product/icon-report.png"></li>
-														<li><span id="report">신고</span></li>
-													</ul>
+												<div class="span-wrap">
+													<span class="text">|&nbsp;&nbsp;</span>
+													<span class="text">2022.05.20</span>
+													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
 												</div>
+												<div class="review-btn">
+													<div class="report-wrap">
+														<ul>
+															<li><img id="icon-report" src="img/product/icon-report.png"></li>
+															<li><span id="report">신고</span></li>
+														</ul>
+													</div>
+												</div>
+											</div><!--info-one  -->
+											<div class="review-content">쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
+											쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
 											</div>
-										</div><!--info-one  -->
-										<div class="review-content">쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
-										쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
-										쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.</div>
-									</div> <!-- info --> 
-								</div><!-- real review -->
+										</div> <!-- info --> 
+									</div><!-- real review -->
+									<div class="real-review">
+										<div class="member-picture">
+											<img class="reviewPicture" src="/img/testpicture.png">
+										</div>
+										<div class="info">
+											<div class="info-one">
+												<span class="nickname">닉네임</span> 
+												<div class="review-btn-2">
+													<a href="#">수정</a> <a href="#">삭제</a> <br>
+												</div>	
+												<div class="star-wrap star-wrap-2">
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span> 
+													<span class="material-icons">star_border</span>  
+													<span class="star-score star-score-2">5.0</span>
+													<div class="star-on">
+														<div class="icon-star">
+															<span class="material-icons">star</span> 
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+															<span class="material-icons">star</span>
+														</div>
+													</div>
+												</div>
+												<div class="span-wrap">
+													<span class="text">|&nbsp;&nbsp;</span>
+													<span class="text">2022.05.20</span>
+													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+												</div>
+												<div class="review-btn">
+													<div class="report-wrap">
+														<ul>
+															<li><img id="icon-report" src="img/product/icon-report.png"></li>
+															<li><span id="report">신고</span></li>
+														</ul>
+													</div>
+												</div>
+											</div><!--info-one  -->
+											<div class="review-content">쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
+											쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
+											쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.</div>
+										</div> <!-- info --> 
+									</div><!-- real review -->
+								</div><!-- real review wrap-->
+								
 							</div><!-- tab-content -->
-							
+							페이징
+							<!-- ///////////////////////////////////////////페이징 자리-->
+							<div class="detail-wrap">
+									<span class="detail-sub-title">상품정보 제공 고시</span>
+									<hr class="sub-title-bottom-line">
+									<table class="detail-content tbl reviewpagetbl" border="1">
+										<tr>
+											<th width=150px>서비스 제공 사업자</th>
+											<td>상품 상세 참조</td>
+										</tr>
+										<tr>
+											<th>인증/허가사항</th>
+											<td>상품 상세 참조</td>
+										</tr>
+										<tr>	
+											<th>이용조건</th>
+											<td>상품 상세 참조</td>
+										</tr>	
+										<tr>
+											<th>취소/환불 조건</th>
+											<td>상품 상세 참조</td>
+										</tr>
+									</table>
+								</div>
+								<div class="detail-wrap">
+									<span class="detail-sub-title">이음파이낸셜(결제대금예치업 등록번호 : 02-0001-9999)</span>
+									<hr class="sub-title-bottom-line">
+									<ul class="detail-content content-bg">
+										<li>이음은 전자금융거래법에 따라 결제대금 예치업을 운영할 수 있는 전자금융업자로 금융위원회에 등록되었으며, 구매안전서비스를 적용하고 있습니다.</li>
+									</ul>
+								</div>
 						</div><!-- product-content -->
 					</div> <!--left-product-detaile-->
 				</div><!-- col-lg-8 posts-list -->
@@ -317,8 +369,14 @@
 									<a href="#"><img class="testimg" src="img/testpicture.png"></a>	
 								</div>
 								<div class="expert-profile">
-									<h3 class="expert-info">전문가이름</h3>
-									<img class="icon-shield shield2" src="img/product/icon-shield2.png">	
+									<ul>
+										<li><h3 class="expert-info">전문가이름</h3></li>
+										<li>
+											<div class="icon-confirm-wrap">
+												<span class="material-icons icon-confirm confirm2">verified</span>
+											</div>
+										</li>
+									</ul>
 								</div><!-- expert-profile -->
 								<div class="info-wrap">
 									<span><h5 class="extpert-info info2">변호사</h5></span>			
@@ -432,7 +490,7 @@
 				}
 			});
 			$('.tab-link').click(function() {
-				var tab_id = $(this).attr('data-tab');
+				let tab_id = $(this).attr('data-tab');
 
 				$('.tab-link').removeClass('current');
 				$('.tab-content').removeClass('current');
@@ -440,6 +498,16 @@
 				$(this).addClass('current');
 				$("#" + tab_id).addClass('current');
 
+			});
+			$('.title1').click(function() {
+				$('.title1').css("border-bottom","3px solid #3865f2");
+				$('.title2').css("border","none");
+				console.log(1);
+			});
+			$('.title2').click(function() {
+				$('.title2').css("border-bottom","3px solid #3865f2");
+				$('.title1').css("border","none");
+				console.log(1);
 			});
 		});
 	</script>

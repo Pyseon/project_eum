@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,11 +24,16 @@ li{
     	width: calc(100% / 5);
     	padding: 13px;
     	height: 250px;
+    	margin: 30px 15px 55px 10px;
 	}
 	
 	.t1{
 	float: left;
 	font-size:17px
+	}
+	.t1 > img{
+	width:20px;
+	height:20px;
 	}
 	.t2{
 	float: right;
@@ -43,6 +49,7 @@ li{
 	.posting-item > img{
 	width: 100%;
 	height: 100px;
+
 	}
 	.category{
 	width: 1000px;
@@ -105,7 +112,13 @@ li{
 				</li>
 				<li>
 				<div class="t1">
+				<img src="./img/category/자기개발.png">
 				${c.expertName }
+				</li>
+				<li>
+				<div class="t2">
+					${c.productCategory}
+				</div>
 				</li>			
 	</div>
 	</c:forEach>

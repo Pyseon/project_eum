@@ -19,8 +19,8 @@
 			product_ans as productAns,
 			product_addr as productAddr,
 			sale
-		from product_tbl p, expert_tbl e
-        where p.expert_no = e.expert_no
+			from product_tbl p, expert_tbl e
+        	where p.expert_no = e.expert_no
           
 	</select>
 </mapper>

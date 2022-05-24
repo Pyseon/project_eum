@@ -515,12 +515,13 @@ th{
 	height: 60px;
 	border-radius: 10px;
 	box-shadow: 0px 2px 10px -2px #a7a7a7;
+	position: relative;
 	
 }
 .summary-icons-star{
 	color: #f2b81f;
 	float: left;
-	position: relative;
+	position: absolute;
 	left: 115px;
 	bottom:1px;
 	font-size: 24px !important;

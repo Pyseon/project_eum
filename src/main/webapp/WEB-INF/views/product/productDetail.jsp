@@ -502,12 +502,10 @@
 			$('.title1').click(function() {
 				$('.title1').css("border-bottom","3px solid #3865f2");
 				$('.title2').css("border","none");
-				console.log(1);
 			});
 			$('.title2').click(function() {
 				$('.title2').css("border-bottom","3px solid #3865f2");
 				$('.title1').css("border","none");
-				console.log(1);
 			});
 		});
 	</script>

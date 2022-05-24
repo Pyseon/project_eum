@@ -93,15 +93,30 @@
             <div class="col-sm-8">
               <div class="shop-menu pull-right">
                 <ul class="nav navbar-nav">
-                  <li>
-                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555">전문가 등록</a>
-                  </li>
-                  <li>
-                    <a href="#">회원가입</a>
-                  </li>
-                  <li>
-                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/loginFrm.do'">로그인</button>
-                  </li>
+                 <c:choose>
+	                 <c:when test="${empty sessionScope.member }">
+		                  <li>
+		                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555">전문가 등록</a>
+		                  </li>
+		                  <li>
+		                    <a href="/joinFrm.do">회원가입</a>
+		                  </li>
+		                  <li>
+		                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/loginFrm.do'">로그인</button>
+		                  </li>
+	                  </c:when>
+	                  <c:otherwise>
+	                  	  <li>
+		                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555">전문가 등록</a>
+		                  </li>
+		                  <li>
+		                    <a href="#">마이페이지</a>
+		                  </li>
+		                  <li>
+		                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/logout.do'">로그아웃</button>
+		                  </li>
+	                  </c:otherwise>
+                 	</c:choose>
                 </ul>
               </div>
               <div class="search_box pull-right">

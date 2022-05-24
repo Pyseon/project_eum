@@ -9,14 +9,14 @@
  			member_nick as memberNick,
  			member_phone as memberPhone,
  			member_point as memberPoint,
- 			member_reportcount as memberReportcount,
+ 			member_reportcount as memberReportCount,
  			gender,
  			birth,
  			agreement,
  			grade,
- 			member_picturename as memberPicturename,
- 			member_picturepath as memberPicturepath,
- 			enrolldate
+ 			member_picturename as memberPictureName,
+ 			member_picturepath as memberPicturePath,
+ 			enrollDate
  		from member_tbl where member_id=#{memberId}
  		<if test="memberPw != null">
  			and member_Pw=#{memberPw}

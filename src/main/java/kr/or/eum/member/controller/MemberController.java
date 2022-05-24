@@ -21,6 +21,27 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
+		if(member != null) {
+			session.setAttribute("member", member);
+		}
 		return "redirect:/";
+	}
+	@RequestMapping(value="/logout.do")
+	public String logout(HttpSession session) {
+	session.invalidate();
+	return "redirect:/";
+	}
+	//즉시로그인
+	@RequestMapping(value="/instantlogin.do")
+	public String instatlogin(Member m, HttpSession session) {
+		Member member = service.selectOneMember(m);
+		if(member != null) {
+			session.setAttribute("member", member);
+		}
+		return "redirect:/";
+	}
+	@RequestMapping(value="/joinFrm.do")
+	public String joinFrm() {
+		return "member/joinFrm";
 	}
 }

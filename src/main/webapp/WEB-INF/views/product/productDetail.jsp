@@ -285,11 +285,9 @@
 										</div> <!-- info --> 
 									</div><!-- real review -->
 								</div><!-- real review wrap-->
-								
-							</div><!-- tab-content -->
-							페이징
-							<!-- ///////////////////////////////////////////페이징 자리-->
-							<div class="detail-wrap">
+								페이징자리
+								<!-- 페이징///////////////////////////// -->
+								<div class="detail-wrap">
 									<span class="detail-sub-title">상품정보 제공 고시</span>
 									<hr class="sub-title-bottom-line">
 									<table class="detail-content tbl reviewpagetbl" border="1">
@@ -318,6 +316,8 @@
 										<li>이음은 전자금융거래법에 따라 결제대금 예치업을 운영할 수 있는 전자금융업자로 금융위원회에 등록되었으며, 구매안전서비스를 적용하고 있습니다.</li>
 									</ul>
 								</div>
+							
+							</div><!-- tab-content -->
 						</div><!-- product-content -->
 					</div> <!--left-product-detaile-->
 				</div><!-- col-lg-8 posts-list -->

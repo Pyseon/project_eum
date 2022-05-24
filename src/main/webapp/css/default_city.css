@@ -423,14 +423,13 @@ textarea.input-form {
   overflow: hidden;
 }
 .pagination.circle-style > li {
-  border-radius: 0%;
+  border-radius: 50%;
 }
 .pagination > li > a.page-item {
   display: block;
   width: 100%;
   height: 100%;
   font-size: 18px;
-  color: #333333;
 }
 .pagination > li > a.page-item > span.material-icons {
   display: block;
@@ -438,21 +437,10 @@ textarea.input-form {
   height: 100%;
   line-height: 40px;
 }
-
-.pagination .page-item.active-page {
-  background-color: #fff;
-  color: #3865f2;
-  border: 2px solid #3865f2;
-  box-sizing: border-box;
-}
-
 .pagination .page-item.active-page {
   background-color: #3865f2;
   color: #fff;
-  /* border: 2px solid #3865f2; */
-  box-sizing: border-box;
 }
-
 /*게시물 표현*/
 .posting-wrap {
   display: flex;

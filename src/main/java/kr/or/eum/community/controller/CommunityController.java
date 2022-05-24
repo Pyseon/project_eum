@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.community.model.service.CommunityService;
 import kr.or.eum.community.model.vo.Community;
+import kr.or.eum.community.model.vo.CommunityPageData;
 
 @Controller
 public class CommunityController {
@@ -16,9 +17,11 @@ public class CommunityController {
 	private CommunityService service;
 	
 	@RequestMapping(value="/communityList.do")
-	public String communityList(Model model) {
-		ArrayList<Community> list = service.selectCommunityList();
-		model.addAttribute("list", list);
+	public String communityList(int reqPage, Model model) {
+		CommunityPageData cpd = service.selectCommunityList(reqPage);
+		model.addAttribute("list", cpd.getList());
+		model.addAttribute("pageNavi", cpd.getPageNavi());
+		model.addAttribute("reqPage", reqPage);
 		return "community/communityList";
 	}
 	

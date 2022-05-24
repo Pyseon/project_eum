@@ -17,7 +17,7 @@
       </div>
 	<c:forEach items="${list }" var="com" varStatus="i">
 		 <!--리스트-->
-	      <div class="card-wrap">
+	      <div class="card-wrap" style="cursor:pointer;" onclick="location.href='/communityDetail.do?comNo=${com.comNo }';">
 	        <img
 	          class="card-img"
 	          src="./img/community/${com.comFilepath }"
@@ -65,7 +65,10 @@
 	        </figcaption>
 	      </div>
 	  	</c:forEach> 
-	  </div>
+	  	<div>
+	  	 	${pageNavi }  	 	
+	  	</div>
+</div>
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </html>

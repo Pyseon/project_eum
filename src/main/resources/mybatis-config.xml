@@ -6,7 +6,7 @@
 		<setting name = "jdbcTypeForNull" value="NULL" />
 	</settings>
 	<typeAliases>
-		<typeAlias type="kr.or.eum.community.model.vo.Community" alias="com"/>
+		<typeAlias type="kr.or.eum.community.model.vo.Community" alias="comm"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="member"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="m"/>

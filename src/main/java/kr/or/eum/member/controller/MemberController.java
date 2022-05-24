@@ -76,15 +76,6 @@ public class MemberController {
 		System.out.println("list"+list);
 		return "MyquestionList";
 	}
-	/*
 	
-	@RequestMapping(value="questionView.do")
-	public String questionView(int qstNo, Model model) {
-		Question q = service.selectOneQuestion(qstNo);
-		model.addAttribute("q",q);
-		
-		return /;
-	}
-	*/
 
 }

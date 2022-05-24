@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Product;
 
 @Repository
 public class MemberDao {
@@ -35,6 +37,12 @@ public class MemberDao {
 		List list = sqlSession.selectList("member.selectQuestionList"); 
 		
 		return (ArrayList<Question>)list;
+	}
+
+	//윤지
+	public Expert selectOneExpert(int expertNo) {
+		Expert expert = sqlSession.selectOne("member.selectOneExpert",expertNo);
+		return expert;
 	}
 
 }

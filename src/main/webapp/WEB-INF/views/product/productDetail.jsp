@@ -73,6 +73,23 @@
 									<button class="btn bc3" id="moreBtn">상세설명 더보기</button>
 								</div>
 								<div class="detail-wrap">
+									<span class="detail-sub-title">자주 묻는 질문</span>
+									<hr class="sub-title-bottom-line">
+									<ul class="detail-content content-bg ">
+										<!-- for문으로 질문 등록한 수 만큼 가져오면 되는데 DB가 없는 것 같은데 -->
+										<li>Q. 꿈은 없고요 놀고 싶습니다.</li>
+										<!-- DB -->
+										<li>A. 안 궁금합니다.</li>
+										<!-- DB -->
+									</ul>
+									<ul class="detail-content content-bg ">
+										<li>Q. 대면상담 진행하면 유재석 볼 수 있나요?</li>
+										<!-- DB -->
+										<li>A. 아니요</li>
+										<!-- DB -->
+									</ul>
+								</div><!-- detail-wrap -->
+								<div class="detail-wrap">
 									<span class="detail-sub-title">판매자 정보</span>
 									<hr class="sub-title-bottom-line">
 									<table class="detail-content tbl" border="1">
@@ -108,23 +125,6 @@
 											진행 된 작업만큼 공제하고 잔여 금액을 환불합니다.</li>
 									</ul>
 								</div>
-								<div class="detail-wrap">
-									<span class="detail-sub-title">자주묻는 질문</span>
-									<hr class="sub-title-bottom-line">
-									<ul class="detail-content content-bg ">
-										<!-- for문으로 질문 등록한 수 만큼 가져오면 되는데 DB가 없는 것 같은데 -->
-										<li>Q. 꿈은 없고요 놀고 싶습니다.</li>
-										<!-- DB -->
-										<li>A. 안 궁금합니다.</li>
-										<!-- DB -->
-									</ul>
-									<ul class="detail-content content-bg ">
-										<li>Q. 대면상담 진행하면 유재석 볼 수 있나요?</li>
-										<!-- DB -->
-										<li>A. 아니요</li>
-										<!-- DB -->
-									</ul>
-								</div><!-- detail-wrap -->
 							</div><!-- tab-content current -->
 							
 							
@@ -285,11 +285,9 @@
 										</div> <!-- info --> 
 									</div><!-- real review -->
 								</div><!-- real review wrap-->
-								
-							</div><!-- tab-content -->
-							페이징
-							<!-- ///////////////////////////////////////////페이징 자리-->
-							<div class="detail-wrap">
+								페이징자리
+								<!-- 페이징///////////////////////////// -->
+								<div class="detail-wrap">
 									<span class="detail-sub-title">상품정보 제공 고시</span>
 									<hr class="sub-title-bottom-line">
 									<table class="detail-content tbl reviewpagetbl" border="1">
@@ -318,6 +316,8 @@
 										<li>이음은 전자금융거래법에 따라 결제대금 예치업을 운영할 수 있는 전자금융업자로 금융위원회에 등록되었으며, 구매안전서비스를 적용하고 있습니다.</li>
 									</ul>
 								</div>
+							
+							</div><!-- tab-content -->
 						</div><!-- product-content -->
 					</div> <!--left-product-detaile-->
 				</div><!-- col-lg-8 posts-list -->

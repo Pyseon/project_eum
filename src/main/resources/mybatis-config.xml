@@ -10,7 +10,8 @@
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="member"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>
 	</typeAliases>
-
-
+	<typeHandlers>
+        <typeHandler handler="kr.or.eum.LongHandler" javaType="String" jdbcType="LONGVARCHAR"/>
+    </typeHandlers>
 
 </configuration>

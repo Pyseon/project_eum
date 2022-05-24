@@ -134,16 +134,16 @@
 							<div id="tab-2" class="tab-content">
 								<div class="topbox-summary">
 									<div class="review-count">
-										<div class="summary-content">
-											<div class="con1">상품 후기 수</div>
+										<div class="summary-content s-con-1">
+											<div class="con1">상품 후기 수</div><br>
 											<div class="con2">100</div>
 										</div>
 									</div>
 									<div class="review-score-aver">
 										<div class="summary-content">
-											<div class="con1">상품 평균 별점</div>
-											<span class="material-icons summary-icons-star">star</span>
-											<span id="star-score-aver" class="con2">5.0</span>
+											<div class="con1">상품 평균 별점</div><br>
+											<div class="con2"><span class="material-icons icon-star">star</span></div>
+											<div class="con2 con-star-score"><span>5.0</span></div>
 										</div>
 									</div>
 								</div>

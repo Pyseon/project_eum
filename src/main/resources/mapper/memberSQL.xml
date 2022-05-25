@@ -46,7 +46,11 @@
   
   	</select>
 	  <select id ="selectProductList" resultType="productAndPay">
-	 		select product_title, pay_date, payment, pay_state
+	 		select 
+	 			product_title as productTitle,
+	 			pay_date as payDate, 
+	 			payment, 
+	 			pay_state as paystate
 			from product_tbl
 			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
 

@@ -26,6 +26,8 @@ public class ProductController {
 	public String productList(int reqPage, Model model) {
 		ProductPageData ppd = productService.selectProductList(reqPage);
 		model.addAttribute("list",ppd.getList());
+		model.addAttribute("pageNavi",ppd.getPageNavi());
+		model.addAttribute("reqPage", reqPage);
 		System.out.println("리스트: "+ppd.getList());
 		return "product/ClassList";
 	}

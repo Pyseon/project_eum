@@ -26,6 +26,9 @@
 		color:#3865f2;
 		font-weight:bold;
 		margin-bottom: 15px;
+	}
+	.bs1{
+		float: left;
 	}	
 </style>
 <body>
@@ -43,6 +46,7 @@
 			비밀번호 확인* <input class="input-form" type="password" name="memberPwt" placeholder="비밀번호를 다시 입력해주세요."><br>
 			연락처*<input class="input-form" type="text" name="phone" placeholder="연락처를 입력해주세요."><br>
 			성별 <input class="input-form" type="text" name="gender"><br>
+			<button class="btn bc1 bs2">남</button><button class="btn bc1 bs2">남</button>
 			생년월일 <input class="input-form" type="text" name="birth"><br>
 			<button class="btn bc1 bs4" type="submit">가입완료</button>
 		</fieldset>

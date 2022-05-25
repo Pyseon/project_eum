@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="manager">
+	<select id="MemberList" resultType="member" parameterType="map">
+		select * from
+		(select rownum as rnum, mem.* from
+		(select
+			member_no as memberNo,
+			member_id as memberId,
+			member_nick as memberNick,
+			member_phone as memberPhone,
+			member_point as memberPoint,
+			member_reportcount as memberReportCount,
+			enrolldate as enrollDate
+		from member_tbl 
+			where grade=1 or grade=2 or grade=3
+		order by member_no desc) mem)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="memberCount" resultType="int">
+		select count(*) from member_tbl
+	</select>
 	<select id="selectAllMember" resultType="member" parameterType="map">
 		select
 			member_no as memberNo,

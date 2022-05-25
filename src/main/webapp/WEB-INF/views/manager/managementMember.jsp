@@ -23,9 +23,10 @@
 			</ul>
 		</div>
 		<div id="resultTbl">
-			<table class="tbl tbl-hover">
+			<table class="tbl tbl-hover resultTbl">
 				<tr class="tr-1">
 					<th>번호</th>
+					<th>회원번호</th>
 					<th>이메일</th>
 					<th>닉네임</th>
 					<th>포인트</th>
@@ -36,6 +37,7 @@
 				</tr>
 				<c:forEach items="${list }" var="member" varStatus="i">
 				<tr class="tr-2">
+					<td>${(reqPage-1)*10 + i.count }</td>
 					<td>${member.memberNo }</td>
 					<td>${member.memberId }</td>
 					<td>${member.memberNick }</td>
@@ -43,10 +45,13 @@
 					<td>${member.memberPhone }</td>
 					<td>${member.enrollDate }</td>
 					<td>${member.memberReportCount }</td>
-					<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=0&memberNo=${member.memberNo}'">블랙리스트 등록</button></td>
+					<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=0&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 등록</button></td>
 					</tr>
 					</c:forEach>
 			</table>
+		</div>
+		<div class="memberPageNavi">
+			${pageNavi }
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>

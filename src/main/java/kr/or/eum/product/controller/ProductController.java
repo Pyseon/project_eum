@@ -26,12 +26,11 @@ public class ProductController {
 	private MemberService memberService;
 	
 	@RequestMapping(value="/ClassList.do")
-	public String productList(int reqPage, Model model) {
-		ProductPageData ppd = productService.selectProductList(reqPage);
+	public String productList(int reqPage, String selPro, Model model) {
+		ProductPageData ppd = productService.selectProductList(reqPage, selPro);
 		model.addAttribute("list",ppd.getList());
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
-		System.out.println("리스트: "+ppd.getList());
 		return "product/ClassList";
 	}
 	

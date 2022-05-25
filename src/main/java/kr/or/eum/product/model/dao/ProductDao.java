@@ -24,9 +24,9 @@ public class ProductDao {
 	}
 
 	//재건
-	public int selectProductCount() {
+	public int selectProductCount(String selPro) {
 		// TODO Auto-generated method stub
-		int totalCount = sqlSession.selectOne("product.selectTotalCount");
+		int totalCount = sqlSession.selectOne("product.selectTotalCount", selPro);
 		return totalCount;
 	}
 	

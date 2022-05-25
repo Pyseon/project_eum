@@ -18,7 +18,7 @@ public class ProductService {
 	@Autowired
 	private ProductDao productDao;
 	
-	public ProductPageData selectProductList(int reqPage) {
+	public ProductPageData selectProductList(int reqPage, String selPro) {
 		int numPerPage = 12;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -26,9 +26,10 @@ public class ProductService {
 		HashMap<String, Object>map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
+		map.put("selPro", selPro);
 		ArrayList<Product> list = productDao.selectProductList(map);
 		
-		int totalCount = productDao.selectProductCount();
+		int totalCount = productDao.selectProductCount(selPro);
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -39,7 +40,7 @@ public class ProductService {
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
 		
 		String pageNavi = "<ul class='pagination'>";
-		if(pageNo != 1) { 	//pageNo-1 :이전버튼 누르면 그룹변경 / reqPage-1 : 이전버튼 누르면 전페이지로 이동 
+		if(pageNo != 1) { 
 			
 			pageNavi += "<li>";
 			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+(pageNo-1)+"'>";

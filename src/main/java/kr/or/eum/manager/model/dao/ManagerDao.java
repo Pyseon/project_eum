@@ -34,5 +34,15 @@ public class ManagerDao {
 		int result = sqlSession.update("manager.updateBlackList", ubl);
 		return 0;
 	}
+
+	public ArrayList<Member> MemberPageData(HashMap<String, Object> pageMap) {
+		List list = sqlSession.selectList("manager.MemberList",pageMap);
+		return (ArrayList<Member>)list;
+	}
+
+	public int MemberCount() {
+		int totalCount = sqlSession.selectOne("manager.memberCount");
+		return totalCount;
+	}
 	
 }

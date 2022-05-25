@@ -2532,6 +2532,7 @@ textarea {
 	position: relative;
 	display: block;
 	margin-top: 50px;
+	margin-bottom: 100px;
 	left: 250px;
 	width: 80%;
 }
@@ -2548,6 +2549,4 @@ textarea {
 	color: #ccc;
 	font-weight: bold;
 	box-sizing: border-box;
-	
 }
-

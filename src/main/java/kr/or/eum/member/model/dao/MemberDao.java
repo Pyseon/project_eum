@@ -23,7 +23,7 @@ public class MemberDao {
 		Member member = sqlSession.selectOne("member.selectOneMember", m);
 		return member;
 	}
-	
+	//재민 내정보수정
 	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
 		
@@ -32,7 +32,7 @@ public class MemberDao {
 	}
 
 	
-
+	//재민 1:1문의내역
 	public ArrayList<Question> selectQuestionList() {
 		List list = sqlSession.selectList("member.selectQuestionList"); 
 		
@@ -43,6 +43,16 @@ public class MemberDao {
 	public Expert selectOneExpert(int expertNo) {
 		Expert expert = sqlSession.selectOne("member.selectOneExpert",expertNo);
 		return expert;
+	}
+	//재민 구매목록
+	public ArrayList<Product> selectProductList() {
+		List list = sqlSession.selectList("member.selectProductList"); 
+		
+		System.out.println(list.size()+"list_size");
+		for(int i=0;list.size()>i;i++) {
+			System.out.println("list"+list);
+		}
+		return (ArrayList<Product>)list;
 	}
 
 }

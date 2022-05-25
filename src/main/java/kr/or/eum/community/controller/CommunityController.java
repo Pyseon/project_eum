@@ -17,20 +17,13 @@ public class CommunityController {
 	private CommunityService service;
 	
 	@RequestMapping(value="/communityList.do")
-	public String communityList(String menu, int category, int reqPage, Model model) {
+	public String communityList(int category, int reqPage, Model model) {
 		CommunityPageData cpd = service.selectCommunityList(category, reqPage);
 		model.addAttribute("list", cpd.getList());
 		model.addAttribute("pageNavi", cpd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
-		model.addAttribute("menu", menu);
+		model.addAttribute("category", category);
 		return "community/communityList";
-	//	if(category == 0) {
-	//	}else if(category == 1) {
-	//		return "community/communityListCat1";
-	//	}else {
-	//		return "community/communityListCat2";
-	//	}
-		
 	}
 	
 	

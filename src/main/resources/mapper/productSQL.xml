@@ -62,14 +62,11 @@
 	</select>
 
 	<!-- 재건 -->
-	<select id="selectTotalCount"  resultType="int">
+	<select id="selectTotalCount" resultType="int" parameterType="map">
 		select count(*) from product_tbl
-			<if test="value eq '법률'.toString()">
-			where product_Category='법률'
-			</if>
-			<if test="value eq '어학'.toString()">
-			where product_Category='어학'
-			</if>
+		<if test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro}
+		</if>
   </select>
   
   <!-- 재건 -->

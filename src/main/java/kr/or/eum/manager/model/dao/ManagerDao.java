@@ -30,8 +30,8 @@ public class ManagerDao {
 		return (ArrayList<Member>)list;
 	}
 
-	public int MemberCount() {
-		int totalCount = sqlSession.selectOne("manager.memberCount");
+	public int MemberCount(int selMem) {
+		int totalCount = sqlSession.selectOne("manager.memberCount",selMem);
 		return totalCount;
 	}
 	

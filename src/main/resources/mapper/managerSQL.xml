@@ -33,8 +33,25 @@
 		order by member_no desc) mem)
 		where rnum between #{start} and #{end}
 	</select>
-	<select id="memberCount" resultType="int">
+	<select id="memberCount" resultType="int" parameterType="int">
 		select count(*) from member_tbl
+		<choose>
+			<when test="value == 0">
+				where grade=1 or grade=2 or grade=3
+			</when>
+			<when test="value == 1">
+				where grade=1
+			</when>
+			<when test="value == 2">
+				where grade=2
+			</when>
+			<when test="value == 3">
+				where grade=3
+			</when>
+			<otherwise>
+				where grade=4
+			</otherwise>
+		</choose>
 	</select>
 
 	<update id="updateBlackList" parameterType="map">

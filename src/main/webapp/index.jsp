@@ -124,7 +124,7 @@
                 <div class="productinfo text-center">
                   <img src="images/home/recommend1.jpg" alt="" />
                   <h2>쉽게배우는 JAVA</h2>
-                  <a href="/manaMember.do?reqPage=1" class="btn btn-default add-to-cart"
+                  <a href="/manaMember.do?reqPage=1&selMem=0" class="btn btn-default add-to-cart"
                     ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
                   >
                 </div>

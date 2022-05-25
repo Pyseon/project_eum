@@ -82,35 +82,5 @@
 		where 
 			A.expert_no=#{expertNo}
  	</select>
- 	
-	<!-- 윤지 -->
-	<select id="selectOneExpert" parameterType="int" resultType="expertAndCom">
- 		SELECT 
- 			COMP_NO as compNo,
-			A.EXPERT_NO as expertNo,
-			COMP_CATEGORY as compCategory,
-			COMP_REP_NAME as compRepName,
-			COMP_NAME as compName,
-			COMP_REGNO as compRegno,
-			COMP_ADDR as compAddr,
-			COMP_PHONE as compPhone,
-			COMP_EMAIL as compEmail,
-			MEMBER_NO as memberNo,
-			EXPERT_CATEGORY as expertCategory,
-			EXPERT_TAG as expertTag,
-			CREDENTIAL,
-			ISSUING_AUTHORITY as issuingAuthority,
-			ACQUISTION_DATE as acquistionDate,
-			EXPERT_NAME as expertName,
-			EXPERT_PHONE as expertPhone,
-			EXPERT_EMAIL as expertEmail,
-			EXPERT_CONTENT as expertContent,
-			JOB_NAME as jobName
-		FROM 
-			expert_tbl A
-		JOIN 
-			company_tbl B on (A.expert_no = B.expert_no)
-		where 
-			A.expert_no=#{expertNo}
- 	</select>
+
 </mapper>

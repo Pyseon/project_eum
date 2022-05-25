@@ -54,6 +54,7 @@ public class MemberService {
 	//윤지
 	public Expert selectOneExpertPicture(int expertNo) {
 		return dao.selectOneExpertPicture(expertNo);
+	}
 
 	//재민 구매내역
 	public ArrayList<Product> selectProductList() {

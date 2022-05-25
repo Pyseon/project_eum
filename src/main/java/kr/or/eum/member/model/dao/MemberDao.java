@@ -13,6 +13,7 @@ import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
+import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Repository
 public class MemberDao {
@@ -56,6 +57,10 @@ public class MemberDao {
 	public ArrayList<ProductAndPayment> selectProductList() {
 		List list = sqlSession.selectList("member.selectProductList"); 
 		return (ArrayList<ProductAndPayment>)list;
+	}
+	public ArrayList<Wishlist> selectWishlist() {
+		List list = sqlSession.selectList("member.selectWishlist");
+		return (ArrayList<Wishlist>)list;
 	}
 
 }

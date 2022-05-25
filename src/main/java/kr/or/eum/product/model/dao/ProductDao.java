@@ -24,9 +24,9 @@ public class ProductDao {
 	}
 
 	//재건
-	public int selectProductCount(String selPro) {
+	public int selectProductCount(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		int totalCount = sqlSession.selectOne("product.selectTotalCount", selPro);
+		int totalCount = sqlSession.selectOne("product.selectTotalCount", map);
 		return totalCount;
 	}
 	

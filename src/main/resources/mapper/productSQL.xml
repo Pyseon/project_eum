@@ -4,11 +4,13 @@
 <mapper namespace="product">
 
 	<select id="selectProductList" resultType="pro">
-	select
-			product_no as productNo,
-			p.expert_no as expertNo,
+	select * from
+		(select rownum as rnum, b.* from
+		(select
+			p.product_no as productNo,
+			expert_no as expertNo,
+            (select expert_Name from expert_tbl e where p.expert_no=e.expert_no) as expertName,
 			product_type as productType,
-			e.expert_Name as expertName,
 			product_title as productTitle,
             product_Category as productCategory,
 			product_intro as productIntro,
@@ -19,9 +21,12 @@
 			product_ans as productAns,
 			product_addr as productAddr,
 			sale
-			from product_tbl p, expert_tbl e
-        	where p.expert_no = e.expert_no
+			from product_tbl p order by p.product_no desc)b)
+        	where rnum between #{start} and #{end}
           
+	</select>
+	<select id="selectTotalCount" resultType="int">
+		select count(*) from product_tbl
 	</select>
 </mapper>
 	

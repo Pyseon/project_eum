@@ -60,7 +60,7 @@
 			MEMBER_NO memberNO,
 			REVIEW_TITLE reviewTitle,
 			REVIEW_CONTENT reviewContent,
-			REVIEW_STAR reviewStar
+			REVIEW_STAR reviewStar,
 			REVIEW_DATE	reviewDate
 		from review_tbl	
 

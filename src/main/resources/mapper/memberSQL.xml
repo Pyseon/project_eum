@@ -45,8 +45,12 @@
  		from question_tbl
   
   	</select>
-	  <select id ="selectProductList" parameterType="map" resultType="pro">
-	 		select product_title, pay_date,payment,pay_state
+	  <select id ="selectProductList" resultType="productAndPay">
+	 		select 
+	 			product_title as productTitle,
+	 			pay_date as payDate, 
+	 			payment, 
+	 			pay_state as paystate
 			from product_tbl
 			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
 
@@ -84,33 +88,14 @@
  	</select>
  	
 	<!-- 윤지 -->
-	<select id="selectOneExpert" parameterType="int" resultType="expertAndCom">
- 		SELECT 
- 			COMP_NO as compNo,
-			A.EXPERT_NO as expertNo,
-			COMP_CATEGORY as compCategory,
-			COMP_REP_NAME as compRepName,
-			COMP_NAME as compName,
-			COMP_REGNO as compRegno,
-			COMP_ADDR as compAddr,
-			COMP_PHONE as compPhone,
-			COMP_EMAIL as compEmail,
-			MEMBER_NO as memberNo,
-			EXPERT_CATEGORY as expertCategory,
-			EXPERT_TAG as expertTag,
-			CREDENTIAL,
-			ISSUING_AUTHORITY as issuingAuthority,
-			ACQUISTION_DATE as acquistionDate,
-			EXPERT_NAME as expertName,
-			EXPERT_PHONE as expertPhone,
-			EXPERT_EMAIL as expertEmail,
-			EXPERT_CONTENT as expertContent,
-			JOB_NAME as jobName
-		FROM 
-			expert_tbl A
-		JOIN 
-			company_tbl B on (A.expert_no = B.expert_no)
+	<select id="selectOneExpertPicture" parameterType="int" resultType="expertAndCom">
+ 		select 
+ 			expert_no, member_no,
+			(select member_picturepath from member_tbl where expert_tbl.member_no = member_tbl.member_no) 
+		from 
+			expert_tbl
 		where 
-			A.expert_no=#{expertNo}
+			expert_no=#{exportNo}
  	</select>
+
 </mapper>

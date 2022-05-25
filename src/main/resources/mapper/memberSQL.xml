@@ -55,6 +55,16 @@
 			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
 
 	  </select>
+	   <select id ="selectWishlist" resultType="productAndPayAndwish">
+	 		select 
+				product_tbl.product_title as productTitle, 
+				payment_tbl.payment as payMent
+			from product_tbl
+			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
+			join wishlist_tbl on (wishlist_tbl.product_no = product_tbl.product_no)
+
+	  </select>
+	  
 
 	<!-- 윤지 -->
 	<select id="selectOneExpert" parameterType="int" resultType="expertAndCom">

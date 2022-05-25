@@ -19,7 +19,7 @@
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 		<div class="container">
 			<div class="comm-header">
-				<button class="comm-nav cat-active" value="2">전체</button>
+				<button class="comm-nav" value="2">전체</button>
 				<button class="comm-nav" value="0">요즘뭐하니</button>
 				<button class="comm-nav" value="1">이건어때</button>
 			</div>
@@ -86,10 +86,10 @@
 	$(function() {
 	    $(".comm-nav").on("click", function() {
 	    	let param = $(this).val();
-	    	let urlData = "/communityList.do?menu=no&category="+param+"&reqPage=1";
-	    	console.log(urlData);
+	    	let urlData = "/communityList.do?menu=no&category="+param+"&reqPage=1"
 	    	$.ajax({
 				url: urlData,
+				async:false,
 				success:function(){
 					$("#comm-content").load(urlData);
 				}

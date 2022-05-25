@@ -13,47 +13,45 @@
 			member_reportcount as memberReportCount,
 			enrolldate as enrollDate
 		from member_tbl 
-			where grade=1 or grade=2 or grade=3
+		<choose>
+			<when test="selMem == 0">
+				where grade=1 or grade=2 or grade=3
+			</when>
+			<when test="selMem == 1">
+				where grade=1
+			</when>
+			<when test="selMem == 2">
+				where grade=2
+			</when>
+			<when test="selMem == 3">
+				where grade=3
+			</when>
+			<otherwise>
+				where grade=4
+			</otherwise>
+		</choose>
 		order by member_no desc) mem)
 		where rnum between #{start} and #{end}
 	</select>
-	<select id="memberCount" resultType="int">
+	<select id="memberCount" resultType="int" parameterType="int">
 		select count(*) from member_tbl
-	</select>
-	<select id="selectAllMember" resultType="member" parameterType="map">
-		select
-			member_no as memberNo,
-			member_id as memberId,
-			member_pw as memberPw,
-			member_nick as memberNick,
-			member_phone as memberPhone,
-			member_point as memberPoint,
-			member_reportcount as memberReportCount,
-			gender as gender,
-			birth as birth,
-			agreement as agreement,
-			grade as grade, 
-			member_picturename as memberPictureName,
-			member_picturepath as memberPicturePath,
-			enrolldate as enrollDate
-			from member_tbl
-			<choose>
-				<when test="selectMemberBtn == 0">
-					where grade = 1 or grade = 2 or grade = 3
-				</when>
-				<when test="selectMemberBtn == 1">
-					where grade = 1
-				</when>
-				<when test="selectMemberBtn == 2">
-					where grade = 2
-				</when>
-				<when test="selectMemberBtn == 3">
-					where grade = 3
-				</when>
-				<otherwise>
-					where grade = 4
-				</otherwise>
-			</choose>
+		<choose>
+			<when test="value == 0">
+				where grade=1 or grade=2 or grade=3
+			</when>
+			<when test="value == 1">
+				where grade=1
+			</when>
+			<when test="value == 2">
+				where grade=2
+			</when>
+			<when test="value == 3">
+				where grade=3
+			</when>
+			<otherwise>
+				where grade=4
+			</otherwise>
+		</choose>
 	</select>
 
 	<update id="updateBlackList" parameterType="map">

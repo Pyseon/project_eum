@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
 <style>
-	.cat-active{
+	.cat-active:focus{
 		background-color: #1abc9c !important;
 		color: #fff !important;
 		border: 1px solid #1abc9c !important;
@@ -86,8 +86,8 @@
 	$(function() {
 	    $(".comm-nav").on("click", function() {
 	    	let param = $(this).val();
-	    	let urlData = "/communityList.do?menu=no&category="+param+"&reqPage=1";
-	    	console.log(urlData);
+	    	let urlData = "/communityList.do?menu=no&category="+param+"&reqPage=1"
+	    			console.log(urlData);
 	    	$.ajax({
 				url: urlData,
 				success:function(){

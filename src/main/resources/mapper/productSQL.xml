@@ -62,43 +62,14 @@
 	</select>
 
 	<!-- 재건 -->
-	<select id="selectTotalCount" parameterType="String" resultType="int">
+	<select id="selectTotalCount"  resultType="int">
 		select count(*) from product_tbl
-		<choose>
-			<when test="value =='법률'.toString()">
+			<if test="value eq '법률'.toString()">
 			where product_Category='법률'
-			</when>
-			<when test="value =='비즈니스'.toString()">
-			where product_Category='비즈니스'
-			</when>
-			<when test="value =='심리/헬스'.toString()">
-			where product_Category='심리/헬스'
-			</when>
-			<when test="value =='학습'.toString()">
-			where product_Category='학습'
-			</when>
-			<when test="value =='금융'.toString()">
-			where product_Category='금융'
-			</when>
-			<when test="value =='라이프'.toString()">
-			where product_Category='라이프'
-			</when>
-			<when test="value =='취미'.toString()">
-			where product_Category='취미'
-			</when>
-			<when test="value =='어학'.toString()">
+			</if>
+			<if test="value eq '어학'.toString()">
 			where product_Category='어학'
-			</when>
-			<when test="value =='레저'.toString()">
-			where product_Category='레저'
-			</when>
-			<when test="value =='IT/테크'.toString()">
-			where product_Category='IT/테크'
-			</when>
-			<when test="value =='자기개발'.toString()">
-			where product_Category='자기개발'
-			</when>
-		</choose>
+			</if>
   </select>
   
   <!-- 재건 -->

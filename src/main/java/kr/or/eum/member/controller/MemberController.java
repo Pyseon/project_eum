@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
+import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Controller
 public class MemberController {
@@ -65,7 +66,7 @@ public class MemberController {
 	//재민 내 정보페이지
 	@RequestMapping(value="/Mypage.do")
 	public String Mypage() {
-		return "Mypage";
+		return "mypage/Mypage";
 	}
 	//재민 내정보수정
 	@RequestMapping(value="/updateMember.do")
@@ -81,8 +82,8 @@ public class MemberController {
 	public String questionList(Model model) {
 		ArrayList<Question> list = service.selectQuestionList();
 		model.addAttribute("list", list);
-		System.out.println("list"+list);
-		return "MyquestionList";
+		
+		return "mypage/MyquestionList";
 	}
 	
 	//재민 1:1문의 상세내역
@@ -91,16 +92,25 @@ public class MemberController {
 		Question q = service.selectOneQuestion(qstNo);
 		model.addAttribute("q",q);
 		
-		return "questionView";
+		return "mypage/questionView";
 		
 	}
+	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model) {
 		ArrayList<ProductAndPayment> list = service.selectProductList();
 		model.addAttribute("list", list);
-		System.out.println("list"+list);
-		return "Myproduct";
+		
+		return "mypage/Myproduct";
 	}
+	//재민 찜내역
 	
+	@RequestMapping(value="/Wishlist.do")
+	public String Mywishlist(Model model) {
+		ArrayList<Wishlist> list = service.selectWishlist();
+		model.addAttribute("list", list);
+		System.out.println("list"+list);
+		return "mypage/wishlist";
+	}
 
 }

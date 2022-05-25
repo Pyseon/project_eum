@@ -20,26 +20,19 @@ public class ManagerController {
 	private ManagerService service;
 	
 	@RequestMapping(value = "/manaMember.do")
-	public String manaMember(int reqPage, Model model) {
-		MemberPageData mpd = service.MemberList(reqPage);
-		//ArrayList<Member> list = service.selectMember(0);
+	public String manaMember(int reqPage, int selMem, Model model) {
+		MemberPageData mpd = service.MemberList(reqPage, selMem);
 		model.addAttribute("list",mpd.getList());
 		model.addAttribute("pageNavi", mpd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selMem", selMem);
 		return "manager/managementMember";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/selectMember.do", produces = "application/json;charset=utf-8")
-	public String selectMember(int selectMemberBtn) {
-		ArrayList<Member> list = service.selectMember(selectMemberBtn);
-		return new Gson().toJson(list);
 	}
 	
 	@RequestMapping(value = "/updateBlackList.do")
 	public String updateBlackList(int updateNo, int memberNo, int reqPage) {
 		int result = service.updateBlackList(updateNo, memberNo);
-		return "redirect:/manaMember.do?reqPage="+reqPage;
+		return "redirect:/manaMember.do?reqPage="+reqPage+"&selMem=4";
 	}
 	
 }

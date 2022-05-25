@@ -20,16 +20,6 @@ public class ManagerDao {
 		return (ArrayList<Member>)list;
 	}
 
-	public int registBlackList(int memberNo) {
-		int result = sqlSession.update("manager.registBlackList", memberNo);
-		return result;
-	}
-	
-	public int clearBlackList(int memberNo) {
-		int result = sqlSession.update("manager.clearBlackList", memberNo);
-		return result;
-	}
-
 	public int updateBlackList(HashMap<String, Integer> ubl) {
 		int result = sqlSession.update("manager.updateBlackList", ubl);
 		return 0;

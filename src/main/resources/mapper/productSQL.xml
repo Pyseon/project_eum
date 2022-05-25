@@ -29,6 +29,10 @@
 		select count(*) from product_tbl
   </select>
   
+  <!-- 재건 -->
+  <!--
+  <select id=
+  -->
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">
 		select

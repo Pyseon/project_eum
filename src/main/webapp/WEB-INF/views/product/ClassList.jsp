@@ -24,12 +24,15 @@ li{
     	width: calc(100% / 5);
     	padding: 13px;
     	height: 250px;
-    	margin: 30px 15px 55px 10px;
+    	margin: 30px 8px 55px 8px;
 	}
 	
 	.t1{
 	float: left;
-	font-size:17px
+	font-size:16px;
+	}
+	.t1 > h4{
+	font-family: fs-bold;
 	}
 	.t1 > img{
 	width:20px;
@@ -119,10 +122,12 @@ li{
 				<div class="t2">
 					${c.productCategory}
 				</div>
-				</li>
-							
+				</li>		
 	</div>
 	</c:forEach>
+</div>
+${pageNavi }
+<div>
 </div>
 </div>
 

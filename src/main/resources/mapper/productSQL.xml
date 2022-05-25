@@ -29,6 +29,10 @@
 		select count(*) from product_tbl
   </select>
   
+  <!-- 재건 -->
+  <!--
+  <select id=
+  -->
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">
 		select
@@ -56,10 +60,16 @@
 			MEMBER_NO memberNO,
 			REVIEW_TITLE reviewTitle,
 			REVIEW_CONTENT reviewContent,
-			REVIEW_STAR reviewStar
+			REVIEW_STAR reviewStar,
 			REVIEW_DATE	reviewDate
 		from review_tbl	
 
+	</select>
+	<!-- 윤지 -->
+	<select id="selectReviewCount" resultType="int">
+		select
+			count(*) as cnt 
+		from review_tbl
 	</select>
 </mapper>
 	

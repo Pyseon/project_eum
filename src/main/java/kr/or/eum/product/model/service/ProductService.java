@@ -19,7 +19,7 @@ public class ProductService {
 	private ProductDao productDao;
 	
 	public ProductPageData selectProductList(int reqPage) {
-		int numPerPage = 15;
+		int numPerPage = 12;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		
@@ -84,6 +84,11 @@ public class ProductService {
 	//윤지
 	public ArrayList<Review> selectAllReview() {
 		return productDao.selectAllReview();
+	}
+	
+	//윤지
+	public int selectReviewCount() {
+		return productDao.selectReviewCount();
 	}
 
 }

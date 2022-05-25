@@ -64,6 +64,10 @@ public class MemberService {
 		
 		return list;
 	}
+	//윤지
+	public Expert selectOneExpertOnly(int expertNo) {
+		return dao.selectOneExpertOnly(expertNo);
+	}
 
 
 }

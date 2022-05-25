@@ -26,7 +26,7 @@ public class ManagerService {
 		pageMap.put("selMem", selMem);
 		ArrayList<Member> memberList = dao.MemberPageData(pageMap);
 		
-		int totalCount = dao.MemberCount();
+		int totalCount = dao.MemberCount(selMem);
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;

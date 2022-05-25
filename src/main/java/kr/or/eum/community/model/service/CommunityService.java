@@ -33,7 +33,6 @@ public class CommunityService {
 		String pageNavi = pageNavi(totalCount, category, reqPage, numPerPage, uriData);
 
 		CommunityPageData cpd = new CommunityPageData(list, pageNavi);	
-	
 		return cpd;
 	}
 	
@@ -119,6 +118,7 @@ public class CommunityService {
 			pageNavi += "</a></li>";
 		}
 		pageNavi += "</ul>";
+		
 		
 		return pageNavi;
 	}

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndPayment;
 
 @Controller
 public class MemberController {
@@ -95,7 +96,7 @@ public class MemberController {
 	}
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model) {
-		ArrayList<Product> list = service.selectProductList();
+		ArrayList<ProductAndPayment> list = service.selectProductList();
 		model.addAttribute("list", list);
 		System.out.println("list"+list);
 		return "Myproduct";

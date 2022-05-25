@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="product">
-
+	<!-- 재건 -->
 	<select id="selectProductList" resultType="pro">
 	select * from
 		(select rownum as rnum, b.* from
@@ -24,10 +24,11 @@
 			from product_tbl p order by p.product_no desc)b)
         	where rnum between #{start} and #{end}       
 	</select>
-
+	<!-- 재건 -->
 	<select id="selectTotalCount" resultType="int">
 		select count(*) from product_tbl
   </select>
+  
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">
 		select

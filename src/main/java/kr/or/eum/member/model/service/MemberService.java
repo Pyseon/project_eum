@@ -11,6 +11,7 @@ import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndPayment;
 
 @Service
 public class MemberService {
@@ -57,8 +58,8 @@ public class MemberService {
 	}
 	
 	//재민 구매내역
-	public ArrayList<Product> selectProductList() {
-		ArrayList<Product> list = dao.selectProductList();
+	public ArrayList<ProductAndPayment> selectProductList() {
+		ArrayList<ProductAndPayment> list = dao.selectProductList();
 		
 		return list;
 	}

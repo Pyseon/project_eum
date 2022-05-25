@@ -45,7 +45,7 @@
  		from question_tbl
   
   	</select>
-	  <select id ="selectProductList" resultType="pro">
+	  <select id ="selectProductList" resultType="productAndPay">
 	 		select product_title, pay_date, payment, pay_state
 			from product_tbl
 			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)

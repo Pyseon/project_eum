@@ -11,6 +11,7 @@ import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndPayment;
 
 @Repository
 public class MemberDao {
@@ -51,14 +52,9 @@ public class MemberDao {
 		return expertPicture;
 	}
 	//재민 구매목록
-	public ArrayList<Product> selectProductList() {
+	public ArrayList<ProductAndPayment> selectProductList() {
 		List list = sqlSession.selectList("member.selectProductList"); 
-		
-		System.out.println(list.size()+"list_size");
-		for(int i=0;list.size()>i;i++) {
-			System.out.println("list"+list);
-		}
-		return (ArrayList<Product>)list;
+		return (ArrayList<ProductAndPayment>)list;
 	}
 
 }

@@ -79,18 +79,18 @@ li{
 <div>
 		<table class="category">
 				<tr>
-					<td><button type="button" class="btm_image" id="img_btn1"><img src="./img/category/전체.png"></button><h3>전체</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn2"><img src="./img/category/법률.png"></button><h3>법률</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn3"><img src="./img/category/비즈니스.png"></button><h3>비즈니스</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn4"><img src="./img/category/심리_헬스.png"></button><h3>심리/헬스</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn5"><img src="./img/category/학습.png"></button><h3>학습</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn6"><img src="./img/category/금융.png"></button><h3>금융</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn7"><img src="./img/category/라이프.png"></button><h3>라이프</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn8"><img src="./img/category/취미.png"></button><h3>레저</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn9"><img src="./img/category/어학.png"></button><h3>어학</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn10"><img src="./img/category/레저.png"></button><h3>레저</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn11"><img src="./img/category/it.png"></button><h3>IT/테크</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn12"><img src="./img/category/자기개발.png"></button><h3>자기계발</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ClassList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"></button><h3>전체</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ClassList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"></button><h3>법률</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ClassList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"></button><h3>비즈니스</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/ClassList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"></button><h3>심리/헬스</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn5" onclick="location.href='/ClassList.do?reqPage=1&selPro=학습'"><img src="./img/category/학습.png"></button><h3>학습</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn6" onclick="location.href='/ClassList.do?reqPage=1&selPro=금융'"><img src="./img/category/금융.png"></button><h3>금융</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn7" onclick="location.href='/ClassList.do?reqPage=1&selPro=라이프'"><img src="./img/category/라이프.png"></button><h3>라이프</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn8" onclick="location.href='/ClassList.do?reqPage=1&selPro=취미'"><img src="./img/category/취미.png"></button><h3>취미</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn9" onclick="location.href='/ClassList.do?reqPage=1&selPro=어학'"><img src="./img/category/어학.png"></button><h3>어학</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/ClassList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"></button><h3>레저</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/ClassList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"></button><h3>IT/테크</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/ClassList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"></button><h3>자기계발</h3></td>
           			</tr>
           			</table>
    </div>

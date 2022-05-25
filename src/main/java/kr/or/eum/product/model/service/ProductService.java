@@ -23,17 +23,13 @@ public class ProductService {
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
 		
-		HashMap<String, Object>map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
 		ArrayList<Product> list = productDao.selectProductList(map);
 		
-		HashMap<String, Object>selPro2 = new HashMap<String, Object>();
-		map.put("selPro", selPro);
-		
-		
-		int totalCount = productDao.selectProductCount(selPro2);
+		int totalCount = productDao.selectProductCount(map);
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;

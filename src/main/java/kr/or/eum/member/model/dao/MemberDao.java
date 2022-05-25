@@ -63,7 +63,7 @@ public class MemberDao {
 	public Expert selectOneExpertOnly(int expertNo) {
 		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly",expertNo);
 		return expert;
-
+	}
 	public ArrayList<Wishlist> selectWishlist() {
 		List list = sqlSession.selectList("member.selectWishlist");
 		return (ArrayList<Wishlist>)list;

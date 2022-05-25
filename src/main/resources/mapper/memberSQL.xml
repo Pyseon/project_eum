@@ -24,7 +24,7 @@
  			and member_Pw=#{memberPw}
  		</if>
  	</select>
-	
+	<!-- 재민 -->
 	<update id="updateMember" parameterType="m" >
 	update into member_tbl set 
 		member_id =#{memberId}, 
@@ -44,7 +44,13 @@
  		
  		from question_tbl
   
-  </select>
+  	</select>
+	  <select id ="selectProductList" parameterType="map" resultType="pro">
+	 		select product_title, pay_date,payment,pay_state
+			from product_tbl
+			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
+
+	  </select>
 
 	<!-- 윤지 -->
 	<select id="selectOneExpert" parameterType="int" resultType="expert">

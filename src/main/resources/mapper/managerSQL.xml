@@ -30,7 +30,7 @@
 				where grade=4
 			</otherwise>
 		</choose>
-		order by member_no desc) ==mem)
+		order by member_no desc) mem)
 		where rnum between #{start} and #{end}
 	</select>
 	<select id="memberCount" resultType="int">

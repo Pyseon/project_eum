@@ -70,11 +70,11 @@ public class ManagerService {
 				//다음버튼
 				if(pageNo <= totalPage) {
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/memberList.do?reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+pageNo+"&selMem="+selMem+"'>";
 					pageNavi += "<span class='material-icons'>chevron_right</span>";
 					pageNavi += "</a></li>";
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/memberList.do?reqPage="+totalPage+"'>";
+					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+totalPage+"&selMem="+selMem+"'>";
 					pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 					pageNavi += "</a></li>";
 				}

@@ -27,6 +27,7 @@ public class ProductDao {
 		// TODO Auto-generated method stub
 		int totalCount = sqlSession.selectOne("product.selectTotalCount");
 		return totalCount;
+	}
 	
 	//윤지
 	public Product selectOneProduct(int productNo) {

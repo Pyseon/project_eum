@@ -11,6 +11,7 @@ import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.product.model.vo.Payment;
 
@@ -22,10 +23,10 @@ public class ProductController {
 	private MemberService memberservice;
 	
 	@RequestMapping(value="/ClassList.do")
-	public String productList(Model model) {
-		ArrayList<Product> list = productService.selectProductList();
-		model.addAttribute("list",list);
-		System.out.println("리스트: "+list);
+	public String productList(int reqPage, Model model) {
+		ProductPageData ppd = productService.selectProductList(reqPage);
+		model.addAttribute("list",ppd.getList());
+		System.out.println("리스트: "+ppd.getList());
 		return "product/ClassList";
 	}
 	

@@ -37,18 +37,10 @@ public class MemberService {
 		return list;
 	}
 
-/*
- * 
- * public ArrayList<Answer> selectAnswerList() {
-		ArrayList<Answer> list = dao.selectAnswerList();
-		return list;
+	public Question selectOneQuestion(int qstNo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	public Answer selectOneAnswer(int ansNo) {
-		Answer a = dao.selectOneBoard(ansNo);
-		
-		return a;
-	}
-*/
 
 }

@@ -26,6 +26,9 @@
 		color:#3865f2;
 		font-weight:bold;
 		margin-bottom: 15px;
+	}
+	.bs1{
+		float: left;
 	}	
 </style>
 <body>

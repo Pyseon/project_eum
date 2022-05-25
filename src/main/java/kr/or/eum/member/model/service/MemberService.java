@@ -10,6 +10,7 @@ import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Product;
 
 @Service
 public class MemberService {
@@ -27,12 +28,13 @@ public class MemberService {
 		return member;
 	}
 	
+	//재민 내정보수정
 	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
 		int result = dao.updateMember(m);
 		return result;
 	}
-
+	//재민 1:1문의리스트 확인
 	public ArrayList<Question> selectQuestionList() {
 		ArrayList<Question> list = dao.selectQuestionList();
 		
@@ -43,15 +45,21 @@ public class MemberService {
 	public ExpertAndCompany selectOneExpert(int expertNo) {
 		return dao.selectOneExpert(expertNo);
 	}
-
+	//재민 1:1문의 상세페이지
 	public Question selectOneQuestion(int qstNo) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	//윤지
 	public Expert selectOneExpertPicture(int expertNo) {
 		return dao.selectOneExpertPicture(expertNo);
+
+	//재민 구매내역
+	public ArrayList<Product> selectProductList() {
+		ArrayList<Product> list = dao.selectProductList();
+		
+		return list;
 	}
 
 

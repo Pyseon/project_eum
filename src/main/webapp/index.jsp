@@ -110,7 +110,7 @@
 	<hr>
 	 <div class="recommended_items container">
     <!--recommended_items-->
-    <h2 class="fs-bold"><a href="/MyquestionList.do">인기있는 클래스</h2></a>
+    <h2 class="fs-bold"><a href="/Mypage.do">인기있는 클래스</h2></a>
     <div
       id="recommended-item-carousel"
       class="carousel slide"

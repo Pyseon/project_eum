@@ -37,6 +37,6 @@
 		
 		
 	</form>
-	
+	<a href="/Myproduct.do">구매내역</a>
 </body>
 </html>

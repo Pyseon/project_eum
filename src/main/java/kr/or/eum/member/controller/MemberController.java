@@ -15,6 +15,7 @@ import kr.or.eum.member.model.service.MemberService;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Product;
 
 @Controller
 public class MemberController {
@@ -91,6 +92,13 @@ public class MemberController {
 		
 		return "questionView";
 		
+	}
+	@RequestMapping(value="/Myproduct.do")
+	public String Myproduct(Model model) {
+		ArrayList<Product> list = service.selectProductList();
+		model.addAttribute("list", list);
+		System.out.println("list"+list);
+		return "Myproduct";
 	}
 	
 

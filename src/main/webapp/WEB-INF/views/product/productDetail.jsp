@@ -36,7 +36,7 @@
 					<div class="left-product-detail">
 						<div class="detail-1">
 							<span data-tab="tab-1" class="detail-title title1 tab-link current">상세내용</span>
-							<span data-tab="tab-2" class="detail-title title2 tab-link">후기<span class="tab-review-count">(${reviewCount})</span></span> <!-- 후기 수 DB -->
+							<span data-tab="tab-2" class="detail-title title2 tab-link">후기<span class="tab-review-count"> (${reviewCount})</span></span> <!-- 후기 수 DB -->
 						</div>	
 						<div class="product-content">
 						
@@ -52,21 +52,7 @@
 									<hr class="sub-title-bottom-line">
 									<div class="detail-main-content">
 										<div class="detail-content">
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										<br><img src="img/testpicture.png"><br>최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										<br><img src="img/testpicture.png">
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										<br><img src="img/testpicture.png"><br>최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
-										최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.최대한 정확하고 신속하게 상담 해드리겠습니다.
+										${p.productContent}
 										</div>
 										<div class="cover"></div>
 										<!-- DB --><br>
@@ -76,27 +62,37 @@
 								<div class="detail-wrap">
 									<span class="detail-sub-title">자주 묻는 질문</span>
 									<hr class="sub-title-bottom-line">
+									<!-- 고민중....................... -->
 									<ul class="detail-content content-bg ">
-										<!-- for문으로 질문 등록한 수 만큼 가져오면 되는데 DB가 없는 것 같은데 -->
-										<li>Q. 꿈은 없고요 놀고 싶습니다.</li>
-										<!-- DB -->
-										<li>A. 안 궁금합니다.</li>
-										<!-- DB -->
+										<c:forEach items="${qst}" var="qst" begin="0" end="2" step="1">
+											<li>
+												Q. <c:out value="${qst}"/>
+											</li>
+										</c:forEach>	
+										<c:forEach items="${ans}" var="ans" begin="0" end="2" step="1">
+											<li>
+												A. <c:out value="${ans}"/>
+											</li>
+										</c:forEach>
 									</ul>
-									<ul class="detail-content content-bg ">
-										<li>Q. 대면상담 진행하면 유재석 볼 수 있나요?</li>
-										<!-- DB -->
-										<li>A. 아니요</li>
-										<!-- DB -->
-									</ul>
+									
 								</div><!-- detail-wrap -->
 								<div class="detail-wrap">
-									<span class="detail-sub-title">판매자 정보</span>
+									<span class="detail-sub-title"></span>
 									<hr class="sub-title-bottom-line">
 									<table class="detail-content tbl" border="1">
 										<tr>
 											<th>대표자</th>
-											<td>홍길동</td>
+											<td>
+											<c:choose>
+												<c:when test="${empty expert.compName}">
+													${expert.expertName}
+												</c:when>
+												<c:otherwise>
+													${expert.compRepName}
+												</c:otherwise>
+											</c:choose>
+											</td>
 											<th>상호명</th>
 											<td>백호법무법인</td>
 										</tr>

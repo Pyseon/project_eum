@@ -39,14 +39,20 @@ public class ProductController {
 	@RequestMapping(value = "/productDetail.do")
 	public String productDetail(Model model, int productNo, int expertNo) {
 		Product product = productService.selectOneProduct(productNo);
+		String productQst[] = product.getProductQst().split("/");
+		String productAns[] = product.getProductAns().split("/");
 		ExpertAndCompany expertAndCom = memberService.selectOneExpert(expertNo);
+		Expert expert = memberService.selectOneExpertOnly(expertNo);
+		System.out.println(expertNo);
+		System.out.println(expertAndCom);
 		ExpertAndMember expertPicture = memberService.selectOneExpertPicture(expertNo);
 		ArrayList<Review> review = productService.selectAllReview();
 		int reviewCount = productService.selectReviewCount();
 		model.addAttribute("p", product);
+		model.addAttribute("qst", productQst);
+		model.addAttribute("ans", productAns);
 		model.addAttribute("expert", expertAndCom);
 		model.addAttribute("picture", expertPicture);
-		System.out.println(expertPicture.getMemberPicturePath());
 		model.addAttribute("review", review);
 		model.addAttribute("reviewCount",reviewCount);
 		return "product/productDetail";

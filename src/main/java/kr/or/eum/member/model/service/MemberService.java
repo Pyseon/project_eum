@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
+import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 
@@ -41,7 +42,7 @@ public class MemberService {
 	}
 	
 	//윤지
-	public Expert selectOneExpert(int expertNo) {
+	public ExpertAndCompany selectOneExpert(int expertNo) {
 		return dao.selectOneExpert(expertNo);
 	}
 	//재민 1:1문의 상세페이지
@@ -49,6 +50,11 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	//윤지
+	public Expert selectOneExpertPicture(int expertNo) {
+		return dao.selectOneExpertPicture(expertNo);
+
 	//재민 구매내역
 	public ArrayList<Product> selectProductList() {
 		ArrayList<Product> list = dao.selectProductList();

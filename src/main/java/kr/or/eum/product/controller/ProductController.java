@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
+import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
@@ -39,16 +40,15 @@ public class ProductController {
 	public String productDetail(Model model, int productNo, int expertNo) {
 		Product product = productService.selectOneProduct(productNo);
 		ExpertAndCompany expertAndCom = memberService.selectOneExpert(expertNo);
-		Expert expertPicture = memberService.selectOneExpertPicture(expertNo);
+		ExpertAndMember expertPicture = memberService.selectOneExpertPicture(expertNo);
 		ArrayList<Review> review = productService.selectAllReview();
-		model.addAttribute("product", product);
+		int reviewCount = productService.selectReviewCount();
+		model.addAttribute("p", product);
 		model.addAttribute("expert", expertAndCom);
-		for(int i = 0; i < review.size(); i++) {
-			System.out.println(review.get(i).getReviewNo());
-			System.out.println(review.get(i).getReviewContent());
-		}
-		System.out.println(expertAndCom.getExpertName());
-		System.out.println(expertAndCom.getExpertEmail());
+		model.addAttribute("picture", expertPicture);
+		System.out.println(expertPicture.getMemberPicturePath());
+		model.addAttribute("review", review);
+		model.addAttribute("reviewCount",reviewCount);
 		return "product/productDetail";
 	}
 	

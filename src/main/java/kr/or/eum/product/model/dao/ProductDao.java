@@ -40,4 +40,9 @@ public class ProductDao {
 		return (ArrayList<Review>)list;
     
 	}
+	//윤지
+	public int selectReviewCount() {
+		int reviewCount = sqlSession.selectOne("product.selectReviewCount");
+		return reviewCount;
+	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,11 +16,11 @@
 				<div class="col-lg-8 posts-list">
 					<div class="left-title">
 						<div class="line-top">
-							<span class="title">상담제목</span><br> 
+							<span class="title">${p.productTitle} </span><br> 
 							<span class="material-icons icon-confirm confirm">verified</span>&nbsp;
 							<div class="top-box-name">
-								<span class="title-2">유재석&nbsp;&nbsp;/</span>&nbsp;
-								<span class="title-2">변호사</span> <!-- DB -->	
+								<span class="title-2">${expert.expertName}&nbsp;&nbsp;/</span>&nbsp;
+								<span class="title-2">${expert.jobName}</span> 
 							</div>
 						</div><!-- line-top -->
 						<hr>
@@ -35,7 +36,7 @@
 					<div class="left-product-detail">
 						<div class="detail-1">
 							<span data-tab="tab-1" class="detail-title title1 tab-link current">상세내용</span>
-							<span data-tab="tab-2" class="detail-title title2 tab-link">후기</span> <!-- 후기 수 DB -->
+							<span data-tab="tab-2" class="detail-title title2 tab-link">후기<span class="tab-review-count">(${reviewCount})</span></span> <!-- 후기 수 DB -->
 						</div>	
 						<div class="product-content">
 						
@@ -43,11 +44,11 @@
 								<div class="detail-wrap">
 									<span class="detail-sub-title">상담소개</span>
 									<hr class="sub-title-bottom-line">
-									<span class="detail-content">20 년 경력의 세무사가 상담해주는 정확한 상담//여기에 한마디칼럼</span>
+									<span class="detail-content"></span>
 									<!-- DB -->
 								</div>
 								<div class="detail-wrap">
-									<span class="detail-sub-title"">상세설명</span>
+									<span class="detail-sub-title">상세설명</span>
 									<hr class="sub-title-bottom-line">
 									<div class="detail-main-content">
 										<div class="detail-content">

@@ -18,11 +18,52 @@
 			    comm_filename as commFilename,
 			    comm_filepath as commFilepath,
 			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
-		from community_tbl comm order by comm.comm_no desc) c)
+		from community_tbl comm 
+		<if test="category == 0">
+		where comm_category = 0
+		</if>
+		<if test="category == 1">
+		where comm_category = 1
+		</if>
+		order by comm.comm_no desc) c)
 		where rnum between #{start} and #{end}
 	</select> 
-	<select id="selectTotalCount" resultType="int">
+	<select id="selectTotalCount" resultType="int" parameterType="map">
 		select count(*) from community_tbl
+		<if test="category == 0">
+		where comm_category = 0
+		</if>
+		<if test="category == 1">
+		where comm_category = 1
+		</if>
 	</select>
+	<select id="selectCommunityListCat0" resultType="comm" parameterType="map">
+		select * from
+			(select rownum as rnum, c.* from
+			(select 
+			    comm.comm_no as commNo,
+			    comm_category as commCategory,
+			    member_no as memberNo,
+			    (select member_nick from member_tbl m where comm.member_no = m.member_no) as memberNick, --멤버닉
+			    (select member_picturepath from member_tbl m where comm.member_no = m.member_no) as memberPicturepath, --멤버프로필사진
+			    comm_title as commTitle,
+			    comm_intro as commIntro,
+			    read_count as readCount,
+			    comm_date as commDate,
+			    comm_like as commLike,
+			    comm_filename as commFilename,
+			    comm_filepath as commFilepath,
+			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
+		from community_tbl comm where comm_category = 0 order by comm.comm_no desc) c)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="selectCommunityCat0Count" resultType="int">
+		select count(*) from community_tbl where comm_category = 0
+	</select>
+	
+	
+	
+	
+	
 	
 </mapper>

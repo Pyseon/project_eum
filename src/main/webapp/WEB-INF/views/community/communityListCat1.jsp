@@ -15,11 +15,11 @@
 </style>
 </head>
 <body>
-	<c:if test="${'yes' eq menu }">
+<c:if test="${'yes' eq menu }">
 		<%@ include file="/WEB-INF/views/common/header.jsp"%>
 		<div class="container">
 			<div class="comm-header">
-				<button class="comm-nav cat-active" value="2">전체</button>
+				<button class="comm-nav" value="2">전체</button>
 				<button class="comm-nav" value="0">요즘뭐하니</button>
 				<button class="comm-nav" value="1">이건어때</button>
 			</div>
@@ -78,15 +78,15 @@
 	  	<div>
 	  	 	${pageNavi }  	 	
 	  	</div>
-   <c:if test="${'yes' eq menu }">
-		 </div>
+	 <c:if test="${'yes' eq menu }">
+	 </div>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	</c:if>
 	<script>
 	$(function() {
 	    $(".comm-nav").on("click", function() {
 	    	let param = $(this).val();
-	    	let urlData = "/communityList.do?menu=no&category="+param+"&reqPage=1";
+	    	let urlData = "/communityList.do?menu=no&category="+param+"&reqPage=1"
 	    	console.log(urlData);
 	    	$.ajax({
 				url: urlData,

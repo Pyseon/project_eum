@@ -6,6 +6,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+
 import kr.or.eum.community.model.vo.Community;
 import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
@@ -58,12 +60,12 @@ public class MemberController {
 	public String joinFrm() {
 		return "member/joinFrm";
 	}	
-  
-  @RequestMapping(value="/Mypage.do")
+	//재민 내 정보페이지
+	@RequestMapping(value="/Mypage.do")
 	public String Mypage() {
 		return "Mypage";
 	}
-	
+	//재민 내정보수정
 	@RequestMapping(value="/updateMember.do")
 	public String updateMember(Member m,HttpSession session) {
 		int result = service.updateMember(m);
@@ -72,13 +74,23 @@ public class MemberController {
 		}
 		return "redirect:/mypage.do";
 	}
-	
+	//재민 1:1 문의내역 확인
 	@RequestMapping(value="/MyquestionList.do")
 	public String questionList(Model model) {
 		ArrayList<Question> list = service.selectQuestionList();
 		model.addAttribute("list", list);
 		System.out.println("list"+list);
 		return "MyquestionList";
+	}
+	
+	//재민 1:1문의 상세내역
+	@RequestMapping(value="/questionView.do.do")
+	public String questionView(int qstNo, Model model) {
+		Question q = service.selectOneQuestion(qstNo);
+		model.addAttribute("q",q);
+		
+		return "questionView";
+		
 	}
 	
 

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.Review;
 
 
 @Repository
@@ -21,9 +22,21 @@ public class ProductDao {
 		return (ArrayList<Product>)list;
 	}
 
+
 	public int selectProductCount() {
 		// TODO Auto-generated method stub
 		int totalCount = sqlSession.selectOne("product.selectTotalCount");
 		return totalCount;
+	
+	//윤지
+	public Product selectOneProduct(int productNo) {
+		Product product = sqlSession.selectOne("product.selectOneProduct",productNo);
+		return product;
+	}
+	//윤지
+	public ArrayList<Review> selectAllReview() {
+		List list = sqlSession.selectList("product.selectAllReview");
+		return (ArrayList<Review>)list;
+    
 	}
 }

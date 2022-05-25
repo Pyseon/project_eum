@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class payment {
+public class Payment {
 	private int payNo;
 	private int memberNo;
 	private int productNo;

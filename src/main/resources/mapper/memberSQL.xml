@@ -88,10 +88,10 @@
  	</select>
  	
 	<!-- 윤지 -->
-	<select id="selectOneExpertPicture" parameterType="int" resultType="expertAndCom">
+	<select id="selectOneExpertPicture" parameterType="int" resultType="expertAndM">
  		select 
  			expert_no, member_no,
-			(select member_picturepath from member_tbl where expert_tbl.member_no = member_tbl.member_no) 
+			(select member_picturepath from member_tbl where expert_tbl.member_no = member_tbl.member_no) as memberPicturepath 
 		from 
 			expert_tbl
 		where 

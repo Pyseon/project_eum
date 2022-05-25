@@ -65,5 +65,11 @@
 		from review_tbl	
 
 	</select>
+	<!-- 윤지 -->
+	<select id="selectReviewCount" resultType="int">
+		select
+			count(*) as cnt 
+		from review_tbl
+	</select>
 </mapper>
 	

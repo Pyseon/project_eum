@@ -9,6 +9,7 @@ import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
+import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
@@ -47,8 +48,8 @@ public class MemberDao {
 		return expertAndCom;
 	}
 
-	public Expert selectOneExpertPicture(int expertNo) {
-		Expert expertPicture = sqlSession.selectOne("member.selectOneExpertPicture",expertNo);
+	public ExpertAndMember selectOneExpertPicture(int expertNo) {
+		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture",expertNo);
 		return expertPicture;
 	}
 	//재민 구매목록

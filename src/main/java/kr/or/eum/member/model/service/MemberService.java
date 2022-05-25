@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
+import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
@@ -53,7 +54,7 @@ public class MemberService {
 	}
 
 	//윤지
-	public Expert selectOneExpertPicture(int expertNo) {
+	public ExpertAndMember selectOneExpertPicture(int expertNo) {
 		return dao.selectOneExpertPicture(expertNo);
 	}
 

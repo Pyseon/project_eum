@@ -85,5 +85,10 @@ public class ProductService {
 	public ArrayList<Review> selectAllReview() {
 		return productDao.selectAllReview();
 	}
+	
+	//윤지
+	public int selectReviewCount() {
+		return productDao.selectReviewCount();
+	}
 
 }

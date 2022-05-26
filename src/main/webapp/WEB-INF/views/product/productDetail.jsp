@@ -64,20 +64,13 @@
 								<div class="detail-wrap">
 									<span class="detail-sub-title">자주 묻는 질문</span>
 									<hr class="sub-title-bottom-line">
-									<!-- 고민중....................... -->
 									<ul class="detail-content content-bg ">
-										<c:forEach items="${qst}" var="qst" begin="0" end="2" step="1">
-											<li>
-												Q. <c:out value="${qst}"/>
-											</li>
-										</c:forEach>	
-										<c:forEach items="${ans}" var="ans" begin="0" end="2" step="1">
-											<li>
-												A. <c:out value="${ans}"/>
-											</li>
+										<c:forEach items="${productQNA}" var="productQNA" varStatus="status">
+												<li>
+												<c:out value="${productQNA}"/>
+												</li>
 										</c:forEach>
 									</ul>
-									
 								</div><!-- detail-wrap -->
 								<div class="detail-wrap">
 									<span class="detail-sub-title"></span>
@@ -375,7 +368,7 @@
 						<div class="right-first-box">
 							<div class="product-summary">
 								<span id="sele">${p.sale}%</span>
-								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price">100,000원</span><br>
+								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span></span><br>
 								<div class="star-wrap">
 									<!-- 별점  -->
 									<ul>
@@ -395,7 +388,9 @@
 							<div class="product-check">
 								<ul>
 									<li><span class="material-icons icons-check">done</span> <span class="check-content">1:1채팅, 영상 통화 가능</span></li>
-									<li><span class="material-icons icons-check">done</span> <span class="check-content">기본 상담 30분</span> <%--DB --%></li>
+									<c:if test="${p.productOption ne 0}">
+										<li><span class="material-icons icons-check">done</span> <span class="check-content">기본 상담 ${p.productOption }분</span> <%--DB --%></li>
+									</c:if>
 									<li><span class="material-icons icons-check">done</span> <span class="check-content">시간 초과 시 추가 비용이 발생할 수 있습니다.</span></li>
 								</ul>
 							</div>
@@ -413,16 +408,25 @@
 								</div>
 								<div class="expert-profile">
 									<ul>
-										<li><h3 class="expert-info">전문가이름</h3></li>
 										<li>
-											<div class="icon-confirm-wrap">
-												<span class="material-icons icon-confirm confirm2">verified</span>
-											</div>
+											<h3 class="expert-info">
+												<c:choose>
+													<c:when test="${empty expertAndCom.compName}">
+													${expert.expertName }
+													</c:when>
+													<c:otherwise>
+													${expertAndCom.compName}
+													</c:otherwise>
+												</c:choose>
+											</h3>
+										</li>
+										<li class="icon-confim-wrap">
+											<span class="material-icons icon-confirm confirm2">verified</span>
 										</li>
 									</ul>
 								</div><!-- expert-profile -->
 								<div class="info-wrap">
-									<span><h5 class="extpert-info info2">변호사</h5></span>			
+									<span><h5 class="extpert-info info2">${expert.jobName }</h5></span>			
 									<span><h5 class="extpert-info info2">자기소개 글자수 test 승소율99%</h5></span>
 								</div><!-- info-wrap -->
 							</div><!-- right-second-box -->
@@ -440,18 +444,13 @@
 							<!-- DB, for문 -->
 							<div class="tag-list-wrap">
 								<ul>
-									<li class="tag-li"><a href="#">Technology</a></li>
-									<li class="tag-li"><a href="#">Fashion</a></li>
-									<li class="tag-li"><a href="#">Architecture</a></li>
-									<li class="tag-li"><a href="#">Fashion</a></li>
-									<li class="tag-li"><a href="#">Food</a></li>
-									<li class="tag-li"><a href="#">Technology</a></li>
-									<li class="tag-li"><a href="#">Lifestyle</a></li>
-									<li class="tag-li"><a href="#">Art</a></li>
-									<li class="tag-li"><a href="#">Adventure</a></li>
-									<li class="tag-li"><a href="#">Food</a></li>
-									<li class="tag-li"><a href="#">Lifestyle</a></li>
-									<li class="tag-li"><a href="#">Adventure</a></li>
+									<c:forEach items="${tag}" var="tag" step="1">
+										<li class="tag-li">
+											<a herf="#">
+												${tag }
+											</a>	
+										</li>
+									</c:forEach>
 								</ul>
 							</div><!-- tag-list-wrap -->
 						</div>	<!-- right-third-box -->
@@ -469,46 +468,12 @@
 							</div>
 							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
-								<ul>
-									<li class="ranking-number">1</li>
-									<li class="likeranking-li"><a href="#">어디서든 잘자는 법</a></li>
-								</ul>
-								<ul>	
-									<li class="ranking-number">2</li>
-									<li class="likeranking-li"><a href="#">취향에 맞는 음악 찾고 싶으신가요?</a></li>
-								</ul>
-								<ul>
-									<li class="ranking-number">3</li>
-									<li class="likeranking-li"><a href="#">유사과학 믿는 유전자 따로 있다?</a></li>
-								</ul>
-								<ul>
-									<li class="ranking-number">4</li>
-									<li class="likeranking-li"><a href="#">이제부터는 낯 가리지 않아요</a></li>
-								</ul>
-								<ul>
-									<li class="ranking-number">5</li>
-									<li class="likeranking-li"><a href="#">할말이 없지만 적는 비법</a></li>
-								</ul>	
-								<ul>
-									<li class="ranking-number">6</li>
-									<li class="likeranking-li"><a href="#">브랜드별 치킨소스 따라하기</a></li>
-								</ul>	
-								<ul>
-									<li class="ranking-number">7</li>
-									<li class="likeranking-li"><a href="#">모욕죄 고소 어렵지 않아요</a></li>
-								</ul>
-								<ul>
-									<li class="ranking-number">8</li>
-									<li class="likeranking-li"><a href="#">종합소득세 신고 원스톱</a></li>								
-								</ul>	
-								<ul>
-									<li class="ranking-number">9</li>
-									<li class="likeranking-li"><a href="#">생활법률 정복</a></li>
-								</ul>
-								<ul>
-									<li class="ranking-number">10</li>
-									<li class="likeranking-li"><a href="#">고양이랑 소통하는 집사</a></li>
-								</ul>
+								<c:forEach items="${wishList}" var="tag" step="1" varStatus="status">
+									<ul>
+										<li class="ranking-number"><c:out value="${status.index+1}"/></li>
+										<li class="likeranking-li"><a href="#">내용내용</a></li>
+									</ul>
+								</c:forEach>
 							</div><!-- likeranking-list-wrap -->
 						</div>	<!-- right-fourth-box -->
 					</div><!-- single-sidebar-widget -->

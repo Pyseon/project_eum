@@ -124,5 +124,23 @@
 		where 
 			product_no=#{productNo}
 	</select>
+	<!-- 윤지 -->
+	<select id="selectWishList" resultType="productWish">
+ 		select 
+ 			rnum, 
+ 			product_no as productNo, 
+ 			product_title as productTitle, 
+ 			wishcount
+ 		from
+ 			(select rownum as rnum,n.* from
+				(select product_no, product_title,
+    				(select nvl(count(*),0) from wishlist_tbl w where w.product_no = p.product_no) as wishCount
+					from 
+						product_tbl p
+					order by 
+			wishCount desc)n) 
+		where 
+			rnum between 1 and 10
+ 	</select> 
 </mapper>
 	

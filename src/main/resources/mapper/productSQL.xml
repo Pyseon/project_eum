@@ -87,7 +87,8 @@
 			product_qst as productQst,
 			product_ans as productAns,
 			product_addr as productAddr,
-			sale
+			sale,
+			product_option as productOption
 		from product_tbl 
         where product_no=#{productNo}
 	</select>

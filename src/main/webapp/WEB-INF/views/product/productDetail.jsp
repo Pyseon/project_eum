@@ -427,7 +427,7 @@
 								</div><!-- expert-profile -->
 								<div class="info-wrap">
 									<span><h5 class="extpert-info info2">${expert.jobName }</h5></span>			
-									<span><h5 class="extpert-info info2">자기소개 글자수 test 승소율99%</h5></span>
+									<span><h5 class="extpert-info info2">${expert.expertIntro }</h5></span>
 								</div><!-- info-wrap -->
 							</div><!-- right-second-box -->
 						</div><!-- single-sidebar-widget user-info-widget -->
@@ -468,10 +468,10 @@
 							</div>
 							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
-								<c:forEach items="${wishList}" var="tag" step="1" varStatus="status">
+								<c:forEach items="${wishList}" var="wishList" step="1" varStatus="status">
 									<ul>
 										<li class="ranking-number"><c:out value="${status.index+1}"/></li>
-										<li class="likeranking-li"><a href="#">내용내용</a></li>
+										<li class="likeranking-li">${wishList.productTitle }<a href="#"></a></li>
 									</ul>
 								</c:forEach>
 							</div><!-- likeranking-list-wrap -->

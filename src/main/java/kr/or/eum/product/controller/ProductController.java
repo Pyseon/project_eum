@@ -57,10 +57,12 @@ public class ProductController {
 		int cost = product.getCost()*product.getSale()/100;
 		String tag[] = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productService.selectWishList();
-//		ArrayList<String> wishTitle = new ArrayList<String>();
-//		for(int i = 0; i < wishList.size(); i++) {
-//			wishTitle.add(wishList.get(i).getProductTitle());			
-//		}
+		ArrayList<String> wishTitle = new ArrayList<String>();
+		for(int i = 0; i < wishList.size(); i++) {
+			wishTitle.add(wishList.get(i).getProductTitle()+"/");			
+		}
+		System.out.println(wishTitle.size());
+		System.out.println(wishList.size());
 		model.addAttribute("p", product);
 		//model.addAttribute("qst", productQst);
 		//model.addAttribute("ans", productAns);
@@ -75,7 +77,7 @@ public class ProductController {
 		model.addAttribute("cost", cost);
 		model.addAttribute("tag", tag);
 		model.addAttribute("wishList",wishList);
-		//model.addAttribute("wishTitle", wishTitle);
+		model.addAttribute("wishTitle", wishTitle);
 		System.out.println(product);
 		System.out.println(productQst);
 		System.out.println(productAns);
@@ -88,6 +90,7 @@ public class ProductController {
 		System.out.println(paymentCount);
 		System.out.println(cost);
 		System.out.println(wishList);
+		System.out.println(wishTitle);
 		return "product/productDetail";
 	}
 	

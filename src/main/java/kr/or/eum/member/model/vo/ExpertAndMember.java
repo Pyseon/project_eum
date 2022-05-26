@@ -22,6 +22,9 @@ public class ExpertAndMember {
 	private String expertEmail;
 	private String expertContent;
 	private String jobName;
+	private String expertPr;
+	private String expertcareer;
+	private String expertIntro;
 	private String memberId;
 	private String memberPw;
 	private String memberNick;

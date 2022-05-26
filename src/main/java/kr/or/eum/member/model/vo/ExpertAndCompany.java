@@ -29,4 +29,7 @@ public class ExpertAndCompany {
 	private String expertEmail;
 	private String expertContent;
 	private String jobName;
+	private String expertPr;
+	private String expertcareer;
+	private String expertIntro;
 }

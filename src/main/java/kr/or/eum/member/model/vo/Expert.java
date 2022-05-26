@@ -22,4 +22,7 @@ public class Expert {
 	private String expertEmail;
 	private String expertContent;
 	private String jobName;
+	private String expertPr;
+	private String expertcareer;
+	private String expertIntro;
 }

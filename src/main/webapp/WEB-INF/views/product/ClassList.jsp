@@ -19,12 +19,15 @@ li{
     	display: flex;
     	flex-wrap: wrap;
 	}
+	
 	.posting-item{
 	    box-sizing: border-box;
-    	width: calc(100% / 5);
-    	padding: 13px;
+    	width: calc(100% / 5)!important;
+    	padding : 0px !important; 
     	height: 250px;
-    	margin: 30px 8px 55px 8px;
+    	margin: 30px 0px 50px 48px;
+    	background-color: #f9f9f9;
+    	border: 1px solid #ddd;
 	}
 	
 	.t1{
@@ -52,7 +55,10 @@ li{
 	.posting-item > img{
 	width: 100%;
 	height: 100px;
-
+	
+	}
+	.posting-connect{
+	    padding: 10px;
 	}
 	.category{
 	width: 1000px;
@@ -62,21 +68,31 @@ li{
     margin-left: auto;
     margin-bottom: 10px;
     flex-grow: 1;
+    border-bottom: 1px solid rgba(220, 220, 220, 0.59);
+    
 	}
 	.category > tbody > tr > td > button >img{
-	width: 50px;
-	height: 50px;
+	width: 70%;
+	height: 70%;
+	}
+	
+	.category > tbody > tr > td > h3{
+	text-align:center;
 	}
 	.category > tbody > tr > td > button{
 	padding: 0;
 	border: none;
 	background: none;
 	}
+	.category > tbody > tr > td{
+	position: center;
+	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
 <body>
-<div>
+<div style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
+
 		<table class="category">
 				<tr>
 					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ClassList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"></button><h3>전체</h3></td>
@@ -95,11 +111,13 @@ li{
           			</table>
    </div>
    
+   
 <div class="container">
 <div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
-	<div class="posting-item">
+	<div class="posting-item" style="cursor: pointer;" onclick="location.href=#" >
 			<img src="./img/test/testimg1.png">
+				<div class="posting-connect">
 				<li>
 				<div class="t1">
 					<h4>${c.productTitle }</h4>
@@ -122,7 +140,8 @@ li{
 				<div class="t2">
 					${c.productCategory}
 				</div>
-				</li>		
+				</li>
+				</div>		
 	</div>
 	</c:forEach>
 </div>

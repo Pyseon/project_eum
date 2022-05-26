@@ -69,10 +69,6 @@
 		</if>
   </select>
   
-  <!-- 재건 -->
-  <!--
-  <select id=
-  -->
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">
 		select

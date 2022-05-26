@@ -11,7 +11,7 @@ public class Payment {
 	private int payNo;
 	private int memberNo;
 	private int productNo;
-	private String payState;
+	private int payState;
 	private String payMethod;
 	private String payDate;
 	private int payMent;

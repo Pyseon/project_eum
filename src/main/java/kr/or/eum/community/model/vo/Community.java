@@ -12,6 +12,7 @@ public class Community {
 	private int commCategory;
 	private int memberNo;
 	private String memberNick;
+	private String memberGrade;
 	private String memberPicturepath;
 	private String commTitle; 
 	private String commIntro;

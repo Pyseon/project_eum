@@ -155,7 +155,7 @@
                     <ul role="menu" class="sub-menu">
                       <li><a href="#">법률/세무</a><ul role="menu" class="sub-menu2">
                         <li><a href="/productDetail.do?productNo=7&expertNo=8">변호사</a></li> <%--임시코드 상품 리스트 완성되면 지울게요.--%>
-                        <li><a href="#">노무사</a></li>
+                        <li><a href="/productDetail.do?productNo=39&expertNo=62">노무사</a></li>
                         <li><a href="#">변리사</a></li>
                         <li><a href="#">법무사</a></li>
                         <li><a href="#">행정사</a></li>
@@ -287,9 +287,9 @@
                     </ul>
                   </li>
                   <li><a href="404.html">전문가 상담</a></li>
-                  <li><a href="/ClassList.do?reqPage=1">클래스</a></li>
+                  <li><a href="/ClassList.do?reqPage=1&selPro=전체">클래스</a></li>
                   <li><a href="/IdeamarketList.jsp">지식마켓</a></li>
-                  <li><a href="/communityList.do?reqPage=1">커뮤니티</a></li>
+                  <li><a href="/communityList.do?category=2&reqPage=1">커뮤니티</a></li>
                 </ul>
               </div>
             </div>

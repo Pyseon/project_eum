@@ -49,7 +49,7 @@ public class MemberDao {
 		ExpertAndCompany expertAndCom = sqlSession.selectOne("member.selectOneExpert",expertNo);
 		return expertAndCom;
 	}
-
+	//윤지
 	public ExpertAndMember selectOneExpertPicture(int expertNo) {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture",expertNo);
 		return expertPicture;
@@ -61,17 +61,23 @@ public class MemberDao {
 		return (ArrayList<ProductAndPayment>)list;
 		
 	}
-	//재민 찜목록
+
+	//윤지
+	public Expert selectOneExpertOnly(int expertNo) {
+		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly",expertNo);
+		return expert;
+	}
+  //재민 찜목록
 	public ArrayList<Wishlist> selectWishlist() {
 		List list = sqlSession.selectList("member.selectWishlist");
 		System.out.println("list"+list);
 		return (ArrayList<Wishlist>)list;
-		
-	}
+
 	//재민 리뷰테이블
 	public ArrayList<Review> selectReviewlist() {
 		List list = sqlSession.selectList("member.selectReviewlist");
 		return (ArrayList<Review>)list;
+
 	}
 
 }

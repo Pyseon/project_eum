@@ -26,12 +26,11 @@ public class ProductController {
 	private MemberService memberService;
 	
 	@RequestMapping(value="/ClassList.do")
-	public String productList(int reqPage, Model model) {
-		ProductPageData ppd = productService.selectProductList(reqPage);
+	public String productList(int reqPage, String selPro, Model model) {
+		ProductPageData ppd = productService.selectProductList(reqPage, selPro);
 		model.addAttribute("list",ppd.getList());
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
-		System.out.println("리스트: "+ppd.getList());
 		return "product/ClassList";
 	}
 	
@@ -39,14 +38,20 @@ public class ProductController {
 	@RequestMapping(value = "/productDetail.do")
 	public String productDetail(Model model, int productNo, int expertNo) {
 		Product product = productService.selectOneProduct(productNo);
+		String productQst[] = product.getProductQst().split("/");
+		String productAns[] = product.getProductAns().split("/");
 		ExpertAndCompany expertAndCom = memberService.selectOneExpert(expertNo);
+		Expert expert = memberService.selectOneExpertOnly(expertNo);
+		System.out.println(expertNo);
+		System.out.println(expertAndCom);
 		ExpertAndMember expertPicture = memberService.selectOneExpertPicture(expertNo);
 		ArrayList<Review> review = productService.selectAllReview();
 		int reviewCount = productService.selectReviewCount();
 		model.addAttribute("p", product);
+		model.addAttribute("qst", productQst);
+		model.addAttribute("ans", productAns);
 		model.addAttribute("expert", expertAndCom);
 		model.addAttribute("picture", expertPicture);
-		System.out.println(expertPicture.getMemberPicturePath());
 		model.addAttribute("review", review);
 		model.addAttribute("reviewCount",reviewCount);
 		return "product/productDetail";

@@ -15,11 +15,11 @@
 	<div class="memberWrap">
 		<div>
 			<ul>
-				<li><button class="btn selectMemberBtn bc3" value=0>전체</button></li>
-				<li><button class="btn selectMemberBtn bc3" value=1>전문가</button></li>
-				<li><button class="btn selectMemberBtn bc3" value=2>일반회원</button></li>
-				<li><button class="btn selectMemberBtn bc3" value=3>사업자</button></li>
-				<li><button class="btn selectMemberBtn bc3" value=4>블랙리스트</button>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=0'">전체</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=1'">전문가</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=2'">일반회원</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=3'">사업자</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=4'">블랙리스트</button></li>
 			</ul>
 		</div>
 		<div id="resultTbl">
@@ -45,7 +45,15 @@
 					<td>${member.memberPhone }</td>
 					<td>${member.enrollDate }</td>
 					<td>${member.memberReportCount }</td>
-					<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=0&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 등록</button></td>
+					<c:choose>
+						<c:when test="${selMem==4 }">
+							<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=1&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 해제</button></td>
+						</c:when>
+						<c:otherwise>
+							<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=0&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 등록</button></td>
+						</c:otherwise>
+					</c:choose>
+					
 					</tr>
 					</c:forEach>
 			</table>

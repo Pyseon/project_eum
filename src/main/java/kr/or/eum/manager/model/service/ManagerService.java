@@ -15,7 +15,7 @@ public class ManagerService {
 	@Autowired
 	private ManagerDao dao;
 	
-	public MemberPageData MemberList(int reqPage) {
+	public MemberPageData MemberList(int reqPage, int selMem) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -23,9 +23,10 @@ public class ManagerService {
 		HashMap<String, Object> pageMap = new HashMap<String, Object>();
 		pageMap.put("start", start);
 		pageMap.put("end", end);
+		pageMap.put("selMem", selMem);
 		ArrayList<Member> memberList = dao.MemberPageData(pageMap);
 		
-		int totalCount = dao.MemberCount();
+		int totalCount = dao.MemberCount(selMem);
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -40,11 +41,11 @@ public class ManagerService {
 				//이전버튼
 				if(pageNo != 1) { 	//pageNo-1 :이전버튼 누르면 그룹변경 / reqPage-1 : 이전버튼 누르면 전페이지로 이동 
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage=1'>";
+					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage=1&selMem="+selMem+"'>";
 					pageNavi += "<span class='material-icons'>keyboard_double_arrow_left</span>";
 					pageNavi += "</a></li>";
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+(pageNo-1)+"'>";
+					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+(pageNo-1)+"&selMem="+selMem+"'>";
 					pageNavi += "<span class='material-icons'>chevron_left</span>";
 					pageNavi += "</a></li>";
 				}
@@ -52,12 +53,12 @@ public class ManagerService {
 				for(int i=0;i<pageNaviSize;i++) {
 					if(pageNo == reqPage) {
 						pageNavi += "<li>";
-						pageNavi += "<a class='page-item active-page' href='/manaMember.do?reqPage="+pageNo+"'>";
+						pageNavi += "<a class='page-item active-page' href='/manaMember.do?reqPage="+pageNo+"&selMem="+selMem+"'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					}else {
 						pageNavi += "<li>";
-						pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+pageNo+"'>";
+						pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+pageNo+"&selMem="+selMem+"'>";
 						pageNavi += pageNo;
 						pageNavi += "</a></li>";
 					}
@@ -69,11 +70,11 @@ public class ManagerService {
 				//다음버튼
 				if(pageNo <= totalPage) {
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/memberList.do?reqPage="+pageNo+"'>";
+					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+pageNo+"&selMem="+selMem+"'>";
 					pageNavi += "<span class='material-icons'>chevron_right</span>";
 					pageNavi += "</a></li>";
 					pageNavi += "<li>";
-					pageNavi += "<a class='page-item' href='/memberList.do?reqPage="+totalPage+"'>";
+					pageNavi += "<a class='page-item' href='/manaMember.do?reqPage="+totalPage+"&selMem="+selMem+"'>";
 					pageNavi += "<span class='material-icons'>keyboard_double_arrow_right</span>";
 					pageNavi += "</a></li>";
 				}
@@ -81,12 +82,6 @@ public class ManagerService {
 				MemberPageData mpd = new MemberPageData(memberList, pageNavi);
 				
 				return mpd;
-	}
-
-	public ArrayList<Member> selectMember(int selectMemberBtn) {
-		HashMap<String, Integer> selMemBtn = new HashMap<String, Integer>();
-		selMemBtn.put("selectMemberBtn", selectMemberBtn);
-		return dao.selectMember(selMemBtn);
 	}
 
 	public int updateBlackList(int updateNo, int memberNo) {

@@ -66,7 +66,13 @@ public class MemberService {
 		
 		return list;
 	}
-	//재민 찜목록
+
+	//윤지
+	public Expert selectOneExpertOnly(int expertNo) {
+		return dao.selectOneExpertOnly(expertNo);
+	}
+
+//재민 찜목록
 	public ArrayList<Wishlist> selectWishlist() {
 		ArrayList<Wishlist> list = dao.selectWishlist();
 		

@@ -18,7 +18,7 @@ public class Product {
 	private String productIntro;
 	private String productTag;
 	private String productContent;
-	private String cost;
+	private int cost;
 	private String productQst;
 	private String productAns;
 	private String productAddr;

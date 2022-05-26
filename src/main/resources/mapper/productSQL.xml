@@ -21,12 +21,52 @@
 			product_ans as productAns,
 			product_addr as productAddr,
 			sale
-			from product_tbl p order by p.product_no desc)b)
-        	where rnum between #{start} and #{end}       
+			from product_tbl p 
+			<choose>
+			<when test="selPro=='법률'.toString()">
+			where product_Category='법률'
+			</when>
+			<when test="selPro=='비즈니스'.toString()">
+			where product_Category='비즈니스'
+			</when>
+			<when test="selPro=='심리/헬스'.toString()">
+			where product_Category='심리/헬스'
+			</when>
+			<when test="selPro=='학습'.toString()">
+			where product_Category='학습'
+			</when>
+			<when test="selPro=='금융'.toString()">
+			where product_Category='금융'
+			</when>
+			<when test="selPro=='라이프'.toString()">
+			where product_Category='라이프'
+			</when>
+			<when test="selPro=='취미'.toString()">
+			where product_Category='취미'
+			</when>
+			<when test="selPro=='어학'.toString()">
+			where product_Category='어학'
+			</when>
+			<when test="selPro=='레저'.toString()">
+			where product_Category='레저'
+			</when>
+			<when test="selPro=='IT/테크'.toString()">
+			where product_Category='IT/테크'
+			</when>
+			<when test="selPro=='자기개발'.toString()">
+			where product_Category='자기개발'
+			</when>
+			</choose>
+			order by p.product_no desc)b)
+        	where rnum between #{start} and #{end}
 	</select>
+
 	<!-- 재건 -->
-	<select id="selectTotalCount" resultType="int">
+	<select id="selectTotalCount" resultType="int" parameterType="map">
 		select count(*) from product_tbl
+		<if test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro}
+		</if>
   </select>
   
   <!-- 재건 -->

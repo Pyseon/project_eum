@@ -39,5 +39,7 @@
 	</form>
 	<a href="/Myproduct.do">구매내역</a>
 	<a href="/Wishlist.do">찜내역</a>
+	<a href="/Myreview.do">찜내역</a>
+	<a href="/Myproject.do">내프로젝트</a>
 </body>
 </html>

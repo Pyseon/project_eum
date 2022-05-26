@@ -25,5 +25,7 @@ public class Product {
 	private int sale;
 	private int reviewStar;
 	private int revCount;
+	private int productOption;
+
 
 }

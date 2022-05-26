@@ -8,8 +8,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.eum.product.model.vo.ProductAndWishList;
+import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.ProAndPayAndReview;
 
 
 @Repository
@@ -46,4 +49,24 @@ public class ProductDao {
 		int reviewCount = sqlSession.selectOne("product.selectReviewCount");
 		return reviewCount;
 	}
+	//윤지
+	public double selectReviewStar(int productNo) {
+		double reviewStar = sqlSession.selectOne("product.selectReviewStar", productNo);
+		return reviewStar;
+	}
+	//윤지
+	public int selectPaymentExpertNoCount(int productNo) {
+		int paymentCount = sqlSession.selectOne("product.selectPaymentExpertNoCount",productNo);
+		return paymentCount;
+	}
+	//윤지
+	public ArrayList<ProductAndWishList> selectWishList() {
+		List list = sqlSession.selectList("product.selectWishList");
+		return (ArrayList<ProductAndWishList>)list;
+	}
+
+//	public ArrayList<ProAndPayAndReview> selectReviewList(int productNo) {
+//		List list = sqlSession.selectList("product.selectReviewList");
+//		return (ArrayList<ProAndPayAndReview>)list;
+//	}
 }

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
+import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Controller
@@ -111,6 +112,14 @@ public class MemberController {
 		model.addAttribute("list", list);
 		System.out.println("list"+list);
 		return "mypage/wishlist";
+	}
+	//재민 리뷰목록
+	@RequestMapping(value="/Myreview.do")
+	public String Myreview(Model model) {
+		ArrayList<Review> list = service.selectReviewlist();
+		model.addAttribute("list", list);
+		System.out.println("list"+list);
+		return "mypage/Myreview";
 	}
 
 }

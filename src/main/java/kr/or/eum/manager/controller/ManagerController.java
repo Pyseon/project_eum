@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 
 import kr.or.eum.manager.model.service.ManagerService;
 import kr.or.eum.manager.model.vo.MemberPageData;
+import kr.or.eum.manager.model.vo.PaymentPageData;
 import kr.or.eum.member.model.vo.Member;
 
 @Controller
@@ -33,6 +34,21 @@ public class ManagerController {
 	public String updateBlackList(int updateNo, int memberNo, int reqPage) {
 		int result = service.updateBlackList(updateNo, memberNo);
 		return "redirect:/manaMember.do?reqPage="+reqPage+"&selMem=4";
+	}
+	
+	@RequestMapping(value = "/manaPayment.do")
+	public String manaPayment(int reqPage, int payState, String searchType, String keyword, Model model) {
+		PaymentPageData ppd = service.paymentList(reqPage, payState, searchType, keyword);
+		model.addAttribute("list", ppd.getList());
+		model.addAttribute("pageNavi", ppd.getPageNavi());
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("payState", payState);
+		return "manager/managementPayment";
+	}
+	@RequestMapping(value = "/updatePayState.do")
+	public String updatePayState(int updateNo, int payNo, int reqPage) {
+		int result = service.updateBlackList(updateNo, payNo);
+		return "redirect:/manaPayment.do?reqPage="+reqPage+"&payState=3";
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Payment;
 
 @Repository
 public class ManagerDao {
@@ -40,12 +41,33 @@ public class ManagerDao {
 		return (ArrayList<Member>)list;
 	}
 
-	public ArrayList<Member> MembersearchPageData(HashMap<String, Object> map) {
+	public ArrayList<Member> searchMemberPageData(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("manager.searchMemberList", map); 
 		return (ArrayList<Member>)list;
 	}
+	
 	public int searchMemberCount(HashMap<String, Object> map) {
 		int totalCount = sqlSession.selectOne("manager.searchMemberCount",map);
+		return totalCount;
+	}
+
+	public ArrayList<Payment> PaymentPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.paymentList", map);
+		return (ArrayList<Payment>)list;
+	}
+
+	public int PaymentCount(int payState) {
+		int totalCount = sqlSession.selectOne("manager.paymentCount",payState);
+		return totalCount;
+	}
+
+	public ArrayList<Payment> searchPaymentPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchPaymentList", map);
+		return (ArrayList<Payment>)list;
+	}
+
+	public int searchPaymentCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("manager.searchPaymentCount", map);
 		return totalCount;
 	}
 	

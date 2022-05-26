@@ -29,6 +29,7 @@
 			<div class="fc-8">가나다 fc-8 ABC 0123</div>
 			<div class="fc-9">가나다 fc-9 ABC 0123</div>
 			<div class="fc-10">가나다 fc-10 ABC 0123</div>
+			<div class="fc-11">가나다 fc-11 #979797 ABC 0123</div>
 		</div>
 		<div>
 			<h2>배경 색</h2>

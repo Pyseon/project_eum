@@ -93,4 +93,79 @@
 		</choose>
 	</select>
 	
+	<select id="paymentList" resultType="pay" parameterType="map">
+		select * from
+		(select rownum as rnum, pay.* from
+		(select
+			pay_no as payNo,
+			member_no as memberNo,
+			product_no as productNo,
+			pay_state as payState,
+			pay_date as payDate,
+			payment as payment,
+			pay_usepoint as payUsepoint,
+			pay_addpoint as payAddpoint
+		from payment_tbl
+		<choose>
+			<when test="payState != 0">
+				where pay_state = #{payState }
+			</when>
+			<otherwise>
+				where pay_state = 1 or pay_state = 2 or pay_state = 3 
+			</otherwise>
+		</choose>
+		order by pay_no desc) pay)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="searchPaymentList" resultType="pay" parameterType="map">
+		select * from
+		(select rownum as rnum, pay.* from
+		(select
+			pay_no as payNo,
+			member_no as memberNo,
+			product_no as productNo,
+			pay_state as payState,
+			pay_date as payDate,
+			payment as payment,
+			pay_usepoint as payUsepoint,
+			pay_addpoint as payAddpoint
+		from payment_tbl
+		<choose>
+			<when test="searchType.equals('payNo') ">
+				where pay_no = #{keyword }
+			</when>
+			<when test="searchType.equals('memberId') ">
+				where member_no = #{keyword }
+			</when>
+		</choose>
+		order by pay_no desc) pay)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="paymentCount" resultType="int" parameterType="int">
+		select count(*) from payment_tbl
+		<choose>
+			<when test="value != 0">
+				where pay_state=#{payState }
+			</when>
+			<otherwise>
+				where pay_state=1 or pay_state=2 or pay_state=3
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="searchPaymentCount" resultType="int" parameterType="map">
+		select count(*) from payment_tbl
+		<choose>
+			<when test="searchType.equals('payNo') ">
+				where pay_no = #{keyword }
+			</when>
+			<when test="searchType.equals('memberId') ">
+				where member_no = #{keyword }
+			</when>
+		</choose>
+	</select>
+	
+	
 </mapper>

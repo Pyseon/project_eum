@@ -8,6 +8,7 @@
 	<typeAliases>
 		<typeAlias type="kr.or.eum.community.model.vo.Community" alias="comm"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="member"/>
+		<typeAlias type="kr.or.eum.product.model.vo.Payment" alias="pay"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Question" alias="q"/>

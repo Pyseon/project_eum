@@ -53,8 +53,8 @@
 			<when test="selPro=='IT/테크'.toString()">
 			where product_Category='IT/테크'
 			</when>
-			<when test="selPro=='자기개발'.toString()">
-			where product_Category='자기개발'
+			<when test="selPro=='자기계발'.toString()">
+			where product_Category='자기계발'
 			</when>
 			</choose>
 			order by p.product_no desc)b)

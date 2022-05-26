@@ -67,11 +67,7 @@ public class MemberDao {
 		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly",expertNo);
 		return expert;
 	}
-  //재민 찜목록
-	public ArrayList<Wishlist> selectWishlist() {
-		List list = sqlSession.selectList("member.selectWishlist");
-		System.out.println("list"+list);
-		return (ArrayList<Wishlist>)list;
+ 
 
 	//재민 리뷰테이블
 	public ArrayList<Review> selectReviewlist() {
@@ -79,5 +75,11 @@ public class MemberDao {
 		return (ArrayList<Review>)list;
 
 	}
+	 //재민 찜목록
+		public ArrayList<Wishlist> selectWishlist() {
+			List list = sqlSession.selectList("member.selectWishlist");
+			
+			return (ArrayList<Wishlist>)list;
+		}
 
 }

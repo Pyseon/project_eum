@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +46,7 @@
 								<div class="detail-wrap">
 									<span class="detail-sub-title">상담소개</span>
 									<hr class="sub-title-bottom-line">
-									<span class="detail-content"></span>
+									<span class="detail-content">${p.productIntro}</span>
 									<!-- DB -->
 								</div>
 								<div class="detail-wrap">
@@ -85,29 +87,73 @@
 											<th>대표자</th>
 											<td>
 											<c:choose>
-												<c:when test="${empty expert.compName}">
+												<c:when test="${empty expertAndCom.compName}">
 													${expert.expertName}
 												</c:when>
 												<c:otherwise>
-													${expert.compRepName}
+													${expertAndCom.compRepName}
 												</c:otherwise>
 											</c:choose>
 											</td>
 											<th>상호명</th>
-											<td>백호법무법인</td>
+											<td>
+												<c:choose>
+												<c:when test="${empty expertAndCom.compName}">
+													-
+												</c:when>
+												<c:otherwise>
+													${expertAndCom.compName}
+												</c:otherwise>
+												</c:choose>
+											</td>
 										</tr>
 										<tr>
 											<th>사업장주소</th>
-											<td>서울특별시 강남구 봉은사로</td>
+											<td>
+												<c:choose>
+												<c:when test="${empty expertAndCom.compName}">
+													${p.productAddr}
+												</c:when>
+												<c:otherwise>
+													${expertAndCom.compAddr}
+												</c:otherwise>
+												</c:choose>
+											</td>
 											<th>사업자등록번호</th>
-											<td>123-12-12123</td>
-											<!-- DB -->
+											<td>
+												<c:choose>
+												<c:when test="${empty expertAndCom.compName}">
+													-
+												</c:when>
+												<c:otherwise>
+													${expertAndCom.compRegno}
+												</c:otherwise>
+												</c:choose>
+											</td>
 										</tr>
 										<tr>
 											<th>연락처</th>
-											<td>010-0000-0000</td>
+											<td>
+												<c:choose>
+												<c:when test="${empty expertAndCom.compName}">
+													${expert.expertPhone}
+												</c:when>
+												<c:otherwise>
+													${expertAndCom.compPhone}
+												</c:otherwise>
+												</c:choose>
+											</td>
 											<th>이메일</th>
-											<td>hong@naver.com</td>
+											<td>
+												<c:choose>
+												<c:when test="${empty expertAndCom.compName}">
+													${expert.expertEmail}
+												</c:when>
+												<c:otherwise>
+													${expertAndCom.compEmail}
+												</c:otherwise>
+												</c:choose>
+											</td>
 										</tr>
 									</table>
 								</div>
@@ -133,14 +179,14 @@
 									<div class="review-count">
 										<div class="summary-content s-con-1">
 											<div class="con1">상품 후기 수</div><br>
-											<div class="con2">100</div>
+											<div class="con2">${reviewCount}</div>
 										</div>
 									</div>
 									<div class="review-score-aver">
 										<div class="summary-content">
 											<div class="con1">상품 평균 별점</div><br>
 											<div class="con2"><span class="material-icons icon-star">star</span></div>
-											<div class="con2 con-star-score"><span>5.0</span></div>
+											<div class="con2 con-star-score"><span>${reviewAvr}</span></div>
 										</div>
 									</div>
 								</div>
@@ -328,14 +374,14 @@
 					<div class="widget-wrap">
 						<div class="right-first-box">
 							<div class="product-summary">
-								<span id="sele">50%</span>
-								<span id="price">50,000원</span><span id="fixed-price">100,000원</span><br>
+								<span id="sele">${p.sale}%</span>
+								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price">100,000원</span><br>
 								<div class="star-wrap">
 									<!-- 별점  -->
 									<ul>
 										<li><span class="material-icons icons-star">star</span></li>
-										<li><span id="star-score">5.0</span></li>
-										<li><span id="help-number">총 n회 상담</span><br></li>
+										<li><span id="star-score">${reviewAvr }</span></li>
+										<li><span id="help-number">총 ${paymentCount}회 상담</span><br></li>
 									</ul>
 								</div>
 								<!-- DB -->

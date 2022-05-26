@@ -72,7 +72,8 @@ public class MemberDao {
 		List list = sqlSession.selectList("member.selectWishlist");
 		System.out.println("list"+list);
 		return (ArrayList<Wishlist>)list;
-
+	}
+	
 	//재민 리뷰테이블
 	public ArrayList<Review> selectReviewlist() {
 		List list = sqlSession.selectList("member.selectReviewlist");

@@ -25,13 +25,27 @@ public class ManagerDao {
 		return 0;
 	}
 
-	public ArrayList<Member> MemberPageData(HashMap<String, Object> pageMap) {
-		List list = sqlSession.selectList("manager.MemberList",pageMap);
+	public ArrayList<Member> MemberPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.MemberList", map);
 		return (ArrayList<Member>)list;
 	}
 
 	public int MemberCount(int selMem) {
 		int totalCount = sqlSession.selectOne("manager.memberCount",selMem);
+		return totalCount;
+	}
+
+	public ArrayList<Member> searchOneMember(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchOneMember", map);
+		return (ArrayList<Member>)list;
+	}
+
+	public ArrayList<Member> MembersearchPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchMemberList", map); 
+		return (ArrayList<Member>)list;
+	}
+	public int searchMemberCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("manager.searchMemberCount",map);
 		return totalCount;
 	}
 	

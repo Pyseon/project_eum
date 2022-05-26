@@ -20,7 +20,9 @@
 			product_qst as productQst,
 			product_ans as productAns,
 			product_addr as productAddr,
-			sale
+			sale,
+			(select review_star from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+			(select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount
 			from product_tbl p 
 			<choose>
 			<when test="selPro=='법률'.toString()">

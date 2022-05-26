@@ -13,6 +13,7 @@ import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
+import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Service
@@ -65,13 +66,21 @@ public class MemberService {
 		
 		return list;
 	}
+
 	//윤지
 	public Expert selectOneExpertOnly(int expertNo) {
 		return dao.selectOneExpertOnly(expertNo);
 	}
 
+//재민 찜목록
 	public ArrayList<Wishlist> selectWishlist() {
 		ArrayList<Wishlist> list = dao.selectWishlist();
+		
+		return list;
+	}
+	//재민 리뷰목록
+	public ArrayList<Review> selectReviewlist() {
+		ArrayList<Review> list = dao.selectReviewlist();
 		
 		return list;
 	}

@@ -13,6 +13,7 @@ import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
+import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Repository
@@ -56,7 +57,9 @@ public class MemberDao {
 	//재민 구매목록
 	public ArrayList<ProductAndPayment> selectProductList() {
 		List list = sqlSession.selectList("member.selectProductList"); 
+		System.out.println("list"+list);
 		return (ArrayList<ProductAndPayment>)list;
+		
 	}
 
 	//윤지
@@ -64,9 +67,16 @@ public class MemberDao {
 		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly",expertNo);
 		return expert;
 	}
+  //재민 찜목록
 	public ArrayList<Wishlist> selectWishlist() {
 		List list = sqlSession.selectList("member.selectWishlist");
+		System.out.println("list"+list);
 		return (ArrayList<Wishlist>)list;
+
+	//재민 리뷰테이블
+	public ArrayList<Review> selectReviewlist() {
+		List list = sqlSession.selectList("member.selectReviewlist");
+		return (ArrayList<Review>)list;
 
 	}
 

@@ -137,6 +137,14 @@ li{
 				${c.productIntro }
 				</div>
 				</li>
+				<div class="card-comment">
+									<i class="fa-solid fa-message"></i> <span
+										class="noto-sb mb-1 fs-bold">${c.revCount }</span>
+				</div>
+				<div class="card-comment">
+									<i class="fa-solid fa-message"></i> <span
+										class="noto-sb mb-1 fs-bold">${c.reviewStar }</span>
+				</div>
 				<li>
 				<div class="t1">
 					<img src="./img/category/자기개발.png">

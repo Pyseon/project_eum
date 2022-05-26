@@ -94,15 +94,11 @@
 	
 	<!-- 윤지 -->
 	<select id="selectAllReview" resultType="review">
-		select
-			REVIEW_NO as reviewNo,
-			PAY_NO as payNo,
-			MEMBER_NO memberNO,
-			REVIEW_TITLE reviewTitle,
-			REVIEW_CONTENT reviewContent,
-			REVIEW_STAR reviewStar,
-			REVIEW_DATE	reviewDate
-		from review_tbl	
+		select * 
+		from 
+			(select rownum,n.* from(select * from review_tbl order by review_no desc)n) 
+		where 
+			rownum between 1 and 10
 
 	</select>
 	<!-- 윤지 -->
@@ -110,6 +106,22 @@
 		select
 			count(*) as cnt 
 		from review_tbl
+	</select>
+	<!-- 윤지 -->
+	<select id="selectReviewStar" resultType="int">
+		select 
+			AVG(review_star) 
+		from 
+			review_tbl
+	</select>
+	<!-- 윤지 -->
+	<select id="selectPaymentExpertNoCount" parameterType="int" resultType="int">
+		select 
+			count(*) 
+		from 
+			payment_tbl 
+		where 
+			product_no=#{productNo}
 	</select>
 </mapper>
 	

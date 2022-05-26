@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import kr.or.eum.product.model.dao.ProductDao;
+import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
@@ -90,6 +91,14 @@ public class ProductService {
 	//윤지
 	public int selectReviewCount() {
 		return productDao.selectReviewCount();
+	}
+	//윤지
+	public int selectReviewStar() {
+		return productDao.selectReviewStar();
+	}
+	//윤지
+	public int selectPaymentExpertNoCount(int productNo) {
+		return productDao.selectPaymentExpertNoCount(productNo);
 	}
 
 }

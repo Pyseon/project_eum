@@ -17,6 +17,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.ProAndPayAndReview;
 import kr.or.eum.product.model.vo.Payment;
 
 @Controller
@@ -50,22 +51,17 @@ public class ProductController {
 		Expert expert = memberService.selectOneExpertOnly(expertNo);
 		ExpertAndMember expertM = memberService.selectOneExpertPicture(expertNo);
 		ArrayList<Review> review = productService.selectAllReview();
-		int reviewAvrBef = productService.selectReviewStar();
-		double reviewAvr = Math.round(reviewAvrBef*1.0);
+		double reviewAvr = productService.selectReviewStar(productNo);
 		int reviewCount = productService.selectReviewCount();
 		int paymentCount = productService.selectPaymentExpertNoCount(productNo);
+		//수정예정
+		//ArrayList<ProAndPayAndReview> ppr = productService.selectReviewList(productNo); 
+		//
 		int cost = product.getCost()*product.getSale()/100;
 		String tag[] = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productService.selectWishList();
-		ArrayList<String> wishTitle = new ArrayList<String>();
-		for(int i = 0; i < wishList.size(); i++) {
-			wishTitle.add(wishList.get(i).getProductTitle()+"/");			
-		}
-		System.out.println(wishTitle.size());
-		System.out.println(wishList.size());
+
 		model.addAttribute("p", product);
-		//model.addAttribute("qst", productQst);
-		//model.addAttribute("ans", productAns);
 		model.addAttribute("productQNA", productQNA);
 		model.addAttribute("expertAndCom", expertAndCom);
 		model.addAttribute("expert", expert);
@@ -77,7 +73,6 @@ public class ProductController {
 		model.addAttribute("cost", cost);
 		model.addAttribute("tag", tag);
 		model.addAttribute("wishList",wishList);
-		model.addAttribute("wishTitle", wishTitle);
 		System.out.println(product);
 		System.out.println(productQst);
 		System.out.println(productAns);
@@ -90,8 +85,13 @@ public class ProductController {
 		System.out.println(paymentCount);
 		System.out.println(cost);
 		System.out.println(wishList);
-		System.out.println(wishTitle);
 		return "product/productDetail";
+	}
+	
+	//윤지
+	@RequestMapping(value = "/expertCounsel.do")
+	public String expertCounsel() {
+		return "product/expertCounsel";
 	}
 	
 	

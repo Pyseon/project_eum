@@ -15,7 +15,7 @@ public class ManagerService {
 	@Autowired
 	private ManagerDao dao;
 	
-	public MemberPageData MemberList(int reqPage, int selMem) {
+	public MemberPageData MemberList(int reqPage, int selMem, String searchType, String keyword) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -24,9 +24,17 @@ public class ManagerService {
 		pageMap.put("start", start);
 		pageMap.put("end", end);
 		pageMap.put("selMem", selMem);
-		ArrayList<Member> memberList = dao.MemberPageData(pageMap);
-		
-		int totalCount = dao.MemberCount(selMem);
+		ArrayList<Member> memberList = new ArrayList<Member>();
+		int totalCount = 0;
+		if(searchType == null) {
+			memberList = dao.MemberPageData(pageMap);
+			totalCount = dao.MemberCount(selMem);
+		}else {
+			pageMap.put("searchType", searchType);
+			pageMap.put("keyword", keyword);
+			memberList = dao.MembersearchPageData(pageMap);
+			totalCount = dao.searchMemberCount(pageMap);
+		}
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -90,5 +98,13 @@ public class ManagerService {
 		ubl.put("memberNo",memberNo);
 		return dao.updateBlackList(ubl);
 	}
+
+	public ArrayList<Member> searchOneMember(String searchType, String keyword) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("searchType", searchType);
+		map.put("keyword", keyword);
+		return dao.searchOneMember(map);
+	}
 	
 }
+

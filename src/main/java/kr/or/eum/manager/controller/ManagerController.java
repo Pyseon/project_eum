@@ -20,8 +20,8 @@ public class ManagerController {
 	private ManagerService service;
 	
 	@RequestMapping(value = "/manaMember.do")
-	public String manaMember(int reqPage, int selMem, Model model) {
-		MemberPageData mpd = service.MemberList(reqPage, selMem);
+	public String manaMember(int reqPage, int selMem, String searchType, String keyword, Model model) {
+		MemberPageData mpd = service.MemberList(reqPage, selMem, searchType, keyword);
 		model.addAttribute("list",mpd.getList());
 		model.addAttribute("pageNavi", mpd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);

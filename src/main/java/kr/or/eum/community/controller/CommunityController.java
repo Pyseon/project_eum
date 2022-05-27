@@ -26,5 +26,14 @@ public class CommunityController {
 		return "community/communityList";
 	}
 	
-	
+	@RequestMapping(value="/communityDetail.do")
+	public String communityDetail(int commNo, int category, Model model) {
+		Community cm = service.communityDetail(commNo);
+		model.addAttribute("cm", cm);
+		if(category == 0) {
+			return "community/detailCat0";
+		}else {
+			return "community/detailCat1";
+		}
+	}
 }

@@ -25,14 +25,14 @@ public class CommunityDao {
 		return totalCount;
 	}
 
-	public ArrayList<Community> selectCommunityListCat0(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("community.selectCommunityListCat0", map);
-		return (ArrayList<Community>)list;
+
+	public Community communityDetail(int commNo) {
+		Community cm = sqlSession.selectOne("community.communityDetail", commNo);
+		return cm;
 	}
 
-	public int selectCommunityCat0Count() {
-		int totalCount = sqlSession.selectOne("community.selectCommunityCat0Count");
-		return totalCount;
+	public void readCountUp(int commNo) {
+		sqlSession.update("community.readCountUp", commNo);
 	}
 	
 	

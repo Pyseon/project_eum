@@ -36,8 +36,25 @@ public class CommunityService {
 		return cpd;
 	}
 	
+	public Community communityDetail(int commNo) {
+		Community cm = dao.communityDetail(commNo);
+		if(cm != null) {
+			dao.readCountUp(commNo);
+		}
+		return cm;
+	}
 	
-//페이징처리 함수
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+/////////////////////////////   페이징처리 함수      //////////////////////////////
 	public HashMap<String, Object> startEnd(int category, int reqPage, int numPerPage) {
 		// reqPage 1 >> 1~ 16, reqPage 2 >> 17~32
 		// 해당페이지 마지막 게시물 번호
@@ -122,6 +139,9 @@ public class CommunityService {
 		
 		return pageNavi;
 	}
+
+
+
 
 
 

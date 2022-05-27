@@ -26,6 +26,7 @@ public class MemberDao {
 	public Member selectOneMember(Member m) {
 		// TODO Auto-generated method stub
 		Member member = sqlSession.selectOne("member.selectOneMember", m);
+		System.out.println(member);
 		return member;
 	}
 	//재민 내정보수정
@@ -67,18 +68,18 @@ public class MemberDao {
 		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly",expertNo);
 		return expert;
 	}
-  //재민 찜목록
-	public ArrayList<Wishlist> selectWishlist() {
-		List list = sqlSession.selectList("member.selectWishlist");
-		System.out.println("list"+list);
-		return (ArrayList<Wishlist>)list;
-	}
-	
+
 	//재민 리뷰테이블
 	public ArrayList<Review> selectReviewlist() {
 		List list = sqlSession.selectList("member.selectReviewlist");
 		return (ArrayList<Review>)list;
 
 	}
+	 //재민 찜목록
+		public ArrayList<Wishlist> selectWishlist() {
+			List list = sqlSession.selectList("member.selectWishlist");
+			
+			return (ArrayList<Wishlist>)list;
+		}
 
 }

@@ -17,6 +17,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.ProReviewMember;
 import kr.or.eum.product.model.vo.Payment;
 
 @Controller
@@ -49,46 +50,47 @@ public class ProductController {
 		ExpertAndCompany expertAndCom = memberService.selectOneExpert(expertNo);
 		Expert expert = memberService.selectOneExpertOnly(expertNo);
 		ExpertAndMember expertM = memberService.selectOneExpertPicture(expertNo);
-		ArrayList<Review> review = productService.selectAllReview();
-		int reviewAvrBef = productService.selectReviewStar();
-		double reviewAvr = Math.round(reviewAvrBef*1.0);
-		int reviewCount = productService.selectReviewCount();
+		ArrayList<Review> reviewRnum = productService.selectAllReview(productNo);
+		double reviewAvrbef = productService.selectReviewStar(productNo);
+		String reviewAvr = String.format("%.1f", reviewAvrbef);
+		int reviewCount = productService.selectReviewCount(productNo);
 		int paymentCount = productService.selectPaymentExpertNoCount(productNo);
+		ArrayList<ProReviewMember> prm = productService.selectReviewList(productNo); 
 		int cost = product.getCost()*product.getSale()/100;
 		String tag[] = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productService.selectWishList();
-//		ArrayList<String> wishTitle = new ArrayList<String>();
-//		for(int i = 0; i < wishList.size(); i++) {
-//			wishTitle.add(wishList.get(i).getProductTitle());			
-//		}
+
 		model.addAttribute("p", product);
-		//model.addAttribute("qst", productQst);
-		//model.addAttribute("ans", productAns);
 		model.addAttribute("productQNA", productQNA);
 		model.addAttribute("expertAndCom", expertAndCom);
 		model.addAttribute("expert", expert);
 		model.addAttribute("expertM", expertM);
-		model.addAttribute("review", review);
+		model.addAttribute("review", reviewRnum);
 		model.addAttribute("reviewAvr", reviewAvr);
 		model.addAttribute("reviewCount",reviewCount);
 		model.addAttribute("paymentCount", paymentCount);
+		model.addAttribute("prm",prm);
 		model.addAttribute("cost", cost);
 		model.addAttribute("tag", tag);
 		model.addAttribute("wishList",wishList);
-		//model.addAttribute("wishTitle", wishTitle);
-		System.out.println(product);
-		System.out.println(productQst);
-		System.out.println(productAns);
-		System.out.println(expertAndCom);
-		System.out.println(expert);
-		System.out.println(expertM);
-		System.out.println(review);
-		System.out.println(reviewAvr);
-		System.out.println(reviewCount);
-		System.out.println(paymentCount);
-		System.out.println(cost);
-		System.out.println(wishList);
+		System.out.println("product : "+product);
+		System.out.println("expertAndCom : "+expertAndCom);
+		System.out.println("expert : "+expert);
+		System.out.println("expertM : "+expertM);
+		System.out.println("reviewRnum : "+reviewRnum);
+		System.out.println("reviewAvr : "+reviewAvr);
+		System.out.println("reviewCount : "+reviewCount);
+		System.out.println("payment : "+paymentCount);
+		System.out.println("prm : "+prm);
+		System.out.println("cost : "+cost);
+		System.out.println("wishList :"+wishList);
 		return "product/productDetail";
+	}
+	
+	//윤지
+	@RequestMapping(value = "/expertCounsel.do")
+	public String expertCounsel() {
+		return "product/expertCounsel";
 	}
 	
 	

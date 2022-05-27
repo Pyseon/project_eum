@@ -26,14 +26,14 @@
 			<c:forEach items="${list }" var="com" varStatus="i">
 				<!--리스트-->
 				<div class="card-wrap" style="cursor: pointer;"
-					onclick="location.href='/communityDetail.do?comNo=${com.commNo }';">
+					onclick="location.href='/communityDetail.do?commNo=${com.commNo }&category=${com.commCategory }';">
 					<img class="card-img" src="./img/community/${com.commFilepath }" />
 					<figcaption>
-						<!-- 2022-05-01 형식의 데이터를 2022.05.01로 바꿔줌 -->
+						<!-- 2022.05.01 11:11 형식의 데이터를 2022.05.01로 바꿔줌 -->
 						<c:set var="oldDate" value="${com.commDate }" />
 						<%
 							String oldDate = (String) pageContext.getAttribute("oldDate");      
-	        				String newDate = oldDate.replace('-', '.');
+	        				String newDate = oldDate.substring(0, 10);
 	        			%>
 						<div class="card-date-right card-reg"><%=newDate %></div>
 						<div class="card-caption card-flex">
@@ -60,9 +60,12 @@
 							<div class="card-profile">
 								<div class="card-user-img-wrap">
 									<img class="card-user-img"
-										src="../img/member/${com.memberPicturepath }" alt="" />
+										src="../img/member/${com.memberPicturepath }" alt="" style="width:30px; height:30px;"/>
 								</div>
 								<span class="card-user-name">${com.memberNick }</span>
+							<c:if test="${com.memberGrade eq 1}">
+								<span class="material-icons" id="verified-icon">verified</span>
+							</c:if>
 							</div>
 							<div class="card-readcount">
 								<span class="mr-1">조회수</span> <span>${com.readCount }</span>
@@ -78,8 +81,11 @@
 	<script>
 		$(function(){
 			let cat = '${category }';
-			if(cat == 0){
-				
+			if(cat != 2){
+				cat++;
+				$(".comm-nav").eq(cat).addClass("cat-active");
+			}else{
+				$(".comm-nav").eq(0).addClass("cat-active");
 			}
 		})
 	</script>

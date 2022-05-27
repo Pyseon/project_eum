@@ -218,7 +218,7 @@ th{
 	border: 1px solid #ececec;
 	border-radius:10px;
 	width: 100%;
-	height: 305px;
+	height: 320px;
 	margin-top: 20px;
 	padding-left: 20px;
 	padding-top: 20px;
@@ -337,12 +337,13 @@ th{
     object-fit: cover;
 }
 .expert-profile{
+	display:flex;
 	width: 100px;
 	height:30px;
 	margin: 0 auto;
-	text-align: center;
 	margin-top: 18px;
 	margin-bottom: 4px;
+	justify-content:center;
 }
 .info-wrap{
 	position:absolute;
@@ -360,7 +361,6 @@ th{
 }
 .expert-info{
 	text-align:center;
-	float: left;
 	margin-top: 4px;
 	display: inline;
 }
@@ -370,10 +370,11 @@ th{
 	vertical-align: top;
 	margin-bottom: 1px;
 	position: absolute;
-	display: inline;
+	margin-top:-2px;
+	margin-left:-6px;
 }
-.icon-confim-wrap{
-	margin-right: 34px;
+.expert-info{
+	margin-right: 6px;
 }
 
 /*여기부터 third-box*/
@@ -501,7 +502,9 @@ th{
 
 
 /*후기*/
-
+.tab-review-count{
+	font-size: 15px !important;
+}
 .topbox-summary{
 	width: 100%;
 	background-color: #dbdff2;

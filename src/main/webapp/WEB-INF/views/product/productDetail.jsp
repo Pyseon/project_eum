@@ -184,13 +184,14 @@
 									</div>
 								</div>
 								<div class="real-review-wrap">
+									<c:forEach items="${ppr}" var="tag" step="1">
 									<div class="real-review">
 										<div class="member-picture">
-											<img class="reviewPicture" src="/img/testpicture.png">
+											<img class="reviewPicture" src=>
 										</div>
 										<div class="info">
 											<div class="info-one">
-												<span class="nickname">닉네임</span> 
+												<span class="nickname">${prm.memberNick }</span> 
 												<div class="review-btn-2">
 													<a href="#">수정</a> <a href="#">삭제</a> <br>
 												</div>	
@@ -226,8 +227,14 @@
 												</div>
 											</div><!--info-one  -->
 											<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-										</div> <!-- info --> 
+										</div> <!-- info -->
 									</div><!-- real review -->
+									</c:forEach> 
+									
+									
+									
+									
+									
 									<div class="real-review">
 										<div class="member-picture">
 											<img class="reviewPicture" src="/img/testpicture.png">
@@ -407,27 +414,24 @@
 									<a href="#"><img class="testimg" src="img/testpicture.png"></a>	
 								</div>
 								<div class="expert-profile">
-									<ul>
-										<li>
-											<h3 class="expert-info">
-												<c:choose>
-													<c:when test="${empty expertAndCom.compName}">
-													${expert.expertName }
-													</c:when>
-													<c:otherwise>
-													${expertAndCom.compName}
-													</c:otherwise>
-												</c:choose>
-											</h3>
-										</li>
-										<li class="icon-confim-wrap">
-											<span class="material-icons icon-confirm confirm2">verified</span>
-										</li>
-									</ul>
+									<div class="expert-profile-span"><h3 class="expert-info">
+										<c:choose>
+											<c:when test="${empty expertAndCom.compName}">
+												${expert.expertName }
+												</c:when>
+												<c:otherwise>
+												${expertAndCom.compName}
+												</c:otherwise>
+											</c:choose>
+										</h3>					
+									</div>				
+									<div class="expert-profile-span">
+										<span class="material-icons icon-confirm confirm2">verified</span>
+									</div>	
 								</div><!-- expert-profile -->
 								<div class="info-wrap">
 									<span><h5 class="extpert-info info2">${expert.jobName }</h5></span>			
-									<span><h5 class="extpert-info info2">자기소개 글자수 test 승소율99%</h5></span>
+									<span><h5 class="extpert-info info2">${expert.expertIntro }</h5></span>
 								</div><!-- info-wrap -->
 							</div><!-- right-second-box -->
 						</div><!-- single-sidebar-widget user-info-widget -->
@@ -468,10 +472,10 @@
 							</div>
 							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
-								<c:forEach items="${wishList}" var="tag" step="1" varStatus="status">
+								<c:forEach items="${wishList}" var="wishList" step="1" varStatus="status">
 									<ul>
 										<li class="ranking-number"><c:out value="${status.index+1}"/></li>
-										<li class="likeranking-li"><a href="#">내용내용</a></li>
+										<li class="likeranking-li">${wishList.productTitle }<a href="#"></a></li>
 									</ul>
 								</c:forEach>
 							</div><!-- likeranking-list-wrap -->

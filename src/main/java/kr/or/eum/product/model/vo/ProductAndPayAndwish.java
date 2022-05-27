@@ -9,5 +9,5 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductAndPayAndwish {
 	private String productTitle;
-	private int payMent;
+	private int payment;
 }

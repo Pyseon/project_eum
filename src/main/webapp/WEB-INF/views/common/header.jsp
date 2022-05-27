@@ -23,6 +23,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- jquery -->
     <script src="js/jquery-3.6.0.js"></script>
     <!-- 기본 CSS -->
@@ -156,7 +157,7 @@
                       <li><a href="#">법률/세무</a><ul role="menu" class="sub-menu2">
                         <li><a href="/productDetail.do?productNo=18&expertNo=8">변호사</a></li> <%--임시코드 상품 리스트 완성되면 지울게요.--%>
                         <li><a href="/productDetail.do?productNo=19&expertNo=62">노무사</a></li>
-                        <li><a href="#">변리사</a></li>
+                        <li><a href="/expertCounsel.do">변리사</a></li>
                         <li><a href="#">법무사</a></li>
                         <li><a href="#">행정사</a></li>
                         <li><a href="#">세무사</a></li>

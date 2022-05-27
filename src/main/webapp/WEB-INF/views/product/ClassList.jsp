@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -18,16 +20,17 @@ li{
 	.posting-wrap {
     	display: flex;
     	flex-wrap: wrap;
+    	margin-left: 20px;
 	}
 	
 	.posting-item{
 	    box-sizing: border-box;
-    	width: calc(100% / 5)!important;
+    	width: 250px !important;
     	padding : 0px !important; 
-    	height: 250px;
-    	margin: 30px 0px 50px 48px;
+    	height: 450px !important;
+    	margin: 25px 15px 55px 10px;
     	background-color: #f9f9f9;
-    	border: 1px solid #ddd;
+    	box-shadow: 3px 3px 3px 3px #e7dede;
 	}
 	
 	.t1{
@@ -52,9 +55,12 @@ li{
   		width: 200px;
   		height: 30px;
 	}
+	.t4{
+	
+	}
 	.posting-item > img{
 	width: 100%;
-	height: 100px;
+	height: 300px;
 	
 	}
 	.posting-connect{
@@ -123,31 +129,40 @@ li{
 					<h4>${c.productTitle }</h4>
 				</div>
 				<div class="t2">
-					<h4>${c.cost }원</h4>
+					<h4><fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원</h4>
 				</div>
 				</li>
 				<li>
-				<div class="t3">
+				<div class="t3" style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
 				${c.productIntro }
 				</div>
 				</li>
+				<div class="card-comment">
+									<i class="fa-solid fa-message"></i> <span
+										class="noto-sb mb-1 fs-bold">${c.revCount }</span>
+				</div>
+				<div class="card-comment">
+									<i class="fa-solid fa-message"></i> <span
+										class="noto-sb mb-1 fs-bold">${c.reviewStar }</span>
+				</div>
 				<li>
 				<div class="t1">
-				<img src="./img/category/자기개발.png">
-				${c.expertName }
-				</li>
-				<li>
+					<img src="./img/category/자기개발.png">
+						${c.expertName }
+				</div>
 				<div class="t2">
 					${c.productCategory}
-				</div>
+				</div>	
 				</li>
+				
 				</div>		
 	</div>
 	</c:forEach>
+	<fmt:formatNumber value="1000" pattern="#,###,###"/>
+
 </div>
 ${pageNavi }
-<div>
-</div>
+
 </div>
 
 </body>

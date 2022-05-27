@@ -2,6 +2,8 @@ package kr.or.eum.member.controller;
 
 
 import java.util.ArrayList;
+import java.util.Locale;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +15,7 @@ import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.member.model.service.MemberService;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
@@ -36,10 +39,14 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
+		System.out.println(member);
 		if(member != null) {
 			session.setAttribute("member", member);
+			return "1";
+		}else {
+			return "0";
 		}
-		return "redirect:/";
+		
 	}
 	
 	//대권 로그아웃
@@ -121,5 +128,46 @@ public class MemberController {
 		System.out.println("list"+list);
 		return "mypage/Myreview";
 	}
-
+	//재민 전문가 신청페이지로 이동
+	@RequestMapping(value="/Expertapply.do")
+	public String Expertapply() {
+		return "expert/Expertapply";
+	}
+	//필요서류 확인페이지
+	@RequestMapping(value="/checkdocument.do")
+	public String checkdocument() {
+		return "expert/checkdocument";
+	}
+	//재민 전문가 신청페이지2로 이동
+	@RequestMapping(value="/Expertapply2.do")
+	public String Expertapply2() {
+		return "expert/Expertapply2";
+	}
+	//재민 전문가 신청페이지3로 이동
+	@RequestMapping(value="/Expertapply3.do", method = RequestMethod.POST)
+	public String Expertapply3(Model model, String expertClass, String expertTag, String expertQual,String expertLicense,String expertIssuer) {
+		
+		model.addAttribute("expertClass",expertClass);
+		model.addAttribute("expertTag",expertTag);
+		model.addAttribute("expertQual",expertQual);
+		model.addAttribute("expertLicense",expertLicense);
+		model.addAttribute("expertIssuer",expertIssuer);
+		return "expert/Expertapply3";
+	}
+	//재민 전문가 (sysout용 확인)
+	@RequestMapping(value="/Expertapply4.do",method = RequestMethod.POST)
+	public String Expertapply4(Model model, String expertClass, String expertTag,String expertDate,String expertQual,String expertLicense,String expertIssuer,String expertName,String expertJob,String expertPhone,String expertEmail) {
+		
+		System.out.println(expertClass);
+		System.out.println(expertTag);
+		System.out.println(expertQual);
+		System.out.println(expertLicense);
+		System.out.println(expertIssuer);
+		System.out.println(expertDate);
+		System.out.println(expertName);
+		System.out.println(expertJob);
+		System.out.println(expertPhone);
+		System.out.println(expertEmail);
+		return null;
+	}
 }

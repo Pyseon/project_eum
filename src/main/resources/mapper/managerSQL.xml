@@ -98,14 +98,15 @@
 		(select rownum as rnum, pay.* from
 		(select
 			pay_no as payNo,
-			member_no as memberNo,
+			(select member_Id from member_tbl m where payment.member_no = m.member_no) as memberId,
 			product_no as productNo,
 			pay_state as payState,
 			pay_date as payDate,
 			payment as payment,
+			pay_method as payMethod,
 			pay_usepoint as payUsepoint,
 			pay_addpoint as payAddpoint
-		from payment_tbl
+		from payment_tbl payment
 		<choose>
 			<when test="payState != 0">
 				where pay_state = #{payState }
@@ -123,20 +124,21 @@
 		(select rownum as rnum, pay.* from
 		(select
 			pay_no as payNo,
-			member_no as memberNo,
-			product_no as productNo,
+			(select member_Id from member_tbl m where payment.member_no = m.member_no) as memberId,
 			pay_state as payState,
 			pay_date as payDate,
 			payment as payment,
+			pay_method as payMethod,
 			pay_usepoint as payUsepoint,
 			pay_addpoint as payAddpoint
-		from payment_tbl
+		from payment_tbl payment
 		<choose>
 			<when test="searchType.equals('payNo') ">
 				where pay_no = #{keyword }
 			</when>
 			<when test="searchType.equals('memberId') ">
-				where member_no = #{keyword }
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
 			</when>
 		</choose>
 		order by pay_no desc) pay)
@@ -162,10 +164,24 @@
 				where pay_no = #{keyword }
 			</when>
 			<when test="searchType.equals('memberId') ">
-				where member_no = #{keyword }
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
 			</when>
 		</choose>
 	</select>
+	
+	<update id="updatePayState" parameterType="map">
+		update payment_tbl set
+		<choose>
+			<when test="updateNo == 0">
+				pay_state=3
+			</when>
+			<otherwise>
+				pay_state=1
+			</otherwise>
+		</choose>
+		where pay_no = #{payNo}
+	</update>
 	
 	
 </mapper>

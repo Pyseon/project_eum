@@ -184,6 +184,13 @@ public class ManagerService {
 				
 				return ppd;
 	}
+
+	public int updatePayState(int updateNo, int payNo) {
+		HashMap<String, Integer> ups = new HashMap<String, Integer>();
+		ups.put("updateNo",updateNo);
+		ups.put("payNo",payNo);
+		return dao.updatePayState(ups);
+	}
 	
 }
 

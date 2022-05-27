@@ -27,19 +27,20 @@ li{
 	    box-sizing: border-box;
     	width: 250px !important;
     	padding : 0px !important; 
-    	height: 450px !important;
+    	height: 500px !important;
     	margin: 25px 15px 55px 10px;
     	background-color: #f9f9f9;
     	box-shadow: 3px 3px 3px 3px #e7dede;
 	}
 	
 	.t1{
-	float: left;
-	font-size:16px;
+	font-size:18px;
+	font-family: fs-bold !important;
+	display: flex;
+	margin: 20px 0 20px 0;
+	justify-content: space-between;
 	}
-	.t1 > h4{
-	font-family: fs-bold;
-	}
+	
 	.t1 > img{
 	width:20px;
 	height:20px;
@@ -56,7 +57,12 @@ li{
   		height: 30px;
 	}
 	.t4{
-	
+	margin: 20px 0 20px 0;
+	justify-content: space-between;
+	}
+	.t4 > img{
+	width:30px;
+	height:30px;
 	}
 	.posting-item > img{
 	width: 100%;
@@ -93,6 +99,10 @@ li{
 	.category > tbody > tr > td{
 	position: center;
 	}
+	.star-wrap span {
+    float: left;
+    color: #ff990d;
+}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
@@ -121,44 +131,51 @@ li{
 <div class="container">
 <div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
-	<div class="posting-item" style="cursor: pointer;" onclick="location.href=#" >
-			<img src="./img/test/testimg1.png">
-				<div class="posting-connect">
-				<li>
-				<div class="t1">
-					<h4>${c.productTitle }</h4>
+	<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
+	<img src="./img/test/testimg1.png">
+		<div class="posting-connect">
+			<li>
+				<div class="t1" style="font-family: fs-bold !important;">
+					<span class="card-category fs-bold">${c.productTitle }</span>
+					<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
 				</div>
-				<div class="t2">
-					<h4><fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원</h4>
-				</div>
-				</li>
-				<li>
-				<div class="t3" style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
+			</li>
+			
+			
+			<li>
+			<div class="t3" style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
 				${c.productIntro }
-				</div>
-				</li>
-				<div class="card-comment">
-									<i class="fa-solid fa-message"></i> <span
-										class="noto-sb mb-1 fs-bold">${c.revCount }</span>
-				</div>
-				<div class="card-comment">
-									<i class="fa-solid fa-message"></i> <span
-										class="noto-sb mb-1 fs-bold">${c.reviewStar }</span>
-				</div>
-				<li>
-				<div class="t1">
-					<img src="./img/category/자기개발.png">
-						${c.expertName }
-				</div>
-				<div class="t2">
-					${c.productCategory}
-				</div>	
-				</li>
+			</div>
+			</li>
+			
+		<li>
+		<div style="margin-bottom: 20px;">
+		<div class="t4">
+			<img src="./img/category/자기개발.png">
+				${c.expertName }
 				
-				</div>		
-	</div>
+		</div>
+		</div>
+		</li>
+		
+		<li>
+		
+			<div class="fa-solid fa-message" style="float: right; font-size:16px;">	
+				<span class="noto-sb mb-1 fs-bold">${c.revCount }</span>
+			</div>	
+			<div class="material-icons icons-star" style="float: left; font-size:16px;">star
+				<div class="noto-sb mb-1 fs-bold" style="float: right; font-size:16px;">${c.reviewStar }
+				</div>		 
+			</div>
+		
+		</li>
+		</div>
+		
+		<div class="t2">
+				${c.productCategory}
+			</div>
+	</div>													   			
 	</c:forEach>
-	<fmt:formatNumber value="1000" pattern="#,###,###"/>
 
 </div>
 ${pageNavi }

@@ -142,26 +142,28 @@ public class MemberController {
 	//재민 전문가 신청페이지3로 이동
 	@RequestMapping(value="/Expertapply3.do", method = RequestMethod.POST)
 	public String Expertapply3(Model model, String expertClass, String expertTag, String expertQual,String expertLicense,String expertIssuer) {
-		System.out.println(expertClass);
-		System.out.println(expertTag);
-		System.out.println(expertQual);
-		System.out.println(expertLicense);
-		System.out.println(expertIssuer);
+		
+		model.addAttribute("expertClass",expertClass);
+		model.addAttribute("expertTag",expertTag);
+		model.addAttribute("expertQual",expertQual);
+		model.addAttribute("expertLicense",expertLicense);
+		model.addAttribute("expertIssuer",expertIssuer);
 		return "expert/Expertapply3";
 	}
 	//재민 전문가 (sysout용 확인)
 	@RequestMapping(value="/Expertapply4.do",method = RequestMethod.POST)
-	public String Expertapply4(Model model, String expertClass, String expertTag, String expertQual,String expertLicense,String expertIssuer,String expertName,String expertJob,String expertPhone,String expertEmail) {
+	public String Expertapply4(Model model, String expertClass, String expertTag,String expertDate,String expertQual,String expertLicense,String expertIssuer,String expertName,String expertJob,String expertPhone,String expertEmail) {
+		
 		System.out.println(expertClass);
 		System.out.println(expertTag);
 		System.out.println(expertQual);
 		System.out.println(expertLicense);
 		System.out.println(expertIssuer);
+		System.out.println(expertDate);
 		System.out.println(expertName);
 		System.out.println(expertJob);
 		System.out.println(expertPhone);
 		System.out.println(expertEmail);
-		
 		return null;
 	}
 }

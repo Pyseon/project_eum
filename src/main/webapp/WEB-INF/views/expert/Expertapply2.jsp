@@ -41,7 +41,7 @@
 			<li>
 				<label>발급기관/취득일시*</label>
 				<input type="text" name="expertIssuer" placeholder="발급기관">
-				<input type="text" placeholder="취득일시">
+				<input type="text" name="expertDate" placeholder="취득일시">
 			</li>
 			
 			

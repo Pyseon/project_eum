@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.eum.product.model.vo.ProductAndWishList;
+import kr.or.eum.product.model.vo.ProductDetail;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.Review;
@@ -65,8 +66,9 @@ public class ProductDao {
 		return (ArrayList<ProductAndWishList>)list;
 	}
 	//윤지
-	public ArrayList<ProReviewMember> selectReviewList(int productNo) {
-		List list = sqlSession.selectList("product.selectReviewList", productNo);
+	public ArrayList<ProReviewMember> selectReviewList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("product.selectReviewList", map);
 		return (ArrayList<ProReviewMember>)list;
 	}
+
 }

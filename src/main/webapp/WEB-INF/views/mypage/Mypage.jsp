@@ -41,5 +41,6 @@
 	<a href="/Wishlist.do">찜내역</a>
 	<a href="/Myreview.do">찜내역</a>
 	<a href="/Myproject.do">내프로젝트</a>
+	<a href="/Expertapply.do">전문가신청</a>
 </body>
 </html>

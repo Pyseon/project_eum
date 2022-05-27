@@ -26,6 +26,7 @@ public class MemberDao {
 	public Member selectOneMember(Member m) {
 		// TODO Auto-generated method stub
 		Member member = sqlSession.selectOne("member.selectOneMember", m);
+		System.out.println(member);
 		return member;
 	}
 	//재민 내정보수정

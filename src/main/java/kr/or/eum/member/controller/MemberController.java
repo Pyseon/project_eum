@@ -36,10 +36,14 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
+		System.out.println(member);
 		if(member != null) {
 			session.setAttribute("member", member);
+			return "1";
+		}else {
+			return "0";
 		}
-		return "redirect:/";
+		
 	}
 	
 	//대권 로그아웃

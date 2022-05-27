@@ -93,18 +93,20 @@
 	
 	<!-- 윤지 -->
 	<select id="selectAllReview" resultType="review">
-		select * 
+		select 
+			review_no, pay_no, member_no, review_title, review_content, review_star, review_date, product_no
 		from 
 			(select rownum,n.* from(select * from review_tbl order by review_no desc)n) 
 		where 
-			rownum between 1 and 10
+			rownum between 1 and 10 and product_no=#{productNo}
 
 	</select>
 	<!-- 윤지 -->
-	<select id="selectReviewCount" resultType="int">
+	<select id="selectReviewCount" parameterType="int" resultType="int">
 		select
 			count(*) as cnt 
 		from review_tbl
+		where product_no=#{productNo}
 	</select>
 	<!-- 윤지 -->
 	<select id="selectReviewStar" parameterType="int" resultType="double">
@@ -147,8 +149,28 @@
 			rnum between 1 and 10
  	</select> 
  	<!-- 윤지 -->
-	<!--  <select id="selectReviewList" parameterType="int" resultType="proAndPayAndReview">
-
-	</select>-->
+	<select id="selectReviewList" parameterType="int" resultType="ProReviewMember">
+	SELECT 
+		pro.product_no as productNo,
+		pro.expert_no as expertNo,
+		r.review_star as reviewStar,
+		m.member_no as memberNo,
+		r.review_no as reviewNo,
+		r.review_content as reviewContent,
+		r.review_date as reviewDate,
+		m.member_nick as memberNick,
+		m.member_picturename as memberPictureName,
+		m.member_picturepath as memberPicturePath
+	FROM 
+		PRODUCT_TBL PRO
+	JOIN 
+		REVIEW_TBL R
+	ON PRO.PRODUCT_NO = R.PRODUCT_NO
+	JOIN 
+		MEMBER_TBL M
+	ON R.MEMBER_NO = M.MEMBER_NO
+	WHERE 
+		pro.product_no=#{productNo}
+	</select>
 </mapper>
 	

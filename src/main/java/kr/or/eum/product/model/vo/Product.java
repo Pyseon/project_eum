@@ -26,6 +26,6 @@ public class Product {
 	private int reviewStar;
 	private int revCount;
 	private int productOption;
-
+	private String productImgPath;
 
 }

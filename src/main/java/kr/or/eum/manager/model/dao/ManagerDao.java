@@ -75,5 +75,10 @@ public class ManagerDao {
 		int result = sqlSession.update("manager.updatePayState", ups);
 		return result;
 	}
+
+	public ArrayList<Payment> detailPayment(int payNo) {
+		List pay = sqlSession.selectList("manager.detailPayment", payNo);
+		return (ArrayList<Payment>)pay;
+	}
 	
 }

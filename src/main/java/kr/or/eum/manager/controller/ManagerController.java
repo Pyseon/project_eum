@@ -14,6 +14,7 @@ import kr.or.eum.manager.model.service.ManagerService;
 import kr.or.eum.manager.model.vo.MemberPageData;
 import kr.or.eum.manager.model.vo.PaymentPageData;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Payment;
 
 @Controller
 public class ManagerController {
@@ -50,5 +51,11 @@ public class ManagerController {
 		int result = service.updatePayState(updateNo, payNo);
 		return "redirect:/manaPayment.do?reqPage="+reqPage+"&payState=3";
 	}
+	@RequestMapping(value="/detailPayment.do")
+	public String detailPayment(int payNo, Model model) {
+		ArrayList<Payment> pay = service.detailPayment(payNo);
+		return null;
+	}
+	
 	
 }

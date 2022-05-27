@@ -191,6 +191,10 @@ public class ManagerService {
 		ups.put("payNo",payNo);
 		return dao.updatePayState(ups);
 	}
+
+	public ArrayList<Payment> detailPayment(int payNo) {
+		return dao.detailPayment(payNo);
+	}
 	
 }
 

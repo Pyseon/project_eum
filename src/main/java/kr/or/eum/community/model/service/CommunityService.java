@@ -36,12 +36,12 @@ public class CommunityService {
 		return cpd;
 	}
 	
-	public ArrayList<Community> communityDetail(int commNo) {
-		ArrayList<Community> list = dao.communityDetail(commNo);
-		if(list != null) {
+	public Community communityDetail(int commNo) {
+		Community cm = dao.communityDetail(commNo);
+		if(cm != null) {
 			dao.readCountUp(commNo);
 		}
-		return list;
+		return cm;
 	}
 	
 	

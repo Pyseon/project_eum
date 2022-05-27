@@ -26,9 +26,9 @@ public class CommunityDao {
 	}
 
 
-	public ArrayList<Community> communityDetail(int commNo) {
-		List list = sqlSession.selectList("community.communityDetail", commNo);
-		return (ArrayList<Community>)list;
+	public Community communityDetail(int commNo) {
+		Community cm = sqlSession.selectOne("community.communityDetail", commNo);
+		return cm;
 	}
 
 	public void readCountUp(int commNo) {

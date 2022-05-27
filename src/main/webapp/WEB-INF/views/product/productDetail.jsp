@@ -409,7 +409,7 @@
 							<div class="right-second-box">
 							<!-- DB -->
 								<div class="picture">
-									<a href="#"><img class="testimg" src="img/testpicture.png"></a>	
+									<a href="#"><img class="testimg" src="/img/member/${expertM.memberPicturePath }"></a>	
 								</div>
 								<div class="expert-profile">
 									<div class="expert-profile-span"><h3 class="expert-info">

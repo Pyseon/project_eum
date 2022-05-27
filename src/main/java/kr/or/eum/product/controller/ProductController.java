@@ -75,7 +75,8 @@ public class ProductController {
 	@RequestMapping(value = "/review.do")
 	public String productReview(Model model, int productNo, int reqPage){
 		ReviewPageData rpd = productService.selectReviewList(productNo, reqPage);
-		return new Gson().toJson(rpd);
+		System.out.println(new Gson().toJson(rpd.getPrm()));
+		return new Gson().toJson(rpd.getPrm());
 	}
 	
 	//윤지

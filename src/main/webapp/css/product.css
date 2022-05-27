@@ -118,6 +118,7 @@ h1,h2,h3,h4,h5,h6{
 
 .title1{
 	margin-right: 10px;
+	border-bottom: 3px solid #3865f2;
 }
 
 .detail-1{

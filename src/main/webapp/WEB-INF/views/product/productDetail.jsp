@@ -518,16 +518,7 @@
 				$('.title1').css("border","none");
 			});
 			
-			$.ajax({
-				url : "/review.do",
-				data : {productNo : productNo, reqPage : reqPage}, 
-				type : “get"
-				success : function(data){ 
-					
-				},
-				error : function(){ //4-2. 
-				}
-			}
+			
 		});
 	</script>
 </body>

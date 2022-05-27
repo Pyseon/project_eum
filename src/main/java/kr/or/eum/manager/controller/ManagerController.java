@@ -54,7 +54,8 @@ public class ManagerController {
 	@RequestMapping(value="/detailPayment.do")
 	public String detailPayment(int payNo, Model model) {
 		ArrayList<Payment> pay = service.detailPayment(payNo);
-		return null;
+		model.addAttribute("pay", pay);
+		return "manager/detailPayment";
 	}
 	
 	

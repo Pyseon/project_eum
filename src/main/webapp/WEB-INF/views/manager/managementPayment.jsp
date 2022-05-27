@@ -53,7 +53,7 @@
 					<td>${pay.payMethod }</td>
 					<td>${pay.payState }</td>
 					<td>${pay.payDate }</td>
-					<td><button class="btn bc3 bc1" onclick="location.href='/detailPayment.do?payNo='${pay.payNo}">상세보기</button></td>
+					<td><button class="btn bc3 bc1" onclick="location.href='/detailPayment.do?payNo=${pay.payNo}'">상세보기</button></td>
 					<c:choose>
 						<c:when test="${pay.payState==3 }">
 							<td><button class="btn bc1 bs1" onclick="location.href='/updatePayState.do?updateNo=1&payNo=${pay.payNo}&reqPage=${reqPage }'">다시 예약</button></td>

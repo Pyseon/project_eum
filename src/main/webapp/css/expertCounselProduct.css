@@ -14,7 +14,7 @@
 		height: 650px;
 		display: flex;
 		flex-direction: column;
-		background-color : #f0f0f0;; 
+		background-color : #eaeaea;
 }
 .buy-detail{
 		overflow-y: auto;
@@ -22,8 +22,38 @@
 		height: 650px;
 		display: flex;
 		flex-direction: column;
-		background-color : #f6f7fc;
+		background-color : #e9ebf8;
 }
+
+#sendMsg{
+	width: 85%;
+	height: 40px;
+	padding: 10px 10px;
+	font-size: 14px;
+}
+#sendBtn{
+	width: 10%;
+	height: 40px;
+	margin-left: 10px;
+}
+
+#sendMsg:focus{
+	border: 1px solid #3865f2;
+	outline: none;
+}
+.sendBox{
+	position: relative;
+	bottom: 60px;
+	left: 10px;
+	right: 10px;
+}
+
+
+
+
+
+
+
 
 *,
 ::after,
@@ -107,15 +137,14 @@
 .col-4 {
     -ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
-    max-width: 33.333333%
+    max-width: 29.444444%
 }
 
 .col-8 {
     -ms-flex: 0 0 66.666667%;
     flex: 0 0 66.666667%;
-    max-width: 66.666667%
+    max-width: 70.555556%
 }
-
 
 @media (min-width:992px) {
     .col-lg-4 {

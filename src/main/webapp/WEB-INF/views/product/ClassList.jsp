@@ -106,7 +106,15 @@ li{
 	.star-wrap span {
     float: left;
     color: #ff990d;
-}
+    }
+    .t4-info{
+    	display: inline;
+    }
+    
+    ul, li {
+    	padding: 0 !important;
+    	margin: 0 !important;
+    }
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
@@ -138,48 +146,47 @@ li{
 	<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
 	<img src="./img/test/testimg1.png">
 		<div class="posting-connect">
+			<ul>
+				<li>
+					<div class="t1" style="font-family: fs-bold !important;">
+						<span class="card-category fs-bold">${c.productTitle }</span>
+						<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+					</div>
+				</li>
+			</ul>
+			
+			<ul>
+				<li>
+					<div class="t3" style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
+					${c.productIntro }
+					</div>
+				</li>
+			</ul>
+		
+		<ul>
 			<li>
-				<div class="t1" style="font-family: fs-bold !important;">
-					<span class="card-category fs-bold">${c.productTitle }</span>
-					<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+				<div class="t4">
+					<span>
+						<img src="./img/category/자기개발.png">${c.expertName }
+					</span>
+					<div class="t4-info"><span>${c.revCount }</span></div>
+					<div><span class="material-icons icons-star">star</span></div>
+					<div class="t4-info"><span>${c.reviewStar }</span></div>		 
 				</div>
 			</li>
-			
-			
-			<li>
-			<div class="t3" style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
-				${c.productIntro }
-			</div>
-			</li>
-			
-		<li>
+		</ul>
 		
-		<div class="t4">
-			<span>
-			<img src="./img/category/자기개발.png">
-				${c.expertName }
-			</span>
-			<span>
-			<ul>
-					<span class="material-icons icons-star">star${c.revCount }
-			</ul>
-				${c.reviewStar }		 
-			</span>
-		</div>
-		</li>
-		
-		<li>
 		<div class="t2">
 			${c.productCategory}
-		</div>
-		</li>
-		</div>
+		</div> <!-- t2 -->
 		
-
-	</div>													   			
+		
+		</div><!-- posting-connect -->
+		
+		</div>
 	</c:forEach>
 
-</div>
+	</div>													   			
 ${pageNavi }
 
 </div>

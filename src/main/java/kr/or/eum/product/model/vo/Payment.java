@@ -17,5 +17,5 @@ public class Payment {
 	private int payment;
 	private int payUsepoint;
 	private int payAddpoint;
-	
+	private String memberId;
 }

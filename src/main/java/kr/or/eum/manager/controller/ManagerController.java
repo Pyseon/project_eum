@@ -47,7 +47,7 @@ public class ManagerController {
 	}
 	@RequestMapping(value = "/updatePayState.do")
 	public String updatePayState(int updateNo, int payNo, int reqPage) {
-		int result = service.updateBlackList(updateNo, payNo);
+		int result = service.updatePayState(updateNo, payNo);
 		return "redirect:/manaPayment.do?reqPage="+reqPage+"&payState=3";
 	}
 	

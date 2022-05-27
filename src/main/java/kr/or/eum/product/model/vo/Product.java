@@ -23,7 +23,7 @@ public class Product {
 	private String productAns;
 	private String productAddr;
 	private int sale;
-	private int reviewStar;
+	private double reviewStar;
 	private int revCount;
 	private int productOption;
 

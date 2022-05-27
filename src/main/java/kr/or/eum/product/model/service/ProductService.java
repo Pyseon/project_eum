@@ -13,7 +13,7 @@ import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
-import kr.or.eum.product.model.vo.ProAndPayAndReview;
+import kr.or.eum.product.model.vo.ProReviewMember;
 
 
 @Service
@@ -87,13 +87,13 @@ public class ProductService {
 		return productDao.selectOneProduct(productNo);
 	}
 	//윤지
-	public ArrayList<Review> selectAllReview() {
-		return productDao.selectAllReview();
+	public ArrayList<Review> selectAllReview(int productNo) {
+		return productDao.selectAllReview(productNo);
 	}
 	
 	//윤지
-	public int selectReviewCount() {
-		return productDao.selectReviewCount();
+	public int selectReviewCount(int productNo) {
+		return productDao.selectReviewCount(productNo);
 	}
 	//윤지
 	public double selectReviewStar(int productNo) {
@@ -108,8 +108,8 @@ public class ProductService {
 		return productDao.selectWishList();
 	}
 	//윤지
-//	public ArrayList<ProAndPayAndReview> selectReviewList(int productNo) {
-//		return productDao.selectReviewList(productNo);
-//	}
+	public ArrayList<ProReviewMember> selectReviewList(int productNo) {
+		return productDao.selectReviewList(productNo);
+	}
 
 }

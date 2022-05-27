@@ -12,7 +12,7 @@ import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.Review;
-import kr.or.eum.product.model.vo.ProAndPayAndReview;
+import kr.or.eum.product.model.vo.ProReviewMember;
 
 
 @Repository
@@ -39,14 +39,14 @@ public class ProductDao {
 		return product;
 	}
 	//윤지
-	public ArrayList<Review> selectAllReview() {
-		List list = sqlSession.selectList("product.selectAllReview");
+	public ArrayList<Review> selectAllReview(int productNo) {
+		List list = sqlSession.selectList("product.selectAllReview", productNo);
 		return (ArrayList<Review>)list;
     
 	}
 	//윤지
-	public int selectReviewCount() {
-		int reviewCount = sqlSession.selectOne("product.selectReviewCount");
+	public int selectReviewCount(int productNo) {
+		int reviewCount = sqlSession.selectOne("product.selectReviewCount", productNo);
 		return reviewCount;
 	}
 	//윤지
@@ -64,9 +64,9 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.selectWishList");
 		return (ArrayList<ProductAndWishList>)list;
 	}
-
-//	public ArrayList<ProAndPayAndReview> selectReviewList(int productNo) {
-//		List list = sqlSession.selectList("product.selectReviewList");
-//		return (ArrayList<ProAndPayAndReview>)list;
-//	}
+	//윤지
+	public ArrayList<ProReviewMember> selectReviewList(int productNo) {
+		List list = sqlSession.selectList("product.selectReviewList", productNo);
+		return (ArrayList<ProReviewMember>)list;
+	}
 }

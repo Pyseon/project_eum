@@ -337,18 +337,13 @@ th{
     object-fit: cover;
 }
 .expert-profile{
+	display:flex;
 	width: 100px;
 	height:30px;
 	margin: 0 auto;
-	text-align: center;
 	margin-top: 18px;
 	margin-bottom: 4px;
-}
-.expert-profile>ul{
-	overflow: hidden;
-}
-.expert-profile>ul>li{
-	float: left;
+	justify-content:center;
 }
 .info-wrap{
 	position:absolute;
@@ -375,10 +370,11 @@ th{
 	vertical-align: top;
 	margin-bottom: 1px;
 	position: absolute;
-	display: inline;
+	margin-top:-2px;
+	margin-left:-6px;
 }
-.icon-confim-wrap{
-	margin-right: 34px;
+.expert-info{
+	margin-right: 6px;
 }
 
 /*여기부터 third-box*/

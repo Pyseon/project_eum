@@ -6,10 +6,14 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.dao.ProductDao;
+import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.ProAndPayAndReview;
 
 
 @Service
@@ -91,5 +95,21 @@ public class ProductService {
 	public int selectReviewCount() {
 		return productDao.selectReviewCount();
 	}
+	//윤지
+	public double selectReviewStar(int productNo) {
+		return productDao.selectReviewStar(productNo);
+	}
+	//윤지
+	public int selectPaymentExpertNoCount(int productNo) {
+		return productDao.selectPaymentExpertNoCount(productNo);
+	}
+	//윤지
+	public ArrayList<ProductAndWishList> selectWishList() {
+		return productDao.selectWishList();
+	}
+	//윤지
+//	public ArrayList<ProAndPayAndReview> selectReviewList(int productNo) {
+//		return productDao.selectReviewList(productNo);
+//	}
 
 }

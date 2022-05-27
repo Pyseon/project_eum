@@ -67,7 +67,6 @@ public class MemberDao {
 		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly",expertNo);
 		return expert;
 	}
- 
 
 	//재민 리뷰테이블
 	public ArrayList<Review> selectReviewlist() {

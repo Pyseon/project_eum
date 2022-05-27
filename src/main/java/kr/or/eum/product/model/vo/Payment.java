@@ -14,7 +14,7 @@ public class Payment {
 	private int payState;
 	private String payMethod;
 	private String payDate;
-	private int payMent;
+	private int payment;
 	private int payUsepoint;
 	private int payAddpoint;
 	

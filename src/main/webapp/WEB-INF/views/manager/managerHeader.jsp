@@ -15,8 +15,8 @@
 			<h2>관리자1</h2>
 		</div>
 		<ul>
-			<li><a href="#">회원관리</a></li>
-			<li><a href="#">주문관리</a></li>
+			<li><a href="/manaMember.do?reqPage=1&selMem=0">회원관리</a></li>
+			<li><a href="/manaPayment.do?reqPage=1&payState=0">주문관리</a></li>
 			<li><a href="#">전문가승인</a></li>
 			<li><a href="#">신고모니터링</a></li>
 			<li><a href="#">1:1상담</a></li>

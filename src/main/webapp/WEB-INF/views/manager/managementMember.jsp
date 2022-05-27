@@ -22,6 +22,19 @@
 				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=4'">블랙리스트</button></li>
 			</ul>
 		</div>
+		<div class="searchBox">
+			<form action="/manaMember.do" method="post">
+				<select name="searchType">
+					<option value="memberNo">회원번호</option>
+					<option value="memberId">이메일</option>
+					<option value="memberNick">닉네임</option>
+				</select>
+				<input type="hidden" name="reqPage" value="1">
+				<input type="hidden" name="selMem" value="0">
+				<input type="text" name="keyword">				
+				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
+			</form>
+		</div>
 		<div id="resultTbl">
 			<table class="tbl tbl-hover resultTbl">
 				<tr class="tr-1">
@@ -29,6 +42,7 @@
 					<th>회원번호</th>
 					<th>이메일</th>
 					<th>닉네임</th>
+					<th>등급</th>
 					<th>포인트</th>
 					<th>전화번호</th>
 					<th>가입일</th>
@@ -41,12 +55,13 @@
 					<td>${member.memberNo }</td>
 					<td>${member.memberId }</td>
 					<td>${member.memberNick }</td>
+					<td>${member.grade }</td>
 					<td>${member.memberPoint }</td>
 					<td>${member.memberPhone }</td>
 					<td>${member.enrollDate }</td>
 					<td>${member.memberReportCount }</td>
 					<c:choose>
-						<c:when test="${selMem==4 }">
+						<c:when test="${member.grade==4 }">
 							<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=1&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 해제</button></td>
 						</c:when>
 						<c:otherwise>
@@ -63,5 +78,6 @@
 		</div>
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	
 </body>
 </html>

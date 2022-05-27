@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -18,13 +20,17 @@ li{
 	.posting-wrap {
     	display: flex;
     	flex-wrap: wrap;
+    	margin-left: 20px;
 	}
+	
 	.posting-item{
 	    box-sizing: border-box;
-    	width: calc(100% / 5);
-    	padding: 13px;
-    	height: 250px;
-    	margin: 30px 8px 55px 8px;
+    	width: 250px !important;
+    	padding : 0px !important; 
+    	height: 450px !important;
+    	margin: 25px 15px 55px 10px;
+    	background-color: #f9f9f9;
+    	box-shadow: 3px 3px 3px 3px #e7dede;
 	}
 	
 	.t1{
@@ -49,10 +55,16 @@ li{
   		width: 200px;
   		height: 30px;
 	}
+	.t4{
+	
+	}
 	.posting-item > img{
 	width: 100%;
-	height: 100px;
-
+	height: 300px;
+	
+	}
+	.posting-connect{
+	    padding: 10px;
 	}
 	.category{
 	width: 1000px;
@@ -62,21 +74,31 @@ li{
     margin-left: auto;
     margin-bottom: 10px;
     flex-grow: 1;
+    border-bottom: 1px solid rgba(220, 220, 220, 0.59);
+    
 	}
 	.category > tbody > tr > td > button >img{
-	width: 50px;
-	height: 50px;
+	width: 70%;
+	height: 70%;
+	}
+	
+	.category > tbody > tr > td > h3{
+	text-align:center;
 	}
 	.category > tbody > tr > td > button{
 	padding: 0;
 	border: none;
 	background: none;
 	}
+	.category > tbody > tr > td{
+	position: center;
+	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
 <body>
-<div>
+<div style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
+
 		<table class="category">
 				<tr>
 					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ClassList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"></button><h3>전체</h3></td>
@@ -95,40 +117,52 @@ li{
           			</table>
    </div>
    
+   
 <div class="container">
 <div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
-	<div class="posting-item">
+	<div class="posting-item" style="cursor: pointer;" onclick="location.href=#" >
 			<img src="./img/test/testimg1.png">
+				<div class="posting-connect">
 				<li>
 				<div class="t1">
 					<h4>${c.productTitle }</h4>
 				</div>
 				<div class="t2">
-					<h4>${c.cost }원</h4>
+					<h4><fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원</h4>
 				</div>
 				</li>
 				<li>
-				<div class="t3">
+				<div class="t3" style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
 				${c.productIntro }
 				</div>
 				</li>
+				<div class="card-comment">
+									<i class="fa-solid fa-message"></i> <span
+										class="noto-sb mb-1 fs-bold">${c.revCount }</span>
+				</div>
+				<div class="card-comment">
+									<i class="fa-solid fa-message"></i> <span
+										class="noto-sb mb-1 fs-bold">${c.reviewStar }</span>
+				</div>
 				<li>
 				<div class="t1">
-				<img src="./img/category/자기개발.png">
-				${c.expertName }
-				</li>
-				<li>
+					<img src="./img/category/자기개발.png">
+						${c.expertName }
+				</div>
 				<div class="t2">
 					${c.productCategory}
-				</div>
-				</li>		
+				</div>	
+				</li>
+				
+				</div>		
 	</div>
 	</c:forEach>
+	<fmt:formatNumber value="1000" pattern="#,###,###"/>
+
 </div>
 ${pageNavi }
-<div>
-</div>
+
 </div>
 
 </body>

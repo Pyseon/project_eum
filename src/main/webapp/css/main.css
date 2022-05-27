@@ -106,7 +106,7 @@ a#scrollUp {
   bottom: 0px;
   right: 10px;
   padding: 5px 10px;
-  background: #3865f2;
+  border: 3px solid #3865f2;
   color: #fff;
   -webkit-animation: bounce 2s ease infinite;
   animation: bounce 2s ease infinite;
@@ -114,6 +114,7 @@ a#scrollUp {
 
 a#scrollUp i {
   font-size: 30px;
+  color: #3865f2;
 }
 
 /*************************
@@ -365,6 +366,7 @@ ul.sub-menu2 {
 
 #footer {
   background: #fff;
+  margin-top: 150px;
 }
 .customercenter ul li:first-child {
   font-size: 20px;
@@ -497,10 +499,6 @@ ul.sub-menu2 {
   left: 25px;
   position: absolute;
   top: 50px;
-}
-
-.footer-widget {
-  margin-bottom: 68px;
 }
 
 .footer-widget .container {
@@ -1772,6 +1770,7 @@ h2.title {
 .user_info > li > span {
 }
 
+/*
 .user_info input,
 select,
 textarea {
@@ -1783,6 +1782,7 @@ textarea {
   border-radius: 0;
   resize: none;
 }
+*/
 
 .user_info select:focus {
   border: 0;
@@ -2549,4 +2549,18 @@ textarea {
 	color: #ccc;
 	font-weight: bold;
 	box-sizing: border-box;
+}
+
+.searchBox{
+	width: 500px;
+	position: relative;
+	display: block;
+	float: right
+}
+
+input[name=keyword]{
+	width: 250px;
+	height: 33px;
+	border-radius: 4px;
+	border: 1px solid #ccc;
 }

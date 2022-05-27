@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Expert;
@@ -15,8 +18,10 @@ import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndWishList;
+import kr.or.eum.product.model.vo.ProductDetail;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.ReviewPageData;
 import kr.or.eum.product.model.vo.ProReviewMember;
 import kr.or.eum.product.model.vo.Payment;
 
@@ -24,8 +29,6 @@ import kr.or.eum.product.model.vo.Payment;
 public class ProductController {
 	@Autowired
 	private ProductService productService;
-	@Autowired
-	private MemberService memberService;
 	
 	@RequestMapping(value="/ClassList.do")
 	public String productList(int reqPage, String selPro, Model model) {
@@ -39,52 +42,40 @@ public class ProductController {
 	//윤지
 	@RequestMapping(value = "/productDetail.do")
 	public String productDetail(Model model, int productNo, int expertNo) {
-		Product product = productService.selectOneProduct(productNo);
-		String productQst[] = product.getProductQst().split("/");
-		String productAns[] = product.getProductAns().split("/");
-		ArrayList<String> productQNA = new ArrayList<String>();
-		for(int i = 0; i < productQst.length; i++) {
-			productQNA.add("Q"+(i+1)+". "+productQst[i]);
-			productQNA.add("A"+(i+1)+". "+productAns[i]);
-		}
-		ExpertAndCompany expertAndCom = memberService.selectOneExpert(expertNo);
-		Expert expert = memberService.selectOneExpertOnly(expertNo);
-		ExpertAndMember expertM = memberService.selectOneExpertPicture(expertNo);
-		ArrayList<Review> reviewRnum = productService.selectAllReview(productNo);
-		double reviewAvrbef = productService.selectReviewStar(productNo);
-		String reviewAvr = String.format("%.1f", reviewAvrbef);
-		int reviewCount = productService.selectReviewCount(productNo);
-		int paymentCount = productService.selectPaymentExpertNoCount(productNo);
-		ArrayList<ProReviewMember> prm = productService.selectReviewList(productNo); 
-		int cost = product.getCost()*product.getSale()/100;
-		String tag[] = product.getProductTag().split("/");
-		ArrayList<ProductAndWishList> wishList = productService.selectWishList();
-
-		model.addAttribute("p", product);
-		model.addAttribute("productQNA", productQNA);
-		model.addAttribute("expertAndCom", expertAndCom);
-		model.addAttribute("expert", expert);
-		model.addAttribute("expertM", expertM);
-		model.addAttribute("review", reviewRnum);
-		model.addAttribute("reviewAvr", reviewAvr);
-		model.addAttribute("reviewCount",reviewCount);
-		model.addAttribute("paymentCount", paymentCount);
-		model.addAttribute("prm",prm);
-		model.addAttribute("cost", cost);
-		model.addAttribute("tag", tag);
-		model.addAttribute("wishList",wishList);
-		System.out.println("product : "+product);
-		System.out.println("expertAndCom : "+expertAndCom);
-		System.out.println("expert : "+expert);
-		System.out.println("expertM : "+expertM);
-		System.out.println("reviewRnum : "+reviewRnum);
-		System.out.println("reviewAvr : "+reviewAvr);
-		System.out.println("reviewCount : "+reviewCount);
-		System.out.println("payment : "+paymentCount);
-		System.out.println("prm : "+prm);
-		System.out.println("cost : "+cost);
-		System.out.println("wishList :"+wishList);
+		ProductDetail pd = productService.selectProductDetail(productNo, expertNo);
+		model.addAttribute("p", pd.getProduct());
+		model.addAttribute("productQNA", pd.getProductQNA());
+		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
+		model.addAttribute("expert", pd.getExpert());
+		model.addAttribute("expertM", pd.getExpertAndMember());
+		model.addAttribute("reviewAvr", pd.getReviewAvr());
+		model.addAttribute("reviewCount",pd.getReviewCount());
+		model.addAttribute("paymentCount", pd.getPaymentCount());
+		//model.addAttribute("prm",pd.getPrm());
+		model.addAttribute("cost", pd.getCost());
+		model.addAttribute("tag", pd.getTag());
+		model.addAttribute("wishList", pd.getWishList());
+		System.out.println("--------------------------------------");
+		System.out.println("product : "+pd.getProduct());
+		System.out.println("expertAndCom : "+pd.getExpertAndCompany());
+		System.out.println("expert : "+pd.getExpert());
+		System.out.println("expertM : "+pd.getExpertAndMember());
+		System.out.println("reviewRnum : "+pd.getReviewRnum());
+		System.out.println("reviewAvr : "+pd.getReviewAvr());
+		System.out.println("reviewCount : "+pd.getReviewCount());
+		System.out.println("payment : "+pd.getPaymentCount());
+		//System.out.println("prm : "+pd.getPrm());
+		System.out.println("cost : "+pd.getCost());
+		System.out.println("wishList :"+pd.getWishList());
+		System.out.println("--------------------------------------");
 		return "product/productDetail";
+	}
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "/review.do")
+	public String productReview(Model model, int productNo, int reqPage){
+		ReviewPageData rpd = productService.selectReviewList(productNo, reqPage);
+		return new Gson().toJson(rpd);
 	}
 	
 	//윤지

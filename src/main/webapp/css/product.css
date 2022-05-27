@@ -363,6 +363,7 @@ th{
 	text-align:center;
 	margin-top: 4px;
 	display: inline;
+	margin-right: 7px;
 }
 .confirm2{
 	color: #3865f2;
@@ -371,10 +372,7 @@ th{
 	margin-bottom: 1px;
 	position: absolute;
 	margin-top:-2px;
-	margin-left:-6px;
-}
-.expert-info{
-	margin-right: 6px;
+	margin-left:-5px;
 }
 
 /*여기부터 third-box*/

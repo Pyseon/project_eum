@@ -38,7 +38,7 @@
 					<div class="left-product-detail">
 						<div class="detail-1">
 							<span data-tab="tab-1" class="detail-title title1 tab-link current">상세내용</span>
-							<span data-tab="tab-2" class="detail-title title2 tab-link">후기<span class="tab-review-count"> (${reviewCount})</span></span> <!-- 후기 수 DB -->
+							<span data-tab="tab-2" class="detail-title title2 tab-link" onclick="review.do?reqPage=1&productNo="${product.productNo }>후기<span class="tab-review-count"> (${reviewCount})</span></span> <!-- 후기 수 DB -->
 						</div>	
 						<div class="product-content">
 						
@@ -184,14 +184,13 @@
 									</div>
 								</div>
 								<div class="real-review-wrap">
-									<c:forEach items="${ppr}" var="tag" step="1">
 									<div class="real-review">
 										<div class="member-picture">
 											<img class="reviewPicture" src=>
 										</div>
 										<div class="info">
 											<div class="info-one">
-												<span class="nickname">${prm.memberNick }</span> 
+												<span class="nickname">닉네임</span> 
 												<div class="review-btn-2">
 													<a href="#">수정</a> <a href="#">삭제</a> <br>
 												</div>	
@@ -229,7 +228,6 @@
 											<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
 										</div> <!-- info -->
 									</div><!-- real review -->
-									</c:forEach> 
 									
 									
 									
@@ -519,6 +517,17 @@
 				$('.title2').css("border-bottom","3px solid #3865f2");
 				$('.title1').css("border","none");
 			});
+			
+			$.ajax({
+				url : "/review.do",
+				data : {productNo : productNo, reqPage : reqPage}, 
+				type : “get"
+				success : function(data){ 
+					
+				},
+				error : function(){ //4-2. 
+				}
+			}
 		});
 	</script>
 </body>

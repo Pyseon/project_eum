@@ -24,5 +24,5 @@ public class Product {
 	private String productAddr;
 	private int sale;
 	private int productOption;
-
+	private String productImgPath;
 }

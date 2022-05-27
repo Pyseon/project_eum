@@ -55,27 +55,42 @@ li{
         overflow: hidden;
   		text-overflow: ellipsis;
   		white-space: nowrap;
-  		width: 200px;
+  		width: 100%;
   		height: 30px;
 	}
 	.t4{
 	margin: 10px 0 10px 0;
 	display: flex;
-	justify-content: space-between;
 	}
-	
+
+	.t4 > span{
+	 text-align: center;
+	}
 	.t4 > span > img{
 	width:30px;
 	height:30px;
 	}
+	.t4-right{
+	display: flex;
+ 	margin-left: auto;
+ 	width: 30%;
+    }
+	
 	.posting-item > img{
 	width: 100%;
-	height: 300px;
+	height: 250px;
 	
 	}
+	
 	.posting-connect{
 	    padding: 10px;
 	}
+	.posting-connect > ul {
+		margin: 0px !important;
+		padding: 0px !important;
+	}
+	
+	
 	.category{
 	width: 1000px;
     margin-top: 20px;
@@ -108,13 +123,31 @@ li{
     color: #ff990d;
     }
     .t4-info{
-    	display: inline;
+    	display: flex;
     }
     
-    ul, li {
-    	padding: 0 !important;
-    	margin: 0 !important;
-    }
+    
+    
+    .material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 18px !important;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+    
+}
+	.icons-star{
+	 color: #ff990d;
+	}
+	
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
@@ -135,8 +168,8 @@ li{
 					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/ClassList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"></button><h3>레저</h3></td>
 					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/ClassList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"></button><h3>IT/테크</h3></td>
 					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/ClassList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"></button><h3>자기계발</h3></td>
-          			</tr>
-          			</table>
+          		</tr>
+          </table>
    </div>
    
    
@@ -167,11 +200,16 @@ li{
 			<li>
 				<div class="t4">
 					<span>
-						<img src="./img/category/자기개발.png">${c.expertName }
+						<img src="./img/category/자기개발.png">&nbsp;${c.expertName }
 					</span>
-					<div class="t4-info"><span>${c.revCount }</span></div>
+				<div class="t4-right">
+					<div><span class="material-icons icons-message">message</span></div>
+					<div class="t4-info"><span>${c.revCount } &nbsp;</span></div>
 					<div><span class="material-icons icons-star">star</span></div>
-					<div class="t4-info"><span>${c.reviewStar }</span></div>		 
+					<div class="t4-info"><span>${c.reviewStar }</span></div>
+				</div>	
+					
+						 
 				</div>
 			</li>
 		</ul>
@@ -193,4 +231,5 @@ ${pageNavi }
 
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+
 </html>

@@ -111,5 +111,7 @@ public class ProductService {
 	public ArrayList<ProReviewMember> selectReviewList(int productNo) {
 		return productDao.selectReviewList(productNo);
 	}
+	
+
 
 }

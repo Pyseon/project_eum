@@ -27,7 +27,7 @@ li{
 	    box-sizing: border-box;
     	width: 250px !important;
     	padding : 0px !important; 
-    	height: 500px !important;
+    	height: 480px !important;
     	margin: 25px 15px 55px 10px;
     	background-color: #f9f9f9;
     	box-shadow: 3px 3px 3px 3px #e7dede;
@@ -37,7 +37,7 @@ li{
 	font-size:18px;
 	font-family: fs-bold !important;
 	display: flex;
-	margin: 20px 0 20px 0;
+	margin: 20px 0 10px 0;
 	justify-content: space-between;
 	}
 	
@@ -46,9 +46,11 @@ li{
 	height:20px;
 	}
 	.t2{
-	float: right;
-	font-size:15px
+	display: flex;
+	
+	
 	}
+	
 	.t3{
         overflow: hidden;
   		text-overflow: ellipsis;
@@ -57,10 +59,12 @@ li{
   		height: 30px;
 	}
 	.t4{
-	margin: 20px 0 20px 0;
+	margin: 10px 0 10px 0;
+	display: flex;
 	justify-content: space-between;
 	}
-	.t4 > img{
+	
+	.t4 > span > img{
 	width:30px;
 	height:30px;
 	}
@@ -149,31 +153,29 @@ li{
 			</li>
 			
 		<li>
-		<div style="margin-bottom: 20px;">
+		
 		<div class="t4">
+			<span>
 			<img src="./img/category/자기개발.png">
 				${c.expertName }
-				
-		</div>
+			</span>
+			<span>
+			<ul>
+					<span class="material-icons icons-star">star${c.revCount }
+			</ul>
+				${c.reviewStar }		 
+			</span>
 		</div>
 		</li>
 		
 		<li>
-		
-			<div class="fa-solid fa-message" style="float: right; font-size:16px;">	
-				<span class="noto-sb mb-1 fs-bold">${c.revCount }</span>
-			</div>	
-			<div class="material-icons icons-star" style="float: left; font-size:16px;">star
-				<div class="noto-sb mb-1 fs-bold" style="float: right; font-size:16px;">${c.reviewStar }
-				</div>		 
-			</div>
-		
+		<div class="t2">
+			${c.productCategory}
+		</div>
 		</li>
 		</div>
 		
-		<div class="t2">
-				${c.productCategory}
-			</div>
+
 	</div>													   			
 	</c:forEach>
 

@@ -28,7 +28,14 @@
 			</li>
 			
 		</ul>
-		
+		<input type="hidden" name = "expertClass" value="${expertClass }" >
+		<input type="hidden" name = "expertTag" value="${expertTag }" >
+		<input type="hidden" name = "expertQual" value="${expertQual }" >
+		<input type="hidden" name = "expertLicense" value="${expertLicense }" >
+		<input type="hidden" name = "expertIssuer" value="${expertIssuer }" >
+		<input type="hidden" name = "expertDate" value="${expertDate }" >
+				
+			
 		<input type="submit" value="신청서 작성완료">
 	</form>
 		

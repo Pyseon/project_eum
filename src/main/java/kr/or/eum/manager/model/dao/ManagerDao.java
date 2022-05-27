@@ -78,7 +78,7 @@ public class ManagerDao {
 
 	public ArrayList<Payment> detailPayment(int payNo) {
 		List pay = sqlSession.selectList("manager.detailPayment", payNo);
-		return (ArrayList<Payment>)pay;
+		return (ArrayList<Payment>) pay;
 	}
 	
 }

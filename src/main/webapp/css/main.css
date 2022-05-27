@@ -2564,3 +2564,16 @@ input[name=keyword]{
 	border-radius: 4px;
 	border: 1px solid #ccc;
 }
+
+.detailTbl tr{
+	border-bottom: 1px solid #eee;
+}
+.detailTbl tr:last-child{
+	height: 300px;
+}
+
+.detailBox{
+	position: relative;
+	display: block;
+	float: right;
+}

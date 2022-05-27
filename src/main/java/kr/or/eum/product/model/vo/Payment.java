@@ -17,5 +17,8 @@ public class Payment {
 	private int payment;
 	private int payUsepoint;
 	private int payAddpoint;
-	private String memberId;
+	
+	private String memberId;  //영준
+	private String productTitle; //영준
+	private String productImgPath;  //영준
 }

@@ -183,7 +183,20 @@
 		where pay_no = #{payNo}
 	</update>
 	
-	
+	<select id="detailPayment" parameterType="int" resultType="pay">
+		select
+			pay_no as payNo,
+			pay_date as payDate,
+			(select product_title from product_tbl pro where pay.product_no = pro.product_no) as productTitle,
+			(select product_imgPath from product_tbl pro where pay.product_no = pro.product_no) as productImgPath,
+			pay_state as payState,
+			payment,
+			pay_method as payMethod,
+			pay_usepoint as payUsepoint,
+			pay_addpoint as payAddpoint
+			from payment_tbl pay
+			where pay_no = #{value }
+	</select>
 	
 	
 </mapper>

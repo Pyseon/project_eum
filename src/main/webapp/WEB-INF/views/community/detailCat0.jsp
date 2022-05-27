@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,10 @@
 		<!-- article-header -->
 		<div class="article-header">
 			<div class="article-list">
-				<a href="#" class="fc-7">요즘 뭐하니 ></a>
+				<a href="/communityList.do?category=0&reqPage=1" class="fc-7">요즘 뭐하니 ></a>
 			</div>
 			<div class="article-title">
-				<h2 style="font-size: 26px">게시판의 제목입니다</h2>
+				<h2 style="font-size: 26px">${cm.commTitle}</h2>
 			</div>
 			<div class="article-profile"></div>
 			<div class="info-box border-down">
@@ -26,22 +27,23 @@
 							style="width: 40px; height: 40px;" />
 					</div>
 					<div class="nick-box">
-						<span class="writer-nick"><strong style="font-size: 15px">코딩의신</strong></span>
+						<span class="writer-nick"><strong style="font-size: 15px">${cm.memberNick }</strong></span>
+						
 						<span class="material-icons verified-icon">verified</span>
 					</div>
 					<div class="article-date">
-						<span class="date fc-11">2022.05.26 15:34</span> <span
-							class="article-info"><span class="fc-3" style="margin-left: 10px;">조회수 </span> <span class="num fc-3">1234</span>
+						<span class="date fc-11">${cm.commDate }</span> <span
+							class="article-info"><span class="fc-3" style="margin-left: 10px;">조회수 </span> <span class="num fc-3">${cm.readCount }</span>
 						</span>
 					</div>
 				</div>
 				<div class="article-info-box">
 					<span class="article-info"> <i class="fa-regular fa-heart"></i>
 						<i class="fa-solid fa-heart"></i> <span>좋아요</span> <strong
-						class="num">0</strong>
+						class="num">${cm.commLike }</strong>
 					</span> <span class="article-info"> <i
 						class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
-						class="num">0</strong>
+						class="num">${cm.cmntCount }</strong>
 					</span>
 				</div>
 			</div>
@@ -51,9 +53,7 @@
 			<div class="article-intro">
 				<i class="fa-solid fa-circle-question"></i> <span
 					class="title-text fs-medium fc-10">요즘 뭐하니?</span>
-				<p>안녕하십니까 제가 소개해드릴것은 요즘 제가 하는 것입니다.안녕하십니까 제가 소개해드릴것은 요즘 제가 하는
-					것입니다.안녕하십니까 제가 소개해드릴것은 요즘 제가 하는 것입니다.안녕하십니까 제가 소개해드릴것은 요즘 제가 하는
-					것입니다.안녕하십니까 제가 소개해드릴것은 요즘 제가 하는 것입니다</p>
+				<p>${cm.commIntro }</p>
 			</div>
 			<div class="attr-wrap">
 				<!-- ADVANTAGE -->
@@ -101,7 +101,7 @@
 				</div>
 			</div>
 
-			<div class="article-cotent">상세설명란입니다.</div>
+			<div class="article-cotent">${cm.commContent }</div>
 			<div class="report-wrap">
 				<i class="material-symbols-outlined">e911_emergency</i> <span>신고하기</span>
 			</div>
@@ -113,7 +113,7 @@
 		<div class="article-bottom info-box">
 			<div class="comments-info">
 				<i class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
-					class="num">0</strong>
+					class="num">${cm.cmntCount }</strong>
 			</div>
 		</div>
 		<!--comment-->

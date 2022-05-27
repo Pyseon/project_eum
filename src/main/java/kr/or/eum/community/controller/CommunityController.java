@@ -28,8 +28,8 @@ public class CommunityController {
 	
 	@RequestMapping(value="/communityDetail.do")
 	public String communityDetail(int commNo, int category, Model model) {
-		ArrayList<Community> list = service.communityDetail(commNo);
-		model.addAttribute("list", list);
+		Community cm = service.communityDetail(commNo);
+		model.addAttribute("cm", cm);
 		if(category == 0) {
 			return "community/detailCat0";
 		}else {

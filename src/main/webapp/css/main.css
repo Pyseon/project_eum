@@ -2572,8 +2572,25 @@ input[name=keyword]{
 	height: 300px;
 }
 
-.detailBox{
+.detailBox {
 	position: relative;
 	display: block;
 	float: right;
+	height: fit-content;
+}
+
+.detailBox > h3{
+	float: right;
+	margin-bottom: 0;
+}
+
+.managerBtn{
+	margin-top: 50px;
+	position: relative;
+	display: block;
+	text-align: center;
+}
+.managerBtn>button{
+	width:300px;
+	height: 40px;
 }

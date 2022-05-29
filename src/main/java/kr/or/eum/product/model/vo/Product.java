@@ -28,6 +28,7 @@ public class Product {
 	private int revCount;
 	private int productOption;
 	private String productImgPath;
+	private String memberPicturepath;
 	
 
 }

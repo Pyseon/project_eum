@@ -21,10 +21,16 @@
 			product_ans as productAns,
 			product_addr as productAddr,
 			sale,
+			m.member_picturepath as memberPicturePath,
+			product_ImgPath as productImgPath,
 			(cost)*(sale)/100 as salecost,
 			(select avg(review_star) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
 			(select count(*) from review_tbl rev where rev.product_no = p.product_no) as revCount
-			from product_tbl p 
+			from product_tbl p
+			join review_tbl r
+            on p.product_no = r.product_no
+            join member_tbl m
+            on r.member_no = m.member_no
 			<if test="selPro!='전체'.toString()">
 			where product_Category=#{selPro}
 			</if>

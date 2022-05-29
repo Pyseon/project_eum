@@ -634,6 +634,8 @@ figcaption {
 	object-fit: cover;
 	border-radius: 50%;
 	overflow: hidden;
+	width: 60px;
+	height: 60px;
 }
 
 .card-info {
@@ -781,6 +783,8 @@ figcaption {
 .attr-box {
 	padding: 30px;
 	width: 36%;
+	border: 1px dashed #eee;
+	border-radius: 6px;
 }
 
 .attribute {
@@ -794,20 +798,37 @@ figcaption {
 }
 
 .attr-title {
-	font-size: 22px;
-	text-align: center;
-	margin-bottom: 15px;
+     font-size: 22px;
+        text-align: center;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        height: 50px;
 }
 
-.attr-title>i {
-	font-size: 30px;
-	margin-right: 5px;
+.attr-thumbs-up{
+	    font-size: 33px;
+        padding-top: 7px;
+        vertical-align: text-bottom;
+        margin-right: 10px;
+}
+.attr-thumbs-down{
+	    font-size: 33px;
+        padding-top: 10px;
+        vertical-align: text-bottom;
+        margin-right: 10px;
+}
+.attr-thumbs-up+span{
+	   vertical-align: top;
+	line-height: 50px;
+}
+.attr-thumbs-down+span{
+	   vertical-align: top;
+	line-height: 50px;
 }
 
 .attribute>i {
 	vertical-align: middle;
 	margin-right: 10px;
-	D
 }
 
 .attribute>span {
@@ -823,8 +844,12 @@ figcaption {
 	background-color: #fbd4d4;
 }
 
-.attr-icon {
-	color: rgb(255, 132, 0);
+.adv-icon {
+	color: #3865f2;
+	font-size: 25px;
+}
+.weak-icon{
+		color: #d15150;
 	font-size: 25px;
 }
 
@@ -899,7 +924,7 @@ figcaption {
 	padding-left: 40px;
 }
 
-@media ( max-width : 991px) {
+@media ( max-width : 1200px) {
 	.attr-box {
 		padding: 5px;
 		width: 100%;
@@ -942,6 +967,9 @@ figcaption {
 	-moz-transition: all 0.3s ease 0s;
 	-o-transition: all 0.3s ease 0s;
 	transition: all 0.3s ease 0s;
+	min-width: 87px;
+	text-align: center;
+	margin-left:10px;
 }
 
 .comments-area .btn-reply:hover {

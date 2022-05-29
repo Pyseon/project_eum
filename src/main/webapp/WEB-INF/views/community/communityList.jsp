@@ -88,6 +88,6 @@
 				$(".comm-nav").eq(0).addClass("cat-active");
 			}
 		})
-	</script>
+	</script>	
 </body>
 </html>

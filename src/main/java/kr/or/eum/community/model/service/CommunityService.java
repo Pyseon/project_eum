@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.eum.community.model.dao.CommunityDao;
 import kr.or.eum.community.model.vo.Community;
+import kr.or.eum.community.model.vo.CommunityCo;
+import kr.or.eum.community.model.vo.CommunityDetailData;
 import kr.or.eum.community.model.vo.CommunityPageData;
 
 @Service
@@ -36,12 +38,16 @@ public class CommunityService {
 		return cpd;
 	}
 	
-	public Community communityDetail(int commNo) {
-		Community cm = dao.communityDetail(commNo);
-		if(cm != null) {
+	public CommunityDetailData communityDetail(int commNo) {
+		Community comm = dao.communityDetail(commNo);
+		//댓글 불러옴 (대댓글 포함)
+		ArrayList<CommunityCo> cmntList = dao.selectCmntList(commNo);
+				
+		if(comm != null) {
 			dao.readCountUp(commNo);
 		}
-		return cm;
+		CommunityDetailData cdd = new CommunityDetailData(comm, cmntList);
+		return cdd;
 	}
 	
 	

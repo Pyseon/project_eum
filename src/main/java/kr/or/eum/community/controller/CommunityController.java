@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.community.model.service.CommunityService;
 import kr.or.eum.community.model.vo.Community;
+import kr.or.eum.community.model.vo.CommunityDetailData;
 import kr.or.eum.community.model.vo.CommunityPageData;
 
 @Controller
@@ -28,8 +29,10 @@ public class CommunityController {
 	
 	@RequestMapping(value="/communityDetail.do")
 	public String communityDetail(int commNo, int category, Model model) {
-		Community cm = service.communityDetail(commNo);
-		model.addAttribute("cm", cm);
+		//Community cm = service.communityDetail(commNo);
+		CommunityDetailData cdd = service.communityDetail(commNo);
+		model.addAttribute("comm", cdd.getComm());
+		model.addAttribute("cmntList", cdd.getCmntList());
 		if(category == 0) {
 			return "community/detailCat0";
 		}else {

@@ -7,6 +7,9 @@
 	</settings>
 	<typeAliases>
 		<typeAlias type="kr.or.eum.community.model.vo.Community" alias="comm"/>
+		<typeAlias type="kr.or.eum.community.model.vo.CommunityCo" alias="commCo"/>
+		<typeAlias type="kr.or.eum.community.model.vo.Haja" alias="haja"/>
+		<typeAlias type="kr.or.eum.community.model.vo.Malja" alias="Malja"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="member"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Payment" alias="pay"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>

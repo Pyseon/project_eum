@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.eum.community.model.vo.Community;
+import kr.or.eum.community.model.vo.CommunityCo;
 
 @Repository
 public class CommunityDao {
@@ -27,13 +28,17 @@ public class CommunityDao {
 
 
 	public Community communityDetail(int commNo) {
-		Community cm = sqlSession.selectOne("community.communityDetail", commNo);
-		return cm;
+		Community comm = sqlSession.selectOne("community.communityDetail", commNo);
+		return comm;
 	}
 
 	public void readCountUp(int commNo) {
 		sqlSession.update("community.readCountUp", commNo);
 	}
-	
-	
+
+	public ArrayList<CommunityCo> selectCmntList(int commNo) {
+		List cmntList = sqlSession.selectList("community.selectCmntList", commNo);
+		return  (ArrayList<CommunityCo>) cmntList;
+	}
+
 }

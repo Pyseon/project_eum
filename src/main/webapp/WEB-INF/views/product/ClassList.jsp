@@ -180,27 +180,32 @@ li{
 		font-size: 13px;
 		line-height: 2;
 	}
-	
+	#im_btn1{
+	border-bottom: 1px solid rgba(220, 220, 220, 0.59);
+	}
+	.selPro-active{
+	border-bottom: 5px solid rgb(56 101 242) !important;
+	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
 <body>
-<div style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
-
+<div>
 		<table class="category">
 				<tr>
-					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ClassList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"></button><h3>전체</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ClassList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"></button><h3>법률</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ClassList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"></button><h3>비즈니스</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/ClassList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"></button><h3>심리/헬스</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn5" onclick="location.href='/ClassList.do?reqPage=1&selPro=학습'"><img src="./img/category/학습.png"></button><h3>학습</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn6" onclick="location.href='/ClassList.do?reqPage=1&selPro=금융'"><img src="./img/category/금융.png"></button><h3>금융</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn7" onclick="location.href='/ClassList.do?reqPage=1&selPro=라이프'"><img src="./img/category/라이프.png"></button><h3>라이프</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn8" onclick="location.href='/ClassList.do?reqPage=1&selPro=취미'"><img src="./img/category/취미.png"></button><h3>취미</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn9" onclick="location.href='/ClassList.do?reqPage=1&selPro=어학'"><img src="./img/category/어학.png"></button><h3>어학</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/ClassList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"></button><h3>레저</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/ClassList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"></button><h3>IT/테크</h3></td>
-					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/ClassList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"></button><h3>자기계발</h3></td>
+							
+					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ClassList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"><h3>전체</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ClassList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"><h3>법률</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ClassList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/ClassList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn5" onclick="location.href='/ClassList.do?reqPage=1&selPro=학습'"><img src="./img/category/학습.png"><h3>학습</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn6" onclick="location.href='/ClassList.do?reqPage=1&selPro=금융'"><img src="./img/category/금융.png"><h3>금융</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn7" onclick="location.href='/ClassList.do?reqPage=1&selPro=라이프'"><img src="./img/category/라이프.png"><h3>라이프</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn8" onclick="location.href='/ClassList.do?reqPage=1&selPro=취미'"><img src="./img/category/취미.png"><h3>취미</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn9" onclick="location.href='/ClassList.do?reqPage=1&selPro=어학'"><img src="./img/category/어학.png"><h3>어학</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/ClassList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"><h3>레저</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/ClassList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"><h3>IT/테크</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/ClassList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"><h3>자기계발</h3></button></td>
           		</tr>
           </table>
    </div>
@@ -210,7 +215,7 @@ li{
 <div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
 	<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
-	<img src="./img/test/testimg1.png">
+	<img src="./img/productList/${c.productImgPath }">
 		<div class="posting-connect">
 			<ul>
 				<li>
@@ -238,7 +243,7 @@ li{
 				<div class="t4">
 					<div>
 					<span>
-						<img src="./img/category/자기개발.png">
+						<img src="./img/member/${c.memberPicturepath}">
 						&nbsp;
 						${c.expertName }
 					</span>
@@ -280,6 +285,70 @@ li{
 ${pageNavi }
 
 </div>
+<script>
+	$(function(){
+		var selPro = '${selPro}';
+		console.log(selPro);
+		
+		for(var i=0; i<12; i++){
+			var val = $(".btm_image").eq(i);
+			console.log(val);
+			if(selPro != '전체'){
+				for(var i=1; i<12; i++){
+					if(i != 1){
+				$(".btm_image").eq(i).addClass("selPro-active");
+					}
+				break;
+				}
+			}else{
+				$(".btm_image").eq(0).addClass("selPro-active");
+				
+			}
+		
+			<!--
+			if(selPro == '전체'){
+				$(".btm_image").eq(0).addClass("selPro-active");
+			}
+			if(selPro == '법률'){
+				$(".btm_image").eq(1).addClass("selPro-active");
+			}
+			if(selPro == '비즈니스'){
+				$(".btm_image").eq(2).addClass("selPro-active");
+			}
+			if(selPro == '심리/헬스'){
+				$(".btm_image").eq(3).addClass("selPro-active");
+			}
+			if(selPro == '학습'){
+				$(".btm_image").eq(4).addClass("selPro-active");
+			}
+			if(selPro == '금융'){
+				$(".btm_image").eq(5).addClass("selPro-active");
+			}
+			if(selPro == '라이프'){
+				$(".btm_image").eq(6).addClass("selPro-active");
+			}
+			if(selPro == '취미'){
+				$(".btm_image").eq(7).addClass("selPro-active");
+			}
+			if(selPro == '어학'){
+				$(".btm_image").eq(8).addClass("selPro-active");
+			}
+			if(selPro == '레저'){
+				$(".btm_image").eq(9).addClass("selPro-active");
+			}
+			if(selPro == 'IT/테크'){
+				$(".btm_image").eq(10).addClass("selPro-active");
+			}
+			if(selPro == '자기계발'){
+				$(".btm_image").eq(11).addClass("selPro-active");
+			}
+			-->
+				break;
+			}
+		
+	});
+		
+</script>
 
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

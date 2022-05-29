@@ -27,11 +27,12 @@ li{
 	    box-sizing: border-box;
     	width: 250px !important;
     	padding : 0px !important; 
-    	height: 480px !important;
+    	height: 400px !important;
     	margin: 25px 15px 55px 10px;
-    	background-color: #f9f9f9;
+    	background-color: #ffffff;
     	box-shadow: 3px 3px 3px 3px #e7dede;
 	}
+	
 	
 	.t1{
 	font-size:18px;
@@ -47,6 +48,7 @@ li{
 	}
 	.t2{
 	display: flex;
+	justify-content: space-between;
 	
 	
 	}
@@ -57,18 +59,23 @@ li{
   		white-space: nowrap;
   		width: 100%;
   		height: 30px;
+  		font-size:17px;
+  		
 	}
 	.t4{
-	margin: 10px 0 10px 0;
+	margin: -4px 0 10px 0;
 	display: flex;
 	}
 
 	.t4 > span{
 	 text-align: center;
+	 line-height: 1;
 	}
-	.t4 > span > img{
+	.t4 > div > span > img{
 	width:30px;
 	height:30px;
+	vertical-align: middle;
+	border-radius: 50%;
 	}
 	.t4-right{
 	display: flex;
@@ -78,15 +85,19 @@ li{
 	
 	.posting-item > img{
 	width: 100%;
-	height: 250px;
+	height: 180px;
 	
 	}
 	
 	.posting-connect{
-	    padding: 10px;
-	}
+    	padding-top: 10px;
+    	padding-right: 20px;
+   		padding-bottom: 20px;
+    	padding-left: 20px;
+}
 	.posting-connect > ul {
 		margin: 0px !important;
+		margin-top: 20px !important;
 		padding: 0px !important;
 	}
 	
@@ -136,6 +147,7 @@ li{
     line-height: 1;
     letter-spacing: normal;
     text-transform: none;
+    
     display: inline-block;
     white-space: nowrap;
     word-wrap: normal;
@@ -146,6 +158,27 @@ li{
 }
 	.icons-star{
 	 color: #ff990d;
+	}
+	
+	#sele {
+	font-size: 20px;
+	color: #3865f2;
+	font-style: italic;
+	font-weight: bold;
+	}
+
+	#price{
+		
+		font-size: 14px;
+		font-weight: bold;
+		line-height: 2;
+	}
+	
+	#fixed-price{
+		
+		text-decoration: line-through;
+		font-size: 13px;
+		line-height: 2;
 	}
 	
 </style>
@@ -183,15 +216,19 @@ li{
 				<li>
 					<div class="t1" style="font-family: fs-bold !important;">
 						<span class="card-category fs-bold">${c.productTitle }</span>
-						<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+						<span style="color: #bdbdbd;">
+						${c.productCategory}
+						</span>
 					</div>
 				</li>
 			</ul>
 			
 			<ul>
 				<li>
-					<div class="t3" style="border-bottom: 1px solid rgba(220, 220, 220, 0.59);">
+					<div class="t3" style="margin-bottom: 5px;" >
 					${c.productIntro }
+					</div>
+					<div style="border-bottom: 1px solid rgba(220, 220, 220, 0.59); ">
 					</div>
 				</li>
 			</ul>
@@ -199,13 +236,19 @@ li{
 		<ul>
 			<li>
 				<div class="t4">
+					<div>
 					<span>
-						<img src="./img/category/자기개발.png">&nbsp;${c.expertName }
+						<img src="./img/category/자기개발.png">
+						&nbsp;
+						${c.expertName }
 					</span>
-				<div class="t4-right">
-					<div><span class="material-icons icons-message">message</span></div>
-					<div class="t4-info"><span>${c.revCount } &nbsp;</span></div>
-					<div><span class="material-icons icons-star">star</span></div>
+					</div>
+					
+				<div class="t4-right" style="line-height: 2;">
+					<div style="line-height: 2.5;"><span class="material-icons icons-message">message</span></div>
+					<div class="t4-info"><span>${c.revCount } </span></div>
+					 &nbsp;
+					<div style="line-height: 2.5;"><span class="material-icons icons-star">star</span></div>
 					<div class="t4-info"><span>${c.reviewStar }</span></div>
 				</div>	
 					
@@ -214,8 +257,17 @@ li{
 			</li>
 		</ul>
 		
-		<div class="t2">
-			${c.productCategory}
+		<div class="t2" style="margin: 0px 0 30px 30px;">
+		&nbsp;
+		<span id="sele" style="width: auto;">${c.sale}%</span>
+			&nbsp;
+			<span id="price" style="width: auto;">
+			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+			</span>
+			
+			<span id="fixed-price" style="width: auto;">
+			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
+			</span>
 		</div> <!-- t2 -->
 		
 		

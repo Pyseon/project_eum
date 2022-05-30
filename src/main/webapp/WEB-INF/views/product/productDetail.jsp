@@ -311,6 +311,14 @@
 
 						</div><!--right-first-box-->
 						
+					<div class="single-sidebar-widget">
+						<div class="right-wish-box">
+							<div class="wish-title-wrap">
+								<div><span class="material-icons icon-wish">favorite_border</span></div>
+							</div>
+						</div>	<!-- right-wish-box -->
+					</div><!-- single-sidebar-widget -->
+						
 					</div><!-- widget-wrap -->
 					<div class="widget-wrap">
 						<div class="single-sidebar-widget user-info-widget">
@@ -526,6 +534,14 @@
 					$('.real-review-wrap').append(review);
 				}
 			}
+			$('.icon-wish').on("click", function() {
+				 var currentValue = this.innerText;
+		         if(currentValue == "favorite_border") {
+		         	this.innerText = "favorite";
+		         }else {
+		            this.innerText = "favorite_border";
+		         }
+			});
 		}); 
 	</script>
 </body>

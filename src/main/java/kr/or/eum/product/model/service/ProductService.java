@@ -3,6 +3,8 @@ package kr.or.eum.product.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,6 +21,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.product.model.vo.ReviewPageData;
+import kr.or.eum.wishlist.model.vo.Wishlist;
 import kr.or.eum.product.model.vo.ProReviewMember;
 
 
@@ -91,7 +94,7 @@ public class ProductService {
 	}
 	
 	//윤지
-	public ProductDetail selectProductDetail(int productNo, int expertNo) {
+	public ProductDetail selectProductDetail(int productNo, int expertNo, HttpSession session) {
 		Product product = productDao.selectOneProduct(productNo);
 		ArrayList<String> productQNA = new ArrayList<String>();
 		if(product.getProductQst() != null) {
@@ -117,7 +120,8 @@ public class ProductService {
 		int cost = product.getCost()*product.getSale()/100;
 		String[] tag = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
-		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList);
+		Wishlist wishCheck = productDao.selectwish(productNo, session);
+		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCheck);
 		return pd;
 	}//selectProductDetail
 	
@@ -189,7 +193,6 @@ public class ProductService {
 		pageNavi += "</ul>";
 		ReviewPageData rpd = new ReviewPageData(list, pageNavi);
 		
-		System.out.println(pageNavi);
 		return rpd;
 	}//selectReviewList
 	

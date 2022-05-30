@@ -3,6 +3,8 @@ package kr.or.eum.product.controller;
 import java.lang.reflect.Member;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,8 +45,8 @@ public class ProductController {
 	
 	//윤지
 	@RequestMapping(value = "/productDetail.do")
-	public String productDetail(Model model, int productNo, int expertNo) {
-		ProductDetail pd = productService.selectProductDetail(productNo, expertNo);
+	public String productDetail(Model model, int productNo, int expertNo, HttpSession session) {
+		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, session);
 		model.addAttribute("p", pd.getProduct());
 		model.addAttribute("productQNA", pd.getProductQNA());
 		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
@@ -57,6 +59,7 @@ public class ProductController {
 		model.addAttribute("cost", pd.getCost());
 		model.addAttribute("tag", pd.getTag());
 		model.addAttribute("wishList", pd.getWishList());
+		//model.addAttribute("wish", pd.getwish());
 		System.out.println("--------------------------------------");
 		System.out.println("product : "+pd.getProduct());
 		System.out.println("expertAndCom : "+pd.getExpertAndCompany());
@@ -84,6 +87,13 @@ public class ProductController {
 	@RequestMapping(value = "/expertCounsel.do")
 	public String expertCounsel() {
 		return "product/expertCounsel";
+	}
+	
+	//윤지 return값 대권님이 만들 페이지로 수정 필요
+	@RequestMapping(value = "/purchase.do")
+	public String purchase(int productNo) {
+		System.out.println(productNo);
+		return "product/payment";
 	}
 	
 	

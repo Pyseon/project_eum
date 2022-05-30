@@ -93,19 +93,24 @@ public class ProductService {
 	//윤지
 	public ProductDetail selectProductDetail(int productNo, int expertNo) {
 		Product product = productDao.selectOneProduct(productNo);
-		String productQst[] = product.getProductQst().split("/");
-		String productAns[] = product.getProductAns().split("/");
 		ArrayList<String> productQNA = new ArrayList<String>();
-		for(int i = 0; i < productQst.length; i++) {
-			productQNA.add("Q"+(i+1)+". "+productQst[i]);
-			productQNA.add("A"+(i+1)+". "+productAns[i]);
+		if(product.getProductQst() != null) {
+			String productQst[] = product.getProductQst().split("/");
+			String productAns[] = product.getProductAns().split("/");
+			for(int i = 0; i < productQst.length; i++) {
+				productQNA.add("Q"+(i+1)+". "+productQst[i]);
+				productQNA.add("A"+(i+1)+". "+productAns[i]);
+			}
 		}
 		ExpertAndCompany expertAndCom = memberDao.selectOneExpert(expertNo);
 		Expert expert = memberDao.selectOneExpertOnly(expertNo);
 		ExpertAndMember expertM = memberDao.selectOneExpertPicture(expertNo);
 		ArrayList<Review> reviewRnum = productDao.selectAllReview(productNo);
-		double reviewAvrbef = productDao.selectReviewStar(productNo);
-		String reviewAvr = String.format("%.1f", reviewAvrbef);
+		double reviewAvrbef = productDao.selectReviewStar(productNo); //null일 때 double로 resulttype 달라해서 에러
+		String reviewAvr = "";
+		if(reviewAvrbef != 0) {
+			reviewAvr = String.format("%.1f", reviewAvrbef);			
+		}
 		int reviewCount = productDao.selectReviewCount(productNo);
 		int paymentCount = productDao.selectPaymentExpertNoCount(productNo);
 		//ArrayList<ProReviewMember> prm = productDao.selectReviewList(productNo); 
@@ -113,7 +118,7 @@ public class ProductService {
 		String[] tag = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
 		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList);
-		return pd ;
+		return pd;
 	}//selectProductDetail
 	
 	//윤지
@@ -128,6 +133,7 @@ public class ProductService {
 		map.put("end", end);
 		
 		ArrayList<ProReviewMember> list = productDao.selectReviewList(map); 
+		System.out.println(list);
 		//전체 페이지 계산을 위한 전체 게시물 수 조회
 		int totalCount = productDao.selectReviewCount(productNo);
 		
@@ -146,11 +152,11 @@ public class ProductService {
 		//페이지 네비게이션 시작번호 계산
 		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
 		
-		String pageNavi = "<ul class='pagination circle-style'>";
+		String pageNavi = "<ul class='pagination'>";
 		//이전버튼
 		if(pageNo != 1) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+(pageNo-1)+"'>";
+			pageNavi += "<a class='page-item' data-page='"+(pageNo-1)+"'>";
 			pageNavi += "<span class='meterial-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 			//html '' 자바 ""
@@ -159,12 +165,12 @@ public class ProductService {
 		for(int i = 0; i < pageNaviSize; i++) {
 			if(pageNo == reqPage) {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/noticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item active-page' data-page='"+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+pageNo+"'>";
+				pageNavi += "<a class='page-item' data-page='"+pageNo+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -176,13 +182,14 @@ public class ProductService {
 		//다음버튼
 		if(pageNo<=totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/noticeList.do?reqPage="+(pageNo)+"'>";
+			pageNavi += "<a class='page-item' data-page='"+(pageNo+1)+"'>";
 			pageNavi += "<span class='meterial-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 		}
 		pageNavi += "</ul>";
 		ReviewPageData rpd = new ReviewPageData(list, pageNavi);
 		
+		System.out.println(pageNavi);
 		return rpd;
 	}//selectReviewList
 	

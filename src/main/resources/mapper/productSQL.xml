@@ -116,7 +116,9 @@
 	<!-- 윤지 -->
 	<select id="selectReviewStar" parameterType="int" resultType="double">
 		select 
-			avg(r.review_star)
+			case when avg(r.review_star) is null then 0
+         		 else avg(r.review_star)  
+    		end review_star
 		from product_tbl pro
 		join payment_tbl pay
 		on pro.product_no = pay.product_no
@@ -146,24 +148,25 @@
 		where rnum between 1 and 10
  	</select> 
  	<!-- 윤지 -->
-	<select id="selectReviewList" parameterType="int" resultType="ProReviewMember">
-		SELECT 
-			pro.product_no as productNo,
-			pro.expert_no as expertNo,
-			r.review_star as reviewStar,
-			m.member_no as memberNo,
-			r.review_no as reviewNo,
-			r.review_content as reviewContent,
-			r.review_date as reviewDate,
-			m.member_nick as memberNick,
-			m.member_picturename as memberPictureName,
-			m.member_picturepath as memberPicturePath
-		FROM PRODUCT_TBL PRO
-		JOIN REVIEW_TBL R
-		ON PRO.PRODUCT_NO = R.PRODUCT_NO
-		JOIN MEMBER_TBL M
-		ON R.MEMBER_NO = M.MEMBER_NO
-		WHERE pro.product_no=#{productNo}
+	<select id="selectReviewList" parameterType="map" resultType="ProReviewMember">
+		SELECT *
+		FROM 
+			( SELECT
+				rownum as rnum, 
+				r.review_star as reviewStar,
+				m.member_no as memberNo,
+				r.review_no as reviewNo,
+				r.review_content as reviewContent,
+				r.review_date as reviewDate,
+				m.member_nick as memberNick,
+				m.member_picturename as memberPictureName,
+				m.member_picturepath as memberPicturePath
+			FROM REVIEW_TBL R
+			JOIN MEMBER_TBL M
+			ON R.MEMBER_NO = M.MEMBER_NO
+			WHERE R.product_no = #{productNo}
+			ORDER BY R.REVIEW_NO DESC )
+		WHERE rnum between #{start} and #{end}
 	</select>
 </mapper>
 	

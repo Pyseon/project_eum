@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.eum.manager.model.dao.ManagerDao;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.report.model.vo.Report;
 
 @Service
 public class ManagerService {
@@ -54,6 +55,18 @@ public class ManagerService {
 			}
 			pageData.put("paymentList", paymentList);
 			break;
+		case "manaReport.do":
+			ArrayList<Report> reportList = new ArrayList<Report>();
+			if(searchType == null) {
+				reportList = dao.ReportPageData(pageMap);
+				totalCount = dao.ReportCount();
+			}else {
+				pageMap.put("searchType", searchType);
+				pageMap.put("keyword", keyword);
+				reportList = dao.searchReportPageData(pageMap);
+				totalCount = dao.searchReportCount(pageMap);
+			}
+			pageData.put("reportList", reportList);
 		}
 		
 		int totalPage = 0;
@@ -136,6 +149,10 @@ public class ManagerService {
 
 	public ArrayList<Payment> detailPayment(int payNo) {
 		return dao.detailPayment(payNo);
+	}
+
+	public ArrayList<Report> detailReport(int reportNo) {
+		return dao.detailReport(reportNo);
 	}
 	
 }

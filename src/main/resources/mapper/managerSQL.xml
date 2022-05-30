@@ -198,5 +198,66 @@
 			where pay_no = #{value }
 	</select>
 	
+	<select id="reportList" parameterType="map" resultType="rpt">
+		select
+		report_no as reportNo,
+		(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
+		report_date as reportDate,
+		report_category as reportCategory,
+		report_index as reportIndex,
+		report_Title as reportTitle
+		from report_tbl report
+	</select>
+	
+	<select id="reportCount" resultType="int">
+		select count(*) from report_tbl
+	</select>
+	
+	<select id="searchReportList" parameterType="map" resultType="rpt">
+		select
+		report_no as reportNo,
+		(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
+		report_date as reportDate,
+		report_category as reportCategory,
+		report_index as reportIndex,
+		report_title as reportTitle
+		from report_tbl report
+		<choose>
+			<when test="searchType.equals('reportTitle') ">
+				where report_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('memberId') ">
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
+			</when>
+		</choose>
+	</select>
+	
+	<select id="searchReportCount" parameterType="map" resultType="int">
+		select count(*) from report_tbl
+		<choose>
+			<when test="searchType.equals('reportTitle') ">
+				where report_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('memberId') ">
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
+			</when>
+		</choose>
+	</select>
+	
+	<select id="detailReport" parameterType="int" resultType="rpt">
+		select
+			report_no as reportNo,
+			(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
+			(select member_Id from member_tbl m where report.plaintiff = m.member_no) as plaintiffId,
+			report_content as report_content,
+			report_date as reportDate,
+			report_category as reportCategory,
+			report_index as reportIndex,
+			report_title as reportTitle
+			from report_tbl report
+			where report_no = #{value }
+	</select>
 	
 </mapper>

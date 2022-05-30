@@ -12,6 +12,7 @@
 		<typeAlias type="kr.or.eum.community.model.vo.Malja" alias="Malja"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="member"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Payment" alias="pay"/>
+		<typeAlias type="kr.or.eum.report.model.vo.Report" alias="rpt"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Question" alias="q"/>

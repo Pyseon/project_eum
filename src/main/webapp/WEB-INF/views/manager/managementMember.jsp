@@ -12,7 +12,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
-	<div class="memberWrap">
+	<div class="manaContentWrap">
 		<div>
 			<ul>
 				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=0'">전체</button></li>

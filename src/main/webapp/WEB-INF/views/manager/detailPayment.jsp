@@ -10,7 +10,7 @@
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
-	<div class="memberWrap">
+	<div class="manaContentWrap">
 		<h1 class="fc-1 fs-full">>주문관리 상세내역</h1>
 		<hr>
 		<c:forEach items="${pay }" var="pay" varStatus="i">

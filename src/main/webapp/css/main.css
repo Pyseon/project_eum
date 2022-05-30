@@ -2528,7 +2528,7 @@ textarea {
   border-radius: 100%;
 }
 
-.memberWrap{
+.manaContentWrap{
 	position: relative;
 	display: block;
 	margin-top: 50px;
@@ -2537,7 +2537,7 @@ textarea {
 	width: 80%;
 }
 
-.memberWrap div ul li{
+.manaContentWrap > div > ul > li{
 	list-style-type: none;
 	float: left;
 	margin-bottom: 15px;

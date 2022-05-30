@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.eum.manager.model.service.ManagerService;
 import kr.or.eum.product.model.service.ProductService;
@@ -71,12 +72,8 @@ public class ManagerController {
 		return "manager/managementReport";
 	}
 	@RequestMapping(value = "/detailReport.do")
-	public String detailReport(int reportNo,int categoryNo, Model model) {
+	public String detailReport(int reportNo,int categoryNo,int reportIndex, Model model) {
 		ArrayList<Report> report = service.detailReport(reportNo);
-		for(int i=0;i<report.size();i++) {
-		System.out.println(report.get(i));
-		}
-		//ProductDetail pd = productService.selectProductDetail(report.get(index), expertNo);
 		model.addAttribute("report", report);
 		return "manager/detailReport";
 	}

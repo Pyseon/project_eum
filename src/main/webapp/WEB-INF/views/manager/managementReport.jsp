@@ -46,7 +46,7 @@
 					<td>${rpt.reportCategory }</td>
 					<td>${rpt.reportIndex }</td>
 					<td>${rpt.reportDate }</td>
-					<td><button class="btn bc3 bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }'">상세보기</button></td>
+					<td><button class="btn bc3 bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button></td>
 					<td><button>글삭제</button></td>
 					<td><button>신고삭제</button></td>
 					

@@ -249,6 +249,7 @@
 	<select id="detailReport" parameterType="int" resultType="rpt">
 		select
 			report_no as reportNo,
+			defendant,
 			(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
 			(select member_Id from member_tbl m where report.plaintiff = m.member_no) as plaintiffId,
 			report_content as report_content,

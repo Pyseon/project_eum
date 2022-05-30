@@ -486,13 +486,13 @@
 				// 기존 페이지 리뷰 제거
 				$(".real-review").off().remove();
 				
-				// 새 페이지 리뷰 삽입
+				// 새 페이지 리뷰 삽입 //추후 프로필 수정
 				for(let i = 0; i < prm.length; i++) {
 					const item = prm[i];
 					const review = $(`
 						<div class="real-review">
 							<div class="member-picture">
-								<img class="reviewPicture" src="/img/member/testpicture.png"> //추후 프로필 수정
+								<img class="reviewPicture" src="/img/member/testpicture.png">
 							</div>
 							<div class="info">
 								<div class="info-one">
@@ -513,16 +513,16 @@
 												<li><span id="report">신고</span></li>
 											</ul>
 										</div>
-									</div>//report-wrap
-								</div>//info-one
+									</div>
+								</div>
 								<div class="review-content">\${item.reviewContent}</div>
-							</div>//info
-						</div>//real-review
+							</div>
+						</div>
 					`);
 					$('.real-review-wrap').append(review);
-				}//for문
-			}//putReviewList
-		}); // window function
+				}
+			}
+		}); 
 	</script>
 </body>
 </html>

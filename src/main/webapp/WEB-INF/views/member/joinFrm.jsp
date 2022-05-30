@@ -51,6 +51,17 @@
 	.birthbox>.input-form{
 		display:inline;
 		width: 32%;
+		font-size: 15px;
+		margin-bottom:3%;
+	}
+	[name=month]{
+		height: 50px;
+	}
+	.checkbox-s{
+		font-size: 15px;
+	}
+	.checkbox-s>input{
+		
 	}
 </style>
 <body>
@@ -77,14 +88,9 @@
 			<br>
 			<div class="birthbox">
 				<div>생년월일</div>
-				<select class="input-form" name='year'>
-					  <option value='' selected>-- 년도 --</option>
-					  <option value='apple'>22</option>
-					  <option value='banana'>21</option>
-					  <option value='lemon'>20</option>
-				</select>
+				<input  class="input-form" type="text" name="year" placeholder="년(4자)">
 				<select class="input-form" name='month'>
-					  <option value='' selected>-- 월 --</option>
+					  <option value='' selected>월</option>
 					  <option value='1'>1</option>
 					  <option value='2'>2</option>
 					  <option value='3'>3</option>
@@ -98,13 +104,17 @@
 					  <option value='11'>11</option>
 					  <option value='12'>12</option>
 				</select>
-				<select class="input-form" name='day'>
-					  <option value='' selected>-- 일 --</option>
-					  <option value='1'>1</option>
-					  <option value='2'>2</option>
-					  <option value='3'>3</option>
-				</select>
+				<input  class="input-form" type="text" name="day" placeholder="일">
 				<button class="btn bc1 bs4" type="submit">가입완료</button>
+			</div>
+			<div class="checkedbox">
+				<input type="checkbox" class="">모두 동의합니다.
+				<div class="checkbox-s">
+					<p><input type="checkbox" class="">만 14세 이상입니다.(필수)</p>
+					<p><input type="checkbox" class="">서비스이용약관에 동의합니다.(필수)</p>
+					<p><input type="checkbox" class="">개인정보 수집/이용에 동의합니다.(필수)</p>
+					<p><input type="checkbox" class="">이벤트 할인 혜택 알림 수신에 동의합니다(선택)</p>
+				</div>
 			</div>
 		</fieldset>
 	</form>

@@ -7,33 +7,27 @@
 	select * from
 		(select rownum as rnum, b.* from
 		(select
-			p.product_no as productNo,	 
-			expert_no as expertNo,
-            (select expert_Name from expert_tbl e where p.expert_no=e.expert_no) as expertName,
-			product_type as productType,			<!--타입구분 1:상담 2:클래스 3:마켓-->
-			product_title as productTitle,			<!-- 제목 -->
-            product_Category as productCategory,	<!-- 카테고리 -->
-			product_intro as productIntro,			<!-- 인트로 -->
-			product_tag as productTag,				<!-- 태그 -->
-			cost,									<!-- 가격 -->
-			sale,									<!-- 할인률 -->
-			m.member_picturepath as memberPicturePath,<!-- 멤버테이블쪽 프로필 사진 -->
-            product_ImgPath as productImgPath,			<!-- 대표이미지 -->
-			(cost)*(sale)/100 as salecost,				<!-- 가격할인가 -->
-			(select avg(review_star) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
-			<!-- 리뷰쪽 별점평균 -->
-			(select count(*) from review_tbl rev where rev.product_no = p.product_no) as revCount
-			 <!-- 리스트 리뷰수 -->
-			from product_tbl p	
-			join review_tbl r	<!-- 리뷰에서 값 가져오기 -->
-            on p.product_no = r.product_no 
-            join member_tbl m <!-- 리뷰에 멤버 외래키를 통해 멤버테이블과 연결 -->
-            on r.member_no = m.member_no
-			<if test="selPro!='전체'.toString()">	<!-- 카테고리 지정 -->
-			where product_Category=#{selPro}
-			</if>
-			order by p.product_no desc)b)
-        	where rnum between #{start} and #{end}
+    p.product_no as productNo,
+    p.expert_no as expertNo,
+    (select member_nick from member_tbl m where p.expert_no = m.member_no) as expertName,
+    (select member_picturepath from member_tbl m where p.expert_no = m.member_no) as memberPicturePath,
+    p.product_Category as productCategory,
+    p.product_title as productTitle,
+    p.product_intro as productIntro,
+    p.product_tag as productTag,
+    cost,
+    sale,
+    (cost)*(sale)/100 as salecost,
+    (select nvl(count(*),0) from review_tbl rev where p.product_no = rev.product_no) as reviewStar,
+    (select avg(nvl(review_star, 0)) from review_tbl rev where rev.product_no = p.product_no)as revCount,
+    p.product_imgpath as productImgPath
+    from product_tbl p
+	<if test="selPro!='전체'.toString()">	<!-- 카테고리 지정 -->
+		where product_Category=#{selPro}
+	</if>
+	where product_type = 2
+	order by p.product_no desc)b)
+    where rnum between #{start} and #{end}
 	</select>
 
 	<!-- 재건 -->

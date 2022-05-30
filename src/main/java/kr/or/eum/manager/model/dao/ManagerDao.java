@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.report.model.vo.Report;
 
 @Repository
 public class ManagerDao {
@@ -80,5 +81,37 @@ public class ManagerDao {
 		List pay = sqlSession.selectList("manager.detailPayment", payNo);
 		return (ArrayList<Payment>) pay;
 	}
+
+	public ArrayList<Report> ReportPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.reportList", map);
+		return (ArrayList<Report>) list;
+	}
+
+	public int ReportCount() {
+		int totalCount = sqlSession.selectOne("manager.reportCount");
+		return totalCount;
+	}
+
+	public ArrayList<Report> searchReportPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchReportList", map);
+		return (ArrayList<Report>) list;
+	}
+	
+	public int searchReportCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("manager.searchReportCount", map);
+		return totalCount;
+	}
+
+	public ArrayList<Report> detailReport(int reportNo) {
+		List report = sqlSession.selectList("manager.detailReport", reportNo);
+		for(int i=0;i<report.size();i++) {
+			System.out.println(report.get(i));
+		}
+		return (ArrayList<Report>) report;
+	}
+	
+	
+	
+	
 	
 }

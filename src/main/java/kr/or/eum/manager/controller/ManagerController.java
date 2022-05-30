@@ -9,12 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.manager.model.service.ManagerService;
+import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.product.model.vo.ProductDetail;
+import kr.or.eum.report.model.vo.Report;
 
 @Controller
 public class ManagerController {
 	@Autowired
 	private ManagerService service;
+	private ProductService productService;
 	
 	@RequestMapping(value = "/manaMember.do")
 	public String manaMember(int reqPage, int selectNum, String searchType, String keyword, Model model) {
@@ -55,6 +59,26 @@ public class ManagerController {
 		ArrayList<Payment> pay = service.detailPayment(payNo);
 		model.addAttribute("pay", pay);
 		return "manager/detailPayment";
+	}
+	@RequestMapping(value = "/manaReport.do")
+	public String manaReport(int reqPage, String searchType, String keyword, Model model) {
+		String wherePage = "manaReport.do";
+		int selectNum = 0;
+		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", rpd.get("reportList"));
+		model.addAttribute("pageNavi",rpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		return "manager/managementReport";
+	}
+	@RequestMapping(value = "/detailReport.do")
+	public String detailReport(int reportNo,int categoryNo, Model model) {
+		ArrayList<Report> report = service.detailReport(reportNo);
+		for(int i=0;i<report.size();i++) {
+		System.out.println(report.get(i));
+		}
+		//ProductDetail pd = productService.selectProductDetail(report.get(index), expertNo);
+		model.addAttribute("report", report);
+		return "manager/detailReport";
 	}
 	
 	

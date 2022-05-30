@@ -74,11 +74,10 @@ public class ProductController {
 	}
 	//윤지
 	@ResponseBody
-	@RequestMapping(value = "/review.do")
+	@RequestMapping(value = "/review.do", produces = "application/json;charset=utf-8")
 	public String productReview(Model model, int productNo, int reqPage){
 		ReviewPageData rpd = productService.selectReviewList(productNo, reqPage);
-		System.out.println(new Gson().toJson(rpd.getPrm()));
-		return new Gson().toJson(rpd.getPrm());
+		return new Gson().toJson(rpd);
 	}
 	
 	//윤지

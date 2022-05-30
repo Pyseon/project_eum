@@ -155,5 +155,16 @@ public class ManagerService {
 		return dao.detailReport(reportNo);
 	}
 	
+	public int ansrptIs(int reportNo) {
+		return dao.ansrptIs(reportNo);
+	}
+
+	public int answerReport(String answerTitle, String answerContent) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("answerTitle", answerTitle);
+		map.put("answerContent", answerContent);
+		return 0;
+	}
+	
 }
 

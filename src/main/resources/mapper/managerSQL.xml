@@ -205,7 +205,8 @@
 		report_date as reportDate,
 		report_category as reportCategory,
 		report_index as reportIndex,
-		report_Title as reportTitle
+		report_Title as reportTitle,
+		report_is as reportIs
 		from report_tbl report
 	</select>
 	
@@ -220,7 +221,8 @@
 		report_date as reportDate,
 		report_category as reportCategory,
 		report_index as reportIndex,
-		report_title as reportTitle
+		report_title as reportTitle,
+		report_is as reportIs
 		from report_tbl report
 		<choose>
 			<when test="searchType.equals('reportTitle') ">
@@ -252,13 +254,17 @@
 			defendant,
 			(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
 			(select member_Id from member_tbl m where report.plaintiff = m.member_no) as plaintiffId,
-			report_content as report_content,
+			report_content as reportContent,
 			report_date as reportDate,
 			report_category as reportCategory,
 			report_index as reportIndex,
 			report_title as reportTitle
 			from report_tbl report
 			where report_no = #{value }
+	</select>
+	
+	<select id="ansrptIs" parameterType="int">
+		select ansrpt_no as ansrptNo from ansrpt_tbl where reportNo = #{value }
 	</select>
 	
 </mapper>

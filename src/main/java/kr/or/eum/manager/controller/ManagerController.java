@@ -77,6 +77,11 @@ public class ManagerController {
 		model.addAttribute("report", report);
 		return "manager/detailReport";
 	}
+	@RequestMapping(value="/answerReport.do")
+	public String answerReport(String answerTitle, String answerContent) {
+		int result = service.answerReport(answerTitle, answerContent);
+		return null;
+	}
 	
 	
 }

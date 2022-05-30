@@ -33,6 +33,7 @@
 					<th>카테고리</th>
 					<th>신고글번호</th>
 					<th>신고일</th>
+					<th>답변여부</th>
 					<th>상세보기</th>
 					<th>글삭제</th>
 					<th>신고 삭제</th>
@@ -46,6 +47,7 @@
 					<td>${rpt.reportCategory }</td>
 					<td>${rpt.reportIndex }</td>
 					<td>${rpt.reportDate }</td>
+					<td>${rpt.reportIs }</td>
 					<td><button class="btn bc3 bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button></td>
 					<td><button>글삭제</button></td>
 					<td><button>신고삭제</button></td>

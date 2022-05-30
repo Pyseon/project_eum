@@ -106,6 +106,16 @@ public class ManagerDao {
 		List report = sqlSession.selectList("manager.detailReport", reportNo);
 		return (ArrayList<Report>) report;
 	}
+
+	public int answerReport(HashMap<String, String> map) {
+		int result = sqlSession.insert("manager.answerReport", map);
+		return result;
+	}
+
+	public int ansrptIs(int reportNo) {
+		int ansrpotIs = sqlSession.selectOne("manager.ansrptIs", reportNo);
+		return ansrpotIs;
+	}
 	
 	
 	

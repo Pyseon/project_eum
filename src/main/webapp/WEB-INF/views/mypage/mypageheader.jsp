@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div class="manager-leftmenuWrap">
-	<nav class="manager-leftmenu">
+<div class="mypage-leftmenuWrap">
+	<nav class="mypage-leftmenu">
 		<div class="userprofileBox">
-			<img class="userprofile" src="">
+			<img class="userprofile" src="/img/member/pngegg.png">
 			<h2></h2>
 		</div>
 		<ul>
@@ -19,8 +19,6 @@
 			<li><a href="/Wishlist.do">찜내역</a></li>
 			<li><a href="/Myreview.do">내리뷰</a></li>
 			<li><a href="/Myproject.do">내프로젝트</a></li>
-			
-
 		</ul>
 	</nav>
 </div>

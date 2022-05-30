@@ -15,8 +15,8 @@
 			enrolldate as enrollDate
 		from member_tbl 
 		<choose>
-			<when test="selMem != 0">
-				where grade=#{selMem }
+			<when test="selectNum != 0">
+				where grade=#{selectNum }
 			</when>
 			<otherwise>
 				where grade=1 or grade=2 or grade=3
@@ -29,7 +29,7 @@
 		select count(*) from member_tbl
 		<choose>
 			<when test="value != 0">
-				where grade=#{selMem }
+				where grade=#{selectNum }
 			</when>
 			<otherwise>
 				where grade=1 or grade=2 or grade=3
@@ -108,8 +108,8 @@
 			pay_addpoint as payAddpoint
 		from payment_tbl payment
 		<choose>
-			<when test="payState != 0">
-				where pay_state = #{payState }
+			<when test="selectNum != 0">
+				where pay_state = #{selectNum }
 			</when>
 			<otherwise>
 				where pay_state = 1 or pay_state = 2 or pay_state = 3 
@@ -149,7 +149,7 @@
 		select count(*) from payment_tbl
 		<choose>
 			<when test="value != 0">
-				where pay_state=#{payState }
+				where pay_state=#{selectNum }
 			</when>
 			<otherwise>
 				where pay_state=1 or pay_state=2 or pay_state=3

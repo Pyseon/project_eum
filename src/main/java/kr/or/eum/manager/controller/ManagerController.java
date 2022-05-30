@@ -1,19 +1,14 @@
 package kr.or.eum.manager.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
 
 import kr.or.eum.manager.model.service.ManagerService;
-import kr.or.eum.manager.model.vo.MemberPageData;
-import kr.or.eum.manager.model.vo.PaymentPageData;
-import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 
 @Controller
@@ -22,12 +17,14 @@ public class ManagerController {
 	private ManagerService service;
 	
 	@RequestMapping(value = "/manaMember.do")
-	public String manaMember(int reqPage, int selMem, String searchType, String keyword, Model model) {
-		MemberPageData mpd = service.MemberList(reqPage, selMem, searchType, keyword);
-		model.addAttribute("list",mpd.getList());
-		model.addAttribute("pageNavi", mpd.getPageNavi());
+	public String manaMember(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaMember.do";
+		//MemberPageData mpd = service.MemberList(reqPage, selMem, searchType, keyword);
+		HashMap<String, Object> mpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", mpd.get("memberList"));
+		model.addAttribute("pageNavi", mpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
-		model.addAttribute("selMem", selMem);
+		model.addAttribute("selMem", selectNum);
 		return "manager/managementMember";
 	}
 	
@@ -38,12 +35,14 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/manaPayment.do")
-	public String manaPayment(int reqPage, int payState, String searchType, String keyword, Model model) {
-		PaymentPageData ppd = service.paymentList(reqPage, payState, searchType, keyword);
-		model.addAttribute("list", ppd.getList());
-		model.addAttribute("pageNavi", ppd.getPageNavi());
+	public String manaPayment(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaPayment.do";
+		//PaymentPageData ppd = service.paymentList(reqPage, payState, searchType, keyword);
+		HashMap<String, Object> ppd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", ppd.get("paymentList"));
+		model.addAttribute("pageNavi", ppd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
-		model.addAttribute("payState", payState);
+		model.addAttribute("payState", selectNum);
 		return "manager/managementPayment";
 	}
 	@RequestMapping(value = "/updatePayState.do")

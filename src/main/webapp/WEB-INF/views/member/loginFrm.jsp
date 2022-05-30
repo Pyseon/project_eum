@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,13 +43,13 @@
 <body>
 <%@ include file="/WEB-INF/views/member/memberheader.jsp"%>
 <div class="container2">
-	<form class="login-form" id="login-form" action="" method="post">
+	<form class="login-form" id="login-form" action="/login.do" method="post">
 		<fieldset>
-			<input type="text" class="input-form" name="memberId" id="memberId" placeholder="이메일을 입력해주세요."><br>
-			<input type="password" class="input-form" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요."><br>
-			<div class="navi-me" id="navi-me">이메일을 입력해주세요</div>
-			<div class="navi-me2" id="navi-me2">비밀번호를 입력해주세요</div>
-			<button class="btn bc1 bs4" id="submitbtn">로그인</button>
+			<input type="text" class="input-form" name="memberId" id="memberId" placeholder="이메일을 입력해주세요." value=""><br>
+			<input type="password" class="input-form" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요." value=""><br>
+			<div class="navi-me" id="navi-me">이메일 또는 비밀번호를 확인해주세요</div>
+			<button class="btn bc1 bs4" type="submit" id="submitbtn">로그인</button>
+			
 		</fieldset>
 	</form>
 </div>
@@ -57,10 +58,26 @@
 	<div><a href="#">아이디/비밀번호찾기</a></div>
 </div>
 <script>
+	$("#login-form").submit(function() {
+		  if( $("[name=memberId]").val()=="" ) {
+		    alert("이메일을 입력해주세요");
+		    return false;
+		  }
+		  return true;
+		});
+	$("#login-form").submit(function() {
+		  if( $("[name=memberId]").val()!=""&& $("[name=memberPw]").val()=="" ) {
+		    alert("비밀번호를 입력해주세요");
+		    return false;
+		  }
+		  return true;
+		});
+
+	/*
 	$("#submitbtn").on("click",function(){
 		
-		var memberId  = $('#memberId' ).val() ;
-        var memberPw = $('#memberPw').val() ;
+		let memberId  = $("#memberId" ).val() ;
+        let memberPw = $("#memberPw").val() ;
         
         if('#memberId'==''&&'#memberPw'==''){
         	console.log("이메일을 입력해주세요");
@@ -70,11 +87,11 @@
         $.ajax({
             type : "POST",
             url: '/login.do',
-            data: {memberId:memberId, memberPw:memberPw},
+            data: {memberId: $("#memberId").val(), memberPw: $("#memberPw").val()},
             success: function(data) {
             	result.empty();
             	console.log(data);
-            	/*
+            	
             	if(data == 0){
             		$("#navi-me").slideDown();
             		alert("회원정보가 없습니다")
@@ -82,21 +99,19 @@
             		location.href="/";
                	 	alert('로그인 성공');
             	}
-            	*/
-            }
-            /*
+            },
+            
             error: function(){
-            	if('#memberId'==''){
+            	if('#memberId'== null){
             		$("#navi-me").slideDown();
             		$("#navi-m2").hide();
             	}
             	alert('잘못된 이메일이거나, 비밀번호가 틀렸습니다.');
             }
-            */
-            
         });
       }
     });
+*/
 </script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>

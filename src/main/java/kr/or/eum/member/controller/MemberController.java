@@ -16,6 +16,7 @@ import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.member.model.service.MemberService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
@@ -36,15 +37,19 @@ public class MemberController {
 	}
 	
 	//대권 로그인 실행
+	//@ResponseBody
 	@RequestMapping(value="/login.do")
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
 		System.out.println(member);
+		String str="";
 		if(member != null) {
 			session.setAttribute("member", member);
-			return "1";
+			str="1";
+			return "redirect:/";
 		}else {
-			return "0";
+			str="0";
+			return "member/loginFrmFail";
 		}
 		
 	}

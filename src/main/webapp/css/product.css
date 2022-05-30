@@ -310,6 +310,20 @@ th{
 	height: 50px;
 	margin-right: 20px;
 }
+/*추가된 좋아요*/
+.right-like-box{
+	margin-top: 20px;
+	border: 1px solid #ececec;
+	border-radius: 10px;
+	width: 100%;
+	height: 45px;
+	text-align: center;
+}
+.icon-like{
+	color: #f05454;
+	line-height: 45px !important;
+}
+
 
 /*여기부터 second-box*/
 .right-second-box{

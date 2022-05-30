@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,6 +15,7 @@ import kr.or.eum.product.model.vo.ProductDetail;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.wishlist.model.vo.Wishlist;
 import kr.or.eum.product.model.vo.ProReviewMember;
 
 
@@ -69,6 +72,14 @@ public class ProductDao {
 	public ArrayList<ProReviewMember> selectReviewList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("product.selectReviewList", map);
 		return (ArrayList<ProReviewMember>)list;
+	}
+
+	public Wishlist selectwish(int productNo, HttpSession session) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("session", session);
+		Wishlist wishCheck = sqlSession.selectOne("wish.selectwish", map);
+		return wishCheck;
 	}
 
 }

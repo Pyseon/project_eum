@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
+import kr.or.eum.wishlist.model.vo.Wishlist;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class ProductDetail {
 	private int cost;
 	private String[] tag;
 	private ArrayList<ProductAndWishList> wishList;
+	private Wishlist wish;
 	
 }
 

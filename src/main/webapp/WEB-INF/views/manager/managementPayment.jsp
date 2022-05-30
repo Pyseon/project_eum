@@ -37,19 +37,23 @@
 					<th>번호</th>
 					<th>주문번호</th>
 					<th>주문자</th>
+					<th>결제금액</th>
 					<th>결제방법</th>
 					<th>주문 상태</th>
 					<th>결제 일자</th>
+					<th>상세 보기</th>
 					<th>주문 취소</th>
 				</tr>
 				<c:forEach items="${list }" var="pay" varStatus="i">
 				<tr class="tr-2">
 					<td>${(reqPage-1)*10 + i.count }</td>
 					<td>${pay.payNo }</td>
-					<td>${pay.memberNo }</td>
+					<td>${pay.memberId }</td>
 					<td>${pay.payment }</td>
+					<td>${pay.payMethod }</td>
 					<td>${pay.payState }</td>
 					<td>${pay.payDate }</td>
+					<td><button class="btn bc3 bc1" onclick="location.href='/detailPayment.do?payNo=${pay.payNo}'">상세보기</button></td>
 					<c:choose>
 						<c:when test="${pay.payState==3 }">
 							<td><button class="btn bc1 bs1" onclick="location.href='/updatePayState.do?updateNo=1&payNo=${pay.payNo}&reqPage=${reqPage }'">다시 예약</button></td>

@@ -2566,6 +2566,36 @@ input[name=keyword]{
 }
 
 
+.detailTbl tr{
+	border-bottom: 1px solid #eee;
+}
+.detailTbl tr:last-child{
+	height: 300px;
+}
+
+.detailBox {
+	position: relative;
+	display: block;
+	float: right;
+	height: fit-content;
+}
+
+.detailBox > h3{
+	float: right;
+	margin-bottom: 0;
+}
+
+.managerBtn{
+	margin-top: 50px;
+	position: relative;
+	display: block;
+	text-align: center;
+}
+.managerBtn>button{
+	width:300px;
+	height: 40px;
+
+}
 /*************************
 *******mypage CSS******
 **************************/
@@ -2645,4 +2675,3 @@ input[name=keyword]{
 	height: 33px;
 	border-radius: 4px;
 	border: 1px solid #ccc;
-}

@@ -18,4 +18,7 @@ public class Payment {
 	private int payUsepoint;
 	private int payAddpoint;
 	
+	private String memberId;  //영준
+	private String productTitle; //영준
+	private String productImgPath;  //영준
 }

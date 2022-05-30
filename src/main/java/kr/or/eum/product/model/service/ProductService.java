@@ -8,12 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.eum.product.model.vo.ProductAndWishList;
+import kr.or.eum.product.model.vo.ProductDetail;
+import kr.or.eum.member.model.dao.MemberDao;
+import kr.or.eum.member.model.vo.Expert;
+import kr.or.eum.member.model.vo.ExpertAndCompany;
+import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.product.model.dao.ProductDao;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
-import kr.or.eum.product.model.vo.ProAndPayAndReview;
+import kr.or.eum.product.model.vo.ReviewPageData;
+import kr.or.eum.product.model.vo.ProReviewMember;
 
 
 @Service
@@ -21,6 +27,8 @@ import kr.or.eum.product.model.vo.ProAndPayAndReview;
 public class ProductService {
 	@Autowired
 	private ProductDao productDao;
+	@Autowired
+	private MemberDao memberDao;
 	
 	public ProductPageData selectProductList(int reqPage, String selPro) {
 		int numPerPage = 12;
@@ -83,33 +91,107 @@ public class ProductService {
 	}
 	
 	//윤지
-	public Product selectOneProduct(int productNo) {
-		return productDao.selectOneProduct(productNo);
-	}
-	//윤지
-	public ArrayList<Review> selectAllReview() {
-		return productDao.selectAllReview();
-	}
+	public ProductDetail selectProductDetail(int productNo, int expertNo) {
+		Product product = productDao.selectOneProduct(productNo);
+		ArrayList<String> productQNA = new ArrayList<String>();
+		if(product.getProductQst() != null) {
+			String productQst[] = product.getProductQst().split("/");
+			String productAns[] = product.getProductAns().split("/");
+			for(int i = 0; i < productQst.length; i++) {
+				productQNA.add("Q"+(i+1)+". "+productQst[i]);
+				productQNA.add("A"+(i+1)+". "+productAns[i]);
+			}
+		}
+		ExpertAndCompany expertAndCom = memberDao.selectOneExpert(expertNo);
+		Expert expert = memberDao.selectOneExpertOnly(expertNo);
+		ExpertAndMember expertM = memberDao.selectOneExpertPicture(expertNo);
+		ArrayList<Review> reviewRnum = productDao.selectAllReview(productNo);
+		double reviewAvrbef = productDao.selectReviewStar(productNo); //null일 때 double로 resulttype 달라해서 에러
+		String reviewAvr = "";
+		if(reviewAvrbef != 0) {
+			reviewAvr = String.format("%.1f", reviewAvrbef);			
+		}
+		int reviewCount = productDao.selectReviewCount(productNo);
+		int paymentCount = productDao.selectPaymentExpertNoCount(productNo);
+		//ArrayList<ProReviewMember> prm = productDao.selectReviewList(productNo); 
+		int cost = product.getCost()*product.getSale()/100;
+		String[] tag = product.getProductTag().split("/");
+		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
+		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList);
+		return pd;
+	}//selectProductDetail
 	
 	//윤지
-	public int selectReviewCount() {
-		return productDao.selectReviewCount();
-	}
-	//윤지
-	public double selectReviewStar(int productNo) {
-		return productDao.selectReviewStar(productNo);
-	}
-	//윤지
-	public int selectPaymentExpertNoCount(int productNo) {
-		return productDao.selectPaymentExpertNoCount(productNo);
-	}
-	//윤지
-	public ArrayList<ProductAndWishList> selectWishList() {
-		return productDao.selectWishList();
-	}
-	//윤지
-//	public ArrayList<ProAndPayAndReview> selectReviewList(int productNo) {
-//		return productDao.selectReviewList(productNo);
-//	}
+	public ReviewPageData selectReviewList(int productNo,int reqPage) {
+		int numPerPage = 5;
+		int end = reqPage*numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("start", start);
+		map.put("end", end);
+		
+		ArrayList<ProReviewMember> list = productDao.selectReviewList(map); 
+		System.out.println(list);
+		//전체 페이지 계산을 위한 전체 게시물 수 조회
+		int totalCount = productDao.selectReviewCount(productNo);
+		
+		//전체페이지 수
+		int totalPage = 0;
+		if(totalCount%numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		//페이지 네비게이션의 길이 지정
+		int pageNaviSize = 5;
+		//페이지 모양 지정
+		//1~5페이지 요청시 > 1 2 3 4 5
+		//6~10페이지 요청시 > 6 7 8 9 10
+		//페이지 네비게이션 시작번호 계산
+		int pageNo = ((reqPage-1)/pageNaviSize)*pageNaviSize + 1;
+		
+		String pageNavi = "<ul class='pagination'>";
+		//이전버튼
+		if(pageNo != 1) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' data-page='"+(pageNo-1)+"'>";
+			pageNavi += "<span class='meterial-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+			//html '' 자바 ""
+		}
+		//페이지숫자
+		for(int i = 0; i < pageNaviSize; i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' data-page='"+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' data-page='"+pageNo+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		//다음버튼
+		if(pageNo<=totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' data-page='"+(pageNo+1)+"'>";
+			pageNavi += "<span class='meterial-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+		}
+		pageNavi += "</ul>";
+		ReviewPageData rpd = new ReviewPageData(list, pageNavi);
+		
+		System.out.println(pageNavi);
+		return rpd;
+	}//selectReviewList
+	
 
 }

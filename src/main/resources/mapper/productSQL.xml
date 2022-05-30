@@ -21,44 +21,19 @@
 			product_ans as productAns,
 			product_addr as productAddr,
 			sale,
-			(select review_star from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
-			(select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount
-			from product_tbl p 
-			<choose>
-			<when test="selPro=='법률'.toString()">
-			where product_Category='법률'
-			</when>
-			<when test="selPro=='비즈니스'.toString()">
-			where product_Category='비즈니스'
-			</when>
-			<when test="selPro=='심리/헬스'.toString()">
-			where product_Category='심리/헬스'
-			</when>
-			<when test="selPro=='학습'.toString()">
-			where product_Category='학습'
-			</when>
-			<when test="selPro=='금융'.toString()">
-			where product_Category='금융'
-			</when>
-			<when test="selPro=='라이프'.toString()">
-			where product_Category='라이프'
-			</when>
-			<when test="selPro=='취미'.toString()">
-			where product_Category='취미'
-			</when>
-			<when test="selPro=='어학'.toString()">
-			where product_Category='어학'
-			</when>
-			<when test="selPro=='레저'.toString()">
-			where product_Category='레저'
-			</when>
-			<when test="selPro=='IT/테크'.toString()">
-			where product_Category='IT/테크'
-			</when>
-			<when test="selPro=='자기계발'.toString()">
-			where product_Category='자기계발'
-			</when>
-			</choose>
+			m.member_picturepath as memberPicturePath,
+			product_ImgPath as productImgPath,
+			(cost)*(sale)/100 as salecost,
+			(select avg(review_star) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+			(select count(*) from review_tbl rev where rev.product_no = p.product_no) as revCount
+			from product_tbl p
+			join review_tbl r
+            on p.product_no = r.product_no
+            join member_tbl m
+            on r.member_no = m.member_no
+			<if test="selPro!='전체'.toString()">
+			where product_Category=#{selPro}
+			</if>
 			order by p.product_no desc)b)
         	where rnum between #{start} and #{end}
 	</select>
@@ -92,28 +67,35 @@
 	</select>
 	
 	<!-- 윤지 -->
-	<select id="selectAllReview" resultType="review">
-		select * 
-		from 
-			(select rownum,n.* from(select * from review_tbl order by review_no desc)n) 
-		where 
-			rownum between 1 and 10
+	<select id="selectAllReview" parameterType="map" resultType="review">
+		select 
+			review_no as reviewNo, 
+			pay_no as payNo, 
+			member_no as memberNo, 
+			review_title as reviewTitle, 
+			review_content as reveiwContent, 
+			review_star as reviewStar, 
+			review_date as reviewDate, 
+			product_no as productNo
+		from (select rownum,n.* from(select * from review_tbl order by review_no desc)n) 
+		where rownum between #{start} and #{end} and product_no=#{productNo}
 
 	</select>
 	<!-- 윤지 -->
-	<select id="selectReviewCount" resultType="int">
-		select
+	<select id="selectReviewCount" parameterType="int" resultType="int">
+		select 
 			count(*) as cnt 
 		from review_tbl
+		where product_no=#{productNo}
 	</select>
 	<!-- 윤지 -->
 	<select id="selectReviewStar" parameterType="int" resultType="double">
 		select 
-			avg(r.review_star)
-		from
-			product_tbl pro
-		join
-			payment_tbl pay
+			case when avg(r.review_star) is null then 0
+         		 else avg(r.review_star)  
+    		end review_star
+		from product_tbl pro
+		join payment_tbl pay
 		on pro.product_no = pay.product_no
 		join review_tbl r
 		on pay.pay_no = r.pay_no
@@ -123,10 +105,8 @@
 	<select id="selectPaymentExpertNoCount" parameterType="int" resultType="int">
 		select 
 			count(*) 
-		from 
-			payment_tbl 
-		where 
-			product_no=#{productNo}
+		from payment_tbl 
+		where product_no=#{productNo}
 	</select>
 	<!-- 윤지 -->
 	<select id="selectWishList" resultType="productWish">
@@ -139,16 +119,29 @@
  			(select rownum as rnum,n.* from
 				(select product_no, product_title,
     				(select nvl(count(*),0) from wishlist_tbl w where w.product_no = p.product_no) as wishCount
-					from 
-						product_tbl p
-					order by 
-			wishCount desc)n) 
-		where 
-			rnum between 1 and 10
+				from product_tbl p order by wishCount desc)n) 
+		where rnum between 1 and 10
  	</select> 
  	<!-- 윤지 -->
-	<!--  <select id="selectReviewList" parameterType="int" resultType="proAndPayAndReview">
-
-	</select>-->
+	<select id="selectReviewList" parameterType="map" resultType="ProReviewMember">
+		SELECT *
+		FROM 
+			( SELECT
+				rownum as rnum, 
+				r.review_star as reviewStar,
+				m.member_no as memberNo,
+				r.review_no as reviewNo,
+				r.review_content as reviewContent,
+				r.review_date as reviewDate,
+				m.member_nick as memberNick,
+				m.member_picturename as memberPictureName,
+				m.member_picturepath as memberPicturePath
+			FROM REVIEW_TBL R
+			JOIN MEMBER_TBL M
+			ON R.MEMBER_NO = M.MEMBER_NO
+			WHERE R.product_no = #{productNo}
+			ORDER BY R.REVIEW_NO DESC )
+		WHERE rnum between #{start} and #{end}
+	</select>
 </mapper>
 	

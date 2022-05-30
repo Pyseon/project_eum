@@ -23,7 +23,7 @@ public class ManagerDao {
 
 	public int updateBlackList(HashMap<String, Integer> ubl) {
 		int result = sqlSession.update("manager.updateBlackList", ubl);
-		return 0;
+		return result;
 	}
 
 	public ArrayList<Member> MemberPageData(HashMap<String, Object> map) {
@@ -69,6 +69,16 @@ public class ManagerDao {
 	public int searchPaymentCount(HashMap<String, Object> map) {
 		int totalCount = sqlSession.selectOne("manager.searchPaymentCount", map);
 		return totalCount;
+	}
+
+	public int updatePayState(HashMap<String, Integer> ups) {
+		int result = sqlSession.update("manager.updatePayState", ups);
+		return result;
+	}
+
+	public ArrayList<Payment> detailPayment(int payNo) {
+		List pay = sqlSession.selectList("manager.detailPayment", payNo);
+		return (ArrayList<Payment>) pay;
 	}
 	
 }

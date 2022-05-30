@@ -184,13 +184,14 @@
 									</div>
 								</div>
 								<div class="real-review-wrap">
+								<%-- <c:forEach items="${prm}" var="prm" step="1">
 									<div class="real-review">
 										<div class="member-picture">
-											<img class="reviewPicture" src="/img/testpicture.png">
+											<!-- <img class="reviewPicture" src=> 프로필 -->
 										</div>
 										<div class="info">
 											<div class="info-one">
-												<span class="nickname">닉네임</span> 
+												<span class="nickname">${prm.memberNick }</span> 
 												<div class="review-btn-2">
 													<a href="#">수정</a> <a href="#">삭제</a> <br>
 												</div>	
@@ -226,102 +227,11 @@
 												</div>
 											</div><!--info-one  -->
 											<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-										</div> <!-- info --> 
+										</div> <!-- info -->
 									</div><!-- real review -->
-									<div class="real-review">
-										<div class="member-picture">
-											<img class="reviewPicture" src="/img/testpicture.png">
-										</div>
-										<div class="info">
-											<div class="info-one">
-												<span class="nickname">닉네임</span> 
-												<div class="review-btn-2">
-													<a href="#">수정</a> <a href="#">삭제</a> <br>
-												</div>	
-												<div class="star-wrap star-wrap-2">
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span>  
-													<span class="star-score star-score-2">5.0</span>
-													<div class="star-on">
-														<div class="icon-star">
-															<span class="material-icons">star</span> 
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-														</div>
-													</div>
-												</div>
-												<div class="span-wrap">
-													<span class="text">|&nbsp;&nbsp;</span>
-													<span class="text">2022.05.20</span>
-													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-												</div>
-												<div class="review-btn">
-													<div class="report-wrap">
-														<ul>
-															<li><img id="icon-report" src="img/product/icon-report.png"></li>
-															<li><span id="report">신고</span></li>
-														</ul>
-													</div>
-												</div>
-											</div><!--info-one  -->
-											<div class="review-content">쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
-											쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
-											</div>
-										</div> <!-- info --> 
-									</div><!-- real review -->
-									<div class="real-review">
-										<div class="member-picture">
-											<img class="reviewPicture" src="/img/testpicture.png">
-										</div>
-										<div class="info">
-											<div class="info-one">
-												<span class="nickname">닉네임</span> 
-												<div class="review-btn-2">
-													<a href="#">수정</a> <a href="#">삭제</a> <br>
-												</div>	
-												<div class="star-wrap star-wrap-2">
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span>  
-													<span class="star-score star-score-2">5.0</span>
-													<div class="star-on">
-														<div class="icon-star">
-															<span class="material-icons">star</span> 
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-														</div>
-													</div>
-												</div>
-												<div class="span-wrap">
-													<span class="text">|&nbsp;&nbsp;</span>
-													<span class="text">2022.05.20</span>
-													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-												</div>
-												<div class="review-btn">
-													<div class="report-wrap">
-														<ul>
-															<li><img id="icon-report" src="img/product/icon-report.png"></li>
-															<li><span id="report">신고</span></li>
-														</ul>
-													</div>
-												</div>
-											</div><!--info-one  -->
-											<div class="review-content">쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
-											쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.
-											쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.쉽게 알려주셔서 좋았습니다.</div>
-										</div> <!-- info --> 
-									</div><!-- real review -->
+									</c:forEach> --%>
 								</div><!-- real review wrap-->
-								페이징자리
+								<div class="page-nav"></div>
 								<!-- 페이징///////////////////////////// -->
 								<div class="detail-wrap">
 									<span class="detail-sub-title">상품정보 제공 고시</span>
@@ -368,7 +278,7 @@
 						<div class="right-first-box">
 							<div class="product-summary">
 								<span id="sele">${p.sale}%</span>
-								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span></span><br>
+								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span><br>
 								<div class="star-wrap">
 									<!-- 별점  -->
 									<ul>
@@ -404,30 +314,27 @@
 							<div class="right-second-box">
 							<!-- DB -->
 								<div class="picture">
-									<a href="#"><img class="testimg" src="img/testpicture.png"></a>	
+									<a href="#"><img class="testimg" src="/img/member/${expertM.memberPicturePath }"></a>	<!-- 추후 프로필 수정 -->
 								</div>
 								<div class="expert-profile">
-									<ul>
-										<li>
-											<h3 class="expert-info">
-												<c:choose>
-													<c:when test="${empty expertAndCom.compName}">
-													${expert.expertName }
-													</c:when>
-													<c:otherwise>
-													${expertAndCom.compName}
-													</c:otherwise>
-												</c:choose>
-											</h3>
-										</li>
-										<li class="icon-confim-wrap">
-											<span class="material-icons icon-confirm confirm2">verified</span>
-										</li>
-									</ul>
+									<div class="expert-profile-span"><h3 class="expert-info">
+										<c:choose>
+											<c:when test="${empty expertAndCom.compName}">
+												${expert.expertName }
+												</c:when>
+												<c:otherwise>
+												${expertAndCom.compName}
+												</c:otherwise>
+											</c:choose>
+										</h3>					
+									</div>				
+									<div class="expert-profile-span">
+										<span class="material-icons icon-confirm confirm2">verified</span>
+									</div>	
 								</div><!-- expert-profile -->
 								<div class="info-wrap">
-									<span><h5 class="extpert-info info2">${expert.jobName }</h5></span>			
-									<span><h5 class="extpert-info info2">${expert.expertIntro }</h5></span>
+									<h5 class="extpert-info info2"><span>${expert.jobName }</span></h5>			
+									<h5 class="extpert-info info2"><span>${expert.expertIntro }</span></h5>
 								</div><!-- info-wrap -->
 							</div><!-- right-second-box -->
 						</div><!-- single-sidebar-widget user-info-widget -->
@@ -438,7 +345,7 @@
 							<div class="tag-title-wrap">
 								<ul>
 									<li><span class="material-icons icon-tag">tag</span></li>
-									<li><span class="tag-title">태그</span></li><br>
+									<li><span class="tag-title">태그</span></li>
 								</ul>
 							</div>
 							<!-- DB, for문 -->
@@ -446,7 +353,7 @@
 								<ul>
 									<c:forEach items="${tag}" var="tag" step="1">
 										<li class="tag-li">
-											<a herf="#">
+											<a href="#">
 												${tag }
 											</a>	
 										</li>
@@ -461,11 +368,11 @@
 						<div class="right-fourth-box">
 							<div class="likeranking">
 								<ul>
-									<li><span class="likeranking-title">좋아요 순 상담&클래스 TOP 10</span></li>
+									<li><span class="likeranking-title">좋아요 순 상담&amp;클래스 TOP 10</span></li>
 									<li><span class="material-icons icon-ranking">signal_cellular_alt</span></li>
-									<hr id="ranking-line">
 								</ul>
 							</div>
+							<hr id="ranking-line">
 							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
 								<c:forEach items="${wishList}" var="wishList" step="1" varStatus="status">
@@ -483,9 +390,14 @@
 			</div><!-- row -->
 		</div><!-- container -->
 	</section>
+
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
 		$(function(){
+			const productNo = ${p.productNo};
+			const tatalCount = ${reviewCount};
+			let isLoadedReview = false;
+			
 			$('#moreBtn').on('click',function(){
 				<%--조언 : 내부컨텐츠 만큼 높이값을 잡아라 부모는 높이값이 없고, 자식은 높이값이 있으면 자식만큼 되니까--%>
 				const content = $('.detail-main-content');
@@ -497,6 +409,7 @@
 					cover.hide();
 				}
 			});
+			
 			$('.tab-link').click(function() {
 				let tab_id = $(this).attr('data-tab');
 
@@ -505,17 +418,111 @@
 
 				$(this).addClass('current');
 				$("#" + tab_id).addClass('current');
+				
+				// 후기를 클릭했을 경우
+				if(tab_id === 'tab-2') {
+					if(!isLoadedReview) {
+						// ajax call
+						getReviewList(1);
+					}
+				} 
+				
 
 			});
+			
 			$('.title1').click(function() {
 				$('.title1').css("border-bottom","3px solid #3865f2");
 				$('.title2').css("border","none");
+			
 			});
+			
 			$('.title2').click(function() {
 				$('.title2').css("border-bottom","3px solid #3865f2");
 				$('.title1').css("border","none");
 			});
-		});
+			
+			function getReviewList(pageNum) {
+				$.ajax({
+					url : "/review.do",
+					data : {
+						productNo : productNo,
+						reqPage : pageNum 
+					},
+					success : function(data) {
+						isLoadedReview = true;
+						console.log('data>>>>', data);
+						putReviewList(data.prm);
+						setPageNav(data.pageNavi);
+					}
+				});
+			}
+			
+			function setPageNav(pageNavi) {
+				$(".pagination").off().remove();
+				const nav = $(pageNavi);
+				nav.find(".page-item").on('click', pageChange);
+				$(".page-nav").append(nav);
+			}
+			
+			function pageChange(event) {
+				let pageNum = $(this).attr('data-page');
+				getReviewList(pageNum);
+			}
+			
+			function getStarPoint(point){
+				let span = "";
+				for(let i = 1; i <= 5; i++) {
+					let starType = 'star';
+					if (i > point) {
+						starType += '_border';
+					}
+					span += `<span class="material-icons">\${starType}</span>`;
+				}
+				span += `<span class="star-score star-score-2">\${point}.0</span>`
+				return `<div class="star-wrap star-wrap-2">\${span}</div>`;
+			}
+			
+			function putReviewList(prm) {
+				// 기존 페이지 리뷰 제거
+				$(".real-review").off().remove();
+				
+				// 새 페이지 리뷰 삽입 //추후 프로필 수정
+				for(let i = 0; i < prm.length; i++) {
+					const item = prm[i];
+					const review = $(`
+						<div class="real-review">
+							<div class="member-picture">
+								<img class="reviewPicture" src="/img/member/testpicture.png">
+							</div>
+							<div class="info">
+								<div class="info-one">
+									<span class="nickname">\${item.memberNick}</span> 
+									<div class="review-btn-2">
+										<a href="#">수정</a> <a href="#">삭제</a> <br>
+									</div>
+									\${getStarPoint(item.reviewStar)}
+									<div class="span-wrap">
+										<span class="text">|&nbsp;&nbsp;</span>
+										<span class="text">\${item.reviewDate}</span>
+										<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
+									</div>
+									<div class="review-btn">
+										<div class="report-wrap">
+											<ul>
+												<li><img id="icon-report" src="img/product/icon-report.png"></li>
+												<li><span id="report">신고</span></li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="review-content">\${item.reviewContent}</div>
+							</div>
+						</div>
+					`);
+					$('.real-review-wrap').append(review);
+				}
+			}
+		}); 
 	</script>
 </body>
 </html>

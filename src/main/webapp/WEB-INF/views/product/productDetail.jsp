@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/product.css" />
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="header-div"><%@ include file="/WEB-INF/views/common/header.jsp"%></div>
 	<section class="post-content-area">
 		<div class="container">
 			<div class="row">
@@ -304,7 +304,10 @@
 									<li><span class="material-icons icons-check">done</span> <span class="check-content">시간 초과 시 추가 비용이 발생할 수 있습니다.</span></li>
 								</ul>
 							</div>
-							<button class="bc1" id="purchaseBtn">구매하기</button>
+							<form action="/purchase.do" method="get">
+								<input type="hidden" name="productNo" value="${p.productNo }"/>
+								<button type="submit" class="bc1" id="purchaseBtn">구매하기</button>
+							</form>
 
 						</div><!--right-first-box-->
 						
@@ -327,7 +330,7 @@
 												</c:otherwise>
 											</c:choose>
 										</h3>					
-									</div>				
+									</div>	
 									<div class="expert-profile-span">
 										<span class="material-icons icon-confirm confirm2">verified</span>
 									</div>	
@@ -391,9 +394,10 @@
 		</div><!-- container -->
 	</section>
 
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<div class="footer-div"><%@ include file="/WEB-INF/views/common/footer.jsp"%></div>
 	<script>
 		$(function(){
+			
 			const productNo = ${p.productNo};
 			const tatalCount = ${reviewCount};
 			let isLoadedReview = false;
@@ -492,7 +496,7 @@
 					const review = $(`
 						<div class="real-review">
 							<div class="member-picture">
-								<img class="reviewPicture" src="/img/member/testpicture.png">
+								<img class="reviewPicture" src="/img/member/\${item.memberPicturePath }">
 							</div>
 							<div class="info">
 								<div class="info-one">

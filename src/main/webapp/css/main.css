@@ -2565,6 +2565,7 @@ input[name=keyword]{
 	border: 1px solid #ccc;
 }
 
+
 .detailTbl tr{
 	border-bottom: 1px solid #eee;
 }
@@ -2593,4 +2594,84 @@ input[name=keyword]{
 .managerBtn>button{
 	width:300px;
 	height: 40px;
+
 }
+/*************************
+*******mypage CSS******
+**************************/
+.mypage-leftmenuWrap{
+  height: 100%;
+  width: 250px;
+}
+
+.mypage-leftmenu{
+  position: fixed;
+  text-align: center;
+}
+
+.mypage-leftmenu ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 200px;
+}
+
+.mypage-leftmenu ul li a{
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  padding: 0 20px;
+}
+
+.mypage-leftmenu ul li:hover{
+  background-color: #333;
+  color: #fff;
+}
+
+.userprofilebox{
+  width: 250px;
+  height: 250px;
+}
+
+.userprofile {
+  width: 150px;
+  height: 150px;
+  border: 1px solid black;
+  border-radius: 100%;
+}
+
+.memberWrap{
+	position: relative;
+	display: block;
+	margin-top: 50px;
+	margin-bottom: 100px;
+	left: 250px;
+	width: 80%;
+}
+
+.memberWrap div ul li{
+	list-style-type: none;
+	float: left;
+	margin-bottom: 15px;
+}
+
+.selectMemberBtn:focus {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	color: #ccc;
+	font-weight: bold;
+	box-sizing: border-box;
+}
+
+.searchBox{
+	width: 500px;
+	position: relative;
+	display: block;
+	float: right
+}
+
+input[name=keyword]{
+	width: 250px;
+	height: 33px;
+	border-radius: 4px;
+	border: 1px solid #ccc;

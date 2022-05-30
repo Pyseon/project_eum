@@ -15,12 +15,15 @@
 	<h1 class="fc-1 fs-full">>신고 상세정보</h1>
 	<hr>
 	<c:forEach items="${report }" var="rpt" varStatus="i">
-		<h2 class="fc-1 fs-bold">신고자: ${report.plaintiffId }</h2>
-		<h2 class="fc-1 fs-bold">${report.reportTitle }</h2>
+		<h2 class="fc-1 fs-bold">신고자: ${rpt.plaintiffId }</h2>
 		<hr>
-		<h3 class="fc-1 fs-medium">${report.reportContent }</h3>
+		<h2 class="fc-1 fs-bold">${rpt.reportTitle }</h2>
 		<hr>
-		
+		<h3 class="fc-1 fs-medium">${rpt.reportContent }</h3>
+		<hr>
+		<div>
+			<%@ include file="/WEB-INF/views/product/productDetail.jsp" %>
+		</div>
 	</c:forEach>
 	</div>
 	

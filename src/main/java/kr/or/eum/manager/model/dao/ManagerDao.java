@@ -104,9 +104,6 @@ public class ManagerDao {
 
 	public ArrayList<Report> detailReport(int reportNo) {
 		List report = sqlSession.selectList("manager.detailReport", reportNo);
-		for(int i=0;i<report.size();i++) {
-			System.out.println(report.get(i));
-		}
 		return (ArrayList<Report>) report;
 	}
 	

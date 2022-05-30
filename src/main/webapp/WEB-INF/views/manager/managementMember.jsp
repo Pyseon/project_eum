@@ -15,11 +15,11 @@
 	<div class="manaContentWrap">
 		<div>
 			<ul>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=0'">전체</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=1'">전문가</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=2'">일반회원</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=3'">사업자</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selMem=4'">블랙리스트</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=1'">전문가</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=2'">일반회원</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=3'">사업자</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=4'">블랙리스트</button></li>
 			</ul>
 		</div>
 		<div class="searchBox">

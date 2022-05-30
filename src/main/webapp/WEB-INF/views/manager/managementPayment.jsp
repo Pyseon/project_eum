@@ -13,10 +13,10 @@
 	<div class="manaContentWrap">
 		<div>
 			<ul>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&payState=0'">전체</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&payState=1'">예약</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&payState=2'">완료</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&payState=3'">예약 취소</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=1'">예약</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=2'">완료</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=3'">예약 취소</button></li>
 			</ul>
 		</div>
 		<div class="searchBox">
@@ -26,7 +26,7 @@
 					<option value="memberId">이메일</option>
 				</select>
 				<input type="hidden" name="reqPage" value="1">
-				<input type="hidden" name="payState" value="0">
+				<input type="hidden" name="selectNum" value="0">
 				<input type="text" name="keyword">				
 				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>

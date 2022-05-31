@@ -17,6 +17,7 @@
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Question" alias="q"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.FaQ" alias="faq"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Expert" alias="expert"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Review" alias="review"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.member.model.vo.ExpertAndCompany" alias="expertAndCom"/> <!-- 윤지 -->

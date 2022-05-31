@@ -280,7 +280,10 @@
 	</select>
 	
 	<select id="reportMember" parameterType="int">
-		update member_tbl set grade=4 where member_no=#{value }
+		update member_tbl set 
+		grade=4,
+		member_reportcount = member_reportcount+1 
+		where member_no=#{value }
 	</select>
 	
 	<delete id="deleteArticles" parameterType="map">
@@ -309,5 +312,52 @@
 		report_is = #{selNo }
 		where report_no = #{reportNo }
 	</update>
+	
+	<insert id="answerReport" parameterType="map">
+		insert into ansrpt_tbl values(ansrpt_seq.nextval,#{reportNo},#{ansrpt_title},#{ansrpt_content})
+	</insert>
+	
+	<select id="FAQList" resultType="faq" parameterType="map">
+		select * from
+		(select rownum as rnum, faq.* from
+		(select
+			faq_no as fAQNo,
+			faq_title as FAQTitle,
+			faq_type as FAQType,
+			faq_date as FAQDate
+		from faq_tbl
+		<if test="selectNum != 0">
+			where faq_type = #{selectNum }
+		</if>
+		order by faq_no desc) faq)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="FAQCount" resultType="int" parameterType="int">
+		select count(*) from faq_tbl
+		<if test="value != 0">
+			where faq_type = #{value }
+		</if>
+	</select>
+	<select id="searchFAQList" resultType="faq" parameterType="map">
+		select * from
+		(select rownum as rnum, faq.* from
+		(select
+			faq_no as fAQNo,
+			faq_title as FAQTitle,
+			faq_type as FAQType,
+			faq_date as FAQDate
+		from faq_tbl
+		<if test="searchType.equals('FAQTitle') ">
+			where faq_title like '%'||#{keyword}||'%'
+		</if>
+		order by faq_no desc) faq)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="searchFAQCount" resultType="int" parameterType="map">
+		select count(*) from faq_tbl
+		<if test="searchType.equals('FAQTitle') ">
+			where faq_title like '%'||#{keyword}||'%'
+		</if>
+	</select>
 	
 </mapper>

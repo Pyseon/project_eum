@@ -2596,6 +2596,25 @@ input[name=keyword]{
 	height: 40px;
 
 }
+.ansRe{
+	float: left;
+}
+#answerReport> h3{
+	margin-top: 10px;
+}
+
+#answerReport > textarea{
+	width: 100%;
+	height: 6.25em;
+	resize: none;
+}
+.reportSubmit{
+	margin-top: 10px;
+}
+
+.resultReport{
+	text-align: right;
+}
 /*************************
 *******mypage CSS******
 **************************/

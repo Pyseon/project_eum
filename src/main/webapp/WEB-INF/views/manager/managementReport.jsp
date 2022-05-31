@@ -43,8 +43,7 @@
 					<th>신고일</th>
 					<th>답변여부</th>
 					<th>상세보기</th>
-					<th>글삭제</th>
-					<th>신고 삭제</th>
+					<th>답변 거부</th>
 				</tr>
 				<c:forEach items="${list }" var="rpt" varStatus="i">
 				<tr class="tr-2">
@@ -86,9 +85,8 @@
 						</c:when>
 					</c:choose>
 					</td>
-					<td><button class="btn bc3 bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button></td>
-					<td><button class="btn bc3 bc1" onclick="location.href='/reportMember.do?memberNo=${rpt.defendant}&category=${rpt.reportCategory }&index=${rpt.reportIndex }&reportNo=${rpt.reportNo }&selNo=1'">회원정지</button></td>
-					<td><button class ="btn bc3 bc1" onclick="location.href=/refuseReport.do?reportNo=${rpt.reportNo}&selNo=2">신고삭제</button></td>
+					<td><button class="btn bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button></td>
+					<td><button class ="btn bc1" onclick="location.href=/refuseReport.do?reportNo=${rpt.reportNo}&selNo=2">답변거부</button></td>
 					
 				</tr>
 				</c:forEach>

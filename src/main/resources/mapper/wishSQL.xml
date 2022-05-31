@@ -2,11 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="wish">
 	
-	<!-- <select id="selectwish" parameterType="map" resultType="wish">
-		select 
-			wish_no as wishNo
-			product_no as productNo
-		from 
-			wishlist_tbl where product_no=#{productNo} and member_no=#{};
-	</select> -->
+	<select id="selectWishCount" parameterType="map" resultType="int">
+		select count (*) 
+		from wishlist_tbl
+		where product_no=#{productNo}
+	</select> 
 </mapper>

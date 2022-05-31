@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductDetail;
+import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.Review;
@@ -74,12 +75,10 @@ public class ProductDao {
 		return (ArrayList<ProReviewMember>)list;
 	}
 
-	public Wishlist selectwish(int productNo, HttpSession session) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("productNo", productNo);
-		map.put("session", session);
-		Wishlist wishCheck = sqlSession.selectOne("wish.selectwish", map);
-		return wishCheck;
+	public int selectwish(int productNo) {
+		int result = sqlSession.selectOne("wish.selectWishCount", productNo);
+		return result;
 	}
+
 
 }

@@ -1,15 +1,18 @@
 package kr.or.eum.product.controller;
 
-import java.lang.reflect.Member;
+import kr.or.eum.member.model.vo.Member;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.google.gson.Gson;
 
@@ -45,8 +48,10 @@ public class ProductController {
 	
 	//윤지
 	@RequestMapping(value = "/productDetail.do")
-	public String productDetail(Model model, int productNo, int expertNo, HttpSession session) {
-		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, session);
+	public String productDetail(Model model, int productNo, int expertNo, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		Member member = (Member)session.getAttribute("member");
+		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, member);
 		model.addAttribute("p", pd.getProduct());
 		model.addAttribute("productQNA", pd.getProductQNA());
 		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
@@ -59,7 +64,8 @@ public class ProductController {
 		model.addAttribute("cost", pd.getCost());
 		model.addAttribute("tag", pd.getTag());
 		model.addAttribute("wishList", pd.getWishList());
-		//model.addAttribute("wish", pd.getwish());
+		model.addAttribute("wishCount", pd.getWishCount());
+		model.addAttribute("member", member);
 		System.out.println("--------------------------------------");
 		System.out.println("product : "+pd.getProduct());
 		System.out.println("expertAndCom : "+pd.getExpertAndCompany());
@@ -72,6 +78,8 @@ public class ProductController {
 		//System.out.println("prm : "+pd.getPrm());
 		System.out.println("cost : "+pd.getCost());
 		System.out.println("wishList :"+pd.getWishList());
+		System.out.println("wishCount : "+pd.getWishCount());
+		System.out.println("member : "+member);
 		System.out.println("--------------------------------------");
 		return "product/productDetail";
 	}

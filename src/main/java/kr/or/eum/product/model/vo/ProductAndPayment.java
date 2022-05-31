@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class ProductAndPayment {
+	private int productNo;
 	private String productTitle;
 	private String payState;
 	private int payMent;

@@ -100,7 +100,7 @@ public class MemberController {
 	}
 	
 	//재민 1:1문의 상세내역
-	@RequestMapping(value="/questionView.do.do")
+	@RequestMapping(value="/questionView.do")
 	public String questionView(int qstNo, Model model) {
 		Question q = service.selectOneQuestion(qstNo);
 		model.addAttribute("q",q);

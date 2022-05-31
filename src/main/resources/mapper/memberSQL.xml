@@ -47,6 +47,7 @@
   	</select>
 	  <select id ="selectProductList" resultType="productAndPay">
 	 		select 
+	 			product_tbl.product_no as productNo,
 	 			product_title as productTitle,
 	 			pay_date as payDate, 
 	 			payment, 

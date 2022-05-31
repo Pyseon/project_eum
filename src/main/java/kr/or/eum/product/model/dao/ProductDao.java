@@ -74,9 +74,28 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.selectReviewList", map);
 		return (ArrayList<ProReviewMember>)list;
 	}
-
+	
+	//윤지
 	public int selectwish(int productNo) {
 		int result = sqlSession.selectOne("wish.selectWishCount", productNo);
+		return result;
+	}
+	
+	//윤지
+	public int insertWish(HashMap<String, Object> map) {
+		int result = sqlSession.insert("wish.insertWish", map);
+		return result;
+	}
+	
+	//윤지
+	public int deletetWish(HashMap<String, Object> map) {
+		int result = sqlSession.delete("wish.deleteWish", map);
+		return result;
+	}
+
+	//윤지
+	public int selectWishMemberCheck(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("wish.selectWishMemberCheck", map);
 		return result;
 	}
 

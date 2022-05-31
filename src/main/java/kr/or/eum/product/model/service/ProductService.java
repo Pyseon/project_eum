@@ -122,7 +122,16 @@ public class ProductService {
 		String[] tag = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
 		int wishCount = productDao.selectwish(productNo);
-		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCount);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		if(member != null) {
+			map.put("memberNo", member.getMemberNo());			
+		}else {
+			map.put("memberNo", 0);
+		}
+		int wishMemberCheck = productDao.selectWishMemberCheck(map);
+		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCount, wishMemberCheck);
 		return pd;
 	}//selectProductDetail
 	
@@ -196,6 +205,21 @@ public class ProductService {
 		
 		return rpd;
 	}//selectReviewList
+	
+	//윤지
+	public int insertWish(int productNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("memberNo", memberNo);
+		return productDao.insertWish(map);
+	}
+	
+	public int deleteWish(int productNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("memberNo", memberNo);
+		return productDao.deletetWish(map);
+	}
 	
 
 }

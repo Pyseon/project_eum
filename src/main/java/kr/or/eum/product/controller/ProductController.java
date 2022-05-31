@@ -50,7 +50,10 @@ public class ProductController {
 	@RequestMapping(value = "/productDetail.do")
 	public String productDetail(Model model, int productNo, int expertNo, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
-		Member member = (Member)session.getAttribute("member");
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");			
+		}
 		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, member);
 		model.addAttribute("p", pd.getProduct());
 		model.addAttribute("productQNA", pd.getProductQNA());
@@ -65,7 +68,12 @@ public class ProductController {
 		model.addAttribute("tag", pd.getTag());
 		model.addAttribute("wishList", pd.getWishList());
 		model.addAttribute("wishCount", pd.getWishCount());
-		model.addAttribute("member", member);
+		if(member != null) {
+			model.addAttribute("memberNo", member.getMemberNo());			
+		}else {
+			model.addAttribute("memberNo", 0);
+		}
+		model.addAttribute("wishMemberCheck", pd.getWishMemberCheck());
 		System.out.println("--------------------------------------");
 		System.out.println("product : "+pd.getProduct());
 		System.out.println("expertAndCom : "+pd.getExpertAndCompany());
@@ -79,7 +87,10 @@ public class ProductController {
 		System.out.println("cost : "+pd.getCost());
 		System.out.println("wishList :"+pd.getWishList());
 		System.out.println("wishCount : "+pd.getWishCount());
-		System.out.println("member : "+member);
+		if(member != null) {
+			System.out.println("memberNo : "+member.getMemberNo());
+		}
+		System.out.println("wishMemberCheck : "+pd.getWishMemberCheck());
 		System.out.println("--------------------------------------");
 		return "product/productDetail";
 	}
@@ -102,6 +113,30 @@ public class ProductController {
 	public String purchase(int productNo) {
 		System.out.println(productNo);
 		return "product/payment";
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "/insertWish.do", produces = "application/json;charset=utf-8")
+	public String insertWish(int productNo, int memberNo) {
+		System.out.println("-------insertWish");
+		System.out.println("productNo : "+productNo);
+		System.out.println("memberNo : "+memberNo);
+		int result = productService.insertWish(productNo, memberNo);
+		System.out.println("result : "+result);
+		return new Gson().toJson(result);
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "/deleteWish.do", produces = "application/json;charset=utf-8")
+	public String deleteWish(int productNo, int memberNo) {
+		System.out.println("-------deleteWish");
+		System.out.println("productNo : "+productNo);
+		System.out.println("memberNo : "+memberNo);
+		int result = productService.deleteWish(productNo, memberNo);
+		System.out.println("result : "+result);
+		return new Gson().toJson(result);
 	}
 	
 	

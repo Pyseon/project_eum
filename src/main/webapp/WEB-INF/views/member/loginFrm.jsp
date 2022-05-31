@@ -55,7 +55,7 @@
 </div>
 <div class="joinbox">
 	<div><a href="/joinFrm.do">회원가입</a></div>
-	<div><a href="#">아이디/비밀번호찾기</a></div>
+	<div><a href="/findId.do">아이디/비밀번호찾기</a></div>
 </div>
 <script>
 	$("#login-form").submit(function() {

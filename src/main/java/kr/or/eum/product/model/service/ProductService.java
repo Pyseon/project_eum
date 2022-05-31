@@ -34,7 +34,7 @@ public class ProductService {
 	@Autowired
 	private MemberDao memberDao;
 	
-	public ProductPageData selectProductList(int reqPage, String selPro) {
+	public ProductPageData selectClassList(int reqPage, String selPro) {
 		int numPerPage = 12;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -43,7 +43,7 @@ public class ProductService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
-		ArrayList<Product> list = productDao.selectProductList(map);
+		ArrayList<Product> list = productDao.selectClassList(map);
 		
 		int totalCount = productDao.selectProductCount(map);
 		int totalPage = 0;

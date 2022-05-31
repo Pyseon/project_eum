@@ -268,11 +268,11 @@ li{
 		<span id="sele" style="width: auto;">${c.sale}%</span>
 	
 		<span class="t2" style="margin: 0px 0 30px 30px;">
-			<span id="price"  class="fc-7" style="width: auto; font-size: 18px; line-height: 1.5; font-weight: bold;">
+			<span id="price"  class="fc-7" style="width: auto; font-size: 18px; line-height: 1.5;">
 			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
 			</span>
 			&nbsp;
-			<span id="fixed-price" style="width: auto; font-size: 12px; font-style: italic;">
+			<span id="fixed-price" style="width: auto; font-size: 12px; font-style: italic; font-weight: bold; margin: 4px 0 0px 0px;">
 			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
 			</span>
 		</span> 

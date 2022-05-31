@@ -26,8 +26,8 @@ public class ProductDao {
 	private SqlSessionTemplate sqlSession;
 	
 	//재건
-	public ArrayList<Product> selectProductList(HashMap<String, Object> map) {
-		List list = sqlSession.selectList("product.selectProductList", map);
+	public ArrayList<Product> selectClassList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("product.selectClassList", map);
 		return (ArrayList<Product>)list;
 	}
 

@@ -3,7 +3,7 @@
 
 <mapper namespace="product">
 	<!-- 재건 -->
-	<select id="selectProductList" resultType="pro">
+	<select id="selectClassList" resultType="pro">
 	select * from
 		(select rownum as rnum, b.* from
 		(select

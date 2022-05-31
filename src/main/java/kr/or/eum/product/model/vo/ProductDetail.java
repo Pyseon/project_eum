@@ -27,6 +27,7 @@ public class ProductDetail {
 	private String[] tag;
 	private ArrayList<ProductAndWishList> wishList;
 	private int wishCount;
+	private int wishMemberCheck;
 	
 }
 

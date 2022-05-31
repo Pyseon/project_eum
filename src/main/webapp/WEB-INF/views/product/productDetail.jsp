@@ -314,7 +314,14 @@
 					<div class="single-sidebar-widget">
 						<div class="right-wish-box">
 							<div class="wish-title-wrap">
-								<div><span class="material-icons icon-wish">favorite_border</span></div>
+								<c:choose>
+									<c:when test="${wishMemberCheck eq 0 }">
+										<div><span class="material-icons icon-wish">favorite_border</span></div>								
+									</c:when>
+									<c:otherwise>
+										<div><span class="material-icons icon-wish">favorite</span></div>
+									</c:otherwise>
+								</c:choose>
 								<div class="wish-count">${wishCount }</div>
 							</div>
 						</div>	<!-- right-wish-box -->
@@ -411,6 +418,7 @@
 			const tatalCount = ${reviewCount};
 			let isLoadedReview = false;
 			
+			//상세설명 더보기
 			$('#moreBtn').on('click',function(){
 				<%--조언 : 내부컨텐츠 만큼 높이값을 잡아라 부모는 높이값이 없고, 자식은 높이값이 있으면 자식만큼 되니까--%>
 				const content = $('.detail-main-content');
@@ -423,6 +431,7 @@
 				}
 			});
 			
+			//탭이동
 			$('.tab-link').click(function() {
 				let tab_id = $(this).attr('data-tab');
 
@@ -443,6 +452,7 @@
 
 			});
 			
+			//탭 border-bottom
 			$('.title1').click(function() {
 				$('.title1').css("border-bottom","3px solid #3865f2");
 				$('.title2').css("border","none");
@@ -454,6 +464,7 @@
 				$('.title1').css("border","none");
 			});
 			
+			//리뷰 페이징 ajax
 			function getReviewList(pageNum) {
 				$.ajax({
 					url : "/review.do",
@@ -535,14 +546,67 @@
 					$('.real-review-wrap').append(review);
 				}
 			}
+			
+			//좋아요(wish)
 			$('.icon-wish').on("click", function() {
+				 var memberNo = ${memberNo};
 				 var currentValue = this.innerText;
-		         if(currentValue == "favorite_border") {
+		         if(currentValue == "favorite_border" && memberNo != 0) {
 		         	this.innerText = "favorite";
+		         	wish();
 		         }else {
 		            this.innerText = "favorite_border";
+		            wishRemove();
 		         }
 			});
+			
+			//좋아요(wish) insert
+			function wish() {
+			var memberNo = ${memberNo};
+			var afterWishCount = ${wishCount}+1;
+				if(memberNo != 0) {
+					$.ajax({
+						url : "/insertWish.do",
+						data : {
+							productNo : productNo,
+							memberNo : memberNo
+						},
+						success : function() {
+							$('.wish-count').text(afterWishCount);
+							console.log('좋아요!');
+						},
+						error : function() {
+							console.log('에러');
+						}
+					});	
+				}else {
+					alert('로그인 후 이용해주세요.');
+				}				
+			};
+			
+			//좋아요(wish) delete
+			function wishRemove() {
+			var memberNo = ${memberNo};
+			var afterWishCount = ${wishCount }-1;
+				if(memberNo != 0) {
+					$.ajax({
+						url : "/deleteWish.do",
+						data : {
+							productNo : productNo,
+							memberNo : memberNo
+						},
+						success : function() {
+							$('.wish-count').text(afterWishCount);
+							console.log('관심없어요!');
+						},
+						error : function() {
+							console.log('에러');
+						}
+					});	
+				}else {
+					alert('로그인 후 이용해주세요.');
+				}				
+			};
 		}); 
 	</script>
 </body>

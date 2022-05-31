@@ -77,6 +77,7 @@
 			processData : false,
 			success : function(data) {
 				$(editor).summernote('editor.insertImage', data.url);
+				//썸머노트테스트
 				}
 			});
 	}

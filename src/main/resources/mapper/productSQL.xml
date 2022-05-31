@@ -22,13 +22,17 @@
     (select avg(nvl(review_star, 0)) from review_tbl rev where rev.product_no = p.product_no)as revCount,
     p.product_imgpath as productImgPath
     from product_tbl p
-	<if test="selPro!='전체'.toString()">	<!-- 카테고리 지정 -->
-		where product_Category=#{selPro}
-	</if>
-	where product_type = 2
-	order by p.product_no desc)b)
+	<choose>
+        <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
+            where product_Category=#{selPro} and product_Category=#{selPro} 
+        </when>
+        <otherwise>
+            where product_type = 2
+        </otherwise>
+    </choose>
+    order by p.product_no desc)b)
     where rnum between #{start} and #{end}
-	</select>
+    </select>
 
 	<!-- 재건 -->
 	<select id="selectTotalCount" resultType="int" parameterType="map">

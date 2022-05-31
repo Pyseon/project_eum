@@ -42,6 +42,10 @@ public class ProductController {
 		System.out.println("selPro : "+selPro);
 		return "product/ClassList";
 	}
+	@RequestMapping(value="/productWriter.do")
+		public String productWriter() {
+		return "product/productWriter";
+	}
 	
 	//윤지
 	@RequestMapping(value = "/productDetail.do")

@@ -30,7 +30,7 @@
 					<option value="memberNick">닉네임</option>
 				</select>
 				<input type="hidden" name="reqPage" value="1">
-				<input type="hidden" name="selMem" value="0">
+				<input type="hidden" name="selectNum" value="0">
 				<input type="text" name="keyword">				
 				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>
@@ -67,8 +67,7 @@
 						<c:otherwise>
 							<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=0&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 등록</button></td>
 						</c:otherwise>
-					</c:choose>
-					
+					</c:choose>					
 					</tr>
 					</c:forEach>
 			</table>

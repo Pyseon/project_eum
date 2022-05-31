@@ -112,9 +112,19 @@ public class ManagerDao {
 		return result;
 	}
 
-	public int ansrptIs(int reportNo) {
-		int ansrpotIs = sqlSession.selectOne("manager.ansrptIs", reportNo);
-		return ansrpotIs;
+	public int reportMember(int memberNo) {
+		int result = sqlSession.update("manager.reportMember", memberNo);
+		return result;
+	}
+
+	public int deleteArticles(HashMap<String, Integer> map) {
+		int result = sqlSession.delete("manager.deleteArticles", map);
+		return result;
+	}
+
+	public int updateReportIs(HashMap<String, Integer> map) {
+		int result = sqlSession.update("manager.updateReportIs",map);
+		return result;
 	}
 	
 	

@@ -11,6 +11,14 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
+		<div>
+			<ul>
+				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=1'">답변대기</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=2'">답변완료</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=3'">답변거부</button></li>
+			</ul>
+		</div>
 		<div class="searchBox">
 			<form action="/manaReport.do" method="post">
 				<select name="searchType">
@@ -44,13 +52,43 @@
 					<td>${rpt.reportNo }</td>
 					<td>${rpt.reportTitle }</td>
 					<td>${rpt.defendantId }</td>
-					<td>${rpt.reportCategory }</td>
+					<td>
+					<c:choose>
+						<c:when test="${rpt.reportCategory == 0}">
+							상품						
+						</c:when>
+						<c:when test="${rpt.reportCategory == 1}">
+							상품후기
+						</c:when>
+						<c:when test="${rpt.reportCategory == 2}">
+							개설요청													
+						</c:when>
+						<c:when test="${rpt.reportCategory == 3}">
+							커뮤니티						
+						</c:when>
+						<c:when test="${rpt.reportCategory == 4}">
+							커뮤니티댓글						
+						</c:when>
+					</c:choose>
+					</td>
 					<td>${rpt.reportIndex }</td>
 					<td>${rpt.reportDate }</td>
-					<td>${rpt.reportIs }</td>
+					<td id="reportIs">
+					<c:choose>
+						<c:when test="${rpt.reportIs == 0}">
+							답변 대기						
+						</c:when>
+						<c:when test="${rpt.reportIs == 1}">
+							답변 완료						
+						</c:when>
+						<c:when test="${rpt.reportIs == 2}">
+							답변 거부						
+						</c:when>
+					</c:choose>
+					</td>
 					<td><button class="btn bc3 bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button></td>
-					<td><button>글삭제</button></td>
-					<td><button>신고삭제</button></td>
+					<td><button class="btn bc3 bc1" onclick="location.href='/reportMember.do?memberNo=${rpt.defendant}&category=${rpt.reportCategory }&index=${rpt.reportIndex }&reportNo=${rpt.reportNo }&selNo=1'">회원정지</button></td>
+					<td><button class ="btn bc3 bc1" onclick="location.href=/refuseReport.do?reportNo=${rpt.reportNo}&selNo=2">신고삭제</button></td>
 					
 				</tr>
 				</c:forEach>

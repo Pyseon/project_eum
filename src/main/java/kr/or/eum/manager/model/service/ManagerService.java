@@ -154,16 +154,30 @@ public class ManagerService {
 	public ArrayList<Report> detailReport(int reportNo) {
 		return dao.detailReport(reportNo);
 	}
-	
-	public int ansrptIs(int reportNo) {
-		return dao.ansrptIs(reportNo);
-	}
 
 	public int answerReport(String answerTitle, String answerContent) {
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("answerTitle", answerTitle);
 		map.put("answerContent", answerContent);
 		return 0;
+	}
+	
+	public int reportMember(int memberNo) {
+		return dao.reportMember(memberNo);
+	}
+
+	public int deleteArticles(int category, int index) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("category", category);
+		map.put("index", index);
+		return dao.deleteArticles(map);
+	}
+
+	public int updateReportIs(int reportNo, int selNo) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("reportNo", selNo);
+		map.put("selNo", selNo);
+		return dao.updateReportIs(map);
 	}
 	
 }

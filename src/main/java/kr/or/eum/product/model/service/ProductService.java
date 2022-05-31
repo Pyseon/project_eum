@@ -220,6 +220,10 @@ public class ProductService {
 		map.put("memberNo", memberNo);
 		return productDao.deletetWish(map);
 	}
+
+	public int afterWishCount(int productNo) {
+		return productDao.selectwish(productNo);
+	}
 	
 
 }

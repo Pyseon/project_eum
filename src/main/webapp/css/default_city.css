@@ -549,29 +549,31 @@ textarea.input-form {
 }
 
 /* 커뮤니티 페이지 */
+#comm-content {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-around;
+}
+
+.do-write-btn {
+	margin-right: 20px;
+}
+
 .comm-header {
 	margin: 30px 5px 10px 5px;
 }
 
 .comm-nav {
-	background-color: #fff;
-	color: #333;
-	border-radius: calc(0.5 * 44px);
-	border: 1px solid #ccc;
-	padding: 3px 12px;
+	min-width: 74px;
+	height: 40px;
+	padding: 0 14px 0;
+	border-radius: 4px;
+	text-align: center;
+	color: #555;
+	font-size: 14px;
 	box-sizing: border-box;
-	margin-right: 3px;
-}
-
-.comm-nav:hover {
-	cursor: pointer;
-	border: 1px solid #1abc9c;
-}
-
-.comm-nav:focus {
-	background-color: #1abc9c;
-	color: #fff;
-	border: 1px solid #1abc9c;
+	border: 1px solid #e5e5e5;
+	background: none;
 }
 
 .card-flex {
@@ -583,7 +585,7 @@ textarea.input-form {
 	width: 250px;
 	/* height:1500px; */
 	border: 1px solid #ddd;
-	margin: 25px 15px 55px 10px;
+	margin: 25px 15px 25px 10px;
 }
 
 .card-img {
@@ -681,6 +683,42 @@ figcaption {
 	text-align: left;
 }
 
+.do-write-icon {
+	vertical-align: top;
+	font-size: 18px;
+}
+
+.pagination>li:first-child {
+	margin-right: auto;
+}
+
+.do-write-btn {
+	border: 1px solid #a7a7a7;
+	margin-left: auto;
+	padding: 6px 10px;
+	font-size: 16px;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 4px;
+	background: none;
+}
+
+.do-write-btn:hover {
+	box-shadow: 1px 1px 0px #a7a7a7;
+	border: 1px solid #333;
+	transition-duration: 0.3s;
+}
+
+.comm-header {
+	display: flex;
+	justify-content: left;
+	align-items: center;
+}
+
+.comm-header>.do-write {
+	margin-left: auto;
+}
+
 /*인증 마크 verified */
 .verified-icon {
 	color: #358bce;
@@ -699,7 +737,8 @@ figcaption {
 }
 
 .article-wrap {
-	margin-top: 30px; padding : 29px 29px 0;
+	margin-top: 30px;
+	padding: 29px 29px 0;
 	border: 1px solid #ebecef;
 	border-radius: 6px;
 	padding: 29px 29px 0;
@@ -798,31 +837,34 @@ figcaption {
 }
 
 .attr-title {
-     font-size: 22px;
-        text-align: center;
-        margin-bottom: 15px;
-        border-radius: 5px;
-        height: 50px;
+	font-size: 22px;
+	text-align: center;
+	margin-bottom: 15px;
+	border-radius: 5px;
+	height: 50px;
 }
 
-.attr-thumbs-up{
-	    font-size: 33px;
-        padding-top: 7px;
-        vertical-align: text-bottom;
-        margin-right: 10px;
+.attr-thumbs-up {
+	font-size: 33px;
+	padding-top: 7px;
+	vertical-align: text-bottom;
+	margin-right: 10px;
 }
-.attr-thumbs-down{
-	    font-size: 33px;
-        padding-top: 10px;
-        vertical-align: text-bottom;
-        margin-right: 10px;
+
+.attr-thumbs-down {
+	font-size: 33px;
+	padding-top: 10px;
+	vertical-align: text-bottom;
+	margin-right: 10px;
 }
-.attr-thumbs-up+span{
-	   vertical-align: top;
+
+.attr-thumbs-up+span {
+	vertical-align: top;
 	line-height: 50px;
 }
-.attr-thumbs-down+span{
-	   vertical-align: top;
+
+.attr-thumbs-down+span {
+	vertical-align: top;
 	line-height: 50px;
 }
 
@@ -848,8 +890,9 @@ figcaption {
 	color: #3865f2;
 	font-size: 25px;
 }
-.weak-icon{
-		color: #d15150;
+
+.weak-icon {
+	color: #d15150;
 	font-size: 25px;
 }
 
@@ -924,6 +967,15 @@ figcaption {
 	padding-left: 40px;
 }
 
+.reply-writer {
+	border: 1px solid #3865f2;
+	font-size: 12px;
+	margin-left: 5px;
+	padding: 1px 4px;
+	border-radius: 22px;
+	color: #3865f2;
+}
+
 @media ( max-width : 1200px) {
 	.attr-box {
 		padding: 5px;
@@ -969,7 +1021,7 @@ figcaption {
 	transition: all 0.3s ease 0s;
 	min-width: 87px;
 	text-align: center;
-	margin-left:10px;
+	margin-left: 10px;
 }
 
 .comments-area .btn-reply:hover {

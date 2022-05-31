@@ -1,133 +1,113 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <!-- 구글 폰트-->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Rubik+Moonrocks&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css"
-      rel="stylesheet"
-      type="text/css"
-    />
-    <!-- 구글 아이콘 -->
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-    <!-- jquery -->
-    <script src="js/jquery-3.6.0.js"></script>
-    <!-- 기본 CSS -->
-    <link rel="stylesheet" href="css/default_city.css" />
-    <link rel="stylesheet" href="css/sweetalert2.min.css" />
-    <!-- 기본 js -->
-    <script src="js/default.js"></script>
-    <script src="js/sweetalert2.all.min.js"></script>
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/font-awesome.min.css" rel="stylesheet" />
-    <link href="css/prettyPhoto.css" rel="stylesheet" />
-    <link href="css/price-range.css" rel="stylesheet" />
-    <link href="css/animate.css" rel="stylesheet" />
-    <link href="css/main.css" rel="stylesheet" />
-    <link href="css/responsive.css" rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous"></script>
-    <!--[if lt IE 9]>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<!-- 구글 아이콘 -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet" />
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+<!-- jquery -->
+<script src="js/jquery-3.6.0.js"></script>
+<!-- 기본 CSS -->
+<link rel="stylesheet" href="css/default_city.css" />
+<link rel="stylesheet" href="css/sweetalert2.min.css" />
+<!-- 기본 js -->
+<script src="js/default.js"></script>
+<script src="js/sweetalert2.all.min.js"></script>
+<link href="css/bootstrap.min.css" rel="stylesheet" />
+<link href="css/prettyPhoto.css" rel="stylesheet" />
+<link href="css/price-range.css" rel="stylesheet" />
+<link href="css/animate.css" rel="stylesheet" />
+<link href="css/main.css" rel="stylesheet" />
+<link href="css/responsive.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/2fade9eaba.js"
+	crossorigin="anonymous"></script>
+<!-- 썸머노트 -->
+<!-- summer note -->
+<script src="js/summernote/summernote-lite.js"></script>
+<script src="js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="css/summernote/summernote-lite.css" />
+<!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
       <script src="js/respond.min.js"></script>
+<link href="css/font-awesome.min.css" rel="stylesheet" />
     <![endif]-->
-    <link rel="shortcut icon" href="images/ico/favicon.ico" />
-    <link
-      rel="apple-touch-icon-precomposed"
-      sizes="144x144"
-      href="images/ico/apple-touch-icon-144-precomposed.png"
-    />
-    <link
-      rel="apple-touch-icon-precomposed"
-      sizes="114x114"
-      href="images/ico/apple-touch-icon-114-precomposed.png"
-    />
-    <link
-      rel="apple-touch-icon-precomposed"
-      sizes="72x72"
-      href="images/ico/apple-touch-icon-72-precomposed.png"
-    />
-    <link
-      rel="apple-touch-icon-precomposed"
-      href="images/ico/apple-touch-icon-57-precomposed.png"
-    />
-    <style>
-      #login-btn {
-        font-family: fs-regular;
-      }
-   
-      #nav-all-category {
-        font-family: fs-bold;
-        color: #555;
-      }
-    </style>
-  </head>
-  <!--/head-->
+<link rel="shortcut icon" href="images/ico/favicon.ico" />
+<link rel="apple-touch-icon-precomposed" sizes="144x144"
+	href="images/ico/apple-touch-icon-144-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="114x114"
+	href="images/ico/apple-touch-icon-114-precomposed.png" />
+<link rel="apple-touch-icon-precomposed" sizes="72x72"
+	href="images/ico/apple-touch-icon-72-precomposed.png" />
+<link rel="apple-touch-icon-precomposed"
+	href="images/ico/apple-touch-icon-57-precomposed.png" />
+<style>
+#login-btn {
+	font-family: fs-regular;
+}
 
-  <body>
-    <header id="header">
-      <!--header-->
-      <div class="header-middle">
-        <!--header-middle-->
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="logo pull-left">
-                <a href="/">
-                	<img src="./img/main-logo-eum.png" alt="" style="width: 120px; vertical-align: middle; margin-top: 31px;"/>
-                </a>
-              </div>
-            </div>
-            <div class="col-sm-8">
-              <div class="shop-menu pull-right">
-                <ul class="nav navbar-nav">
-                 <c:choose>
-	                 <c:when test="${empty sessionScope.member }">
-		                  <li>
-		                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555">전문가 등록</a>
-		                  </li>
-		                  <li>
-		                    <a href="/joinFrm.do">회원가입</a>
-		                  </li>
-		                  <li>
-		                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/loginFrm.do'">로그인</button>
-		                  </li>
-	                  </c:when>
-	                  <c:otherwise>
-	                  	  <li>
-		                    <a href="/reference.jsp" style="font-family: fs-bold; color: #555">전문가 등록</a>
-		                  </li>
-		                  <li>
-		                    <a href="#">마이페이지</a>
-		                  </li>
-		                  <li>
-		                    <button class="btn bc1 bs6" id="login-btn" type="button" onclick="location.href='/logout.do'">로그아웃</button>
-		                  </li>
-	                  </c:otherwise>
-                 	</c:choose>
-                </ul>
-              </div>
-              <div class="search_box pull-right">
-                <input type="text" placeholder="상담,클래스,지식마켓 검색" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!--/header-middle-->
+#nav-all-category {
+	font-family: fs-bold;
+	color: #555;
+}
+</style>
+</head>
+<!--/head-->
+<body>
+	<header id="header">
+		<!--header-->
+		<div class="header-middle">
+			<!--header-middle-->
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-4">
+						<div class="logo pull-left">
+							<a href="/"> <img src="./img/main-logo-eum.png" alt=""
+								style="width: 120px; vertical-align: middle; margin-top: 31px;" />
+							</a>
+						</div>
+					</div>
+					<div class="col-sm-8">
+						<div class="shop-menu pull-right">
+							<ul class="nav navbar-nav">
+								<c:choose>
+									<c:when test="${empty sessionScope.member }">
+										<li><a href="/reference.jsp"
+											style="font-family: fs-bold; color: #555">전문가 등록</a></li>
+										<li><a href="/joinFrm.do">회원가입</a></li>
+										<li>
+											<button class="btn bc1 bs6" id="login-btn" type="button"
+												onclick="location.href='/loginFrm.do'">로그인</button>
+										</li>
+									</c:when>
+									<c:otherwise>
+										<li><a href="/reference.jsp"
+											style="font-family: fs-bold; color: #555">전문가 등록</a></li>
+										<li><a href="#">마이페이지</a></li>
+										<li>
+											<button class="btn bc1 bs6" id="login-btn" type="button"
+												onclick="location.href='/logout.do'">로그아웃</button>
+										</li>
+									</c:otherwise>
+								</c:choose>
+							</ul>
+						</div>
+						<div class="search_box pull-right">
+							<input type="text" placeholder="상담,클래스,지식마켓 검색" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--/header-middle-->
 
       <div class="header-bottom">
         <!--header-bottom-->
@@ -311,12 +291,11 @@
     		});
     	});
     </script>
-        <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.scrollUp.min.js"></script>
-    <script src="js/price-range.js"></script>
-    <script src="js/jquery.prettyPhoto.js"></script>
-    <script src="js/main.js"></script>
-    
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.scrollUp.min.js"></script>
+	<script src="js/price-range.js"></script>
+	<script src="js/jquery.prettyPhoto.js"></script>
+	<script src="js/main.js"></script>
+
 </body>
 </html>

@@ -16,6 +16,7 @@ import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.member.model.service.MemberService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
@@ -36,15 +37,19 @@ public class MemberController {
 	}
 	
 	//대권 로그인 실행
+	//@ResponseBody
 	@RequestMapping(value="/login.do")
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
 		System.out.println(member);
+		String str="";
 		if(member != null) {
 			session.setAttribute("member", member);
-			return "1";
+			str="1";
+			return "redirect:/";
 		}else {
-			return "0";
+			str="0";
+			return "member/loginFrmFail";
 		}
 		
 	}
@@ -95,7 +100,7 @@ public class MemberController {
 	}
 	
 	//재민 1:1문의 상세내역
-	@RequestMapping(value="/questionView.do.do")
+	@RequestMapping(value="/questionView.do")
 	public String questionView(int qstNo, Model model) {
 		Question q = service.selectOneQuestion(qstNo);
 		model.addAttribute("q",q);
@@ -113,7 +118,7 @@ public class MemberController {
 	}
 	//재민 찜내역
 	
-	@RequestMapping(value="/Wishlist.do")
+	@RequestMapping(value="/Mywishlist.do")
 	public String Mywishlist(Model model) {
 		ArrayList<Wishlist> list = service.selectWishlist();
 		model.addAttribute("list", list);

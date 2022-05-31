@@ -62,7 +62,7 @@
 			member_point as memberPoint,
 			member_reportcount as memberReportCount,
 			enrolldate as enrollDate
-		from member_tbl 
+		from member_tbl
 		<choose>
 			<when test="searchType.equals('memberId') ">
 				where member_id like '%'||#{keyword}||'%'
@@ -198,5 +198,116 @@
 			where pay_no = #{value }
 	</select>
 	
+	<select id="reportList" parameterType="map" resultType="rpt">
+		select
+		report_no as reportNo,
+		defendant,
+		(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
+		report_date as reportDate,
+		report_category as reportCategory,
+		report_index as reportIndex,
+		report_Title as reportTitle,
+		report_is as reportIs
+		from report_tbl report
+		<choose>
+			<when test="selectNum == 1">
+				where report_is= 0
+			</when>
+			<when test="selectNum == 2">
+				where report_is= 1
+			</when>
+			<when test="selectNum == 3">
+				where report_is= 2
+			</when>
+			<otherwise>
+				where report_is= 0 or report_is=1 or report_is=2
+			</otherwise>
+		</choose>
+	</select>
+	
+	<select id="reportCount" resultType="int">
+		select count(*) from report_tbl
+	</select>
+	
+	<select id="searchReportList" parameterType="map" resultType="rpt">
+		select
+		report_no as reportNo,
+		defendant,
+		(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
+		report_date as reportDate,
+		report_category as reportCategory,
+		report_index as reportIndex,
+		report_title as reportTitle,
+		report_is as reportIs
+		from report_tbl report
+		<choose>
+			<when test="searchType.equals('reportTitle') ">
+				where report_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('memberId') ">
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
+			</when>
+		</choose>
+	</select>
+	
+	<select id="searchReportCount" parameterType="map" resultType="int">
+		select count(*) from report_tbl
+		<choose>
+			<when test="searchType.equals('reportTitle') ">
+				where report_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('memberId') ">
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
+			</when>
+		</choose>
+	</select>
+	
+	<select id="detailReport" parameterType="int" resultType="rpt">
+		select
+			report_no as reportNo,
+			defendant,
+			(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
+			(select member_Id from member_tbl m where report.plaintiff = m.member_no) as plaintiffId,
+			report_content as reportContent,
+			report_date as reportDate,
+			report_category as reportCategory,
+			report_index as reportIndex,
+			report_title as reportTitle
+			from report_tbl report
+			where report_no = #{value }
+	</select>
+	
+	<select id="reportMember" parameterType="int">
+		update member_tbl set grade=4 where member_no=#{value }
+	</select>
+	
+	<delete id="deleteArticles" parameterType="map">
+		delete from 
+		<choose>
+			<when test="category == 0">
+				product_tbl where product_no = #{index }
+			</when>
+			<when test="category == 1">
+				review_tbl where review_no = #{index }
+			</when>
+			<when test="category == 2">
+				request_tbl where req_no = #{index }
+			</when>
+			<when test="category == 3">
+				community_tbl where comm_no = #{index }
+			</when>
+			<when test="category == 4">
+				communityco_tbl where cmnt_no = #{index }
+			</when>
+		</choose>
+	</delete>
+	
+	<update id="updateReportIs">
+		update report_tbl set 
+		report_is = #{selNo }
+		where report_no = #{reportNo }
+	</update>
 	
 </mapper>

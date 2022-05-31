@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/product.css" />
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="header-div"><%@ include file="/WEB-INF/views/common/header.jsp"%></div>
 	<section class="post-content-area">
 		<div class="container">
 			<div class="row">
@@ -184,52 +184,9 @@
 									</div>
 								</div>
 								<div class="real-review-wrap">
-								<%-- <c:forEach items="${prm}" var="prm" step="1">
-									<div class="real-review">
-										<div class="member-picture">
-											<!-- <img class="reviewPicture" src=> 프로필 -->
-										</div>
-										<div class="info">
-											<div class="info-one">
-												<span class="nickname">${prm.memberNick }</span> 
-												<div class="review-btn-2">
-													<a href="#">수정</a> <a href="#">삭제</a> <br>
-												</div>	
-												<div class="star-wrap star-wrap-2">
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span>  
-													<span class="star-score star-score-2">5.0</span>
-													<div class="star-on">
-														<div class="icon-star">
-															<span class="material-icons">star</span> 
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-														</div>
-													</div>
-												</div>
-												<div class="span-wrap">
-													<span class="text">|&nbsp;&nbsp;</span>
-													<span class="text">2022.05.20</span>
-													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-												</div>
-												<div class="review-btn">
-													<div class="report-wrap">
-														<ul>
-															<li><img id="icon-report" src="img/product/icon-report.png"></li>
-															<li><span id="report">신고</span></li>
-														</ul>
-													</div>
-												</div>
-											</div><!--info-one  -->
-											<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-										</div> <!-- info -->
-									</div><!-- real review -->
-									</c:forEach> --%>
+								 <c:if test="${reviewCount eq 0}">
+								 	<div class="reviewNull">등록된 후기가 없습니다.</div>
+								 </c:if>
 								</div><!-- real review wrap-->
 								<div class="page-nav"></div>
 								<!-- 페이징///////////////////////////// -->
@@ -304,9 +261,28 @@
 									<li><span class="material-icons icons-check">done</span> <span class="check-content">시간 초과 시 추가 비용이 발생할 수 있습니다.</span></li>
 								</ul>
 							</div>
-							<button class="bc1" id="purchaseBtn">구매하기</button>
+							<form action="/purchase.do" method="get">
+								<input type="hidden" name="productNo" value="${p.productNo }"/>
+								<button type="submit" class="bc1" id="purchaseBtn">구매하기</button>
+							</form>
 
 						</div><!--right-first-box-->
+						
+					<div class="single-sidebar-widget">
+						<div class="right-wish-box">
+							<div class="wish-title-wrap">
+								<c:choose>
+									<c:when test="${wishMemberCheck eq 0 }">
+										<div><span class="material-icons icon-wish">favorite_border</span></div>								
+									</c:when>
+									<c:otherwise>
+										<div><span class="material-icons icon-wish">favorite</span></div>
+									</c:otherwise>
+								</c:choose>
+								<div class="wish-count">${wishCount }</div>
+							</div>
+						</div>	<!-- right-wish-box -->
+					</div><!-- single-sidebar-widget -->
 						
 					</div><!-- widget-wrap -->
 					<div class="widget-wrap">
@@ -327,7 +303,7 @@
 												</c:otherwise>
 											</c:choose>
 										</h3>					
-									</div>				
+									</div>	
 									<div class="expert-profile-span">
 										<span class="material-icons icon-confirm confirm2">verified</span>
 									</div>	
@@ -373,12 +349,20 @@
 								</ul>
 							</div>
 							<hr id="ranking-line">
-							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
 								<c:forEach items="${wishList}" var="wishList" step="1" varStatus="status">
 									<ul>
 										<li class="ranking-number"><c:out value="${status.index+1}"/></li>
-										<li class="likeranking-li">${wishList.productTitle }<a href="#"></a></li>
+										<li class="likeranking-li"> 
+											<c:choose>
+												<c:when test="${wishList.productType eq 1}">
+													<a class="rankingurl" href="/productDetail.do?productNo=${wishList.productNo }&expertNo=${wishList.expertNo}">${wishList.productTitle }</a> 
+												</c:when>
+												<c:otherwise>
+													<a class="rankingurl" href="/imgVerProductDetail.do?productNo=${wishList.productNo }&expertNo=${wishList.expertNo}">${wishList.productTitle }</a> 
+												</c:otherwise>
+											</c:choose>
+										</li>
 									</ul>
 								</c:forEach>
 							</div><!-- likeranking-list-wrap -->
@@ -391,13 +375,15 @@
 		</div><!-- container -->
 	</section>
 
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<div class="footer-div"><%@ include file="/WEB-INF/views/common/footer.jsp"%></div>
 	<script>
 		$(function(){
+			
 			const productNo = ${p.productNo};
 			const tatalCount = ${reviewCount};
 			let isLoadedReview = false;
 			
+			//상세설명 더보기
 			$('#moreBtn').on('click',function(){
 				<%--조언 : 내부컨텐츠 만큼 높이값을 잡아라 부모는 높이값이 없고, 자식은 높이값이 있으면 자식만큼 되니까--%>
 				const content = $('.detail-main-content');
@@ -410,6 +396,7 @@
 				}
 			});
 			
+			//탭이동
 			$('.tab-link').click(function() {
 				let tab_id = $(this).attr('data-tab');
 
@@ -430,6 +417,7 @@
 
 			});
 			
+			//탭 border-bottom
 			$('.title1').click(function() {
 				$('.title1').css("border-bottom","3px solid #3865f2");
 				$('.title2').css("border","none");
@@ -441,6 +429,7 @@
 				$('.title1').css("border","none");
 			});
 			
+			//리뷰 페이징 ajax
 			function getReviewList(pageNum) {
 				$.ajax({
 					url : "/review.do",
@@ -492,7 +481,7 @@
 					const review = $(`
 						<div class="real-review">
 							<div class="member-picture">
-								<img class="reviewPicture" src="/img/member/testpicture.png">
+								<img class="reviewPicture" src="/img/member/\${item.memberPicturePath }">
 							</div>
 							<div class="info">
 								<div class="info-one">
@@ -522,6 +511,67 @@
 					$('.real-review-wrap').append(review);
 				}
 			}
+			
+			//좋아요(wish)
+			$('.icon-wish').on("click", function() {
+				 var memberNo = ${memberNo};
+				 var currentValue = this.innerText;
+		         if(currentValue == "favorite_border" && memberNo != 0) {
+		         	this.innerText = "favorite";
+		         	wish();
+		         }else {
+		            this.innerText = "favorite_border";
+		            wishRemove();
+		         }
+			});
+			
+			//좋아요(wish) insert
+			function wish() {
+			var memberNo = ${memberNo};
+			//var afterWishCount = Number($('.wish-count').text())+1;
+				if(memberNo != 0) {
+					$.ajax({
+						url : "/insertWish.do",
+						data : {
+							productNo : productNo,
+							memberNo : memberNo
+						},
+						success : function(data) {
+							$('.wish-count').text(data);
+							console.log('좋아요!');
+						},
+						error : function() {
+							console.log('에러');
+						}
+					});	
+				}else {
+					alert('로그인 후 이용해주세요.');
+				}				
+			};
+			
+			//좋아요(wish) delete
+			function wishRemove() {
+			var memberNo = ${memberNo};
+			var afterWishCount = ${wishCount }-1;
+				if(memberNo != 0) {
+					$.ajax({
+						url : "/deleteWish.do",
+						data : {
+							productNo : productNo,
+							memberNo : memberNo
+						},
+						success : function(data) {
+							$('.wish-count').text(data);
+							console.log('관심없어요!');
+						},
+						error : function() {
+							console.log('에러');
+						}
+					});	
+				}else {
+					alert('로그인 후 이용해주세요.');
+				}				
+			};
 		}); 
 	</script>
 </body>

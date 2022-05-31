@@ -3,6 +3,8 @@ package kr.or.eum.product.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,12 +15,14 @@ import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
+import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.dao.ProductDao;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.product.model.vo.ReviewPageData;
+import kr.or.eum.wishlist.model.vo.Wishlist;
 import kr.or.eum.product.model.vo.ProReviewMember;
 
 
@@ -91,7 +95,7 @@ public class ProductService {
 	}
 	
 	//윤지
-	public ProductDetail selectProductDetail(int productNo, int expertNo) {
+	public ProductDetail selectProductDetail(int productNo, int expertNo, Member member) {
 		Product product = productDao.selectOneProduct(productNo);
 		ArrayList<String> productQNA = new ArrayList<String>();
 		if(product.getProductQst() != null) {
@@ -117,7 +121,17 @@ public class ProductService {
 		int cost = product.getCost()*product.getSale()/100;
 		String[] tag = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
-		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList);
+		int wishCount = productDao.selectwish(productNo);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		if(member != null) {
+			map.put("memberNo", member.getMemberNo());			
+		}else {
+			map.put("memberNo", 0);
+		}
+		int wishMemberCheck = productDao.selectWishMemberCheck(map);
+		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCount, wishMemberCheck);
 		return pd;
 	}//selectProductDetail
 	
@@ -189,9 +203,27 @@ public class ProductService {
 		pageNavi += "</ul>";
 		ReviewPageData rpd = new ReviewPageData(list, pageNavi);
 		
-		System.out.println(pageNavi);
 		return rpd;
 	}//selectReviewList
+	
+	//윤지
+	public int insertWish(int productNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("memberNo", memberNo);
+		return productDao.insertWish(map);
+	}
+	
+	public int deleteWish(int productNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("memberNo", memberNo);
+		return productDao.deletetWish(map);
+	}
+
+	public int afterWishCount(int productNo) {
+		return productDao.selectwish(productNo);
+	}
 	
 
 }

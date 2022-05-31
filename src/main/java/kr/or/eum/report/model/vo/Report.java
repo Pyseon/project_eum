@@ -9,10 +9,15 @@ import lombok.NoArgsConstructor;
 @Data
 public class Report {
 	private int reportNo;
-	private int memberNo;
+	private int defendant;		//신고받은사람
+	private int plaintiff;		//신고한 사람
 	private String reportContent;
 	private String reportDate;
 	private int reportCategory;
 	private int reportIndex;
 	private String reportTitle;
+	private int reportIs;
+	
+	private String defendantId;
+	private String plaintiffId;
 }

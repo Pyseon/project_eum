@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.eum.manager.model.service.ManagerService;
+import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.product.model.vo.ProductDetail;
+import kr.or.eum.report.model.vo.Report;
 
 @Controller
 public class ManagerController {
@@ -55,6 +59,39 @@ public class ManagerController {
 		ArrayList<Payment> pay = service.detailPayment(payNo);
 		model.addAttribute("pay", pay);
 		return "manager/detailPayment";
+	}
+	@RequestMapping(value = "/manaReport.do")
+	public String manaReport(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaReport.do";
+		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", rpd.get("reportList"));
+		model.addAttribute("pageNavi",rpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		return "manager/managementReport";
+	}
+	@RequestMapping(value = "/detailReport.do")
+	public String detailReport(int reportNo,int categoryNo,int reportIndex, Model model) {
+		ArrayList<Report> report = service.detailReport(reportNo);
+		model.addAttribute("report", report);
+		return "manager/detailReport";
+	}
+	@RequestMapping(value="/answerReport.do")
+	public String answerReport(String answerTitle, String answerContent) {
+		int result = service.answerReport(answerTitle, answerContent);
+		return null;
+	}
+	
+	@RequestMapping(value = "/reportMember.do")
+	public String reportMember(int memberNo, int category, int index, int reportNo,int selNo) {
+		int result = service.reportMember(memberNo);
+		int result2 = service.deleteArticles(category, index);
+		int result3 = service.updateReportIs(reportNo, selNo);
+		return "redirect:/manaMember.do?reqPage=1&selectNum=0&searchType=memberNo&keyword="+memberNo;
+	}
+	@RequestMapping(value = "/refuseReport.do")
+	public String refuseReport(int reportNo, int selNo) {
+		int result = service.updateReportIs(reportNo, selNo);
+		return null;
 	}
 	
 	

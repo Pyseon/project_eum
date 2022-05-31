@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import kr.or.eum.manager.model.dao.ManagerDao;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.report.model.vo.Report;
 
 @Service
 public class ManagerService {
@@ -54,6 +55,18 @@ public class ManagerService {
 			}
 			pageData.put("paymentList", paymentList);
 			break;
+		case "manaReport.do":
+			ArrayList<Report> reportList = new ArrayList<Report>();
+			if(searchType == null) {
+				reportList = dao.ReportPageData(pageMap);
+				totalCount = dao.ReportCount();
+			}else {
+				pageMap.put("searchType", searchType);
+				pageMap.put("keyword", keyword);
+				reportList = dao.searchReportPageData(pageMap);
+				totalCount = dao.searchReportCount(pageMap);
+			}
+			pageData.put("reportList", reportList);
 		}
 		
 		int totalPage = 0;
@@ -136,6 +149,35 @@ public class ManagerService {
 
 	public ArrayList<Payment> detailPayment(int payNo) {
 		return dao.detailPayment(payNo);
+	}
+
+	public ArrayList<Report> detailReport(int reportNo) {
+		return dao.detailReport(reportNo);
+	}
+
+	public int answerReport(String answerTitle, String answerContent) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("answerTitle", answerTitle);
+		map.put("answerContent", answerContent);
+		return 0;
+	}
+	
+	public int reportMember(int memberNo) {
+		return dao.reportMember(memberNo);
+	}
+
+	public int deleteArticles(int category, int index) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("category", category);
+		map.put("index", index);
+		return dao.deleteArticles(map);
+	}
+
+	public int updateReportIs(int reportNo, int selNo) {
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		map.put("reportNo", selNo);
+		map.put("selNo", selNo);
+		return dao.updateReportIs(map);
 	}
 	
 }

@@ -12,4 +12,6 @@ public class ProductAndWishList {
 	private String productTitle;
 	private int wishNo;
 	private int memberNo;
+	private int expertNo;
+	private int productType;
 }

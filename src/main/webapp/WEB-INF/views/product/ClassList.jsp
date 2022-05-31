@@ -20,15 +20,15 @@ li{
 	.posting-wrap {
     	display: flex;
     	flex-wrap: wrap;
-    	margin-left: 20px;
+    	margin-left: 46px;
 	}
 	
 	.posting-item{
 	    box-sizing: border-box;
-    	width: 250px !important;
+    	width: 240px !important;
     	padding : 0px !important; 
-    	height: 400px !important;
-    	margin: 25px 15px 55px 10px;
+    	height: 385px !important;
+    	margin: 25px 10px 25px 10px;
     	background-color: #ffffff;
     	box-shadow: 3px 3px 3px 3px #e7dede;
 	}
@@ -38,7 +38,7 @@ li{
 	font-size:18px;
 	font-family: fs-bold !important;
 	display: flex;
-	margin: 20px 0 10px 0;
+	margin: 20px 0 0px 0;
 	justify-content: space-between;
 	}
 	
@@ -63,8 +63,9 @@ li{
   		
 	}
 	.t4{
-	margin: -4px 0 10px 0;
+	margin: 14px 11px 10px 0;
 	display: flex;
+	justify-content: space-between;
 	}
 
 	.t4 > span{
@@ -97,7 +98,7 @@ li{
 }
 	.posting-connect > ul {
 		margin: 0px !important;
-		margin-top: 20px !important;
+		margin-top: 3px !important;
 		padding: 0px !important;
 	}
 	
@@ -221,14 +222,14 @@ li{
 				<li>
 					<div class="t1" style="font-family: fs-bold !important;">
 						<span class="card-category fs-bold">${c.productTitle }</span>
-						<span style="color: #bdbdbd;">
+						<span style="color: #bdbdbd; font-size: 14px !important; line-height: 2;">
 						${c.productCategory}
 						</span>
 					</div>
 				</li>
 			</ul>
 			
-			<ul>
+			<ul style="margin-top:0px;">
 				<li>
 					<div class="t3" style="margin-bottom: 5px;" >
 					${c.productIntro }
@@ -249,7 +250,7 @@ li{
 					</span>
 					</div>
 					
-				<div class="t4-right" style="line-height: 2;">
+				<div class="t4-right" style="line-height: 2; margin : 0 0 0 0px">
 					<div style="line-height: 2.5;"><span class="material-icons icons-message">message</span></div>
 					<div class="t4-info"><span>${c.revCount } </span></div>
 					 &nbsp;
@@ -262,18 +263,20 @@ li{
 			</li>
 		</ul>
 		
-		<div class="t2" style="margin: 0px 0 30px 30px;">
-		&nbsp;
+		<div class="t2" style="margin: 20px 0 0px 0px;" >	
+		
 		<span id="sele" style="width: auto;">${c.sale}%</span>
-			&nbsp;
-			<span id="price" style="width: auto;">
-			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
-			</span>
-			
-			<span id="fixed-price" style="width: auto;">
+	
+		<span class="t2" style="margin: 0px 0 30px 30px;">
+			<span id="price"  class="fc-7" style="width: auto; font-size: 18px; line-height: 1.5; font-weight: bold;">
 			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
 			</span>
-		</div> <!-- t2 -->
+			&nbsp;
+			<span id="fixed-price" style="width: auto; font-size: 12px; font-style: italic;">
+			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+			</span>
+		</span> 
+		</div><!-- t2 -->
 		
 		
 		</div><!-- posting-connect -->

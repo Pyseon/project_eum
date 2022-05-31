@@ -4,15 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductDetail;
+import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.wishlist.model.vo.Wishlist;
 import kr.or.eum.product.model.vo.ProReviewMember;
 
 
@@ -70,5 +74,30 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.selectReviewList", map);
 		return (ArrayList<ProReviewMember>)list;
 	}
+	
+	//윤지
+	public int selectwish(int productNo) {
+		int result = sqlSession.selectOne("wish.selectWishCount", productNo);
+		return result;
+	}
+	
+	//윤지
+	public int insertWish(HashMap<String, Object> map) {
+		int result = sqlSession.insert("wish.insertWish", map);
+		return result;
+	}
+	
+	//윤지
+	public int deletetWish(HashMap<String, Object> map) {
+		int result = sqlSession.delete("wish.deleteWish", map);
+		return result;
+	}
+
+	//윤지
+	public int selectWishMemberCheck(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("wish.selectWishMemberCheck", map);
+		return result;
+	}
+
 
 }

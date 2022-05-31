@@ -124,7 +124,8 @@ public class ProductController {
 		System.out.println("memberNo : "+memberNo);
 		int result = productService.insertWish(productNo, memberNo);
 		System.out.println("result : "+result);
-		return new Gson().toJson(result);
+		int afterWishCount = productService.afterWishCount(productNo);
+		return new Gson().toJson(afterWishCount); 
 	}
 	
 	//윤지
@@ -136,7 +137,8 @@ public class ProductController {
 		System.out.println("memberNo : "+memberNo);
 		int result = productService.deleteWish(productNo, memberNo);
 		System.out.println("result : "+result);
-		return new Gson().toJson(result);
+		int afterWishCount = productService.afterWishCount(productNo);
+		return new Gson().toJson(afterWishCount);
 	}
 	
 	

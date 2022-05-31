@@ -563,7 +563,7 @@
 			//좋아요(wish) insert
 			function wish() {
 			var memberNo = ${memberNo};
-			var afterWishCount = ${wishCount}+1;
+			//var afterWishCount = Number($('.wish-count').text())+1;
 				if(memberNo != 0) {
 					$.ajax({
 						url : "/insertWish.do",
@@ -571,8 +571,8 @@
 							productNo : productNo,
 							memberNo : memberNo
 						},
-						success : function() {
-							$('.wish-count').text(afterWishCount);
+						success : function(data) {
+							$('.wish-count').text(data);
 							console.log('좋아요!');
 						},
 						error : function() {
@@ -595,8 +595,8 @@
 							productNo : productNo,
 							memberNo : memberNo
 						},
-						success : function() {
-							$('.wish-count').text(afterWishCount);
+						success : function(data) {
+							$('.wish-count').text(data);
 							console.log('관심없어요!');
 						},
 						error : function() {

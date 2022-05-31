@@ -26,7 +26,7 @@ public class ProductDetail {
 	private int cost;
 	private String[] tag;
 	private ArrayList<ProductAndWishList> wishList;
-	private Wishlist wish;
+	private int wishCount;
 	
 }
 

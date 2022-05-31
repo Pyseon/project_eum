@@ -311,7 +311,7 @@ th{
 	margin-right: 20px;
 }
 /*추가된 좋아요*/
-.right-like-box{
+.right-wish-box{
 	margin-top: 20px;
 	border: 1px solid #ececec;
 	border-radius: 10px;
@@ -319,9 +319,18 @@ th{
 	height: 45px;
 	text-align: center;
 }
-.icon-like{
+.wish-title-wrap{
+	display: flex;
+	justify-content: center;
+}
+.icon-wish{
 	color: #f05454;
 	line-height: 45px !important;
+}
+.wish-count{
+	margin: 0;
+	line-height: 3.2;
+	margin-left: 5px;
 }
 
 

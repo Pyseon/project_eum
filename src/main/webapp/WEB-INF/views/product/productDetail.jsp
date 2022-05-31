@@ -315,6 +315,7 @@
 						<div class="right-wish-box">
 							<div class="wish-title-wrap">
 								<div><span class="material-icons icon-wish">favorite_border</span></div>
+								<div class="wish-count">${wishCount }</div>
 							</div>
 						</div>	<!-- right-wish-box -->
 					</div><!-- single-sidebar-widget -->

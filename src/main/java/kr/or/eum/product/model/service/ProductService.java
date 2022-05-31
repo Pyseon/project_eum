@@ -117,7 +117,6 @@ public class ProductService {
 		}
 		int reviewCount = productDao.selectReviewCount(productNo);
 		int paymentCount = productDao.selectPaymentExpertNoCount(productNo);
-		//ArrayList<ProReviewMember> prm = productDao.selectReviewList(productNo); 
 		int cost = product.getCost()*product.getSale()/100;
 		String[] tag = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
@@ -223,6 +222,19 @@ public class ProductService {
 
 	public int afterWishCount(int productNo) {
 		return productDao.selectwish(productNo);
+	}
+
+	public HashMap<String, Object> selectProductAndExpert(int productNo, int expertNo) {
+		Product product = productDao.selectOneProduct(productNo);
+		Expert expert = memberDao.selectOneExpertOnly(expertNo);
+		ExpertAndCompany expertAndCom = memberDao.selectOneExpert(expertNo);
+		ExpertAndMember expertM = memberDao.selectOneExpertPicture(expertNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("product", product);
+		map.put("expert",expert);
+		map.put("expertC",expertAndCom);
+		map.put("expertM",expertM);
+		return map;
 	}
 	
 

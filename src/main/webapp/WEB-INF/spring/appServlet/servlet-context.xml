@@ -60,6 +60,13 @@
 	<task:annotation-driven/>
 	<!--  AOP 어노테이션 방식 사용 선언!! -->
 	<aop:aspectj-autoproxy />
+	<!-- 전체채팅 웹소캣 객체 생성 -->
+	<beans:bean id="MemberChat" class="kr.or.eum.product.controller.ChatController"/>
+	<!-- 웹소캣 mapping --> <!-- /chat.do로 요청이 오면 id MemberChat에서 처리함 -->
+	<websocket:handlers>
+		<websocket:mapping handler="MemberChat" path="/chat.do"/>
+	</websocket:handlers>
+	
 	
 	
 	<context:component-scan base-package="kr.or.eum" />

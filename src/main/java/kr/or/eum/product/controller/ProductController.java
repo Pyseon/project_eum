@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +22,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
+import org.springframework.web.socket.CloseStatus;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
 import org.springframework.web.multipart.MultipartFile;
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -41,7 +49,7 @@ import kr.or.eum.product.model.vo.ProReviewMember;
 import kr.or.eum.product.model.vo.Payment;
 
 @Controller
-public class ProductController {
+public class ProductController{
 	@Autowired
 	private ProductService productService;
 	
@@ -106,7 +114,6 @@ public class ProductController {
 		model.addAttribute("reviewAvr", pd.getReviewAvr());
 		model.addAttribute("reviewCount",pd.getReviewCount());
 		model.addAttribute("paymentCount", pd.getPaymentCount());
-		//model.addAttribute("prm",pd.getPrm());
 		model.addAttribute("cost", pd.getCost());
 		model.addAttribute("tag", pd.getTag());
 		model.addAttribute("wishList", pd.getWishList());
@@ -126,7 +133,6 @@ public class ProductController {
 		System.out.println("reviewAvr : "+pd.getReviewAvr());
 		System.out.println("reviewCount : "+pd.getReviewCount());
 		System.out.println("payment : "+pd.getPaymentCount());
-		//System.out.println("prm : "+pd.getPrm());
 		System.out.println("cost : "+pd.getCost());
 		System.out.println("wishList :"+pd.getWishList());
 		System.out.println("wishCount : "+pd.getWishCount());
@@ -155,7 +161,6 @@ public class ProductController {
 		model.addAttribute("reviewAvr", pd.getReviewAvr());
 		model.addAttribute("reviewCount",pd.getReviewCount());
 		model.addAttribute("paymentCount", pd.getPaymentCount());
-		//model.addAttribute("prm",pd.getPrm());
 		model.addAttribute("cost", pd.getCost());
 		model.addAttribute("tag", pd.getTag());
 		model.addAttribute("wishList", pd.getWishList());
@@ -176,12 +181,6 @@ public class ProductController {
 	public String productReview(Model model, int productNo, int reqPage){
 		ReviewPageData rpd = productService.selectReviewList(productNo, reqPage);
 		return new Gson().toJson(rpd);
-	}
-	
-	//윤지
-	@RequestMapping(value = "/expertCounsel.do")
-	public String expertCounsel() {
-		return "product/expertCounsel";
 	}
 	
 	//윤지 return값 대권님이 만들 페이지로 수정 필요
@@ -220,5 +219,24 @@ public class ProductController {
 		return new Gson().toJson(afterWishCount);
 	}
 	
+	//윤지
+	@RequestMapping(value = "/expertCounsel.do")
+	public String expertCounsel(Model model, int productNo, int expertNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map = productService.selectProductAndExpert(productNo, expertNo);
+		model.addAttribute("p", map.get("product"));
+		model.addAttribute("e", map.get("expert"));
+		model.addAttribute("ec",map.get("expertC"));
+		model.addAttribute("em", map.get("expertM"));
+		System.out.println("Counsel_product : "+map.get("product"));
+		System.out.println("Counsel_expert : "+map.get("expert"));
+		System.out.println("Counsel_expertC : "+map.get("expertC"));
+		System.out.println("Counsel_expertM : "+map.get("expertM"));
+		return "product/expertCounsel";
+	}
+	
 	
 }
+
+
+

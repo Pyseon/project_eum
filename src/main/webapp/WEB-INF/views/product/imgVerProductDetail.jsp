@@ -276,13 +276,14 @@
 									<a href="#"><img class="testimg" src="/img/member/${expertM.memberPicturePath }"></a>	<!-- 추후 프로필 수정 -->
 								</div>
 								<div class="expert-profile">
-									<div class="expert-profile-span"><h3 class="expert-info">
-										<c:choose>
-											<c:when test="${empty expertAndCom.compName}">
-												${expert.expertName }
+									<div class="expert-profile-span">
+										<h3 class="expert-info">
+											<c:choose>
+												<c:when test="${empty expertAndCom.compName}">
+													${expert.expertName }
 												</c:when>
 												<c:otherwise>
-												${expertAndCom.compName}
+													${expertAndCom.compName}
 												</c:otherwise>
 											</c:choose>
 										</h3>					

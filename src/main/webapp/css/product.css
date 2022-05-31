@@ -97,6 +97,13 @@ h1,h2,h3,h4,h5,h6{
 	margin-top: 1.5px;
 	font-size: 18px !important;
 }
+#mainImg {
+	margin-top: 20px;
+	overflow: hidden;
+	width: 100%;
+	height: 700px;
+	
+}
 
 /*/////left-title 관련 끝/////*/
 
@@ -664,6 +671,10 @@ th{
 	margin-bottom: 70px;
 	margin-top: 50px;
 }
+.reviewNull{
+	text-align: center;
+}
+
 
 
 

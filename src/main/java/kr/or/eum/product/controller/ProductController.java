@@ -94,6 +94,38 @@ public class ProductController {
 		System.out.println("--------------------------------------");
 		return "product/productDetail";
 	}
+	
+	@RequestMapping("/imgVerproductDetail.do")
+	public String imgVerProductDetail(Model model, int productNo, int expertNo, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");			
+		}
+		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, member);
+		model.addAttribute("p", pd.getProduct());
+		model.addAttribute("productQNA", pd.getProductQNA());
+		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
+		model.addAttribute("expert", pd.getExpert());
+		model.addAttribute("expertM", pd.getExpertAndMember());
+		model.addAttribute("reviewAvr", pd.getReviewAvr());
+		model.addAttribute("reviewCount",pd.getReviewCount());
+		model.addAttribute("paymentCount", pd.getPaymentCount());
+		//model.addAttribute("prm",pd.getPrm());
+		model.addAttribute("cost", pd.getCost());
+		model.addAttribute("tag", pd.getTag());
+		model.addAttribute("wishList", pd.getWishList());
+		model.addAttribute("wishCount", pd.getWishCount());
+		if(member != null) {
+			model.addAttribute("memberNo", member.getMemberNo());			
+		}else {
+			model.addAttribute("memberNo", 0);
+		}
+		model.addAttribute("wishMemberCheck", pd.getWishMemberCheck());
+		return "product/imgVerProductDetail";
+	}
+	
+	
 	//윤지
 	@ResponseBody
 	@RequestMapping(value = "/review.do", produces = "application/json;charset=utf-8")

@@ -53,7 +53,8 @@
 			product_ans as productAns,
 			product_addr as productAddr,
 			sale,
-			product_option as productOption
+			product_option as productOption,
+			product_imgpath as productImgPath
 		from product_tbl 
         where product_no=#{productNo}
 	</select>

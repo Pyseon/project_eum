@@ -19,7 +19,6 @@ import kr.or.eum.report.model.vo.Report;
 public class ManagerController {
 	@Autowired
 	private ManagerService service;
-	private ProductService productService;
 	
 	@RequestMapping(value = "/manaMember.do")
 	public String manaMember(int reqPage, int selectNum, String searchType, String keyword, Model model) {
@@ -62,9 +61,8 @@ public class ManagerController {
 		return "manager/detailPayment";
 	}
 	@RequestMapping(value = "/manaReport.do")
-	public String manaReport(int reqPage, String searchType, String keyword, Model model) {
+	public String manaReport(int reqPage, int selectNum, String searchType, String keyword, Model model) {
 		String wherePage = "manaReport.do";
-		int selectNum = 0;
 		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", rpd.get("reportList"));
 		model.addAttribute("pageNavi",rpd.get("pageNavi"));
@@ -80,6 +78,19 @@ public class ManagerController {
 	@RequestMapping(value="/answerReport.do")
 	public String answerReport(String answerTitle, String answerContent) {
 		int result = service.answerReport(answerTitle, answerContent);
+		return null;
+	}
+	
+	@RequestMapping(value = "/reportMember.do")
+	public String reportMember(int memberNo, int category, int index, int reportNo,int selNo) {
+		int result = service.reportMember(memberNo);
+		int result2 = service.deleteArticles(category, index);
+		int result3 = service.updateReportIs(reportNo, selNo);
+		return "redirect:/manaMember.do?reqPage=1&selectNum=0&searchType=memberNo&keyword="+memberNo;
+	}
+	@RequestMapping(value = "/refuseReport.do")
+	public String refuseReport(int reportNo, int selNo) {
+		int result = service.updateReportIs(reportNo, selNo);
 		return null;
 	}
 	

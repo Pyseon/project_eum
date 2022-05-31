@@ -23,6 +23,10 @@ h1,h2,h3,h4,h5,h6{
 	margin: 0;
 }
 
+a{
+	cursor: pointer;
+}
+
 /*/////공통 끝/////*/
 
 
@@ -34,6 +38,9 @@ h1,h2,h3,h4,h5,h6{
 
 .tab-content.current {
 	display: block;
+}
+.tab-link{
+	cursor: pointer;
 }
 
 /*/////left-title 관련/////*/
@@ -333,6 +340,7 @@ th{
 .icon-wish{
 	color: #f05454;
 	line-height: 45px !important;
+	cursor: pointer;
 }
 .wish-count{
 	margin: 0;

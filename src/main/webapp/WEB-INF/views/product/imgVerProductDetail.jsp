@@ -332,12 +332,20 @@
 								</ul>
 							</div>
 							<hr id="ranking-line">
-							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
 								<c:forEach items="${wishList}" var="wishList" step="1" varStatus="status">
 									<ul>
 										<li class="ranking-number"><c:out value="${status.index+1}"/></li>
-										<li class="likeranking-li">${wishList.productTitle }<a href="#"></a></li>
+										<li class="likeranking-li"> 
+											<c:choose>
+												<c:when test="${wishList.productType eq 1}">
+													<a class="rankingurl" href="/productDetail.do?productNo=${wishList.productNo }&expertNo=${wishList.expertNo}">${wishList.productTitle }</a> 
+												</c:when>
+												<c:otherwise>
+													<a class="rankingurl" href="/imgVerProductDetail.do?productNo=${wishList.productNo }&expertNo=${wishList.expertNo}">${wishList.productTitle }</a> 
+												</c:otherwise>
+											</c:choose>
+										</li>
 									</ul>
 								</c:forEach>
 							</div><!-- likeranking-list-wrap -->

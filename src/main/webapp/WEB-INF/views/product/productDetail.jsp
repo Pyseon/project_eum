@@ -187,52 +187,6 @@
 								 <c:if test="${reviewCount eq 0}">
 								 	<div class="reviewNull">등록된 후기가 없습니다.</div>
 								 </c:if>
-								<%-- <c:forEach items="${prm}" var="prm" step="1">
-									<div class="real-review">
-										<div class="member-picture">
-											<!-- <img class="reviewPicture" src=> 프로필 -->
-										</div>
-										<div class="info">
-											<div class="info-one">
-												<span class="nickname">${prm.memberNick }</span> 
-												<div class="review-btn-2">
-													<a href="#">수정</a> <a href="#">삭제</a> <br>
-												</div>	
-												<div class="star-wrap star-wrap-2">
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span>  
-													<span class="star-score star-score-2">5.0</span>
-													<div class="star-on">
-														<div class="icon-star">
-															<span class="material-icons">star</span> 
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-														</div>
-													</div>
-												</div>
-												<div class="span-wrap">
-													<span class="text">|&nbsp;&nbsp;</span>
-													<span class="text">2022.05.20</span>
-													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-												</div>
-												<div class="review-btn">
-													<div class="report-wrap">
-														<ul>
-															<li><img id="icon-report" src="img/product/icon-report.png"></li>
-															<li><span id="report">신고</span></li>
-														</ul>
-													</div>
-												</div>
-											</div><!--info-one  -->
-											<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-										</div> <!-- info -->
-									</div><!-- real review -->
-									</c:forEach> --%>
 								</div><!-- real review wrap-->
 								<div class="page-nav"></div>
 								<!-- 페이징///////////////////////////// -->
@@ -395,12 +349,20 @@
 								</ul>
 							</div>
 							<hr id="ranking-line">
-							<!-- DB, for문 --> <!-- 하트 icon 숫자로 바꿀 예정 -->
 							<div class="likeranking-list-wrap">
 								<c:forEach items="${wishList}" var="wishList" step="1" varStatus="status">
 									<ul>
 										<li class="ranking-number"><c:out value="${status.index+1}"/></li>
-										<li class="likeranking-li">${wishList.productTitle }<a href="#"></a></li>
+										<li class="likeranking-li"> 
+											<c:choose>
+												<c:when test="${wishList.productType eq 1}">
+													<a class="rankingurl" href="/productDetail.do?productNo=${wishList.productNo }&expertNo=${wishList.expertNo}">${wishList.productTitle }</a> 
+												</c:when>
+												<c:otherwise>
+													<a class="rankingurl" href="/imgVerProductDetail.do?productNo=${wishList.productNo }&expertNo=${wishList.expertNo}">${wishList.productTitle }</a> 
+												</c:otherwise>
+											</c:choose>
+										</li>
 									</ul>
 								</c:forEach>
 							</div><!-- likeranking-list-wrap -->

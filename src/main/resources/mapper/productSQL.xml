@@ -107,10 +107,12 @@
  			rnum, 
  			product_no as productNo, 
  			product_title as productTitle, 
- 			wishcount
+ 			wishcount,
+ 			expert_no as expertNo,
+ 			product_type as productType
  		from
  			(select rownum as rnum,n.* from
-				(select product_no, product_title,
+				(select product_no, product_title, expert_no, product_type,
     				(select nvl(count(*),0) from wishlist_tbl w where w.product_no = p.product_no) as wishCount
 				from product_tbl p order by wishCount desc)n) 
 		where rnum between 1 and 10

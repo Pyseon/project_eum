@@ -16,25 +16,9 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-8 posts-list">
-					<div class="left-title">
-						<div class="line-top">
-							<span class="title">${p.productTitle} </span><br> 
-							<span class="material-icons icon-confirm confirm">verified</span>&nbsp;
-							<div class="top-box-name">
-								<span class="title-2">${expert.expertName}&nbsp;&nbsp;/</span>&nbsp;
-								<span class="title-2">${expert.jobName}</span> 
-							</div>
-						</div><!-- line-top -->
-						<hr>
-						<div class="line-bottom">
-							<span class="title-3">상담 이용 안내</span>
-							<ul>
-								<li class="title-2">· 실제 상담 시작은 상호 협의하에 진행 됩니다.</li>
-								<li class="title-2">· 1:1 채팅 상담 이외의 방법으로 상담 진행 시 추후 문제 예방을 위하여 이력을 남겨주시기 바랍니다.</li>
-							</ul>
-						</div><!-- line-bottom" -->
-					</div><!--left-title"-->
-					
+					<div class="detail-wrap">
+						<img id="mainImg" src="img/product/mainImg/${p.productImgPath }">
+					</div>
 					<div class="left-product-detail">
 						<div class="detail-1">
 							<span data-tab="tab-1" class="detail-title title1 tab-link current">상세내용</span>
@@ -44,7 +28,7 @@
 						
 							<div id="tab-1" class="tab-content current">
 								<div class="detail-wrap">
-									<span class="detail-sub-title">상담소개</span>
+									<span class="detail-sub-title">상품소개</span>
 									<hr class="sub-title-bottom-line">
 									<span class="detail-content">${p.productIntro}</span>
 									<!-- DB -->
@@ -154,10 +138,10 @@
 									<span class="detail-sub-title">취소/환불</span>
 									<hr class="sub-title-bottom-line">
 									<ul class="detail-content content-bg">
-										<li>1. 전문가와 의뢰인 간의 상호 협의 후 거래 철회가 가능합니다.</li>
-										<li>2. 전문가의 귀책사유로 작업을 시작하지 않았거나 이에 준하는 보편적인 관점에서
+										<li>1. 판매자와 의뢰인 간의 상호 협의 후 거래 철회가 가능합니다.</li>
+										<li>2. 판매자의 귀책사유로 거래에 문제가 생겼거나 이에 준하는 보편적인 관점에서
 											심각하게 잘못 이행된 경우 결제 금액 전액 환불이 가능합니다.</li>
-										<li>3. 전문가가 지정된 서비스를 제공하지 못할 것이 확실할 경우 서비스 비용을 일할 계산하여 
+										<li>3. 판매자가 지정된 서비스를 제공하지 못할 것이 확실할 경우 서비스 비용을 일할 계산하여 
 											진행 된 작업만큼 공제하고 잔여 금액을 환불합니다.</li>
 									</ul>
 								</div>
@@ -184,55 +168,9 @@
 									</div>
 								</div>
 								<div class="real-review-wrap">
-								 <c:if test="${reviewCount eq 0}">
-								 	<div class="reviewNull">등록된 후기가 없습니다.</div>
-								 </c:if>
-								<%-- <c:forEach items="${prm}" var="prm" step="1">
-									<div class="real-review">
-										<div class="member-picture">
-											<!-- <img class="reviewPicture" src=> 프로필 -->
-										</div>
-										<div class="info">
-											<div class="info-one">
-												<span class="nickname">${prm.memberNick }</span> 
-												<div class="review-btn-2">
-													<a href="#">수정</a> <a href="#">삭제</a> <br>
-												</div>	
-												<div class="star-wrap star-wrap-2">
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span> 
-													<span class="material-icons">star_border</span>  
-													<span class="star-score star-score-2">5.0</span>
-													<div class="star-on">
-														<div class="icon-star">
-															<span class="material-icons">star</span> 
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-															<span class="material-icons">star</span>
-														</div>
-													</div>
-												</div>
-												<div class="span-wrap">
-													<span class="text">|&nbsp;&nbsp;</span>
-													<span class="text">2022.05.20</span>
-													<span class="text">&nbsp;&nbsp;&nbsp;&nbsp;</span>
-												</div>
-												<div class="review-btn">
-													<div class="report-wrap">
-														<ul>
-															<li><img id="icon-report" src="img/product/icon-report.png"></li>
-															<li><span id="report">신고</span></li>
-														</ul>
-													</div>
-												</div>
-											</div><!--info-one  -->
-											<div class="review-content">쉽게 알려주셔서 좋았습니다.</div>
-										</div> <!-- info -->
-									</div><!-- real review -->
-									</c:forEach> --%>
+									<c:if test="${reviewCount eq 0}">
+								 		<div class="reviewNull">등록된 후기가 없습니다.</div>
+									</c:if>
 								</div><!-- real review wrap-->
 								<div class="page-nav"></div>
 								<!-- 페이징///////////////////////////// -->
@@ -265,7 +203,6 @@
 										<li>이음은 전자금융거래법에 따라 결제대금 예치업을 운영할 수 있는 전자금융업자로 금융위원회에 등록되었으며, 구매안전서비스를 적용하고 있습니다.</li>
 									</ul>
 								</div>
-							
 							</div><!-- tab-content -->
 						</div><!-- product-content -->
 					</div> <!--left-product-detaile-->

@@ -63,8 +63,9 @@ li{
   		
 	}
 	.t4{
-	margin: 14px 0 10px 0;
+	margin: 14px 11px 10px 0;
 	display: flex;
+	justify-content: space-between;
 	}
 
 	.t4 > span{
@@ -221,7 +222,7 @@ li{
 				<li>
 					<div class="t1" style="font-family: fs-bold !important;">
 						<span class="card-category fs-bold">${c.productTitle }</span>
-						<span style="color: #bdbdbd;">
+						<span style="color: #bdbdbd; font-size: 14px !important; line-height: 2;">
 						${c.productCategory}
 						</span>
 					</div>
@@ -249,7 +250,7 @@ li{
 					</span>
 					</div>
 					
-				<div class="t4-right" style="line-height: 2;">
+				<div class="t4-right" style="line-height: 2; margin : 0 0 0 0px">
 					<div style="line-height: 2.5;"><span class="material-icons icons-message">message</span></div>
 					<div class="t4-info"><span>${c.revCount } </span></div>
 					 &nbsp;
@@ -267,12 +268,12 @@ li{
 		<span id="sele" style="width: auto;">${c.sale}%</span>
 	
 		<span class="t2" style="margin: 0px 0 30px 30px;">
-			<span id="price" style="width: auto;">
-			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+			<span id="price"  class="fc-7" style="width: auto; font-size: 18px; line-height: 1.5; font-weight: bold;">
+			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
 			</span>
 			&nbsp;
-			<span id="fixed-price" style="width: auto;">
-			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
+			<span id="fixed-price" style="width: auto; font-size: 12px; font-style: italic;">
+			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
 			</span>
 		</span> 
 		</div><!-- t2 -->

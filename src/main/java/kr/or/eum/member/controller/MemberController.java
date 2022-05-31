@@ -118,7 +118,7 @@ public class MemberController {
 	}
 	//재민 찜내역
 	
-	@RequestMapping(value="/Wishlist.do")
+	@RequestMapping(value="/Mywishlist.do")
 	public String Mywishlist(Model model) {
 		ArrayList<Wishlist> list = service.selectWishlist();
 		model.addAttribute("list", list);

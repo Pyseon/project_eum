@@ -183,28 +183,27 @@ li{
 	.selPro-active{
 	border-bottom: 5px solid rgb(56 101 242) !important;
 	}
-</style>
+
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>	
 </head>
 
 <body>
-
-<div>
-		<table class="category">
+	<table class="category">
 				<tr>
 							
-					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/Myproduct.do?reqPage=1&selPro=전문가상담'"><h3>전문가상담</h3></button></td>
-				
-					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/Myproduct.do?reqPage=1&selPro=클래스'"><h3>클래스</h3></button></td>
-					
-					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/Myproduct.do?reqPage=1&selPro=지식마켓'"><h3>지식마켓</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ClassList.do?reqPage=1&selPro=전체'"><h3>전문가상담</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ClassList.do?reqPage=1&selPro=법률'"><h3>클래스</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ClassList.do?reqPage=1&selPro=비즈니스'"><h3>지식마켓</h3></button></td>
 				</tr>
-          </table>
-   </div>
+      </table>
+
 	<div class="page-content">
+		
 	<div class="posting-wrap">
+		
+	
 		<c:forEach var="p" items="${list }" varStatus="i">
 		
 		<div class="posting-item" style="cursor: pointer;" >

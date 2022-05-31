@@ -8,10 +8,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class FaQ {
-	private int FaQNo;
+	private int FAQNo;
 	private int memberNo;
-	private String FaQTitle;
-	private long FaQContent;
-	private String FaQType;
-	private String FaQDate;
+	private String FAQTitle;
+	private long FAQContent;
+	private int FAQType;
+	private String FAQDate;
 }

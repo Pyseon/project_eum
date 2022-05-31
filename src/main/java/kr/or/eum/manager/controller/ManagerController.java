@@ -69,30 +69,35 @@ public class ManagerController {
 		model.addAttribute("reqPage", reqPage);
 		return "manager/managementReport";
 	}
+	
 	@RequestMapping(value = "/detailReport.do")
 	public String detailReport(int reportNo,int categoryNo,int reportIndex, Model model) {
 		ArrayList<Report> report = service.detailReport(reportNo);
 		model.addAttribute("report", report);
+		model.addAttribute("category", categoryNo);
 		return "manager/detailReport";
 	}
-	@RequestMapping(value="/answerReport.do")
-	public String answerReport(String answerTitle, String answerContent) {
-		int result = service.answerReport(answerTitle, answerContent);
-		return null;
-	}
 	
+	@RequestMapping(value="/answerReport.do")
+	public String answerReport(int reportNo, String answerTitle, String answerContent, int category, int index) {
+		int selNo = 1;
+		int result = service.answerReport(answerTitle, answerContent);
+		int result2 = service.updateReportIs(reportNo, selNo);
+		return "manager/detailReport.do?reportNo="+reportNo+"&categoryNo="+category+"&reportIndex="+index;
+	}
 	@RequestMapping(value = "/reportMember.do")
 	public String reportMember(int memberNo, int category, int index, int reportNo,int selNo) {
-		int result = service.reportMember(memberNo);
-		int result2 = service.deleteArticles(category, index);
-		int result3 = service.updateReportIs(reportNo, selNo);
+		int result = service.reportMember(memberNo);  //해당 멤버 정지, 리폿카운트 올림
+		int result2 = service.deleteArticles(category, index);  //글 없애기
 		return "redirect:/manaMember.do?reqPage=1&selectNum=0&searchType=memberNo&keyword="+memberNo;
 	}
-	@RequestMapping(value = "/refuseReport.do")
-	public String refuseReport(int reportNo, int selNo) {
-		int result = service.updateReportIs(reportNo, selNo);
-		return null;
-	}
 	
+	@RequestMapping(value = "/manaFAQ.do")
+	public String manaFAQ(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaFAQ.do";
+		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", fpd.get("FAQList"));
+		return "manager/managementFAQ";
+	}
 	
 }

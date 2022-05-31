@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.eum.manager.model.dao.ManagerDao;
+import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -67,6 +68,19 @@ public class ManagerService {
 				totalCount = dao.searchReportCount(pageMap);
 			}
 			pageData.put("reportList", reportList);
+			
+		case "manaFAQ.do":
+			ArrayList<FaQ> FAQList = new ArrayList<FaQ>();
+			if(searchType == null) {
+				FAQList = dao.FAQPageData(pageMap);
+				totalCount = dao.FAQCount(selectNum);
+			}else {
+				pageMap.put("searchType", searchType);
+				pageMap.put("keyword", keyword);
+				FAQList = dao.searchFAQPageData(pageMap);
+				totalCount = dao.searchFAQCount(pageMap);
+			}
+			pageData.put("FAQList", FAQList);
 		}
 		
 		int totalPage = 0;
@@ -154,13 +168,6 @@ public class ManagerService {
 	public ArrayList<Report> detailReport(int reportNo) {
 		return dao.detailReport(reportNo);
 	}
-
-	public int answerReport(String answerTitle, String answerContent) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("answerTitle", answerTitle);
-		map.put("answerContent", answerContent);
-		return 0;
-	}
 	
 	public int reportMember(int memberNo) {
 		return dao.reportMember(memberNo);
@@ -178,6 +185,13 @@ public class ManagerService {
 		map.put("reportNo", selNo);
 		map.put("selNo", selNo);
 		return dao.updateReportIs(map);
+	}
+	
+	public int answerReport(String answerTitle, String answerContent) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("answerTitle", answerTitle);
+		map.put("answerContent", answerContent);
+		return dao.answerReport(map);
 	}
 	
 }

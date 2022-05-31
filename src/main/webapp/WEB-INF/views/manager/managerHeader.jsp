@@ -21,7 +21,7 @@
 			<li><a href="/manaReport.do?reqPage=1&selectNum=0">신고모니터링</a></li>
 			<li><a href="#">1:1상담</a></li>
 			<li><a href="#">공지사항</a></li>
-			<li><a href="#">FAQ</a></li>
+			<li><a href="/manaFAQ.do?reqPage=1&selectNum=0">FAQ</a></li>
 			<li><a href="#">통계</a></li>
 		</ul>
 	</nav>

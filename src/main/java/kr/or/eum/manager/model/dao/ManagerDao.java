@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -125,6 +126,25 @@ public class ManagerDao {
 	public int updateReportIs(HashMap<String, Integer> map) {
 		int result = sqlSession.update("manager.updateReportIs",map);
 		return result;
+	}
+	
+	public ArrayList<FaQ> FAQPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.FAQList", map);
+		return (ArrayList<FaQ>) list;
+	}
+
+	public int FAQCount(int selectNum) {
+		int totalCount = sqlSession.selectOne("manager.FAQCount", selectNum);
+		return totalCount;
+	}
+	public ArrayList<FaQ> searchFAQPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchFAQList", map);
+		return (ArrayList<FaQ>) list;
+	}
+
+	public int searchFAQCount(HashMap<String, Object> map) {
+		int totalCount = sqlSession.selectOne("manager.searchFAQCount", map);
+		return totalCount;
 	}
 	
 	

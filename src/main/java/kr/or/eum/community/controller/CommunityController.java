@@ -39,4 +39,13 @@ public class CommunityController {
 			return "community/detailCat1";
 		}
 	}
+	
+	@RequestMapping(value="/communityWriteFrm.do")
+	public String communityWriteFrm() {
+			return "community/communityWriteFrm";
+	}
+	
+	
+	
+	
 }

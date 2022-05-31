@@ -8,19 +8,29 @@
 <title>이음 :: 커뮤니티</title>
 <style>
 .cat-active {
-	background-color: #1abc9c !important;
-	color: #fff !important;
-	border: 1px solid #1abc9c !important;
+  background: #3865f2 !important;
+  color: #fff !important;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2), inset 1px 1px 7px 2px #284aaf !important; 
+  letter-spacing: 1px;
 }
+
+
 </style>
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <body>
 	<div class="container">
+	  <div class=comm-wrap>
 		<div class="comm-header">
 			<button class="comm-nav" onclick="location.href='/communityList.do?category=2&reqPage=1'">전체</button>
 			<button class="comm-nav" onclick="location.href='/communityList.do?category=0&reqPage=1'" >요즘뭐하니</button>
 			<button class="comm-nav" onclick="location.href='/communityList.do?category=1&reqPage=1'" >이건어때</button>
+			<div class="do-write">
+				<button class="do-write-btn" onclick="location.href='/communityWriteFrm.do'">
+				<span class='material-symbols-outlined fc-2 do-write-icon'>drive_file_rename_outline</span> 
+				<span class="do-write-text">글쓰기</span>			
+			</button>
+		</div>
 		</div>
 		<div id=comm-content>
 			<c:forEach items="${list }" var="com" varStatus="i">
@@ -76,6 +86,7 @@
 			</c:forEach>
 			<div>${pageNavi }</div>
 		</div>
+	  </div>
 	</div>
 		<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>

@@ -1,25 +1,38 @@
 package kr.or.eum.product.controller;
 
 import kr.or.eum.member.model.vo.Member;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 import javax.websocket.Session;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
+
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import org.springframework.web.multipart.MultipartFile;
+
+
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Expert;
@@ -42,7 +55,7 @@ public class ProductController{
 	
 	@RequestMapping(value="/ClassList.do")
 	public String productList(int reqPage, String selPro, Model model) {
-		ProductPageData ppd = productService.selectProductList(reqPage, selPro);
+		ProductPageData ppd = productService.selectClassList(reqPage, selPro);
 		model.addAttribute("list",ppd.getList());
 		model.addAttribute("selPro", selPro);
 		model.addAttribute("pageNavi",ppd.getPageNavi());
@@ -54,6 +67,35 @@ public class ProductController{
 		public String productWriter() {
 		return "product/productWriter";
 	}
+	/*
+	@ResponseBody
+	@RequestMapping(value="/uploadSummernoteImageFile.do", produces="application/json; charset=utf8")
+	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
+		JsonObject jsonObject = new JsonObject();
+		
+		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
+		String fileRoot = contextRoot+"resources/fileupload/";
+		
+		String originalFileName = multipartFile.getOriginalFilename();
+		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
+		
+		String savedFileName = UUID.randomUUID() + extension;
+		File targetFile = new File(fileRoot + savedFileName);
+		try {
+			InputStream fileStream = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(fileStream, targetFile);
+			jsonObject.addProperty("url", "/summernote/resources/fileupload/"+savedFileName);
+			jsonObject.addProperty("responseCode", "success");
+			
+	} catch (IOException e) {
+		FileUtils.deleteQuietly(targetFile);
+		jsonObject.addProperty("responseCode", "error");
+		e.printStackTrace();
+	}
+		String a = jsonObject.toString();
+		return a;
+	}
+	*/
 	
 	//윤지
 	@RequestMapping(value = "/productDetail.do")
@@ -158,8 +200,11 @@ public class ProductController{
 		int result = productService.insertWish(productNo, memberNo);
 		System.out.println("result : "+result);
 		int afterWishCount = productService.afterWishCount(productNo);
-		return new Gson().toJson(afterWishCount); 
+		return new Gson().toJson(afterWishCount);
+		
 	}
+	
+	
 	
 	//윤지
 	@ResponseBody

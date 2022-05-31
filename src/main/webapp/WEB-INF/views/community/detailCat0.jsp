@@ -119,6 +119,9 @@
 									<c:if test="${cmnt.memberGrade eq 1 }">
 									<span class="material-icons verified-icon">verified</span>
 									</c:if>
+									<c:if test="${cmnt.memberNo eq comm.memberNo }">
+									<span class="reply-writer">작성자</span>
+									</c:if>
 									<p class="comment">${cmnt.cmntContent }</p>
 									<p class="date fs-light">${cmnt.cmntDate }</p>
 								</div>
@@ -143,6 +146,9 @@
 									 <strong style="font-size: 15px">${cmnt.memberNick }</strong>
 									 <c:if test="${cmnt.memberGrade eq 1 }">
 									<span class="material-icons verified-icon">verified</span>
+									</c:if>
+									<c:if test="${cmnt.memberNo eq comm.memberNo }">
+									<span class="reply-writer">작성자</span>
 									</c:if>
 									</span>
 									<c:if test="${cmnt.cmntLev eq 1 }">
@@ -170,4 +176,9 @@
 	<!--container end-->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
+<script>
+	
+</script>
+
+
 </html>

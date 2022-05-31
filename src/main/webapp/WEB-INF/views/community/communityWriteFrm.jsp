@@ -275,6 +275,17 @@
              
             //썸머노트 불러오기 함수 
             $("#summernote").summernote({
+            	  toolbar: [ //썸머노트 툴바 추가
+      			    ['fontsize', ['fontsize']],
+      			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+      			    ['color', ['forecolor','color']],
+      			    ['table', ['table']],
+      			    ['para', ['ul', 'ol', 'paragraph']],
+      			    ['height', ['height']],
+      			    ['insert',['picture','link','video']],
+      			    ['view', ['fullscreen', 'help']]
+      			 	 ],
+      			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
 			  height: 500,                 // 에디터 높이
 			  minHeight: null,             // 최소 높이
 			  maxHeight: null,             // 최대 높이

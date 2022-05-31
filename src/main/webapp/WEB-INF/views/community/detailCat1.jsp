@@ -8,6 +8,9 @@
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <body>
+	<input type='button' value='add' class='addOptBtn' onclick='add_optbox();'>
+<div id="opt">
+</div>
 	<div class="container">
 	 <div class="article-wrap">
 		<!-- article-header -->
@@ -167,4 +170,42 @@
 	<!--container end-->
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
+
+<script>
+$(function(){
+
+	
+});
+function add_optbox(){
+	let newDiv = document.createElement("div");
+	newDiv.setAttribute("class","optBox");
+	newDiv.innerHTML = "<input type='button' value='del' class='delOptBtn' onclick='del_optbox();'><br>";
+	console.log("add함수동작");
+	$("#opt").append(newDiv);
+	del_optbox();
+}
+
+
+function del_optbox(){
+	console.log("del 함수동작");
+	$(".delOptBtn").on("click",function(){
+		$(this).parent().remove();
+	});
+}
+
+</script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

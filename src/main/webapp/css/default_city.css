@@ -688,10 +688,6 @@ figcaption {
 	font-size: 18px;
 }
 
-.pagination>li:first-child {
-	margin-right: auto;
-}
-
 .do-write-btn {
 	border: 1px solid #a7a7a7;
 	margin-left: auto;

@@ -45,6 +45,15 @@ public class CommunityController {
 			return "community/communityWriteFrm";
 	}
 	
+	@RequestMapping(value="/communityWrite.do")
+	public String communityWrite(Community comm) {
+		System.out.println(comm);
+		int result = service.communityWrite(comm);
+		
+		return "community/communityWriteFrm";
+		//return "redirect:/communityList.do?category="+comm.getCommCategory()+"&reqPage=1";
+	}
+	
 	
 	
 	

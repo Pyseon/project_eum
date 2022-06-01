@@ -79,6 +79,23 @@
  		where co.comm_no = ${value} order by co.CMNT_group ,co.cmnt_no
 	</select> 
 
+	<insert id="communityWrite" parameterType="comm">
+		insert into community_tbl values(
+			COMMUNITY_SEQ.nextval,
+			#{commCategory},
+			#{memberNo},
+			#{commTitle},
+			#{commIntro},
+			#{commContent},
+			#{advantage},
+			#{weakness},
+			0,
+			TO_CHAR(SYSDATE, 'yyyy.mm.dd hh24:mi'),
+   			0,
+			#{commFilename},
+			#{commFilename}
+		)
+	</insert>
 
 
 </mapper>

@@ -2,6 +2,7 @@ package kr.or.eum.community.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,38 @@ public class CommunityService {
 		CommunityDetailData cdd = new CommunityDetailData(comm, cmntList);
 		return cdd;
 	}
+	
+	public int communityWrite(Community comm) {
+		String advantage = comm.getAdvantage();
+		List<String> advList = new ArrayList<String>();
+		System.out.println(advantage);
+		System.out.println();
+			
+		String []tokens=advantage.split("\\|");
+			
+		for(int i=0;i<tokens.length;i++){
+			if(tokens[i] == null || tokens[i].trim().length() < 2) { // null or 빈칸일때
+			}else { //문자가 정석으로 있을때
+				if(tokens[i].indexOf(",") == 0) { //첫번째글자에 쉼표가 있을경우
+					advList.add(tokens[i].replaceFirst(",", "")); //첫번째 쉼표는 빈칸으로 변환
+				}else {
+					advList.add(tokens[i].trim()); //문자 앞뒤로 빈칸만 삭제 (문자열 중간 빈칸은 삭제 안함)
+				}
+			}
+		}
+		
+		advantage = "";
+		
+		for(int i=0;i<advList.size();i++){
+			advantage += advList.get(i)+"|";
+		}
+		System.out.println("최종값>>"+advantage);
+		
+//		return dao.communityWrite(comm);
+		return -1;
+	}
+	
+	
 
 /////////////////////////////   페이징처리 함수      //////////////////////////////
 	public HashMap<String, Object> startEnd(int category, int reqPage, int numPerPage) {
@@ -136,5 +169,7 @@ public class CommunityService {
 
 		return pageNavi;
 	}
+
+
 
 }

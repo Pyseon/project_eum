@@ -41,4 +41,9 @@ public class CommunityDao {
 		return  (ArrayList<CommunityCo>) cmntList;
 	}
 
+	public int communityWrite(Community comm) {
+		int result = sqlSession.insert("community.communityWrite", comm);
+		return result;
+	}
+
 }

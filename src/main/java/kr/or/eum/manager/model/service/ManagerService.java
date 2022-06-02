@@ -193,6 +193,14 @@ public class ManagerService {
 		map.put("answerContent", answerContent);
 		return dao.answerReport(map);
 	}
+
+	public int insertFAQ(int FAQCategory, String FAQTitle, String FAQContent) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("FAQCategory", Integer.toString(FAQCategory));
+		map.put("FAQTitle", FAQTitle);
+		map.put("FAQContent", FAQContent);
+		return dao.insertFAQ(map);
+	}
 	
 }
 

@@ -97,7 +97,20 @@ public class ManagerController {
 		String wherePage = "manaFAQ.do";
 		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", fpd.get("FAQList"));
+		model.addAttribute("pageNavi", fpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
 		return "manager/managementFAQ";
+	}
+	@RequestMapping(value = "/insertFAQFrm.do")
+	public String insertFAQFrm() {
+		return "manager/insertFAQFrm";
+	}
+	
+	@RequestMapping(value = "/insertFAQ.do")
+	public String insertFAQ(int FAQCategory, String FAQTitle, String FAQContent) {
+		int result = service.insertFAQ(FAQCategory, FAQTitle, FAQContent);
+		return null;
 	}
 	
 }

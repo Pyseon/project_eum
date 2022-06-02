@@ -146,6 +146,11 @@ public class ManagerDao {
 		int totalCount = sqlSession.selectOne("manager.searchFAQCount", map);
 		return totalCount;
 	}
+
+	public int insertFAQ(HashMap<String, String> map) {
+		int result = sqlSession.insert("manager.insertFAQ",map);
+		return result;
+	}
 	
 	
 	

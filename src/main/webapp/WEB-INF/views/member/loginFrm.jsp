@@ -28,15 +28,25 @@
       	width: 40%;
       }
       .joinbox{
-      	margin: 0 auto;
-      	margin-top: 1%;
-      	text-align: center;
+      	width:22%;
+      	justify-content:center;
+      	margin: 0 auto !important;
       }
       .navi-me{
       	display: none;
       }
       .navi-me2{
       	display: none;
+      }
+      #joinfrm{
+      	float: left;
+      	text-align:left;
+ 	 	width: 50%;
+      }
+      #findid{
+      	float: right;
+      	text-align:right;
+  		width: 50%; 
       }
     </style>
 </head>
@@ -54,8 +64,8 @@
 	</form>
 </div>
 <div class="joinbox">
-	<div><a href="/joinFrm.do">회원가입</a></div>
-	<div><a href="/findId.do">아이디/비밀번호찾기</a></div>
+	<div><a id="joinfrm" href="/joinFrm.do">회원가입</a></div>
+	<div><a id="findid" href="/findId.do"> 아이디/비밀번호찾기</a></div>
 </div>
 <script>
 	$("#login-form").submit(function() {

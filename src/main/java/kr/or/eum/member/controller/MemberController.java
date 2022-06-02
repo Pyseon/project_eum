@@ -181,7 +181,7 @@ public class MemberController {
 		System.out.println(expertEmail);
 		return null;
 	}
-	//재민 내 구매목록 삭제
+
 	@RequestMapping(value="/DeleteMyproduct.do")
 	public String DeleteMyproduct(int payNo) {
 		int result = service.DeleteMyproduct(payNo);
@@ -195,5 +195,16 @@ public class MemberController {
 	ArrayList<Payment> list = service.Myproductdetail(payNo);
 	System.out.println(list);
 	return "mypage/Myproductdetail";
+
+	//대권 아이디찾기
+	@RequestMapping(value="/findId.do")
+	public String findId() { 
+		return "member/findId";
+	}
+	//대권 비밀번호찾기
+	@RequestMapping(value="/findPw.do")
+	public String findPw() { 
+		return "member/findPw";
+
 	}
 }

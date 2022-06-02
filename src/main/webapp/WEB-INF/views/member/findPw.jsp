@@ -103,9 +103,9 @@
 	<div class=backgroundcolorsky>
 		<div class="idfindbody">
 			<div class="explan" id="explan">
-				<div>이음은 이메일을 아이디로 사용합니다.</div>
-				<div>소유하고 계신 계정을 입력해보세요.</div>
-				<div>가입여부를 확인해드립니다.	</div>
+				<div></div>
+				<div>가입하셨던 이메일 계정을 입력하시면,</div>
+				<div>임시비밀번호를 이메일로 발송해 드립니다.</div>
 			</div>
 			<form>
 				<input class="input-form inputplus" type="text" name="memberId">

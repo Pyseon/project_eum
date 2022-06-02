@@ -35,6 +35,15 @@
 		birth = #{gender}  where member_no=#{memberNo}
 	
 	</update>
+		<!-- 재민 내 구매목록삭제 -->
+	  <update id ="DeleteMyproduct" parameterType="int">
+	 		 update into payment_tbl set
+	 		 pay_state = 3
+	 		 
+			where member_no=#{payNo}
+			
+
+	  </update>
 	 <select id ="selectQuestionList" parameterType="map" resultType="q">
  		select
  		qst_no as qstNo,
@@ -45,15 +54,35 @@
  		from question_tbl
   
   	</select>
+  		<!-- 재민 내 구매목록 -->
 	  <select id ="selectProductList" resultType="productAndPay">
 	 		select 
 	 			product_tbl.product_no as productNo,
 	 			product_title as productTitle,
 	 			pay_date as payDate, 
 	 			payment, 
-	 			pay_state as paystate
+	 			pay_state as paystate,
+	 			pay_No as payNo,
+	 			member_No as memberNo
 			from product_tbl
 			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
+			where member_no=#{memberNo}
+			
+
+	  </select>
+	  <select id ="Myproductdetail" resultType="pay">
+	 		select 
+	 			pay_no as payNo,
+	 			product_no as productNo,
+	 			pay_date as payDate,
+	 			payment,
+	 			pay_usepoint as payUsepoint,
+	 			pay_addpoint as payAddpoint
+	 			
+			from payment_tbl
+			
+			where pay_no=#{payNo} 
+			
 
 	  </select>
 	   <select id ="selectWishlist" resultType="productAndPayAndwish">
@@ -63,7 +92,7 @@
 			from product_tbl
 			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
 			join wishlist_tbl on (wishlist_tbl.product_no = product_tbl.product_no)
-
+			where wishlist_tbl.member_no=#{memberNo}
 	  </select>
 	  
 

@@ -14,4 +14,6 @@ public class ProductAndPayment {
 	private int payMent;
 	private String payDate;
 	private int productType;
+	private int memberNo;
+	private int payNo;
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+      <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,10 +64,10 @@
 		<fieldset>
 			<div class="emailbox">
 				<div>이메일*</div> 
-				<input class="input-form" type="text" name="memberId" placeholder="이메일을 입력해주세요.">
+				<input class="input-form" type="text" name="memberId" value="${sessionScope.m.memberId}" placeholder="이메일을 입력해주세요.">
 				<button class="btn bc1 bs1" type="button" id="button-pr">인증하기</button>
 			</div>
-			<input class="input-form mbt" type="text" name="numberId" placeholder="인증번호를 입력해주세요."><br>
+			<input class="input-form mbt" type="text" name="numberId" } placeholder="인증번호를 입력해주세요."><br>
 			닉네임* <input  class="input-form" type="text" name="memberNick" placeholder="닉네임을 입력해주세요."><br>
 			비밀번호* <input  class="input-form" type="password" name="memberPw" placeholder="비밀번호를 입력해주세요."><br>
 			비밀번호 확인* <input class="input-form" type="password" name="memberPwRe" placeholder="비밀번호를 다시 입력해주세요."><br>

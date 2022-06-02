@@ -218,16 +218,8 @@ li{
 			</ul>
 			</div>
 			<div>
-						<!-- 찜목록 하트 -->
-						<!-- 
-						<c:when test="${wishMemberCheck eq 0 }">
-										<div><span class="material-icons icon-wish">favorite_border</span></div>								
-						</c:when>
-						<c:otherwise>
-										<div><span class="material-icons icon-wish">favorite</span></div>
-						</c:otherwise>
+				<button class="material-icons icon-wish">favorite_border</button>
 						
-						 -->
 			</div>
 		</div>
 		

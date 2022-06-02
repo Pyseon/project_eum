@@ -261,13 +261,18 @@
 									<li><span class="material-icons icons-check">done</span> <span class="check-content">시간 초과 시 추가 비용이 발생할 수 있습니다.</span></li>
 								</ul>
 							</div>
-							<form action="/purchase.do" method="get">
-								<input type="hidden" name="productNo" value="${p.productNo }"/>
-								<button type="submit" class="bc1" id="purchaseBtn">구매하기</button>
-							</form>
-
+							<c:choose>
+								<c:when test="${memberNo ne 0}">
+									<form action="/purchase.do" method="get">
+									<input type="hidden" name="productNo" value="${p.productNo }"/>
+									<button type="submit" class="bc1" id="purchaseBtn">구매하기</button>
+									</form>
+								</c:when>
+								<c:otherwise>
+									<button type="submit" class="bc1" id="purchaseBtn" onclick="loginNeed();">구매하기</button>
+								</c:otherwise>
+							</c:choose>
 						</div><!--right-first-box-->
-						
 					<div class="single-sidebar-widget">
 						<div class="right-wish-box">
 							<div class="wish-title-wrap">
@@ -377,6 +382,10 @@
 
 	<div class="footer-div"><%@ include file="/WEB-INF/views/common/footer.jsp"%></div>
 	<script>
+		function loginNeed(){
+			alert('로그인 후 이용해주세요.');
+			location.href="/loginFrm.do";
+		}
 		$(function(){
 			
 			const productNo = ${p.productNo};
@@ -546,6 +555,7 @@
 					});	
 				}else {
 					alert('로그인 후 이용해주세요.');
+					location.href="/loginFrm.do";
 				}				
 			};
 			
@@ -570,6 +580,7 @@
 					});	
 				}else {
 					alert('로그인 후 이용해주세요.');
+					location.href="/loginFrm.do";
 				}				
 			};
 		}); 

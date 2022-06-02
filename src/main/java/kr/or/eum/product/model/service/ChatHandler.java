@@ -1,8 +1,9 @@
-package kr.or.eum.product.controller;
+package kr.or.eum.product.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -11,22 +12,24 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-public class ChatController extends TextWebSocketHandler {
+public class ChatHandler extends TextWebSocketHandler {
 	
-//	//채팅방목록
-//	private ArrayList<String> chatList;
+	@Autowired
+	private ProductService productService;
+
+	// 1:1채팅방 : 따로 따로 x 한 번에 관리 필요, 제일 먼저 필요한 건 채팅방 하나고, 채팅방을 리스트화 한 게 필요 이걸 리스트로 만들꺼냐, 맵으로 만들꺼냐
+	// 중요한 건 내가 보낸 메세지가 어떤 채팅방에 갈 건지 구분이 필요....참여하고 있는 채팅방이 여러 채팅이 여러개 일 수 있어서 
+	
+	//우선순위 : 1:1 최적화.
+	//이후 : 이게 여러개 됐을 때 어떻게 관리할지.
+	
 	//접속한 회원
 	private ArrayList<WebSocketSession> sessionList;
-	//채팅방 별 아이디를 저장할 map
-	private HashMap<WebSocketSession, String> memberList;
-	
-	
-	
-	public ChatController() {
+
+
+	public ChatHandler() {
 		super();
-		//this.chatList = new ;
 		this.sessionList = new ArrayList<WebSocketSession>();
-		this.memberList = new HashMap<WebSocketSession, String>();
 	}
 	
 	//클라이언트가 웹소캣에 최초로 접속했을 때 자동으로 수행되는 메소드
@@ -35,7 +38,7 @@ public class ChatController extends TextWebSocketHandler {
 		sessionList.add(session);
 		System.out.println("새 클라이언트 접속!");
 		System.out.println("session : "+session);
-	}
+	}//afterConnectionEstablished
 	
 	//클라이언트가 서버로 메세지를 전송하면 수행되는 메소드
 	@Override
@@ -50,25 +53,33 @@ public class ChatController extends TextWebSocketHandler {
 		String type = element.getAsJsonObject().get("type").getAsString();
 		//키가 msg인 값을 추출
 		String msg = element.getAsJsonObject().get("msg").getAsString();
-		if(type.equals("enter")) { // 새로 채팅방에 회원이 들어온 경우
-			memberList.put(session,msg);
-			
-		}else if(type.equals("chat")) {//채팅메세지를 입력한 경우
-			String sendMsg ="<div class='chat left'><span class='chatId'>"+memberList.get(session)+" : </span>"+msg+"</div>";
+		
+		// 새로 채팅방에 회원이 들어온 경우
+		if(type.equals("enter")) { 
+		
+		
+		//채팅메세지를 입력한 경우
+		}else if(type.equals("chat")) {
+			//int result = productService.insertChat(msg);
+			String sendMsg ="<div class='chat left'><span class='chatId'></span>"+msg+"</div>";
 			for(WebSocketSession s : sessionList) {
 				if(!s.equals(session)) {
 					TextMessage tm = new TextMessage(sendMsg);
 					s.sendMessage(tm);
-				}
-			}
-		}
-	}
+				}//if문
+			}//for문
+		}//else if(type.chat)
+	}//handleTextMessage
 		
 	//클라이언트와 연결이 끊겼을 때 자동으로 수행되는 메소드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
-		//접속종료 시 종료된 세션을 list에서 제거
-
-	}
+		sessionList.remove(session);
+		String sendMsg = "<p>상담이 종료되었습니다.</p>";
+		TextMessage tm = new TextMessage(sendMsg);
+		for(WebSocketSession s : sessionList) {
+			s.sendMessage(tm); 
+		}
+	}//afterConnectionClosed
 	
-}
+}//ChatHandler 

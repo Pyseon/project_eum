@@ -38,6 +38,12 @@ public class ProductDao {
 		return totalCount;
 	}
 	
+	public int insertProduct(Product pro) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("product.insertProduct", pro);
+		return result;
+	}
+	
 	//윤지
 	public Product selectOneProduct(int productNo) {
 		Product product = sqlSession.selectOne("product.selectOneProduct",productNo);

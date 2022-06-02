@@ -46,6 +46,24 @@
 			
 			
 		</ul>
+		<div>
+		
+		<!-- 수정예정
+		<input type="text" class="input-form" placeholder="input" /> <br>
+		<select class="input-form">
+			<option>value1</option>
+			<option>value2</option>
+			<option>value3</option>
+		</select>
+		<textarea class="input-form" placeholder="textarea"></textarea>
+		<input type="text" class="input-form" placeholder="disabled" disabled />
+		<input type="text" class="input-form" placeholder="readonly" readonly />
+		
+		 -->
+		<h2>입력양식</h2>
+		
+	</div>
+		
 		<a href="/Expertapply.do">이전</a>
 		<input type="submit" value="다음">
 	</form>

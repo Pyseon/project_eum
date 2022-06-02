@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -57,9 +58,15 @@ public class ProductController{
 		System.out.println("selPro : "+selPro);
 		return "product/ClassList";
 	}
-	@RequestMapping(value="/productWriter.do")
-		public String productWriter() {
-		return "product/productWriter";
+	@RequestMapping(value="/productWriterFrm.do")
+		public String productWriterFrm() {
+		return "product/productWriterFrm";
+	}
+	@RequestMapping(value="/productWrite.do")
+		public String productWrite(Product pro) {
+		int result = productService.productWrite(pro);
+		return "product/productWriterFrm";
+		
 	}
 	/*
 	@ResponseBody

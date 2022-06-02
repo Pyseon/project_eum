@@ -41,6 +41,25 @@
 		 	where product_Category = #{selPro}
 		</if>
   </select>
+  <insert id="insertProduct" parameterType="pro">
+  		insert into
+  			product_tbl values(
+  			product_seq.nextval,
+  			#{expertNo},
+  			#{productTitle},
+  			#{productCategory},
+  			#{productIntro},
+  			#{productTag},
+  			#{productContent},
+  			#{cost},
+  			#{productQst},
+  			#{productAns},
+  			#{productAddr},
+  			#{sale},
+  			#{productOption},
+  			#{productImgpath}
+  			)
+  </insert>
   
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">

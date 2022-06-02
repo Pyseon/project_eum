@@ -94,6 +94,12 @@ public class ProductService {
 		
 	}
 	
+	public int productWrite(Product pro) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 	//윤지
 	public ProductDetail selectProductDetail(int productNo, int expertNo, Member member) {
 		Product product = productDao.selectOneProduct(productNo);
@@ -236,6 +242,11 @@ public class ProductService {
 		map.put("expertM",expertM);
 		return map;
 	}
+
+
+	
+
+	
 	
 
 }

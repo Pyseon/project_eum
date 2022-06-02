@@ -15,34 +15,31 @@ body{
 }
 
 .messageArea{
-		overflow-y: auto;
-		height: 650px;
-		display: flex;
-		flex-direction: column;
-		background-color : #eaeaea;
-		padding: 15px;
+	overflow-y: auto;
+	height: 624px;
+	display: flex;
+	flex-direction: column;
+	background-color : #eaeaea;
+	padding: 15px;
 }
 .buy-detail{
-		overflow-y: auto;
-		border : 1px solid #ececec;
-		height: 725px;
-		display: flex;
-		flex-direction: column;
-		background-color : #e9ebf8;
-		align-items: center;
+	overflow-y: auto;
+	border : 1px solid #ececec;
+	height: 725px;
+	display: flex;
+	flex-direction: column;
+	background-color : #e9ebf8;
+	align-items: center;
+	justify-content: center;
 }
 
 #sendMsg{
-	width: 90%;
+	width: 100%;
 	height: 47px;
 	padding: 10px 10px;
 	font-size: 14px;
 	border-radius: 15px;
 	border:none;
-}
-#sendBtn{
-	width: 5%;
-	height: 40px;
 }
 
 #sendMsg:focus{
@@ -51,8 +48,9 @@ body{
 }
 .sendBox{
 	display: flex;
-	border:  14px solid #eaeaea;
+	border:  27px solid #eaeaea;
 	background-color: #eaeaea;
+	padding-right: 5px;
 }
 
 button {
@@ -68,54 +66,55 @@ button {
 }
 
 .left{
-      position: relative;
-      max-width: 300px;
-      align-self: flex-start;
-      background: #FFFFFF;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      margin-left:16px;
-      padding:15px;
-  }
+    position: relative;
+    max-width: 300px;
+    align-self: flex-start;
+    background: #FFFFFF;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-left:16px;
+    padding:15px;
+    margin-bottom: 5px;
+}
 .left:after{
-      content: '';
-      position: absolute;
-      border-style: solid;
-      border-width: 15px 15px 15px 0;
-      border-color: transparent #FFFFFF;
-      display: block;
-      width: 0;
-      z-index: 1;
-      left: -15px;
-      top: 12px;
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 15px 0;
+    border-color: transparent #FFFFFF;
+    display: block;
+    width: 0;
+    z-index: 1;
+    left: -15px;
+    top: 12px;
 }
 .right{
-      background-color: #3865f2;
-      color:#fff;
-      max-width:300px;      
-      align-self: flex-end;
-      position: relative;      
-      padding: 15px;      
-      margin-right:16px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      margin-bottom: 5px;
+    background-color: #3865f2;
+    color:#fff;
+    max-width:300px;      
+    align-self: flex-end;
+    position: relative;      
+    padding: 15px;      
+    margin-right:16px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-bottom: 5px;
 }
 .right:after{
-      content: '';
-      position: absolute;
-      border-style: solid;
-      border-width: 15px 0 15px 15px;
-      border-color: transparent #3865f2;
-      color:#fff;
-      display: block;
-      width: 0;
-      z-index: 1;
-      right: -15px;
-      top: 12px;
-      margin-bottom: 5px;
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 0 15px 15px;
+    border-color: transparent #3865f2;
+    color:#fff;
+    display: block;
+    width: 0;
+    z-index: 1;
+    right: -15px;
+    top: 12px;
+    margin-bottom: 5px;
 }
 input::placeholder{
 	color: #979797;
@@ -127,7 +126,7 @@ input::placeholder{
 .widget-wrap{
 	border-radius: 10px;
 	box-shadow: 0px 1px 15px 1px #ececec;
-	width: 85%;
+	width: 90%;
 	background-color: #fff;
 	margin-top:20px;
 	overflow: hidden;
@@ -159,6 +158,7 @@ hr{
 }
 .check-title-wrap{
 	display: flex;
+	position: relative;
 }
 .icons-check{
 	font-size: 20px !important;
@@ -187,6 +187,9 @@ hr{
 	justify-content: center;
 	margin: 30px 0px;
 }
+.check-box-wrap{
+	margin-right: 5px;
+}
 .checkbox{
 	zoom:1.3;
 }
@@ -203,7 +206,7 @@ hr{
 	color: #3865f2;
 	font-size: 22px !important;
 	vertical-align: top;
- 	margin-top: 5px;
+ 	margin-top: 3px;
     margin-left: -6px;
 }
 .picture{
@@ -221,6 +224,7 @@ hr{
 .expert-profile{
 	display: flex;
     justify-content: center;
+    margin-top: -2px;
 }
 h3,h5{
 	margin: 0px;
@@ -229,9 +233,6 @@ h3,h5{
 	width: 100%;
 	text-align: center;
 	padding-top: 11px;
-}
-.info-wrap>h5>span{
-	color: #aeaeae;
 }
 .expert-info{
 	text-align:center;
@@ -243,11 +244,46 @@ h3,h5{
 	margin-top:10px;
 	color: #aeaeae;
 }
+.info1{
+	margin-top: -10px;
+	color: #333333
+}
+.checkbox, .fileBtn, .send-icon, .icon-out {
+	cursor: pointer;
+}
 
+.icon-out{
+	position: absolute;
+	right: 19px;
+	font-size: 20px !important;
+}
 
-
-
-
+.fileBtn{
+	width: 45px;
+    margin-right: 10px;
+}
+.title-wrap{
+	margin: 0px;
+}
+.date{
+	text-align: center;
+}
+.hr-sect {
+    display: flex;
+    align-items: center;
+    color: rgba(0, 0, 0, 0.35);
+    margin: 8px 0px;
+}
+.hr-sect::before,
+.hr-sect::after {
+    content: "";
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.35);
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 16px;
+}
 
 
 
@@ -270,51 +306,6 @@ h3,h5{
 }
 
 
-@-ms-viewport {
-    width: device-width
-}
-
-
-@media (min-width:576px) {
-    .container {
-        max-width: 540px
-    }
-}
-
-@media (min-width:768px) {
-    .container {
-        max-width: 720px
-    }
-}
-
-@media (min-width:992px) {
-    .container {
-        max-width: 960px;
-    }
-}
-
-@media (min-width:1200px) {
-    .container {
-        max-width: 1140px
-    }
-}
-
-.container-fluid {
-    width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto
-}
-
-.row {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -15px;
-    margin-left: -15px
-}
 
 .col-4,
 .col-8,
@@ -345,25 +336,25 @@ h3,h5{
 .col-4 {
     -ms-flex: 0 0 33.333333%;
     flex: 0 0 33.333333%;
-    max-width: 29.444444%
+    max-width: 37.444444%
 }
 
 .col-8 {
     -ms-flex: 0 0 66.666667%;
     flex: 0 0 66.666667%;
-    max-width: 70.555556%
+    max-width: 62.555556%
 }
 
 @media (min-width:992px) {
     .col-lg-4 {
         -ms-flex: 0 0 33.333333%;
         flex: 0 0 33.333333%;
-        max-width: 37.444444%
+        max-width: 33.444444%
     }
     .col-lg-8 {
         -ms-flex: 0 0 66.666667%;
         flex: 0 0 66.666667%;
-        max-width: 62.555556%
+        max-width: 66.555556%
     }
 }
 

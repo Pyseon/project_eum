@@ -215,17 +215,24 @@ public class ProductController{
 	
 	//윤지
 	@RequestMapping(value = "/expertCounsel.do")
-	public String expertCounsel(Model model, int productNo, int expertNo) {
+	public String expertCounsel(Model model, int productNo, int expertNo, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");			
+		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map = productService.selectProductAndExpert(productNo, expertNo);
 		model.addAttribute("p", map.get("product"));
 		model.addAttribute("e", map.get("expert"));
-		model.addAttribute("ec",map.get("expertC"));
+		model.addAttribute("ec", map.get("expertC"));
 		model.addAttribute("em", map.get("expertM"));
+		model.addAttribute("m", member);
 		System.out.println("Counsel_product : "+map.get("product"));
 		System.out.println("Counsel_expert : "+map.get("expert"));
 		System.out.println("Counsel_expertC : "+map.get("expertC"));
 		System.out.println("Counsel_expertM : "+map.get("expertM"));
+		System.out.println("counsel_member : "+member);
 		return "product/expertCounsel";
 	}
 	

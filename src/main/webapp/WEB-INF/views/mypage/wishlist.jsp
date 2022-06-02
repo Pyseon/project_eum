@@ -218,9 +218,16 @@ li{
 			</ul>
 			</div>
 			<div>
-						<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do'">주문상세</button>
-						<button class="btn bc3 modal-open-btn" target="#test-modal"">주문취소</button>
-						<button class="btn bc5 bs7" id="login-btn" type="button" onclick="location.href='/.do'">시작하기</button>
+						<!-- 찜목록 하트 -->
+						<!-- 
+						<c:when test="${wishMemberCheck eq 0 }">
+										<div><span class="material-icons icon-wish">favorite_border</span></div>								
+						</c:when>
+						<c:otherwise>
+										<div><span class="material-icons icon-wish">favorite</span></div>
+						</c:otherwise>
+						
+						 -->
 			</div>
 		</div>
 		

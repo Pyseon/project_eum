@@ -74,7 +74,7 @@
 		display: block;
 		width   : 90%;
 		margin: 0 auto;
-		border-bottom:4px solid #3865f2;
+		border-bottom:4px solid gray;
 	}
 	.idpw{
 		font-size:15px;
@@ -88,7 +88,7 @@
 		display: block;
 		width   : 85%;
 		margin: 0 auto;
-		border-bottom:4px solid gray;
+		border-bottom:4px solid #3865f2;
 	}
 </style>
 </head>

@@ -180,4 +180,9 @@ public class MemberController {
 	public String findId() { 
 		return "member/findId";
 	}
+	//대권 비밀번호찾기
+	@RequestMapping(value="/findPw.do")
+	public String findPw() { 
+		return "member/findPw";
+	}
 }

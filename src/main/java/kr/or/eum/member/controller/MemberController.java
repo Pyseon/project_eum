@@ -189,13 +189,11 @@ public class MemberController {
 	}
 	@RequestMapping(value="/Myproductdetail.do")
 	public String Myproductdetail(int payNo) {
-		
-		
 	System.out.println(payNo+"payNo");
 	ArrayList<Payment> list = service.Myproductdetail(payNo);
 	System.out.println(list);
 	return "mypage/Myproductdetail";
-
+	}
 	//대권 아이디찾기
 	@RequestMapping(value="/findId.do")
 	public String findId() { 

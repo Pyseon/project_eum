@@ -77,8 +77,43 @@ public class CommunityService {
 		}
 		System.out.println("최종값>>"+advantage);
 		
-//		return dao.communityWrite(comm);
-		return -1;
+		
+		String weakness = comm.getWeakness();
+		List<String> weakList = new ArrayList<String>();
+		System.out.println(weakness);
+		System.out.println();
+			
+		String []tokens2=advantage.split("\\|");
+			
+		for(int i=0;i<tokens2.length;i++){
+			if(tokens2[i] == null || tokens2[i].trim().length() < 2) { // null or 빈칸일때
+			}else { //문자가 정석으로 있을때
+				if(tokens2[i].indexOf(",") == 0) { //첫번째글자에 쉼표가 있을경우
+					weakList.add(tokens2[i].replaceFirst(",", "")); //첫번째 쉼표는 빈칸으로 변환
+				}else {
+					weakList.add(tokens2[i].trim()); //문자 앞뒤로 빈칸만 삭제 (문자열 중간 빈칸은 삭제 안함)
+				}
+			}
+		}
+		
+		weakness = "";
+		
+		for(int i=0;i<advList.size();i++){
+			weakness += weakList.get(i)+"|";
+		}
+		System.out.println("최종값>>"+weakness);
+		
+		
+		
+		
+		comm.setAdvantage(advantage);
+		comm.setWeakness(weakness);
+		
+		int result =  dao.communityWrite(comm);
+		
+		
+		return result;
+//		return -1;
 	}
 	
 	

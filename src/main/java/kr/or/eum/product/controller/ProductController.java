@@ -139,7 +139,7 @@ public class ProductController{
 	}
 	
 	//윤지
-	@RequestMapping("/imgVerProductDetail.do")
+	@RequestMapping(value = "/imgVerProductDetail.do")
 	public String imgVerProductDetail(Model model, int productNo, int expertNo, HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		Member member = null;

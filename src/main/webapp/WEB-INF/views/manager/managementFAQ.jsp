@@ -6,22 +6,46 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+#categoryList{
+	display: none;
+	position: relative;
+	text-align: left;
+	margin-top: -60px;
+	margin-left: -185px;
+	background: #ccc;
+	width: 310px;
+}
+.searchBox>form{
+	float: right;
+}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
-	<div class="manaContentWrap">
-		<select name="faqType">
-			<option value="0">전체</option>
-			<option value="1">서비스소개</option>
-			<option value="2">이용방법</option>
-			<option value="3">구매 및 영수증</option>
-			<option value="4">가입/인증</option>
-			<option value="5">계정 정보/탈퇴</option>
-			<option value="6">문제해결</option>
-			<option value="7">취소/환불</option>
-			<option value="8">신고/패널티</option>
-		</select>
+	<div class="manaContentWrap">		
+	<h1>>FAQ</h1>
+		<div class="searchBox">
+			<form action="/manaFAQ.do" method="post" id="faqSelectBox">
+				<select name="searchType">
+					<option value="faqTitle">제목</option>
+					<option id="faqCategory" value="faqCategory">유형</option>
+				</select>
+				<input type="hidden" name="reqPage" value="1">
+				<input type="hidden" name="selectNum" value="0">
+				<input type="text" name="keyword">				
+				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
+			</form>
+			<div id="categoryList">
+<pre>
+0: 전체		
+1: 서비스 소개		2: 이용방법	
+3: 구매 및 영수증	4: 가입 / 인증	
+5: 계정 정보/탈퇴	6: 문제 해결	
+7: 취소 / 환불		8: 신고 / 패널티</pre>
+			</div>
+		</div>
 		<div id="resultTbl">
 			<table class="tbl tbl-hover resultTbl">
 				<tr class="tr-1">
@@ -38,7 +62,7 @@
 					<td>${faq.FAQNo }</td>
 					<td>${faq.FAQTitle }</td>
 					<td>${faq.FAQDate }</td>
-					<td><button>수정</button></td>
+					<td><button onclick="">수정</button></td>
 					<td><button>삭제</button></td>			
 					</tr>
 					</c:forEach>
@@ -46,8 +70,20 @@
 		</div>
 		<div class="memberPageNavi">
 			${pageNavi }
+			<button onclick="location.href='/insertFAQFrm.do'">글쓰기</button>
 		</div>
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<script>
+	$(document).ready(function(){
+		$("select[name=searchType]").change(function(){
+			if($("select[name=searchType]").val() == 'faqCategory' ){
+				$('#categoryList').show();
+			}else{
+				$('#categoryList').hide();
+			}
+		});
+	});
+</script>
 </body>
 </html>

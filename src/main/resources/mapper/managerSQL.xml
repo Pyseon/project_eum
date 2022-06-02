@@ -360,4 +360,8 @@
 		</if>
 	</select>
 	
+	<insert id="insertFAQ" parameterType="map">
+		insert into faq_tbl values(faq_seq.nextval, #{FAQTitle}, #{FAQContent}, #{FAQType}, TO_CHAR(SYSDATE,'YYYY-MM-DD'));
+	</insert>
+	
 </mapper>

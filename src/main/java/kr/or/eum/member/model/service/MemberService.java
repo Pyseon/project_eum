@@ -11,6 +11,7 @@ import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
@@ -62,8 +63,8 @@ public class MemberService {
 	}
 
 	//재민 구매내역
-	public ArrayList<ProductAndPayment> selectProductList() {
-		ArrayList<ProductAndPayment> list = dao.selectProductList();
+	public ArrayList<ProductAndPayment> selectProductList(int memberNo) {
+		ArrayList<ProductAndPayment> list = dao.selectProductList(memberNo);
 		
 		return list;
 	}
@@ -73,16 +74,27 @@ public class MemberService {
 		return dao.selectOneExpertOnly(expertNo);
 	}
 
-//재민 찜목록
-	public ArrayList<Wishlist> selectWishlist() {
-		ArrayList<Wishlist> list = dao.selectWishlist();
+	//재민 찜목록
+	public ArrayList<Wishlist> selectWishlist(int memberNo) {
+		ArrayList<Wishlist> list = dao.selectWishlist(memberNo);
 		
 		return list;
 	}
 	//재민 리뷰목록
-	public ArrayList<Review> selectReviewlist() {
-		ArrayList<Review> list = dao.selectReviewlist();
+	public ArrayList<Review> selectReviewlist(int memberNo) {
+		ArrayList<Review> list = dao.selectReviewlist(memberNo);
 		
+		return list;
+	}
+	//재민 내 구매목록 삭제
+	public int DeleteMyproduct(int payNo) {
+		// TODO Auto-generated method stub
+		return dao.DeleteMyproduct(payNo);
+	}
+
+	public ArrayList<Payment> Myproductdetail(int payNo) {
+		ArrayList<Payment> list = dao.Myproductdetail(payNo);
+		System.out.println(list);
 		return list;
 	}
 

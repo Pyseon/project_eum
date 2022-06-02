@@ -4,6 +4,7 @@ package kr.or.eum.member.controller;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
@@ -78,13 +80,15 @@ public class MemberController {
 	}	
 	//재민 내 정보페이지
 	@RequestMapping(value="/Mypage.do")
-	public String Mypage() {
+	public String Mypage(Member m,HttpSession session) {
+		
 		return "mypage/Mypage";
 	}
 	//재민 내정보수정
 	@RequestMapping(value="/updateMember.do")
 	public String updateMember(Member m,HttpSession session) {
 		int result = service.updateMember(m);
+	
 		if(result>0) {
 			session.setAttribute("m", m);
 		}
@@ -110,27 +114,29 @@ public class MemberController {
 	}
 	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
-	public String Myproduct(Model model) {
-		ArrayList<ProductAndPayment> list = service.selectProductList();
-		model.addAttribute("list", list);
+	public String Myproduct(Model model, HttpSession session, int memberNo) {
+		ArrayList<ProductAndPayment> list = service.selectProductList(memberNo);
 		
+		model.addAttribute("list", list);
+		System.out.println(list);
+		System.out.println(memberNo+"memberNo");
 		return "mypage/Myproduct";
 	}
 	//재민 찜내역
 	
 	@RequestMapping(value="/Mywishlist.do")
-	public String Mywishlist(Model model) {
-		ArrayList<Wishlist> list = service.selectWishlist();
+	public String Mywishlist(Model model,int memberNo) {
+		ArrayList<Wishlist> list = service.selectWishlist(memberNo);
 		model.addAttribute("list", list);
-		System.out.println("list"+list);
+		
 		return "mypage/wishlist";
 	}
 	//재민 리뷰목록
 	@RequestMapping(value="/Myreview.do")
-	public String Myreview(Model model) {
-		ArrayList<Review> list = service.selectReviewlist();
+	public String Myreview(Model model,int memberNo) {
+		ArrayList<Review> list = service.selectReviewlist(memberNo);
 		model.addAttribute("list", list);
-		System.out.println("list"+list);
+		
 		return "mypage/Myreview";
 	}
 	//재민 전문가 신청페이지로 이동
@@ -174,5 +180,20 @@ public class MemberController {
 		System.out.println(expertPhone);
 		System.out.println(expertEmail);
 		return null;
+	}
+	//재민 내 구매목록 삭제
+	@RequestMapping(value="/DeleteMyproduct.do")
+	public String DeleteMyproduct(int payNo) {
+		int result = service.DeleteMyproduct(payNo);
+		return "redirect:/Myproduct";
+	}
+	@RequestMapping(value="/Myproductdetail.do")
+	public String Myproductdetail(int payNo) {
+		
+		
+	System.out.println(payNo+"payNo");
+	ArrayList<Payment> list = service.Myproductdetail(payNo);
+	System.out.println(list);
+	return "mypage/Myproductdetail";
 	}
 }

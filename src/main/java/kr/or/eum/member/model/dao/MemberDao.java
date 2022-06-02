@@ -11,6 +11,7 @@ import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
@@ -56,9 +57,9 @@ public class MemberDao {
 		return expertPicture;
 	}
 	//재민 구매목록
-	public ArrayList<ProductAndPayment> selectProductList() {
-		List list = sqlSession.selectList("member.selectProductList"); 
-		System.out.println("list"+list);
+	public ArrayList<ProductAndPayment> selectProductList(int memberNo) {
+		List list = sqlSession.selectList("member.selectProductList",memberNo); 
+		
 		return (ArrayList<ProductAndPayment>)list;
 		
 	}
@@ -70,16 +71,25 @@ public class MemberDao {
 	}
 
 	//재민 리뷰테이블
-	public ArrayList<Review> selectReviewlist() {
-		List list = sqlSession.selectList("member.selectReviewlist");
+	public ArrayList<Review> selectReviewlist(int memberNo) {
+		List list = sqlSession.selectList("member.selectReviewlist",memberNo);
 		return (ArrayList<Review>)list;
-
+		
 	}
 	 //재민 찜목록
-		public ArrayList<Wishlist> selectWishlist() {
-			List list = sqlSession.selectList("member.selectWishlist");
+	public ArrayList<Wishlist> selectWishlist(int memberNo) {
+		List list = sqlSession.selectList("member.selectWishlist",memberNo);
 			
-			return (ArrayList<Wishlist>)list;
-		}
+		return (ArrayList<Wishlist>)list;
+	}
+	public int DeleteMyproduct(int payNo) {
+		int result = sqlSession.update("member.DeleteMyproduct");
+		return result;
+	}
+	public ArrayList<Payment> Myproductdetail(int payNo) {
+		List list = sqlSession.selectList("member.Myproductdetail",payNo); 
+		System.out.println(list);
+		return (ArrayList<Payment>)list;
+	}
 
 }

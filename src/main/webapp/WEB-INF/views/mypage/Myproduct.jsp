@@ -235,9 +235,11 @@ li{
 			</ul>
 			</div>
 			<div>
-						<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do'">주문상세</button>
-						<button class="btn bc3 modal-open-btn" target="#test-modal"">주문취소</button>
-						<button class="btn bc5 bs7" id="login-btn" type="button" onclick="location.href='/.do'">시작하기</button>
+						<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">${p.payNo}</button>
+						
+						<button class="btn bc3 modal-open-btn" target="#test-modal">주문취소</button>
+						
+						<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/.do'">시작하기</button>
 			</div>
 		</div>
 		
@@ -269,7 +271,7 @@ li{
 				영업일 2-3일 내로 처리될 예정입니다.
 			</p>
 			<div class="modal-btns-container">
-				<button class="btn bc3" id="modal-btns-item">구매취소</button>
+				<button class="btn bc3" id="modal-btns-item" onclick="location.href='/DeleteMyproduct.do'">구매취소</button>
 				<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
 			</div>
 		</div>

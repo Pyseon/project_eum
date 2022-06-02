@@ -191,7 +191,7 @@
 			<div class="tab_cont">
 				<div class="write-frm on">
 					<h1>요즘뭐하니 글쓰기</h1>
-					<form action="/communityWrite.do" method="post" onsubmit="checkForm();return false">
+					<form action="/communityWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
 					<input type="hidden" name="commCategory" value="0">
 					<input type="hidden" name="memberNo" value="14">
 					<input type="hidden" name="advantage">
@@ -208,7 +208,7 @@
 								<p class="comm-write-p" style="margin-bottom: 5px;">대표이미지</p>
 								<h4 class="fc-3" style="margin-top: 0;">(세로로 긴 사진이 적합합니다.)</h4>
 								<label for="input-file">파일 선택</label> <input type="file"
-									name="commFilename" class="commFile upload-hidden"
+									name="file" class="commFile upload-hidden"
 									id="input-file">
 							</div>
 							<div class="input-img-box"></div>

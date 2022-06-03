@@ -3,6 +3,9 @@ package kr.or.eum.manager.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.manager.model.service.ManagerService;
 import kr.or.eum.manager.model.vo.FaQ;
+import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
 
@@ -127,6 +132,48 @@ public class ManagerController {
 	public String updateFAQ(int FAQNo, int FAQType, String FAQTitle, String FAQContent) {
 		int result = service.updateFAQ(FAQNo, FAQType, FAQTitle, FAQContent);
 		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
+	}
+	@RequestMapping(value = "/manaNotice.do")
+	public String manaNotice(int reqPage, String searchType, String keyword, Model model) {
+		String wherePage = "manaNotice.do";
+		int selectNum = 0;
+		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", npd.get("noticeList"));
+		model.addAttribute("pageNavi", npd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/managementNotice";
+	}
+	@RequestMapping(value = "/insertNoticeFrm.do")
+	public String insertNoticeFrm() {
+		return "manager/insertNoticeFrm";
+	}
+	@RequestMapping(value = "/insertNotice.do")
+	public String insertNotice(HttpServletRequest request, String noticeTitle, String noticeContent) {
+		HttpSession session = request.getSession(false);
+		Member member = (Member)session.getAttribute("member");
+		HashMap<String, Object> notice = new HashMap<String, Object>();
+		notice.put("memberNo", member.getMemberNo());
+		notice.put("noticeTitle", noticeTitle);
+		notice.put("noticeContent", noticeContent);
+		int result = service.insertNotice(notice);
+		return "redirect:/manaNotice.do?reqPage=1";
+	}
+	@RequestMapping(value = "/deleteNotice.do")
+	public String deleteNotice(int noticeNo) {
+		int result = service.deletenotice(noticeNo);
+		return "redirect:/manaNotice.do?reqPage=1";
+	}
+	@RequestMapping(value = "/updateNoticeFrm.do")
+	public String updateNoticeFrm(int noticeNo, Model model) {
+		ArrayList<Notice> list = service.selectNotice(noticeNo);
+		model.addAttribute("list", list);
+		return "manager/updateNoticeFrm";
+	}
+	@RequestMapping(value = "/updateNotice.do")
+	public String updateNotice(int noticeNo, String noticeTitle, String noticeContent) {
+		int result = service.updateNotice(noticeNo, noticeTitle, noticeContent);
+		return "redirect:/manaNotice.do?reqPage=1";
 	}
 	
 }

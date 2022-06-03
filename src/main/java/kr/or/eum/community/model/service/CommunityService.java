@@ -113,7 +113,6 @@ public class CommunityService {
 		
 		
 		return result;
-//		return -1;
 	}
 	
 	

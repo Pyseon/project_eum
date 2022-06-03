@@ -10,7 +10,9 @@
 <body>
 	
 	
+	
 	<div class="page-content">
+		<br>
 		<div>
 		
 		<button class="btn bc1 bs5">개인</button>

@@ -361,7 +361,32 @@
 	</select>
 	
 	<insert id="insertFAQ" parameterType="map">
-		insert into faq_tbl values(faq_seq.nextval, #{FAQTitle}, #{FAQContent}, #{FAQType}, TO_CHAR(SYSDATE,'YYYY-MM-DD'));
+		insert into faq_tbl values(
+		faq_seq.nextval, 
+		#{FAQTitle}, 
+		#{FAQContent}, 
+		#{FAQType}, 
+		TO_CHAR(SYSDATE,'YYYY-MM-DD'))
 	</insert>
+	
+	<delete id="deleteFAQ" parameterType="int">
+		delete faq_tbl where faq_no = #{value }
+	</delete>
+	
+	<select id="selectFAQ" parameterType="int" resultType="faq">
+		select
+		faq_no as FAQNo,
+		faq_title as FAQTitle,
+		faq_content as FAQContent,
+		faq_type as FAQType
+		from faq_tbl
+		where faq_no = #{value}
+	</select>
+	
+	<update id="updateFAQ" parameterType="map">
+		update faq_tbl set 
+		faq_type=#{FAQType}, faq_title=#{FAQTitle}, faq_content=#{FAQContent} 
+		where faq_no = #{FAQNo}
+	</update>
 	
 </mapper>

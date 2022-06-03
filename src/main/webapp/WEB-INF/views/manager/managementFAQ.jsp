@@ -6,26 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-#categoryList{
-	display: none;
-	position: relative;
-	text-align: left;
-	margin-top: -60px;
-	margin-left: -185px;
-	background: #ccc;
-	width: 310px;
-}
-.searchBox>form{
-	float: right;
-}
-</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">		
-	<h1>>FAQ</h1>
 		<div class="searchBox">
 			<form action="/manaFAQ.do" method="post" id="faqSelectBox">
 				<select name="searchType">
@@ -62,15 +47,17 @@
 					<td>${faq.FAQNo }</td>
 					<td>${faq.FAQTitle }</td>
 					<td>${faq.FAQDate }</td>
-					<td><button onclick="">수정</button></td>
-					<td><button>삭제</button></td>			
+					<td><button class="bc3 bs6" onclick="location.href='/updateFAQFrm.do?FAQNo=${faq.FAQNo}'">수정</button></td>
+					<td><button class="bc3 bs6" onclick="location.href='/deleteFAQ.do?FAQNo=${faq.FAQNo}'">삭제</button></td>			
 					</tr>
 					</c:forEach>
 			</table>
 		</div>
 		<div class="memberPageNavi">
 			${pageNavi }
-			<button onclick="location.href='/insertFAQFrm.do'">글쓰기</button>
+		</div>
+		<div class="insertFAQBtn">
+		<button class="bc1 bs5" onclick="location.href='/insertFAQFrm.do'">글쓰기</button>
 		</div>
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

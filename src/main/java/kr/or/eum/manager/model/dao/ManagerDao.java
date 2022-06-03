@@ -147,8 +147,23 @@ public class ManagerDao {
 		return totalCount;
 	}
 
-	public int insertFAQ(HashMap<String, String> map) {
+	public int insertFAQ(HashMap<String, Object> map) {
 		int result = sqlSession.insert("manager.insertFAQ",map);
+		return result;
+	}
+
+	public int deleteFAQ(int FAQNo) {
+		int result = sqlSession.delete("manager.deleteFAQ",FAQNo);
+		return result;
+	}
+
+	public ArrayList<FaQ> selectFAQ(int FAQNo) {
+		List list = sqlSession.selectList("manager.selectFAQ", FAQNo);
+		return (ArrayList<FaQ>) list;
+	}
+
+	public int updateFAQ(HashMap<String, Object> map) {
+		int result = sqlSession.update("manager.updateFAQ", map);
 		return result;
 	}
 	

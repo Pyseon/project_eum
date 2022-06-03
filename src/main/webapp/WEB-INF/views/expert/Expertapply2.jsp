@@ -5,24 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>전문가 신청3</title>
+<style>
+.consultbox>.input-form{
+		display:inline;
+		width: 32%;
+		font-size: 15px;
+		margin-bottom:3%;
+	}
+</style>
 </head>
 <body>
+	<div class="consultbox" style="border:1px solid; padding:10px;">
+		
+
 	<form action="/Expertapply3.do" method="post">
 		<ul>
 			<li>
 				<label>상담분야*</label>
-				<select size="11" id="class" name="expertClass" multiple>
-					<option value="law" selected>법률</option>
-					<option value="law" selected>비지니스</option>
-					<option value="law" selected>심리/헬스</option>
-					<option value="law" selected>학습</option>
-					<option value="law" selected>금융</option>
-					<option value="law" selected>라이프</option>
-					<option value="law" selected>취미</option>
-					<option value="law" selected>어학</option>
-					<option value="law" selected>레저</option>
-					<option value="law" selected>IT/테크</option>
-					<option value="law" selected>자기계발</option>
+				
+				<select class="input-form" name='cousult'>
+				 	<option value='law' selected>법률</option>
+					<option value='law' selected>비지니스</option>
+					<option value='law' selected>심리/헬스</option>
+					<option value='law' selected>학습</option>
+					<option value='law' selected>금융</option>
+					<option value='law' selected>라이프</option>
+					<option value='law' selected>취미</option>
+					<option value='law' selected>어학</option>
+					<option value='law' selected>레저</option>
+					<option value='law' selected>IT/테크</option>
+					<option value='law' selected>자기계발</option>
+					  
 				</select>
 			</li>
 			<li>
@@ -48,22 +61,8 @@
 		</ul>
 		<div>
 		
-		<!-- 수정예정
-		<input type="text" class="input-form" placeholder="input" /> <br>
-		<select class="input-form">
-			<option>value1</option>
-			<option>value2</option>
-			<option>value3</option>
-		</select>
-		<textarea class="input-form" placeholder="textarea"></textarea>
-		<input type="text" class="input-form" placeholder="disabled" disabled />
-		<input type="text" class="input-form" placeholder="readonly" readonly />
-		
-		 -->
-		<h2>입력양식</h2>
-		
 	</div>
-		
+</div>
 		<a href="/Expertapply.do">이전</a>
 		<input type="submit" value="다음">
 	</form>

@@ -7,10 +7,12 @@
 <meta charset="UTF-8">
 <title>>후기</title>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
 </head>
 <body>
-	<h3>>후기</h3>
+	
 	<div class="page-content">
+		<h1>>후기</h1>
 		<table class="tbl tbl-hover">
 			
 			<tr class="tr-1">

@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import kr.or.eum.manager.model.service.ManagerService;
-import kr.or.eum.product.model.service.ProductService;
+import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.product.model.vo.Payment;
-import kr.or.eum.product.model.vo.ProductDetail;
 import kr.or.eum.report.model.vo.Report;
 
 @Controller
@@ -103,14 +101,32 @@ public class ManagerController {
 		return "manager/managementFAQ";
 	}
 	@RequestMapping(value = "/insertFAQFrm.do")
-	public String insertFAQFrm() {
+	public String inorupFAQFrm() {
 		return "manager/insertFAQFrm";
 	}
 	
 	@RequestMapping(value = "/insertFAQ.do")
-	public String insertFAQ(int FAQCategory, String FAQTitle, String FAQContent) {
-		int result = service.insertFAQ(FAQCategory, FAQTitle, FAQContent);
-		return null;
+	public String insertFAQ(int FAQType, String FAQTitle, String FAQContent) {
+		int result = service.insertFAQ(FAQType, FAQTitle, FAQContent);
+		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
+	}
+	
+	@RequestMapping(value = "/deleteFAQ.do")
+	public String deleteFAQ(int FAQNo) {
+		int result = service.deleteFAQ(FAQNo);
+		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
+	}
+	
+	@RequestMapping(value = "/updateFAQFrm.do")
+	public String updateFAQFrm(int FAQNo, Model model) {
+		ArrayList<FaQ> list = service.selectFAQ(FAQNo);
+		model.addAttribute("list", list);
+		return "manager/updateFAQFrm";
+	}
+	@RequestMapping(value = "/updateFAQ.do")
+	public String updateFAQ(int FAQNo, int FAQType, String FAQTitle, String FAQContent) {
+		int result = service.updateFAQ(FAQNo, FAQType, FAQTitle, FAQContent);
+		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
 	}
 	
 }

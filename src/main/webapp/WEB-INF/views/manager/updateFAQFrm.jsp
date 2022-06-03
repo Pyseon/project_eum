@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +10,12 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
+	<c:forEach items="${list }" var="faq" varStatus="i">
 	<div class="manaContentWrap">
-		<h1>>FAQ등록페이지</h1>
+		<h1>>FAQ수정페이지</h1>
 		<hr>
-		<form action="/insertFAQ.do" method="post" class="FAQForm">
+		<form action="/updateFAQ.do" method="post" class="FAQForm">
+
 		<select name="FAQType" class="FAQCategory">
 			<option value="1">서비스 소개</option>
 			<option value="2">이용방법</option>
@@ -23,16 +26,17 @@
 			<option value="7">취소 / 환불</option>
 			<option value="8">신고 / 패널티</option>
 		</select>
-		<input type="text" name="FAQTitle" placeholder="제목을 입력하세요.">
+		<input type="text" name="FAQTitle" placeholder="제목을 입력하세요." value="${faq.FAQTitle }">
 		
 		<!-- 썸머노트 -->
 		<div class="pt-1" style="margin-bottom: 50px;">
-			<textarea id="summernote" name="FAQContent"></textarea>
+			<textarea id="summernote" name="FAQContent">${faq.FAQContent }</textarea>
 		</div>
-		
-		<input type="submit" class="btn bc1 bs4" value="등록하기">
+		<input type="hidden" name="FAQNo" value=${faq.FAQNo }>
+		<input type="submit" class="btn bc1 bs4" value="수정하기">
 		</form>
 	</div>
+	</c:forEach>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
 	 //썸머노트 불러오기 함수 
@@ -87,5 +91,6 @@
     });// 이미지 추가 함수 종료
   
 	</script>
+
 </body>
 </html>

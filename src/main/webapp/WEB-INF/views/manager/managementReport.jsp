@@ -16,7 +16,6 @@
 				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=0'">전체</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=1'">답변대기</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=2'">답변완료</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=3'">답변거부</button></li>
 			</ul>
 		</div>
 		<div class="searchBox">

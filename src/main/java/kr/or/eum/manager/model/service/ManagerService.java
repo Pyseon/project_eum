@@ -194,13 +194,31 @@ public class ManagerService {
 		return dao.answerReport(map);
 	}
 
-	public int insertFAQ(int FAQCategory, String FAQTitle, String FAQContent) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("FAQCategory", Integer.toString(FAQCategory));
+	public int insertFAQ(int FAQType, String FAQTitle, String FAQContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("FAQType", FAQType);
 		map.put("FAQTitle", FAQTitle);
 		map.put("FAQContent", FAQContent);
 		return dao.insertFAQ(map);
 	}
+
+	public int deleteFAQ(int FAQNo) {
+		return dao.deleteFAQ(FAQNo);
+	}
+
+	public ArrayList<FaQ> selectFAQ(int FAQNo) {
+		return dao.selectFAQ(FAQNo);
+	}
+
+	public int updateFAQ(int FAQNo, int FAQType, String FAQTitle, String FAQContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("FAQNo", FAQNo);
+		map.put("FAQType", FAQType);
+		map.put("FAQTitle", FAQTitle);
+		map.put("FAQContent", FAQContent);
+		return dao.updateFAQ(map);
+	}
+	
 	
 }
 

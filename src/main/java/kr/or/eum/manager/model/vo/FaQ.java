@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class FaQ {
 	private int FAQNo;
-	private int memberNo;
 	private String FAQTitle;
-	private long FAQContent;
+	private String FAQContent;
 	private int FAQType;
 	private String FAQDate;
 }

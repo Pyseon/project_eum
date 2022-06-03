@@ -92,7 +92,7 @@ public class MemberController {
 		if(result>0) {
 			session.setAttribute("m", m);
 		}
-		return "redirect:/mypage.do";
+		return "redirect:/";
 	}
 	//재민 1:1 문의내역 확인
 	@RequestMapping(value="/MyquestionList.do")
@@ -136,7 +136,7 @@ public class MemberController {
 	public String Myreview(Model model,int memberNo) {
 		ArrayList<Review> list = service.selectReviewlist(memberNo);
 		model.addAttribute("list", list);
-		
+		System.out.println(list);
 		return "mypage/Myreview";
 	}
 	//재민 전문가 신청페이지로 이동
@@ -144,6 +144,7 @@ public class MemberController {
 	public String Expertapply() {
 		return "expert/Expertapply";
 	}
+	
 	//필요서류 확인페이지
 	@RequestMapping(value="/checkdocument.do")
 	public String checkdocument() {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import kr.or.eum.manager.model.vo.FaQ;
+import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -164,6 +165,43 @@ public class ManagerDao {
 
 	public int updateFAQ(HashMap<String, Object> map) {
 		int result = sqlSession.update("manager.updateFAQ", map);
+		return result;
+	}
+
+	public ArrayList<Notice> noticePageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.noticeList", map);
+		return (ArrayList<Notice>) list;
+	}
+	public int noticeCount() {
+		int totalCount = sqlSession.selectOne("manager.noticeCount");
+		return totalCount;
+	}
+	public ArrayList<Notice> searchNoticePageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchNoticeList", map);
+		return (ArrayList<Notice>) list;
+	}
+	public int searchNoticeCount(HashMap<String, Object> map){
+		int totalCount = sqlSession.selectOne("manager.searchNoticeCount", map);
+		return totalCount;
+	}
+
+	public int deleteNotice(int noticeNo) {
+		int result = sqlSession.delete("manager.deleteNotice", noticeNo);
+		return result;
+	}
+
+	public ArrayList<Notice> selectNotice(int noticeNo) {
+		List list = sqlSession.selectList("manager.selectNotice", noticeNo);
+		return (ArrayList<Notice>) list;
+	}
+
+	public int insertNotice(HashMap<String, Object> notice) {
+		int result = sqlSession.insert("manager.insertNotice", notice);
+		return result;
+	}
+
+	public int updateNotice(HashMap<String, Object> map) {
+		int result = sqlSession.update("manager.updateNotice", map);
 		return result;
 	}
 	

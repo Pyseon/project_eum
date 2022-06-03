@@ -23,7 +23,7 @@
 			<option value="7">취소 / 환불</option>
 			<option value="8">신고 / 패널티</option>
 		</select>
-		<input type="text" name="FAQTitle" placeholder="제목을 입력하세요.">
+		<input type="text" class="managerTitle" name="FAQTitle" placeholder="제목을 입력하세요.">
 		
 		<!-- 썸머노트 -->
 		<div class="pt-1" style="margin-bottom: 50px;">

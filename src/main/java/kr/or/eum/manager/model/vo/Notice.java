@@ -11,8 +11,8 @@ public class Notice {
 	private int noticeNo;
 	private int memberNo;
 	private String noticeTitle;
-	private long noticeContent;
+	private String noticeContent;
 	private String noticeDate;
-	private String noticeFileName;
-	private String noticeFilePath;
+	
+	private String memberId;
 }

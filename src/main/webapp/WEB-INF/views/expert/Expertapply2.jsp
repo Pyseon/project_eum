@@ -23,7 +23,7 @@
 			<li>
 				<label>상담분야*</label>
 				
-				<select class="input-form" name='cousult'>
+				<select class="input-form" name='cousult1'>
 				 	<option value='law' selected>법률</option>
 					<option value='law' selected>비지니스</option>
 					<option value='law' selected>심리/헬스</option>

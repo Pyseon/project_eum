@@ -59,12 +59,21 @@ public class ProductController{
 		return "product/ClassList";
 	}
 	@RequestMapping(value="/productWriterFrm.do")
-		public String productWriterFrm() {
+		public String productWriterFrm(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession(false);
+        Member member = null;
+        if(session != null) {
+            member = (Member)session.getAttribute("member");
+        }
+        int memberNo = member.getMemberNo();
+        Expert expert = productService.selectExpertNo(memberNo);
+        model.addAttribute("expertNo", expert.getExpertNo());
 		return "product/productWriterFrm";
 	}
+	
 	@RequestMapping(value="/productWrite.do")
 		public String productWrite(Product pro) {
-		int result = productService.productWrite(pro);
+		System.out.println(pro);
 		return "product/productWriterFrm";
 		
 	}

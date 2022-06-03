@@ -187,6 +187,16 @@ li{
 	.selPro-active{
 	border-bottom: 5px solid rgb(56 101 242) !important;
 	}
+	#writeButton{
+		margin: 0px 0px 0px 1000px;
+		background-color: #ffffff;
+		border: 1px solid #a7a7a7;
+		padding: 6px 10px;
+		border-radius: 4px;
+		font-size: 18px;
+		line-height: 1.5;
+		font-weight: normal;
+	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
@@ -213,6 +223,7 @@ li{
    
    
 <div class="container">
+<button type="button" class="writeButton" id="writeButton" onclick="location.href='/productWriterFrm.do'">등록하기</button>
 <div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
 	<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
@@ -264,10 +275,20 @@ li{
 		</ul>
 		
 		<div class="t2" style="margin: 20px 0 0px 0px;" >	
-		
+		<c:set var="sele" value="0%" />
+		<c:choose>
+		<c:when test="${sele eq '00%' }">	
+		<span class="t2" style="margin: 0px 0 30px 0px;">
+			&nbsp;
+			<span id="fixed-price" style="width: auto; font-size: 12px; font-weight: bold; margin: 4px 0 0px 0px;">
+			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+			</span>
+		</span> 
+		</c:when>
+		<c:otherwise>
 		<span id="sele" style="width: auto;">${c.sale}%</span>
 	
-		<span class="t2" style="margin: 0px 0 30px 30px;">
+		<span class="t2" style="margin: 0px 0 30px 0px;">
 			<span id="price"  class="fc-7" style="width: auto; font-size: 18px; line-height: 1.5;">
 			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
 			</span>
@@ -276,6 +297,9 @@ li{
 			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
 			</span>
 		</span> 
+		</c:otherwise>
+		</c:choose>
+		
 		</div><!-- t2 -->
 		
 		
@@ -286,6 +310,7 @@ li{
 
 	</div>													   			
 ${pageNavi }
+
 
 </div>
 <script>

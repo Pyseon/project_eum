@@ -9,6 +9,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+div{
+	margin-top: 20px;
+	}
 	#category{
 		font:bold 16px "malgun gothic";
 		width: 120px;
@@ -20,6 +23,9 @@
 		#category > ul >li:hover > ul{
 		display:block;
 		}
+		.input{
+		margin-top: 20px;
+		}
 	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
@@ -29,8 +35,11 @@
 </head>
 <body>
 	<div class="container">
+	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">상담 등록하기</h1>
 		<form action="/productWrite.do" method="post">
+		<input type="text" name="expertNo" value="${expertNo }">
+		<input type="hidden" name="productType" value="2">
 		<div>
 			<table class = "product-tab">
 				<tr>
@@ -40,19 +49,19 @@
 				</tr>
 			</table>	
 		</div>
-		<select id="category">
+		<select id="category" name="productCategory">
 		<option value="">선택</option>
-		<option value="1">법률</option>
-		<option value="2">비즈니스</option>
-		<option value="3">심리/헬스</option>
-		<option value="4">학습</option>
-		<option value="5">금융</option>
-		<option value="6">라이프</option>
-		<option value="7">취미</option>
-		<option value="8">어학</option>
-		<option value="9">레저</option>
-		<option value="10">IT/테크</option>
-		<option value="9">자기계발</option>
+		<option value="법률">법률</option>
+		<option value="비즈니스">비즈니스</option>
+		<option value="심리/헬스">심리/헬스</option>
+		<option value="학습">학습</option>
+		<option value="금융">금융</option>
+		<option value="라이프">라이프</option>
+		<option value="취미">취미</option>
+		<option value="어학">어학</option>
+		<option value="레저">레저</option>
+		<option value="IT/테크">IT/테크</option>
+		<option value="자기계발">자기계발</option>
 		</select>
 		
 		<div class="title">
@@ -65,19 +74,17 @@
 		</div>
 		<div class="content">
 			<div>상담 상세 설명</div>
-			<textarea id="productContent" class="input-form"></textarea>
+			<textarea id="summernote" name="productContent" class="input-form"></textarea>
 		</div>
 		<div>
 			<div>자주묻는 질문 (선택)</div>
 			<div>
-				<span>질문
-					<input class="input-form" type="text" name="productQNA" placeholder="질문을 입력하세요">
-				</span>
+				질문
+				<input class="input-form" type="text" name="productQNA" placeholder="질문을 입력하세요" >
 			</div>
 			<div>
-				<span>답변
-					<input class="input-form" type="text" name="productAns" placeholder="답변을 입력하세요">
-				</span>
+				답변
+				<input class="input-form" type="text" name="productAns" placeholder="답변을 입력하세요">
 			</div>
 			
 		</div>
@@ -86,11 +93,15 @@
 			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요">
 		</div>
 		<div>
-		<div>가격 설정</div>
-			<span>
-			<input class="input-form" type="text" name="productOption" placeholder="시간을 정해 주세요">
-			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요">원
-			</span>
+			가격설정
+			<div style="display: flex; margin-top: 0px;">
+			<div  style= " display: flex; width: 50%;">
+			<input class="input-form" type="text" name="productOption" placeholder="시간을 정해 주세요" style="width: 100%;">
+			</div>
+			<div style="display:flex; margin-top: 0px;">
+			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요"style="width: 100%;">원
+			</div>
+			</div>
 		</div>
 		<div>
 		<div>태그</div>
@@ -102,7 +113,7 @@
 		</form>
 	</div>
 	<script>
-	$("#productContent").summernote({
+	$("#summernote").summernote({
         toolbar: [ //썸머노트 툴바 추가/수정
             ['fontsize', ['fontsize']],
             ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],

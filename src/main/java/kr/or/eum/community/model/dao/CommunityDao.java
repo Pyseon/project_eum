@@ -49,4 +49,8 @@ public class CommunityDao {
 		sqlSession.update("community.communityUpdate", comm);
 	}
 
+	public void communityDelete(int commNo) {
+		sqlSession.delete("community.communityDelete", commNo);
+	}
+
 }

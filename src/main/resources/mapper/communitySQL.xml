@@ -111,4 +111,8 @@
 		where comm_no = #{commNo}
 	</update>
 
+	<delete id="communityDelete" parameterType="int">
+		delete from community_tbl 
+			where comm_no = ${value}
+	</delete>
 </mapper>

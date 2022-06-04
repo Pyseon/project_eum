@@ -38,7 +38,7 @@ public class CommunityService {
 		CommunityPageData cpd = new CommunityPageData(list, pageNavi);
 		return cpd;
 	}
-
+//>>>>>>>>>> 읽기
 	public CommunityDetailData communityDetail(int commNo) {
 		Community comm = dao.communityDetail(commNo);
 		// 댓글 불러옴 (대댓글 포함)
@@ -50,22 +50,32 @@ public class CommunityService {
 		CommunityDetailData cdd = new CommunityDetailData(comm, cmntList);
 		return cdd;
 	}
-	
+	//댓글없이 내용만 가져오기
 	public Community communityDetailNotCmnt(int commNo) {
 		return dao.communityDetail(commNo);
 	}
-	
-	public void communityUpdate(Community comm) {
-		Community community = setToken(comm);
-		dao.communityUpdate(community);
-	}
-
-	
-	
+//>>>>>>>>>> 쓰기
 	public int communityWrite(Community comm) {
 		Community community = setToken(comm);
 		return dao.communityWrite(community);
 	}
+
+
+//>>>>>>>>>> 수정
+	public void communityUpdate(Community comm) {
+		Community community = setToken(comm);
+		dao.communityUpdate(community);
+	}
+	
+//>>>>>>>>>> 삭제
+	public void communityDelete(int commNo) {
+		dao.communityDelete(commNo);
+		
+	}
+	
+	
+
+	
 	
 /////////////////////////////   장점,단점 처리 함수      //////////////////////////////	
 	public Community setToken(Community comm) {
@@ -214,6 +224,8 @@ public class CommunityService {
 
 		return pageNavi;
 	}
+
+
 
 
 

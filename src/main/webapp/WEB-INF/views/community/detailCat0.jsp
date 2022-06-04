@@ -15,8 +15,8 @@
 		<div class="article-header">
 			<div class="article-list">
 				<a href="/communityList.do?category=0&reqPage=1" class="fc-7">요즘 뭐하니 ></a>
-				<button class="btn bc6 bs5 fc-1" onclick="location.href='communityUpdateFrm.do?commNo=${comm.commNo}'">수정</button>
-				<button class="btn bc6 bs5 fc-1" onclick="location.href='communityDelete.do?commNo=${comm.commNo}'">삭제</button>
+				<button class="btn bc6 bs5 fc-1" onclick="location.href='/communityUpdateFrm.do?commNo=${comm.commNo}'">수정</button>
+				<button class="btn bc6 bs5 fc-1  modal-open-btn" target="#del-modal">삭제</button>
 			</div>
 			<div class="article-title">
 				<h2 style="font-size: 26px">${comm.commTitle}</h2>
@@ -176,6 +176,26 @@
 		<!-- comment end -->
 	</div>
 	<!--container end-->
+	
+	
+	<!-- modal start -->
+	<div id="del-modal" class="modal-bg">
+	<div class="modal-wrap" style="margin-top: 300px;">
+		<div class="modal-head" style="border-bottom: none;">
+			<h2>정말로 삭제 하시겠습니까?</h2>
+			<h4 style="color: #a7a7a7">삭제 후에는 복구 할 수 없습니다.</h4>
+		</div>
+			<div class="modal-btns-container">
+				<button class="btn bg-9 fc-5" id="modal-btns-item" style="margin-right: 5px;" onclick="location.href='/communityDelete.do?category=${comm.commCategory }&commNo=${comm.commNo}'">삭제하기</button>
+				<button class="btn bg-4 fc-5 modal-close" id="modal-btns-item"  style="margin-left: 5px;">취소하기</button>
+			</div>
+		</div>
+	</div>
+	<!-- modal end -->
+	
+	
+	
+	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 <script>

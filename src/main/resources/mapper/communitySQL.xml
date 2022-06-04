@@ -96,6 +96,19 @@
 			#{commFilename}
 		)
 	</insert>
-
+	
+	<update id="communityUpdate" parameterType="comm">
+		update community_tbl set 
+			comm_title = #{commTitle},
+			comm_intro = #{commIntro},
+			comm_content = #{commContent},
+			advantage = #{advantage},
+			weakness = #{weakness}
+		<if test="commFilename != null">
+			, comm_filename = #{commFilename},
+			comm_filepath = #{commFilepath}
+		</if>
+		where comm_no = #{commNo}
+	</update>
 
 </mapper>

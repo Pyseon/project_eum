@@ -24,20 +24,23 @@ public class ChatHandler extends TextWebSocketHandler {
 	//이후 : 이게 여러개 됐을 때 어떻게 관리할지.
 	
 	//접속한 회원
-	private ArrayList<WebSocketSession> sessionList;
+	private HashMap<String, ArrayList<WebSocketSession>> sessionMap;
+	private HashMap<WebSocketSession, String> sessionRoom;
 
 
 	public ChatHandler() {
 		super();
-		this.sessionList = new ArrayList<WebSocketSession>();
+		this.sessionMap = new HashMap<String, ArrayList<WebSocketSession>>();
+		this.sessionRoom = new HashMap<WebSocketSession, String>();
 	}
 	
 	//클라이언트가 웹소캣에 최초로 접속했을 때 자동으로 수행되는 메소드
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception{
-		sessionList.add(session);
+//		sessionList.add(session);
 		System.out.println("새 클라이언트 접속!");
-		System.out.println("session : "+session);
+		System.out.println("session : "+ session.getId());
+//		session.get
 	}//afterConnectionEstablished
 	
 	//클라이언트가 서버로 메세지를 전송하면 수행되는 메소드
@@ -53,18 +56,30 @@ public class ChatHandler extends TextWebSocketHandler {
 		String type = element.getAsJsonObject().get("type").getAsString();
 		//키가 msg인 값을 추출
 		String msg = element.getAsJsonObject().get("msg").getAsString();
+		String memberNo = element.getAsJsonObject().get("memberNo").getAsString();
+		String counselNo = element.getAsJsonObject().get("counselNo").getAsString();
+		
+		// 상담이 없을 때
+		if(!sessionMap.containsKey(counselNo)) {
+			sessionMap.put(counselNo, new ArrayList<WebSocketSession>());
+		}
+		
 		
 		// 새로 채팅방에 회원이 들어온 경우
-		if(type.equals("enter")) { 
-		
-		
+		if(type.equals("enter")) {
+			System.out.println("---------------");
+			System.out.println(counselNo);
+			System.out.println("---------------");
+			sessionMap.get(counselNo).add(session);
+			sessionRoom.put(session, counselNo);
 		//채팅메세지를 입력한 경우
-		}else if(type.equals("chat")) {
-			//int result = productService.insertChat(msg);
+		}else if(type.equals("chat")) {//if문으로 이미지 있다 없다, 읽음 표시도 
 			String sendMsg ="<div class='chat left'><span class='chatId'></span>"+msg+"</div>";
-			for(WebSocketSession s : sessionList) {
+			int result = productService.insertChat(msg, memberNo,counselNo); 
+			for(WebSocketSession s : sessionMap.get(counselNo)) {
 				if(!s.equals(session)) {
 					TextMessage tm = new TextMessage(sendMsg);
+					//나 외에 다른 사람이 있다 없다 체크
 					s.sendMessage(tm);
 				}//if문
 			}//for문
@@ -74,7 +89,15 @@ public class ChatHandler extends TextWebSocketHandler {
 	//클라이언트와 연결이 끊겼을 때 자동으로 수행되는 메소드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
+		String counselNo = sessionRoom.get(session);
+		ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo);
 		sessionList.remove(session);
+		sessionRoom.remove(session);
+		
+		if(sessionList.isEmpty()) {
+			sessionMap.remove(counselNo);
+		}
+		
 		String sendMsg = "<p>상담이 종료되었습니다.</p>";
 		TextMessage tm = new TextMessage(sendMsg);
 		for(WebSocketSession s : sessionList) {

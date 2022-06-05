@@ -175,4 +175,76 @@
 		where 
 			expert_no=#{expertNo}
  	</select>
+ 	
+ 	<!-- 윤지 -->
+ 	<select id="selectOneExpert2" parameterType="int" resultType="expertAndCom">
+ 		SELECT 
+            COMP_NO as compNo,
+			E.EXPERT_NO as expertNo,
+			COMP_REP_NAME as compRepName,
+			COMP_NAME as compName,
+			COMP_REGNO as compRegno,
+			E.MEMBER_NO as memberNo,
+			CREDENTIAL,
+			EXPERT_NAME as expertName,
+			EXPERT_PHONE as expertPhone,
+			EXPERT_EMAIL as expertEmail,
+			EXPERT_CONTENT as expertContent,
+			JOB_NAME as jobName,
+			EXPERT_PR as expertPr,
+			EXPERT_CAREER as expertCareer,
+			EXPERT_INTRO as expertIntro
+        FROM PAYMENT_TBL PAY
+        JOIN PRODUCT_TBL PRO
+        ON PAY.PRODUCT_NO = PRO.PRODUCT_NO
+        JOIN EXPERT_TBL E
+        ON PRO.EXPERT_NO = E.EXPERT_NO
+        JOIN COMPANY_TBL C
+        ON E.EXPERT_NO = C.EXPERT_NO
+        WHERE PAY.PAY_NO=#{payNo}
+ 	</select>
+ 	
+ 	<!-- 윤지 -->
+ 	<select id="selectOneExpertOnly2" parameterType="int" resultType="expert">
+ 		SELECT 
+ 			E.EXPERT_NO as expertNo,
+			E.MEMBER_NO as memberNo,
+			EXPERT_CATEGORY as expertCategory,
+			EXPERT_TAG as expertTag,
+			CREDENTIAL,
+			ISSUING_AUTHORITY as issuingAuthority,
+			ACQUISTION_DATE as acquistionDate,
+			EXPERT_NAME as expertName,
+			EXPERT_PHONE as expertPhone,
+			EXPERT_EMAIL as expertEmail,
+			EXPERT_CONTENT as expertContent,
+			JOB_NAME as jobName,
+			EXPERT_PR as expertPr,
+			EXPERT_CAREER as expertCareer,
+			EXPERT_INTRO as expertIntro
+		FROM 
+			EXPERT_TBL E
+		JOIN PRODUCT_TBL PRO
+        ON PRO.EXPERT_NO = E.EXPERT_NO
+        JOIN PAYMENT_TBL PAY
+        ON PRO.PRODUCT_NO = PAY.PRODUCT_NO
+        WHERE PAY.PAY_NO=#{payNo}
+ 	</select>
+ 	
+ 	<!-- 윤지 -->
+ 	<select id="selectOneExpertPicture2" parameterType="int" resultType="expertAndM">
+ 		select 
+ 			e.expert_no as expertNo, 
+ 			m.member_no as memberNo,
+ 			member_picturepath as memberPicturepath
+		from expert_tbl e
+        join member_tbl m
+        on e.member_no = m.member_no
+        join product_tbl pro
+        on e.expert_no = pro.expert_no
+        join payment_tbl pay
+        on pro.product_no = pay.product_no
+		where 
+			pay.pay_no=#{payNo}
+ 	</select>
 </mapper>

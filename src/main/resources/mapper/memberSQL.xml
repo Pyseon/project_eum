@@ -58,6 +58,7 @@
 	 		select 
 	 			product_tbl.product_no as productNo,
 	 			product_title as productTitle,
+	 			product_type as productType,
 	 			pay_date as payDate, 
 	 			payment, 
 	 			pay_state as paystate,

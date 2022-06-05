@@ -14,10 +14,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.google.gson.Gson;
 
 import kr.or.eum.community.model.service.CommunityService;
 import kr.or.eum.community.model.vo.Community;
+import kr.or.eum.community.model.vo.CommunityCo;
 import kr.or.eum.community.model.vo.CommunityDetailData;
 import kr.or.eum.community.model.vo.CommunityPageData;
 
@@ -62,7 +66,18 @@ public class CommunityController {
 		service.communityWrite(community);
 		return "redirect:/communityList.do?category=" + comm.getCommCategory() + "&reqPage=1";
 	}
-
+	
+	@ResponseBody
+	@RequestMapping(value="/commCoWrite.do", produces="application/json;charset=utf-8")
+	public String communityCoWrite(CommunityCo commCo) {
+		//insert 후 selectKey를 이용해 방금 insert 한 pk값 얻어옴
+		service.commCoWrite(commCo);
+		//얻어온 pk값으로 데이터 조회 후 리턴
+		CommunityCo comment = service.commCoDetail(commCo.getCmntNo());
+		return new Gson().toJson(comment);
+	}
+	
+	
 //>>>>>>>>>>>수정
 	@RequestMapping(value = "/communityUpdateFrm.do")
 	public String communityUpdateFrm(int commNo, Model model) {

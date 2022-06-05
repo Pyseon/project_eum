@@ -6,6 +6,51 @@
 <head>
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
+<style>
+.comment-write {
+	background-color: #f9f9fad;
+	border: 2px solid #ebecef;
+	color: #323232;
+	padding: 15px 6px 6px 20px;
+	margin-bottom: 25px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.comment-write-head{
+	display:flex;
+	justify-content: space-between;
+}
+.comment-num-box{
+	color: #757575;
+}
+
+#comment-textarea {
+	resize: none;
+	width: 100%;
+	border: none;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	height: 42.5px;
+	padding-bottom: 8px;
+}
+
+#comment-textarea:focus {
+	outline: none;
+}
+
+.comment-write-btn {
+	float: right;
+	background-color: #cdd8fc;
+	font-family: fs-m !important;
+	color: #1a73e8 !important;
+	padding: 4px 12px !important;
+}
+
+.autosize {
+	min-height: 50px;
+}
+</style>
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <body>
@@ -104,10 +149,11 @@
 			</div>
 		</div>
 		<div class="comments-area">
+		  <div class="comment-list-wrap">
 		<c:forEach items="${cmntList }" var="cmnt">
 			<c:choose>
 				<c:when test="${cmnt.cmntLev eq 0 }">
-					<!--comment-->
+			<!--comment-->
 					<div class="comment-list">
 						<div class="single-comment justify-content-between d-flex">
 							<div class="user justify-content-between d-flex">
@@ -118,12 +164,15 @@
 									<span class="writer-nick">
 										<strong style="font-size: 15px">${cmnt.memberNick }</strong>
 									</span>
+									
 									<c:if test="${cmnt.memberGrade eq 1 }">
-									<span class="material-icons verified-icon">verified</span>
+										<span class="material-icons verified-icon">verified</span>
 									</c:if>
+									
 									<c:if test="${cmnt.memberNo eq comm.memberNo }">
-									<span class="reply-writer">작성자</span>
+										<span class="reply-writer">작성자</span>
 									</c:if>
+									
 									<p class="comment">${cmnt.cmntContent }</p>
 									<p class="date fs-light">${cmnt.cmntDate }</p>
 								</div>
@@ -146,19 +195,25 @@
 								<div class="desc">
 									<span class="writer-nick">
 									 <strong style="font-size: 15px">${cmnt.memberNick }</strong>
+									 
 									 <c:if test="${cmnt.memberGrade eq 1 }">
 									<span class="material-icons verified-icon">verified</span>
 									</c:if>
+									
 									<c:if test="${cmnt.memberNo eq comm.memberNo }">
 									<span class="reply-writer">작성자</span>
 									</c:if>
+									
 									</span>
+									
 									<c:if test="${cmnt.cmntLev eq 1 }">
 									<p class="comment">${cmnt.cmntContent }</p>
 									</c:if>
+									
 									<c:if test="${cmnt.cmntLev eq 2 }">
 									<p class="comment"><span class="ref-nick">@${cmnt.cmntRefNick } </span>${cmnt.cmntContent }</p>
 									</c:if>
+									
 									<p class="date fs-light">${cmnt.cmntDate }</p>
 								</div>
 							</div>
@@ -172,11 +227,29 @@
 			</c:choose>
 		</c:forEach>
 		</div>
+		<div class="comment-write">
+			<!-- 댓글 참고 data -->
+			 	<input type="hidden" id="writerNo" value="${comm.memberNo}">
+			<!-- 전송 데이터 -->
+				<input type="hidden" name="commNo" id="commNo" value="${comm.commNo}">
+				<input type="hidden" name="memberNo" id="memberNo" value="14">
+				<input type="hidden" name="cmntContent" id="cmntContent">
+				<input type="hidden" name="cmntLev" id="cmntLev" value="0">
+			<!--            -->
+				<div class="comment-write-head">
+				<span style="font-family: fs-m; margin:0 0 8px 0; padding-left:2px;">댓글 쓰기</span>
+				<span class="comment-num-box"><span id="comment-num">0</span>/250</span>
+			</div>
+			<textarea id="comment-textarea" placeholder="댓글 입력" onkeyup="resize(this)" onkeydown="resize(this)" maxlength="250"></textarea>
+			<button type="button" id="comment-reg" class="comment-write-btn btn fc-7">등록</button>
+		</div>
+
+		</div>
 		<!--comment-area-->
 		<!-- comment end -->
+		
 	</div>
 	<!--container end-->
-	
 	
 	<!-- modal start -->
 	<div id="del-modal" class="modal-bg">
@@ -192,15 +265,128 @@
 		</div>
 	</div>
 	<!-- modal end -->
+
+	<script>
+
+$(function(){
+	
+	$("#comment-reg").on("click",function(){
+		//글자수세기 함수 동작
+		convertbr();
+		//ajax 동작
+		let commNo = $("#commNo").val();
+		let memberNo = $("#memberNo").val();
+		let cmntContent = $("#cmntContent").val();
+		let cmntLev = $("#cmntLev").val();
+		let writerNo = $("#writerNo").val();
+		let cmntHtml = "";
+		$.ajax({
+			url: "/commCoWrite.do",
+			data: {commNo:commNo, memberNo:memberNo, cmntContent:cmntContent, cmntLev:cmntLev},
+			success:function(data){
+				cmntHtml += '<div class="comment-list"><div class="single-comment justify-content-between d-flex"><div class="user justify-content-between d-flex"><div class="thumb">';
+				cmntHtml += '<img src="./img/member/'+data.memberPicturepath+'" alt="" class="card-user-img" /></div><div class="desc"><span class="writer-nick">';
+				cmntHtml += '<strong style="font-size: 15px">'+data.memberNick+'</strong>';
+				if(data.memberGrade == 1){
+					cmntHtml += '<span class="material-icons verified-icon">verified</span>';
+				}
+				if(data.memberNo == writerNo){
+					cmntHtml += '<span class="reply-writer">작성자</span>';
+				}
+				cmntHtml += '<p class="comment">'+data.cmntContent+'</p>';
+				cmntHtml += '<p class="date fs-light">'+data.cmntDate+'</p>';
+				cmntHtml += '</div>';
+				cmntHtml += '<div class="reply-btn"><a href="" class="btn-reply">답글쓰기</a></div></div>';
+				cmntHtml += '</div>';
+				$(".comment-list-wrap").append(cmntHtml);
+				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
+				
+			}
+		})
+			
+	});
 	
 	
 	
 	
-	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
-</body>
-<script>
+	
+	
+	
+	//글자수세기 함수
+	$("#comment-textarea").on("keydown",function(){
+		 var comment = $("#comment-textarea").val();
+		 console.log(comment.length);
+		$("#comment-num").text(comment.length);
+	});
+	
+	
+	
+});
+	
+	
+	
+	
+
+		
+function resize(obj) {
+    obj.style.height = '1px';
+    obj.style.height = (12 + obj.scrollHeight) + 'px';
+    
+    //5줄 이상 입력하면 알림창 띄우도록
+    var str = $("#comment-textarea").val();
+    var str_arr = str.split("\n");  // 줄바꿈 기준으로 나눔 
+    var row = str_arr.length;  // row = 줄 수 
+    if(row >10){
+   		 //마지막 입력문자 삭제
+   		var title = "10줄 이상 작성할 수 없습니다.";
+    	var icon = "error";
+    	toastShow(title,icon);
+	    var lastChar = str.slice(0,-1); //열 
+	    $("#comment-textarea").val(lastChar)
+    }
+    
+}
+
+//textarea 엔터시 <br>로 바꿔주는 함수
+
+function convertbr(){
+   var str = document.getElementById("comment-textarea").value;
+   var str = str.replace(/\r\n|\n/g,'<br>');
+   document.getElementById('cmntContent').value = str;
+   
+  	
+}
+
+
+
+
+//토스트 알림 함수		
+function toastShow(title, icon){
+	const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: true,
+	    timer: 3500,
+	    timerProgressBar: true,
+	    didOpen: (toast) => {
+	     // toast.addEventListener('mouseenter', Swal.stopTimer)
+	      toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	 	})
+
+  Toast.fire({
+    title: title,
+    icon: icon
+  })
+
+}//토스트 알림 함수 끝		
+
+
+
 	
 </script>
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</body>
 
 
 </html>

@@ -115,4 +115,67 @@
 		delete from community_tbl 
 			where comm_no = ${value}
 	</delete>
+	
+	<insert id="commCoWrite" parameterType="commCo">
+		insert into communityco_tbl values(
+			COMMUNITYCO_SEQ.nextval,
+		    #{memberNo},
+		    #{cmntContent},
+		    to_char(sysdate, 'yyyy.mm.dd hh24:mi'),
+		    #{commNo},
+		    <if test="cmntRef == 0">
+		    null,
+		    </if>
+		    <if test="cmntRef != 0">
+		    #{cmntRef},
+		    </if>
+		    #{cmntLev},
+		    <if test="cmntLev == 0">
+		    COMMUNITYCO_SEQ.currval
+		    </if>
+		    <if test="cmntLev > 0">
+		    #{cmntGroup}
+		    </if>
+		)
+		<selectKey resultType="int" order="AFTER" keyProperty="cmntNo">
+		 	select max(cmnt_no) from communityco_tbl
+		</selectKey>
+	</insert>
+	
+	<select id="commCoDetail" resultType="commCo" parameterType="int">
+		select
+			co.CMNT_NO as cmntNo,
+			co.MEMBER_NO as memberNo,
+			(select member_nick from member_tbl m where co.member_no = m.member_no) as memberNick, --멤버닉
+			(select grade from member_tbl m where co.member_no = m.member_no) as memberGrade, --멤버등급
+			(select member_picturepath from member_tbl m where co.member_no = m.member_no) as memberPicturepath, --멤버프로필사진
+			co.CMNT_CONTENT as cmntContent,
+			co.CMNT_DATE as cmntDate,
+			co.COMM_NO as commNo,
+			co.CMNT_REF as cmntRef,
+            m.member_nick as cmntRefNick,
+			co.CMNT_LEV AS cmntLev,
+            co.CMNT_GROUP AS cmntGroup
+		from communityco_tbl co
+        left join communityco_tbl co2 on co.cmnt_ref = co2.cmnt_no
+		left join member_tbl m on co2.member_no = m.member_no
+ 		where co.cmnt_no = ${value}
+	</select>
+	
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -53,4 +53,13 @@ public class CommunityDao {
 		sqlSession.delete("community.communityDelete", commNo);
 	}
 
+	public void commCoWrite(CommunityCo commCo) {
+		sqlSession.insert("community.commCoWrite", commCo);
+	}
+
+	public CommunityCo commCoDetail(int cmntNo) {
+		CommunityCo commCo = sqlSession.selectOne("community.commCoDetail", cmntNo);
+		return commCo;
+	}
+
 }

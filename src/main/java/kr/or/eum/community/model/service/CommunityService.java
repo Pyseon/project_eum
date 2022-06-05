@@ -54,12 +54,21 @@ public class CommunityService {
 	public Community communityDetailNotCmnt(int commNo) {
 		return dao.communityDetail(commNo);
 	}
+	
+	//댓글번호로 댓글 하나 불러오기
+	public CommunityCo commCoDetail(int cmntNo) {
+		return dao.commCoDetail(cmntNo);
+	}
+	
 //>>>>>>>>>> 쓰기
 	public int communityWrite(Community comm) {
 		Community community = setToken(comm);
 		return dao.communityWrite(community);
 	}
 
+	public void commCoWrite(CommunityCo commCo) {
+		dao.commCoWrite(commCo);
+	}
 
 //>>>>>>>>>> 수정
 	public void communityUpdate(Community comm) {
@@ -70,7 +79,6 @@ public class CommunityService {
 //>>>>>>>>>> 삭제
 	public void communityDelete(int commNo) {
 		dao.communityDelete(commNo);
-		
 	}
 	
 	
@@ -224,6 +232,8 @@ public class CommunityService {
 
 		return pageNavi;
 	}
+
+
 
 
 

@@ -211,6 +211,7 @@
         where pay.pay_no=#{payNo}
 	</select>
   
+  	<!-- 윤지 -->
 	<select id="selectCounsel" parameterType="int" resultType="counsel">
 		select 
 			counsel_no as counselNo, 
@@ -221,7 +222,8 @@
 		from counsel_tbl 
 		where pay_no=#{payNo}
 	</select>
-  
+	
+  	<!-- 윤지 -->
 	<select id="selectChat" parameterType="int" resultType="chat">
 		select 
 			chat.chat_no as chatNo,
@@ -237,7 +239,7 @@
         join payment_tbl p
         on counsel.pay_no = p.pay_no
         where counsel.pay_no=#{payNo} order by chat_no asc       
-  </select>
+  	</select>
   
 	<select id="selectExpertNo" parameterType="int" resultType="expert">
 		select expert_no as expertNo

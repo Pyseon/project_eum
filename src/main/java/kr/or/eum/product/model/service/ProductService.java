@@ -283,11 +283,6 @@ public class ProductService {
 		return productDao.selectExpertNo(memberNo);
 	}
 
-
-	
-
-	
-	
 	//윤지
 	public int insertChat(String msg, String memberNo, String counselNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();

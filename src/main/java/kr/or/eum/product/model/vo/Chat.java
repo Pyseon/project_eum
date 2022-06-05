@@ -14,5 +14,5 @@ public class Chat {
 	private String chatContent;
 	private String chatDate;
 	private String chatTime;
-	private int chatReadchack;
+	private int chatReadcheck;
 }

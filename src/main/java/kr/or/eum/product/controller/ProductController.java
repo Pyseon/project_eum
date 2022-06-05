@@ -40,6 +40,7 @@ import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.product.model.vo.ReviewPageData;
 import kr.or.eum.product.model.vo.ProReviewMember;
+import kr.or.eum.product.model.vo.Counsel;
 import kr.or.eum.product.model.vo.Payment;
 
 @Controller
@@ -168,7 +169,6 @@ public class ProductController{
 		return "product/imgVerProductDetail";
 	}
 	
-	
 	//윤지
 	@ResponseBody
 	@RequestMapping(value = "/review.do", produces = "application/json;charset=utf-8")
@@ -198,8 +198,6 @@ public class ProductController{
 		
 	}
 	
-	
-	
 	//윤지
 	@ResponseBody
 	@RequestMapping(value = "/deleteWish.do", produces = "application/json;charset=utf-8")
@@ -215,26 +213,48 @@ public class ProductController{
 	
 	//윤지
 	@RequestMapping(value = "/expertCounsel.do")
-	public String expertCounsel(Model model, int productNo, int expertNo, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		Member member = null;
-		if(session != null) {
-			member = (Member)session.getAttribute("member");			
-		}
+	public String expertCounsel(Model model, int payNo, HttpServletRequest request) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		map = productService.selectProductAndExpert(productNo, expertNo);
+		map = productService.selectProductAndExpertAndPayment(payNo, request);
 		model.addAttribute("p", map.get("product"));
 		model.addAttribute("e", map.get("expert"));
 		model.addAttribute("ec", map.get("expertC"));
 		model.addAttribute("em", map.get("expertM"));
-		model.addAttribute("m", member);
+		model.addAttribute("pay", map.get("payment"));
+		model.addAttribute("r", map.get("review"));
+		model.addAttribute("m", map.get("member"));
+		model.addAttribute("c", map.get("counsel"));
+		model.addAttribute("chat", map.get("chatList"));
+		//int counselNo = 1;
+		//if(!((Member)map.get("member")).getMemberId().equals("eom08@gmail.com") && !((Member)map.get("member")).getMemberId().equals("testyj")) {
+		//	counselNo = 999;
+		//}  	
+		//Counsel counsel = new Counsel();
+		//counsel.setCounselNo(1);
+		//model.addAttribute("c", counsel);
+		//model.addAttribute("m", member);
+		
+		if(!map.get("paymentState").equals(1) && !map.get("paymentState").equals(2)) {
+			return "product/paymentError";
+		}
 		System.out.println("Counsel_product : "+map.get("product"));
 		System.out.println("Counsel_expert : "+map.get("expert"));
 		System.out.println("Counsel_expertC : "+map.get("expertC"));
 		System.out.println("Counsel_expertM : "+map.get("expertM"));
-		System.out.println("counsel_member : "+member);
-		return "product/expertCounsel";
+		System.out.println("Counsel_payment : "+map.get("payment"));
+		System.out.println("Counsel_review : "+map.get("review"));
+		System.out.println("Counsel_member : "+map.get("member"));
+		System.out.println("Counsel_counsel : "+map.get("counsel"));
+		System.out.println("Counsel_chat : "+map.get("chatList"));
+		if(map.get("expertTrue").equals(true) || map.get("memberTrue").equals(true)) {
+			return "product/expertCounsel";
+		}else{
+			//counsel.setCounselNo(999);
+			return "product/paymentError";
+		}
+		//return "product/expertCounsel";
 	}
+
 	
 	
 }

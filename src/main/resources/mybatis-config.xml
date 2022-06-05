@@ -27,6 +27,8 @@
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndWishList" alias="productWish"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.ProReviewMember" alias="ProReviewMember"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.wishlist.model.vo.Wishlist" alias="wish"/> <!-- 윤지 -->
+		<typeAlias type="kr.or.eum.product.model.vo.Counsel" alias="counsel"/> <!-- 윤지 -->
+		<typeAlias type="kr.or.eum.product.model.vo.Chat" alias="chat"/> <!-- 윤지 -->
 	</typeAliases>
 	<typeHandlers>
         <typeHandler handler="kr.or.eum.LongHandler" javaType="String" jdbcType="LONGVARCHAR"/>

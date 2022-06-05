@@ -51,19 +51,19 @@ public class MemberDao {
 		ExpertAndCompany expertAndCom = sqlSession.selectOne("member.selectOneExpert",expertNo);
 		return expertAndCom;
 	}
+	
 	//윤지
 	public ExpertAndMember selectOneExpertPicture(int expertNo) {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture",expertNo);
 		return expertPicture;
 	}
+	
 	//재민 구매목록
 	public ArrayList<ProductAndPayment> selectProductList(int memberNo) {
 		List list = sqlSession.selectList("member.selectProductList",memberNo); 
-		
 		return (ArrayList<ProductAndPayment>)list;
-		
 	}
-
+	
 	//윤지
 	public Expert selectOneExpertOnly(int expertNo) {
 		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly",expertNo);
@@ -74,22 +74,38 @@ public class MemberDao {
 	public ArrayList<Review> selectReviewlist(int memberNo) {
 		List list = sqlSession.selectList("member.selectReviewlist",memberNo);
 		return (ArrayList<Review>)list;
-		
 	}
-	 //재민 찜목록
+	
+	//재민 찜목록
 	public ArrayList<Wishlist> selectWishlist(int memberNo) {
 		List list = sqlSession.selectList("member.selectWishlist",memberNo);
 			
 		return (ArrayList<Wishlist>)list;
 	}
+	
 	public int DeleteMyproduct(int payNo) {
 		int result = sqlSession.update("member.DeleteMyproduct");
 		return result;
 	}
+	
 	public ArrayList<Payment> Myproductdetail(int payNo) {
 		List list = sqlSession.selectList("member.Myproductdetail",payNo); 
 		System.out.println(list);
 		return (ArrayList<Payment>)list;
+	}
+	
+	//윤지
+	public ExpertAndCompany selectOneExpert2(int payNo) {
+		ExpertAndCompany expertAndCom = sqlSession.selectOne("member.selectOneExpert2",payNo);
+		return expertAndCom;
+	}
+	public Expert selectOneExpertOnly2(int payNo) {
+		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly2", payNo);
+		return expert;
+	}
+	public ExpertAndMember selectOneExpertPicture2(int payNo) {
+		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture2",payNo);
+		return expertPicture;
 	}
 
 }

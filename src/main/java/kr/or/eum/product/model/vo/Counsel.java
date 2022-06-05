@@ -11,6 +11,6 @@ public class Counsel {
 	private int counselNo;
 	private int memberNo;
 	private int expertNo;
-	private int productNo;
+	private int payNo;
 	private int limitTime;
 }

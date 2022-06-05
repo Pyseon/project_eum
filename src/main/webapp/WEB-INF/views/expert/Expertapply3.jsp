@@ -5,9 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>전문가신청페이지2</title>
+
 </head>
+
 <body>
-	<form action="/Expertapply4.do" method="post">
+		<form action="/Expertapply4.do" method="post">
+		<div style="border:1px solid; padding:10px;">
+		
 		<ul>
 			<li>
 				<label>판매자이름*</label>
@@ -35,7 +39,7 @@
 		<input type="hidden" name = "expertIssuer" value="${expertIssuer }" >
 		<input type="hidden" name = "expertDate" value="${expertDate }" >
 				
-			
+		</div>	
 		<input type="submit" value="신청서 작성완료">
 	</form>
 		

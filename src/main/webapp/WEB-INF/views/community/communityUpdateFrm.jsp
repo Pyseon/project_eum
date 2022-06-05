@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>이음 :: 글쓰기</title>
 <style>
-
 </style>
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -23,28 +23,33 @@
 		<div class="article-wrap" style="margin-top: 0;">
 			<div class="tab_cont">
 				<div class="write-frm on">
-					<h1>요즘뭐하니 글쓰기</h1>
-					<form action="/communityWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-					<input type="hidden" name="commCategory" value="0">
-					<input type="hidden" name="memberNo" value="14">
-					<input type="hidden" name="advantage">
-					<input type="hidden" name="weakness">
+					<h1>요즘뭐하니 수정하기</h1>
+					<form action="/communityUpdate.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+					<input type="hidden" name="commNo" value="${comm.commNo }">
+					<input type="hidden" name="commCategory" value="${comm.commCategory }">
+					<input type="hidden" name="advantage" value="${comm.advantage }">
+					<input type="hidden" name="weakness" value="${comm.weakness }">
 						<p class="comm-write-p">제목</p>
 						<input type="text" name="commTitle" class="commTitle comm-input"
-							placeholder="제목을 입력하세요">
+							placeholder="제목을 입력하세요" value="${comm.commTitle }">
 						<p class="comm-write-p">간단한 소개</p>
 						<input type="text" name="commIntro" class="commIntro comm-input"
-							placeholder="간단한 소개">
+							placeholder="간단한 소개" value="${comm.commIntro }">
 						<!-- 대표이미지 -->
 						<div class="img-box-wrap">
 							<div class="commFileBox preview-image">
 								<p class="comm-write-p" style="margin-bottom: 5px;">대표이미지</p>
 								<h4 class="fc-3" style="margin-top: 0;">(세로로 긴 사진이 적합합니다.)</h4>
-								<label for="input-file">파일 선택</label> <input type="file"
-									name="file" class="commFile upload-hidden"
-									id="input-file">
+								<label for="input-file">파일 선택</label> 
+								<input type="file" name="file" class="commFile upload-hidden" id="input-file">
 							</div>
-							<div class="input-img-box"></div>
+							<div class="input-img-box">
+								<div class="upload-display" style="display:inline-block; border: 1px solid #eee; padding: 10px;">
+									<div class="upload-thumb-wrap">
+										<img src="./img/community/${comm.commFilepath }" class="upload-thumb" style="height: 160px;">
+									</div>
+								</div>
+							</div>
 						</div>
 
 						<!--장점/단점-->
@@ -62,10 +67,29 @@
 							</span>
 							<h4 class="fc-3" style="margin-top: 10px;">(최대 5개까지 추가 가능)</h4>
 							<div id="adv-opt">
-								<input type="text" name="advantage2" class="comm-input adv-val"
-									placeholder="내용을 입력하세요." maxlength="51" required>
-							</div>
+					<!-- 추가공간-->			
+								<c:forTokens var="adv" items="${comm.advantage}" delims="|" varStatus="i" >
+								 	<c:if test="${i.first }"> <!-- 첫번째값일때 -->
+										<input type="text" name="advantage2" class="comm-input adv-val"
+											value="${adv }"placeholder="내용을 입력하세요." maxlength="51" required>
+								 	</c:if>
+								 	<c:if test="${i.index ge 1}"> <!-- 값이 하나만 있지 않고 두번째값 이상 존재할때-->
+										<div class="optBox">
+											<input type="text" name="advantage2"
+												class="comm-input adv-val" value="${adv }" required>
+											<button class="delOptBtn optButton">
+												<i class="fa-solid fa-square-minus fc-9"></i>
+											</button>
+										</div>
+								 	</c:if>
+								</c:forTokens>
+					<!-- 추가공간 끝 -->							
+							</div> <!-- adv-opt -->
+								
 						</div>
+									
+							
+							
 						<div class="weak-input" style="margin-top: 50px;">
 							<span class="comm-write-p"> 추천하지 않는 이유
 								<button type="button" class="addOptBtn2 optButton">
@@ -74,8 +98,21 @@
 							</span>
 							<h4 class="fc-3" style="margin-top: 10px;"><span>(최대 5개까지 추가 가능)</span><span></span></h4>
 							<div id="weak-opt">
-								<input type="text" name="weakness2" class="comm-input weak-val"
-									placeholder="내용을 입력하세요." maxlength="51" required>
+								<c:forTokens var="weak" items="${comm.weakness}" delims="|" varStatus="i" >
+								 	<c:if test="${i.first }"> <!-- 첫번째값일때 -->
+										<input type="text" name="weakness2" class="comm-input weak-val"
+											value="${weak }"placeholder="내용을 입력하세요." maxlength="51" required>
+								 	</c:if>
+								 	<c:if test="${i.index ge 1}"> <!-- 값이 하나만 있지 않고 두번째값 이상 존재할때-->
+										<div class="optBox">
+											<input type="text" name="weakness2"
+												class="comm-input weak-val" value="${weak }" required>
+											<button class="delOptBtn2 optButton">
+												<i class="fa-solid fa-square-minus fc-9"></i>
+											</button>
+										</div>
+								 	</c:if>
+								</c:forTokens>		
 							</div>
 						</div>
 
@@ -83,10 +120,10 @@
 						<!--썸머노트-->
 						<p class="comm-write-p">상세 소개</p>
 						<div class="pt-1" style="margin-bottom: 50px;">
-							<textarea id="summernote" name="commContent"></textarea>
+							<textarea id="summernote" name="commContent">${comm.commContent }</textarea>
 						</div>
 						<input type="submit" class="btn bc1 bs4" style="margin: 30px 0; height:50px; font-size: 16px;"
-							value="등록하기"></input>
+							value="수정하기"></input>
 					</form>
 				</div>
 			</div>
@@ -107,8 +144,16 @@
                 $(".tab_cont > div").hide();
                 $(".tab_cont > div").eq(idx).show();
             })
+             //수정하려면 먼저 장점으로 입력된 여러개의 값을 배열로 가져올 필요가 있음
+             //그래서 같은 name의 값을 가져오도록 한다.
              
-            var advList = [];
+			var advList = [];
+            var advIdx = 0;
+              $("input[name=advantage2]").each(function(index, item){
+	            advList[advIdx] = $(item).val() + "|";
+	            advIdx++;
+              });
+             
             //장점 가져오기
             $(document).on("change", ".adv-val", function(){
             	var advStr = $(this).val();
@@ -119,14 +164,25 @@
     				const icon = "warning";
     				toastShow(title,icon);
     			}else{
-	            	advList[$(".adv-val").index(this)] = advStr+"|";     
+	            	advList[$(".adv-val").index(this)] = advStr + "|";     
 	            	$("[name=advantage]").val(advList);
 	            	console.log(advList);
     			}
            
             });
             
-            var weakList = [];
+            
+            
+            //수정하려면 먼저 장점으로 입력된 여러개의 값을 배열로 가져올 필요가 있음
+            //그래서 같은 name의 값을 가져오도록 한다.
+            
+			var weakList = [];
+           var weakIdx = 0;
+             $("input[name=weakness2]").each(function(index, item){
+	          	weakList[weakIdx] = $(item).val()+"|";
+	            weakIdx++;
+             });
+            
             //단점 가져오기
             $(document).on("change", ".weak-val", function(){
             	var weakStr = $(this).val();
@@ -144,18 +200,20 @@
            
             });
             
-            
+            console.log(advList);
+            console.log(weakList);
             //옵션 추가 버튼함수 시작
-            var advCount = 1;
-            var weakCount = 1;
+            var advCount = $(".adv-val").length;
+            var weakCount = $(".weak-val").length;
        
         $(".addOptBtn").on("click",function(){
             if(advCount >= 5) return;
             var advDiv = document.createElement("div");
             advDiv.setAttribute("class","optBox");
-            advDiv.innerHTML = '<input type="text" name="advantage2" class="comm-input adv-val" placeholder="내용을 입력하세요." required><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
+            advDiv.innerHTML = '<input type="text" name="advantage2" class="comm-input adv-val" placeholder="내용을 입력하세요."><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
             $("#adv-opt").append(advDiv);
             advCount++;
+        });
             $(".delOptBtn").off().on("click",function(){
                   advList.splice($(".delOptBtn").index(this)+1, 1);
                   $("[name=advantage]").val(advList);
@@ -163,7 +221,6 @@
                   $(this).parent().remove();
                   advCount--;
             });
-        });
 
         $(".addOptBtn2").on("click",function(){
             if(weakCount >= 5) return;
@@ -172,6 +229,7 @@
             newDiv.innerHTML = '<input type="text" name="weakness2" class="comm-input weak-val" placeholder="내용을 입력하세요."><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
             $("#weak-opt").append(newDiv);
             weakCount++;
+        });
             $(".delOptBtn2").off().on("click",function(){
             	weakList.splice($(".delOptBtn2").index(this)+1, 1);
                 $("[name=weakness]").val(weakList);
@@ -179,7 +237,6 @@
                   $(this).parent().remove();
                   weakCount--;
             });
-        });
         
             
             

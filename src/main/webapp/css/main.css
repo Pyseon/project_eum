@@ -2616,13 +2616,43 @@ input[name=keyword]{
 	text-align: right;
 }
 
-input[name=FAQTitle]{
+.managerTitle{
 	margin-top: 25px;
 	margin-bottom: 25px;
 	width: 100%;
-	height: 75px;
+	height: 50px;
 	border: 1px solid #3865f2;
 	text-align: center;
+}
+#categoryList{
+	display: none;
+	position: relative;
+	text-align: left;
+	margin-top: -60px;
+	margin-left: -185px;
+	background: #ccc;
+	width: 310px;
+}
+.searchBox>form{
+	float: right;
+}
+
+.FAQCategory{
+	-o-appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 40px;
+	border: 1px solid #3865f2;
+	text-align: center;
+}
+.FAQForm > input::placeholder {
+	text-align: center;
+}
+.insertFAQBtn{
+	margin-top: -70px;
+	text-align: right;
 }
 /*************************
 *******mypage CSS******

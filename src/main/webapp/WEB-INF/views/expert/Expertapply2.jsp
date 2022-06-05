@@ -5,24 +5,37 @@
 <head>
 <meta charset="UTF-8">
 <title>전문가 신청3</title>
+<style>
+.consultbox>.input-form{
+		display:inline;
+		width: 32%;
+		font-size: 15px;
+		margin-bottom:3%;
+	}
+</style>
 </head>
 <body>
+	<div class="consultbox" style="border:1px solid; padding:10px;">
+		
+
 	<form action="/Expertapply3.do" method="post">
 		<ul>
 			<li>
 				<label>상담분야*</label>
-				<select size="11" id="class" name="expertClass" multiple>
-					<option value="law" selected>법률</option>
-					<option value="law" selected>비지니스</option>
-					<option value="law" selected>심리/헬스</option>
-					<option value="law" selected>학습</option>
-					<option value="law" selected>금융</option>
-					<option value="law" selected>라이프</option>
-					<option value="law" selected>취미</option>
-					<option value="law" selected>어학</option>
-					<option value="law" selected>레저</option>
-					<option value="law" selected>IT/테크</option>
-					<option value="law" selected>자기계발</option>
+				
+				<select class="input-form" name='cousult'>
+				 	<option value='law' selected>법률</option>
+					<option value='law' selected>비지니스</option>
+					<option value='law' selected>심리/헬스</option>
+					<option value='law' selected>학습</option>
+					<option value='law' selected>금융</option>
+					<option value='law' selected>라이프</option>
+					<option value='law' selected>취미</option>
+					<option value='law' selected>어학</option>
+					<option value='law' selected>레저</option>
+					<option value='law' selected>IT/테크</option>
+					<option value='law' selected>자기계발</option>
+					  
 				</select>
 			</li>
 			<li>
@@ -43,29 +56,21 @@
 				<input type="text" name="expertIssuer" placeholder="발급기관">
 				<input type="text" name="expertDate" placeholder="취득일시">
 			</li>
+			<li>
+				<label>자격증사본*</label>
+				<input type="text" name="expertfile" placeholder="최대 MB 이하 첨부가능 jpg,png,pdf 지원">
+			</li>
+			<label><input type="checkbox" name = "expert_check4">입력한 정보는 (이음) 내 프로필 공개 목적으로 하며, 탈퇴 시에는 바로 폐기됩니다.</label>
 			
 			
 		</ul>
 		<div>
-		
-		<!-- 수정예정
-		<input type="text" class="input-form" placeholder="input" /> <br>
-		<select class="input-form">
-			<option>value1</option>
-			<option>value2</option>
-			<option>value3</option>
-		</select>
-		<textarea class="input-form" placeholder="textarea"></textarea>
-		<input type="text" class="input-form" placeholder="disabled" disabled />
-		<input type="text" class="input-form" placeholder="readonly" readonly />
-		
-		 -->
-		<h2>입력양식</h2>
-		
+			<button class="btn bc1 bs5" onclick="location.href='/Expertapply.do'">이전</button>
+			<button class="btn bc1 bs5" onclick="location.href='/Expertapply3.do'">다음</button>
+			<input type="submit" value="다음">
 	</div>
+</div>
 		
-		<a href="/Expertapply.do">이전</a>
-		<input type="submit" value="다음">
 	</form>
 </body>
 </html>

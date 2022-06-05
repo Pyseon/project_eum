@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductDetail;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Chat;
 import kr.or.eum.product.model.vo.Counsel;
@@ -38,6 +39,12 @@ public class ProductDao {
 		// TODO Auto-generated method stub
 		int totalCount = sqlSession.selectOne("product.selectTotalCount", map);
 		return totalCount;
+	}
+	
+	public int productWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("product.productWrite", pro);
+		return result;
 	}
 	
 	//윤지
@@ -133,6 +140,11 @@ public class ProductDao {
 	public ArrayList<Chat> selectChat(int payNo) {
 		List chatList = sqlSession.selectList("product.selectChat", payNo);
 		return (ArrayList<Chat>)chatList;
+  }
+  
+	public Expert selectExpertNo(int memberNo) {
+		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
+		return expert;
 	}
 
 

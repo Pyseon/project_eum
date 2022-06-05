@@ -98,5 +98,12 @@ public class MemberService {
 		return list;
 	}
 
+	public Member selectMypage(Member m) {
+		
+		Member member = dao.selectOneMember(m);
+		System.out.println(member+"Mypage");
+		return member;
+	}
+
 
 }

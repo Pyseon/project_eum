@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import kr.or.eum.manager.model.dao.ManagerDao;
 import kr.or.eum.manager.model.vo.FaQ;
+import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -81,6 +82,19 @@ public class ManagerService {
 				totalCount = dao.searchFAQCount(pageMap);
 			}
 			pageData.put("FAQList", FAQList);
+			
+		case "manaNotice.do":
+			ArrayList<Notice> noticeList = new ArrayList<Notice>();
+			if(searchType == null) {
+				noticeList = dao.noticePageData(pageMap);
+				totalCount = dao.noticeCount();
+			}else {
+				pageMap.put("searchType", searchType);
+				pageMap.put("keyword", keyword);
+				noticeList = dao.searchNoticePageData(pageMap);
+				totalCount = dao.searchNoticeCount(pageMap);
+			}
+			pageData.put("noticeList", noticeList);
 		}
 		
 		int totalPage = 0;
@@ -194,13 +208,51 @@ public class ManagerService {
 		return dao.answerReport(map);
 	}
 
-	public int insertFAQ(int FAQCategory, String FAQTitle, String FAQContent) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("FAQCategory", Integer.toString(FAQCategory));
+	public int insertFAQ(int FAQType, String FAQTitle, String FAQContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("FAQType", FAQType);
 		map.put("FAQTitle", FAQTitle);
 		map.put("FAQContent", FAQContent);
 		return dao.insertFAQ(map);
 	}
+
+	public int deleteFAQ(int FAQNo) {
+		return dao.deleteFAQ(FAQNo);
+	}
+
+	public ArrayList<FaQ> selectFAQ(int FAQNo) {
+		return dao.selectFAQ(FAQNo);
+	}
+
+	public int updateFAQ(int FAQNo, int FAQType, String FAQTitle, String FAQContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("FAQNo", FAQNo);
+		map.put("FAQType", FAQType);
+		map.put("FAQTitle", FAQTitle);
+		map.put("FAQContent", FAQContent);
+		return dao.updateFAQ(map);
+	}
+
+	public int deletenotice(int noticeNo) {
+		return dao.deleteNotice(noticeNo);
+	}
+
+	public ArrayList<Notice> selectNotice(int noticeNo) {
+		return dao.selectNotice(noticeNo);
+	}
+
+	public int insertNotice(HashMap<String, Object> notice) {
+		return dao.insertNotice(notice);
+	}
+
+	public int updateNotice(int noticeNo, String noticeTitle, String noticeContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("noticeNo", noticeNo);
+		map.put("noticeTitle", noticeTitle);
+		map.put("noticeContent", noticeContent);
+		return dao.updateNotice(map);
+	}
+	
 	
 }
 

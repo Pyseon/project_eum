@@ -14,5 +14,5 @@ public class Review {
 	private String reviewContent;
 	private int reviewStar;
 	private String reviewDate;
-	
+	private String reviewTitle;
 }

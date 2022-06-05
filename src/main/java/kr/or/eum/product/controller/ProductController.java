@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -58,9 +59,24 @@ public class ProductController{
 		System.out.println("selPro : "+selPro);
 		return "product/ClassList";
 	}
-	@RequestMapping(value="/productWriter.do")
-		public String productWriter() {
-		return "product/productWriter";
+	@RequestMapping(value="/productWriterFrm.do")
+		public String productWriterFrm(HttpServletRequest request, Model model) {
+		HttpSession session = request.getSession(false);
+        Member member = null;
+        if(session != null) {
+            member = (Member)session.getAttribute("member");
+        }
+        int memberNo = member.getMemberNo();
+        Expert expert = productService.selectExpertNo(memberNo);
+        model.addAttribute("expertNo", expert.getExpertNo());
+		return "product/productWriterFrm";
+	}
+	
+	@RequestMapping(value="/productWrite.do")
+		public String productWrite(Product pro) {
+		System.out.println(pro);
+		return "product/productWriterFrm";
+		
 	}
 	/*
 	@ResponseBody

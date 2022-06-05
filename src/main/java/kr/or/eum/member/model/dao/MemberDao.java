@@ -90,9 +90,10 @@ public class MemberDao {
 	
 	public ArrayList<Payment> Myproductdetail(int payNo) {
 		List list = sqlSession.selectList("member.Myproductdetail",payNo); 
-		System.out.println(list);
+		
 		return (ArrayList<Payment>)list;
 	}
+
 	
 	//윤지
 	public ExpertAndCompany selectOneExpert2(int payNo) {

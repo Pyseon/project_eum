@@ -26,13 +26,12 @@
  	</select>
 	<!-- 재민 -->
 	<update id="updateMember" parameterType="m" >
-	update into member_tbl set 
+	update member_tbl set 
 		member_id =#{memberId}, 
 		member_nick =#{memberNick}, 
 		member_pw=#{memberPw}, 
-		member_Phone = #{memberPhone}, 
-		gender = #{gender}, 
-		birth = #{gender}  where member_no=#{memberNo}
+		member_Phone = #{memberPhone} 		 
+		where member_no=#{memberNo}
 	
 	</update>
 		<!-- 재민 내 구매목록삭제 -->
@@ -59,6 +58,7 @@
 	 		select 
 	 			product_tbl.product_no as productNo,
 	 			product_title as productTitle,
+	 			product_type as productType,
 	 			pay_date as payDate, 
 	 			payment, 
 	 			pay_state as paystate,
@@ -87,6 +87,7 @@
 	  </select>
 	   <select id ="selectWishlist" resultType="productAndPayAndwish">
 	 		select 
+	 			product_tbl.product_type as productType,
 				product_tbl.product_title as productTitle, 
 				payment_tbl.payment as payment
 			from product_tbl
@@ -94,6 +95,16 @@
 			join wishlist_tbl on (wishlist_tbl.product_no = product_tbl.product_no)
 			where wishlist_tbl.member_no=#{memberNo}
 	  </select>
+	  <select id ="selectReviewlist" resultType="review">
+	 		select 
+	 		review_No as reviewNo,
+	 		review_title as reviewTitle,
+	 		review_content as reviewContent,
+	 		review_date as reviewDate
+			from review_tbl
+			where member_no=#{memberNo}
+	  </select>
+	  
 	  
 
 	<!-- 윤지 -->

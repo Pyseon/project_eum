@@ -38,7 +38,7 @@ public class CommunityService {
 		CommunityPageData cpd = new CommunityPageData(list, pageNavi);
 		return cpd;
 	}
-
+//>>>>>>>>>> 읽기
 	public CommunityDetailData communityDetail(int commNo) {
 		Community comm = dao.communityDetail(commNo);
 		// 댓글 불러옴 (대댓글 포함)
@@ -50,12 +50,39 @@ public class CommunityService {
 		CommunityDetailData cdd = new CommunityDetailData(comm, cmntList);
 		return cdd;
 	}
-	
+	//댓글없이 내용만 가져오기
+	public Community communityDetailNotCmnt(int commNo) {
+		return dao.communityDetail(commNo);
+	}
+//>>>>>>>>>> 쓰기
 	public int communityWrite(Community comm) {
+		Community community = setToken(comm);
+		return dao.communityWrite(community);
+	}
+
+
+//>>>>>>>>>> 수정
+	public void communityUpdate(Community comm) {
+		Community community = setToken(comm);
+		dao.communityUpdate(community);
+	}
+	
+//>>>>>>>>>> 삭제
+	public void communityDelete(int commNo) {
+		dao.communityDelete(commNo);
+		
+	}
+	
+	
+
+	
+	
+/////////////////////////////   장점,단점 처리 함수      //////////////////////////////	
+	public Community setToken(Community comm) {
+	
+		//장점 토큰 , 으로된거 짤라서 붙임
 		String advantage = comm.getAdvantage();
 		List<String> advList = new ArrayList<String>();
-		System.out.println(advantage);
-		System.out.println();
 			
 		String []tokens=advantage.split("\\|");
 			
@@ -75,15 +102,14 @@ public class CommunityService {
 		for(int i=0;i<advList.size();i++){
 			advantage += advList.get(i)+"|";
 		}
-		System.out.println("최종값>>"+advantage);
 		
 		
+		
+		//단점토큰 , 으로된거 짤라서 붙임
 		String weakness = comm.getWeakness();
 		List<String> weakList = new ArrayList<String>();
-		System.out.println(weakness);
-		System.out.println();
 			
-		String []tokens2=advantage.split("\\|");
+		String []tokens2=weakness.split("\\|");
 			
 		for(int i=0;i<tokens2.length;i++){
 			if(tokens2[i] == null || tokens2[i].trim().length() < 2) { // null or 빈칸일때
@@ -98,22 +124,16 @@ public class CommunityService {
 		
 		weakness = "";
 		
-		for(int i=0;i<advList.size();i++){
+		for(int i=0;i<weakList.size();i++){
 			weakness += weakList.get(i)+"|";
 		}
+		System.out.println("최종값>>"+advantage);
 		System.out.println("최종값>>"+weakness);
-		
-		
-		
 		
 		comm.setAdvantage(advantage);
 		comm.setWeakness(weakness);
 		
-		int result =  dao.communityWrite(comm);
-		
-		
-		return result;
-//		return -1;
+		return comm;
 	}
 	
 	
@@ -204,6 +224,8 @@ public class CommunityService {
 
 		return pageNavi;
 	}
+
+
 
 
 

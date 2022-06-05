@@ -9,7 +9,7 @@
 		(select
     p.product_no as productNo,
     p.expert_no as expertNo,
-    (select member_nick from member_tbl m where p.expert_no = m.member_no) as expertName,
+    (select expert_name from expert_tbl m where p.expert_no = m.member_no) as expertName,
     (select member_picturepath from member_tbl m where p.expert_no = m.member_no) as memberPicturePath,
     p.product_Category as productCategory,
     p.product_title as productTitle,
@@ -18,8 +18,8 @@
     cost,
     sale,
     (cost)*(sale)/100 as salecost,
-    (select nvl(count(*),0) from review_tbl rev where p.product_no = rev.product_no) as reviewStar,
-    (select avg(nvl(review_star, 0)) from review_tbl rev where rev.product_no = p.product_no)as revCount,
+    (select nvl(count(*),0) from review_tbl rev where p.product_no = rev.product_no) as revCount,
+   (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
     p.product_imgpath as productImgPath
     from product_tbl p
 	<choose>
@@ -41,7 +41,27 @@
 		 	where product_Category = #{selPro}
 		</if>
   </select>
-  
+  <insert id="productWrite" parameterType="pro">
+  		insert into
+  			product_tbl values(
+  			product_seq.nextval,
+  			#{expertNo},
+  			#{productType},
+  			#{productTitle},
+  			#{productCategory},
+  			#{productIntro},
+  			#{productTag},
+  			#{productContent},
+  			#{cost},
+  			#{productQst},
+  			#{productAns},
+  			#{productAddr},
+  			#{sale},
+  			#{productOption},
+  			#{productImgPath}
+  			)
+  </insert>
+ 
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">
 		select
@@ -190,6 +210,7 @@
         on pro.product_no = pay.product_no
         where pay.pay_no=#{payNo}
 	</select>
+  
 	<select id="selectCounsel" parameterType="int" resultType="counsel">
 		select 
 			counsel_no as counselNo, 
@@ -200,6 +221,7 @@
 		from counsel_tbl 
 		where pay_no=#{payNo}
 	</select>
+  
 	<select id="selectChat" parameterType="int" resultType="chat">
 		select 
 			chat.chat_no as chatNo,
@@ -215,6 +237,11 @@
         join payment_tbl p
         on counsel.pay_no = p.pay_no
         where counsel.pay_no=#{payNo} order by chat_no asc       
+  </select>
+  
+	<select id="selectExpertNo" parameterType="int" resultType="expert">
+		select expert_no as expertNo
+		from expert_tbl where member_no=#{memberNo}
 	</select>
 </mapper>
 	

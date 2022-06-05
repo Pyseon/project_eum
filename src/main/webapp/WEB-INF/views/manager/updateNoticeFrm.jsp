@@ -9,32 +9,25 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
+	<c:forEach items="${list }" var="ntc" varStatus="i">
 	<div class="manaContentWrap">
-		<h1>>FAQ등록페이지</h1>
+		<h1>>공지사항 수정페이지</h1>
 		<hr>
-		<form action="/insertFAQ.do" method="post" class="FAQForm">
-		<select name="FAQType" class="FAQCategory">
-			<option value="1">서비스 소개</option>
-			<option value="2">이용방법</option>
-			<option value="3">구매 및 영수증</option>
-			<option value="4">가입 / 인증</option>
-			<option value="5">계정 정보 / 탈퇴</option>
-			<option value="6">문제 해결</option>
-			<option value="7">취소 / 환불</option>
-			<option value="8">신고 / 패널티</option>
-		</select>
-		<input type="text" class="managerTitle" name="FAQTitle" placeholder="제목을 입력하세요.">
+		<form action="/updateNotice.do" method="post" class="noticeForm">
+		<input type="text" class="managerTitle" name="noticeTitle" placeholder="제목을 입력하세요." value="${ntc.noticeTitle }">
 		
 		<!-- 썸머노트 -->
 		<div class="pt-1" style="margin-bottom: 50px;">
-			<textarea id="summernote" name="FAQContent"></textarea>
+			<textarea id="summernote" name="noticeContent">${ntc.noticeContent }</textarea>
 		</div>
-		
-		<input type="submit" class="btn bc1 bs4" value="등록하기">
+		<input type="hidden" name="noticeNo" value=${ntc.noticeNo }>
+		<input type="submit" class="btn bc1 bs4" value="수정하기">
 		</form>
 	</div>
+	</c:forEach>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+	
 	 //썸머노트 불러오기 함수 
     $("#summernote").summernote({
     	  toolbar: [ //썸머노트 툴바 추가

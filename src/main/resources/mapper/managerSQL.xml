@@ -361,7 +361,113 @@
 	</select>
 	
 	<insert id="insertFAQ" parameterType="map">
-		insert into faq_tbl values(faq_seq.nextval, #{FAQTitle}, #{FAQContent}, #{FAQType}, TO_CHAR(SYSDATE,'YYYY-MM-DD'));
+		insert into faq_tbl values(
+		faq_seq.nextval, 
+		#{FAQTitle}, 
+		#{FAQContent}, 
+		#{FAQType}, 
+		TO_CHAR(SYSDATE,'YYYY-MM-DD'))
 	</insert>
+	
+	<delete id="deleteFAQ" parameterType="int">
+		delete faq_tbl where faq_no = #{value }
+	</delete>
+	
+	<select id="selectFAQ" parameterType="int" resultType="faq">
+		select
+		faq_no as FAQNo,
+		faq_title as FAQTitle,
+		faq_content as FAQContent,
+		faq_type as FAQType
+		from faq_tbl
+		where faq_no = #{value}
+	</select>
+	
+	<update id="updateFAQ" parameterType="map">
+		update faq_tbl set 
+		faq_type=#{FAQType}, faq_title=#{FAQTitle}, faq_content=#{FAQContent} 
+		where faq_no = #{FAQNo}
+	</update>
+	
+	<select id="noticeList" parameterType="map" resultType="ntc">
+		select * from
+		(select rownum as rnum, ntc.* from
+		(select
+			notice_no as noticeNo,
+			(select member_Id from member_tbl m where notice.member_no = m.member_no) as memberId,
+			notice_date as noticeDate,
+			notice_title as noticeTitle
+		from notice_tbl notice
+		order by notice_no desc) ntc)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="noticeCount" resultType="int">
+		select count(*) from notice_tbl
+	</select>
+	<select id="searchNoticeList" parameterType="map" resultType="ntc">
+		select * from
+		(select rownum as rnum, ntc.* from
+		(select
+			notice_no as noticeNo,
+			(select member_Id from member_tbl m where notice.member_no = m.member_no) as memberId,
+			notice_date as noticeDate,
+			notice_title as noticeTitle,
+			notice_content as noticeContent
+		from notice_tbl notice
+		<choose>
+			<when test="searchType.equals('memberId') ">
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
+			</when>
+			<when test="searchType.equals('noticeTitle') ">
+				where notice_title like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+		order by notice_no desc) ntc)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="searchNoticeCount" resultType="int" parameterType="map">
+		select count(*) from notice_tbl
+		<choose>
+			<when test="searchType.equals('memberId') ">
+				where member_no in
+        		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
+			</when>
+			<when test="searchType.equals('noticeTitle') ">
+				where notice_title like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+	
+	<delete id="deleteNotice" parameterType="int">
+		delete notice_tbl where notice_no = #{value }
+	</delete>
+	
+	<select id="selectNotice" parameterType="int" resultType="ntc">
+		select
+		notice_no as noticeNo,
+		(select member_Id from member_tbl m where ntc.member_no = m.member_no) as memberId,
+		notice_title as noticeTitle,
+		notice_content as noticeContent,
+		notice_date as noticeDate
+		from notice_tbl ntc
+		where notice_no = #{value}
+	</select>
+	
+	<insert id="insertNotice" parameterType="map">
+		insert into notice_tbl values(
+		notice_seq.nextval,
+		#{memberNo},
+		#{noticeTitle},
+		#{noticeContent},
+		to_char(sysdate,'yyyy-mm-dd')
+		)
+	</insert>
+	<update id="updateNotice" parameterType="map">
+		update notice_tbl set 
+		notice_title=#{noticeTitle}, notice_content=#{noticeContent} 
+		where notice_no = #{noticeNo}
+	</update>
 	
 </mapper>

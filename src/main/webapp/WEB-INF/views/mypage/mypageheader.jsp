@@ -14,11 +14,12 @@
 			<h2></h2>
 		</div>
 		<ul>
-			<li><a href="/Mypage.do">내정보</a></li>
+			<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">내정보</a></li>
 			<li><a href="/Myproduct.do?memberNo=${sessionScope.member.memberNo}">구매내역</a></li>
-			<li><a href="/Mywishlist.do">찜내역</a></li>
-			<li><a href="/Myreview.do">내리뷰</a></li>
-			<li><a href="/Myproject.do">내프로젝트</a></li>
+			<li><a href="/Mywishlist.do?memberNo=${sessionScope.member.memberNo}">찜내역</a></li>
+			<li><a href="/Myreview.do?memberNo=${sessionScope.member.memberNo}">내리뷰</a></li>
+			
+			<li><a href="/Myproject.do?memberNo=${sessionScope.member.memberNo}">내프로젝트</a></li>
 		</ul>
 	</nav>
 </div>

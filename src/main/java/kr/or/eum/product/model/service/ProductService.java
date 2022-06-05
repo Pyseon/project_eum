@@ -97,6 +97,14 @@ public class ProductService {
 		
 	}
 	
+	public int productWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = productDao.productWrite(pro);
+		
+		return result;
+	}
+	
+	
 	//윤지
 	public ProductDetail selectProductDetail(int productNo, int expertNo, Member member) {
 		Product product = productDao.selectOneProduct(productNo);
@@ -270,6 +278,15 @@ public class ProductService {
 		map.put("chatList", chatList);
 		return map;
 	}
+
+	public Expert selectExpertNo(int memberNo) {
+		return productDao.selectExpertNo(memberNo);
+	}
+
+
+	
+
+	
 	
 	//윤지
 	public int insertChat(String msg, String memberNo, String counselNo) {

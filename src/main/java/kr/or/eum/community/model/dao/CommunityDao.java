@@ -42,8 +42,15 @@ public class CommunityDao {
 	}
 
 	public int communityWrite(Community comm) {
-		int result = sqlSession.insert("community.communityWrite", comm);
-		return result;
+		return sqlSession.insert("community.communityWrite", comm);
+	}
+
+	public void communityUpdate(Community comm) {
+		sqlSession.update("community.communityUpdate", comm);
+	}
+
+	public void communityDelete(int commNo) {
+		sqlSession.delete("community.communityDelete", commNo);
 	}
 
 }

@@ -127,7 +127,7 @@
 							class="num">${comm.commLike }</strong>
 						</span> <span class="article-info"> <i
 							class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
-							class="num">${comm.cmntCount }</strong>
+							id="cmnt-total2" class="num">${comm.cmntCount }</strong>
 						</span>
 					</div>
 				</div>
@@ -181,7 +181,7 @@
 		<div class="article-bottom info-box">
 			<div class="comments-info">
 				<i class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
-					id="cmnt-total" class="num">${comm.cmntCount }</strong>
+					id="cmnt-total" class="num cmnt-total">${comm.cmntCount }</strong>
 			</div>
 		</div>
 		<div class="comments-area">
@@ -215,7 +215,8 @@
 										</div>
 									</div>
 									<div class="reply-btn">
-										<a href="" class="btn-reply">답글쓰기</a>
+										<a href="javascript:void(0);" class="btn-reply replyBtn" 
+										onclick="replyFrm(1, ${cmnt.cmntNo}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
 										<div class="comment-btn-wrap">
 											<input type="hidden" class="reply-cmnt-no"
 												value="${cmnt.cmntNo}"> 
@@ -266,10 +267,15 @@
 										<input type="hidden" class="reply-cmnt-no"
 											value="${cmnt.cmntNo}"> <input type="hidden"
 											class="reply-writer-no" value="${cmnt.memberNo}"> <a
-											href="" class="btn-reply text-uppercase">답글쓰기</a>
+											href="javascript:void(0);" class="btn-reply re-replyBtn"
+											onclick="replyFrm(2, ${cmnt.cmntRef}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
 										<div class="comment-btn-wrap">
-											<a href="" class="comment-update-btn">수정 </a> <span>|</span>
-											<a href="" class="comment-del-btn"> 삭제</a>
+											<input type="hidden" class="reply-cmnt-no"
+												value="${cmnt.cmntNo}"> 
+											<input type="hidden"
+												class="reply-writer-no" value="${cmnt.memberNo}">
+											<a href="javascript:void(0);" class="comment-update-btn">수정 </a> <span>|</span>
+											<a href="javascript:void(0);" class="comment-del-btn"> 삭제</a>
 										</div>
 									</div>
 								</div>
@@ -285,7 +291,7 @@
 				<!-- 전송 데이터 -->
 				<input type="hidden" name="commNo" id="commNo"
 					value="${comm.commNo}"> <input type="hidden"
-					name="memberNo" id="memberNo" value="14"> <input
+					name="memberNo" id="memberNo" value="${sessionScope.member.memberNo }"> <input
 					type="hidden" name="cmntContent" id="cmntContent"> <input
 					type="hidden" name="cmntLev" id="cmntLev" value="0">
 				<!--            -->
@@ -343,6 +349,7 @@ $(function(){
 		let cmntHtml = "";
 		$.ajax({
 			url: "/commCoWrite.do",
+			type:"post",
 			data: {commNo:commNo, memberNo:memberNo, cmntContent:cmntContent, cmntLev:cmntLev},
 			success:function(data){
 				/*
@@ -364,25 +371,30 @@ $(function(){
 				*/
 				$("#cmntContent").val("");
 				$("#comment-textarea").val("");
+				$("#comment-num").text(0);
 				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
 				$("#cmnt-total").load(location.href + " #cmnt-total");
+				$("#cmnt-total2").load(location.href + " #cmnt-total2");
+				
 			}
 		})
 			
 	});
 	
-	//처음 댓글등록창에 입력값이 없으면 등록버튼 비활성화
 	
 	
 	//댓글 수정폼 띄우기
 	let updateCmntNo = 0;
 	let updatememberNo = 0;
 	$(document).on("click",".comment-update-btn", function() {
+		//기존창 살리고 입력창 없애기 (중복생성방지)
 		$(".comment-cancel-btn").parent().parent().prev().show();
 		$(".comment-cancel-btn").parent().parent().remove();
 		
 		updateCmntNo = $(this).prev().prev().val();
 		updatememberNo = $(this).prev().val();
+		
+		console.log("수정폼띄움!");
 		console.log("댓글번호 > "+updateCmntNo);
 		console.log("멤버번호 > "+updatememberNo);
 		
@@ -404,6 +416,8 @@ $(function(){
 		
 	})
 	
+	
+	//댓글 수정 취소시 -> 되돌리기
 	$(document).on("click",".comment-cancel-btn", function() {
 		$(this).parent().parent().prev().show();
 		$(this).parent().parent().remove();
@@ -475,6 +489,7 @@ $(function(){
 		 	   		success:function(data){
 						$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
 						$("#cmnt-total").load(location.href + " #cmnt-total");
+						$("#cmnt-total2").load(location.href + " #cmnt-total2");
 					}
 	 	   		})
 	 	   }
@@ -483,16 +498,33 @@ $(function(){
 		
 	} 
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//대댓글 쓰기  ////////////////////////////////////////////////////////////////////////////////////////////////// 
+	$(document).on("click","#reComment-write-btn",function(){
+		let replyCommNo = $("#commNo").val();			//대댓글을 남길 글번호
+		let replyParentNo = $(this).prev().val();		//답글다는 조상님의 번호
+		let replyMemberNo = $("#memberNo").val();		//답글다는 유저 회원번호
+		let replyContent = returnBr();			//댓글 내용 
+		let replyLevel = $(this).prev().prev().val();	//1이면 대댓글, 2이면 대대댓글
+		let replyNum = $(this).prev().prev().prev().val();	//답글다는 댓글의번호
+		
+		console.log("조상번호>"+replyParentNo);	
+		
+		
+		console.log("참조번호>"+replyNum);		
+		
+		
+		$.ajax({
+			url: "/commCoWrite.do",
+			type:"post",
+			data: {memberNo:replyMemberNo, cmntContent:replyContent, commNo:replyCommNo, cmntRef:replyNum, cmntLev:replyLevel, cmntGroup:replyParentNo },
+			success:function(data){
+				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
+				$("#cmnt-total").load(location.href + " #cmnt-total");
+				$("#cmnt-total2").load(location.href + " #cmnt-total2");
+			}
+		})
+		
+	});
 	
 	
 	
@@ -515,8 +547,10 @@ $(function(){
 		 var UpdateComment = $("#comment-updatearea").val();
 		 if(UpdateComment <= 0){
 			 $("#comment-update-btn").attr("disabled",true);
+			 $("#reComment-write-btn").attr("disabled",true);
 		 }else{
 			 $("#comment-update-btn").attr("disabled",false);
+			 $("#reComment-write-btn").attr("disabled",false);
 		 }
 		 console.log(UpdateComment.length);
 		$("#UpdateComment-num").text(UpdateComment.length);
@@ -534,7 +568,44 @@ $(function(){
 	
 }); //문서로딩 후 함수
 
+/////// 대댓글 폼띄우기 함수
+function replyFrm(replyLev, replyParentNo, replyNo, replyNick, thisReply){
+	$(".comment-cancel-btn").parent().parent().prev().show();
+	$(".comment-cancel-btn").parent().parent().remove();
 	
+
+	console.log("===============================");
+	console.log(replyLev);
+	console.log(replyParentNo);
+	console.log(replyNo);
+	console.log(replyNick);
+	console.log("this");
+	
+	console.log("===============================");
+	
+	
+	
+	var writeHtml = "";
+	writeHtml += '<div class="comment-write" style="margin-left:60px;")">';
+	writeHtml += '<div class="comment-write-head">';
+	writeHtml += '<span style="font-family: fs-m; margin:0 0 8px 0; padding-left:2px;">@'+replyNick+' 에게 답글쓰기</span>';
+	writeHtml += '<span class="comment-num-box"><span id="UpdateComment-num">0</span>/250</span>';
+	writeHtml += '</div>';
+	writeHtml += '<textarea id="comment-updatearea" placeholder="답글 입력" onkeyup="resizeUpdatearea(this)" onkeydown="resize(this)" maxlength="250"></textarea>';
+	writeHtml += '<div style="float: right;">';
+	writeHtml += '<input type="hidden" id="replyNo" value="'+replyNo+'">';
+	writeHtml += '<input type="hidden" id="replyLevel" value="'+replyLev+'">';
+	writeHtml += '<input type="hidden" id="replyParentNo" value="'+replyParentNo+'">';
+	writeHtml += '<button type="button" id="reComment-write-btn" class="comment-write-btn btn fll" disabled>등록</button>';
+	writeHtml += '<button type="button" class="comment-cancel-btn btn fc-7">취소</button>';
+	writeHtml += '</div>';
+	writeHtml += '</div>';
+	
+	$(thisReply).parent().parent().parent().after(writeHtml);
+}
+
+
+
 
 	
 	
@@ -558,6 +629,31 @@ function resize(obj) {
     }
     
 }
+
+function resizeUpdatearea(obj) {
+    obj.style.height = '1px';
+    obj.style.height = (12 + obj.scrollHeight) + 'px';
+    
+    //5줄 이상 입력하면 알림창 띄우도록
+    var str = $("#comment-updatearea").val();
+    var str_arr = str.split("\n");  // 줄바꿈 기준으로 나눔 
+    var row = str_arr.length;  // row = 줄 수 
+    if(row >10){
+   		 //마지막 입력문자 삭제
+   		var title = "10줄 이상 작성할 수 없습니다.";
+    	var icon = "error";
+    	toastShow(title,icon);
+	    var lastChar = str.slice(0,-1); //열 
+	    $("#comment-updatearea").val(lastChar)
+    }
+    
+}
+
+
+
+
+
+
 
 //textarea 엔터시 <br>로 바꿔주고 히든 input 에 저장하는 함수
 function convertbr(){

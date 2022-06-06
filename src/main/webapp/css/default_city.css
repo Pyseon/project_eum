@@ -944,6 +944,10 @@ figcaption {
 	display: -ms-flexbox !important;
 	display: flex !important;
 }
+.dd-flex {
+	display: -ms-flexbox;
+	display: flex;
+}
 
 @media ( max-width : 414px) {
 	.comments-area {

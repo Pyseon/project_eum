@@ -162,6 +162,16 @@
  		where co.cmnt_no = ${value}
 	</select>
 	
+	<update id="commCoUpdate" parameterType="commCo">
+		update communityco_tbl set
+			cmnt_content = #{cmntContent}
+		where cmnt_no = #{cmntNo}
+	</update>
+	
+	<delete id="commCoDelete" parameterType="int">
+		delete from communityco_tbl 
+			where cmnt_no = ${value}
+	</delete>
 </mapper>
 
 

@@ -131,20 +131,36 @@ public class ProductDao {
 		Product product = sqlSession.selectOne("product.selectOneProduct2", payNo);
 		return product;
 	}
-
+	
+	//윤지
 	public Counsel selectCounsel(int payNo) {
 		Counsel counsel = sqlSession.selectOne("product.selectCounsel", payNo);
 		return counsel;
 	}
-
+	
+	//윤지
 	public ArrayList<Chat> selectChat(int payNo) {
 		List chatList = sqlSession.selectList("product.selectChat", payNo);
 		return (ArrayList<Chat>)chatList;
-  }
-  
+	}
+	
 	public Expert selectExpertNo(int memberNo) {
 		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
 		return expert;
+	}
+
+	//윤지
+	public int updateReadCheck(HashMap<String, Object> map) {
+		int result = sqlSession.update("product.updateReadCheck", map);
+		return result;
+	}
+
+	//윤지
+	public int updatePaymentState(int counselNo) {
+		Payment payment = sqlSession.selectOne("product.selectPayment", counselNo);
+		int result = sqlSession.update("product.updatePaymentState", payment.getPayNo());
+		System.out.println(result);
+		return result;
 	}
 
 

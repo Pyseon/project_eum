@@ -1,5 +1,7 @@
 package kr.or.eum.product.model.service;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,6 +29,9 @@ public class ChatHandler extends TextWebSocketHandler {
 	private HashMap<String, ArrayList<WebSocketSession>> sessionMap;
 	private HashMap<WebSocketSession, String> sessionRoom;
 
+//	LocalTime localTime = LocalTime.now();
+//	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+//	String now = localTime.format(formatter);
 
 	public ChatHandler() {
 		super();
@@ -58,6 +63,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		String msg = element.getAsJsonObject().get("msg").getAsString();
 		String memberNo = element.getAsJsonObject().get("memberNo").getAsString();
 		String counselNo = element.getAsJsonObject().get("counselNo").getAsString();
+		String time = element.getAsJsonObject().get("time").getAsString();
 		
 		// 상담이 없을 때
 		if(!sessionMap.containsKey(counselNo)) {
@@ -72,9 +78,11 @@ public class ChatHandler extends TextWebSocketHandler {
 			System.out.println("---------------");
 			sessionMap.get(counselNo).add(session);
 			sessionRoom.put(session, counselNo);
+			//int readResult = productService.updateReadCheck(counselNo, memberNo);
+			//System.out.println("readResult : "+readResult);
 		//채팅메세지를 입력한 경우
 		}else if(type.equals("chat")) {//if문으로 이미지 있다 없다, 읽음 표시도 
-			String sendMsg ="<div class='chat left'><span class='chatId'></span>"+msg+"</div>";
+			String sendMsg ="<div class='chat-content-wrap'><div class='chat left'><span class='chatId'></span>"+msg+"</div><div class='content-sub-wrap'><div class='read-check'>1<div><div class='chat-time'>"+time+"</div></div></div>";
 			int result = productService.insertChat(msg, memberNo,counselNo); 
 			for(WebSocketSession s : sessionMap.get(counselNo)) {
 				if(!s.equals(session)) {
@@ -98,7 +106,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			sessionMap.remove(counselNo);
 		}
 		
-		String sendMsg = "<p>상담이 종료되었습니다.</p>";
+		String sendMsg = "<p'>부재중입니다.</p>"; //나중에 삭제
 		TextMessage tm = new TextMessage(sendMsg);
 		for(WebSocketSession s : sessionList) {
 			s.sendMessage(tm); 

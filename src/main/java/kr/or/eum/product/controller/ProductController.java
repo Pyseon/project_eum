@@ -230,46 +230,53 @@ public class ProductController{
 	//윤지
 	@RequestMapping(value = "/expertCounsel.do")
 	public String expertCounsel(Model model, int payNo, HttpServletRequest request) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map = productService.selectProductAndExpertAndPayment(payNo, request);
+		HashMap<String, Object> compare = productService.compareMemberNo(payNo, request);
+		System.out.println(compare.get("expertTrue"));
+		System.out.println(compare.get("memberTrue"));
+		if(compare.get("expertTrue").equals(false) && compare.get("memberTrue").equals(false)) {
+			return "product/paymentError";
+		}
+		model.addAttribute("m", compare.get("member"));
+		HashMap<String, Object> map = productService.selectProductAndExpertAndPayment(payNo);
 		model.addAttribute("p", map.get("product"));
 		model.addAttribute("e", map.get("expert"));
 		model.addAttribute("ec", map.get("expertC"));
 		model.addAttribute("em", map.get("expertM"));
 		model.addAttribute("pay", map.get("payment"));
 		model.addAttribute("r", map.get("review"));
-		model.addAttribute("m", map.get("member"));
 		model.addAttribute("c", map.get("counsel"));
-		model.addAttribute("chat", map.get("chatList"));
-		//int counselNo = 1;
-		//if(!((Member)map.get("member")).getMemberId().equals("eom08@gmail.com") && !((Member)map.get("member")).getMemberId().equals("testyj")) {
-		//	counselNo = 999;
-		//}  	
-		//Counsel counsel = new Counsel();
-		//counsel.setCounselNo(1);
-		//model.addAttribute("c", counsel);
-		//model.addAttribute("m", member);
-		
+		model.addAttribute("chat", map.get("chatList"));		
 		if(!map.get("paymentState").equals(1) && !map.get("paymentState").equals(2)) {
 			return "product/paymentError";
 		}
+		System.out.println("Counsel_member : "+compare.get("member"));
 		System.out.println("Counsel_product : "+map.get("product"));
 		System.out.println("Counsel_expert : "+map.get("expert"));
 		System.out.println("Counsel_expertC : "+map.get("expertC"));
 		System.out.println("Counsel_expertM : "+map.get("expertM"));
 		System.out.println("Counsel_payment : "+map.get("payment"));
 		System.out.println("Counsel_review : "+map.get("review"));
-		System.out.println("Counsel_member : "+map.get("member"));
 		System.out.println("Counsel_counsel : "+map.get("counsel"));
 		System.out.println("Counsel_chat : "+map.get("chatList"));
-		if(map.get("expertTrue").equals(true) || map.get("memberTrue").equals(true)) {
-			return "product/expertCounsel";
-		}else{
-			//counsel.setCounselNo(999);
-			return "product/paymentError";
-		}
-		//return "product/expertCounsel";
+		
+		return "product/expertCounsel";
 	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "updatePaymentState.do")
+	public String updatePaymentState(int counselNo) {
+		int result = productService.updatePaymentState(counselNo);
+		return new Gson().toJson(result);
+	}
+	
+	//윤지
+	@RequestMapping(value = "/review.do")
+	public String insertReview(int payNo, HttpServletRequest request) {
+		//HashMap<String, Object> review = productService.insertReview(payNo, request);
+		return "product/reviewFrm";
+	}
+  
 	//대권 구매성공
 	@RequestMapping(value="/purchaseSuccess.do")
 	public String purchaseSuccess() {

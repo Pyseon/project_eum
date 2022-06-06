@@ -238,7 +238,7 @@ public class ProductService {
 	}
 
 	//윤지
-	public HashMap<String, Object> selectProductAndExpertAndPayment(int payNo, HttpServletRequest request) {
+	public HashMap<String, Object> selectProductAndExpertAndPayment(int payNo) {
 		Product product = productDao.selectOneProduct2(payNo);
 		ExpertAndCompany expertAndCom = memberDao.selectOneExpert2(payNo);
 		Expert expert = memberDao.selectOneExpertOnly2(payNo);
@@ -249,22 +249,6 @@ public class ProductService {
 		int reviewUploadCheck = productDao.selectReviewUploadCheck(payNo);
 		ArrayList<Chat> chatList = productDao.selectChat(payNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
-		HttpSession session = request.getSession(false);
-		Member member = null;
-		member = (Member)session.getAttribute("member");	
-		boolean expertNoCheck = false;
-		boolean paymentMemberNoCheck = false;
-		if(session != null) {
-			map.put("member",member);
-			if(member.getMemberNo() == expert.getMemberNo()) {
-				expertNoCheck = true;
-			} 
-			if(member.getMemberNo() == payment.getMemberNo()) {
-				paymentMemberNoCheck = true;
-			}
-		}
-		System.out.println(expertNoCheck);
-		System.out.println(paymentMemberNoCheck);
 		map.put("product", product);
 		map.put("expert",expert);
 		map.put("expertC",expertAndCom);
@@ -272,8 +256,6 @@ public class ProductService {
 		map.put("payment",payment);
 		map.put("paymentState",paymentState);
 		map.put("review",reviewUploadCheck);
-		map.put("expertTrue",expertNoCheck);
-		map.put("memberTrue",paymentMemberNoCheck);
 		map.put("counsel",counsel);
 		map.put("chatList", chatList);
 		return map;
@@ -291,6 +273,53 @@ public class ProductService {
 		map.put("counselNo",counselNo);
 		return productDao.insertChat(map);
 	}
+
+	//윤지
+	public HashMap<String, Object> compareMemberNo(int payNo, HttpServletRequest request) {
+		Expert expert = memberDao.selectOneExpertOnly2(payNo);
+		Payment payment = productDao.selectPaymentState(payNo);
+		System.out.println("payment : "+payment);
+		HashMap<String, Object> compare = new HashMap<String, Object>();
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");	
+			System.out.println("member : "+member);
+			compare.put("member", member);
+			boolean expertNoCheck = false;
+			boolean paymentMemberNoCheck = false;
+			if(member.getMemberNo() == expert.getMemberNo()) {
+				expertNoCheck = true;
+			} 
+			if(member.getMemberNo() == payment.getMemberNo()) {
+				paymentMemberNoCheck = true;
+			}			
+			compare.put("expertTrue", expertNoCheck);
+			compare.put("memberTrue",paymentMemberNoCheck);
+		}		
+		return compare;
+	}
+	
+	//윤지
+	public int updateReadCheck(String counselNo, String memberNo) {
+		int realCounselNo = Integer.parseInt(counselNo);
+		int realMemberNo = Integer.parseInt(memberNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("counselNo", realCounselNo);
+		map.put("memberNo", realMemberNo);
+		return productDao.updateReadCheck(map);
+	}
+	
+	//윤지
+	public int updatePaymentState(int counselNo) {
+		return productDao.updatePaymentState(counselNo);
+	}
+
+	//윤지
+//	public HashMap<String, Object> insertReview(int payNo, HttpServletRequest request) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 
 }

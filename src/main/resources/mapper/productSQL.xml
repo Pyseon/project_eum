@@ -245,5 +245,27 @@
 		select expert_no as expertNo
 		from expert_tbl where member_no=#{memberNo}
 	</select>
+	
+	<!-- 윤지 -->
+	<update id="updateReadCheck" parameterType="int">
+		update chat_tbl set chat_readcheck=0 where counsel_no=#{counselNo} and member_no=#{memberNo} and chat_readcheck=1
+	</update>
+	
+	<!-- 윤지 -->
+	<select id="selectPayment" parameterType="int" resultType="pay">
+		select 
+			c.counsel_no as counselNo, 
+			c.member_no as memberNo, 
+			c.expert_no as expertNo, 
+			p.pay_no as payNo, 
+			p.pay_state as payState
+        from counsel_tbl c
+        join payment_tbl p
+        on c.pay_no = p.pay_no
+        where counsel_no=#{counselNo}
+	</select>
+	<update id="updatePaymentState" parameterType="int">
+		update payment_tbl set pay_state=2 where pay_no=#{payNo}
+	</update>
 </mapper>
 	

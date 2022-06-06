@@ -276,6 +276,17 @@ public class ProductController{
 		//HashMap<String, Object> review = productService.insertReview(payNo, request);
 		return "product/reviewFrm";
 	}
+  
+	//대권 구매성공
+	@RequestMapping(value="/purchaseSuccess.do")
+	public String purchaseSuccess() {
+		return "product/purchaseSuccess";
+	}
+	//대권 구매실패
+	@RequestMapping(value="/purchaseFailed.do")
+	public String purchaseFailed() {
+		return "product/purchaseFailed";
+	}
 	
 	
 }

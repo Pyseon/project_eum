@@ -470,4 +470,33 @@
 		where notice_no = #{noticeNo}
 	</update>
 	
+	<select id="selectChart" resultType="chart">
+		select
+		(select count(*) from member_tbl) as memberCount,		<!-- 총 회원수 -->
+		(select count(*) from member_tbl 
+		where (substr(enrolldate,6,2) like (select to_char(sysdate, 'mm') from dual)) 
+		and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as memberMonth,  <!-- 이달의 신규 회원 수 -->
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '01' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as janMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '02' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as febMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '03' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as marMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '04' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as aprMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '05' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as mayMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '06' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as junMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '07' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as julMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '08' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as augMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '09' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as sepMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '10' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as octMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '11' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as novMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '12' and substr(enrolldate,3,2) like (select to_char(sysdate,'yy') from dual)) as decMember,
+		
+		(select count(*) from member_tbl where gender = 1) as genderMale,
+		(select count(*) from member_tbl where gender = 2) as genderFemale,
+		(select count(*) from member_tbl where gender != 1 and gender !=2) as unknownGender,
+		
+		(select count(*) from member_tbl where grade=1) as expertCount,		<!-- 총 전문가수 -->
+		(select count(*) from member_tbl where grade=2) as generalMember,	<!-- 일반 회원수 -->
+		(select count(*) from member_tbl where grade=4) as blackCount		<!-- 블랙 리스트 수-->
+		from dual
+	</select>
+	
 </mapper>

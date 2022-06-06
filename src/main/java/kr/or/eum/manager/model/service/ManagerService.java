@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.eum.manager.model.dao.ManagerDao;
+import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.member.model.vo.Member;
@@ -251,6 +252,10 @@ public class ManagerService {
 		map.put("noticeTitle", noticeTitle);
 		map.put("noticeContent", noticeContent);
 		return dao.updateNotice(map);
+	}
+
+	public Chart selectChart() {
+		return dao.selectChart();
 	}
 	
 	

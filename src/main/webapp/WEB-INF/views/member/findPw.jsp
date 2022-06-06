@@ -98,7 +98,7 @@
 	<div class="idfindmain fs-bold">아이디/비밀번호 찾기</div>
 	<div class="idpwbox">
 		<div class="idfind"><a href="/findId.do">아이디찾기</a></div>
-		<div class="idpw"><a href="#">비밀번호찾기</a></div>
+		<div class="idpw"><a href="/findPw.do">비밀번호찾기</a></div>
 	</div>
 	<div class=backgroundcolorsky>
 		<div class="idfindbody">

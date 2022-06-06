@@ -22,7 +22,7 @@
 			<li><a href="#">1:1상담</a></li>
 			<li><a href="/manaNotice.do?reqPage=1">공지사항</a></li>
 			<li><a href="/manaFAQ.do?reqPage=1&selectNum=0">FAQ</a></li>
-			<li><a href="#">통계</a></li>
+			<li><a href="/manaChart.do">통계</a></li>
 		</ul>
 	</nav>
 </div>

@@ -76,11 +76,19 @@ public class CommunityService {
 		dao.communityUpdate(community);
 	}
 	
+	public void commCoUpdate(CommunityCo commCo) {
+		dao.commCoUpdate(commCo);
+	}
+	
+	
 //>>>>>>>>>> 삭제
 	public void communityDelete(int commNo) {
 		dao.communityDelete(commNo);
 	}
 	
+	public void commCoDelete(int cmntNo) {
+		dao.commCoDelete(cmntNo);
+	}
 	
 
 	
@@ -143,6 +151,7 @@ public class CommunityService {
 		
 		return comm;
 	}
+	
 	
 	
 
@@ -232,6 +241,8 @@ public class CommunityService {
 
 		return pageNavi;
 	}
+
+
 
 
 

@@ -62,4 +62,13 @@ public class CommunityDao {
 		return commCo;
 	}
 
+	public void commCoUpdate(CommunityCo commCo) {
+		sqlSession.update("community.commCoUpdate", commCo);
+		
+	}
+
+	public void commCoDelete(int cmntNo) {
+		sqlSession.delete("community.commCoDelete", cmntNo);
+	}
+
 }

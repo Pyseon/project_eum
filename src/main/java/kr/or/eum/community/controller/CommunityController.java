@@ -69,12 +69,12 @@ public class CommunityController {
 	
 	@ResponseBody
 	@RequestMapping(value="/commCoWrite.do", produces="application/json;charset=utf-8")
-	public String communityCoWrite(CommunityCo commCo) {
+	public void communityCoWrite(CommunityCo commCo) {
 		//insert 후 selectKey를 이용해 방금 insert 한 pk값 얻어옴
 		service.commCoWrite(commCo);
 		//얻어온 pk값으로 데이터 조회 후 리턴
-		CommunityCo comment = service.commCoDetail(commCo.getCmntNo());
-		return new Gson().toJson(comment);
+		//CommunityCo comment = service.commCoDetail(commCo.getCmntNo());
+		//return new Gson().toJson(comment);
 	}
 	
 	
@@ -104,6 +104,13 @@ public class CommunityController {
 		return getUri;
 	}
 
+	@ResponseBody
+	@RequestMapping(value = "/commCoUpdate.do")
+	public void commCoUpdate(CommunityCo commCo) {
+		service.commCoUpdate(commCo);
+	}
+	
+	
 //>>>>>>>>>>삭제
 	@RequestMapping(value="/communityDelete.do")
 	public String communityDelete(int category, int commNo) {
@@ -111,7 +118,11 @@ public class CommunityController {
 		return "redirect:/communityList.do?category="+category+"&reqPage=1";
 	}
 
-	
+	@ResponseBody
+	@RequestMapping(value = "/commCoDelete.do")
+	public void commCoDelete(int cmntNo) {
+		service.commCoDelete(cmntNo);
+	}
 	
 	
 	

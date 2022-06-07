@@ -190,31 +190,30 @@ li{
 		font-weight: normal;
 	}
 </style>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>	
 </head>
-
 <body>
 <div>
 		<table class="category">
 				<tr>
 							
-					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"><h3>전체</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"><h3>법률</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn5" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=학습'"><img src="./img/category/학습.png"><h3>학습</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn6" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=금융'"><img src="./img/category/금융.png"><h3>금융</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn7" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=라이프'"><img src="./img/category/라이프.png"><h3>라이프</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn8" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=취미'"><img src="./img/category/취미.png"><h3>취미</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn9" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=어학'"><img src="./img/category/어학.png"><h3>어학</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"><h3>레저</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"><h3>IT/테크</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/IdeamarketList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"><h3>자기계발</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ExpertList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"><h3>전체</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ExpertList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"><h3>법률</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ExpertList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/ExpertList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn5" onclick="location.href='/ExpertList.do?reqPage=1&selPro=학습'"><img src="./img/category/학습.png"><h3>학습</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn6" onclick="location.href='/ExpertList.do?reqPage=1&selPro=금융'"><img src="./img/category/금융.png"><h3>금융</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn7" onclick="location.href='/ExpertList.do?reqPage=1&selPro=라이프'"><img src="./img/category/라이프.png"><h3>라이프</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn8" onclick="location.href='/ExpertList.do?reqPage=1&selPro=취미'"><img src="./img/category/취미.png"><h3>취미</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn9" onclick="location.href='/ExpertList.do?reqPage=1&selPro=어학'"><img src="./img/category/어학.png"><h3>어학</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/ExpertList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"><h3>레저</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/ExpertList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"><h3>IT/테크</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/ExpertList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"><h3>자기계발</h3></button></td>
           		</tr>
           </table>
    </div>
-      <div class="container">
-   	<button type="button" class="writeButton" id="writeButton" onclick="location.href='/ideamarketWriterFrm.do'">등록하기</button>
+   <div class="container">
+   	<button type="button" class="writeButton" id="writeButton" onclick="location.href='/expertWriterFrm.do'">등록하기</button>
    	<div class="posting-wrap">
    		<c:forEach items="${list }" var="c" varStatus="i">
    			<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
@@ -318,6 +317,7 @@ li{
 	});
 	
 	</script>
+   
 
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

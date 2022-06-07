@@ -89,9 +89,10 @@
 										</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="/reference.jsp"
+										<li><a href="/Expertapply.do"
 											style="font-family: fs-bold; color: #555">전문가 등록</a></li>
-										<li><a href="#">마이페이지</a></li>
+											
+										<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">마이페이지</a></li>
 										<li>
 											<button class="btn bc1 bs6" id="login-btn" type="button"
 												onclick="location.href='/logout.do'">로그아웃</button>
@@ -267,9 +268,9 @@
                       </a></li>
                     </ul>
                   </li>
-                  <li><a href="404.html">전문가 상담</a></li>
+                  <li><a href="/ExpertList.do?reqPage=1&selPro=전체">전문가 상담</a></li>
                   <li><a href="/ClassList.do?reqPage=1&selPro=전체">클래스</a></li>
-                  <li><a href="/IdeamarketList.jsp">지식마켓</a></li>
+                  <li><a href="/IdeamarketList.do?reqPage=1&selPro=전체">지식마켓</a></li>
                   <li><a href="/communityList.do?category=2&reqPage=1">커뮤니티</a></li>
                 </ul>
               </div>

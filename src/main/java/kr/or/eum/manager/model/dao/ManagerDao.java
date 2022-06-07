@@ -8,10 +8,12 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
@@ -221,6 +223,31 @@ public class ManagerDao {
 	public SalesChart selectSalesChart(HashMap<String, Object> map) {
 		SalesChart salesChart = sqlSession.selectOne("manager.selectSalesChart", map);
 		return salesChart;
+	}
+
+	public ArrayList<Answer> answerPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.answerPageData", map);
+		return (ArrayList<Answer>) list;
+	}
+
+	public int answerCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("manager.answerCount", map);
+		return result;
+	}
+
+	public ArrayList<Question> qstPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.qstPageData", map);
+		return (ArrayList<Question>) list;
+	}
+	
+	public int qstCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("manager.qstCount", map);
+		return result;
+	}
+
+	public Question selectQst(int qstNo) {
+		Question qst = sqlSession.selectOne("manager.selectQst", qstNo);
+		return qst;
 	}
 	
 	

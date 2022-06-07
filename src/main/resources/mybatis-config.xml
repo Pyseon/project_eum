@@ -18,6 +18,7 @@
 		<typeAlias type="kr.or.eum.product.model.vo.Ideamarket" alias="idea"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Question" alias="q"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.Answer" alias="ans"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.FaQ" alias="faq"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Notice" alias="ntc"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Chart" alias="chart"/>

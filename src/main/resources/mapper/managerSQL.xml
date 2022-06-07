@@ -564,5 +564,59 @@
 		</choose>
 		from dual
 	</select>
+	<select id="answerPageData" parameterType="map" resultType="ans">
+		select * from
+		(select rownum as rnum, ans.* from
+		(select
+			ans_no as ansNo,
+			ans_title as ansTitle,
+			(select ans_state from question_tbl where answer_tbl.qst_no = question_tbl.qst_no) as ansState,
+			ans_date as ansDate
+			from answer_tbl
+		<if test="selectNum != 0">
+			where (select ans_state from question_tbl where answer_tbl.qst_no = question_tbl.qst_no) = #{selectNum}
+		</if>
+		order by ans_no desc) ans)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="answerCount" parameterType="map" resultType="int">
+		select count(*) from
+		answer_tbl
+		<if test="selectNum != 0">
+			where (select ans_state from question_tbl where answer_tbl.qst_no = question_tbl.qst_no) = #{selectNum}
+		</if>
+	</select>
 	
+	<select id="qstPageData" parameterType="map" resultType="q">
+		select * from
+		(select rownum as rnum, qst.* from
+		(select
+			qst_no as qstNo,
+			qst_title as qstTitle,
+			ans_state as ansState,
+			qst_date as qstDate
+			from question_tbl
+		<if test="selectNum != 0">
+			where ans_state = #{selectNum }
+		</if>
+		order by qst_no desc) qst)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="qstCount" parameterType="map" resultType="int">
+		select count(*) from
+		question_tbl
+		<if test="selectNum != 0">
+			where ans_state = #{selectNum }
+		</if>
+	</select>
+	<select id="selectQst" parameterType="int" resultType="q">
+		select
+			qst_no as qstNo,
+			(select member_Id from member_tbl m where question_tbl.member_no = m.member_no) as memberId,
+			qst_title as qstTitle,
+			qst_content as qstContent,
+			qst_date as qstDate
+			from question_tbl
+			where qst_no = #{value }
+	</select>
 </mapper>

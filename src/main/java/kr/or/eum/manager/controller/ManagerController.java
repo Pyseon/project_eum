@@ -19,6 +19,7 @@ import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
@@ -200,7 +201,29 @@ public class ManagerController {
 		return new Gson().toJson(salesTypeChart);
 	}
 	@RequestMapping(value = "/manaAnswer.do")
-	public String manaAnswer() {
-		return null;
+	public String manaAnswer(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaAnswer.do";
+		HashMap<String, Object> apd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", apd.get("answerList"));
+		model.addAttribute("pageNavi", apd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/managementAnswer";
+	}
+	@RequestMapping(value = "/manaQuestion.do")
+	public String manaQuestion(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaQuestion.do";
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", qpd.get("qstList"));
+		model.addAttribute("pageNavi", qpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/managementQuestion";
+	}
+	@RequestMapping(value = "/insertAnswerFrm.do")
+	public String insertAnswerFrm(int qstNo, Model model) {
+		Question qst = service.selectQst(qstNo);
+		model.addAttribute("qst", qst);
+		return "manager/insertAnswerFrm";
 	}
 }

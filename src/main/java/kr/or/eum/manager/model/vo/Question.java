@@ -11,9 +11,9 @@ public class Question {
 	private int qstNo;
 	private int memberNo;
 	private String qstTitle;
-	private long qstContent;
-	private String qstEmail;
+	private String qstContent;
 	private String qstDate;
-	private String qstFileName;
-	private String qstFilePath;
+	private int ansState;
+	
+	private String memberId;
 }

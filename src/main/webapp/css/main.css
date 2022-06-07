@@ -2669,6 +2669,12 @@ input[name=keyword]{
 	width: 50%;
 	float: left;
 }
+.questionBox{
+	border: 1px solid #3865f2;
+}
+.answerForm > h2{
+	float: left;
+}
 /*************************
 *******mypage CSS******
 **************************/

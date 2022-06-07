@@ -36,10 +36,10 @@
 	</update>
 		<!-- 재민 내 구매목록삭제 -->
 	  <update id ="DeleteMyproduct" parameterType="int">
-	 		 update into payment_tbl set
+	 		 update payment_tbl set
 	 		 pay_state = 3
 	 		 
-			where member_no=#{payNo}
+			where pay_no=#{payNo}
 			
 
 	  </update>

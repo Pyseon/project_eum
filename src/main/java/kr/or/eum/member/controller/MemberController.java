@@ -92,6 +92,7 @@ public class MemberController {
 		if(result>0) {
 			session.setAttribute("m", m);
 		}
+		System.out.println(m);
 		return "redirect:/";
 	}
 	//재민 1:1 문의내역 확인
@@ -118,8 +119,7 @@ public class MemberController {
 		ArrayList<ProductAndPayment> list = service.selectProductList(memberNo);
 		
 		model.addAttribute("list", list);
-		System.out.println(list);
-		System.out.println(memberNo+"memberNo");
+		
 		return "mypage/Myproduct";
 	}
 	//재민 찜내역
@@ -182,11 +182,13 @@ public class MemberController {
 		System.out.println(expertEmail);
 		return null;
 	}
-
+	//재민 주문취소
 	@RequestMapping(value="/DeleteMyproduct.do")
 	public String DeleteMyproduct(int payNo) {
 		int result = service.DeleteMyproduct(payNo);
-		return "redirect:/Myproduct";
+		
+		System.out.println(result);
+		return "redirect:/";
 	}
 	@RequestMapping(value="/Myproductdetail.do")
 	public String Myproductdetail(int payNo) {

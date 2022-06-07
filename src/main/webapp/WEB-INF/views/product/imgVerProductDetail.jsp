@@ -226,11 +226,11 @@
 								<div class="picture">
 									<a href="#"><img class="testimg" src="/img/member/${expertM.memberPicturePath }"></a>	<!-- 추후 프로필 수정 -->
 								</div>
-								<div class="expert-profile">
-									<div class="expert-profile-span">
+								<div class="expert-profile-wrap">
+									<div class="expert-profile">
 										<h3 class="expert-info">${expert.expertName }</h3>					
 									</div>	
-									<div class="expert-profile-span">
+									<div class="expert-profile">
 										<span class="material-icons icon-confirm confirm2">verified</span>
 									</div>	
 								</div><!-- expert-profile -->
@@ -240,7 +240,7 @@
 								</div><!-- info-wrap -->
 							</div><!-- right-second-box -->
 						</div><!-- single-sidebar-widget user-info-widget -->
-					</div> <!-- widget-wrap -->	
+					</div> <!-- widget-wrap -->		
 					
 					<div class="single-sidebar-widget">
 						<div class="right-third-box">

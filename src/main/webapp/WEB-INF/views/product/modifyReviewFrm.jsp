@@ -43,6 +43,9 @@
 						<input type="text" class="review-title" name="review-title" placeholder="제목을 입력해주세요.(60자 제한)" value="${r.reviewTitle }">
 						<textarea class="textarea" name="textarea" maxlength="300" placeholder="후기를 입력해주세요.(300자 제한)">${r.reviewContent }</textarea>
 					</div>
+					<div class="textCount-wrap">	
+						<span class="textCount">0</span> <span class="textTotal">/300</span>
+					</div>
 					<div class="submit-btn-wrap">
 						<button class="bc1 submit-btn" id="submit-btn" onclick="update()">제출</button>
 					</div>	
@@ -58,6 +61,21 @@
 
 
 	function update(){
+		
+		if($('#star-result2').text() == 0){
+	        alert("별점을 선택해주세요.");
+	        return false;
+	    }
+		if($('.review-title').val() == ""){
+	        alert("제목을 입력해주세요.");
+	        $('.review-title').focus();
+	        return false;
+	    }
+		if($('.textarea').val() == ""){
+	        alert("내용을 입력해주세요.");
+	        $('.textarea').focus();
+	        return false;
+	    }
 		
 		var reviewNo = $('.reviewNo').val();
 		var title = $('.review-title').val();
@@ -120,6 +138,14 @@
 		
 		$('.textarea').keyup(function() {
 			let content = $(this).val();
+			
+			// 글자수 세기
+		    if (content.length == 0 || content == '') {
+		    	$('.textCount').text('0');
+		    } else {
+		    	$('.textCount').text(content.length);
+		    }
+			
 			// 글자수 제한
 		    if(content.length > 200) {
 		    	// 200자 부터는 타이핑 되지 않도록

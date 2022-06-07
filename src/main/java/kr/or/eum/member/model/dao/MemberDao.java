@@ -98,6 +98,13 @@ public class MemberDao {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture2",payNo);
 		return expertPicture;
 	}
+
+	//윤지
+	public ExpertAndMember selectOneExpert(int reviewNo) {
+		ExpertAndMember expertM = sqlSession.selectOne("member.selectOneExpert",reviewNo);
+		return expertM;
+  }
+  
 	public ArrayList<Product> selectMyproject(int memberNo) {
 		List list = sqlSession.selectList("member.selectMyproject",memberNo); 
 		return (ArrayList<Product>)list;

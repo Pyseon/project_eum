@@ -419,6 +419,7 @@
 			}
 			
 			function putReviewList(prm) {
+				const memberNo = ${memberNo};
 				// 기존 페이지 리뷰 제거
 				$(".real-review").off().remove();
 				
@@ -432,10 +433,10 @@
 							</div>
 							<div class="info">
 								<div class="info-one">
-									<span class="nickname">\${item.memberNick}</span> 
+									<span class="nickname">\${item.memberNick}</span>
 									<div class="review-btn-2">
-										<a href="#">수정</a> <a href="#">삭제</a> <br>
-									</div>
+										<a href="/modifyReviewFrm.do?reviewNo=\${item.reviewNo}">수정</a> <a href="/deleteReview.do?reviewNo=\${item.reviewNo}">삭제</a> <br>
+									</div>										
 									\${getStarPoint(item.reviewStar)}
 									<div class="span-wrap">
 										<span class="text">|&nbsp;&nbsp;</span>

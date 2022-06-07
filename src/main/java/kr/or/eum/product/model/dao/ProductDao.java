@@ -186,8 +186,35 @@ public class ProductDao {
 		return result;
 	}
 
+	//윤지
 	public int insertReview(Review review) {
 		int result = sqlSession.insert("product.insertReview", review);
+		return result;
+	}
+	
+	//윤지
+	public Review selectReview(int reviewNo) {
+		Review review = sqlSession.selectOne("product.selectReview", reviewNo);
+		return review;
+	}
+	
+	//윤지
+	public Product selectProductName(int reviewNo) {
+		Product product = sqlSession.selectOne("product.selectProductName", reviewNo);
+		return product;
+	}
+	
+	//윤지
+	public int updateReview(Review review) {
+		int result = sqlSession.update("product.updateReview", review);
+		return result;
+	}
+	public int deleteReview(int reviewNo) {
+		int result = sqlSession.delete("product.deleteReview", reviewNo);
+		return result;
+	}
+	public int overlapCheckReview(int payNo) {
+		int result = sqlSession.selectOne("product.overlapCheck", payNo);
 		return result;
 	}
 

@@ -183,4 +183,19 @@
 		where 
 			pay.pay_no=#{payNo}
  	</select>
+ 	
+ 	<!-- 윤지 -->
+ 	<select id="selectOneExpert" parameterType="int" resultType="expertAndM">
+		select 
+			e.expert_name as expertName, 
+			m.member_picturepath as memberPicturePath
+        from product_tbl p
+        join review_tbl r
+        on p.product_no = r.product_no
+        join expert_tbl e
+        on p.expert_no = e.expert_no
+        join member_tbl m
+        on e.member_no = m.member_no
+        where review_no=#{reviewNo}
+	</select>
 </mapper>

@@ -540,9 +540,35 @@ public class ProductService {
 		return memberCheck;
 	}
 
+	//윤지
 	public int insertReview(Review review) {
 		return productDao.insertReview(review);
 	}
-	
+
+	//윤지
+	public HashMap<String, Object> selectReview(int reviewNo) {
+		Review review = productDao.selectReview(reviewNo);
+		Product product = productDao.selectProductName(reviewNo);
+		ExpertAndMember expertM = memberDao.selectOneExpert(reviewNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("review", review);
+		map.put("product", product);
+		map.put("expertM", expertM);
+		return map;
+	}
+
+	public int updateReview(Review review) {
+		return productDao.updateReview(review);
+	}
+
+	public int deleteReview(int reviewNo) {
+		return productDao.deleteReview(reviewNo);
+	}
+
+	public int overlapCheckReview(int payNo) {
+		return productDao.overlapCheckReview(payNo);
+	}
+
+
 
 }

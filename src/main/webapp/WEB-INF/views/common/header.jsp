@@ -146,7 +146,7 @@
                       </li>
                       <li><a href="#">비즈니스</a>
                       <ul role="menu" class="sub-menu2">
-                        <li><a href="#">회계사</a></li>
+                        <li><a href="/reviewFrm.do?payNo=41">회계사</a></li>
                         <li><a href="#">관세사</a></li>
                         <li><a href="#">번역/통역</a></li>
                         <li><a href="#">디자인</a></li>

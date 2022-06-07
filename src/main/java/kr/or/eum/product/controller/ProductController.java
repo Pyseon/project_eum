@@ -61,7 +61,23 @@ public class ProductController{
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
 		System.out.println("selPro : "+selPro);
- 
+		
+		HttpSession session = request.getSession(false);
+        Member member = null;
+        if(session != null) {
+            member = (Member)session.getAttribute("member");
+        }
+        if(member != null) {
+        	model.addAttribute("grade", member.getGrade());
+			model.addAttribute("memberNo", member.getMemberNo());
+			System.out.println("memberNo : "+member.getMemberNo());
+			System.out.println("grade : "+member.getGrade());
+
+		}else {
+			model.addAttribute("memberNo", 0);
+		}
+
+
 		return "product/ClassList";
 	}
 	@RequestMapping(value="/classWriterFrm.do")
@@ -144,18 +160,33 @@ public class ProductController{
 	}
 	
 	@RequestMapping(value="/ExpertList.do")
-	public String expertList(int reqPage, String selPro, Model model) {
+	public String expertList(int reqPage, String selPro, Model model, HttpServletRequest request) {
 		ProductPageData ppd = productService.selectExpertList(reqPage, selPro);
 		model.addAttribute("list",ppd.getList());
 		model.addAttribute("selPro", selPro);
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
 		System.out.println("selPro : "+selPro);
+		
+		HttpSession session = request.getSession(false);
+        Member member = null;
+        if(session != null) {
+            member = (Member)session.getAttribute("member");
+        }
+        if(member != null) {
+        	model.addAttribute("grade", member.getGrade());
+			model.addAttribute("memberNo", member.getMemberNo());
+			System.out.println("memberNo : "+member.getMemberNo());
+			System.out.println("grade : "+member.getGrade());
+
+		}else {
+			model.addAttribute("memberNo", 0);
+		}
 		return "product/ExpertList";
 	}
 	
 	@RequestMapping(value="/expertWriterFrm.do")
-	public String expertWriterFrm(HttpServletRequest request, Model model) {
+	public String expertWriterFrm(int reqPage, String selPro, Model model, HttpServletRequest request) {
 	HttpSession session = request.getSession(false);
     Member member = null;
     if(session != null) {

@@ -499,4 +499,70 @@
 		from dual
 	</select>
 	
+	<select id="selectMemberChart" parameterType="String" resultType="memberChart">
+		select
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '01' and substr(enrolldate,1,4) like #{value }) as janMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '02' and substr(enrolldate,1,4) like #{value }) as febMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '03' and substr(enrolldate,1,4) like #{value }) as marMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '04' and substr(enrolldate,1,4) like #{value }) as aprMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '05' and substr(enrolldate,1,4) like #{value }) as mayMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '06' and substr(enrolldate,1,4) like #{value }) as junMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '07' and substr(enrolldate,1,4) like #{value }) as julMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '08' and substr(enrolldate,1,4) like #{value }) as augMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '09' and substr(enrolldate,1,4) like #{value }) as sepMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '10' and substr(enrolldate,1,4) like #{value }) as octMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '11' and substr(enrolldate,1,4) like #{value }) as novMember,
+		(select count(*) from member_tbl where substr(enrolldate,6,2) like '12' and substr(enrolldate,1,4) like #{value }) as decMember
+		from dual
+	</select>
+	
+	<select id="selectSalesChart" parameterType="map" resultType="salesChart">
+		select
+		<choose>
+			<when test="salesType == 1">
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '01' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as janSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '02' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as febSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '03' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as marSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '04' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as aprSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '05' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as maySales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '06' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as junSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '07' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as julSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '08' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as augSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '09' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as sepSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '10' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as octSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '11' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as novSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '12' and substr(pay_date,1,2) like #{year} and (select product_type from product_tbl where payment_tbl.product_no = product_tbl.product_no) = #{productType}) as decSales
+			</when>
+			<when test="salesType == 2">
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '01' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as janSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '02' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as febSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '03' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as marSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '04' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as aprSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '05' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as maySales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '06' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as junSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '07' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as julSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '08' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as augSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '09' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as sepSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '10' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as octSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '11' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as novSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '12' and substr(pay_date,1,2) like #{year} and (select product_category from product_tbl where payment_tbl.product_no = product_tbl.product_no) like #{productCategory}) as decSales
+			</when>
+			<otherwise>
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '01' and substr(pay_date,1,2) like #{year}) as janSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '02' and substr(pay_date,1,2) like #{year}) as febSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '03' and substr(pay_date,1,2) like #{year}) as marSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '04' and substr(pay_date,1,2) like #{year}) as aprSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '05' and substr(pay_date,1,2) like #{year}) as maySales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '06' and substr(pay_date,1,2) like #{year}) as junSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '07' and substr(pay_date,1,2) like #{year}) as julSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '08' and substr(pay_date,1,2) like #{year}) as augSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '09' and substr(pay_date,1,2) like #{year}) as sepSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '10' and substr(pay_date,1,2) like #{year}) as octSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '11' and substr(pay_date,1,2) like #{year}) as novSales,
+				(select sum(PAYMENT) from payment_tbl where substr(pay_date,4,2) like '12' and substr(pay_date,1,2) like #{year}) as decSales
+			</otherwise>
+		</choose>
+		from dual
+	</select>
+	
 </mapper>

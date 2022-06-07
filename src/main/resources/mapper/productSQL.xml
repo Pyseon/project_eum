@@ -106,9 +106,10 @@
 	<select id="selectTotalCount" resultType="int" parameterType="map">
 		select count(*) from product_tbl
 		<if test="!selPro.equals('전체')">
-		 	where product_Category = #{selPro}
+		 	where product_type=1 and product_Category = #{selPro}
 		</if>
   </select>
+  
   <insert id="classWrite" parameterType="pro">
   		insert into
   			product_tbl values(

@@ -213,11 +213,26 @@ li{
           </table>
    </div>
    <div class="container">
-   	<button type="button" class="writeButton" id="writeButton" onclick="location.href='/expertWriterFrm.do'">등록하기</button>
+	<c:if test="${grade eq null}">
+		<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 0}">
+		<button type="button" class="writeButton" id="writeButton" onclick="manager();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 1}">
+		<button type="button" class="writeButton" id="writeButton" onclick="expertNeed();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 2}">
+		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 3}">
+		<button type="button" class="writeButton" id="writeButton" onclick="blacklist();">등록하기</button>
+	</c:if>
+	
    	<div class="posting-wrap">
    		<c:forEach items="${list }" var="c" varStatus="i">
    			<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
-   				<img src="./img/product/ExpertList/${c.productImgPath }">
+   				<img src="./img/product/ExpertList">
    				<div class="posting-connect">
    					<ul>
    						<li>
@@ -293,6 +308,26 @@ li{
    	${pageNavi }
    </div>
    <script>
+   function loginNeed(){
+		alert('로그인 후 이용해주세요.');
+		location.href="/loginFrm.do";
+		}
+		
+		function manager(){
+			alert('관리인은 전문가상담을 등록할 수 없습니다.');
+			location.href="/ExpertList.do?reqPage=1&selPro=전체";
+			}
+		
+		function expertNeed(){
+			alert('전문가 인증을 받고 오세요.');
+			location.href="/ExpertList.do?reqPage=1&selPro=전체";
+		}
+		function blacklist(){
+			alert('블랙리스트 회원은 등록할 수 없습니다.');
+			location.href="/ExpertList.do?reqPage=1&selPro=전체";
+		}
+   
+   
 	$(function(){
 		var selPro = '${selPro}';
 		console.log(selPro);

@@ -186,5 +186,10 @@ public class ProductDao {
 		return result;
 	}
 
+	public int insertReview(Review review) {
+		int result = sqlSession.insert("product.insertReview", review);
+		return result;
+	}
+
 
 }

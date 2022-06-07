@@ -141,7 +141,7 @@
                         <li><a href="/expertCounsel.do?payNo=25">변리사</a></li>
                         <li><a href="/imgVerProductDetail.do?productNo=19&expertNo=62">법무사</a></li>
                         <li><a href="/expertCounsel.do?payNo=28">행정사</a></li>
-                        <li><a href="#">세무사</a></li>
+                        <li><a href="/reviewFrm.do?payNo=25">세무사</a></li>
                         </ul>
                       </li>
                       <li><a href="#">비즈니스</a>

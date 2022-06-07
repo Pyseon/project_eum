@@ -34,7 +34,6 @@ import com.google.gson.JsonObject;
 
 import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Expert;
-import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Product;
@@ -336,7 +335,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, member);
 		model.addAttribute("p", pd.getProduct());
 		model.addAttribute("productQNA", pd.getProductQNA());
-		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
 		model.addAttribute("expert", pd.getExpert());
 		model.addAttribute("expertM", pd.getExpertAndMember());
 		model.addAttribute("reviewAvr", pd.getReviewAvr());
@@ -354,7 +352,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		model.addAttribute("wishMemberCheck", pd.getWishMemberCheck());
 		System.out.println("--------------------------------------");
 		System.out.println("product : "+pd.getProduct());
-		System.out.println("expertAndCom : "+pd.getExpertAndCompany());
 		System.out.println("expert : "+pd.getExpert());
 		System.out.println("expertM : "+pd.getExpertAndMember());
 		System.out.println("reviewRnum : "+pd.getReviewRnum());
@@ -383,7 +380,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, member);
 		model.addAttribute("p", pd.getProduct());
 		model.addAttribute("productQNA", pd.getProductQNA());
-		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
 		model.addAttribute("expert", pd.getExpert());
 		model.addAttribute("expertM", pd.getExpertAndMember());
 		model.addAttribute("reviewAvr", pd.getReviewAvr());
@@ -457,7 +453,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		HashMap<String, Object> map = productService.selectProductAndExpertAndPayment(payNo);
 		model.addAttribute("p", map.get("product"));
 		model.addAttribute("e", map.get("expert"));
-		model.addAttribute("ec", map.get("expertC"));
 		model.addAttribute("em", map.get("expertM"));
 		model.addAttribute("pay", map.get("payment"));
 		model.addAttribute("r", map.get("review"));
@@ -469,7 +464,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		System.out.println("Counsel_member : "+compare.get("member"));
 		System.out.println("Counsel_product : "+map.get("product"));
 		System.out.println("Counsel_expert : "+map.get("expert"));
-		System.out.println("Counsel_expertC : "+map.get("expertC"));
 		System.out.println("Counsel_expertM : "+map.get("expertM"));
 		System.out.println("Counsel_payment : "+map.get("payment"));
 		System.out.println("Counsel_review : "+map.get("review"));
@@ -488,12 +482,26 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	}
 	
 	//윤지
-	@RequestMapping(value = "/review.do")
-	public String insertReview(int payNo, HttpServletRequest request) {
-		//HashMap<String, Object> review = productService.insertReview(payNo, request);
+	@RequestMapping(value = "/reviewFrm.do")
+	public String reviewFrm(Model model, int payNo, HttpServletRequest request) {
+		Boolean compare = productService.reviewMemberCompare(payNo, request);
+		if(compare == false) {
+			return "product/paymentError";
+		}
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");
+		}	
+		HashMap<String, Object> map = productService.reviewFrm(payNo);
+		model.addAttribute("pro", map.get("product"));
+		model.addAttribute("e", map.get("expert"));
+		model.addAttribute("em", map.get("expertM"));
+		model.addAttribute("pay", map.get("payment"));
+		model.addAttribute("m", member);
 		return "product/reviewFrm";
 	}
-  
+	
 	//대권 구매성공
 	@RequestMapping(value="/purchaseSuccess.do")
 	public String purchaseSuccess() {
@@ -505,6 +513,14 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		return "product/purchaseFailed";
 	}
 	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "insertReview.do")
+	public String insertReview(Review review) {
+		System.out.println("insertReview : "+review);
+		int result = productService.insertReview(review);
+		return new Gson().toJson(result);
+	}
 	
 }
 

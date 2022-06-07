@@ -78,75 +78,21 @@
 									<table class="detail-content tbl" border="1">
 										<tr>
 											<th>대표자</th>
-											<td>
-											<c:choose>
-												<c:when test="${empty expertAndCom.compName}">
-													${expert.expertName}
-												</c:when>
-												<c:otherwise>
-													${expertAndCom.compRepName}
-												</c:otherwise>
-											</c:choose>
-											</td>
+											<td>${expert.expertName}</td>
 											<th>상호명</th>
-											<td>
-												<c:choose>
-												<c:when test="${empty expertAndCom.compName}">
-													-
-												</c:when>
-												<c:otherwise>
-													${expertAndCom.compName}
-												</c:otherwise>
-												</c:choose>
-											</td>
+											<td>-</td>
 										</tr>
 										<tr>
 											<th>사업장주소</th>
-											<td>
-												<c:choose>
-												<c:when test="${empty expertAndCom.compName}">
-													${p.productAddr}
-												</c:when>
-												<c:otherwise>
-													${expertAndCom.compAddr}
-												</c:otherwise>
-												</c:choose>
-											</td>
+											<td>${p.productAddr}</td>
 											<th>사업자등록번호</th>
-											<td>
-												<c:choose>
-												<c:when test="${empty expertAndCom.compName}">
-													-
-												</c:when>
-												<c:otherwise>
-													${expertAndCom.compRegno}
-												</c:otherwise>
-												</c:choose>
-											</td>
+											<td>-</td>
 										</tr>
 										<tr>
 											<th>연락처</th>
-											<td>
-												<c:choose>
-												<c:when test="${empty expertAndCom.compName}">
-													${expert.expertPhone}
-												</c:when>
-												<c:otherwise>
-													${expertAndCom.compPhone}
-												</c:otherwise>
-												</c:choose>
-											</td>
+											<td>${expert.expertPhone}</td>
 											<th>이메일</th>
-											<td>
-												<c:choose>
-												<c:when test="${empty expertAndCom.compName}">
-													${expert.expertEmail}
-												</c:when>
-												<c:otherwise>
-													${expertAndCom.compEmail}
-												</c:otherwise>
-												</c:choose>
-											</td>
+											<td>${expert.expertEmail}</td>
 										</tr>
 									</table>
 								</div>
@@ -297,19 +243,11 @@
 								<div class="picture">
 									<a href="#"><img class="testimg" src="/img/member/${expertM.memberPicturePath }"></a>	<!-- 추후 프로필 수정 -->
 								</div>
-								<div class="expert-profile">
-									<div class="expert-profile-span"><h3 class="expert-info">
-										<c:choose>
-											<c:when test="${empty expertAndCom.compName}">
-												${expert.expertName }
-												</c:when>
-												<c:otherwise>
-												${expertAndCom.compName}
-												</c:otherwise>
-											</c:choose>
-										</h3>					
+								<div class="expert-profile-wrap">
+									<div class="expert-profile">
+										<h3 class="expert-info">${expert.expertName }</h3>					
 									</div>	
-									<div class="expert-profile-span">
+									<div class="expert-profile">
 										<span class="material-icons icon-confirm confirm2">verified</span>
 									</div>	
 								</div><!-- expert-profile -->

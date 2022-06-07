@@ -17,8 +17,10 @@
 	<div class="chatting">
 		<div class="col-lg-8">
 			<div class="messageArea">
-				<%--<p class='date hr-sect'>${chat.chatDate }</p> 날짜문제  --%>	
+				<%--<c:set></c:set> 여기에 첫 날짜를 넣어놓고 날짜가 다르면 출력, 아니면 출력 안 함 --%>
 				<c:forEach items="${chat}" var="chat" varStatus="status">
+				<%--<c:if test=""></c:if> --%>
+				<%--<p class='date hr-sect'>${chat.chatDate }</p> --%>	
 					<c:if test="${chat.memberNo eq m.memberNo }">
 						<div class="chat-content-wrap sub-right">
 							<div class="content-sub-wrap">
@@ -114,9 +116,18 @@
 										<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox" checked disabled></div>
 										<div class="check-agree">위 내용을 확인하셨습니까?</div>
 									</div>
-									<div class="submit-wrap">
-									<button type="button" class="bc1 submit-btn" id="reviewBtn" onclick="('/review.do?payNo=${pay.payNo}')">후기작성</button>
-									</div>
+									<c:choose>
+										<c:when test="${m.grade eq 1 }">
+											<div class="submit-wrap">
+											<button type="button" class="bc1 submit-btn" id="startBtn" onclick="location.href='/'">홈페이지</button>
+											</div>
+										</c:when>
+										<c:when test="${m.grade eq 2 }">
+											<div class="submit-wrap">
+											<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/reviewFrm.do?payNo=${pay.payNo}')">후기작성</button>
+											</div>										
+										</c:when>
+									</c:choose>
 								</c:when>
 								<c:otherwise>
 									<div class="check-box-allwrap">
@@ -124,13 +135,12 @@
 										<div class="check-agree">위 내용을 확인하셨습니까?</div>
 									</div>
 									<div class="submit-wrap">
-										<button type="button" class="bc1 submit-btn" id="mypageBtn" onclick="('/Myproduct.do?memberNo=${m.memberNo}')">마이페이지</button>
+										<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/Myproduct.do?memberNo=${m.memberNo}')">마이페이지</button>
 									</div>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
 					</c:choose>
-									<!-- ajax이용해서 innserText로 실시간 바꿔주기.....+url경로도 -->
 				</div><!-- widget-wrap title-wrap -->
 				<div class="widget-wrap">
 					<div class="expert-info">
@@ -194,20 +204,24 @@
 				}else {
 				    $('.checkbox').attr('disabled',true);	
 				    appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
-				    $('#timeZone').html("<span id='min'>1</span> : <span id='sec'>00</span>");
+				    $('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
 					intervalId = window.setInterval(function(){
 						timeCount();
-					},1000);
-					//${p.productOption }
+					},10);
+					//${p.productOption } //1000
 				}
 			}else if($('#startBtn').text() == '후기작성') {
 				$('.checkbox').attr('checked', 'checked');
 				$('.checkbox').attr('disabled',true);
-				location.href='/review.do?payNo=${pay.payNo}';
-			}else { //왜 attr도 prop도 안 됨?
+				location.href='/reviewFrm.do?payNo=${pay.payNo}';
+			}else if($('#startBtn').text() == '마이페이지') { 
 				$('.checkbox').attr('checked', 'checked');
 				$('.checkbox').attr('disabled',true);
 				location.href='/Myproduct.do?memberNo=${m.memberNo}';
+			}else {
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/';
 			}
 		});	
 		
@@ -227,7 +241,11 @@
 						url : "/updatePaymentState.do",
 						data : {counselNo:counselNo},
 						success : function(data) {
-							$('#startBtn').text('후기작성');
+							if(${m.grade eq 2}) {
+								$('#startBtn').text('후기작성');								
+							}else if(${m.grade eq 1}) {
+								$('#startBtn').text('홈페이지');
+							}
 							$('#sendMsg').attr("placeholder",'[안내] 상담이 종료되어 입력이 불가합니다. 상담에 문제가 있는 경우 고객센터로 문의해주세요.');
 							$('#file').attr("type","text");
 						},
@@ -308,7 +326,7 @@
 						 }; 
 			ws.send(JSON.stringify(data)); //data객체를 문자열로 변환해서 웹소켓 서버로 전송
 			appendChat("<p class='date hr-sect'>"+getToday()+"</p>"); 
-			appendChat("<p class='check-in'>대화가 시작되었습니다.</p>");
+			appendChat("<p class='check-in'>대화가 시작되었습니다.</p>"); //이전대화를 여기서 가져오는 방법도 있음
 		}
 		
 		//서버에서 화면으로 데이터를 전송 시 처리할 함수 

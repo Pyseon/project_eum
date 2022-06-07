@@ -12,9 +12,8 @@ public class Answer {
 	private int qstNo;
 	private int memberNo;
 	private String ansTitle;
-	private long ansContent;
+	private String ansContent;
 	private String ansEmail;
 	private String ansDate;
-	private String ansFileName;
-	private String ansFilePath;
+	private int ansState;
 }

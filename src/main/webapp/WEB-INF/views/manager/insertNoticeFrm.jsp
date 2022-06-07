@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
 		<h1>>공지사항 등록페이지</h1>

@@ -19,7 +19,7 @@
 			<li><a href="/manaPayment.do?reqPage=1&selectNum=0">주문관리</a></li>
 			<li><a href="#">전문가승인</a></li>
 			<li><a href="/manaReport.do?reqPage=1&selectNum=0">신고모니터링</a></li>
-			<li><a href="#">1:1상담</a></li>
+			<li><a href="/manaQuestion.do?reqPage=1&selectNum=0">1:1상담</a></li>
 			<li><a href="/manaNotice.do?reqPage=1">공지사항</a></li>
 			<li><a href="/manaFAQ.do?reqPage=1&selectNum=0">FAQ</a></li>
 			<li><a href="/manaChart.do">통계</a></li>

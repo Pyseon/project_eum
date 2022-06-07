@@ -7,10 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.eum.manager.model.dao.ManagerDao;
+import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
@@ -72,7 +74,7 @@ public class ManagerService {
 				totalCount = dao.searchReportCount(pageMap);
 			}
 			pageData.put("reportList", reportList);
-			
+			break;
 		case "manaFAQ.do":
 			ArrayList<FaQ> FAQList = new ArrayList<FaQ>();
 			if(searchType == null) {
@@ -85,7 +87,7 @@ public class ManagerService {
 				totalCount = dao.searchFAQCount(pageMap);
 			}
 			pageData.put("FAQList", FAQList);
-			
+			break;
 		case "manaNotice.do":
 			ArrayList<Notice> noticeList = new ArrayList<Notice>();
 			if(searchType == null) {
@@ -98,6 +100,19 @@ public class ManagerService {
 				totalCount = dao.searchNoticeCount(pageMap);
 			}
 			pageData.put("noticeList", noticeList);
+			break;
+		case "manaAnswer.do":
+			ArrayList<Answer> answerList = new ArrayList<Answer>();
+			answerList = dao.answerPageData(pageMap);
+			totalCount = dao.answerCount(pageMap);
+			pageData.put("answerList", answerList);
+			break;
+		case "manaQuestion.do":
+			ArrayList<Question> qstList = new ArrayList<Question>();
+			qstList = dao.qstPageData(pageMap);
+			totalCount = dao.qstCount(pageMap);
+			pageData.put("qstList", qstList);
+			break;
 		}
 		
 		int totalPage = 0;
@@ -304,6 +319,10 @@ public class ManagerService {
 			salesCharts.add(dao.selectSalesChart(map));	
 		}
 		return salesCharts;
+	}
+
+	public Question selectQst(int qstNo) {
+		return dao.selectQst(qstNo);
 	}
 	
 	

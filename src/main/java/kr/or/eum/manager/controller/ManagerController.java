@@ -10,11 +10,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.eum.manager.model.service.ManagerService;
 import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
+import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -181,5 +186,21 @@ public class ManagerController {
 		model.addAttribute("chart", chart);
 		return "manager/managementChart";
 	}
+	@ResponseBody
+	@RequestMapping(value = "/memberChart.do", produces = "application/json;charset=utf-8")
+	public String memberChart(String year) {
+		MemberChart memberChart = service.selectMemberChart(year);
+		return new Gson().toJson(memberChart);
+	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/salesChart.do", produces = "application/json;charset=utf-8")
+	public String salesTypeChart(String year, int salesType) {
+		ArrayList<SalesChart> salesTypeChart = service.selectSalesTypeChart(year, salesType);
+		return new Gson().toJson(salesTypeChart);
+	}
+	@RequestMapping(value = "/manaAnswer.do")
+	public String manaAnswer() {
+		return null;
+	}
 }

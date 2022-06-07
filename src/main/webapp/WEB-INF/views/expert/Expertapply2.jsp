@@ -56,15 +56,21 @@
 				<input type="text" name="expertIssuer" placeholder="발급기관">
 				<input type="text" name="expertDate" placeholder="취득일시">
 			</li>
+			<li>
+				<label>자격증사본*</label>
+				<input type="text" name="expertfile" placeholder="최대 MB 이하 첨부가능 jpg,png,pdf 지원">
+			</li>
+			<label><input type="checkbox" name = "expert_check4">입력한 정보는 (이음) 내 프로필 공개 목적으로 하며, 탈퇴 시에는 바로 폐기됩니다.</label>
 			
 			
 		</ul>
 		<div>
-		
+			<button class="btn bc1 bs5" onclick="location.href='/Expertapply.do'">이전</button>
+			<button class="btn bc1 bs5" onclick="location.href='/Expertapply3.do'">다음</button>
+			<input type="submit" value="다음">
 	</div>
 </div>
-		<a href="/Expertapply.do">이전</a>
-		<input type="submit" value="다음">
+		
 	</form>
 </body>
 </html>

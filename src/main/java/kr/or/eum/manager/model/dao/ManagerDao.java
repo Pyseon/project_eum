@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.member.model.vo.Member;
@@ -203,6 +204,11 @@ public class ManagerDao {
 	public int updateNotice(HashMap<String, Object> map) {
 		int result = sqlSession.update("manager.updateNotice", map);
 		return result;
+	}
+
+	public Chart selectChart() {
+		Chart chart = sqlSession.selectOne("manager.selectChart");
+		return chart;
 	}
 	
 	

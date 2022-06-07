@@ -44,6 +44,7 @@ import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.product.model.vo.ReviewPageData;
 import kr.or.eum.product.model.vo.ProReviewMember;
+import kr.or.eum.product.model.vo.Counsel;
 import kr.or.eum.product.model.vo.Payment;
 
 @Controller
@@ -401,7 +402,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		return "product/imgVerProductDetail";
 	}
 	
-	
 	//윤지
 	@ResponseBody
 	@RequestMapping(value = "/review.do", produces = "application/json;charset=utf-8")
@@ -431,8 +431,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		
 	}
 	
-	
-	
 	//윤지
 	@ResponseBody
 	@RequestMapping(value = "/deleteWish.do", produces = "application/json;charset=utf-8")
@@ -448,25 +446,63 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	
 	//윤지
 	@RequestMapping(value = "/expertCounsel.do")
-	public String expertCounsel(Model model, int productNo, int expertNo, HttpServletRequest request) {
-		HttpSession session = request.getSession(false);
-		Member member = null;
-		if(session != null) {
-			member = (Member)session.getAttribute("member");			
+	public String expertCounsel(Model model, int payNo, HttpServletRequest request) {
+		HashMap<String, Object> compare = productService.compareMemberNo(payNo, request);
+		System.out.println(compare.get("expertTrue"));
+		System.out.println(compare.get("memberTrue"));
+		if(compare.get("expertTrue").equals(false) && compare.get("memberTrue").equals(false)) {
+			return "product/paymentError";
 		}
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map = productService.selectProductAndExpert(productNo, expertNo);
+		model.addAttribute("m", compare.get("member"));
+		HashMap<String, Object> map = productService.selectProductAndExpertAndPayment(payNo);
 		model.addAttribute("p", map.get("product"));
 		model.addAttribute("e", map.get("expert"));
 		model.addAttribute("ec", map.get("expertC"));
 		model.addAttribute("em", map.get("expertM"));
-		model.addAttribute("m", member);
+		model.addAttribute("pay", map.get("payment"));
+		model.addAttribute("r", map.get("review"));
+		model.addAttribute("c", map.get("counsel"));
+		model.addAttribute("chat", map.get("chatList"));		
+		if(!map.get("paymentState").equals(1) && !map.get("paymentState").equals(2)) {
+			return "product/paymentError";
+		}
+		System.out.println("Counsel_member : "+compare.get("member"));
 		System.out.println("Counsel_product : "+map.get("product"));
 		System.out.println("Counsel_expert : "+map.get("expert"));
 		System.out.println("Counsel_expertC : "+map.get("expertC"));
 		System.out.println("Counsel_expertM : "+map.get("expertM"));
-		System.out.println("counsel_member : "+member);
+		System.out.println("Counsel_payment : "+map.get("payment"));
+		System.out.println("Counsel_review : "+map.get("review"));
+		System.out.println("Counsel_counsel : "+map.get("counsel"));
+		System.out.println("Counsel_chat : "+map.get("chatList"));
+		
 		return "product/expertCounsel";
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "updatePaymentState.do")
+	public String updatePaymentState(int counselNo) {
+		int result = productService.updatePaymentState(counselNo);
+		return new Gson().toJson(result);
+	}
+	
+	//윤지
+	@RequestMapping(value = "/review.do")
+	public String insertReview(int payNo, HttpServletRequest request) {
+		//HashMap<String, Object> review = productService.insertReview(payNo, request);
+		return "product/reviewFrm";
+	}
+  
+	//대권 구매성공
+	@RequestMapping(value="/purchaseSuccess.do")
+	public String purchaseSuccess() {
+		return "product/purchaseSuccess";
+	}
+	//대권 구매실패
+	@RequestMapping(value="/purchaseFailed.do")
+	public String purchaseFailed() {
+		return "product/purchaseFailed";
 	}
 	
 	

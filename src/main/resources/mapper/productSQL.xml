@@ -187,8 +187,8 @@
 			product_no as productNo
 		from (select rownum,n.* from(select * from review_tbl order by review_no desc)n) 
 		where rownum between #{start} and #{end} and product_no=#{productNo}
-
 	</select>
+	
 	<!-- 윤지 -->
 	<select id="selectReviewCount" parameterType="int" resultType="int">
 		select 
@@ -196,6 +196,7 @@
 		from review_tbl
 		where product_no=#{productNo}
 	</select>
+	
 	<!-- 윤지 -->
 	<select id="selectReviewStar" parameterType="int" resultType="double">
 		select 
@@ -209,6 +210,7 @@
 		on pay.pay_no = r.pay_no
 		where pro.product_no = #{productNo}
 	</select>
+	
 	<!-- 윤지 -->
 	<select id="selectPaymentExpertNoCount" parameterType="int" resultType="int">
 		select 
@@ -216,6 +218,7 @@
 		from payment_tbl 
 		where product_no=#{productNo}
 	</select>
+	
 	<!-- 윤지 -->
 	<select id="selectWishList" resultType="productWish">
  		select 
@@ -232,11 +235,12 @@
 				from product_tbl p order by wishCount desc)n) 
 		where rnum between 1 and 10
  	</select> 
+ 	
  	<!-- 윤지 -->
 	<select id="selectReviewList" parameterType="map" resultType="ProReviewMember">
-		SELECT *
-		FROM 
-			( SELECT
+		select *
+		from 
+			(select
 				rownum as rnum, 
 				r.review_star as reviewStar,
 				m.member_no as memberNo,
@@ -246,18 +250,116 @@
 				m.member_nick as memberNick,
 				m.member_picturename as memberPictureName,
 				m.member_picturepath as memberPicturePath
-			FROM REVIEW_TBL R
-			JOIN MEMBER_TBL M
-			ON R.MEMBER_NO = M.MEMBER_NO
-			WHERE R.product_no = #{productNo}
-			ORDER BY R.REVIEW_NO DESC )
+			from review_tbl r
+			join member_tbl m
+			on r.member_no = m.member_no
+			where r.product_no = #{productNo}
+			order by r.review_no desc)
 		WHERE rnum between #{start} and #{end}
 	</select>
 	
+	<!-- 윤지 -->
+	<select id="selectPaymentState" parameterType="int" resultType="pay">
+		select 
+			pay_no as payNo, 
+			member_no as memberNo, 
+			product_no as productNo, 
+			pay_state as payState
+		from payment_tbl 
+		where pay_no=#{payNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<select id="selectReviewUploadCheck" parameterType="int" resultType="int">
+		select count(*)as cnt from review_tbl where pay_no=#{payNo}
+	</select>
+	
+	<!-- 윤지-->
+	<insert id="insertChat" parameterType="map">
+		insert into chat_tbl values(chat_seq.nextval, #{counselNo}, #{memberNo}, #{msg}, to_char(sysdate,'yyyy-mm-dd'), to_char(sysdate,'hh24:mi'),1)
+	</insert>
+	
+	<!-- 윤지 -->
+	<select id="selectOneProduct2" parameterType="int" resultType="pro">
+		select
+			pro.product_no as productNo,
+			product_type as productType,
+			product_title as productTitle,
+	        product_Category as productCategory,
+			product_intro as productIntro,
+			product_tag as productTag,
+			product_content as productContent,
+			cost,
+			product_qst as productQst,
+			product_ans as productAns,
+			product_addr as productAddr,
+			sale,
+			product_option as productOption,
+			product_imgpath as productImgPath
+		from product_tbl pro 
+        join payment_tbl pay
+        on pro.product_no = pay.product_no
+        where pay.pay_no=#{payNo}
+	</select>
+  
+  	<!-- 윤지 -->
+	<select id="selectCounsel" parameterType="int" resultType="counsel">
+		select 
+			counsel_no as counselNo, 
+			member_no as memberNo, 
+			expert_no as expertNo, 
+			pay_no as payNo, 
+			limit_time as limitTime 
+		from counsel_tbl 
+		where pay_no=#{payNo}
+	</select>
+	
+  	<!-- 윤지 -->
+	<select id="selectChat" parameterType="int" resultType="chat">
+		select 
+			chat.chat_no as chatNo,
+	        chat.counsel_no as counselNo,
+	        chat.member_no as memberNo,
+	        chat.chat_content as chatContent,
+	        chat.chat_date as chatDate,
+	        chat.chat_time as chatTime,
+	        chat.chat_readcheck as chatReadcheck
+        from chat_tbl chat
+        join counsel_tbl counsel
+        on chat.counsel_no = counsel.counsel_no
+        join payment_tbl p
+        on counsel.pay_no = p.pay_no
+        where counsel.pay_no=#{payNo} order by chat_no asc       
+  	</select>
+
 	<select id="selectExpertNo" parameterType="int" resultType="expert">
 		select expert_no as expertNo
 		from expert_tbl where member_no=#{memberNo}
 	</select>
 	
+
+	<!-- 윤지 -->
+	<update id="updateReadCheck" parameterType="int">
+		update chat_tbl set chat_readcheck=0 where counsel_no=#{counselNo} and member_no=#{memberNo} and chat_readcheck=1
+	</update>
+	
+	<!-- 윤지 -->
+	<select id="selectPayment" parameterType="int" resultType="pay">
+    
+		select 
+			c.counsel_no as counselNo, 
+			c.member_no as memberNo, 
+			c.expert_no as expertNo, 
+			p.pay_no as payNo, 
+			p.pay_state as payState
+        from counsel_tbl c
+        join payment_tbl p
+        on c.pay_no = p.pay_no
+        where counsel_no=#{counselNo}
+	</select>
+	<update id="updatePaymentState" parameterType="int">
+		update payment_tbl set pay_state=2 where pay_no=#{payNo}
+	</update>
+
 </mapper>
 	

@@ -20,6 +20,7 @@
 		<typeAlias type="kr.or.eum.manager.model.vo.Question" alias="q"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.FaQ" alias="faq"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Notice" alias="ntc"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.Chart" alias="chart"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Expert" alias="expert"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Review" alias="review"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.member.model.vo.ExpertAndCompany" alias="expertAndCom"/> <!-- 윤지 -->
@@ -29,6 +30,8 @@
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndWishList" alias="productWish"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.ProReviewMember" alias="ProReviewMember"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.wishlist.model.vo.Wishlist" alias="wish"/> <!-- 윤지 -->
+		<typeAlias type="kr.or.eum.product.model.vo.Counsel" alias="counsel"/> <!-- 윤지 -->
+		<typeAlias type="kr.or.eum.product.model.vo.Chat" alias="chat"/> <!-- 윤지 -->
 	</typeAliases>
 	<typeHandlers>
         <typeHandler handler="kr.or.eum.LongHandler" javaType="String" jdbcType="LONGVARCHAR"/>

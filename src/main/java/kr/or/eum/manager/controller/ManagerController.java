@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.manager.model.service.ManagerService;
+import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.member.model.vo.Member;
@@ -26,7 +27,6 @@ public class ManagerController {
 	@RequestMapping(value = "/manaMember.do")
 	public String manaMember(int reqPage, int selectNum, String searchType, String keyword, Model model) {
 		String wherePage = "manaMember.do";
-		//MemberPageData mpd = service.MemberList(reqPage, selMem, searchType, keyword);
 		HashMap<String, Object> mpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", mpd.get("memberList"));
 		model.addAttribute("pageNavi", mpd.get("pageNavi"));
@@ -174,6 +174,12 @@ public class ManagerController {
 	public String updateNotice(int noticeNo, String noticeTitle, String noticeContent) {
 		int result = service.updateNotice(noticeNo, noticeTitle, noticeContent);
 		return "redirect:/manaNotice.do?reqPage=1";
+	}
+	@RequestMapping(value = "/manaChart.do")
+	public String manaChart(Model model) {
+		Chart chart = service.selectChart();
+		model.addAttribute("chart", chart);
+		return "manager/managementChart";
 	}
 	
 }

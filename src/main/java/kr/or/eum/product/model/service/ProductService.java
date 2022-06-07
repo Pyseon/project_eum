@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.dao.ProductDao;
+import kr.or.eum.product.model.vo.Chat;
+import kr.or.eum.product.model.vo.Counsel;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductPageData;
@@ -429,6 +432,7 @@ public class ProductService {
 		return productDao.insertWish(map);
 	}
 	
+	//윤지
 	public int deleteWish(int productNo, int memberNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("productNo", productNo);
@@ -436,20 +440,32 @@ public class ProductService {
 		return productDao.deletetWish(map);
 	}
 
+	//윤지
 	public int afterWishCount(int productNo) {
 		return productDao.selectwish(productNo);
 	}
 
-	public HashMap<String, Object> selectProductAndExpert(int productNo, int expertNo) {
-		Product product = productDao.selectOneProduct(productNo);
-		Expert expert = memberDao.selectOneExpertOnly(expertNo);
-		ExpertAndCompany expertAndCom = memberDao.selectOneExpert(expertNo);
-		ExpertAndMember expertM = memberDao.selectOneExpertPicture(expertNo);
+	//윤지
+	public HashMap<String, Object> selectProductAndExpertAndPayment(int payNo) {
+		Product product = productDao.selectOneProduct2(payNo);
+		ExpertAndCompany expertAndCom = memberDao.selectOneExpert2(payNo);
+		Expert expert = memberDao.selectOneExpertOnly2(payNo);
+		ExpertAndMember expertM = memberDao.selectOneExpertPicture2(payNo);
+		Payment payment = productDao.selectPaymentState(payNo);
+		Counsel counsel = productDao.selectCounsel(payNo);
+		int paymentState = payment.getPayState();
+		int reviewUploadCheck = productDao.selectReviewUploadCheck(payNo);
+		ArrayList<Chat> chatList = productDao.selectChat(payNo);
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("product", product);
 		map.put("expert",expert);
 		map.put("expertC",expertAndCom);
 		map.put("expertM",expertM);
+		map.put("payment",payment);
+		map.put("paymentState",paymentState);
+		map.put("review",reviewUploadCheck);
+		map.put("counsel",counsel);
+		map.put("chatList", chatList);
 		return map;
 	}
 
@@ -457,11 +473,63 @@ public class ProductService {
 		return productDao.selectExpertNo(memberNo);
 	}
 
+	//윤지
+	public int insertChat(String msg, String memberNo, String counselNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("msg", msg);
+		map.put("memberNo", memberNo);
+		map.put("counselNo",counselNo);
+		return productDao.insertChat(map);
+	}
 
+
+	//윤지
+	public HashMap<String, Object> compareMemberNo(int payNo, HttpServletRequest request) {
+		Expert expert = memberDao.selectOneExpertOnly2(payNo);
+		Payment payment = productDao.selectPaymentState(payNo);
+		System.out.println("payment : "+payment);
+		HashMap<String, Object> compare = new HashMap<String, Object>();
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");	
+			System.out.println("member : "+member);
+			compare.put("member", member);
+			boolean expertNoCheck = false;
+			boolean paymentMemberNoCheck = false;
+			if(member.getMemberNo() == expert.getMemberNo()) {
+				expertNoCheck = true;
+			} 
+			if(member.getMemberNo() == payment.getMemberNo()) {
+				paymentMemberNoCheck = true;
+			}			
+			compare.put("expertTrue", expertNoCheck);
+			compare.put("memberTrue",paymentMemberNoCheck);
+		}		
+		return compare;
+	}
 
 	
-
+	//윤지
+	public int updateReadCheck(String counselNo, String memberNo) {
+		int realCounselNo = Integer.parseInt(counselNo);
+		int realMemberNo = Integer.parseInt(memberNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("counselNo", realCounselNo);
+		map.put("memberNo", realMemberNo);
+		return productDao.updateReadCheck(map);
+	}
 	
+	//윤지
+	public int updatePaymentState(int counselNo) {
+		return productDao.updatePaymentState(counselNo);
+	}
+
+	//윤지
+//	public HashMap<String, Object> insertReview(int payNo, HttpServletRequest request) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
 	
 
 }

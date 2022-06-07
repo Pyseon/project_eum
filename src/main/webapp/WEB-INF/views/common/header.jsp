@@ -89,9 +89,10 @@
 										</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="/reference.jsp"
+										<li><a href="/Expertapply.do"
 											style="font-family: fs-bold; color: #555">전문가 등록</a></li>
-										<li><a href="#">마이페이지</a></li>
+											
+										<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">마이페이지</a></li>
 										<li>
 											<button class="btn bc1 bs6" id="login-btn" type="button"
 												onclick="location.href='/logout.do'">로그아웃</button>
@@ -137,9 +138,9 @@
                       <li><a href="#">법률/세무</a><ul role="menu" class="sub-menu2">
                         <li><a href="/productDetail.do?productNo=18&expertNo=8">변호사</a></li> <%--임시코드 상품 리스트 완성되면 지울게요.--%>
                         <li><a href="/productDetail.do?productNo=19&expertNo=62">노무사</a></li>
-                        <li><a href="/expertCounsel.do?productNo=18&expertNo=8">변리사</a></li>
+                        <li><a href="/expertCounsel.do?payNo=25">변리사</a></li>
                         <li><a href="/imgVerProductDetail.do?productNo=19&expertNo=62">법무사</a></li>
-                        <li><a href="#">행정사</a></li>
+                        <li><a href="/expertCounsel.do?payNo=28">행정사</a></li>
                         <li><a href="#">세무사</a></li>
                         </ul>
                       </li>

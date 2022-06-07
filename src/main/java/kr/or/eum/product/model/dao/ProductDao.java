@@ -14,6 +14,8 @@ import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductDetail;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.product.model.vo.Chat;
+import kr.or.eum.product.model.vo.Counsel;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.Review;
@@ -132,6 +134,62 @@ public class ProductDao {
 	}
 
 
+
+	//윤지
+	public Payment selectPaymentState(int payNo) {
+		Payment payment = sqlSession.selectOne("product.selectPaymentState", payNo);
+		return payment;
+	}
+
+	//윤지
+	public int selectReviewUploadCheck(int payNo) {
+		int reviewUploadCheck = sqlSession.selectOne("product.selectReviewUploadCheck", payNo);
+		return reviewUploadCheck;
+	}
+
+	//윤지
+	public int insertChat(HashMap<String, Object> map) {
+		int result = sqlSession.insert("product.insertChat", map);
+		return result;
+	}
+	
+	//윤지
+	public Product selectOneProduct2(int payNo) {
+		Product product = sqlSession.selectOne("product.selectOneProduct2", payNo);
+		return product;
+	}
+	
+	//윤지
+	public Counsel selectCounsel(int payNo) {
+		Counsel counsel = sqlSession.selectOne("product.selectCounsel", payNo);
+		return counsel;
+	}
+	
+	//윤지
+	public ArrayList<Chat> selectChat(int payNo) {
+		List chatList = sqlSession.selectList("product.selectChat", payNo);
+		return (ArrayList<Chat>)chatList;
+	}
+	
+	public Expert selectExpertNo(int memberNo) {
+		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
+		return expert;
+	}
+
+
+	//윤지
+	public int updateReadCheck(HashMap<String, Object> map) {
+		int result = sqlSession.update("product.updateReadCheck", map);
+		return result;
+	}
+
+	//윤지
+	public int updatePaymentState(int counselNo) {
+		Payment payment = sqlSession.selectOne("product.selectPayment", counselNo);
+		int result = sqlSession.update("product.updatePaymentState", payment.getPayNo());
+		System.out.println(result);
+		return result;
+	}
 
 
 }

@@ -118,8 +118,17 @@ input::placeholder {
   color: #a7a7a7;
 }
 
+.textCount-wrap{
+	text-align: right;
+    margin-right: 71px;
+    margin-bottom: 20px;
+    margin-top: -15px;
+}
+
+
 .textarea, .review-title {
 	padding: 10px;
+	
 }
 
 .review-title {
@@ -137,3 +146,40 @@ input:focus{
 textarea:focus{
 	outline: 1px solid #3865f2;
 }
+.icon-star{
+	color: lightgray;
+}
+
+
+
+
+
+
+
+
+
+
+@media (min-width:576px) {
+    .container {
+        max-width: 540px
+    }
+}
+
+@media (min-width:768px) {
+    .container {
+        max-width: 720px
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 960px
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1140px
+    }
+}
+

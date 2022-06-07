@@ -125,21 +125,6 @@ public class CommunityController {
 	
 	
 	
-=======
-
-// >>>>>>>>>>쓰기
-	@RequestMapping(value = "/communityWriteFrm.do")
-	public String communityWriteFrm() {
-		return "community/communityWriteFrm";
-	}
-
-	@RequestMapping(value = "/communityWrite.do")
-	public String communityWrite(Community comm, MultipartFile file, HttpServletRequest request) {
-		Community community = imgUpload(comm, file, request);
-		service.communityWrite(community);
-		return "redirect:/communityList.do?category=" + comm.getCommCategory() + "&reqPage=1";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value="/commCoWrite.do", produces="application/json;charset=utf-8")
 	public void communityCoWrite(CommunityCo commCo) {

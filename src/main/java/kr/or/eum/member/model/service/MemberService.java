@@ -105,5 +105,11 @@ public class MemberService {
 		return member;
 	}
 
+	public ArrayList<Product> selectMyproject(int memberNo) {
+		ArrayList<Product> list = dao.selectMyproject(memberNo);
+		
+		return list;
+	}
+
 
 }

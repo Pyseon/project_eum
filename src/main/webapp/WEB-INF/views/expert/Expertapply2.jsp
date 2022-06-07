@@ -12,16 +12,19 @@
 		font-size: 15px;
 		margin-bottom:3%;
 	}
+	
 </style>
 </head>
-<body>
-	<div class="consultbox" style="border:1px solid; padding:10px;">
-		
 
-	<form action="/Expertapply3.do" method="post">
-		<ul>
-			<li>
-				<label>상담분야*</label>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
+<body>
+
+		<div class="page-content">
+		<div class="flex-wrap">
+		<form action="/Expertapply3.do" method="post">
+		<br>
+				<label><h2>상담분야*</h2></label>
+				<div class="consultbox">
 				
 				<select class="input-form" name='cousult'>
 				 	<option value='law' selected>법률</option>
@@ -37,40 +40,40 @@
 					<option value='law' selected>자기계발</option>
 					  
 				</select>
-			</li>
-			<li>
-				<label>태그*</label>
-				<input type="text" name="expertTag" placeholder="#태그">
-			</li>
-			<li>
-				<label>자격*</label>
-				<input type="text" name="expertQual" placeholder="">
-			</li>
-			<br>
-			<li>
-				<label>자격증*</label>
-				<input type="text" name="expertLicense" placeholder="자격증명">
-			</li>
-			<li>
-				<label>발급기관/취득일시*</label>
-				<input type="text" name="expertIssuer" placeholder="발급기관">
-				<input type="text" name="expertDate" placeholder="취득일시">
-			</li>
-			<li>
-				<label>자격증사본*</label>
-				<input type="text" name="expertfile" placeholder="최대 MB 이하 첨부가능 jpg,png,pdf 지원">
-			</li>
-			<label><input type="checkbox" name = "expert_check4">입력한 정보는 (이음) 내 프로필 공개 목적으로 하며, 탈퇴 시에는 바로 폐기됩니다.</label>
-			
-			
-		</ul>
-		<div>
-			<button class="btn bc1 bs5" onclick="location.href='/Expertapply.do'">이전</button>
-			<button class="btn bc1 bs5" onclick="location.href='/Expertapply3.do'">다음</button>
-			<input type="submit" value="다음">
-	</div>
-</div>
+			</div><br>
+		<label><h2>태그*</h2></label><br>
+		<textarea class="input-form" placeholder="#태그"></textarea><br>
 		
-	</form>
+		
+		<label><h2>자격*</h2></label>
+				<p>
+					선택분야의 가입 자격입니다.
+					아래의 신청 자격을 확인 후 해당되는 자격정보로 입력해 주세요
+				</p>
+		
+		<br>
+		<textarea class="input-form" placeholder="반려견 지도사(구.훈련사) - 한국애견협회&#13;&#10;훈련사 -한국애견연맹&#13;&#10;양서파충류 관리사 - 한국양서파충류협회"></textarea><br>
+		
+		
+		<label><h2>자격증 사본*</h2></label><br>
+		<input type="text" name="expertfile" placeholder="최대 MB 이하 첨부가능 jpg,png,pdf 지원"><br>
+		
+		<label><h2>발급기관 / 취득일시*</h2></label><br>
+		<input type="text" name="expertIssuer" placeholder="발급기관"><br>
+		<input type="text" name="expertDate" placeholder="취득일시"><br><br>
+		<br>
+		<button class="btn bc1 bs5" onclick="location.href='/Expertapply.do'">이전</button>
+		<button class="btn bc1 bs5" type="submit">다음</button>
+		
+		</form>
+	</div>
+		
+	</div>
+
+	
+
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	
+<script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous"></script>	
 </body>
 </html>

@@ -114,6 +114,14 @@ public class MemberController {
 		
 	}
 	//재민 구매내역
+	@RequestMapping(value="/Myproject.do")
+	public String Myproject(Model model, HttpSession session, int memberNo) {
+		ArrayList<Product> list = service.selectMyproject(memberNo);
+		
+		model.addAttribute("list", list);
+		
+		return "mypage/Myproject";
+	}
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {
 		ArrayList<ProductAndPayment> list = service.selectProductList(memberNo);

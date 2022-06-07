@@ -98,5 +98,9 @@ public class MemberDao {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture2",payNo);
 		return expertPicture;
 	}
+	public ArrayList<Product> selectMyproject(int memberNo) {
+		List list = sqlSession.selectList("member.selectMyproject",memberNo); 
+		return (ArrayList<Product>)list;
+	}
 
 }

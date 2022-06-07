@@ -10,8 +10,8 @@
 <body>
 	
 	
-	
-	<div class="page-content">
+
+<div class="page-content">
 		<br>
 		<div>
 		
@@ -45,6 +45,8 @@
 		<button class="btn bc1 bs5" onclick="location.href='/Expertapply2.do'">다음</button>
 	</div>
 </div>
+
+	
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous"></script>
 </body>

@@ -139,15 +139,6 @@
 			<textarea id="summernote" name="productContent" class="input-form"></textarea>
 		</div>
 		
-						<div class="img-box-wrap">
-							<div class="commFileBox preview-image">
-								<p class="comm-write-p" style="margin-bottom: 5px;">대표이미지</p>
-								<h4 class="fc-3" style="margin-top: 0;">(세로로 긴 사진이 적합합니다.)</h4>
-								<label for="input-file">파일 선택</label> 
-								<input type="file"name="file" class="commFile upload-hidden" id="input-file">
-							</div>
-							<div class="input-img-box"></div>
-						</div>
 		<div style="margin-bottom: 20px">
 			<div>
 			<span>

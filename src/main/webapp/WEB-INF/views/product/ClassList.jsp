@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <!DOCTYPE html>
@@ -223,9 +224,23 @@ li{
    
    
 <div class="container">
-		<input type="text" name="expertNo" value="${c.expertNo }">
-<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
-<div class="posting-wrap">
+
+	<c:if test="${grade eq null}">
+		<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 0}">
+		<button type="button" class="writeButton" id="writeButton" onclick="manager();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 1}">
+		<button type="button" class="writeButton" id="writeButton" onclick="expertNeed();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 2}">
+		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 3}">
+		<button type="button" class="writeButton" id="writeButton" onclick="blacklist();">등록하기</button>
+	</c:if>
+			<div class="posting-wrap">
 
 	<c:forEach items="${list }" var="c" varStatus="i">
 	<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
@@ -310,20 +325,39 @@ li{
 		</div>
 	</c:forEach>
 		<c:choose>
-		<c:when test="${0 eq c.memberNo }">
+		<c:when test="${0 eq c.expertNo }">
 		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/oginFrm.do'">등록하기</button>
 		</c:when>
 		<c:otherwise>
 		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
 		</c:otherwise>
 		</c:choose>
-		<input type="text" name="memberNo" value="${memberNo }">
+		<input type="text" name="memberNo" value="${grade }">
 	</div>													   			
 ${pageNavi }
 
 
 </div>
 <script>
+	function loginNeed(){
+	alert('로그인 후 이용해주세요.');
+	location.href="/loginFrm.do";
+	}
+	
+	function manager(){
+		alert('관리인은 클래스를 등록할 수 없습니다.');
+		location.href="/ClassList.do?reqPage=1&selPro=전체";
+		}
+	
+	function expertNeed(){
+		alert('전문가 인증을 받고 오세요.');
+		location.href="/ClassList.do?reqPage=1&selPro=전체";
+	}
+	function blacklist(){
+		alert('블랙리스트 회원은 등록할 수 없습니다.');
+		location.href="/ClassList.do?reqPage=1&selPro=전체";
+	}
+
 	$(function(){
 		var selPro = '${selPro}';
 		console.log(selPro);

@@ -46,16 +46,9 @@ public class ProductService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
-		
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		int totalCount = 0;
-		
 		ArrayList<Product> list = productDao.selectClassList(map);
 		
-		
-		
-		
-		
+		int totalCount = productDao.selectProductCount(map);
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -64,10 +57,6 @@ public class ProductService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
-		
-		
-		
-		
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
@@ -85,7 +74,7 @@ public class ProductService {
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += "<a class='page-item' href='/ClasstList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -96,7 +85,7 @@ public class ProductService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+			pageNavi += "<a class='page-item' href='/ClasstList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			

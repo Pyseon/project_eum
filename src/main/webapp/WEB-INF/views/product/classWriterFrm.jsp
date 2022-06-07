@@ -99,7 +99,7 @@
 	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">상담 등록하기</h1>
 		<form action="/classWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-		<input type="hidden" name="expertNo" value="${expertNo }">
+		<input type="text" name="expertNo" value="${expertNo }">
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
 		<div style="margin-top: -30px !important;">

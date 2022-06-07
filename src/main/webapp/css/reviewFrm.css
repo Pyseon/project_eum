@@ -1,0 +1,145 @@
+@charset "UTF-8";
+
+.picture{
+	width: 180px;
+    height: 180px; 
+    border-radius: 70%;
+    overflow: hidden;
+    margin: 0 auto;
+    margin-top: 30px;
+}
+
+.expert-profile-wrap{
+	display:flex;
+	width: 100px;
+	height:30px;
+	margin: 0 auto;
+	margin-top: 18px;
+	margin-bottom: 4px;
+	justify-content:center;
+}
+
+.confirm2{
+	color: #3865f2;
+	font-size: 22px !important;
+	vertical-align: top;
+	margin-bottom: 1px;
+	position: absolute;
+	margin-top:-2px;
+	margin-left:-5px;
+}
+
+.icon-confirm{
+	color: #3865f2;
+	vertical-align: top;
+	margin-top: -1.0px;
+	font-size: 18px !important;
+}
+
+.expert-info{
+	text-align:center;
+	margin-top: 4px;
+	display: inline;
+	margin-right: 7px;
+}
+
+.info-wrap>h5>span{
+	color: #fff;
+}
+.info2{
+	margin: 10px;
+}
+
+.testimg {
+	width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main-title{
+	font-size: 20px;
+    font-weight: bold;
+    color: #3865f2;
+    margin-top: 30px;
+    margin-left: 20px;
+}
+
+.product-title{
+	text-align: center;
+    font-size: 18px;
+    margin-top: 60px;
+    border-bottom: 2px solid #a7a7a7;
+    margin-left: 150px;
+    margin-right: 150px;
+    padding-bottom: 10px;
+    font-weight: bold;
+    margin-bottom: 60px;
+}
+.star{
+	text-align: center;
+	margin-top: -12px;
+}
+
+.star>span{
+	font-size: 44px;
+}
+
+.submit-btn{
+	width: 85%;
+	height: 50px;
+}
+
+.submit-btn-wrap{
+	text-align: center;
+}
+
+textarea {
+    width: 85%;
+    height: 6.25em;
+    border: 1px solid #a7a7a7;
+    resize: none;
+}
+
+.content-wrap{
+	display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.textarea-wrap{
+	margin-bottom: 20px;
+}
+
+#star-result, #star-result2 {
+	color: #ff990d;
+	font-weight:bold;
+}
+
+textarea::placeholder {
+  color: #a7a7a7;
+}
+
+input::placeholder {
+  color: #a7a7a7;
+}
+
+.textarea, .review-title {
+	padding: 10px;
+}
+
+.review-title {
+	width: 85%;
+    height: 2.25em;
+    border: 1px solid #a7a7a7;
+    resize: none;
+    margin-bottom: 15px;
+}
+
+input:focus{
+	outline: 1px solid #3865f2;
+}
+
+textarea:focus{
+	outline: 1px solid #3865f2;
+}

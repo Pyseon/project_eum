@@ -22,7 +22,6 @@
 		<typeAlias type="kr.or.eum.manager.model.vo.Chart" alias="chart"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Expert" alias="expert"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Review" alias="review"/> <!-- 윤지 -->
-		<typeAlias type="kr.or.eum.member.model.vo.ExpertAndCompany" alias="expertAndCom"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndPayment" alias="productAndPay"/>
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndPayAndwish" alias="productAndPayAndwish"/>
 		<typeAlias type="kr.or.eum.member.model.vo.ExpertAndMember" alias="expertAndM"/> <!-- 윤지 -->

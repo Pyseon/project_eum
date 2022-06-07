@@ -14,7 +14,6 @@ import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductDetail;
 import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
-import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.dao.ProductDao;
@@ -117,7 +116,6 @@ public class ProductService {
 				productQNA.add("A"+(i+1)+". "+productAns[i]);
 			}
 		}
-		ExpertAndCompany expertAndCom = memberDao.selectOneExpert(expertNo);
 		Expert expert = memberDao.selectOneExpertOnly(expertNo);
 		ExpertAndMember expertM = memberDao.selectOneExpertPicture(expertNo);
 		ArrayList<Review> reviewRnum = productDao.selectAllReview(productNo);
@@ -141,7 +139,7 @@ public class ProductService {
 			map.put("memberNo", 0);
 		}
 		int wishMemberCheck = productDao.selectWishMemberCheck(map);
-		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCount, wishMemberCheck);
+		ProductDetail pd = new ProductDetail(product, productQNA, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCount, wishMemberCheck);
 		return pd;
 	}//selectProductDetail
 	
@@ -240,7 +238,6 @@ public class ProductService {
 	//윤지
 	public HashMap<String, Object> selectProductAndExpertAndPayment(int payNo) {
 		Product product = productDao.selectOneProduct2(payNo);
-		ExpertAndCompany expertAndCom = memberDao.selectOneExpert2(payNo);
 		Expert expert = memberDao.selectOneExpertOnly2(payNo);
 		ExpertAndMember expertM = memberDao.selectOneExpertPicture2(payNo);
 		Payment payment = productDao.selectPaymentState(payNo);
@@ -251,7 +248,6 @@ public class ProductService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("product", product);
 		map.put("expert",expert);
-		map.put("expertC",expertAndCom);
 		map.put("expertM",expertM);
 		map.put("payment",payment);
 		map.put("paymentState",paymentState);
@@ -316,10 +312,38 @@ public class ProductService {
 	}
 
 	//윤지
-//	public HashMap<String, Object> insertReview(int payNo, HttpServletRequest request) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	public HashMap<String, Object> reviewFrm(int payNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		Product product = productDao.selectOneProduct2(payNo);
+		Expert expert = memberDao.selectOneExpertOnly2(payNo);
+		ExpertAndMember expertM = memberDao.selectOneExpertPicture2(payNo);
+		Payment payment = productDao.selectPaymentState(payNo);
+		map.put("product", product);
+		map.put("expert", expert);
+		map.put("expertM", expertM);
+		map.put("payment", payment);
+		return map;
+	}
+
+	//윤지
+	public Boolean reviewMemberCompare(int payNo, HttpServletRequest request) {
+		Payment payment = productDao.selectPaymentState(payNo);
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		boolean memberCheck = false;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");	
+			System.out.println("member : "+member);
+			if(member.getMemberNo() == payment.getMemberNo()) {
+				memberCheck = true;
+			}
+		}
+		return memberCheck;
+	}
+
+	public int insertReview(Review review) {
+		return productDao.insertReview(review);
+	}
 	
 
 }

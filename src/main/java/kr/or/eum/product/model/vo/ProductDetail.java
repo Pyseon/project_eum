@@ -3,7 +3,6 @@ package kr.or.eum.product.model.vo;
 import java.util.ArrayList;
 
 import kr.or.eum.member.model.vo.Expert;
-import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 import lombok.AllArgsConstructor;
@@ -16,7 +15,6 @@ import lombok.NoArgsConstructor;
 public class ProductDetail {
 	private Product product;
 	private ArrayList<String> productQNA;
-	private ExpertAndCompany expertAndCompany;
 	private Expert expert;
 	private ExpertAndMember expertAndMember;
 	private ArrayList<Review> reviewRnum;

@@ -8,7 +8,6 @@ import java.util.List;
 import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.member.model.vo.Expert;
-import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
@@ -46,11 +45,6 @@ public class MemberDao {
 		return (ArrayList<Question>)list;
 	}
 
-	//윤지
-	public ExpertAndCompany selectOneExpert(int expertNo) {
-		ExpertAndCompany expertAndCom = sqlSession.selectOne("member.selectOneExpert",expertNo);
-		return expertAndCom;
-	}
 	
 	//윤지
 	public ExpertAndMember selectOneExpertPicture(int expertNo) {
@@ -94,16 +88,12 @@ public class MemberDao {
 		return (ArrayList<Payment>)list;
 	}
 
-	
 	//윤지
-	public ExpertAndCompany selectOneExpert2(int payNo) {
-		ExpertAndCompany expertAndCom = sqlSession.selectOne("member.selectOneExpert2",payNo);
-		return expertAndCom;
-	}
 	public Expert selectOneExpertOnly2(int payNo) {
 		Expert expert = sqlSession.selectOne("member.selectOneExpertOnly2", payNo);
 		return expert;
 	}
+	//윤지
 	public ExpertAndMember selectOneExpertPicture2(int payNo) {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture2",payNo);
 		return expertPicture;

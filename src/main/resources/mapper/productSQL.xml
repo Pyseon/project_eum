@@ -167,6 +167,7 @@
 		WHERE rnum between #{start} and #{end}
 	</select>
 	
+	<!-- 여기서부터 chat관련 -->
 	<!-- 윤지 -->
 	<select id="selectPaymentState" parameterType="int" resultType="pay">
 		select 
@@ -267,5 +268,8 @@
 	<update id="updatePaymentState" parameterType="int">
 		update payment_tbl set pay_state=2 where pay_no=#{payNo}
 	</update>
+	<insert id="insertReview" parameterType="review">
+		INSERT INTO REVIEW_TBL VALUES(REVIEW_SEQ.NEXTVAL,#{payNo},#{memberNo},#{reviewTitle},#{reviewContent},#{reviewStar},to_char(sysdate,'yyyy.mm.dd'),#{productNo});
+	</insert>
 </mapper>
 	

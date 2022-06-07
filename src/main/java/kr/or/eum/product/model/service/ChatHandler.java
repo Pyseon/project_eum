@@ -88,6 +88,9 @@ public class ChatHandler extends TextWebSocketHandler {
 				if(!s.equals(session)) {
 					TextMessage tm = new TextMessage(sendMsg);
 					//나 외에 다른 사람이 있다 없다 체크
+					//DB에 보내는 것과 사용자가 접속해 있어서 메세지를 보내주는 것을 따로따로 생각하기
+					//insert는 읽음 여부와 관계없이
+					//상대방에게 전송까지 하는 건 접속여부 (읽음 여부)에 따라....
 					s.sendMessage(tm);
 				}//if문
 			}//for문
@@ -106,7 +109,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			sessionMap.remove(counselNo);
 		}
 		
-		String sendMsg = "<p'>부재중입니다.</p>"; //나중에 삭제
+		String sendMsg = "<p'>새로고침으로 세션 연결 끊김.</p>"; //나중에 삭제
 		TextMessage tm = new TextMessage(sendMsg);
 		for(WebSocketSession s : sessionList) {
 			s.sendMessage(tm); 

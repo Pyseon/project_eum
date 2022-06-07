@@ -10,7 +10,9 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
+import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -210,8 +212,16 @@ public class ManagerDao {
 		Chart chart = sqlSession.selectOne("manager.selectChart");
 		return chart;
 	}
+
+	public MemberChart selectMemberChart(String year) {
+		MemberChart memberChart = sqlSession.selectOne("manager.selectMemberChart", year);
+		return memberChart;
+	}
 	
-	
+	public SalesChart selectSalesChart(HashMap<String, Object> map) {
+		SalesChart salesChart = sqlSession.selectOne("manager.selectSalesChart", map);
+		return salesChart;
+	}
 	
 	
 	

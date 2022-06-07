@@ -21,6 +21,8 @@
 		<typeAlias type="kr.or.eum.manager.model.vo.FaQ" alias="faq"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Notice" alias="ntc"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Chart" alias="chart"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.MemberChart" alias="memberChart"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.SalesChart" alias="salesChart"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Expert" alias="expert"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Review" alias="review"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndPayment" alias="productAndPay"/>

@@ -2654,6 +2654,21 @@ input[name=keyword]{
 	margin-top: -70px;
 	text-align: right;
 }
+
+.chartDiv > h2{
+	text-align: center;
+}
+
+.selectBox{
+	position: relative;
+	text-align: right;
+	margin-top: -35px;
+	margin-bottom: 30px;
+}
+.pieChart{
+	width: 50%;
+	float: left;
+}
 /*************************
 *******mypage CSS******
 **************************/

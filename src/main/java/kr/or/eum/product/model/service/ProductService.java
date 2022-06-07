@@ -2,6 +2,7 @@ package kr.or.eum.product.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,9 +47,16 @@ public class ProductService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		int totalCount = 0;
+		
 		ArrayList<Product> list = productDao.selectClassList(map);
 		
-		int totalCount = productDao.selectProductCount(map);
+		
+		
+		
+		
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -57,6 +65,10 @@ public class ProductService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		
+		
+		
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
@@ -97,11 +109,207 @@ public class ProductService {
 		
 	}
 	
-	public int productWrite(Product pro) {
+	public ProductPageData selectExpertList(int reqPage, String selPro) {
+		int numPerPage = 12;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("selPro", selPro);
+		ArrayList<Product> list = productDao.selectExpertList(map);
+		
+		int totalCount = productDao.selectProductCount(map);
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) { 
+			
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/ExpertList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/ExpertList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/ExpertList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/ExpertList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+			
+		}
+		pageNavi += "</ul>";
+		ProductPageData ppd = new ProductPageData(list, pageNavi);	
+					 
+		return ppd;
+		
+	}
+	
+	public ProductPageData selectIdeamarketList(int reqPage, String selPro) {
+		int numPerPage = 12;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("selPro", selPro);
+		
+		HashMap<String, Object> data = new HashMap<String, Object>();
+		int totalCount = 0;
+		
+		ArrayList<Product> list = productDao.selectIdeamarketList(map);
+		
+		
+		
+		
+		
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		
+		
+		
+		
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) { 
+			
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/IdeamarketList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
+			pageNavi += "<span ideamarket='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/IdeamarketList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/IdeamarketList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/IdeamarketList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+			
+		}
+		pageNavi += "</ul>";
+		ProductPageData ppd = new ProductPageData(list, pageNavi);	
+					 
+		return ppd;
+		
+	}
+	
+	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
-		int result = productDao.productWrite(pro);
+		Product product=setToken(pro);
+		int result = productDao.classWrite(product);
 		
 		return result;
+	}
+	
+	public int expertWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = productDao.expertWrite(pro);
+		
+		return result;
+	}
+	
+	public int ideamarketWrite(Product pro) {
+		// TODO Auto-generated method stub
+		Product product=setToken(pro);
+		int result = productDao.ideamarketWrite(product);
+		
+		return result;
+	}
+	
+	public Product setToken(Product pro) {
+		String productQst = pro.getProductQst();
+		List<String> qstList = new ArrayList<String>();
+		String []tokens=productQst.split("\\|");
+		for(int i=0;i<tokens.length;i++) {
+			if(tokens[i] == null || tokens[i].trim().length() < 2) {
+			}else {
+				if(tokens[i].indexOf(",") == 0) {
+					qstList.add(tokens[i].replaceFirst(",", ""));
+				}else {
+					qstList.add(tokens[i].trim());
+				}
+			}
+			
+		}
+		productQst = "";
+		
+		for(int i=0;i<qstList.size();i++){
+			productQst += qstList.get(i)+"|";
+		}
+		
+		String productAns = pro.getProductAns();
+		List<String> ansList = new ArrayList<String>();
+			
+		String []tokens2=productAns.split("\\|");
+		for(int i=0;i<tokens2.length;i++){
+			if(tokens2[i] == null || tokens2[i].trim().length() < 2) {
+			}else {
+				if(tokens2[i].indexOf(",") == 0) {
+					ansList.add(tokens2[i].replaceFirst(",", ""));
+				}else {
+					ansList.add(tokens2[i].trim());
+				}
+			}
+		}
+		productAns = "";
+		
+		for(int i=0;i<ansList.size();i++){
+			productAns += ansList.get(i)+"|";
+		}
+		System.out.println("최종값>>"+productQst);
+		System.out.println("최종값>>"+productAns);
+		
+		pro.setProductQst(productQst);
+		pro.setProductAns(productAns);
+		
+		return pro;
 	}
 	
 	
@@ -274,6 +482,7 @@ public class ProductService {
 		return productDao.insertChat(map);
 	}
 
+
 	//윤지
 	public HashMap<String, Object> compareMemberNo(int payNo, HttpServletRequest request) {
 		Expert expert = memberDao.selectOneExpertOnly2(payNo);
@@ -299,6 +508,7 @@ public class ProductService {
 		}		
 		return compare;
 	}
+
 	
 	//윤지
 	public int updateReadCheck(String counselNo, String memberNo) {

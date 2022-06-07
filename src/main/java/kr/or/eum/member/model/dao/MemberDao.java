@@ -98,5 +98,10 @@ public class MemberDao {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture2",payNo);
 		return expertPicture;
 	}
+	//윤지
+	public ExpertAndMember selectOneExpert(int reviewNo) {
+		ExpertAndMember expertM = sqlSession.selectOne("member.selectOneExpert",reviewNo);
+		return expertM;
+	}
 
 }

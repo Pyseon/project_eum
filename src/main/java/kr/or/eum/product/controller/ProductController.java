@@ -8,6 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -515,13 +516,44 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	
 	//윤지
 	@ResponseBody
-	@RequestMapping(value = "insertReview.do")
+	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(Review review) {
-		System.out.println("insertReview : "+review);
-		int result = productService.insertReview(review);
+		int check = productService.overlapCheckReview(review.getPayNo());
+		if(check == 0) {
+			System.out.println("check : "+check);
+			System.out.println("insertReview : "+review);
+			int result = productService.insertReview(review);
+			return new Gson().toJson(result);			
+		}
+		return "product/paymentError";
+	}
+	
+	//윤지
+	@RequestMapping(value = "/modifyReviewFrm.do")
+	public String modifyReview(Model model, int reviewNo) {
+		HashMap<String, Object> map= productService.selectReview(reviewNo);
+		model.addAttribute("r", map.get("review"));
+		model.addAttribute("p", map.get("product"));
+		model.addAttribute("e", map.get("expertM"));
+		return "product/modifyReviewFrm";
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "/updateReview.do")
+	public String updateReview(Review review) {
+		System.out.println("updateReview : "+review);
+		int result = productService.updateReview(review);
+		System.out.println(result);
 		return new Gson().toJson(result);
 	}
 	
+	//윤지
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo) {
+		int result = productService.deleteReview(reviewNo);
+		return "redirect:/";
+	}
 }
 
 

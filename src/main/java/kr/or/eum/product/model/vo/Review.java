@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Review {
-	private String reviewNo;
+	private int reviewNo;
 	private int payNo;
 	private int memberNo;
 	private int productNo;

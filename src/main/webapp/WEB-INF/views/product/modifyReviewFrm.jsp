@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="css/reviewFrm.css" />
 <!-- 구글 아이콘 -->
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
@@ -15,9 +13,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="main-title">>후기작성</div>
-			<div class="product-title">${pro.productTitle }</div>
+			<div class="product-title">${p.productTitle }</div>
 			<div class="picture">
-				<a href="#"><img class="testimg" src="/img/member/${em.memberPicturePath }"></a>
+				<a href="#"><img class="testimg" src="/img/member/${e.memberPicturePath }"></a>
 			</div>
 			<div class="expert-profile-wrap">
 				<div class="expert-profile">
@@ -35,49 +33,49 @@
 				<span class="material-icons fc-10 icon-star">star</span>
 				<div class="score">
 					<span id="star-result">0</span>
-	                <span id="star-result2">0</span>
+	                <span id="star-result2">${r.reviewStar}</span>
 				</div>
 			</div>
 			<div class="review content">
 				<div class="content-wrap">
-					<input type="hidden" class="payNo" value="${pay.payNo }">
-					<input type="hidden" class="memberNo" value="${m.memberNo }">
-					<input type="hidden" class="productNo" value="${pro.productNo }">
 					<div class="textarea-wrap">
-						<input type="text" class="review-title" name="review-title" placeholder="제목을 입력해주세요.(60자 제한)">
-						<textarea class="textarea" name="textarea" maxlength="300" placeholder="후기를 입력해주세요.(300자 제한)"></textarea>
+						<input type="hidden" name="reviewNo" class="reviewNo" value="${r.reviewNo }">
+						<input type="text" class="review-title" name="review-title" placeholder="제목을 입력해주세요.(60자 제한)" value="${r.reviewTitle }">
+						<textarea class="textarea" name="textarea" maxlength="300" placeholder="후기를 입력해주세요.(300자 제한)">${r.reviewContent }</textarea>
 					</div>
 					<div class="submit-btn-wrap">
-						<button class="bc1 submit-btn" id="submit-btn" onclick="insert()">제출</button>
+						<button class="bc1 submit-btn" id="submit-btn" onclick="update()">제출</button>
 					</div>	
 				</div>
 			</div>
 		</div>
 	</div>	
 	<div class="footer-div"><%@ include file="/WEB-INF/views/common/footer.jsp"%></div>
-<script>		
-	function insert(){
+<script>
+
+	
+	
+
+
+	function update(){
 		
-		const payNo = $('.payNo').val();
-		const memberNo = $('.memberNo').val();
-		const productNo = $('.productNo').val();
+		var reviewNo = $('.reviewNo').val();
 		var title = $('.review-title').val();
 		var text = $('.textarea').val();
 		var score = $('#star-result2').text();
 		
+		
 		$.ajax({
-			url : "/insertReview.do",
+			url : "/updateReview.do",
 			data : {
-				   payNo:payNo,
-				   memberNo:memberNo,
-				   productNo:productNo,
+				   reviewNo:reviewNo,
 				   reviewTitle:title,
 				   reviewContent:text,
 				   reviewStar:score
 				   },
 			success : function(data) {
-				alert('후기가 정상적으로 등록되었습니다.')
-				location.href='/Myreview.do?memberNo=${m.memberNo}';
+				alert('후기가 정상적으로 수정되었습니다.')
+				location.href='/Myreview.do?memberNo=${r.memberNo}';
 			},
 			error : function() {
 				alert('잘못된 접근입니다.')

@@ -362,10 +362,51 @@
 		update payment_tbl set pay_state=2 where pay_no=#{payNo}
 	</update>
 
-  <!--윤지 -->
+  	<!--윤지 -->
 	<insert id="insertReview" parameterType="review">
-		INSERT INTO REVIEW_TBL VALUES(REVIEW_SEQ.NEXTVAL,#{payNo},#{memberNo},#{reviewTitle},#{reviewContent},#{reviewStar},to_char(sysdate,'yyyy.mm.dd'),#{productNo});
+		INSERT INTO REVIEW_TBL VALUES(REVIEW_SEQ.NEXTVAL,#{payNo},#{memberNo},#{reviewTitle},#{reviewContent},#{reviewStar},to_char(sysdate,'yyyy.mm.dd'),#{productNo})
 	</insert>
-
+	
+	<!-- 윤지 -->
+	<select id="selectReview" parameterType="int" resultType="review">
+		select 
+			review_no as reviewNo, 
+			pay_no as payNo,
+			member_no as memberNo,
+			review_title as reviewTitle,
+			review_content as reviewContent,
+			review_star as reviewStar,
+			review_date as reviewDate,
+			product_no as productNo
+		from review_tbl where review_no=#{reviewNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<select id="selectProductName" parameterType="int" resultType="pro">
+		select p.product_title as productTitle
+        from product_tbl p
+        join review_tbl r
+        on p.product_no = r.product_no
+        where review_no=#{reviewNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<update id="updateReview" parameterType="review">
+		update review_tbl set review_title=#{reviewTitle}, review_content=#{reviewContent}, review_star=#{reviewStar} where review_no=#{reviewNo}
+	</update>
+	
+	<!-- 윤지 -->
+	<delete id="deleteReview" parameterType="int">
+		delete from review_tbl where review_no=#{reviewNo}
+	</delete>
+	
+	<!-- 윤지 -->
+	<select id="overlapCheck" parameterType="int" resultType="int">
+		select count(*)
+        from review_tbl r
+        join payment_tbl p
+        on r.pay_no = p.pay_no
+        where r.pay_no = #{payNo}
+	</select>
 </mapper>
 	

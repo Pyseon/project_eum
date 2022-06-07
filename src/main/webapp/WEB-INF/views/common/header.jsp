@@ -89,9 +89,10 @@
 										</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="/reference.jsp"
+										<li><a href="/Expertapply.do"
 											style="font-family: fs-bold; color: #555">전문가 등록</a></li>
-										<li><a href="#">마이페이지</a></li>
+											
+										<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">마이페이지</a></li>
 										<li>
 											<button class="btn bc1 bs6" id="login-btn" type="button"
 												onclick="location.href='/logout.do'">로그아웃</button>

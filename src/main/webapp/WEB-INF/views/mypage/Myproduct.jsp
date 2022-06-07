@@ -237,7 +237,13 @@ li{
 			<div>
 						<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">주문상세</button>
 						
-						<button class="btn bc3 modal-open-btn" target="#test-modal">주문취소</button>
+						<!-- <button class="btn bc3 modal-open-btn" target="#test-modal" id = "">주문취소</button> -->
+						
+						
+						<c:if test="${p.payState eq 1}">
+							<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMyproduct.do?payNo=${p.payNo}'">주문취소</button>
+						</c:if>
+						
 						
 						<c:if test="${p.productType eq 1}">
 							<c:if test="${p.payState eq 1}">
@@ -308,7 +314,8 @@ li{
 			}
 		
 	});
-		
+	
+	
 </script>
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

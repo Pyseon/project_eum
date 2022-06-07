@@ -31,6 +31,11 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.selectClassList", map);
 		return (ArrayList<Product>)list;
 	}
+	//재건
+	public ArrayList<Product> selectExpertList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("product.selectExpertList", map);
+		return (ArrayList<Product>)list;
+	}
 
 	//재건
 	public int selectProductCount(HashMap<String, Object> map) {
@@ -39,9 +44,29 @@ public class ProductDao {
 		return totalCount;
 	}
 	
-	public int productWrite(Product pro) {
+	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
-		int result = sqlSession.insert("product.productWrite", pro);
+		int result = sqlSession.insert("product.classWrite", pro);
+		return result;
+	}
+	public int expertWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("product.expertWrite", pro);
+		return result;
+	}
+	
+	public Expert selectExpertNo(int memberNo) {
+		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
+		return expert;
+	}
+	public ArrayList<Product> selectIdeamarketList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("product.selectIdeamarketList", map);
+		return (ArrayList<Product>)list;
+	}
+	
+	public int ideamarketWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("product.ideamarketWrite", pro);
 		return result;
 	}
 	
@@ -106,10 +131,7 @@ public class ProductDao {
 		return result;
 	}
 
-	public Expert selectExpertNo(int memberNo) {
-		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
-		return expert;
-	}
+
 
 
 }

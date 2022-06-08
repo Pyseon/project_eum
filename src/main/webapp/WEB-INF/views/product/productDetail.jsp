@@ -196,7 +196,14 @@
 								<div class="report-wrap">
 									<ul>
 										<li><img id="icon-report" src="img/product/icon-report.png"></li>
-										<li><span id="report"><a onclick="report('${expert.memberNo }','0','${p.productNo }')">신고</a></span></li>
+										<c:choose>
+											<c:when test="${memberNo ne 0}">
+												<li><span id="report"><a onclick="report('${expert.memberNo }','0','${p.productNo }')">신고</a></span></li>
+											</c:when>
+											<c:otherwise>
+												<li><span id="report"><a onclick="loginNeed();">신고</a></span></li>
+											</c:otherwise>										
+										</c:choose>
 									</ul>
 								</div>
 							</div><!-- product-summary -->
@@ -323,11 +330,6 @@
 	<div class="footer-div"><%@ include file="/WEB-INF/views/common/footer.jsp"%></div>
 <script>
 
-	function loginNeed(){
-		alert('로그인 후 이용해주세요.');
-		location.href="/loginFrm.do";
-	}
-	
 	$(function(){
 		
 		const productNo = ${p.productNo};

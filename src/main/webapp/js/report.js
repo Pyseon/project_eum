@@ -4,29 +4,37 @@
 * param3 : 신고한 글의 고유번호(primary key) ex:product_no
 *
 */
+
+	function loginNeed(){
+		alert('로그인 후 이용해주세요.');
+		location.href="/loginFrm.do";
+	}
+
 	function report(param1,param2,param3) {
 	console.log(param1);
 	console.log(param2);
 	console.log(param3);
+	
 		const divWrap = $('<div class="report-modal-back">');
 		const divSubwrap = $('<div class="modal-sub-wrap">');
 		const modalContentwrap = $('<div class="modal-content-wrap">');
 		const closeBtn = $('<div class="con"><span class="material-icons icon-close">close</span></div>');
 		const icon = $('<img id="icon-report-modal" src="img/product/icon-report.png">');
 		const modalTitle = $('<div class="modal-title fc-9">신고하시겠습니까?</div>');
-		const modalform = $('<form action="/report.do" type="post">');
+		
 		const defendant = $('<input type="hidden" name="defendant" value="'+param1+'">');
-		const category = $('<input type="hidden" name="reportCategory" value="'+param2+'">');
+		const reportCategory = $('<input type="hidden" name="reportCategory" value="'+param2+'">');
 		const reportIndex = $('<input type="hidden" name="reportIndex" value="'+param3+'">'); 
 		const radiowrap = $('<div class="radio-wrap">');
-		const radio1 = $('<div class="radio"><input type="radio" name="reportRadio" value="spam" checked>&nbsp;&nbsp;광고 홍보성<br></input></div>');
-		const radio2 = $('<div class="radio"><input type="radio" name="reportRadio" value="slang">&nbsp;&nbsp;비매너/욕설<br></input></div>');
-		const radio3 = $('<div class="radio"><input type="radio" name="reportRadio" value="etc">&nbsp;&nbsp;기타<br></input></div>');
+		const radio1 = $('<div class="radio"><input type="radio" name="reportRadio" value="광고" checked>&nbsp;&nbsp;광고 홍보성<br></input></div>');
+		const radio2 = $('<div class="radio"><input type="radio" name="reportRadio" value="비매너">&nbsp;&nbsp;비매너/욕설<br></input></div>');
+		const radio3 = $('<div class="radio"><input type="radio" name="reportRadio" value="기타">&nbsp;&nbsp;기타<br></input></div>');
 		const reportTitle = $('<input type="text" name="reportTitle" class="reportTitle" placeholder="제목을 입력해주세요.(30자 제한)">');
 		const reportContent = $('<textarea name="reportContent" class="textarea" maxlength="150" placeholder="신고 사유를 입력해주세요.(150자 제한)">');
 		const contentCount = $('<div class="count-wrap"><span class="textCount">0</span> <span class="textTotal">/150</span></div>');
 		const btnwrap = $('<div class="btn-wrap">')
-		const submitBtn = $('<button class="submitBtn bc1 type="submit">제출</button>');
+		const submitBtn = $('<button class="submitBtn bc1" type="button">제출</button>');
+		
 		modalContentwrap.append(icon);
 		modalContentwrap.append(modalTitle);
 		radiowrap.append(radio1);
@@ -34,13 +42,15 @@
 		radiowrap.append(radio3);
 		divSubwrap.append(closeBtn);
 		modalContentwrap.append(radiowrap);
+		modalContentwrap.append(defendant);
+		modalContentwrap.append(reportCategory);
+		modalContentwrap.append(reportIndex);
 		modalContentwrap.append(reportTitle);
 		modalContentwrap.append(reportContent);
 		modalContentwrap.append(contentCount);
 		modalContentwrap.append(submitBtn);
 		modalContentwrap.append(btnwrap);
-		modalform.append(modalContentwrap);
-		divSubwrap.append(modalform);
+		divSubwrap.append(modalContentwrap);
 		divWrap.append(divSubwrap);
 		$('body').append(divWrap);
 		 
@@ -86,9 +96,43 @@
 		        alert("내용을 입력해주세요.");
 		        return false;
 		    } 
-			
-			alert('신고되었습니다. 감사합니다.');
-
+		    
+		    const data1 = defendant.val();
+		    const data2 = reportContent.val();
+		    const data3 = reportCategory.val();
+		    const data4 = reportIndex.val();
+		    const data5 = reportTitle.val();
+		    const data6 = $('[name=reportRadio]:checked').val();
+		    
+		    console.log(data1);
+		    console.log(data2);
+		    console.log(data3);
+		    console.log(data4);
+		    console.log(data5);
+		    console.log(data6);
+		    
+			$.ajax({
+				url : "/report.do",
+				type : "post",
+				data : {
+					   defendant:data1,
+					   reportContent:data2,
+					   reportCategory:data3,
+					   reportIndex:data4,
+					   reportTitle:data5,
+					   reportRadio:data6
+					   },
+				success : function(data) {
+					alert('신고되었습니다. 감사합니다.');
+					divSubwrap.fadeOut();
+					divWrap.fadeOut();
+				},
+				error : function() {
+					alert('잘못된 접근입니다.');
+					divSubwrap.fadeOut();
+					divWrap.fadeOut();
+				}
+			});
 		});
 	}
 

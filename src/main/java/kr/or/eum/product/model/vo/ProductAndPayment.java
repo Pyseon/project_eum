@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class ProductAndPayment {
 	private int productNo;
 	private String productTitle;
+	private String productImgPath;
 	private String payState;
 	private int payMent;
 	private String payDate;

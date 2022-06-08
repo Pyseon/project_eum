@@ -26,7 +26,7 @@
 				<label><h2>상담분야*</h2></label>
 				<div class="consultbox">
 				
-				<select class="input-form" name='cousult'>
+				<select class="input-form" name='expertCategory'>
 				 	<option value='law' selected>법률</option>
 					<option value='law' selected>비지니스</option>
 					<option value='law' selected>심리/헬스</option>
@@ -42,7 +42,7 @@
 				</select>
 			</div><br>
 		<label><h2>태그*</h2></label><br>
-		<textarea class="input-form" placeholder="#태그"></textarea><br>
+		<textarea class="input-form" name="expertTag" placeholder="#태그"></textarea><br>
 		
 		
 		<label><h2>자격*</h2></label>
@@ -56,14 +56,39 @@
 		
 		
 		<label><h2>자격증 사본*</h2></label><br>
-		<input type="text" name="expertfile" placeholder="최대 MB 이하 첨부가능 jpg,png,pdf 지원"><br>
+		<input type="text" name="certificateName"  class="input-form" placeholder="최대 MB 이하 첨부가능 jpg,png,pdf 지원"><br>
+		<label for="input-file">파일 선택</label> <input type="file"
+									name="file" class="commFile upload-hidden"
+									id="input-file">
 		
 		<label><h2>발급기관 / 취득일시*</h2></label><br>
-		<input type="text" name="expertIssuer" placeholder="발급기관"><br>
-		<input type="text" name="expertDate" placeholder="취득일시"><br><br>
+		<input type="text" class="input-form"  name="issuingAuthority" placeholder="발급기관"><br>
+		
+		<input type="text" class="input-form"  name="acquistionDate" placeholder="취득일시"><br><br>
 		<br>
+		<label>직업명*</label>
+		<input type="text" class="input-form"  name="jobName" placeholder="직업명"><br>
+		
+		<label>고객센터번호*</label>
+		<input type="text" class="input-form"  name="expertPhone" placeholder="070-0000-0000"><br>		
+			
+		<label>고객센터 이메일*</label>
+		<input type="text" class="input-form"  name="expertEmail" placeholder="asdf@naver.com"><br>
+		
+		<label>이름*</label>
+		<input type="text" class="input-form"  name="expertName" placeholder="박코딩"><br>
+		
+		<label>상세설명*</label>
+		<input type="text" class="input-form"  name="expertContent" placeholder="상세설명"><br>
+		
+		<label>자기소개*</label>
+		<input type="text" class="input-form"  name="expertPr" placeholder="자기소개"><br>
+		
+		<label>자격증명*</label>
+		<input type="text" class="input-form"  name="credential" placeholder="자격증명"><br>
+		<input type="hidden" name = "memberNo" value="${memberNo }" >
 		<button class="btn bc1 bs5" onclick="location.href='/Expertapply.do'">이전</button>
-		<button class="btn bc1 bs5" type="submit">다음</button>
+		<button class="btn bc1 bs5" type="submit">제출완료</button>
 		
 		</form>
 	</div>

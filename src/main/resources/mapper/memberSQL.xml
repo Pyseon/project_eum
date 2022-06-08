@@ -24,6 +24,14 @@
  			and member_Pw=#{memberPw}
  		</if>
  	</select>
+ 	<!-- 재민 전문가 신청 -->
+ 	<insert id="insertexpert" parameterType = "expert">
+		insert into expert_tbl values(
+		expert_seq.nextval,#{memberNo},#{expertCategory},#{expertTag},#{credential},#{issuingAuthority},
+		#{acquistionDate},#{certificateName},#{certificatePath},#{expertName},
+		#{expertPhone},#{expertEmail},#{expertContent},#{jobName},#{expertPr},#{expertcareer},#{expertIntro},'0')
+	</insert>
+ 	
 	<!-- 재민 -->
 	<update id="updateMember" parameterType="m" >
 	update member_tbl set 
@@ -60,6 +68,7 @@
 	 			product_title as productTitle,
 	 			product_type as productType,
 	 			pay_date as payDate, 
+	 			 
 	 			payment, 
 	 			pay_state as paystate,
 	 			pay_No as payNo,

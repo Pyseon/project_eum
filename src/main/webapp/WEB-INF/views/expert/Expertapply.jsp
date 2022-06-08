@@ -13,6 +13,7 @@
 
 <div class="page-content">
 		<br>
+		<form action="/Expertapply2.do" method="post">
 		<div>
 		
 		<button class="btn bc1 bs5">개인</button>
@@ -42,8 +43,10 @@
 		<label><input type="checkbox" name = "expert_check3">상담전문가의 개인정보보호 의무 안내 및 동의</label>
 		<textarea class="input-form" placeholder="이음약관3"></textarea>
 		<br>
-		<button class="btn bc1 bs5" onclick="location.href='/Expertapply2.do'">다음</button>
+		<input type="hidden" name = "memberNo" value="${sessionScope.member.memberNo}">
+		<button class="btn bc1 bs5" type="submit">다음</button>
 	</div>
+	</form>
 </div>
 
 	

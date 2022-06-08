@@ -107,5 +107,11 @@ public class MemberService {
 		return list;
 	}
 
+	public int insertExpert(Expert ex) {
+		// TODO Auto-generated method stub
+		int result = dao.insertExpert(ex);
+		return result;
+	}
+
 
 }

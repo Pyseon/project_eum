@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.or.eum.report.model.service.ReportService;
+import kr.or.eum.report.model.vo.Report;
 
 @Controller
 public class ReportController {
@@ -12,8 +13,10 @@ public class ReportController {
 	private ReportService service;
 	
 	@RequestMapping(value = "/report.do")
-	public String Report() {
-		return "common/reportFrm";
+	public String insertReport(Report report, String reportRadio) {
+		System.out.println(report);
+		System.out.println(reportRadio);
+		return "redirect:/";
 	}
 	
 }

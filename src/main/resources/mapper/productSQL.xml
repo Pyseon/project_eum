@@ -23,7 +23,7 @@
     p.product_imgpath as productImgPath,
     p.product_Imgename as productImgname
     from product_tbl p
-	<choose>
+<choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
             where product_Category=#{selPro} and product_type = 2
         </when>
@@ -102,13 +102,44 @@
     where rnum between #{start} and #{end}
     </select>
 
-	<!-- 재건 -->
-	<select id="selectTotalCount" resultType="int" parameterType="map">
+<!-- 재건 -->
+	<select id="selectExpTotalCount" resultType="int" parameterType="map">
 		select count(*) from product_tbl
-		<if test="!selPro.equals('전체')">
-		 	where product_type=1 and product_Category = #{selPro}
-		</if>
-  </select>
+		<choose>
+		<when test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro} and product_type = 1
+		</when>
+		<otherwise>
+		where product_type = 1
+		</otherwise>
+		</choose>
+  	</select>
+
+	<!-- 재건 -->
+	<select id="selectClsTotalCount" resultType="int" parameterType="map">
+		select count(*) from product_tbl
+		<choose>
+		<when test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro} and product_type = 2
+		</when>
+		<otherwise>
+		where product_type = 2
+		</otherwise>
+		</choose>
+  	</select>
+  
+  <!-- 재건 -->
+	<select id="selectIdmTotalCount" resultType="int" parameterType="map">
+		select count(*) from product_tbl
+		<choose>
+		<when test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro} and product_type = 3
+		</when>
+		<otherwise>
+		where product_type = 3
+		</otherwise>
+		</choose>
+  	</select>
   
   <insert id="classWrite" parameterType="pro">
   		insert into

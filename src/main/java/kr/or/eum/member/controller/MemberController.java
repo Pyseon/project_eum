@@ -29,6 +29,7 @@ import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -125,7 +126,7 @@ public class MemberController {
 	//재민 구매내역
 	@RequestMapping(value="/Myproject.do")
 	public String Myproject(Model model, HttpSession session, int memberNo) {
-		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
+		ArrayList<Product> list = service.selectMyproject(memberNo);
 		
 		model.addAttribute("list", list);
 		System.out.println(list);

@@ -86,8 +86,27 @@ public class CommunityService {
 		dao.communityDelete(commNo);
 	}
 	
-	public void commCoDelete(int cmntNo) {
-		dao.commCoDelete(cmntNo);
+	public void commCoDelete(int cmntNo, int commNo) {
+		//게시글번호와 댓글번호를 commGroup으로 조회해서 카운팅숫자가 1이면 단독댓글
+		//1보다 크면 대댓글이 있으므로 삭제하지말고 수정으로 바꿈
+		//cmntNo 는 댓글번호 이므로 cmntGroup에 들어가는데 
+		//댓글인경우 cmntNo=cmntGroup이고 / 대댓글이면 원댓글의 cmntNo=cmntGroup이므로 대댓글이 있으면 무조건 2이상 나옴
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("commNo", commNo);
+		map.put("cmntGroup", cmntNo);
+		int result = dao.commentCount(map);
+		
+		//대댓글이 있는 댓글은 삭제시 댓글을 삭제하지않고 내용만 업데이트 해준다
+		
+		if(result > 1) { //대댓글이 있는경우
+			CommunityCo commCo = new CommunityCo();
+			String delCommentMsg = "[사용자가 삭제한 댓글 입니다.]";
+			commCo.setCmntNo(cmntNo);
+			commCo.setCmntContent(delCommentMsg);
+			dao.commCoUpdate(commCo);
+		}else {
+			dao.commCoDelete(cmntNo);
+		}
 	}
 	
 

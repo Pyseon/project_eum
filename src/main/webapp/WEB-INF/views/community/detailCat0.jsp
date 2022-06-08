@@ -7,80 +7,6 @@
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
 <style>
-.reply-btn {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: flex-end;
-}
-
-.comment-btn-wrap {
-	padding-bottom: 10px;
-}
-
-.comment-btn-wrap * {
-	color: #777 !important;
-}
-
-.comment-write {
-	background-color: #f9f9fad;
-	border: 2px solid #ebecef;
-	color: #323232;
-	padding: 15px 6px 6px 20px;
-	margin-bottom: 25px;
-	border-radius: 6px;
-	overflow: hidden;
-}
-
-.comment-write-head {
-	display: flex;
-	justify-content: space-between;
-}
-
-.comment-num-box {
-	color: #757575;
-}
-
-#comment-textarea, #comment-updatearea {
-	resize: none;
-	width: 100%;
-	border: none;
-	overflow: hidden;
-	overflow-wrap: break-word;
-	height: 42.5px;
-	padding-bottom: 8px;
-}
-
-#comment-textarea:focus, #comment-updatearea:focus {
-	outline: none;
-}
-
-.comment-write-btn {
-	float: right;
-	background-color: #cdd8fc;
-	font-family: fs-m !important;
-	color: #1a73e8 !important;
-	padding: 4px 12px !important;
-}
-
-.comment-update2-btn {
-	float: left;
-	background-color: #f0f0f0;
-	color: #777 !important;
-	padding: 4px 12px !important;
-	margin-right: 5px;
-}
-
-.comment-cancel-btn {
-	float: left;
-	background-color: #f0f0f0;
-	color: #777 !important;
-	padding: 4px 12px !important;
-}
-
-.autosize {
-	min-height: 50px;
-}
 </style>
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -214,9 +140,11 @@
 											<p class="date fs-light">${cmnt.cmntDate }</p>
 										</div>
 									</div>
+									<c:if test="${not empty sessionScope.member }">
 									<div class="reply-btn">
 										<a href="javascript:void(0);" class="btn-reply replyBtn" 
 										onclick="replyFrm(1, ${cmnt.cmntNo}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
+										<c:if test="${sessionScope.member.memberNo eq cmnt.memberNo }">
 										<div class="comment-btn-wrap">
 											<input type="hidden" class="reply-cmnt-no"
 												value="${cmnt.cmntNo}"> 
@@ -226,7 +154,9 @@
 											<span>|</span> 
 											<a href="javascript:void(0);" class="comment-del-btn"> 삭제</a>
 										</div>
-									</div>
+										</c:if>
+									</div> <!-- reply-btn -->
+									</c:if>
 								</div>
 							</div>
 							<!--comment end-->
@@ -263,12 +193,14 @@
 											<p class="date fs-light">${cmnt.cmntDate }</p>
 										</div>
 									</div>
+									<c:if test="${not empty sessionScope.member }">
 									<div class="reply-btn">
 										<input type="hidden" class="reply-cmnt-no"
 											value="${cmnt.cmntNo}"> <input type="hidden"
 											class="reply-writer-no" value="${cmnt.memberNo}"> <a
 											href="javascript:void(0);" class="btn-reply re-replyBtn"
 											onclick="replyFrm(2, ${cmnt.cmntRef}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
+										<c:if test="${sessionScope.member.memberNo eq cmnt.memberNo }">
 										<div class="comment-btn-wrap">
 											<input type="hidden" class="reply-cmnt-no"
 												value="${cmnt.cmntNo}"> 
@@ -277,7 +209,9 @@
 											<a href="javascript:void(0);" class="comment-update-btn">수정 </a> <span>|</span>
 											<a href="javascript:void(0);" class="comment-del-btn"> 삭제</a>
 										</div>
+										</c:if>
 									</div>
+									</c:if>
 								</div>
 							</div>
 							<!--Re-comment end-->
@@ -285,6 +219,7 @@
 					</c:choose>
 				</c:forEach>
 			</div>
+			<c:if test="${not empty sessionScope.member }">
 			<div class="comment-write">
 				<!-- 댓글 참고 data -->
 				<input type="hidden" id="writerNo" value="${comm.memberNo}">
@@ -305,7 +240,7 @@
 				<button type="button" id="comment-reg" disabled
 					class="comment-write-btn btn fc-7">등록</button>
 			</div>
-
+			</c:if>
 		</div>
 		<!--comment-area-->
 		<!-- comment end -->
@@ -404,7 +339,7 @@ $(function(){
 		writeHtml += '<span style="font-family: fs-m; margin:0 0 8px 0; padding-left:2px;">댓글 수정</span>';
 		writeHtml += '<span class="comment-num-box"><span id="UpdateComment-num">0</span>/250</span>';
 		writeHtml += '</div>';
-		writeHtml += '<textarea id="comment-updatearea" placeholder="댓글 입력" onkeyup="resize(this)" onkeydown="resize(this)" maxlength="250"></textarea>';
+		writeHtml += '<textarea id="comment-updatearea" placeholder="댓글 입력" onkeyup="resizeUpdatearea(this)" onkeydown="resizeUpdatearea(this)" maxlength="250"></textarea>';
 		writeHtml += '<div style="float: right;">';
 		writeHtml += '<button type="button" id="comment-update-btn" class="comment-write-btn btn fll" disabled>수정</button>';
 		writeHtml += '<button type="button" class="comment-cancel-btn btn fc-7">취소</button>';
@@ -451,14 +386,15 @@ $(function(){
 	
 	$(document).on('click', ".comment-del-btn", function(){
 		let deleteCmntNo = $(this).prev().prev().prev().prev().val();
-		alertFire(deleteCmntNo);
+		let deleteCommNo = $("#commNo").val();
+		alertFire(deleteCmntNo, deleteCommNo);
 	});
 	
 	//alert 함수 띄우기
-	function alertFire(deleteCmntNo){
+	function alertFire(deleteCmntNo, deleteCommNo){
 	  	const alertResult = Swal.fire({
 		    title: '댓글을 삭제 하시겠습니까?',
-		    text: "                         ",
+		    text: "답글이 있는경우 댓글 내용만 삭제 됩니다.",
 		    icon: 'warning',
 		    showCancelButton: true,
 		    confirmButtonColor: '#3085d6',
@@ -466,7 +402,6 @@ $(function(){
 		    confirmButtonText: '삭제하기',
 		    cancelButtonText: '취소'
 	 	}).then(result => {
-	 	   // 만약 Promise리턴을 받으면,
 	 	   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
 	 	   		console.log("삭제할게!");
 	 	   		console.log("삭제댓글번호 > "+deleteCmntNo);
@@ -485,7 +420,7 @@ $(function(){
 	 	   		//그냥 삭제할때
 	 	   		$.ajax({
 	 	   			url: "/commCoDelete.do",
-	 	   			data: {cmntNo:deleteCmntNo},
+	 	   			data: {cmntNo:deleteCmntNo, commNo:deleteCommNo},
 		 	   		success:function(data){
 						$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
 						$("#cmnt-total").load(location.href + " #cmnt-total");
@@ -619,9 +554,9 @@ function resize(obj) {
     var str = $("#comment-textarea").val();
     var str_arr = str.split("\n");  // 줄바꿈 기준으로 나눔 
     var row = str_arr.length;  // row = 줄 수 
-    if(row >10){
+    if(row >5){
    		 //마지막 입력문자 삭제
-   		var title = "10줄 이상 작성할 수 없습니다.";
+   		var title = "5줄 이상 작성할 수 없습니다.";
     	var icon = "error";
     	toastShow(title,icon);
 	    var lastChar = str.slice(0,-1); //열 
@@ -635,15 +570,15 @@ function resizeUpdatearea(obj) {
     obj.style.height = (12 + obj.scrollHeight) + 'px';
     
     //5줄 이상 입력하면 알림창 띄우도록
-    var str = $("#comment-updatearea").val();
-    var str_arr = str.split("\n");  // 줄바꿈 기준으로 나눔 
-    var row = str_arr.length;  // row = 줄 수 
-    if(row >10){
+    var str2 = $("#comment-updatearea").val();
+    var str2_arr = str2.split("\n");  // 줄바꿈 기준으로 나눔 
+    var row2 = str2_arr.length;  // row = 줄 수 
+    if(row2 >5){
    		 //마지막 입력문자 삭제
-   		var title = "10줄 이상 작성할 수 없습니다.";
+   		var title = "5줄 이상 작성할 수 없습니다.";
     	var icon = "error";
     	toastShow(title,icon);
-	    var lastChar = str.slice(0,-1); //열 
+	    var lastChar = str2.slice(0,-1); //열 
 	    $("#comment-updatearea").val(lastChar)
     }
     

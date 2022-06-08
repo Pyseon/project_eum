@@ -16,4 +16,6 @@ public class Answer {
 	private String ansEmail;
 	private String ansDate;
 	private int ansState;
+	
+	private String memberNick;
 }

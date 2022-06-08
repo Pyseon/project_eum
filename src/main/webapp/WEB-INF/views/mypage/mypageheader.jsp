@@ -20,6 +20,7 @@
 			<li><a href="/Myreview.do?memberNo=${sessionScope.member.memberNo}">내리뷰</a></li>
 			
 			<li><a href="/Myproject.do?memberNo=${sessionScope.member.memberNo}">내프로젝트</a></li>
+			<li><a href="/myQuestionList.do?memberNo=${sessionScope.member.memberNo}&reqPage=1&selectNum=0">1:1 문의 내역</a></li> <!-- 영준 -->
 		</ul>
 	</nav>
 </div>

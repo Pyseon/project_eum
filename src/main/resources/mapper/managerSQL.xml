@@ -586,29 +586,6 @@
 			where (select ans_state from question_tbl where answer_tbl.qst_no = question_tbl.qst_no) = #{selectNum}
 		</if>
 	</select>
-	
-	<select id="qstPageData" parameterType="map" resultType="q">
-		select * from
-		(select rownum as rnum, qst.* from
-		(select
-			qst_no as qstNo,
-			qst_title as qstTitle,
-			ans_state as ansState,
-			qst_date as qstDate
-			from question_tbl
-		<if test="selectNum != 0">
-			where ans_state = #{selectNum }
-		</if>
-		order by qst_no desc) qst)
-		where rnum between #{start} and #{end}
-	</select>
-	<select id="qstCount" parameterType="map" resultType="int">
-		select count(*) from
-		question_tbl
-		<if test="selectNum != 0">
-			where ans_state = #{selectNum }
-		</if>
-	</select>
 	<select id="selectQst" parameterType="int" resultType="q">
 		select
 			qst_no as qstNo,
@@ -619,4 +596,65 @@
 			from question_tbl
 			where qst_no = #{value }
 	</select>
+	<select id="selectAns" parameterType="int" resultType="ans">
+		select
+			(select member_nick from member_tbl m where ans.member_no = m.member_no) as memberNick,
+			ans_title as ansTitle,
+			ans_content as ansContent
+			from answer_tbl ans
+			where qst_no = #{value }
+	</select>
+	<insert id="insertAnswer" parameterType="map">
+		insert into answer_tbl values(answer_seq.nextval, #{qstNo}, #{memberNo}, #{ansTitle}, #{ansContent}, to_char(sysdate,'yyyy-mm-dd-hh24-mi'))
+	</insert>
+	<update id="updateAnsState" parameterType="int">
+		update question_tbl set ans_state = 1 where qst_no = #{value } 
+	</update>
+	
+	<select id="qstPageData" parameterType="map" resultType="q">
+		select * from
+		(select rownum as rnum, qst.* from
+		(select
+			qst_no as qstNo,
+			qst_title as qstTitle,
+			ans_state as ansState,
+			qst_date as qstDate
+			from question_tbl
+			<if test="selectNum != 0">
+				where ans_state = 0
+			</if>
+		order by qst_no desc) qst)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="qstCount" parameterType="map" resultType="int">
+		select count(*) from
+		question_tbl
+		<if test="selectNum != 0">
+			where ans_state = 0
+		</if>
+	</select>
+	
+	<select id="myQstPageData" parameterType="map" resultType="q">
+		select * from
+		(select rownum as rnum, qst.* from
+		(select
+			qst_no as qstNo,
+			qst_title as qstTitle,
+			ans_state as ansState,
+			qst_date as qstDate
+			from question_tbl
+			where member_no = #{memberNo }
+		order by qst_no desc) qst)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="myQstCount" parameterType="map" resultType="int">
+		select count(*) from
+		question_tbl
+		<if test="selectNum != 0">
+			where member_no = #{memberNo }
+		</if>
+	</select>
+	<insert id="insertQuestion" parameterType="map">
+		insert into question_tbl values(question_seq.nextval, #{memberNo}, #{qstTitle}, #{qstContent}, to_char(sysdate,'yyyy-mm-dd-hh24-mi'), 0)
+	</insert>
 </mapper>

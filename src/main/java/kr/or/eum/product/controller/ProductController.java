@@ -87,9 +87,14 @@ public class ProductController{
             member = (Member)session.getAttribute("member");
         }
         int memberNo = member.getMemberNo();
+    
         Expert expert = productService.selectExpertNo(memberNo);
+        model.addAttribute("memberNo", member.getMemberNo());
         model.addAttribute("expertNo", expert.getExpertNo());
+        System.out.println("memberNo : "+member.getMemberNo());
         System.out.println("expert : "+expert);
+        
+ 
 		return "product/classWriterFrm";
 	}
 	

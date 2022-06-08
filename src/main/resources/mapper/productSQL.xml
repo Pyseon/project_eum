@@ -4,25 +4,30 @@
 <mapper namespace="product">
 	<!-- 재건 -->
 	<select id="selectClassList" resultType="pro">
-	select * from
-		(select rownum as rnum, b.* from
-		(select
-    p.product_no as productNo,
-    p.expert_no as expertNo,
-    (select expert_name from expert_tbl m where p.expert_no = m.member_no) as expertName,
-    (select member_picturepath from member_tbl m where p.expert_no = m.member_no) as memberPicturePath,
-    p.product_Category as productCategory,
-    p.product_title as productTitle,
-    p.product_intro as productIntro,
-    p.product_tag as productTag,
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
     cost,
     sale,
     (cost)*(sale)/100 as salecost,
-    (select nvl(count(*),0) from review_tbl rev where p.product_no = rev.product_no) as revCount,
-   (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
-    p.product_imgpath as productImgPath,
-    p.product_Imgename as productImgname
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
     from product_tbl p
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
 <choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
             where product_Category=#{selPro} and product_type = 2
@@ -31,74 +36,82 @@
             where product_type = 2
         </otherwise>
     </choose>
-    order by p.product_no desc)b)
+    order by product_no desc)b)
     where rnum between #{start} and #{end}
     </select>
     
     <!-- 재건 -->
 	<select id="selectExpertList" resultType="pro">
-	select * from
-		(select rownum as rnum, b.* from
-		(select
-    p.product_no as productNo,
-    p.expert_no as expertNo,
-    (select expert_name from expert_tbl m where p.expert_no = m.member_no) as expertName,
-    (select member_picturepath from member_tbl m where p.expert_no = m.member_no) as memberPicturePath,
-    (select member_no from member_tbl m where p.expert_no = m.member_no) as memberNo,
-    p.product_Category as productCategory,
-    p.product_title as productTitle,
-    p.product_intro as productIntro,
-    p.product_tag as productTag,
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
     cost,
     sale,
     (cost)*(sale)/100 as salecost,
-    (select nvl(count(*),0) from review_tbl rev where p.product_no = rev.product_no) as revCount,
-   (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
-    p.product_imgpath as productImgPath,
-    p.product_Imgename as productImgname
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
     from product_tbl p
-	<choose>
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
+<choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
-            where product_Category=#{selPro} and product_type = 1
+            where product_Category=#{selPro} and product_type = 2
         </when>
         <otherwise>
             where product_type = 1
         </otherwise>
     </choose>
-    order by p.product_no desc)b)
+    order by product_no desc)b)
     where rnum between #{start} and #{end}
     </select>
     
     <select id="selectIdeamarketList" resultType="pro">
-	select * from
-		(select rownum as rnum, b.* from
-		(select
-    p.product_no as productNo,
-    p.expert_no as expertNo,
-    (select expert_name from expert_tbl m where p.expert_no = m.member_no) as expertName,
-    (select member_picturepath from member_tbl m where p.expert_no = m.member_no) as memberPicturePath,
-    (select member_no from member_tbl m where p.expert_no = m.member_no) as memberNo,
-    p.product_Category as productCategory,
-    p.product_title as productTitle,
-    p.product_intro as productIntro,
-    p.product_tag as productTag,
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
     cost,
     sale,
     (cost)*(sale)/100 as salecost,
-    (select nvl(count(*),0) from review_tbl rev where p.product_no = rev.product_no) as revCount,
-   (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
-    p.product_imgpath as productImgPath,
-    p.product_Imgename as productImgname
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
     from product_tbl p
-	<choose>
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
+<choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
-            where product_Category=#{selPro} and product_type = 3
+            where product_Category=#{selPro} and product_type = 2
         </when>
         <otherwise>
             where product_type = 3
         </otherwise>
     </choose>
-    order by p.product_no desc)b)
+    order by product_no desc)b)
     where rnum between #{start} and #{end}
     </select>
 
@@ -368,6 +381,11 @@
 	<select id="selectExpertNo" parameterType="int" resultType="expert">
 		select expert_no as expertNo
 		from expert_tbl where member_no=#{memberNo}
+	</select>
+	
+	<select id="selectMemberNo" parameterType="int" resultType="member">
+		select member_no as memberNo
+		from member_tbl where member_no=#{memberNo}
 	</select>
 	
 

@@ -73,6 +73,12 @@ public class ProductDao {
 		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
 		return expert;
 	}
+	
+	public Member selectMemberNo(int memberNo) {
+		Member member = sqlSession.selectOne("product.selectMemberNo", memberNo);
+		return member;
+	}
+	
 	public ArrayList<Product> selectIdeamarketList(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("product.selectIdeamarketList", map);
 		return (ArrayList<Product>)list;

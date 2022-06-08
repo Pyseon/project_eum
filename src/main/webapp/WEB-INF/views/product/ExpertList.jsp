@@ -213,6 +213,7 @@ li{
           </table>
    </div>
    <div class="container">
+   테스트용 아이디 : eom15@gmail.com 비밀번호 :1234
 	<c:if test="${grade eq null}">
 		<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
 	</c:if>

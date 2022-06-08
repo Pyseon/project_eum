@@ -179,8 +179,8 @@ public class CommunityController {
 
 	@ResponseBody
 	@RequestMapping(value = "/commCoDelete.do")
-	public void commCoDelete(int cmntNo) {
-		service.commCoDelete(cmntNo);
+	public void commCoDelete(int cmntNo, int commNo) {
+		service.commCoDelete(cmntNo, commNo);
 	}
 	
 	

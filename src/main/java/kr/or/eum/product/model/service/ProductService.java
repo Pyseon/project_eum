@@ -256,6 +256,7 @@ public class ProductService {
 	}
 	
 	public Product setToken(Product pro) {
+		
 		String productQst = pro.getProductQst();
 		List<String> qstList = new ArrayList<String>();
 		String []tokens=productQst.split("\\|");
@@ -273,12 +274,12 @@ public class ProductService {
 		productQst = "";
 		
 		for(int i=0;i<qstList.size();i++){
-			productQst += qstList.get(i)+"|";
+			productQst += qstList.get(i)+"/";
 		}
+		
 		
 		String productAns = pro.getProductAns();
 		List<String> ansList = new ArrayList<String>();
-			
 		String []tokens2=productAns.split("\\|");
 		for(int i=0;i<tokens2.length;i++){
 			if(tokens2[i] == null || tokens2[i].trim().length() < 2) {
@@ -291,15 +292,38 @@ public class ProductService {
 			}
 		}
 		productAns = "";
-		
 		for(int i=0;i<ansList.size();i++){
-			productAns += ansList.get(i)+"|";
+			productAns += ansList.get(i)+"/";
 		}
+		
+		
+		String productTag = pro.getProductTag();
+		List<String> tagList = new ArrayList<String>();
+		String []tokens3=productTag.split("\\|");
+		for(int i=0;i<tokens3.length;i++){
+			if(tokens3[i] == null || tokens3[i].trim().length() < 2) {
+			}else {
+				if(tokens3[i].indexOf(",") == 0) {
+					tagList.add(tokens3[i].replaceFirst(",", ""));
+				}else {
+					tagList.add(tokens3[i].trim());
+				}
+			}
+		}
+		productTag = "";
+		for(int i=0;i<tagList.size();i++){
+			productTag += "#"+tagList.get(i)+"/";
+		}
+		
+	
+		
 		System.out.println("최종값>>"+productQst);
 		System.out.println("최종값>>"+productAns);
+		System.out.println("최종값>>"+productTag);
 		
 		pro.setProductQst(productQst);
 		pro.setProductAns(productAns);
+		pro.setProductTag(productTag);
 		
 		return pro;
 	}
@@ -460,6 +484,10 @@ public class ProductService {
 
 	public Expert selectExpertNo(int memberNo) {
 		return productDao.selectExpertNo(memberNo);
+	}
+	
+	public Member selectMemberNo(int memberNo) {
+		return productDao.selectMemberNo(memberNo);
 	}
 
 	//윤지

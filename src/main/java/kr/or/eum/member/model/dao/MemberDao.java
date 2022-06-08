@@ -12,6 +12,7 @@ import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -105,9 +106,9 @@ public class MemberDao {
 		return expertM;
   }
   
-	public ArrayList<Product> selectMyproject(int memberNo) {
+	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
 		List list = sqlSession.selectList("member.selectMyproject",memberNo); 
-		return (ArrayList<Product>)list;
+		return (ArrayList<ProductAndExpert>)list;
 	}
 	public int insertExpert(Expert ex) {
 		

@@ -222,4 +222,8 @@
         on e.member_no = m.member_no
         where review_no=#{reviewNo}
 	</select>
+	
+	<insert id="insertReport" parameterType="rpt">
+		insert into report_tbl values(report_seq.nextval, #{defendant}, #{plaintiff},#{reportContent},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{reportCategory},#{reportIndex},#{reportTitle},0)
+	</insert>
 </mapper>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 
 import kr.or.eum.manager.model.service.ManagerService;
+import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
 import kr.or.eum.manager.model.vo.MemberChart;
@@ -225,5 +226,53 @@ public class ManagerController {
 		Question qst = service.selectQst(qstNo);
 		model.addAttribute("qst", qst);
 		return "manager/insertAnswerFrm";
+	}
+	@RequestMapping(value = "/insertAnswer.do")
+	public String insertAnswer(HttpServletRequest request, int qstNo, String ansTitle, String ansContent) {
+		HttpSession session = request.getSession(false);
+		Member member = (Member)session.getAttribute("member");
+		HashMap<String, Object> answer = new HashMap<String, Object>();
+		answer.put("memberNo", member.getMemberNo());
+		answer.put("qstNo", qstNo);
+		answer.put("ansTitle", ansTitle);
+		answer.put("ansContent", ansContent);
+		int result = service.insertAnswer(answer);
+		int reulst2 = service.updateAnsState(qstNo);
+		return "redirect:/manaQuestion.do?reqPage=1&selectNum=0";
+	}
+	@RequestMapping(value = "/myQuestionList.do")
+	public String myQuestionList(HttpSession session, int memberNo, Model model,int reqPage,int selectNum) {
+		String wherePage = "myQuestionList.do";
+		String searchType = null;
+		String keyword = Integer.toString(memberNo);
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", qpd.get("qstList"));
+		model.addAttribute("pageNavi", qpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "mypage/myQuestionList";
+	}
+	@RequestMapping(value = "/insertQuestionFrm.do")
+	public String insertQuestionFrm(HttpSession session, Model model) {
+		return "mypage/insertQuestionFrm";
+	}
+	@RequestMapping(value = "/insertQuestion.do")
+	public String insertQuestion(HttpServletRequest request, String qstTitle, String qstContent) {
+		HttpSession session = request.getSession(false);
+		Member member = (Member)session.getAttribute("member");
+		HashMap<String, Object> qst = new HashMap<String, Object>();
+		qst.put("memberNo", member.getMemberNo());
+		qst.put("qstTitle", qstTitle);
+		qst.put("qstContent", qstContent);
+		int result = service.insertQuestion(qst);
+		return "redirect:/myQuestionList.do?reqPage=1&selectNum=0&memberNo="+member.getMemberNo();
+	}
+	@RequestMapping(value = "/detailQuestion.do")
+	public String detailQuestion(int qstNo, Model model) {
+		Question qst = service.selectQst(qstNo);
+		Answer ans = service.selectAns(qstNo);
+		model.addAttribute("qst", qst);
+		model.addAttribute("ans", ans);
+		return "mypage/detailQuestion";
 	}
 }

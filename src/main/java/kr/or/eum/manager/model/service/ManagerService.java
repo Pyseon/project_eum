@@ -108,9 +108,16 @@ public class ManagerService {
 			pageData.put("answerList", answerList);
 			break;
 		case "manaQuestion.do":
-			ArrayList<Question> qstList = new ArrayList<Question>();
-			qstList = dao.qstPageData(pageMap);
+			ArrayList<Question> qst = new ArrayList<Question>();
+			qst = dao.qstPageData(pageMap);
 			totalCount = dao.qstCount(pageMap);
+			pageData.put("qstList", qst);
+			break;
+		case "myQuestionList.do":
+			ArrayList<Question> qstList = new ArrayList<Question>();
+			pageMap.put("memberNo", keyword);
+			qstList = dao.myQstPageData(pageMap);
+			totalCount = dao.myQstCount(pageMap);
 			pageData.put("qstList", qstList);
 			break;
 		}
@@ -323,6 +330,22 @@ public class ManagerService {
 
 	public Question selectQst(int qstNo) {
 		return dao.selectQst(qstNo);
+	}
+
+	public int insertAnswer(HashMap<String, Object> answer) {
+		return dao.insertAnswer(answer);
+	}
+
+	public int updateAnsState(int qstNo) {
+		return dao.updateAnsState(qstNo);
+	}
+
+	public int insertQuestion(HashMap<String, Object> qst) {
+		return dao.insertQuestion(qst);
+	}
+
+	public Answer selectAns(int qstNo) {
+		return dao.selectAns(qstNo);
 	}
 	
 	

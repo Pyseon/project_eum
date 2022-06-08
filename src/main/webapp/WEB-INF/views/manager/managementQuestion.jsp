@@ -22,8 +22,8 @@
 				<tr class="tr-1">
 					<th>번호</th>
 					<th>질문번호</th>
+					<th>제목</th>
 					<th>일자</th>
-					<th>시간</th>
 					<th>답변상태</th>
 					<th>답변하기</th>
 				</tr>
@@ -31,8 +31,8 @@
 					<tr class="tr-2">
 						<td>${(reqPage-1)*10 + i.count }</td>
 						<td>${q.qstNo }</td>
+						<td>${q.qstTitle }</td>
 						<td>${q.qstDate.substring(0,10) }</td>
-						<td>${q.qstDate.substring(11,16) }</td>
 						<td>${q.ansState }</td>
 						<td><button onclick="location.href='/insertAnswerFrm.do?qstNo=${q.qstNo}'">답변하기</button></td>
 					</tr>

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class Product {
 	
 	private int productNo;
+	private int memberNo;
 	private int expertNo;
 	private int productType;
 	private String expertName;
@@ -27,6 +28,7 @@ public class Product {
 	private double reviewStar;
 	private int revCount;
 	private int productOption;
+	private String productImgname;
 	private String  productImgPath;
 	private String memberPicturepath;
 	

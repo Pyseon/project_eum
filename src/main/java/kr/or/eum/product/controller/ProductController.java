@@ -2,9 +2,13 @@ package kr.or.eum.product.controller;
 
 import kr.or.eum.member.model.vo.Member;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +35,6 @@ import com.google.gson.JsonObject;
 
 import kr.or.eum.member.model.service.MemberService;
 import kr.or.eum.member.model.vo.Expert;
-import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.product.model.service.ProductService;
 import kr.or.eum.product.model.vo.Product;
@@ -50,63 +53,313 @@ public class ProductController{
 	private ProductService productService;
 	
 	@RequestMapping(value="/ClassList.do")
-	public String productList(int reqPage, String selPro, Model model) {
+	public String ClassList(int reqPage, String selPro, Model model, HttpServletRequest request) {
 		ProductPageData ppd = productService.selectClassList(reqPage, selPro);
+
 		model.addAttribute("list",ppd.getList());
 		model.addAttribute("selPro", selPro);
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
 		System.out.println("selPro : "+selPro);
+		
+		HttpSession session = request.getSession(false);
+        Member member = null;
+        if(session != null) {
+            member = (Member)session.getAttribute("member");
+        }
+        if(member != null) {
+        	model.addAttribute("grade", member.getGrade());
+			model.addAttribute("memberNo", member.getMemberNo());
+			System.out.println("memberNo : "+member.getMemberNo());
+			System.out.println("grade : "+member.getGrade());
+
+		}else {
+			model.addAttribute("memberNo", 0);
+		}
+
+
 		return "product/ClassList";
 	}
-	@RequestMapping(value="/productWriterFrm.do")
-		public String productWriterFrm(HttpServletRequest request, Model model) {
+	@RequestMapping(value="/classWriterFrm.do")
+		public String classWriterFrm(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
         Member member = null;
         if(session != null) {
             member = (Member)session.getAttribute("member");
         }
         int memberNo = member.getMemberNo();
+    
         Expert expert = productService.selectExpertNo(memberNo);
+        model.addAttribute("memberNo", member.getMemberNo());
         model.addAttribute("expertNo", expert.getExpertNo());
-		return "product/productWriterFrm";
+        System.out.println("memberNo : "+member.getMemberNo());
+        System.out.println("expert : "+expert);
+        
+ 
+		return "product/classWriterFrm";
 	}
 	
-	@RequestMapping(value="/productWrite.do")
-		public String productWrite(Product pro) {
+	@RequestMapping(value="/classWrite.do")
+		public String classWrite(Product pro, MultipartFile file, HttpServletRequest request) {
+		System.out.println(pro.getProductImgname());
+		System.out.println(pro.getProductImgPath());
+		System.out.println(file.getOriginalFilename());
+		String savePath 
+		= request.getSession().getServletContext().getRealPath("/img/product/ClassList/");
+		
+		//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
+		//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
+		//사용자가 업로드한 파일 이름
+		String filename = file.getOriginalFilename();
+		//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
+		//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
+		//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
+		//매개변수가 하나면 매개변수부터 잘라서 반환
+		String onlyFilename = filename.substring(0, filename.lastIndexOf("."));
+		String extension = filename.substring(filename.lastIndexOf("."));
+		//실제 업로드할 파일명을 저장할 변수
+		String filepath = null;
+		//파일명 중복시 뒤에 붙일 숫자 변수
+		int count = 0;
+		while(true) {
+			if(count == 0) {
+				//반복 첫번째 회차에서는 원본파일명을 그대로 적용
+				filepath = onlyFilename + extension; //test.txt
+			}
+			File checkFile = new File(savePath+filepath);
+			if(!checkFile.exists()) { //경로에 파일이 존재하지않으면 (exists() method 사용)
+				break; //겹치지않으면 >> while 문 종료
+			}else {
+				filepath = onlyFilename + "_" + count + extension;
+			}
+			count++; //존재하면 카운트를 ++ 하고 반복문 다시 실행
+		}
+		//파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
+		//해당파일 업로드 작업
+		try {
+			//중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
+			FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+			//업로드 속도증가를 위한 보조스트림 생성
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			//파일 업로드
+			byte[] bytes = file.getBytes();
+			bos.write(bytes);
+			bos.close();
+			
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		pro.setProductImgname(filename);
+		pro.setProductImgPath(filepath);
+		
 		System.out.println(pro);
-		return "product/productWriterFrm";
+		
+		int result = productService.classWrite(pro);
+		
+		return "redirect:/ClassList.do?reqPage=1&selPro=전체";
 		
 	}
-	/*
-	@ResponseBody
-	@RequestMapping(value="/uploadSummernoteImageFile.do", produces="application/json; charset=utf8")
-	public String uploadSummernoteImageFile(@RequestParam("file") MultipartFile multipartFile, HttpServletRequest request )  {
-		JsonObject jsonObject = new JsonObject();
+	
+	@RequestMapping(value="/ExpertList.do")
+	public String expertList(int reqPage, String selPro, Model model, HttpServletRequest request) {
+		ProductPageData ppd = productService.selectExpertList(reqPage, selPro);
+		model.addAttribute("list",ppd.getList());
+		model.addAttribute("selPro", selPro);
+		model.addAttribute("pageNavi",ppd.getPageNavi());
+		model.addAttribute("reqPage", reqPage);
+		System.out.println("selPro : "+selPro);
 		
-		String contextRoot = new HttpServletRequestWrapper(request).getRealPath("/");
-		String fileRoot = contextRoot+"resources/fileupload/";
+		HttpSession session = request.getSession(false);
+        Member member = null;
+        if(session != null) {
+            member = (Member)session.getAttribute("member");
+        }
+        if(member != null) {
+        	model.addAttribute("grade", member.getGrade());
+			model.addAttribute("memberNo", member.getMemberNo());
+			System.out.println("memberNo : "+member.getMemberNo());
+			System.out.println("grade : "+member.getGrade());
+
+		}else {
+			model.addAttribute("memberNo", 0);
+		}
+		return "product/ExpertList";
+	}
+	
+	@RequestMapping(value="/expertWriterFrm.do")
+	public String expertWriterFrm(int reqPage, String selPro, Model model, HttpServletRequest request) {
+	HttpSession session = request.getSession(false);
+    Member member = null;
+    if(session != null) {
+        member = (Member)session.getAttribute("member");
+    }
+    int memberNo = member.getMemberNo();
+    Expert expert = productService.selectExpertNo(memberNo);
+    model.addAttribute("expertNo", expert.getExpertNo());
+    System.out.println("expert : "+expert);
+	return "product/expertWriterFrm";
+}
+
+@RequestMapping(value="/expertWrite.do")
+	public String expertWrite(Product pro, MultipartFile file, HttpServletRequest request) {
+	System.out.println(pro.getProductImgname());
+	System.out.println(pro.getProductImgPath());
+	System.out.println(file.getOriginalFilename());
+	String savePath 
+	= request.getSession().getServletContext().getRealPath("/img/product/ExpertList/");
+	
+	//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
+	//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
+	//사용자가 업로드한 파일 이름
+	String filename = file.getOriginalFilename();
+	//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
+	//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
+	//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
+	//매개변수가 하나면 매개변수부터 잘라서 반환
+	String onlyFilename = filename.substring(0, filename.lastIndexOf("."));
+	String extension = filename.substring(filename.lastIndexOf("."));
+	//실제 업로드할 파일명을 저장할 변수
+	String filepath = null;
+	//파일명 중복시 뒤에 붙일 숫자 변수
+	int count = 0;
+	while(true) {
+		if(count == 0) {
+			//반복 첫번째 회차에서는 원본파일명을 그대로 적용
+			filepath = onlyFilename + extension; //test.txt
+		}
+		File checkFile = new File(savePath+filepath);
+		if(!checkFile.exists()) { //경로에 파일이 존재하지않으면 (exists() method 사용)
+			break; //겹치지않으면 >> while 문 종료
+		}else {
+			filepath = onlyFilename + "_" + count + extension;
+		}
+		count++; //존재하면 카운트를 ++ 하고 반복문 다시 실행
+	}
+	//파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
+	//해당파일 업로드 작업
+	try {
+		//중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
+		FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+		//업로드 속도증가를 위한 보조스트림 생성
+		BufferedOutputStream bos = new BufferedOutputStream(fos);
+		//파일 업로드
+		byte[] bytes = file.getBytes();
+		bos.write(bytes);
+		bos.close();
 		
-		String originalFileName = multipartFile.getOriginalFilename();
-		String extension = originalFileName.substring(originalFileName.lastIndexOf("."));
-		
-		String savedFileName = UUID.randomUUID() + extension;
-		File targetFile = new File(fileRoot + savedFileName);
-		try {
-			InputStream fileStream = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(fileStream, targetFile);
-			jsonObject.addProperty("url", "/summernote/resources/fileupload/"+savedFileName);
-			jsonObject.addProperty("responseCode", "success");
-			
-	} catch (IOException e) {
-		FileUtils.deleteQuietly(targetFile);
-		jsonObject.addProperty("responseCode", "error");
+	}catch (FileNotFoundException e) {
+		e.printStackTrace();
+	}catch (IOException e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-		String a = jsonObject.toString();
-		return a;
+	
+	pro.setProductImgname(filename);
+	pro.setProductImgPath(filepath);
+	
+	System.out.println(pro);
+	
+	int result = productService.expertWrite(pro);
+	
+	return "redirect:/ExpertList.do?reqPage=1&selPro=전체";
+	
+}	
+
+@RequestMapping(value="/IdeamarketList.do")
+public String IdeamarketList(int reqPage, String selPro, Model model, HttpServletRequest request) {
+	ProductPageData ppd = productService.selectIdeamarketList(reqPage, selPro);
+
+	model.addAttribute("list",ppd.getList());
+	model.addAttribute("selPro", selPro);
+	model.addAttribute("pageNavi",ppd.getPageNavi());
+	model.addAttribute("reqPage", reqPage);
+	System.out.println("selPro : "+selPro);
+
+	return "product/IdeamarketList";
+}
+@RequestMapping(value="/ideamarketWriterFrm.do")
+	public String ideamarketWriterFrm(HttpServletRequest request, Model model) {
+	HttpSession session = request.getSession(false);
+    Member member = null;
+    if(session != null) {
+        member = (Member)session.getAttribute("member");
+    }
+    int memberNo = member.getMemberNo();
+    Expert expert = productService.selectExpertNo(memberNo);
+    model.addAttribute("expertNo", expert.getExpertNo());
+    System.out.println("expert : "+expert);
+	return "product/ideamarketWriterFrm";
+}
+
+@RequestMapping(value="/ideamarketWrite.do")
+	public String ideamarketWrite(Product pro, MultipartFile file, HttpServletRequest request) {
+	System.out.println(pro.getProductImgname());
+	System.out.println(pro.getProductImgPath());
+	System.out.println(file.getOriginalFilename());
+	String savePath 
+	= request.getSession().getServletContext().getRealPath("/img/product/IdeamarketList/");
+	
+	//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
+	//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
+	//사용자가 업로드한 파일 이름
+	String filename = file.getOriginalFilename();
+	//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
+	//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
+	//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
+	//매개변수가 하나면 매개변수부터 잘라서 반환
+	String onlyFilename = filename.substring(0, filename.lastIndexOf("."));
+	String extension = filename.substring(filename.lastIndexOf("."));
+	//실제 업로드할 파일명을 저장할 변수
+	String filepath = null;
+	//파일명 중복시 뒤에 붙일 숫자 변수
+	int count = 0;
+	while(true) {
+		if(count == 0) {
+			//반복 첫번째 회차에서는 원본파일명을 그대로 적용
+			filepath = onlyFilename + extension; //test.txt
+		}
+		File checkFile = new File(savePath+filepath);
+		if(!checkFile.exists()) { //경로에 파일이 존재하지않으면 (exists() method 사용)
+			break; //겹치지않으면 >> while 문 종료
+		}else {
+			filepath = onlyFilename + "_" + count + extension;
+		}
+		count++; //존재하면 카운트를 ++ 하고 반복문 다시 실행
 	}
-	*/
+	//파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
+	//해당파일 업로드 작업
+	try {
+		//중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
+		FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+		//업로드 속도증가를 위한 보조스트림 생성
+		BufferedOutputStream bos = new BufferedOutputStream(fos);
+		//파일 업로드
+		byte[] bytes = file.getBytes();
+		bos.write(bytes);
+		bos.close();
+		
+	}catch (FileNotFoundException e) {
+		e.printStackTrace();
+	}catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	pro.setProductImgname(filename);
+	pro.setProductImgPath(filepath);
+	
+	System.out.println(pro);
+	
+	int result = productService.ideamarketWrite(pro);
+	
+	return "redirect:/IdeamarketList.do?reqPage=1&selPro=전체";
+	
+}
+
 	
 	//윤지
 	@RequestMapping(value = "/productDetail.do")
@@ -119,7 +372,6 @@ public class ProductController{
 		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, member);
 		model.addAttribute("p", pd.getProduct());
 		model.addAttribute("productQNA", pd.getProductQNA());
-		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
 		model.addAttribute("expert", pd.getExpert());
 		model.addAttribute("expertM", pd.getExpertAndMember());
 		model.addAttribute("reviewAvr", pd.getReviewAvr());
@@ -137,7 +389,6 @@ public class ProductController{
 		model.addAttribute("wishMemberCheck", pd.getWishMemberCheck());
 		System.out.println("--------------------------------------");
 		System.out.println("product : "+pd.getProduct());
-		System.out.println("expertAndCom : "+pd.getExpertAndCompany());
 		System.out.println("expert : "+pd.getExpert());
 		System.out.println("expertM : "+pd.getExpertAndMember());
 		System.out.println("reviewRnum : "+pd.getReviewRnum());
@@ -166,7 +417,6 @@ public class ProductController{
 		ProductDetail pd = productService.selectProductDetail(productNo, expertNo, member);
 		model.addAttribute("p", pd.getProduct());
 		model.addAttribute("productQNA", pd.getProductQNA());
-		model.addAttribute("expertAndCom", pd.getExpertAndCompany());
 		model.addAttribute("expert", pd.getExpert());
 		model.addAttribute("expertM", pd.getExpertAndMember());
 		model.addAttribute("reviewAvr", pd.getReviewAvr());
@@ -230,46 +480,67 @@ public class ProductController{
 	//윤지
 	@RequestMapping(value = "/expertCounsel.do")
 	public String expertCounsel(Model model, int payNo, HttpServletRequest request) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map = productService.selectProductAndExpertAndPayment(payNo, request);
+		HashMap<String, Object> compare = productService.compareMemberNo(payNo, request);
+		System.out.println(compare.get("expertTrue"));
+		System.out.println(compare.get("memberTrue"));
+		if(compare.get("expertTrue").equals(false) && compare.get("memberTrue").equals(false)) {
+			return "product/paymentError";
+		}
+		model.addAttribute("m", compare.get("member"));
+		HashMap<String, Object> map = productService.selectProductAndExpertAndPayment(payNo);
 		model.addAttribute("p", map.get("product"));
 		model.addAttribute("e", map.get("expert"));
-		model.addAttribute("ec", map.get("expertC"));
 		model.addAttribute("em", map.get("expertM"));
 		model.addAttribute("pay", map.get("payment"));
 		model.addAttribute("r", map.get("review"));
-		model.addAttribute("m", map.get("member"));
 		model.addAttribute("c", map.get("counsel"));
 		model.addAttribute("chat", map.get("chatList"));
-		//int counselNo = 1;
-		//if(!((Member)map.get("member")).getMemberId().equals("eom08@gmail.com") && !((Member)map.get("member")).getMemberId().equals("testyj")) {
-		//	counselNo = 999;
-		//}  	
-		//Counsel counsel = new Counsel();
-		//counsel.setCounselNo(1);
-		//model.addAttribute("c", counsel);
-		//model.addAttribute("m", member);
-		
+		model.addAttribute("firstDate", map.get("first"));
 		if(!map.get("paymentState").equals(1) && !map.get("paymentState").equals(2)) {
 			return "product/paymentError";
 		}
+		System.out.println("Counsel_member : "+compare.get("member"));
 		System.out.println("Counsel_product : "+map.get("product"));
 		System.out.println("Counsel_expert : "+map.get("expert"));
-		System.out.println("Counsel_expertC : "+map.get("expertC"));
 		System.out.println("Counsel_expertM : "+map.get("expertM"));
 		System.out.println("Counsel_payment : "+map.get("payment"));
 		System.out.println("Counsel_review : "+map.get("review"));
-		System.out.println("Counsel_member : "+map.get("member"));
 		System.out.println("Counsel_counsel : "+map.get("counsel"));
 		System.out.println("Counsel_chat : "+map.get("chatList"));
-		if(map.get("expertTrue").equals(true) || map.get("memberTrue").equals(true)) {
-			return "product/expertCounsel";
-		}else{
-			//counsel.setCounselNo(999);
+		System.out.println("Counsel_firstDate : "+map.get("first"));
+		
+		return "product/expertCounsel";
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "updatePaymentState.do")
+	public String updatePaymentState(int counselNo) {
+		int result = productService.updatePaymentState(counselNo);
+		return new Gson().toJson(result);
+	}
+	
+	//윤지
+	@RequestMapping(value = "/reviewFrm.do")
+	public String reviewFrm(Model model, int payNo, HttpServletRequest request) {
+		Boolean compare = productService.reviewMemberCompare(payNo, request);
+		if(compare == false) {
 			return "product/paymentError";
 		}
-		//return "product/expertCounsel";
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");
+		}	
+		HashMap<String, Object> map = productService.reviewFrm(payNo);
+		model.addAttribute("pro", map.get("product"));
+		model.addAttribute("e", map.get("expert"));
+		model.addAttribute("em", map.get("expertM"));
+		model.addAttribute("pay", map.get("payment"));
+		model.addAttribute("m", member);
+		return "product/reviewFrm";
 	}
+	
 	//대권 구매성공
 	@RequestMapping(value="/purchaseSuccess.do")
 	public String purchaseSuccess() {
@@ -281,6 +552,67 @@ public class ProductController{
 		return "product/purchaseFailed";
 	}
 	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "/insertReview.do")
+	public String insertReview(Review review) {
+		int check = productService.overlapCheckReview(review.getPayNo());
+		if(check != 0) {
+			return "product/paymentError";
+		}
+		System.out.println("check : "+check);
+		System.out.println("insertReview : "+review);
+		int result = productService.insertReview(review);
+		System.out.println(result);
+		return new Gson().toJson(result);			
+	}
+	
+	//윤지
+	@RequestMapping(value = "/modifyReviewFrm.do")
+	public String modifyReview(Model model, int reviewNo) {
+		HashMap<String, Object> map= productService.selectReview(reviewNo);
+		model.addAttribute("r", map.get("review"));
+		model.addAttribute("p", map.get("product"));
+		model.addAttribute("e", map.get("expertM"));
+		return "product/modifyReviewFrm";
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "/updateReview.do")
+	public String updateReview(Review review) {
+		System.out.println("updateReview : "+review);
+		int result = productService.updateReview(review);
+		System.out.println(result);
+		return new Gson().toJson(result);
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "/deleteReview.do")
+	public String deleteReview(int reviewNo) {
+		int result = productService.deleteReview(reviewNo);
+		System.out.println(result);
+		return new Gson().toJson(result);
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "updateStartTime.do")
+	public String updateStartTime(String startTime, int counselNo) {
+		int result = productService.updateStartTime(startTime, counselNo);
+		System.out.println(result);
+		System.out.println(startTime);
+		return new Gson().toJson(startTime);
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value = "updateReadCheck.do")
+	public String updateReadCheck(String counselNo, String memberNo) {
+		int readResult = productService.updateReadCheck(counselNo, memberNo);
+		return new Gson().toJson(readResult);
+	}
 	
 }
 

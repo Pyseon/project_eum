@@ -2,6 +2,7 @@ package kr.or.eum.product.model.service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,7 +15,6 @@ import kr.or.eum.product.model.vo.ProductAndWishList;
 import kr.or.eum.product.model.vo.ProductDetail;
 import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
-import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.dao.ProductDao;
@@ -46,9 +46,10 @@ public class ProductService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
+
+		int totalCount = productDao.selectClassCount(map);
 		ArrayList<Product> list = productDao.selectClassList(map);
-		
-		int totalCount = productDao.selectProductCount(map);
+
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -57,6 +58,10 @@ public class ProductService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		
+		
+		
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
@@ -97,11 +102,230 @@ public class ProductService {
 		
 	}
 	
-	public int productWrite(Product pro) {
+	public ProductPageData selectExpertList(int reqPage, String selPro) {
+		int numPerPage = 12;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("selPro", selPro);
+
+		int totalCount = productDao.selectExpertCount(map);
+		ArrayList<Product> list = productDao.selectExpertList(map);
+
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		
+		
+		
+		
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) { 
+			
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/ExpertList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/ExpertList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/ExpertList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/ExpertList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+			
+		}
+		pageNavi += "</ul>";
+		ProductPageData ppd = new ProductPageData(list, pageNavi);	
+					 
+		return ppd;
+		
+	}
+	
+	public ProductPageData selectIdeamarketList(int reqPage, String selPro) {
+		int numPerPage = 12;
+		int end = reqPage * numPerPage;
+		int start = end - numPerPage + 1;
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("selPro", selPro);
+
+		int totalCount = productDao.selectIdeamarketCount(map);
+		ArrayList<Product> list = productDao.selectIdeamarketList(map);
+
+		int totalPage = 0;
+		if(totalCount % numPerPage == 0) {
+			totalPage = totalCount/numPerPage;
+		}else {
+			totalPage = totalCount/numPerPage + 1;
+		}
+		int pageNaviSize = 5;
+		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		
+		
+		
+		
+		String pageNavi = "<ul class='pagination'>";
+		if(pageNo != 1) { 
+			
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/IdeamarketList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
+			pageNavi += "</a></li>";
+		}
+		for(int i=0;i<pageNaviSize;i++) {
+			if(pageNo == reqPage) {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item active-page' href='/IdeamarketList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}else {
+				pageNavi += "<li>";
+				pageNavi += "<a class='page-item' href='/IdeamarketList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += pageNo;
+				pageNavi += "</a></li>";
+			}
+			pageNo++;
+			if(pageNo > totalPage) {
+				break;
+			}
+		}
+		if(pageNo <= totalPage) {
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/IdeamarketList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+			pageNavi += "<span class='material-icons'>chevron_right</span>";
+			pageNavi += "</a></li>";
+			
+		}
+		pageNavi += "</ul>";
+		ProductPageData ppd = new ProductPageData(list, pageNavi);	
+					 
+		return ppd;
+		
+	}
+	
+	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
-		int result = productDao.productWrite(pro);
+		Product product=setToken(pro);
+		int result = productDao.classWrite(product);
 		
 		return result;
+	}
+	
+	public int expertWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = productDao.expertWrite(pro);
+		Product product=setToken(pro);
+		return result;
+	}
+	
+	public int ideamarketWrite(Product pro) {
+		// TODO Auto-generated method stub
+		Product product=setToken(pro);
+		int result = productDao.ideamarketWrite(product);
+		
+		return result;
+	}
+	
+	public Product setToken(Product pro) {
+		
+		String productQst = pro.getProductQst();
+		List<String> qstList = new ArrayList<String>();
+		String []tokens=productQst.split("\\|");
+		for(int i=0;i<tokens.length;i++) {
+			if(tokens[i] == null || tokens[i].trim().length() < 2) {
+			}else {
+				if(tokens[i].indexOf(",") == 0) {
+					qstList.add(tokens[i].replaceFirst(",", ""));
+				}else {
+					qstList.add(tokens[i].trim());
+				}
+			}
+			
+		}
+		productQst = "";
+		
+		for(int i=0;i<qstList.size();i++){
+			productQst += qstList.get(i)+"/";
+		}
+		
+		
+		String productAns = pro.getProductAns();
+		List<String> ansList = new ArrayList<String>();
+		String []tokens2=productAns.split("\\|");
+		for(int i=0;i<tokens2.length;i++){
+			if(tokens2[i] == null || tokens2[i].trim().length() < 2) {
+			}else {
+				if(tokens2[i].indexOf(",") == 0) {
+					ansList.add(tokens2[i].replaceFirst(",", ""));
+				}else {
+					ansList.add(tokens2[i].trim());
+				}
+			}
+		}
+		productAns = "";
+		for(int i=0;i<ansList.size();i++){
+			productAns += ansList.get(i)+"/";
+		}
+		
+		
+		String productTag = pro.getProductTag();
+		List<String> tagList = new ArrayList<String>();
+		String []tokens3=productTag.split("\\|");
+		for(int i=0;i<tokens3.length;i++){
+			if(tokens3[i] == null || tokens3[i].trim().length() < 2) {
+			}else {
+				if(tokens3[i].indexOf(",") == 0) {
+					tagList.add(tokens3[i].replaceFirst(",", ""));
+				}else {
+					tagList.add(tokens3[i].trim());
+				}
+			}
+		}
+		productTag = "";
+		for(int i=0;i<tagList.size();i++){
+			productTag += "#"+tagList.get(i)+"/";
+		}
+		
+	
+		
+		System.out.println("최종값>>"+productQst);
+		System.out.println("최종값>>"+productAns);
+		System.out.println("최종값>>"+productTag);
+		
+		pro.setProductQst(productQst);
+		pro.setProductAns(productAns);
+		pro.setProductTag(productTag);
+		
+		return pro;
 	}
 	
 	
@@ -117,7 +341,6 @@ public class ProductService {
 				productQNA.add("A"+(i+1)+". "+productAns[i]);
 			}
 		}
-		ExpertAndCompany expertAndCom = memberDao.selectOneExpert(expertNo);
 		Expert expert = memberDao.selectOneExpertOnly(expertNo);
 		ExpertAndMember expertM = memberDao.selectOneExpertPicture(expertNo);
 		ArrayList<Review> reviewRnum = productDao.selectAllReview(productNo);
@@ -141,7 +364,7 @@ public class ProductService {
 			map.put("memberNo", 0);
 		}
 		int wishMemberCheck = productDao.selectWishMemberCheck(map);
-		ProductDetail pd = new ProductDetail(product, productQNA, expertAndCom, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCount, wishMemberCheck);
+		ProductDetail pd = new ProductDetail(product, productQNA, expert, expertM, reviewRnum, reviewAvr, reviewCount, paymentCount, cost, tag, wishList, wishCount, wishMemberCheck);
 		return pd;
 	}//selectProductDetail
 	
@@ -238,9 +461,8 @@ public class ProductService {
 	}
 
 	//윤지
-	public HashMap<String, Object> selectProductAndExpertAndPayment(int payNo, HttpServletRequest request) {
+	public HashMap<String, Object> selectProductAndExpertAndPayment(int payNo) {
 		Product product = productDao.selectOneProduct2(payNo);
-		ExpertAndCompany expertAndCom = memberDao.selectOneExpert2(payNo);
 		Expert expert = memberDao.selectOneExpertOnly2(payNo);
 		ExpertAndMember expertM = memberDao.selectOneExpertPicture2(payNo);
 		Payment payment = productDao.selectPaymentState(payNo);
@@ -248,42 +470,32 @@ public class ProductService {
 		int paymentState = payment.getPayState();
 		int reviewUploadCheck = productDao.selectReviewUploadCheck(payNo);
 		ArrayList<Chat> chatList = productDao.selectChat(payNo);
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		HttpSession session = request.getSession(false);
-		Member member = null;
-		member = (Member)session.getAttribute("member");	
-		boolean expertNoCheck = false;
-		boolean paymentMemberNoCheck = false;
-		if(session != null) {
-			map.put("member",member);
-			if(member.getMemberNo() == expert.getMemberNo()) {
-				expertNoCheck = true;
-			} 
-			if(member.getMemberNo() == payment.getMemberNo()) {
-				paymentMemberNoCheck = true;
-			}
+		String first = "";
+		for(int i = 0; i < 1; i++) {
+			first = chatList.get(i).getChatDate();
 		}
-		System.out.println(expertNoCheck);
-		System.out.println(paymentMemberNoCheck);
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("product", product);
 		map.put("expert",expert);
-		map.put("expertC",expertAndCom);
 		map.put("expertM",expertM);
 		map.put("payment",payment);
 		map.put("paymentState",paymentState);
 		map.put("review",reviewUploadCheck);
-		map.put("expertTrue",expertNoCheck);
-		map.put("memberTrue",paymentMemberNoCheck);
 		map.put("counsel",counsel);
 		map.put("chatList", chatList);
+		map.put("first", first);
 		return map;
 	}
 
 	public Expert selectExpertNo(int memberNo) {
 		return productDao.selectExpertNo(memberNo);
 	}
+	
+	public Member selectMemberNo(int memberNo) {
+		return productDao.selectMemberNo(memberNo);
+	}
 
-	//윤지
+	//윤지 채팅
 	public int insertChat(String msg, String memberNo, String counselNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", msg);
@@ -291,6 +503,121 @@ public class ProductService {
 		map.put("counselNo",counselNo);
 		return productDao.insertChat(map);
 	}
+
+
+	//윤지
+	public HashMap<String, Object> compareMemberNo(int payNo, HttpServletRequest request) {
+		Expert expert = memberDao.selectOneExpertOnly2(payNo);
+		Payment payment = productDao.selectPaymentState(payNo);
+		System.out.println("payment : "+payment);
+		HashMap<String, Object> compare = new HashMap<String, Object>();
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");	
+			System.out.println("member : "+member);
+			compare.put("member", member);
+			boolean expertNoCheck = false;
+			boolean paymentMemberNoCheck = false;
+			if(member.getMemberNo() == expert.getMemberNo()) {
+				expertNoCheck = true;
+			} 
+			if(member.getMemberNo() == payment.getMemberNo()) {
+				paymentMemberNoCheck = true;
+			}			
+			compare.put("expertTrue", expertNoCheck);
+			compare.put("memberTrue",paymentMemberNoCheck);
+		}		
+		return compare;
+	}
+
 	
+	//윤지 채팅
+	public int updateReadCheck(String counselNo, String memberNo) {
+		int realCounselNo = Integer.parseInt(counselNo);
+		int realMemberNo = Integer.parseInt(memberNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("counselNo", realCounselNo);
+		map.put("memberNo", realMemberNo);
+		return productDao.updateReadCheck(map);
+	}
+	
+	//윤지
+	public int updatePaymentState(int counselNo) {
+		return productDao.updatePaymentState(counselNo);
+	}
+
+	//윤지
+	public HashMap<String, Object> reviewFrm(int payNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		Product product = productDao.selectOneProduct2(payNo);
+		Expert expert = memberDao.selectOneExpertOnly2(payNo);
+		ExpertAndMember expertM = memberDao.selectOneExpertPicture2(payNo);
+		Payment payment = productDao.selectPaymentState(payNo);
+		map.put("product", product);
+		map.put("expert", expert);
+		map.put("expertM", expertM);
+		map.put("payment", payment);
+		return map;
+	}
+
+	//윤지
+	public Boolean reviewMemberCompare(int payNo, HttpServletRequest request) {
+		Payment payment = productDao.selectPaymentState(payNo);
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		boolean memberCheck = false;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");	
+			System.out.println("member : "+member);
+			if(member.getMemberNo() == payment.getMemberNo()) {
+				memberCheck = true;
+			}
+		}
+		return memberCheck;
+	}
+
+	//윤지
+	public int insertReview(Review review) {
+		return productDao.insertReview(review);
+	}
+
+	//윤지
+	public HashMap<String, Object> selectReview(int reviewNo) {
+		Review review = productDao.selectReview(reviewNo);
+		Product product = productDao.selectProductName(reviewNo);
+		ExpertAndMember expertM = memberDao.selectOneExpert(reviewNo);
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("review", review);
+		map.put("product", product);
+		map.put("expertM", expertM);
+		return map;
+	}
+
+	//윤지
+	public int updateReview(Review review) {
+		return productDao.updateReview(review);
+	}
+
+	//윤지
+	public int deleteReview(int reviewNo) {
+		return productDao.deleteReview(reviewNo);
+	}
+
+	//윤지
+	public int overlapCheckReview(int payNo) {
+		return productDao.overlapCheckReview(payNo);
+	}
+
+	public int updateStartTime(String startTime, int counselNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startTime", startTime);
+		map.put("counselNo", counselNo);
+		System.out.println(startTime);
+		System.out.println(counselNo);
+		return productDao.updateStartTime(map);
+	}
+
+
 
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @Data
 public class ExpertAndMember {
 	private int expertNo;
+	private String expertName;
 	private int memberNo;
 	private String memberPictureName;
 	private String memberPicturePath;

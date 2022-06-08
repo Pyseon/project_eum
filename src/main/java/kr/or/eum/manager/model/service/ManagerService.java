@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.or.eum.manager.model.dao.ManagerDao;
+import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
+import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.manager.model.vo.Question;
+import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -70,7 +74,7 @@ public class ManagerService {
 				totalCount = dao.searchReportCount(pageMap);
 			}
 			pageData.put("reportList", reportList);
-			
+			break;
 		case "manaFAQ.do":
 			ArrayList<FaQ> FAQList = new ArrayList<FaQ>();
 			if(searchType == null) {
@@ -83,7 +87,7 @@ public class ManagerService {
 				totalCount = dao.searchFAQCount(pageMap);
 			}
 			pageData.put("FAQList", FAQList);
-			
+			break;
 		case "manaNotice.do":
 			ArrayList<Notice> noticeList = new ArrayList<Notice>();
 			if(searchType == null) {
@@ -96,6 +100,26 @@ public class ManagerService {
 				totalCount = dao.searchNoticeCount(pageMap);
 			}
 			pageData.put("noticeList", noticeList);
+			break;
+		case "manaAnswer.do":
+			ArrayList<Answer> answerList = new ArrayList<Answer>();
+			answerList = dao.answerPageData(pageMap);
+			totalCount = dao.answerCount(pageMap);
+			pageData.put("answerList", answerList);
+			break;
+		case "manaQuestion.do":
+			ArrayList<Question> qst = new ArrayList<Question>();
+			qst = dao.qstPageData(pageMap);
+			totalCount = dao.qstCount(pageMap);
+			pageData.put("qstList", qst);
+			break;
+		case "myQuestionList.do":
+			ArrayList<Question> qstList = new ArrayList<Question>();
+			pageMap.put("memberNo", keyword);
+			qstList = dao.myQstPageData(pageMap);
+			totalCount = dao.myQstCount(pageMap);
+			pageData.put("qstList", qstList);
+			break;
 		}
 		
 		int totalPage = 0;
@@ -256,6 +280,72 @@ public class ManagerService {
 
 	public Chart selectChart() {
 		return dao.selectChart();
+	}
+
+	public MemberChart selectMemberChart(String year) {
+		return dao.selectMemberChart(year);
+	}
+
+	public ArrayList<SalesChart> selectSalesTypeChart(String year, int salesType) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("year", year);
+		map.put("salesType", salesType);
+		ArrayList<SalesChart> salesCharts = new ArrayList<SalesChart>();
+		if(salesType == 1) {
+			map.put("productType", 1);
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productType", 2);
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productType", 3);
+			salesCharts.add(dao.selectSalesChart(map));
+		}
+		if(salesType == 2) {
+			map.put("productCategory", "법률");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "비즈니스");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "심리");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "학습");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "금융");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "라이프");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "취미");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "어학");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "레저");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "IT");
+			salesCharts.add(dao.selectSalesChart(map));
+			map.put("productCategory", "자기계발");
+			salesCharts.add(dao.selectSalesChart(map));
+		}else {
+			salesCharts.add(dao.selectSalesChart(map));	
+		}
+		return salesCharts;
+	}
+
+	public Question selectQst(int qstNo) {
+		return dao.selectQst(qstNo);
+	}
+
+	public int insertAnswer(HashMap<String, Object> answer) {
+		return dao.insertAnswer(answer);
+	}
+
+	public int updateAnsState(int qstNo) {
+		return dao.updateAnsState(qstNo);
+	}
+
+	public int insertQuestion(HashMap<String, Object> qst) {
+		return dao.insertQuestion(qst);
+	}
+
+	public Answer selectAns(int qstNo) {
+		return dao.selectAns(qstNo);
 	}
 	
 	

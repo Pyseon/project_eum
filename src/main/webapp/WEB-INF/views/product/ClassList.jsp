@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
 <!DOCTYPE html>
@@ -223,11 +224,28 @@ li{
    
    
 <div class="container">
-<button type="button" class="writeButton" id="writeButton" onclick="location.href='/productWriterFrm.do'">등록하기</button>
-<div class="posting-wrap">
+	테스트용 아이디 : eom15@gmail.com 비밀번호 :1234
+	
+	<c:if test="${grade eq null}">
+		<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 0}">
+		<button type="button" class="writeButton" id="writeButton" onclick="manager();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 1}">
+		<button type="button" class="writeButton" id="writeButton" onclick="expertNeed();">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 2}">
+		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+	</c:if>
+	<c:if test="${grade eq 3}">
+		<button type="button" class="writeButton" id="writeButton" onclick="blacklist();">등록하기</button>
+	</c:if>
+			<div class="posting-wrap">
+
 	<c:forEach items="${list }" var="c" varStatus="i">
 	<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
-	<img src="./img/productList/${c.productImgPath }">
+	<img src="./img/product/ClassList/${c.productImgPath }">
 		<div class="posting-connect">
 			<ul>
 				<li>
@@ -261,7 +279,7 @@ li{
 					</span>
 					</div>
 					
-				<div class="t4-right" style="line-height: 2; margin : 0 0 0 0px">
+				<div class="t4-right" style="line-height: 2; margin : 0 7px 0 0px">
 					<div style="line-height: 2.5;"><span class="material-icons icons-message">message</span></div>
 					<div class="t4-info"><span>${c.revCount } </span></div>
 					 &nbsp;
@@ -275,12 +293,11 @@ li{
 		</ul>
 		
 		<div class="t2" style="margin: 20px 0 0px 0px;" >	
-		<c:set var="sele" value="0%" />
 		<c:choose>
-		<c:when test="${sele eq '00%' }">	
+		<c:when test="${0 eq c.sale }">	
+			<span id="sele" style="width: auto;"></span>
 		<span class="t2" style="margin: 0px 0 30px 0px;">
-			&nbsp;
-			<span id="fixed-price" style="width: auto; font-size: 12px; font-weight: bold; margin: 4px 0 0px 0px;">
+			<span id="price"  class="fc-1" style="width: auto; font-size: 18px; line-height: 1.5;">
 			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
 			</span>
 		</span> 
@@ -300,6 +317,7 @@ li{
 		</c:otherwise>
 		</c:choose>
 		
+
 		</div><!-- t2 -->
 		
 		
@@ -307,13 +325,41 @@ li{
 		
 		</div>
 	</c:forEach>
-
+		<c:choose>
+		<c:when test="${0 eq c.expertNo }">
+		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/oginFrm.do'">등록하기</button>
+		</c:when>
+		<c:otherwise>
+		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+		</c:otherwise>
+		</c:choose>
+		<input type="text" name="memberNo" value="${grade }">
+		<input type="text" name="memberNo" value="${memberNo }">
 	</div>													   			
 ${pageNavi }
 
 
 </div>
 <script>
+	function loginNeed(){
+	alert('로그인 후 이용해주세요.');
+	location.href="/loginFrm.do";
+	}
+	
+	function manager(){
+		alert('관리인은 클래스를 등록할 수 없습니다.');
+		location.href="/ClassList.do?reqPage=1&selPro=전체";
+		}
+	
+	function expertNeed(){
+		alert('전문가 인증을 받고 오세요.');
+		location.href="/ClassList.do?reqPage=1&selPro=전체";
+	}
+	function blacklist(){
+		alert('블랙리스트 회원은 등록할 수 없습니다.');
+		location.href="/ClassList.do?reqPage=1&selPro=전체";
+	}
+
 	$(function(){
 		var selPro = '${selPro}';
 		console.log(selPro);

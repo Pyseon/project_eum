@@ -24,6 +24,31 @@
  			and member_Pw=#{memberPw}
  		</if>
  	</select>
+ 	<!-- 재민 전문가 신청 -->
+ 	<insert id="insertexpert" parameterType = "expert">
+		insert into expert_tbl values(
+		expert_seq.nextval,#{memberNo},#{expertCategory},#{expertTag},#{credential},#{issuingAuthority},
+		#{acquistionDate},#{certificateName},#{certificatePath},#{expertName},
+		#{expertPhone},#{expertEmail},#{expertContent},#{jobName},#{expertPr},#{expertcareer},#{expertIntro},'0')
+	</insert>
+	<!-- 재민 내프로젝트  -->
+ 	 <select id ="selectMyproject" parameterType="productAndExpert" resultType="pro">
+ 		
+		select 
+		expert_tbl.member_no as memberNo,
+		expert_tbl.expert_no as expertNo,
+		product_tbl.product_no as productNo,
+		product_tbl.product_title as productTitle,
+		product_tbl.product_ImgPath as productImgPath,
+		product_tbl.product_Intro as productIntro,
+		product_tbl.product_no as productNo
+		
+		from product_tbl 
+		join expert_tbl on (expert_tbl.expert_no = product_tbl.expert_no)   
+		where member_no=#{memberNo}
+  
+  	</select>
+  	 
 	<!-- 재민 -->
 	<update id="updateMember" parameterType="m" >
 	update member_tbl set 
@@ -36,10 +61,10 @@
 	</update>
 		<!-- 재민 내 구매목록삭제 -->
 	  <update id ="DeleteMyproduct" parameterType="int">
-	 		 update into payment_tbl set
+	 		 update payment_tbl set
 	 		 pay_state = 3
 	 		 
-			where member_no=#{payNo}
+			where pay_no=#{payNo}
 			
 
 	  </update>
@@ -60,6 +85,7 @@
 	 			product_title as productTitle,
 	 			product_type as productType,
 	 			pay_date as payDate, 
+	 			product_imgPath as productImgPath,
 	 			payment, 
 	 			pay_state as paystate,
 	 			pay_No as payNo,
@@ -87,7 +113,9 @@
 	  </select>
 	   <select id ="selectWishlist" resultType="productAndPayAndwish">
 	 		select 
+	 			payment_tbl.pay_no as payNo,
 	 			product_tbl.product_type as productType,
+	 			product_tbl.product_imgPath as productImgPath,
 				product_tbl.product_title as productTitle, 
 				payment_tbl.payment as payment
 			from product_tbl
@@ -97,6 +125,7 @@
 	  </select>
 	  <select id ="selectReviewlist" resultType="review">
 	 		select 
+	 		product_no as productNo,
 	 		review_No as reviewNo,
 	 		review_title as reviewTitle,
 	 		review_content as reviewContent,
@@ -104,43 +133,7 @@
 			from review_tbl
 			where member_no=#{memberNo}
 	  </select>
-	  
-	  
 
-	<!-- 윤지 -->
-	<select id="selectOneExpert" parameterType="int" resultType="expertAndCom">
- 		SELECT 
- 			COMP_NO as compNo,
-			A.EXPERT_NO as expertNo,
-			COMP_CATEGORY as compCategory,
-			COMP_REP_NAME as compRepName,
-			COMP_NAME as compName,
-			COMP_REGNO as compRegno,
-			COMP_ADDR as compAddr,
-			COMP_PHONE as compPhone,
-			COMP_EMAIL as compEmail,
-			MEMBER_NO as memberNo,
-			EXPERT_CATEGORY as expertCategory,
-			EXPERT_TAG as expertTag,
-			CREDENTIAL,
-			ISSUING_AUTHORITY as issuingAuthority,
-			ACQUISTION_DATE as acquistionDate,
-			EXPERT_NAME as expertName,
-			EXPERT_PHONE as expertPhone,
-			EXPERT_EMAIL as expertEmail,
-			EXPERT_CONTENT as expertContent,
-			JOB_NAME as jobName,
-			EXPERT_PR as expertPr,
-			EXPERT_CAREER as expertCareer,
-			EXPERT_INTRO as expertIntro
-		FROM 
-			expert_tbl A
-		JOIN 
-			company_tbl B on (A.expert_no = B.expert_no)
-		where 
-			A.expert_no=#{expertNo}
- 	</select>
- 	
 	<!-- 윤지 -->
 	<select id="selectOneExpertPicture" parameterType="int" resultType="expertAndM">
  		select 
@@ -174,34 +167,6 @@
 			expert_tbl 
 		where 
 			expert_no=#{expertNo}
- 	</select>
- 	
- 	<!-- 윤지 -->
- 	<select id="selectOneExpert2" parameterType="int" resultType="expertAndCom">
- 		SELECT 
-            COMP_NO as compNo,
-			E.EXPERT_NO as expertNo,
-			COMP_REP_NAME as compRepName,
-			COMP_NAME as compName,
-			COMP_REGNO as compRegno,
-			E.MEMBER_NO as memberNo,
-			CREDENTIAL,
-			EXPERT_NAME as expertName,
-			EXPERT_PHONE as expertPhone,
-			EXPERT_EMAIL as expertEmail,
-			EXPERT_CONTENT as expertContent,
-			JOB_NAME as jobName,
-			EXPERT_PR as expertPr,
-			EXPERT_CAREER as expertCareer,
-			EXPERT_INTRO as expertIntro
-        FROM PAYMENT_TBL PAY
-        JOIN PRODUCT_TBL PRO
-        ON PAY.PRODUCT_NO = PRO.PRODUCT_NO
-        JOIN EXPERT_TBL E
-        ON PRO.EXPERT_NO = E.EXPERT_NO
-        JOIN COMPANY_TBL C
-        ON E.EXPERT_NO = C.EXPERT_NO
-        WHERE PAY.PAY_NO=#{payNo}
  	</select>
  	
  	<!-- 윤지 -->
@@ -247,6 +212,7 @@
 		where 
 			pay.pay_no=#{payNo}
  	</select>
+
  	<!-- 대권 -->
  	<insert id="insertMember" parameterType="member">
  		insert into member_tbl values(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberPhone},#{memberPoint},#{memberReportCount},#{gender},#{birth},#{agreement},#{grade},#{memberPictureName},#{memberPicturePath},to_char(sysdate,'yyyy-mm-dd'))
@@ -255,4 +221,24 @@
  	<select id="search" parameterType="member" resultType="member">
  		select member_no as memberNo from member_tbl where member_Nick = #{memberNick}	
  	</select>
+ 	
+ 	<!-- 윤지 -->
+ 	<select id="selectOneExpert" parameterType="int" resultType="expertAndM">
+		select 
+			e.expert_name as expertName, 
+			m.member_picturepath as memberPicturePath
+        from product_tbl p
+        join review_tbl r
+        on p.product_no = r.product_no
+        join expert_tbl e
+        on p.expert_no = e.expert_no
+        join member_tbl m
+        on e.member_no = m.member_no
+        where review_no=#{reviewNo}
+	</select>
+	
+	<insert id="insertReport" parameterType="rpt">
+		insert into report_tbl values(report_seq.nextval, #{defendant}, #{plaintiff},#{reportContent},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{reportCategory},#{reportIndex},#{reportTitle},0)
+	</insert>
+
 </mapper>

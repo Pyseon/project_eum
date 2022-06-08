@@ -17,32 +17,50 @@
 	<div class="chatting">
 		<div class="col-lg-8">
 			<div class="messageArea">
+				<p class='date hr-sect'>${firstDate }</p>
+				<c:set var="firstDate" value="${firstDate }" /> <%--여기에 첫 날짜를 넣어놓고 날짜가 다르면 출력, 아니면 출력 안 함 --%>
 				<c:forEach items="${chat}" var="chat" varStatus="status">
-						<c:if test="${chat.memberNo eq m.memberNo }">
-							<div class="chat-content-wrap sub-right">
-								<div class="content-sub-wrap">
-									<div class="read-check check-right"><c:out value="${chat.chatReadcheck}"/></div>
-									<div class="chat-time"><c:out value="${chat.chatTime}"/></div>
-								</div>
-								<div class="right"><c:out value="${chat.chatContent}"/></div>
+				<c:if test="${firstDate ne chat.chatDate }">
+					<p class='date hr-sect'>${chat.chatDate }</p>
+					<c:set var="firstDate" value="${chat.chatDate }" />
+				</c:if>
+					<c:if test="${chat.memberNo eq m.memberNo }">
+						<div class="chat-content-wrap sub-right">
+							<div class="content-sub-wrap">
+								<c:choose>
+									<c:when test="${chat.chatReadcheck eq 0}">
+									</c:when>
+									<c:when test="${chat.chatReadcheck ne 0}">
+										<div class="read-check check-right"><c:out value="${chat.chatReadcheck}"/></div>
+									</c:when>
+								</c:choose>
+								<div class="chat-time"><c:out value="${chat.chatTime}"/></div>
 							</div>
-						</c:if>
-						<c:if test="${chat.memberNo ne m.memberNo }">
-							<div class="chat-content-wrap">
-								<div class="left"><c:out value="${chat.chatContent}"/></div>
-								<div class="content-sub-wrap">
-									<div class="read-check"><c:out value="${chat.chatReadcheck}"/></div>
-									<div class="chat-time"><c:out value="${chat.chatTime}"/></div>
-								</div>
-							</div>	
-						</c:if>						
+							<div class="right"><c:out value="${chat.chatContent}"/></div>
+						</div>
+					</c:if>
+					<c:if test="${chat.memberNo ne m.memberNo }">
+						<div class="chat-content-wrap">
+							<div class="left"><c:out value="${chat.chatContent}"/></div>
+							<div class="content-sub-wrap">
+								<c:choose>
+									<c:when test="${chat.chatReadcheck eq 0}">
+									</c:when>
+									<c:when test="${chat.chatReadcheck ne 0}">
+										<div class="read-check"><c:out value="${chat.chatReadcheck}"/></div>
+									</c:when>
+								</c:choose>
+								<div class="chat-time"><c:out value="${chat.chatTime}"/></div>
+							</div>
+						</div>	
+					</c:if>						
 				</c:forEach>
 			</div>
 			<!-- 주문상태 확인, 1:구매완료 2:구매확정 3:취소완료, 따라서 1번 활성화, 2번 비활성화, 3번은 다른 페이지로 리턴 됨-->
 			<c:choose>
 				<c:when test="${pay.payState eq 1}">
 					<div class="sendBox">
-						<input type="file" name="file" id="file" style="display:none"> <div class="fileBtn-wrap" onclick="onclick=document.all.file.click()"><img class="fileBtn" src="/img/product/icon-folder.png"></div>
+						<input type="file" name="file" id="file" style="display:none"> <div class="fileBtn-wrap" onclick="document.all.file.click()"><img class="fileBtn" src="/img/product/icon-folder.png"></div>
 						<input type="hidden" id="memberNo" value="${m.memberNo }">
 						<input type="hidden" id="counselNo" value="${c.counselNo }">
 						<input type="text" id="sendMsg" placeholder="[안내] 상담이 종료되면 입력이 불가합니다.">
@@ -52,7 +70,7 @@
 				<c:when test="${pay.payState eq 2}">
 					<div class="sendBox">
 						<input name="file" id="file" style="display:none"> <div class="fileBtn-wrap"><img class="fileBtn" src="/img/product/icon-folder.png"></div>
-						<input type="text" id="sendMsg" placeholder="[안내] 상담이 종료되어 입력이 불가합니다. 상담에 문제가 있는 경우 고객센터로 문의부탁드립니다." readonly>
+						<input type="text" id="sendMsg" placeholder="[안내] 상담이 종료되어 입력이 불가합니다. 상담에 문제가 있는 경우 고객센터로 문의해주세요." readonly>
 						<div class="send-btn-non"><span class="material-icons fc-7 send-icon">arrow_forward</span></div>
 					</div><!-- sendBox -->	
 				</c:when>
@@ -66,13 +84,13 @@
 					<div class="product-detail">
 						<span class="material-icons fc-7 icon-schedule">schedule</span>
 						<div class="product-option">1:1상담&nbsp;&nbsp;/</div>&nbsp;&nbsp;
-						<div class="product-option op2">${p.productOption }분</div>					
+						<div class="product-option op2">${p.productOption }분</div><span id="timeZone">-</span> <span id="msg"></span>					
 					</div>
 					<hr>
 					<div class="check-title-wrap">
 						<span class="material-icons icons-check fc-9">done</span>
 						<div class="check-list-title fc-9">꼭 확인해 주세요</div>
-						<span class="material-icons fc-7 icon-out">logout</span><br>
+						<span class="material-icons fc-7 icon-out" onclick="window.open('/Myproduct.do?memberNo=${m.memberNo}')">logout</span><br>
 					</div>
 					<div class="check-list-content">
 						<ul>
@@ -87,7 +105,7 @@
 					<c:choose>
 						<c:when test="${pay.payState eq 1}">
 							<div class="check-box-allwrap">
-								<div class="check-box-wrap"><input class="checkbox" type="checkbox" name="agree"></div>
+								<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox" name="agree"></div>
 								<div class="check-agree">위 내용을 확인하셨습니까?</div>
 							</div>
 							<div class="submit-wrap">
@@ -98,26 +116,34 @@
 							<c:choose>
 								<c:when test="${r eq 0 }">
 									<div class="check-box-allwrap">
-										<div class="check-box-wrap"><input class="checkbox" type="checkbox" checked disabled></div>
+										<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox" checked disabled></div>
 										<div class="check-agree">위 내용을 확인하셨습니까?</div>
 									</div>
-									<div class="submit-wrap">
-									<button type="button" class="bc1 submit-btn" id="reviewBtn">후기작성</button>
-									</div>
+									<c:choose>
+										<c:when test="${m.grade eq 1 }">
+											<div class="submit-wrap">
+											<button type="button" class="bc1 submit-btn" id="startBtn" onclick="location.href='/'">홈페이지</button>
+											</div>
+										</c:when>
+										<c:when test="${m.grade eq 2 }">
+											<div class="submit-wrap">
+											<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/reviewFrm.do?payNo=${pay.payNo}')">후기작성</button>
+											</div>										
+										</c:when>
+									</c:choose>
 								</c:when>
 								<c:otherwise>
 									<div class="check-box-allwrap">
-										<div class="check-box-wrap"><input class="checkbox" type="checkbox" checked disabled></div>
+										<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox"  checked disabled></div>
 										<div class="check-agree">위 내용을 확인하셨습니까?</div>
 									</div>
 									<div class="submit-wrap">
-										<button type="button" class="bc1 submit-btn" id="mypageBtn">마이페이지</button>
+										<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/Myproduct.do?memberNo=${m.memberNo}')">마이페이지</button>
 									</div>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
 					</c:choose>
-									<!-- ajax이용해서 innserText로 실시간 바꿔주기.....+url경로도 -->
 				</div><!-- widget-wrap title-wrap -->
 				<div class="widget-wrap">
 					<div class="expert-info">
@@ -165,23 +191,119 @@
 		let ws;
 		//접속회원 아이디용 변수
 		let memberId;
-		
+		//페이지 뜨자마자 initChat 함수 실행
 		initChat('${m.memberId}');
 		
-		
+		//send-btn을 클릭하면 메세지 전송 함수 실행
 		$('.send-btn').on('click', function(){
 			sendMsg();
 		});
-		
+		//startBtn을 클릭하면 체크박스 여부 체크 및 시간 감소
 		$('#startBtn').on('click', function(){
-			//체크박스 체크여부
-			if($(".checkbox").is(":checked")==false){
-			    alert('확인사항 동의 후 시작하기를 눌러주세요.');
+			if($('#startBtn').text() == '시작하기') {
+				//체크박스 체크여부
+				if($('.checkbox').is(':checked')==false){
+				    alert('확인사항 동의 후 시작하기를 눌러주세요.');
+				}else {
+				    $('.checkbox').attr('disabled',true);
+				    const counselNo = $('#counselNo').val();
+				    const startTime = getTime2();
+				    /*
+				    const startTimeSplit = startTime.split(':');
+				    console.log(startTime);
+				    console.log(startTimeSplit);
+				    let reTime = "";
+				    for(let i = 0; i < startTimeSplit.length; i++) {
+				    	reTime = reTime+startTimeSplit[i]
+				    }
+				    let testTime = 015030;013543
+				    const why = parseInt(015030-013543);
+				    const why2 = parseInt(013543+693);
+				    console.log('why2>>>'+why2)
+				    console.log('why'+why)
+				    console.log(reTime);
+				    let finalTime = testTime-reTime;
+				    console.log(finalTime);
+				    */
+				    $.ajax({
+				    	url : "updateStartTime.do",
+				    	data : {startTime:startTime, counselNo:counselNo}, 
+				    	success : function(data) {
+				    		appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
+						    $('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
+							intervalId = window.setInterval(function(){
+								timeCount();
+							},10);
+						},
+						error : function() {
+							alert('잘못된 접근입니다.');
+						}
+				    });
+				    //appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
+				    //$('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
+					//intervalId = window.setInterval(function(){
+						//timeCount();
+					//},10);
+					//${p.productOption } //1000
+				}
+			}else if($('#startBtn').text() == '후기작성') {
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/reviewFrm.do?payNo=${pay.payNo}';
+			}else if($('#startBtn').text() == '마이페이지') { 
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/Myproduct.do?memberNo=${m.memberNo}';
 			}else {
-			    $(".checkbox").attr("disabled",true);			
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/';
 			}
 		});	
+		
+		function timeCount(){
+			const counselNo = $('#counselNo').val();
+			const min = Number($("#min").text());
+			const sec = $("#sec").text();
+			if(sec == "00") {
+				if(min == 0){
+					clearInterval(intervalId);
+					$('#sendMsg').attr("readonly", true);
+					appendChat("<p class='check-in'>상담이 종료되었습니다.</p>");
+					const msg = $("#msg");
+					msg.text("종료");
+					msg.css("color","#1abc9c");
+					$.ajax({
+						url : "/updatePaymentState.do",
+						data : {counselNo:counselNo},
+						success : function(data) {
+							if(${m.grade eq 2}) {
+								$('#startBtn').text('후기작성');								
+							}else if(${m.grade eq 1}) {
+								$('#startBtn').text('홈페이지');
+							}
+							$('#sendMsg').attr("placeholder",'[안내] 상담이 종료되어 입력이 불가합니다. 상담에 문제가 있는 경우 고객센터로 문의해주세요.');
+							$('#file').attr("type","text");
+						},
+						error : function() {
+							console.log('에러');
+						}
+					});
+				}else{
+					$("#min").text(min-1);
+					$("#sec").text(59);	
+				}
+			}else{
+				const newSec = Number(sec)-1;
+				if(newSec<10){
+					$("#sec").text("0"+newSec);
+				}else{
+					$("#sec").text(newSec);
+				}
+			}
+		} 
 
+		//접속한 시점 날짜 함수
 		function getToday(){
 		    var now = new Date();
 		    var year = now.getFullYear();
@@ -193,8 +315,40 @@
 		    if(date<10) {
 		    	date = "0"+date;
 		    }
-			return year+"년 "+month+"월 "+date+"일"; 
+			return year+"년"+month+"월"+date+"일"; 
 		}
+		
+		function getTime(){
+			var now = new Date();
+			var hours = now.getHours(); 
+			var minutes = now.getMinutes();
+			if(hours<10) {
+				hours = "0"+hours;
+			}
+			if(minutes<10) {
+				minutes = "0"+minutes;
+			}
+			return hours+":"+minutes;
+		}
+		
+		function getTime2(){
+			var now = new Date();
+			var hours = now.getHours(); 
+			var minutes = now.getMinutes();
+			var seconds = now.getSeconds();  
+			//var milliseconds = today.getMilliseconds(); // 밀리초
+			if(hours<10) {
+				hours = "0"+hours;
+			}
+			if(minutes<10) {
+				minutes = "0"+minutes;
+			}
+			if(seconds<10) {
+				seconds = "0"+seconds;
+			}
+			return hours+":"+minutes+":"+seconds;
+		}
+		
 		
 		//채팅을 시작하는 함수
 		function initChat(param) {
@@ -215,15 +369,18 @@
 			//key:value
 			const memberNo = $("#memberNo").val();
 			const counselNo = $('#counselNo').val();
+			let time = getTime()
+			console.log(time);
 			const data = {
 						  type:"enter",
 						  msg:memberId, 
 						  memberNo:memberNo,
-						  counselNo:counselNo
+						  counselNo:counselNo,
+						  time:time
 						 }; 
 			ws.send(JSON.stringify(data)); //data객체를 문자열로 변환해서 웹소켓 서버로 전송
-			appendChat("<p class='check-in'>대화가 시작되었습니다.</p>");
-			appendChat("<p class='date hr-sect'>"+getToday()+"</p>"); //채팅방 화면에 날짜 출력 DB로 수정 필요!
+			appendChat("<p class='date hr-sect'>"+getToday()+"</p>"); 
+			appendChat("<p class='check-in'>대화가 시작되었습니다.</p>"); //이전대화를 여기서 가져오는 방법도 있음
 		}
 		
 		//서버에서 화면으로 데이터를 전송 시 처리할 함수 
@@ -242,15 +399,29 @@
 			const msg = $("#sendMsg").val();
 			const memberNo = $("#memberNo").val();
 			const counselNo = $('#counselNo').val();
+			let time = getTime()
 			if(msg != ''){
 				const data = {
 							  type:"chat",
 							  msg:msg, 
 							  memberNo:memberNo,
-							  counselNo:counselNo
+							  counselNo:counselNo,
+							  time:time
 							 };
 				ws.send(JSON.stringify(data));
-				appendChat("<div class='chat right'>"+msg+"</div>");
+				
+				$.ajax({
+					url : "updateReadCheck.do",
+					data : {memberNo:memberNo, counselNo:counselNo},
+					success : function(data) {
+						console.log('성공');
+					},
+					error : function() {
+						console.log('에러');
+					}
+				})
+				
+				appendChat("<div class='chat-content-wrap sub-right'><div class='content-sub-wrap'><div class='read-check check-right'>1</div><div class='chat-time'>"+getTime()+"</div></div><div class='chat right'>"+msg+"</div></div>");
 				$("#sendMsg").val("");
 			}
 		}

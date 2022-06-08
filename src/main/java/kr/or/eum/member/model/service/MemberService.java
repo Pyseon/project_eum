@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
-import kr.or.eum.member.model.vo.ExpertAndCompany;
 import kr.or.eum.member.model.vo.ExpertAndMember;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -50,10 +50,7 @@ public class MemberService {
 		return list;
 	}
 	
-	//윤지
-	public ExpertAndCompany selectOneExpert(int expertNo) {
-		return dao.selectOneExpert(expertNo);
-	}
+
 	//재민 1:1문의 상세페이지
 	public Question selectOneQuestion(int qstNo) {
 		// TODO Auto-generated method stub
@@ -108,6 +105,7 @@ public class MemberService {
 		return member;
 	}
 
+
 	public int insertMember(Member m) {
 		dao.insertMember(m);
 		return dao.insertMember(m);
@@ -116,6 +114,19 @@ public class MemberService {
 	public Member search(String memberNick) {
 		// TODO Auto-generated method stub
 		return dao.search(memberNick);
+  }
+  
+	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
+		ArrayList<ProductAndExpert> list = dao.selectMyproject(memberNo);
+		
+		return list;
+	}
+
+	public int insertExpert(Expert ex) {
+		// TODO Auto-generated method stub
+		int result = dao.insertExpert(ex);
+		return result;
+
 	}
 
 

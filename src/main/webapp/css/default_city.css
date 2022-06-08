@@ -724,7 +724,7 @@ figcaption {
 
 /*요즘뭐하니 상세보기*/
 .fll {
-	float: left;
+	float: left !important;
 	margin-right: 10px;
 }
 
@@ -1129,6 +1129,82 @@ figcaption {
 .comment-form .btn:hover {
 	box-shadow: 0px 10px 20px rgba(108, 39, 255, 0.3);
 }
+
+.reply-btn {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-end;
+}
+
+.comment-btn-wrap {
+	padding-bottom: 10px;
+}
+
+.comment-btn-wrap * {
+	color: #777 !important;
+}
+
+.comment-write {
+	background-color: #f9f9fad;
+	border: 2px solid #ebecef;
+	color: #323232;
+	padding: 15px 6px 6px 20px;
+	margin-bottom: 25px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.comment-write-head {
+	display: flex;
+	justify-content: space-between;
+}
+
+.comment-num-box {
+	color: #757575;
+}
+
+#comment-textarea, #comment-updatearea {
+	resize: none;
+	width: 100%;
+	border: none;
+	overflow: hidden;
+	overflow-wrap: break-word;
+	height: 42.5px;
+	padding-bottom: 8px;
+}
+
+#comment-textarea:focus, #comment-updatearea:focus {
+	outline: none;
+}
+
+.comment-write-btn {
+	float: right;
+	background-color: #cdd8fc;
+	font-family: fs-m !important;
+	color: #1a73e8 !important;
+	padding: 4px 12px !important;
+}
+
+.comment-update2-btn {
+	float: left;
+	background-color: #f0f0f0;
+	color: #777 !important;
+	padding: 4px 12px !important;
+	margin-right: 5px;
+}
+
+.comment-cancel-btn {
+	float: left;
+	background-color: #f0f0f0;
+	color: #777 !important;
+	padding: 4px 12px !important;
+}
+
+.autosize {
+	min-height: 50px;
+}
+
 
 /* 커뮤니티 글쓰기  */
 .tab_title li {

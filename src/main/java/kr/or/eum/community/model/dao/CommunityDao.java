@@ -71,4 +71,8 @@ public class CommunityDao {
 		sqlSession.delete("community.commCoDelete", cmntNo);
 	}
 
+	public int commentCount(HashMap<String, Object> map) { //삭제하려는 댓글에 대댓글이 있는지 확인
+		return sqlSession.selectOne("community.commentCount", map);
+	}
+
 }

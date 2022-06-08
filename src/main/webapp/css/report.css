@@ -1,0 +1,79 @@
+@charset "UTF-8";
+
+
+/*모달 임시*/
+.report-modal-back{
+	top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal-sub-wrap{
+	width: 600px;
+    height: 475px;
+    background-color: #fff;
+    position: relative;
+    border-radius: 40px;
+}
+.modal-content-wrap {
+	display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#icon-report-modal{
+	width: 50px;
+    height: 50px;
+    margin-top: -5px;
+}
+.modal-title{
+	font-size: 18px;
+    font-weight: bold;
+    border-bottom: 1px solid;
+}
+.radio-wrap{
+	padding: 10px;
+}
+.radio{
+	padding-bottom: 5px;
+}
+textarea {
+	resize: none;
+	width: 500px;
+    height: 100px;
+    padding: 10px;
+}
+textarea::placeholder {
+  color: #a7a7a7;
+}
+.count-wrap{
+	margin-top: 5px;
+    margin-left: 457px;
+}
+.icon-close{
+	margin-left: 535px;
+    margin-top: 10px;
+    font-size: 40px !important;
+    padding: 0;
+    color: #ececec;
+    cursor: pointer;
+}
+.submitBtn{
+	width: 100px;
+    text-align: center;
+}
+.reportTitle{
+	width: 500px;
+    height: 30px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.reportTitle::placeholder {
+  color: #a7a7a7;
+}

@@ -172,6 +172,10 @@
 		delete from communityco_tbl 
 			where cmnt_no = ${value}
 	</delete>
+	
+	<select id="commentCount" parameterType="map" resultType="int">
+		select count(*) from communityco_tbl where comm_no = #{commNo} and cmnt_group = #{cmntGroup}
+	</select>
 </mapper>
 
 

@@ -1,7 +1,6 @@
 @charset "UTF-8";
 
 
-
 /*/////공통/////*/
 ul, li {
 	list-style: none;
@@ -374,7 +373,7 @@ th{
     height: 100%;
     object-fit: cover;
 }
-.expert-profile{
+.expert-profile-wrap{
 	display:flex;
 	width: 100px;
 	height:30px;

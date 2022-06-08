@@ -282,13 +282,13 @@ h3,h5{
     align-items: center;
     color: rgba(0, 0, 0, 0.35);
     margin: 19px 0px;
-    font-size:12px;
+    font-size:13px;
 }
 .hr-sect::before,
 .hr-sect::after {
     content: "";
     flex-grow: 1;
-    background: rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.1);
     height: 1px;
     font-size: 0px;
     line-height: 0px;
@@ -300,6 +300,7 @@ h3,h5{
     color: #fff;
     padding: 10px;
     font-size:12px;
+    margin-top: 10px;
 }
 .chat-content-wrap{
 	display: flex;
@@ -309,6 +310,8 @@ h3,h5{
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    font-size: 14px;
+    color: #a7a7a7;
 }
 .content-sub-wrap{
 	display: flex;
@@ -325,7 +328,27 @@ h3,h5{
 .sub-right{
 	justify-content: flex-end;
 }
-
+.read-check{
+	font-size:14px;
+	color: #a7a7a7;
+}
+#timeZone{
+	background-color: #1abc9c;
+    width: 58px;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 10px;
+    color: #fff;
+}
+#msg{
+	font-size: 12px;
+    margin-top: 3px;
+    margin-left: 3px;
+}
+#min, #sec{
+	font-size: 14px;
+	vertical-align: 1.5px;
+}
 
 
 

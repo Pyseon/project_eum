@@ -1,6 +1,11 @@
 package kr.or.eum.member.controller;
 
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
@@ -19,10 +24,13 @@ import kr.or.eum.member.model.service.MemberService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -98,11 +106,14 @@ public class MemberController {
 	//재민 내정보수정
 	@RequestMapping(value="/updateMember.do")
 	public String updateMember(Member m,HttpSession session) {
+		
+		
 		int result = service.updateMember(m);
 	
 		if(result>0) {
-			session.setAttribute("m", m);
+			session.setAttribute("member", m);
 		}
+		System.out.println(m);
 		return "redirect:/";
 	}
 	//재민 1:1 문의내역 확인
@@ -123,14 +134,30 @@ public class MemberController {
 		return "mypage/questionView";
 		
 	}
+	//재민 내 프로젝트
+	@RequestMapping(value="/Myproject.do")
+	public String Myproject(Model model, HttpSession session, int memberNo) {
+		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
+		
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "mypage/Myproject";
+	}
+	@RequestMapping(value="/MyprojectDetail.do")
+	public String MyprojectDetail(Model model, HttpSession session, int memberNo) {
+		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
+		
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "mypage/Myproject";
+	}
 	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {
 		ArrayList<ProductAndPayment> list = service.selectProductList(memberNo);
 		
 		model.addAttribute("list", list);
-		System.out.println(list);
-		System.out.println(memberNo+"memberNo");
+		
 		return "mypage/Myproduct";
 	}
 	//재민 찜내역
@@ -150,6 +177,7 @@ public class MemberController {
 		System.out.println(list);
 		return "mypage/Myreview";
 	}
+	
 	//재민 전문가 신청페이지로 이동
 	@RequestMapping(value="/Expertapply.do")
 	public String Expertapply() {
@@ -162,42 +190,84 @@ public class MemberController {
 		return "expert/checkdocument";
 	}
 	//재민 전문가 신청페이지2로 이동
-	@RequestMapping(value="/Expertapply2.do")
-	public String Expertapply2() {
+	@RequestMapping(value="/Expertapply2.do", method = RequestMethod.POST)
+	public String Expertapply2(Model model, int memberNo) {
+		model.addAttribute("memberNo",memberNo);
 		return "expert/Expertapply2";
 	}
 	//재민 전문가 신청페이지3로 이동
 	@RequestMapping(value="/Expertapply3.do", method = RequestMethod.POST)
-	public String Expertapply3(Model model, String expertClass, String expertTag, String expertQual,String expertLicense,String expertIssuer) {
+	public String Expertapply3(Expert ex) {
 		
-		model.addAttribute("expertClass",expertClass);
-		model.addAttribute("expertTag",expertTag);
-		model.addAttribute("expertQual",expertQual);
-		model.addAttribute("expertLicense",expertLicense);
-		model.addAttribute("expertIssuer",expertIssuer);
-		return "expert/Expertapply3";
-	}
-	//재민 전문가 (sysout용 확인)
-	@RequestMapping(value="/Expertapply4.do",method = RequestMethod.POST)
-	public String Expertapply4(Model model, String expertClass, String expertTag,String expertDate,String expertQual,String expertLicense,String expertIssuer,String expertName,String expertJob,String expertPhone,String expertEmail) {
+		/*
+		String savePath 
+		= request.getSession().getServletContext().getRealPath("/img/expert/");
 		
-		System.out.println(expertClass);
-		System.out.println(expertTag);
-		System.out.println(expertQual);
-		System.out.println(expertLicense);
-		System.out.println(expertIssuer);
-		System.out.println(expertDate);
-		System.out.println(expertName);
-		System.out.println(expertJob);
-		System.out.println(expertPhone);
-		System.out.println(expertEmail);
+			//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
+			//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
+			//사용자가 업로드한 파일 이름 
+			String certificateName = file.getOriginalFilename();
+			//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
+			//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
+			//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
+			//매개변수가 하나면 매개변수부터 잘라서 반환
+			String onlyFilename = certificateName.substring(0, certificateName.lastIndexOf("."));//test
+			String extension = certificateName.substring(certificateName.lastIndexOf("."));//.txt
+			//실제 업로드할 파일명을 저장할 변수
+			String certificatePath = null;
+			//파일명 중복시 뒤에 붙일 숫자 변수
+			int count = 0;
+			while(true) {
+				if(count == 0) {
+					//반복 첫번째 회차에서는 원본파일명을 그대로 적용
+					certificatePath = onlyFilename + extension; //test.txt
+				}
+				File checkFile = new File(savePath+certificatePath);
+				if(!checkFile.exists()) { //경로에 파일이 존재하지않으면 (exists() method 사용)
+					break; //겹치지않으면 >> while 문 종료
+				}else {
+					certificatePath = onlyFilename + "_" + count + extension;
+				}
+				count++; //존재하면 카운트를 ++ 하고 반복문 다시 실행
+			}
+			//파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
+			//해당파일 업로드 작업
+			try {
+				//중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
+				FileOutputStream fos = new FileOutputStream(new File(savePath+certificatePath));
+				//업로드 속도증가를 위한 보조스트림 생성
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				//파일 업로드
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	
+			ex.setCertificateName(certificateName);
+			ex.setCertificatePath(certificatePath);
+		*/
+		int result = service.insertExpert(ex);
+		
+		System.out.println(result);
+
+		
 		return null;
 	}
-
+	
+	//재민 주문취소
 	@RequestMapping(value="/DeleteMyproduct.do")
 	public String DeleteMyproduct(int payNo) {
 		int result = service.DeleteMyproduct(payNo);
-		return "redirect:/Myproduct";
+		
+		System.out.println(result);
+		return "redirect:/";
 	}
 	@RequestMapping(value="/Myproductdetail.do")
 	public String Myproductdetail(int payNo) {

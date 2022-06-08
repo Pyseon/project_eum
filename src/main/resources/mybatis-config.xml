@@ -15,14 +15,17 @@
 		<typeAlias type="kr.or.eum.product.model.vo.Payment" alias="pay"/>
 		<typeAlias type="kr.or.eum.report.model.vo.Report" alias="rpt"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Product" alias="pro"/>
+		<typeAlias type="kr.or.eum.product.model.vo.Ideamarket" alias="idea"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="m"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Question" alias="q"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.Answer" alias="ans"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.FaQ" alias="faq"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Notice" alias="ntc"/>
 		<typeAlias type="kr.or.eum.manager.model.vo.Chart" alias="chart"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.MemberChart" alias="memberChart"/>
+		<typeAlias type="kr.or.eum.manager.model.vo.SalesChart" alias="salesChart"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Expert" alias="expert"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Review" alias="review"/> <!-- 윤지 -->
-		<typeAlias type="kr.or.eum.member.model.vo.ExpertAndCompany" alias="expertAndCom"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndPayment" alias="productAndPay"/>
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndPayAndwish" alias="productAndPayAndwish"/>
 		<typeAlias type="kr.or.eum.member.model.vo.ExpertAndMember" alias="expertAndM"/> <!-- 윤지 -->
@@ -31,6 +34,7 @@
 		<typeAlias type="kr.or.eum.wishlist.model.vo.Wishlist" alias="wish"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Counsel" alias="counsel"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Chat" alias="chat"/> <!-- 윤지 -->
+		<typeAlias type="kr.or.eum.product.model.vo.ProductAndExpert" alias="productAndExpert"/>
 	</typeAliases>
 	<typeHandlers>
         <typeHandler handler="kr.or.eum.LongHandler" javaType="String" jdbcType="LONGVARCHAR"/>

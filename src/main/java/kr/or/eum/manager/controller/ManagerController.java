@@ -10,11 +10,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 
 import kr.or.eum.manager.model.service.ManagerService;
+import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Chart;
 import kr.or.eum.manager.model.vo.FaQ;
+import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
+import kr.or.eum.manager.model.vo.Question;
+import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -181,5 +188,91 @@ public class ManagerController {
 		model.addAttribute("chart", chart);
 		return "manager/managementChart";
 	}
+	@ResponseBody
+	@RequestMapping(value = "/memberChart.do", produces = "application/json;charset=utf-8")
+	public String memberChart(String year) {
+		MemberChart memberChart = service.selectMemberChart(year);
+		return new Gson().toJson(memberChart);
+	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/salesChart.do", produces = "application/json;charset=utf-8")
+	public String salesTypeChart(String year, int salesType) {
+		ArrayList<SalesChart> salesTypeChart = service.selectSalesTypeChart(year, salesType);
+		return new Gson().toJson(salesTypeChart);
+	}
+	@RequestMapping(value = "/manaAnswer.do")
+	public String manaAnswer(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaAnswer.do";
+		HashMap<String, Object> apd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", apd.get("answerList"));
+		model.addAttribute("pageNavi", apd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/managementAnswer";
+	}
+	@RequestMapping(value = "/manaQuestion.do")
+	public String manaQuestion(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaQuestion.do";
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", qpd.get("qstList"));
+		model.addAttribute("pageNavi", qpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/managementQuestion";
+	}
+	@RequestMapping(value = "/insertAnswerFrm.do")
+	public String insertAnswerFrm(int qstNo, Model model) {
+		Question qst = service.selectQst(qstNo);
+		model.addAttribute("qst", qst);
+		return "manager/insertAnswerFrm";
+	}
+	@RequestMapping(value = "/insertAnswer.do")
+	public String insertAnswer(HttpServletRequest request, int qstNo, String ansTitle, String ansContent) {
+		HttpSession session = request.getSession(false);
+		Member member = (Member)session.getAttribute("member");
+		HashMap<String, Object> answer = new HashMap<String, Object>();
+		answer.put("memberNo", member.getMemberNo());
+		answer.put("qstNo", qstNo);
+		answer.put("ansTitle", ansTitle);
+		answer.put("ansContent", ansContent);
+		int result = service.insertAnswer(answer);
+		int reulst2 = service.updateAnsState(qstNo);
+		return "redirect:/manaQuestion.do?reqPage=1&selectNum=0";
+	}
+	@RequestMapping(value = "/myQuestionList.do")
+	public String myQuestionList(HttpSession session, int memberNo, Model model,int reqPage,int selectNum) {
+		String wherePage = "myQuestionList.do";
+		String searchType = null;
+		String keyword = Integer.toString(memberNo);
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", qpd.get("qstList"));
+		model.addAttribute("pageNavi", qpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "mypage/myQuestionList";
+	}
+	@RequestMapping(value = "/insertQuestionFrm.do")
+	public String insertQuestionFrm(HttpSession session, Model model) {
+		return "mypage/insertQuestionFrm";
+	}
+	@RequestMapping(value = "/insertQuestion.do")
+	public String insertQuestion(HttpServletRequest request, String qstTitle, String qstContent) {
+		HttpSession session = request.getSession(false);
+		Member member = (Member)session.getAttribute("member");
+		HashMap<String, Object> qst = new HashMap<String, Object>();
+		qst.put("memberNo", member.getMemberNo());
+		qst.put("qstTitle", qstTitle);
+		qst.put("qstContent", qstContent);
+		int result = service.insertQuestion(qst);
+		return "redirect:/myQuestionList.do?reqPage=1&selectNum=0&memberNo="+member.getMemberNo();
+	}
+	@RequestMapping(value = "/detailQuestion.do")
+	public String detailQuestion(int qstNo, Model model) {
+		Question qst = service.selectQst(qstNo);
+		Answer ans = service.selectAns(qstNo);
+		model.addAttribute("qst", qst);
+		model.addAttribute("ans", ans);
+		return "mypage/detailQuestion";
+	}
 }

@@ -33,19 +33,64 @@ public class ProductDao {
 		List list = sqlSession.selectList("product.selectClassList", map);
 		return (ArrayList<Product>)list;
 	}
+	//재건
+	public ArrayList<Product> selectExpertList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("product.selectExpertList", map);
+		return (ArrayList<Product>)list;
+	}
 
 	//재건
-	public int selectProductCount(HashMap<String, Object> map) {
+	public int selectClassCount(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		int totalCount = sqlSession.selectOne("product.selectTotalCount", map);
+		int totalCount = sqlSession.selectOne("product.selectClsTotalCount", map);
 		return totalCount;
 	}
 	
-	public int productWrite(Product pro) {
+	public int selectExpertCount(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		int result = sqlSession.insert("product.productWrite", pro);
+		int totalCount = sqlSession.selectOne("product.selectExpTotalCount", map);
+		return totalCount;
+	}
+	
+	public int selectIdeamarketCount(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = sqlSession.selectOne("product.selectIdmTotalCount", map);
+		return totalCount;
+	}
+	
+	public int classWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("product.classWrite", pro);
 		return result;
 	}
+	public int expertWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("product.expertWrite", pro);
+		return result;
+	}
+	
+	public Expert selectExpertNo(int memberNo) {
+		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
+		return expert;
+	}
+	
+	public Member selectMemberNo(int memberNo) {
+		Member member = sqlSession.selectOne("product.selectMemberNo", memberNo);
+		return member;
+	}
+	
+	public ArrayList<Product> selectIdeamarketList(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("product.selectIdeamarketList", map);
+		return (ArrayList<Product>)list;
+	}
+	
+	public int ideamarketWrite(Product pro) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("product.ideamarketWrite", pro);
+		return result;
+	}
+	
+
 	
 	//윤지
 	public Product selectOneProduct(int productNo) {
@@ -108,6 +153,8 @@ public class ProductDao {
 		return result;
 	}
 
+
+
 	//윤지
 	public Payment selectPaymentState(int payNo) {
 		Payment payment = sqlSession.selectOne("product.selectPaymentState", payNo);
@@ -131,21 +178,74 @@ public class ProductDao {
 		Product product = sqlSession.selectOne("product.selectOneProduct2", payNo);
 		return product;
 	}
-
+	
+	//윤지
 	public Counsel selectCounsel(int payNo) {
 		Counsel counsel = sqlSession.selectOne("product.selectCounsel", payNo);
 		return counsel;
 	}
-
+	
+	//윤지
 	public ArrayList<Chat> selectChat(int payNo) {
 		List chatList = sqlSession.selectList("product.selectChat", payNo);
 		return (ArrayList<Chat>)chatList;
-  }
-  
-	public Expert selectExpertNo(int memberNo) {
-		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
-		return expert;
 	}
+	
+
+	//윤지
+	public int updateReadCheck(HashMap<String, Object> map) {
+		int result = sqlSession.update("product.updateReadCheck", map);
+		return result;
+	}
+
+	//윤지
+	public int updatePaymentState(int counselNo) {
+		Payment payment = sqlSession.selectOne("product.selectPayment", counselNo);
+		int result = sqlSession.update("product.updatePaymentState", payment.getPayNo());
+		System.out.println(result);
+		return result;
+	}
+
+	//윤지
+	public int insertReview(Review review) {
+		int result = sqlSession.insert("product.insertReview", review);
+		return result;
+	}
+	
+	//윤지
+	public Review selectReview(int reviewNo) {
+		Review review = sqlSession.selectOne("product.selectReview", reviewNo);
+		return review;
+	}
+	
+	//윤지
+	public Product selectProductName(int reviewNo) {
+		Product product = sqlSession.selectOne("product.selectProductName", reviewNo);
+		return product;
+	}
+	
+	//윤지
+	public int updateReview(Review review) {
+		int result = sqlSession.update("product.updateReview", review);
+		return result;
+	}
+	//윤지
+	public int deleteReview(int reviewNo) {
+		int result = sqlSession.delete("product.deleteReview", reviewNo);
+		return result;
+	}
+	//윤지
+	public int overlapCheckReview(int payNo) {
+		int result = sqlSession.selectOne("product.overlapCheck", payNo);
+		return result;
+	}
+	//윤지
+	public int updateStartTime(HashMap<String, Object> map) {
+		int result = sqlSession.update("product.updateStartTime", map);
+		return result;
+	}
+
+
 
 
 }

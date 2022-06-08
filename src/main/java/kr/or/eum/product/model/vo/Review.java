@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Review {
-	private int memberNo;
+	private int reviewNo;
 	private int payNo;
-	private String reviewNo;
+	private int memberNo;
+	private int productNo;
+	private String reviewTitle;
 	private String reviewContent;
 	private int reviewStar;
 	private String reviewDate;
-	private String reviewTitle;
 }

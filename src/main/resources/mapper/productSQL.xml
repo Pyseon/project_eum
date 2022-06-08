@@ -4,49 +4,162 @@
 <mapper namespace="product">
 	<!-- 재건 -->
 	<select id="selectClassList" resultType="pro">
-	select * from
-		(select rownum as rnum, b.* from
-		(select
-    p.product_no as productNo,
-    p.expert_no as expertNo,
-    (select expert_name from expert_tbl m where p.expert_no = m.member_no) as expertName,
-    (select member_picturepath from member_tbl m where p.expert_no = m.member_no) as memberPicturePath,
-    p.product_Category as productCategory,
-    p.product_title as productTitle,
-    p.product_intro as productIntro,
-    p.product_tag as productTag,
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
     cost,
     sale,
     (cost)*(sale)/100 as salecost,
-    (select nvl(count(*),0) from review_tbl rev where p.product_no = rev.product_no) as revCount,
-   (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
-    p.product_imgpath as productImgPath
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
     from product_tbl p
-	<choose>
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
+<choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
-            where product_Category=#{selPro} and product_Category=#{selPro} 
+            where product_Category=#{selPro} and product_type = 2
         </when>
         <otherwise>
             where product_type = 2
         </otherwise>
     </choose>
-    order by p.product_no desc)b)
+    order by product_no desc)b)
+    where rnum between #{start} and #{end}
+    </select>
+    
+    <!-- 재건 -->
+	<select id="selectExpertList" resultType="pro">
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
+    cost,
+    sale,
+    (cost)*(sale)/100 as salecost,
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
+    from product_tbl p
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
+<choose>
+        <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
+            where product_Category=#{selPro} and product_type = 2
+        </when>
+        <otherwise>
+            where product_type = 1
+        </otherwise>
+    </choose>
+    order by product_no desc)b)
+    where rnum between #{start} and #{end}
+    </select>
+    
+    <select id="selectIdeamarketList" resultType="pro">
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
+    cost,
+    sale,
+    (cost)*(sale)/100 as salecost,
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
+    from product_tbl p
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
+<choose>
+        <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
+            where product_Category=#{selPro} and product_type = 2
+        </when>
+        <otherwise>
+            where product_type = 3
+        </otherwise>
+    </choose>
+    order by product_no desc)b)
     where rnum between #{start} and #{end}
     </select>
 
-	<!-- 재건 -->
-	<select id="selectTotalCount" resultType="int" parameterType="map">
+<!-- 재건 -->
+	<select id="selectExpTotalCount" resultType="int" parameterType="map">
 		select count(*) from product_tbl
-		<if test="!selPro.equals('전체')">
-		 	where product_Category = #{selPro}
-		</if>
-  </select>
-  <insert id="productWrite" parameterType="pro">
+		<choose>
+		<when test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro} and product_type = 1
+		</when>
+		<otherwise>
+		where product_type = 1
+		</otherwise>
+		</choose>
+  	</select>
+
+	<!-- 재건 -->
+	<select id="selectClsTotalCount" resultType="int" parameterType="map">
+		select count(*) from product_tbl
+		<choose>
+		<when test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro} and product_type = 2
+		</when>
+		<otherwise>
+		where product_type = 2
+		</otherwise>
+		</choose>
+  	</select>
+  
+  <!-- 재건 -->
+	<select id="selectIdmTotalCount" resultType="int" parameterType="map">
+		select count(*) from product_tbl
+		<choose>
+		<when test="!selPro.equals('전체')">
+		 	where product_Category = #{selPro} and product_type = 3
+		</when>
+		<otherwise>
+		where product_type = 3
+		</otherwise>
+		</choose>
+  	</select>
+  
+  <insert id="classWrite" parameterType="pro">
   		insert into
   			product_tbl values(
   			product_seq.nextval,
   			#{expertNo},
-  			#{productType},
+  			2,
   			#{productTitle},
   			#{productCategory},
   			#{productIntro},
@@ -58,7 +171,30 @@
   			#{productAddr},
   			#{sale},
   			#{productOption},
-  			#{productImgPath}
+  			#{productImgPath},
+  			#{productImgname}
+  			)
+  </insert>
+  
+    <insert id="expertWrite" parameterType="pro">
+  		insert into
+  			product_tbl values(
+  			product_seq.nextval,
+  			#{expertNo},
+  			1,
+  			#{productTitle},
+  			#{productCategory},
+  			#{productIntro},
+  			#{productTag},
+  			#{productContent},
+  			#{cost},
+  			#{productQst},
+  			#{productAns},
+  			#{productAddr},
+  			#{sale},
+  			#{productOption},
+  			#{productImgPath},
+  			#{productImgname}
   			)
   </insert>
  
@@ -167,6 +303,7 @@
 		WHERE rnum between #{start} and #{end}
 	</select>
 	
+	<!-- 여기서부터 chat관련 -->
 	<!-- 윤지 -->
 	<select id="selectPaymentState" parameterType="int" resultType="pay">
 		select 
@@ -185,7 +322,7 @@
 	
 	<!-- 윤지-->
 	<insert id="insertChat" parameterType="map">
-		insert into chat_tbl values(chat_seq.nextval, #{counselNo}, #{memberNo}, #{msg}, to_char(sysdate,'yyyy-mm-dd'), to_char(sysdate,'hh24:mi'),1)
+		insert into chat_tbl values(chat_seq.nextval, #{counselNo}, #{memberNo}, #{msg}, to_char(sysdate,'yyyy"년"mm"월"dd"일"'), to_char(sysdate,'hh24:mi'),1)
 	</insert>
 	
 	<!-- 윤지 -->
@@ -240,10 +377,91 @@
         on counsel.pay_no = p.pay_no
         where counsel.pay_no=#{payNo} order by chat_no asc       
   	</select>
-  
+
 	<select id="selectExpertNo" parameterType="int" resultType="expert">
 		select expert_no as expertNo
 		from expert_tbl where member_no=#{memberNo}
 	</select>
+	
+	<select id="selectMemberNo" parameterType="int" resultType="member">
+		select member_no as memberNo
+		from member_tbl where member_no=#{memberNo}
+	</select>
+	
+
+	<!-- 윤지 -->
+	<update id="updateReadCheck" parameterType="int">
+		update chat_tbl set chat_readcheck=0 where counsel_no=#{counselNo} and member_no=#{memberNo} and chat_readcheck=1
+	</update>
+	
+	<!-- 윤지 -->
+	<select id="selectPayment" parameterType="int" resultType="pay">
+    
+		select 
+			c.counsel_no as counselNo, 
+			c.member_no as memberNo, 
+			c.expert_no as expertNo, 
+			p.pay_no as payNo, 
+			p.pay_state as payState
+        from counsel_tbl c
+        join payment_tbl p
+        on c.pay_no = p.pay_no
+        where counsel_no=#{counselNo}
+	</select>
+	<update id="updatePaymentState" parameterType="int">
+		update payment_tbl set pay_state=2 where pay_no=#{payNo}
+	</update>
+
+  	<!--윤지 -->
+	<insert id="insertReview" parameterType="review">
+		INSERT INTO REVIEW_TBL VALUES(REVIEW_SEQ.NEXTVAL,#{payNo},#{memberNo},#{reviewTitle},#{reviewContent},#{reviewStar},to_char(sysdate,'yyyy.mm.dd'),#{productNo})
+	</insert>
+	
+	<!-- 윤지 -->
+	<select id="selectReview" parameterType="int" resultType="review">
+		select 
+			review_no as reviewNo, 
+			pay_no as payNo,
+			member_no as memberNo,
+			review_title as reviewTitle,
+			review_content as reviewContent,
+			review_star as reviewStar,
+			review_date as reviewDate,
+			product_no as productNo
+		from review_tbl where review_no=#{reviewNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<select id="selectProductName" parameterType="int" resultType="pro">
+		select p.product_title as productTitle
+        from product_tbl p
+        join review_tbl r
+        on p.product_no = r.product_no
+        where review_no=#{reviewNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<update id="updateReview" parameterType="review">
+		update review_tbl set review_title=#{reviewTitle}, review_content=#{reviewContent}, review_star=#{reviewStar} where review_no=#{reviewNo}
+	</update>
+	
+	<!-- 윤지 -->
+	<delete id="deleteReview" parameterType="int">
+		delete from review_tbl where review_no=#{reviewNo}
+	</delete>
+	
+	<!-- 윤지 -->
+	<select id="overlapCheck" parameterType="int" resultType="int">
+		select count(*)
+        from review_tbl r
+        join payment_tbl p
+        on r.pay_no = p.pay_no
+        where r.pay_no = #{payNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<update id="updateStartTime" parameterType="map">
+		update counsel_tbl set start_time=#{startTime} where counsel_no=#{counselNo} 
+	</update>
 </mapper>
 	

@@ -46,9 +46,10 @@ public class ProductService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
+
+		int totalCount = productDao.selectClassCount(map);
 		ArrayList<Product> list = productDao.selectClassList(map);
-		
-		int totalCount = productDao.selectProductCount(map);
+
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -57,6 +58,10 @@ public class ProductService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		
+		
+		
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
@@ -74,7 +79,7 @@ public class ProductService {
 				pageNavi += "</a></li>";
 			}else {
 				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/ClasstList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+				pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
 				pageNavi += pageNo;
 				pageNavi += "</a></li>";
 			}
@@ -85,7 +90,7 @@ public class ProductService {
 		}
 		if(pageNo <= totalPage) {
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/ClasstList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
+			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			
@@ -106,9 +111,10 @@ public class ProductService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
+
+		int totalCount = productDao.selectExpertCount(map);
 		ArrayList<Product> list = productDao.selectExpertList(map);
-		
-		int totalCount = productDao.selectProductCount(map);
+
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -117,6 +123,10 @@ public class ProductService {
 		}
 		int pageNaviSize = 5;
 		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
+		
+		
+		
+		
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
@@ -166,16 +176,10 @@ public class ProductService {
 		map.put("start", start);
 		map.put("end", end);
 		map.put("selPro", selPro);
-		
-		HashMap<String, Object> data = new HashMap<String, Object>();
-		int totalCount = 0;
-		
+
+		int totalCount = productDao.selectIdeamarketCount(map);
 		ArrayList<Product> list = productDao.selectIdeamarketList(map);
-		
-		
-		
-		
-		
+
 		int totalPage = 0;
 		if(totalCount % numPerPage == 0) {
 			totalPage = totalCount/numPerPage;
@@ -194,7 +198,7 @@ public class ProductService {
 			
 			pageNavi += "<li>";
 			pageNavi += "<a class='page-item' href='/IdeamarketList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
-			pageNavi += "<span ideamarket='material-icons'>chevron_left</span>";
+			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
 		for(int i=0;i<pageNaviSize;i++) {
@@ -239,7 +243,7 @@ public class ProductService {
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
 		int result = productDao.expertWrite(pro);
-		
+		Product product=setToken(pro);
 		return result;
 	}
 	

@@ -40,9 +40,21 @@ public class ProductDao {
 	}
 
 	//재건
-	public int selectProductCount(HashMap<String, Object> map) {
+	public int selectClassCount(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
-		int totalCount = sqlSession.selectOne("product.selectTotalCount", map);
+		int totalCount = sqlSession.selectOne("product.selectClsTotalCount", map);
+		return totalCount;
+	}
+	
+	public int selectExpertCount(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = sqlSession.selectOne("product.selectExpTotalCount", map);
+		return totalCount;
+	}
+	
+	public int selectIdeamarketCount(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		int totalCount = sqlSession.selectOne("product.selectIdmTotalCount", map);
 		return totalCount;
 	}
 	
@@ -71,6 +83,8 @@ public class ProductDao {
 		int result = sqlSession.insert("product.ideamarketWrite", pro);
 		return result;
 	}
+	
+
 	
 	//윤지
 	public Product selectOneProduct(int productNo) {
@@ -190,6 +204,8 @@ public class ProductDao {
 		int result = sqlSession.insert("product.insertReview", review);
 		return result;
 	}
+
+
 
 
 }

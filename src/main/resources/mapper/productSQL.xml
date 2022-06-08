@@ -322,7 +322,7 @@
 	
 	<!-- 윤지-->
 	<insert id="insertChat" parameterType="map">
-		insert into chat_tbl values(chat_seq.nextval, #{counselNo}, #{memberNo}, #{msg}, to_char(sysdate,'yyyy-mm-dd'), to_char(sysdate,'hh24:mi'),1)
+		insert into chat_tbl values(chat_seq.nextval, #{counselNo}, #{memberNo}, #{msg}, to_char(sysdate,'yyyy"년"mm"월"dd"일"'), to_char(sysdate,'hh24:mi'),1)
 	</insert>
 	
 	<!-- 윤지 -->
@@ -458,5 +458,10 @@
         on r.pay_no = p.pay_no
         where r.pay_no = #{payNo}
 	</select>
+	
+	<!-- 윤지 -->
+	<update id="updateStartTime" parameterType="map">
+		update counsel_tbl set start_time=#{startTime} where counsel_no=#{counselNo} 
+	</update>
 </mapper>
 	

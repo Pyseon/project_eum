@@ -28,6 +28,9 @@ public class ChatHandler extends TextWebSocketHandler {
 	//접속한 회원
 	private HashMap<String, ArrayList<WebSocketSession>> sessionMap;
 	private HashMap<WebSocketSession, String> sessionRoom;
+	
+	//인원체크
+	private static int i;
 
 //	LocalTime localTime = LocalTime.now();
 //	DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
@@ -45,7 +48,7 @@ public class ChatHandler extends TextWebSocketHandler {
 //		sessionList.add(session);
 		System.out.println("새 클라이언트 접속!");
 		System.out.println("session : "+ session.getId());
-//		session.get
+		i++;
 	}//afterConnectionEstablished
 	
 	//클라이언트가 서버로 메세지를 전송하면 수행되는 메소드
@@ -78,15 +81,21 @@ public class ChatHandler extends TextWebSocketHandler {
 			System.out.println("---------------");
 			sessionMap.get(counselNo).add(session);
 			sessionRoom.put(session, counselNo);
-			//int readResult = productService.updateReadCheck(counselNo, memberNo);
 			//System.out.println("readResult : "+readResult);
+			
 		//채팅메세지를 입력한 경우
 		}else if(type.equals("chat")) {//if문으로 이미지 있다 없다, 읽음 표시도 
 			String sendMsg ="<div class='chat-content-wrap'><div class='chat left'><span class='chatId'></span>"+msg+"</div><div class='content-sub-wrap'><div class='read-check'>1<div><div class='chat-time'>"+time+"</div></div></div>";
 			int result = productService.insertChat(msg, memberNo,counselNo); 
 			for(WebSocketSession s : sessionMap.get(counselNo)) {
 				if(!s.equals(session)) {
-					TextMessage tm = new TextMessage(sendMsg);
+					if(i == 2) {
+						sendMsg ="<div class='chat-content-wrap'><div class='chat left'><span class='chatId'></span>"+msg+"</div><div class='content-sub-wrap'><div class='read-check'><div><div class='chat-time'>"+time+"</div></div></div>";
+					}else {
+						sendMsg ="<div class='chat-content-wrap'><div class='chat left'><span class='chatId'></span>"+msg+"</div><div class='content-sub-wrap'><div class='read-check'>1<div><div class='chat-time'>"+time+"</div></div></div>";
+					}
+					TextMessage tm = new TextMessage(sendMsg);						
+					int readResult = productService.updateReadCheck(counselNo, memberNo);
 					//나 외에 다른 사람이 있다 없다 체크
 					//DB에 보내는 것과 사용자가 접속해 있어서 메세지를 보내주는 것을 따로따로 생각하기
 					//insert는 읽음 여부와 관계없이
@@ -100,6 +109,7 @@ public class ChatHandler extends TextWebSocketHandler {
 	//클라이언트와 연결이 끊겼을 때 자동으로 수행되는 메소드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception{
+		i--;
 		String counselNo = sessionRoom.get(session);
 		ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo);
 		sessionList.remove(session);
@@ -109,11 +119,11 @@ public class ChatHandler extends TextWebSocketHandler {
 			sessionMap.remove(counselNo);
 		}
 		
-		String sendMsg = "<p'>새로고침으로 세션 연결 끊김.</p>"; //나중에 삭제
-		TextMessage tm = new TextMessage(sendMsg);
-		for(WebSocketSession s : sessionList) {
-			s.sendMessage(tm); 
-		}
+		//String sendMsg = "<p'>새로고침으로 세션 연결 끊김.</p>"; //나중에 삭제
+		//TextMessage tm = new TextMessage(sendMsg);
+		//for(WebSocketSession s : sessionList) {
+			//s.sendMessage(tm); 
+		//}
 	}//afterConnectionClosed
 	
 }//ChatHandler 

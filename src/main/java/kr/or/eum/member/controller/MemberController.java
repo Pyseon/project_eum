@@ -123,7 +123,7 @@ public class MemberController {
 		return "mypage/questionView";
 		
 	}
-	//재민 구매내역
+	//재민 내 프로젝트
 	@RequestMapping(value="/Myproject.do")
 	public String Myproject(Model model, HttpSession session, int memberNo) {
 		ArrayList<Product> list = service.selectMyproject(memberNo);
@@ -132,6 +132,15 @@ public class MemberController {
 		System.out.println(list);
 		return "mypage/Myproject";
 	}
+	@RequestMapping(value="/MyprojectDetail.do")
+	public String MyprojectDetail(Model model, HttpSession session, int memberNo) {
+		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
+		
+		model.addAttribute("list", list);
+		System.out.println(list);
+		return "mypage/Myproject";
+	}
+	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {
 		ArrayList<ProductAndPayment> list = service.selectProductList(memberNo);

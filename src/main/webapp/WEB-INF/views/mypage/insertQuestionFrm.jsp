@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,33 +9,18 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
-	<div class="manaContentWrap">
-	
-		<h1>>1:1문의 상세 페이지</h1>
-		<hr>
-		<div class="questionBox">
-			<h3>질문번호: ${qst.qstNo }</h3>
-			<hr>
-			<h3>제목: ${qst.qstTitle }</h3>
-			<hr>
-			<h4>${qst.memberId }</h4>
-			<h4>${qst.qstDate.substring(0,10) }</h4>
-			<h4>${qst.qstDate.substring(11,16) }</h4>
-			<hr>
-			<p>${qst.qstContent }</p>
-		</div>
-			<form action="insertAnswer.do" method="post" class="answerForm">
-			<span class="material-symbols-outlined ansRe">
-				subdirectory_arrow_right</span><h2>답변</h2>
-				<input type="text" class="managerTitle" name="ansTitle" placeholder="제목">
-				<div class="pt-1" style="margin-bottom: 50px;">
-					<textarea id="summernote" name="ansContent"></textarea>
-				</div>
-				<input type="hidden" name="qstNo" value="${qst.qstNo }">
-				<input type="submit" class="btn bc1 bs4" value="제출">
-			</form> 
-		</div>
+	<h1>>1:1 질문</h1>
+	<hr>
+	<div class="container">
+	<form action="/insertQuestion.do" method="post">
+		<input class="managerTitle" type="text" name="qstTitle" placeholder="제목을 입력하세요.">
 		
+		<!-- 썸머노트 -->
+		<div class="pt-1" style="margin-bottom: 50px;">
+			<textarea id="summernote" name="qstContent"></textarea>
+		</div>
+		<input type="submit" class="btn bc1 bs4" value="등록하기">
+	</form>
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>

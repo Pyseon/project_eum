@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -235,6 +237,21 @@ public class ManagerDao {
 		return result;
 	}
 
+	public Question selectQst(int qstNo) {
+		Question qst = sqlSession.selectOne("manager.selectQst", qstNo);
+		return qst;
+	}
+
+	public int insertAnswer(HashMap<String, Object> answer) {
+		int result = sqlSession.insert("manager.insertAnswer", answer);
+		return result;
+	}
+
+	public int updateAnsState(int qstNo) {
+		int result = sqlSession.update("manager.updateAnsState", qstNo);
+		return result;
+	}
+	
 	public ArrayList<Question> qstPageData(HashMap<String, Object> map) {
 		List list = sqlSession.selectList("manager.qstPageData", map);
 		return (ArrayList<Question>) list;
@@ -244,12 +261,26 @@ public class ManagerDao {
 		int result = sqlSession.selectOne("manager.qstCount", map);
 		return result;
 	}
-
-	public Question selectQst(int qstNo) {
-		Question qst = sqlSession.selectOne("manager.selectQst", qstNo);
-		return qst;
+	
+	public ArrayList<Question> myQstPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.myQstPageData", map);
+		return (ArrayList<Question>) list;
 	}
 	
+	public int myQstCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("manager.myQstCount", map);
+		return result;
+	}
+
+	public int insertQuestion(HashMap<String, Object> map) {
+		int result = sqlSession.insert("manager.insertQuestion", map);
+		return result;
+	}
+
+	public Answer selectAns(int qstNo) {
+		Answer ans = sqlSession.selectOne("manager.selectAns", qstNo);
+		return ans;
+	}
 	
 	
 }

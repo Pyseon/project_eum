@@ -218,8 +218,9 @@ li{
 			</ul>
 			</div>
 			<div>
-				<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMywish.do?payNo=${p.payNo}'">삭제</button>
-						
+				<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMywish.do?payNo=${w.payNo}'">${w.payNo}</button>
+						<span class="material-icons icon-wish">favorite</span>
+				
 			</div>
 		</div>
 		

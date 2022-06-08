@@ -87,6 +87,7 @@
 	  </select>
 	   <select id ="selectWishlist" resultType="productAndPayAndwish">
 	 		select 
+	 			payment_tbl.pay_no as payNo,
 	 			product_tbl.product_type as productType,
 				product_tbl.product_title as productTitle, 
 				payment_tbl.payment as payment
@@ -97,6 +98,7 @@
 	  </select>
 	  <select id ="selectReviewlist" resultType="review">
 	 		select 
+	 		product_no as productNo,
 	 		review_No as reviewNo,
 	 		review_title as reviewTitle,
 	 		review_content as reviewContent,

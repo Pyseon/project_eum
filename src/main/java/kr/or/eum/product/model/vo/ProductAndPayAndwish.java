@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class ProductAndPayAndwish {
 	private String productTitle;
 	private int payMent;
+	private int payNo;
 }

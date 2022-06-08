@@ -147,6 +147,7 @@ public class MemberController {
 		System.out.println(list);
 		return "mypage/Myreview";
 	}
+	
 	//재민 전문가 신청페이지로 이동
 	@RequestMapping(value="/Expertapply.do")
 	public String Expertapply() {

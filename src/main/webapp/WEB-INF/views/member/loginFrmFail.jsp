@@ -28,12 +28,23 @@
       	width: 40%;
       }
       .joinbox{
-      	margin: 0 auto;
-      	margin-top: 1%;
-      	text-align: center;
+      	width:22%;
+      	justify-content:center;
+      	margin: 0 auto !important;
       }
       .navi-me{
-      color:red;
+      	display: none;
+      	color:red;
+      }
+      #joinfrm{
+      	float: left;
+      	text-align:left;
+ 	 	width: 50%;
+      }
+      #findid{
+      	float: right;
+      	text-align:right;
+  		width: 50%; 
       }
       
 
@@ -46,15 +57,16 @@
 		<fieldset>
 			<input type="text" class="input-form" name="memberId" id="memberId" placeholder="이메일을 입력해주세요."><br>
 			<input type="password" class="input-form" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요."><br>
-			<div class="navi-me" id="navi-me">이메일 또는 비밀번호를 확인해주세요</div>
+			<div class="navi-me" id="navi-me">이메일 또는 비밀번호를 확인해주세요</div><br>
 			<button class="btn bc1 bs4" type="submit" submitbtn">로그인</button>
 		</fieldset>
 	</form>
 </div>
 <div class="joinbox">
 	<div><a href="/joinFrm.do">회원가입</a></div>
-	<div><a href="#">아이디/비밀번호찾기</a></div>
+	<div><a href="/findId.do">아이디/비밀번호찾기</a></div>
 </div>
+<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>

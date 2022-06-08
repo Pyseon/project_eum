@@ -247,4 +247,12 @@
 		where 
 			pay.pay_no=#{payNo}
  	</select>
+ 	<!-- 대권 -->
+ 	<insert id="insertMember" parameterType="member">
+ 		insert into member_tbl values(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberPhone},#{memberPoint},#{memberReportCount},#{gender},#{birth},#{agreement},#{grade},#{memberPictureName},#{memberPicturePath},to_char(sysdate,'yyyy-mm-dd'))
+ 	</insert>
+ 	<!-- 대권 -->
+ 	<select id="search" parameterType="member" resultType="member">
+ 		select member_no as memberNo from member_tbl where member_Nick = #{memberNick}	
+ 	</select>
 </mapper>

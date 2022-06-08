@@ -3,6 +3,7 @@ package kr.or.eum.member.controller;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -26,11 +27,21 @@ import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
+
+
+
 @Controller
 public class MemberController {
 	
 	@Autowired
 	private MemberService service;
+	@Autowired
+	private JavaMailSender mailSender;
 	
 	//대권 로그인페이지 이동
 	@RequestMapping(value="/loginFrm.do")
@@ -204,6 +215,95 @@ public class MemberController {
 	@RequestMapping(value="/findPw.do")
 	public String findPw() { 
 		return "member/findPw";
+	}
+	//대권 회원가입
+	@RequestMapping(value="/join.do",method = RequestMethod.POST)
+	public String join(Member m) {
+		System.out.println(m);
+		System.out.println("요청!");
+		int result= service.insertMember(m);
+		return "redirect:/";
+	}
+	//대권 메일테스트
+	/*
+	@RequestMapping(value = "/sendMail.do", method = RequestMethod.GET)
+    public void sendMailTest() throws Exception{
+        
+        String subject = "eum 인증메일";
+        String content = "메일 테스트 내용";
+        String from = "보내는이 아이디@도메인주소";
+        String to = "받는이 아이디@도메인주소";
+        
+        try {
+            MimeMessage mail = mailSender.createMimeMessage();
+            MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
 
+            mailHelper.setFrom(from);
+      
+            mailHelper.setTo(to);
+            mailHelper.setSubject(subject);
+            mailHelper.setText(content, true); 
+            
+            mailSender.send(mail);
+            
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+    }
+    */
+	//대권 메일인증
+    @RequestMapping(value="/mailCheck.do", method=RequestMethod.GET)
+    @ResponseBody
+    public String mailCheckGET(String email) throws Exception{
+        
+        //Logger.info("이메일 데이터 전송 확인");
+        //Logger.info("인증번호 : " + email);
+        
+        Random random = new Random();
+        int checkNum = random.nextInt(888888) + 111111;
+        //logger.info("인증번호 " + checkNum);
+        
+        String setFrom = "khoven@gmail.com";
+        String toMail = email;
+        String title = "회원가입 인증 이메일 입니다.";
+        String content = 
+                "홈페이지를 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "인증 번호는 " + checkNum + "입니다." + 
+                "<br>" + 
+                "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
+        try {            
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        String num = Integer.toString(checkNum);
+        
+        return num;
+    }
+    //닉네임 유효성검사
+    @ResponseBody
+	@RequestMapping(value="/nickCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
+	public String memberNick(String memberNick , Model model) {
+    	System.out.println(memberNick);
+		Member member = service.search(memberNick);
+		System.out.println("컨트롤러:"+ member);
+		String str="";
+		if(member != null) {
+			str="1";
+			return str;
+		}else {
+			str="0";
+			return str;
+		}
+		
 	}
 }

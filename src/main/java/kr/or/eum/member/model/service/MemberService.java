@@ -6,6 +6,8 @@ import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndMember;
@@ -18,6 +20,7 @@ import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Service
+@Transactional
 public class MemberService {
 
 	@Autowired
@@ -102,6 +105,17 @@ public class MemberService {
 		return member;
 	}
 
+
+	public int insertMember(Member m) {
+		dao.insertMember(m);
+		return dao.insertMember(m);
+	}
+
+	public Member search(String memberNick) {
+		// TODO Auto-generated method stub
+		return dao.search(memberNick);
+  }
+  
 	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
 		ArrayList<ProductAndExpert> list = dao.selectMyproject(memberNo);
 		
@@ -112,6 +126,7 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		int result = dao.insertExpert(ex);
 		return result;
+
 	}
 
 

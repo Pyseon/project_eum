@@ -99,6 +99,17 @@ public class MemberDao {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture2",payNo);
 		return expertPicture;
 	}
+	public int insertMember(Member m) {
+		int result = sqlSession.insert("member.insertMember",m);
+		return result;
+		
+	}
+	public Member search(String memberNick) {
+		// TODO Auto-generated method stub
+		Member member = sqlSession.selectOne("member.search",memberNick);
+		System.out.println("dao:"+ member);
+		return member;
+	}
 
 	//윤지
 	public ExpertAndMember selectOneExpert(int reviewNo) {

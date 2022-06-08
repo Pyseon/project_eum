@@ -31,7 +31,19 @@
 		#{acquistionDate},#{certificateName},#{certificatePath},#{expertName},
 		#{expertPhone},#{expertEmail},#{expertContent},#{jobName},#{expertPr},#{expertcareer},#{expertIntro},'0')
 	</insert>
- 	
+	<!-- 재민 내프로젝트
+ 	 <select id ="selectMyproject" parameterType="product">
+ 		
+		select  
+		product_no as productNo,
+		product_title as productTitle,
+		
+		from product_tbl 
+		join expert_tbl on (expert_tbl.expert_no = product_tbl.expert_no)   
+		where member_no==#{memberNo}
+  
+  	</select>
+  	  -->
 	<!-- 재민 -->
 	<update id="updateMember" parameterType="m" >
 	update member_tbl set 
@@ -68,7 +80,7 @@
 	 			product_title as productTitle,
 	 			product_type as productType,
 	 			pay_date as payDate, 
-	 			 
+	 			product_imgPath as productImgPath,
 	 			payment, 
 	 			pay_state as paystate,
 	 			pay_No as payNo,
@@ -98,6 +110,7 @@
 	 		select 
 	 			payment_tbl.pay_no as payNo,
 	 			product_tbl.product_type as productType,
+	 			product_tbl.product_imgPath as productImgPath,
 				product_tbl.product_title as productTitle, 
 				payment_tbl.payment as payment
 			from product_tbl

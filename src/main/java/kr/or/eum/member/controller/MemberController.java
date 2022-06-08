@@ -126,7 +126,7 @@ public class MemberController {
 	//재민 내 프로젝트
 	@RequestMapping(value="/Myproject.do")
 	public String Myproject(Model model, HttpSession session, int memberNo) {
-		ArrayList<Product> list = service.selectMyproject(memberNo);
+		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
 		
 		model.addAttribute("list", list);
 		System.out.println(list);

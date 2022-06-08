@@ -329,6 +329,22 @@
 
 	<div class="footer-div"><%@ include file="/WEB-INF/views/common/footer.jsp"%></div>
 <script>
+	function deletereview(param) {
+		const check = confirm('삭제하시겠습니까?');
+		if(check == true) {
+			$.ajax({
+				url : "/deleteReview.do",
+				data : {reviewNo:param},
+				success : function(data) {
+					alert('후기가 삭제되었습니다.');
+				},
+				error : function() {
+					alert('잘못된 접근입니다.');
+				}
+			});
+		}
+	}
+
 
 	$(function(){
 		
@@ -441,7 +457,7 @@
 							<div class="info-one">
 								<span class="nickname">\${item.memberNick}</span>
 								<div class="review-btn-2">
-									<a href="/modifyReviewFrm.do?reviewNo=\${item.reviewNo}">수정</a> <a href="/deleteReview.do?reviewNo=\${item.reviewNo}">삭제</a> <br>
+									<a href="/modifyReviewFrm.do?reviewNo=\${item.reviewNo}">수정</a> <a href="#" onclick="deletereview(\${item.reviewNo})">삭제</a> <br>
 								</div>										
 								\${getStarPoint(item.reviewStar)}
 								<div class="span-wrap">

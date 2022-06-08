@@ -17,10 +17,13 @@
 	<div class="chatting">
 		<div class="col-lg-8">
 			<div class="messageArea">
-				<%--<c:set></c:set> 여기에 첫 날짜를 넣어놓고 날짜가 다르면 출력, 아니면 출력 안 함 --%>
+				<p class='date hr-sect'>${firstDate }</p>
+				<c:set var="firstDate" value="${firstDate }" /> <%--여기에 첫 날짜를 넣어놓고 날짜가 다르면 출력, 아니면 출력 안 함 --%>
 				<c:forEach items="${chat}" var="chat" varStatus="status">
-				<%--<c:if test=""></c:if> --%>
-				<%--<p class='date hr-sect'>${chat.chatDate }</p> --%>	
+				<c:if test="${firstDate ne chat.chatDate }">
+					<p class='date hr-sect'>${chat.chatDate }</p>
+					<c:set var="firstDate" value="${chat.chatDate }" />
+				</c:if>
 					<c:if test="${chat.memberNo eq m.memberNo }">
 						<div class="chat-content-wrap sub-right">
 							<div class="content-sub-wrap">
@@ -202,12 +205,45 @@
 				if($('.checkbox').is(':checked')==false){
 				    alert('확인사항 동의 후 시작하기를 눌러주세요.');
 				}else {
-				    $('.checkbox').attr('disabled',true);	
-				    appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
-				    $('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
-					intervalId = window.setInterval(function(){
-						timeCount();
-					},10);
+				    $('.checkbox').attr('disabled',true);
+				    const counselNo = $('#counselNo').val();
+				    const startTime = getTime2();
+				    /*
+				    const startTimeSplit = startTime.split(':');
+				    console.log(startTime);
+				    console.log(startTimeSplit);
+				    let reTime = "";
+				    for(let i = 0; i < startTimeSplit.length; i++) {
+				    	reTime = reTime+startTimeSplit[i]
+				    }
+				    let testTime = 015030;013543
+				    const why = parseInt(015030-013543);
+				    const why2 = parseInt(013543+693);
+				    console.log('why2>>>'+why2)
+				    console.log('why'+why)
+				    console.log(reTime);
+				    let finalTime = testTime-reTime;
+				    console.log(finalTime);
+				    */
+				    $.ajax({
+				    	url : "updateStartTime.do",
+				    	data : {startTime:startTime, counselNo:counselNo}, 
+				    	success : function(data) {
+				    		appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
+						    $('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
+							intervalId = window.setInterval(function(){
+								timeCount();
+							},10);
+						},
+						error : function() {
+							alert('잘못된 접근입니다.');
+						}
+				    });
+				    //appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
+				    //$('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
+					//intervalId = window.setInterval(function(){
+						//timeCount();
+					//},10);
 					//${p.productOption } //1000
 				}
 			}else if($('#startBtn').text() == '후기작성') {
@@ -265,7 +301,7 @@
 					$("#sec").text(newSec);
 				}
 			}
-		}
+		} 
 
 		//접속한 시점 날짜 함수
 		function getToday(){
@@ -279,7 +315,7 @@
 		    if(date<10) {
 		    	date = "0"+date;
 		    }
-			return year+"년 "+month+"월 "+date+"일"; 
+			return year+"년"+month+"월"+date+"일"; 
 		}
 		
 		function getTime(){
@@ -293,6 +329,24 @@
 				minutes = "0"+minutes;
 			}
 			return hours+":"+minutes;
+		}
+		
+		function getTime2(){
+			var now = new Date();
+			var hours = now.getHours(); 
+			var minutes = now.getMinutes();
+			var seconds = now.getSeconds();  
+			//var milliseconds = today.getMilliseconds(); // 밀리초
+			if(hours<10) {
+				hours = "0"+hours;
+			}
+			if(minutes<10) {
+				minutes = "0"+minutes;
+			}
+			if(seconds<10) {
+				seconds = "0"+seconds;
+			}
+			return hours+":"+minutes+":"+seconds;
 		}
 		
 		
@@ -355,6 +409,18 @@
 							  time:time
 							 };
 				ws.send(JSON.stringify(data));
+				
+				$.ajax({
+					url : "updateReadCheck.do",
+					data : {memberNo:memberNo, counselNo:counselNo},
+					success : function(data) {
+						console.log('성공');
+					},
+					error : function() {
+						console.log('에러');
+					}
+				})
+				
 				appendChat("<div class='chat-content-wrap sub-right'><div class='content-sub-wrap'><div class='read-check check-right'>1</div><div class='chat-time'>"+getTime()+"</div></div><div class='chat right'>"+msg+"</div></div>");
 				$("#sendMsg").val("");
 			}

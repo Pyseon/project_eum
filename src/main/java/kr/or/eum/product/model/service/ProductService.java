@@ -470,6 +470,10 @@ public class ProductService {
 		int paymentState = payment.getPayState();
 		int reviewUploadCheck = productDao.selectReviewUploadCheck(payNo);
 		ArrayList<Chat> chatList = productDao.selectChat(payNo);
+		String first = "";
+		for(int i = 0; i < 1; i++) {
+			first = chatList.get(i).getChatDate();
+		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("product", product);
 		map.put("expert",expert);
@@ -479,6 +483,7 @@ public class ProductService {
 		map.put("review",reviewUploadCheck);
 		map.put("counsel",counsel);
 		map.put("chatList", chatList);
+		map.put("first", first);
 		return map;
 	}
 
@@ -490,7 +495,7 @@ public class ProductService {
 		return productDao.selectMemberNo(memberNo);
 	}
 
-	//윤지
+	//윤지 채팅
 	public int insertChat(String msg, String memberNo, String counselNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("msg", msg);
@@ -527,7 +532,7 @@ public class ProductService {
 	}
 
 	
-	//윤지
+	//윤지 채팅
 	public int updateReadCheck(String counselNo, String memberNo) {
 		int realCounselNo = Integer.parseInt(counselNo);
 		int realMemberNo = Integer.parseInt(memberNo);
@@ -589,16 +594,28 @@ public class ProductService {
 		return map;
 	}
 
+	//윤지
 	public int updateReview(Review review) {
 		return productDao.updateReview(review);
 	}
 
+	//윤지
 	public int deleteReview(int reviewNo) {
 		return productDao.deleteReview(reviewNo);
 	}
 
+	//윤지
 	public int overlapCheckReview(int payNo) {
 		return productDao.overlapCheckReview(payNo);
+	}
+
+	public int updateStartTime(String startTime, int counselNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("startTime", startTime);
+		map.put("counselNo", counselNo);
+		System.out.println(startTime);
+		System.out.println(counselNo);
+		return productDao.updateStartTime(map);
 	}
 
 

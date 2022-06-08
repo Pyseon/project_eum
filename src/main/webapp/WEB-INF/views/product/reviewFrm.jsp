@@ -96,8 +96,13 @@
 				   reviewStar:score
 				   },
 			success : function(data) {
-				alert('후기가 정상적으로 등록되었습니다.')
-				location.href='/Myreview.do?memberNo=${m.memberNo}';
+				if(data == 0) {
+					alert('후기는 한 번만 작성가능합니다.')
+					location.href='/Myreview.do?memberNo=${m.memberNo}';
+				}else {
+					alert('후기가 정상적으로 등록되었습니다.')
+					location.href='/Myreview.do?memberNo=${m.memberNo}';					
+				}
 			},
 			error : function() {
 				alert('잘못된 접근입니다.')

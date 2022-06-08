@@ -200,7 +200,7 @@ li{
 		<c:forEach var="w" items="${list }" varStatus="i">
 		
 		<div class="posting-item" style="cursor: pointer;" >
-			<img src="./img/test/testimg1.png">
+			<img src="./img/product/ClassList/${w.productImgPath }">
 			<div class="posting-connect">
 			<ul>
 				<li>

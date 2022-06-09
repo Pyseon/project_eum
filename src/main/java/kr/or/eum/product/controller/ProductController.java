@@ -606,7 +606,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		return new Gson().toJson(startTime);
 	}
 	
-	
+	//윤지
 	@ResponseBody
 	@RequestMapping(value = "updateReadCheck.do")
 	public String updateReadCheck(String counselNo, String memberNo) {

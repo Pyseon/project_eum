@@ -111,7 +111,7 @@ public class MemberService {
 		return dao.insertMember(m);
 	}
 
-	public Member search(String memberNick) {
+	public int search(String memberNick) {
 		// TODO Auto-generated method stub
 		return dao.search(memberNick);
   }
@@ -127,6 +127,11 @@ public class MemberService {
 		int result = dao.insertExpert(ex);
 		return result;
 
+	}
+
+	public int searchId(String memberId) {
+		// TODO Auto-generated method stub
+		return dao.searchId(memberId);
 	}
 
 

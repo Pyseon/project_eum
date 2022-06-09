@@ -104,11 +104,11 @@ public class MemberDao {
 		return result;
 		
 	}
-	public Member search(String memberNick) {
+	public int search(String memberNick) {
 		// TODO Auto-generated method stub
-		Member member = sqlSession.selectOne("member.search",memberNick);
-		System.out.println("dao:"+ member);
-		return member;
+		int result = sqlSession.selectOne("member.search",memberNick);
+		System.out.println("dao:"+ result);
+		return result;
 	}
 
 	//윤지
@@ -124,6 +124,12 @@ public class MemberDao {
 	public int insertExpert(Expert ex) {
 		
 		int result = sqlSession.insert("member.insertexpert",ex);
+		return result;
+	}
+	public int searchId(String memberId) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.selectOne("member.searchId",memberId);
+		System.out.println("dao:"+ result);
 		return result;
 	}
 

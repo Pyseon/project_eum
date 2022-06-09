@@ -336,11 +336,11 @@ public class MemberController {
         
         String setFrom = "khoven@gmail.com";
         String toMail = email;
-        String title = "회원가입 인증 이메일 입니다.";
+        String title = "eum 회원가입 인증 이메일 입니다.";
         String content = 
-                "홈페이지를 방문해주셔서 감사합니다." +
+                "eum을 방문해주셔서 감사합니다." +
                 "<br><br>" + 
-                "인증 번호는 " + checkNum + "입니다." + 
+                "인증 번호는 <span style='color:#3865f2;'> " + checkNum + "<span>입니다." + 
                 "<br>" + 
                 "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
         try {            
@@ -364,10 +364,27 @@ public class MemberController {
 	@RequestMapping(value="/nickCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
 	public String memberNick(String memberNick , Model model) {
     	System.out.println(memberNick);
-		Member member = service.search(memberNick);
-		System.out.println("컨트롤러:"+ member);
+		int result = service.search(memberNick);
+		System.out.println("컨트롤러:"+ result);
 		String str="";
-		if(member != null) {
+		if(result == 1) {
+			str="1";
+			return str;
+		}else {
+			str="0";
+			return str;
+		}
+		
+	}
+  //이메일 유효성검사
+    @ResponseBody
+	@RequestMapping(value="/emailCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
+	public String memberId(String memberId , Model model) {
+    	System.out.println(memberId);
+		int result = service.searchId(memberId);
+		System.out.println("컨트롤러:"+ result);
+		String str="";
+		if(result == 1) {
 			str="1";
 			return str;
 		}else {

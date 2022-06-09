@@ -28,10 +28,9 @@
 				<th><a href="/productdetail.do?productNo=${r.productNo}">${r.reviewTitle }</a></th>
 				<td>${r.reviewStar }</td>
 				<td>${r.reviewDate }</td>
-				
 			</tr>
 			<tr class="tr-3">
-				<th>{r.reviewContent}</th>
+				<th>${r.reviewContent}</th>
 			</tr>
 			</c:forEach>
 			

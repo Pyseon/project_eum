@@ -99,7 +99,7 @@
 	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">내 프로젝트</h1>
 		<form action="/classWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-		<input type="text" name="expertNo" value="${expertNo }">
+		
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
 		<div style="margin-top: -30px !important;">
@@ -129,11 +129,11 @@
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요.">
+			<input class="input-form" type="text" name="productTitle" placeholder="${productTitle }">
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요">
+			<input class="input-form" type="text" name="productIntro" placeholder="${productIntro }">
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>
@@ -215,7 +215,7 @@
     maxHeight: null,             // 최대 높이
     focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
     lang: "ko-KR",                    // 한글 설정
-    placeholder: '최대 2048자까지 쓸 수 있습니다'    //placeholder 설정
+    placeholder: '${productContent }'    //placeholder 설정
     
 	});
 	

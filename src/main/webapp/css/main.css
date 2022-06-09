@@ -2675,6 +2675,28 @@ input[name=keyword]{
 .answerForm > h2{
 	float: left;
 }
+.expertTbl{
+	width: 100%;
+	border: 1px solid black;
+}
+.expertTbl th{
+	width: 30%;
+	padding-left: 30px;
+}
+.expertTbl td{
+	width: 70%;
+}
+.expertTbl_top{
+	height: 500px;
+}
+.expertTbl_bottom{
+	height: 300px;
+}
+.modal-textarea{
+	resize: none;
+	width: 200px;
+	height: 100px;
+}
 /*************************
 *******mypage CSS******
 **************************/

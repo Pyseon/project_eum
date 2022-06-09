@@ -17,6 +17,7 @@ import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -281,6 +282,47 @@ public class ManagerDao {
 		Answer ans = sqlSession.selectOne("manager.selectAns", qstNo);
 		return ans;
 	}
-	
+
+	public ArrayList<Expert> expertPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.expertPageData", map);
+		return (ArrayList<Expert>) list;
+	}
+	public int expertCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("manager.expertCount", map);
+		return result;
+	}
+	public ArrayList<Expert> searchExpertPageData(HashMap<String, Object> map) {
+		List list = sqlSession.selectList("manager.searchExpertPageData", map);
+		return (ArrayList<Expert>) list;
+	}
+	public int searchExpertCount(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("manager.searchExpertCount", map);
+		return result;
+	}
+
+	public Expert selectExpert(int expertNo) {
+		Expert exp = sqlSession.selectOne("manager.selectExpert", expertNo);
+		return exp;
+	}
+
+	public int updateExpertApp(HashMap<String, Object> map) {
+		int result = sqlSession.update("manager.updateExpertApp", map);
+		return result;
+	}
+
+	public int refuseExpert(HashMap<String, Object> map) {
+		int result = sqlSession.update("manager.refuseExpert", map);
+		return result;
+	}
+
+	public int insertRefuseExpert(HashMap<String, Object> map) {
+		int result = sqlSession.insert("manager.insertRefuseExpert", map);
+		return result;
+	}
+
+	public String selectRefuseContnet(int expertNo) {
+		String refuseContent = sqlSession.selectOne("manager.selectRefuseContent", expertNo);
+		return refuseContent;
+	}
 	
 }

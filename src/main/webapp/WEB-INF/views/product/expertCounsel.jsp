@@ -385,7 +385,8 @@
 		
 		//서버에서 화면으로 데이터를 전송 시 처리할 함수 
 		function receiverMsg(param) {
-			appendChat(param.data);
+			appendChat(param.data); // 받은 메세지 출력해였는데..............................
+			//메세지로 보낼 때도 있는데 읽음으로 바꿀 때도 있는 것.........
 			console.log(param);
 		}
 		

@@ -657,4 +657,88 @@
 	<insert id="insertQuestion" parameterType="map">
 		insert into question_tbl values(question_seq.nextval, #{memberNo}, #{qstTitle}, #{qstContent}, to_char(sysdate,'yyyy-mm-dd-hh24-mi'), 0)
 	</insert>
+	
+	<select id="expertPageData" resultType="expert" parameterType="map">
+		select * from
+		(select rownum as rnum, exp.* from
+		(select
+			expert_no as expertNo,
+			expert_name as expertName,
+			expert_category as expertCategory,
+			job_name as jobName,
+			expert_app as expertApp
+		from expert_tbl
+			<if test="selectNum != 0">
+				where expert_app = #{selectNum }-1
+			</if>
+		order by expert_no desc) exp)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="expertCount" resultType="int" parameterType="map">
+		select count(*) from expert_tbl
+			<if test="selectNum != 0">
+				where expert_app = #{selectNum }-1
+			</if>
+	</select>
+	<select id="searchExpertPageData" parameterType="map" resultType="expert">
+		select * from
+		(select rownum as rnum, exp.* from
+		(select
+			expert_no as expertNo,
+			expert_name as expertName,
+			expert_category as expertCategory,
+			job_name as jobName,
+			expert_app as expertApp
+		from expert_tbl
+		<choose>
+			<when test="searchType.equals('expertName') ">
+				where expert_name like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('category') ">
+				where expert_category like #{keyword}
+			</when>
+		</choose>
+		order by expert_no desc) exp)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="searchExpertCount" parameterType="map" resultType="int">
+		select count(*) from expert_tbl
+		<choose>
+			<when test="searchType.equals('expertName') ">
+				where expert_name like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('category') ">
+				where expert_category like #{category}
+			</when>
+		</choose>
+	</select>
+	<select id="selectExpert" parameterType="int" resultType="expert">
+		select
+			expert_no as expertNo,
+			expert_category as expertCategory,
+			expert_tag as expertTag,
+			credential as credential,
+			issuing_authority as issuingAuthority,
+			acquistion_date as acquistionDate,
+			certificate_path as certificatePath,
+			
+			expert_name as expertName,
+			job_name as jobName,
+			expert_phone as expertPhone,
+			expert_email as expertEmail,
+			expert_app as expertApp 
+			
+			from expert_tbl
+			where expert_no = #{value }
+	</select>
+	<update id="updateExpertApp" parameterType="map">
+		update expert_tbl set expert_app = #{selectNum } where expert_no = #{expertNo }
+	</update>
+	<insert id="insertRefuseExpert">
+		insert into refuseexpert_tbl values(refuseexpert_seq.nextval, #{expertNo}, #{refuseContent})
+	</insert>
+	<select id="selectRefuseContent" parameterType="int" resultType="String">
+		select refuse_content from refuseExpert_tbl where expert_no = #{value }
+	</select>
 </mapper>

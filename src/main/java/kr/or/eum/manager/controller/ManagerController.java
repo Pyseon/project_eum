@@ -22,6 +22,7 @@ import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.Report;
@@ -275,4 +276,44 @@ public class ManagerController {
 		model.addAttribute("ans", ans);
 		return "mypage/detailQuestion";
 	}
+	@RequestMapping(value = "/manaExpert.do")
+	public String manaExpert(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaExpert.do";
+		HashMap<String, Object> epd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", epd.get("expertList"));
+		model.addAttribute("pageNavi", epd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/managementExpert";
+	}
+	@RequestMapping(value = "/detailExpert.do")
+	public String detailExpert(int expertNo,int expertApp, Model model) {
+		Expert exp = service.selectExpert(expertNo);
+		if(expertApp==2) {
+			String refuseContent = service.selectRefuseContent(expertNo);
+			model.addAttribute("refuseContent", refuseContent);
+		}
+		model.addAttribute("exp", exp);
+		return "manager/detailExpert";
+	}
+	
+	@RequestMapping(value = "/refuseExpert.do")
+	public String refuseExpert(int expertNo, String refuseContent ) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("expertNo", expertNo);
+		map.put("refuseContent", refuseContent);
+		map.put("selectNum", 2);
+		int result = service.updateExpertApp(map);
+		int result2 = service.insertRefuseExpert(map);
+		return "redirect:/manaExpert.do?reqPage=1&selectNum=0";
+	}
+	@RequestMapping(value = "/updateExpertApp.do")
+	public String updateExpertApp(int expertNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("expertNo", expertNo);
+		map.put("selectNum", 1);
+		int result = service.updateExpertApp(map);
+		return "redirect:/manaExpert.do?reqPage=1&selectNum=0";
+	}
 }
+

@@ -1,8 +1,5 @@
 package kr.or.eum.community.model.vo;
 
-import java.util.ArrayList;
-
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,8 +7,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class CommunityDetailData {
-	private Community comm;
-	private ArrayList<CommunityCo> cmntList;
-	private ArrayList<Pick> pickList;
+public class PickLike {
+	private int pickLikeNo;
+	private int memberNo;
+	private int pickNo;
 }

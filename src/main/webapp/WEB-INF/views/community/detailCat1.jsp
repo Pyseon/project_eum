@@ -7,6 +7,212 @@
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
 <style>
+.pick-box{
+}
+
+.pick-box {
+	padding: 30px;
+	width: 70%;
+	border: 1px dashed #eee;
+	border-radius: 6px;
+	background-color: #f9f9fa;
+}
+
+.speech-bubble {
+	position: relative;
+	background: #cdd8fc;
+	border-radius: 0.4em;
+	min-height: 50px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+	/* color: #fff; */
+	padding: 15px;
+}
+
+.haja-nick {
+	margin-top: 5px;
+	margin-bottom: 3px;
+}
+
+.pick-date {
+	display: flex;
+	flex-direction: column-reverse;
+	padding: 0 15px 28px 15px;
+	color: #979797;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;
+	border-right-color: #cdd8fc;
+	border-left: 0;
+	border-top: 0;
+	margin-top: -12px;
+	margin-left: -15px;
+}
+
+.speech-bubble2 {
+	position: relative;
+	background: #fcd4d4;
+	border-radius: .4em;
+	min-height: 50px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+	/* color: #fff; */
+	padding: 15px;
+}
+
+.speech-bubble2:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 15px solid transparent;
+	border-left-color: #fcd4d4;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -12px;
+	margin-right: -15px;
+}
+
+.ali-right {
+	float: right;
+}
+
+.haja-content {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.haja-writer {
+	display: flex;
+	flex-direction: column;
+	margin-right: 20px;
+	padding-top: 15px;
+	text-align: center;
+}
+
+.malja-writer {
+	display: flex;
+	flex-direction: column;
+	text-align: right;
+}
+
+.haja-comment {
+	max-width: 60%;
+}
+
+.malja-content {
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 25px;
+}
+
+.malja-comment {
+	max-width: 50%;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
+
+.pick-btn {
+	background-color: transparent;
+	border: none;
+	padding: 0;
+	margin-top: 6px;
+	font-size: 13px;
+	color: #979797;
+}
+
+.malja-btn {
+	padding-right: 10px;
+}
+
+.malja-date-like {
+	display: flex;
+	justify-content: flex-start;
+}
+
+.haja-like {
+	background-color: #fff;
+	border: none;
+	border-radius: 20px;
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+	height: 22px;
+	margin-top: 3px;
+}
+
+.haja-like>i {
+	color: orangered;
+	font-size: 20px;
+}
+
+.haja-like>span {
+	vertical-align: top;
+}
+
+* {
+	/* box-sizing: border-box; */
+	
+}
+
+.button-label {
+	cursor: pointer;
+	border-radius: 0.25em;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0
+		rgba(0, 0, 0, 0.22);
+	transition: 0.3s;
+	padding: 10px 15px;
+}
+
+.button-label:hover {
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0
+		rgba(0, 0, 0, 0.32);
+}
+
+.button-label:active {
+	transform: translateY(2px);
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0
+		rgba(0, 0, 0, 0.22);
+}
+
+#yes-button:checked+.button-label {
+	background-color: #3666f1;
+	color: #eee;
+}
+
+#yes-button+.button-label:hover {
+	background-color: #2c4fbf;
+	color: #eee;
+}
+
+#no-button:checked+.button-label {
+	background-color: #f05454;
+	color: #eee;
+}
+
+#no-button+.button-label:hover {
+	background-color: #bd4242;
+	color: #eee;
+}
+
+#pickContent {
+	margin-left: 20px;
+	width: 65%;
+	min-height: 35px;
+	border-radius: 0.4em;
+	border: 1.5px solid #aaa;
+	padding-left: 10px;
+	outline: none;
+}
 </style>
 </head>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -16,7 +222,8 @@
 			<!-- article-header -->
 			<div class="article-header">
 				<div class="article-list">
-					<a href="/communityList.do?category=1&reqPage=1" class="fc-7">이거어때 ></a>
+					<a href="/communityList.do?category=1&reqPage=1" class="fc-7">이거어때
+						></a>
 					<button class="btn bc6 bs5 fc-1"
 						onclick="location.href='/communityUpdateFrm.do?commNo=${comm.commNo}'">수정</button>
 					<button class="btn bc6 bs5 fc-1  modal-open-btn"
@@ -64,35 +271,7 @@
 						class="title-text fs-medium fc-10">어떤게 고민이니?</span>
 					<p>${comm.commIntro }</p>
 				</div>
-				<div class="attr-wrap">
-					<!-- ADVANTAGE -->
-					<div class="attr-box">
-						<div class="attr-title bg-7">
-							<i class="fa-solid fa-thumbs-up fc-5 attr-thumbs-up"></i> <span
-								class="fc-5">이런분들에게 추천해요!</span>
-						</div>
-						<c:forTokens var="adv" items="${comm.advantage}" delims="|"
-							varStatus="i">
-							<div class="attribute adv">
-								<i class="fa-regular fa-face-laugh-squint adv-icon"></i> <span>${adv }</span>
-							</div>
-						</c:forTokens>
-					</div>
 
-					<!-- WEAKNESS -->
-					<div class="attr-box">
-						<div class="attr-title bg-9">
-							<i class="fa-solid fa-thumbs-down fc-5 attr-thumbs-down"></i> <span
-								class="fc-5">이런 분들에게 비추해요!</span>
-						</div>
-						<c:forTokens var="weak" items="${comm.weakness}" delims="|"
-							varStatus="i">
-							<div class="attribute weak">
-								<i class="fa-regular fa-face-sad-tear weak-icon"></i> <span>${weak }</span>
-							</div>
-						</c:forTokens>
-					</div>
-				</div>
 
 				<div class="article-cotent">${comm.commContent }</div>
 				<div class="report-wrap">
@@ -102,152 +281,119 @@
 		</div>
 		<!--article-content-wrap end-->
 
-		<!-- comment start -->
-		<div class="article-bottom info-box">
-			<div class="comments-info">
-				<i class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
-					id="cmnt-total" class="num cmnt-total">${comm.cmntCount }</strong>
-			</div>
-		</div>
-		<c:if test="${not empty sessionScope.member }">
-		<div class="comments-area">
-			<div class="comment-list-wrap">
-				<c:forEach items="${cmntList }" var="cmnt">
-					<c:choose>
-						<c:when test="${cmnt.cmntLev eq 0 }">
-							<!--comment-->
-							<div class="comment-list">
-								<div class="single-comment justify-content-between dd-flex">
-									<div class="user justify-content-between dd-flex">
-										<div class="thumb">
-											<img src="./img/member/${cmnt.memberPicturepath }" alt=""
-												class="card-user-img" />
-										</div>
-										<div class="desc">
-											<span class="writer-nick"> <strong
-												style="font-size: 15px">${cmnt.memberNick }</strong>
-											</span>
 
-											<c:if test="${cmnt.memberGrade eq 1 }">
-												<span class="material-icons verified-icon">verified</span>
-											</c:if>
 
-											<c:if test="${cmnt.memberNo eq comm.memberNo }">
-												<span class="reply-writer">작성자</span>
-											</c:if>
+		<div class="attr-wrap">
+			<div class="pick-box">
+				<c:forEach items="${pickList }" var="p">
 
-											<p class="comment">${cmnt.cmntContent }</p>
-											<p class="date fs-light">${cmnt.cmntDate }</p>
-										</div>
+					<c:if test="${p.pickCategory eq 0 }">
+
+						<div class="haja-wrap">
+							<div class="haja-content">
+								<div class="haja-writer">
+									<div class="card-user-img-wrap fll" style="margin: 0;">
+										<img class="card-user-img"
+											src="./img/member/${p.memberPicturepath }"
+											style="width: 60px; height: 60px;" />
 									</div>
-									<c:if test="${not empty sessionScope.member }">
-									<div class="reply-btn">
-										<a href="javascript:void(0);" class="btn-reply replyBtn" 
-										onclick="replyFrm(1, ${cmnt.cmntNo}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
-										<c:if test="${sessionScope.member.memberNo eq cmnt.memberNo }">
-										<div class="comment-btn-wrap">
-											<input type="hidden" class="reply-cmnt-no"
-												value="${cmnt.cmntNo}"> 
-											<input type="hidden"
-												class="reply-writer-no" value="${cmnt.memberNo}">
-											<a href ="javascript:void(0);" class="comment-update-btn">수정</a> 
-											<span>|</span> 
-											<a href="javascript:void(0);" class="comment-del-btn"> 삭제</a>
+									<c:if test="${sessionScope.member.memberNo eq p.memberNo }">
+										<div>
+											<button class="pick-btn">수정</button>
+											<span class="pick-btn">|</span>
+											<button class="pick-btn">삭제</button>
 										</div>
+									</c:if>
+								</div>
+								<div class="haja-comment">
+									<span class="writer-nick"> <strong
+										style="font-size: 15px">${p.memberNick }</strong> <c:if
+											test="${p.memberGrade eq 1 }">
+											<span class="material-icons verified-icon">verified</span>
 										</c:if>
-									</div> <!-- reply-btn -->
+									</span>
+									<div class="speech-bubble">${p.pickContent }</div>
+									<div class="haja-date-like">
+										<button class="haja-like">
+											<i class="material-icons">recommend</i> <span>${p.pickLike }</span>
+										</button>
+									</div>
+								</div>
+								<div class="pick-date">${p.pickDate }</div>
+							</div>
+						</div>
+
+					</c:if>
+					<c:if test="${p.pickCategory eq 1 }">
+						<div class="malja-wrap">
+							<div class="malja-content">
+								<div class="pick-date">${p.pickDate }</div>
+								<div class="malja-comment">
+									<span class="writer-nick"> <strong
+										style="font-size: 15px;">${p.memberNick }</strong> <c:if
+											test="${p.memberGrade eq 1 }">
+											<span class="material-icons verified-icon">verified</span>
+										</c:if>
+									</span>
+									<div class="speech-bubble2">${p.pickContent }</div>
+									<div class="malja-date-like">
+										<button class="haja-like">
+											<i class="material-icons">recommend</i> <span>${p.pickLike }</span>
+										</button>
+									</div>
+								</div>
+
+								<div class="malja-writer">
+									<div class="card-user-img-wrap fll" style="margin-left: 20px;">
+										<img class="card-user-img" src="./img/member/${p.memberPicturepath }"
+											style="width: 60px; height: 60px" />
+									</div>
+									<c:if test="${sessionScope.member.memberNo eq p.memberNo }">
+										<div class="malja-btn">
+											<button class="pick-btn">수정</button>
+											<span class="pick-btn">|</span>
+											<button class="pick-btn">삭제</button>
+										</div>
 									</c:if>
 								</div>
 							</div>
-							<!--comment end-->
-						</c:when>
-						<c:when test="${cmnt.cmntLev ne 0 }">
-							<!--Re-comment-->
-							<div class="comment-list left-padding">
-								<div class="single-comment justify-content-between dd-flex">
-									<div class="user justify-content-between dd-flex">
-										<div class="thumb">
-											<img src="./img/member/${cmnt.memberPicturepath }" alt=""
-												class="card-user-img" />
-										</div>
-										<div class="desc">
-											<span class="writer-nick"> <strong
-												style="font-size: 15px">${cmnt.memberNick }</strong> <c:if
-													test="${cmnt.memberGrade eq 1 }">
-													<span class="material-icons verified-icon">verified</span>
-												</c:if> <c:if test="${cmnt.memberNo eq comm.memberNo }">
-													<span class="reply-writer">작성자</span>
-												</c:if>
-
-											</span>
-
-											<c:if test="${cmnt.cmntLev eq 1 }">
-												<p class="comment">${cmnt.cmntContent }</p>
-											</c:if>
-
-											<c:if test="${cmnt.cmntLev eq 2 }">
-												<p class="comment">
-													<span class="ref-nick">@${cmnt.cmntRefNick } </span>${cmnt.cmntContent }</p>
-											</c:if>
-
-											<p class="date fs-light">${cmnt.cmntDate }</p>
-										</div>
-									</div>
-									<c:if test="${not empty sessionScope.member }">
-									<div class="reply-btn">
-										<input type="hidden" class="reply-cmnt-no"
-											value="${cmnt.cmntNo}"> <input type="hidden"
-											class="reply-writer-no" value="${cmnt.memberNo}"> <a
-											href="javascript:void(0);" class="btn-reply re-replyBtn"
-											onclick="replyFrm(2, ${cmnt.cmntRef}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
-										<c:if test="${sessionScope.member.memberNo eq cmnt.memberNo }">
-										<div class="comment-btn-wrap">
-											<input type="hidden" class="reply-cmnt-no"
-												value="${cmnt.cmntNo}"> 
-											<input type="hidden"
-												class="reply-writer-no" value="${cmnt.memberNo}">
-											<a href="javascript:void(0);" class="comment-update-btn">수정 </a> <span>|</span>
-											<a href="javascript:void(0);" class="comment-del-btn"> 삭제</a>
-										</div>
-										</c:if>
-									</div>
-									</c:if>
-								</div>
-							</div>
-							<!--Re-comment end-->
-						</c:when>
-					</c:choose>
+						</div>
+					</c:if>
 				</c:forEach>
-			</div>
-			<c:if test="${not empty sessionScope.member }">
-			<div class="comment-write">
-				<!-- 댓글 참고 data -->
-				<input type="hidden" id="writerNo" value="${comm.memberNo}">
-				<!-- 전송 데이터 -->
-				<input type="hidden" name="commNo" id="commNo"
-					value="${comm.commNo}"> <input type="hidden"
-					name="memberNo" id="memberNo" value="${sessionScope.member.memberNo }"> <input
-					type="hidden" name="cmntContent" id="cmntContent"> <input
-					type="hidden" name="cmntLev" id="cmntLev" value="0">
-				<!--            -->
-				<div class="comment-write-head">
-					<span
-						style="font-family: fs-m; margin: 0 0 8px 0; padding-left: 2px;">댓글
-						쓰기</span> <span class="comment-num-box"><span id="comment-num">0</span>/250</span>
+
+				<div class="button-wrap" style="margin-top: 50px;">
+					<!-- 전송 데이터 -->
+					<input type="hidden" name="commNo" id="commNo" value="${comm.commNo}">
+					<input type="hidden" name="memberNo" id="memberNo" value="${sessionScope.member.memberNo }">
+					<input type="hidden" name="pickCategory" id="pickCategory" value="0">
+					<!--            -->
+					<input type="radio" name="accept-offers" id="yes-button"
+						class="hidden radio-label" checked> <label
+						for="yes-button" class="button-label">해봐!</label> <input
+						type="radio" name="accept-offers" id="no-button"
+						class="hidden radio-label"> <label for="no-button"
+						class="button-label">하지마!</label> 
+						<input type="text"
+						name="pickContent" id="pickContent">
+					<button class="btn" id="pick-reg"
+						style="width: 60px; height: 35px; background-color: yellow; color: #222; font-weight: bold;">전송</button>
 				</div>
-				<textarea id="comment-textarea" placeholder="댓글 입력"
-					onkeyup="resize(this)" onkeydown="resize(this)" maxlength="250"></textarea>
-				<button type="button" id="comment-reg" disabled
-					class="comment-write-btn btn fc-7">등록</button>
+
+
+
 			</div>
-			</c:if>
+			<!--pick box end-->
 		</div>
-		</c:if>
-		<!--comment-area-->
-		<!-- comment end -->
+		<!-- attr-wrap end-->
+
 
 	</div>
 	<!--container end-->
+
+
+
+
+
 
 	<!-- modal start -->
 	<div id="del-modal" class="modal-bg">
@@ -265,28 +411,36 @@
 			</div>
 		</div>
 	</div>
+
 	<!-- modal end -->
 
-<script>
+	<script>
 
 $(function(){
+	$(document).on("click","#yes-button",function(){
+		$("#pickCategory").val(0);
+	});
 	
+	$(document).on("click","#no-button",function(){
+		$("#pickCategory").val(1);
+	});
+		
 	
 	//댓글등록하고 특정 div새로고침해서 불러오기
-	$("#comment-reg").on("click",function(){
-		//글자수세기 함수 동작
-		convertbr();
-		//ajax 동작
+	$(document).on("click","#pick-reg",function(){
 		let commNo = $("#commNo").val();
 		let memberNo = $("#memberNo").val();
-		let cmntContent = $("#cmntContent").val();
-		let cmntLev = $("#cmntLev").val();
-		let writerNo = $("#writerNo").val();
-		let cmntHtml = "";
+		let pickContent = $("#pickContent").val();
+		let pickCategory = $("#pickCategory").val();
+		console.log(pickContent);
+		console.log(commNo);
+		console.log(memberNo);
+		console.log(pickCategory);
+		
 		$.ajax({
-			url: "/commCoWrite.do",
+			url: "/pickWrite.do",
 			type:"post",
-			data: {commNo:commNo, memberNo:memberNo, cmntContent:cmntContent, cmntLev:cmntLev},
+			data: {commNo:commNo, memberNo:memberNo, pickContent:pickContent, pickCategory:pickCategory},
 			success:function(data){
 				/*
 				cmntHtml += '<div class="comment-list"><div class="single-comment justify-content-between dd-flex"><div class="user justify-content-between dd-flex"><div class="thumb">';
@@ -305,12 +459,12 @@ $(function(){
 				cmntHtml += '</div>';
 				$(".comment-list-wrap").append(cmntHtml);
 				*/
-				$("#cmntContent").val("");
-				$("#comment-textarea").val("");
-				$("#comment-num").text(0);
-				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
-				$("#cmnt-total").load(location.href + " #cmnt-total");
-				$("#cmnt-total2").load(location.href + " #cmnt-total2");
+				$("#pickContent").val("");
+				//$(".attr-wrap").load(location.href + " .attr-wrap");
+				$(".pick-box").load(location.href + " .pick-box");
+				$(".haja-wrap").load(location.href + " .haja-wrap");
+				$(".malja-wrap").load(location.href + " .malja-wrap");
+				
 				
 			}
 		})

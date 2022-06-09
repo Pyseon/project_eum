@@ -31,6 +31,7 @@ import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
+import kr.or.eum.product.model.vo.ProductAndExpertDetail;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -106,14 +107,13 @@ public class MemberController {
 	//재민 내정보수정
 	@RequestMapping(value="/updateMember.do")
 	public String updateMember(Member m,HttpSession session) {
-		
-		
 		int result = service.updateMember(m);
-	
+		System.out.println(result);
 		if(result>0) {
 			session.setAttribute("member", m);
 		}
-		System.out.println(m);
+		
+		
 		return "redirect:/";
 	}
 	//재민 1:1 문의내역 확인
@@ -140,16 +140,17 @@ public class MemberController {
 		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
 		
 		model.addAttribute("list", list);
-		System.out.println(list);
+		
 		return "mypage/Myproject";
 	}
+	
 	@RequestMapping(value="/MyprojectDetail.do")
-	public String MyprojectDetail(Model model, HttpSession session, int memberNo) {
-		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
+	public String MyprojectDetail(Model model, HttpSession session, int productNo) {
+		ArrayList<ProductAndExpertDetail> list = service.selectMyprojectDetail(productNo);
 		
 		model.addAttribute("list", list);
 		System.out.println(list);
-		return "mypage/Myproject";
+		return "mypage/MyprojectDetail";
 	}
 	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
@@ -264,9 +265,10 @@ public class MemberController {
 	//재민 주문취소
 	@RequestMapping(value="/DeleteMyproduct.do")
 	public String DeleteMyproduct(int payNo) {
+		
 		int result = service.DeleteMyproduct(payNo);
 		
-		System.out.println(result);
+	
 		return "redirect:/";
 	}
 	@RequestMapping(value="/Myproductdetail.do")
@@ -336,11 +338,11 @@ public class MemberController {
         
         String setFrom = "khoven@gmail.com";
         String toMail = email;
-        String title = "회원가입 인증 이메일 입니다.";
+        String title = "eum 회원가입 인증 이메일 입니다.";
         String content = 
-                "홈페이지를 방문해주셔서 감사합니다." +
+                "eum을 방문해주셔서 감사합니다." +
                 "<br><br>" + 
-                "인증 번호는 " + checkNum + "입니다." + 
+                "인증 번호는 <span style='color:#3865f2;'> " + checkNum + "<span>입니다." + 
                 "<br>" + 
                 "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
         try {            
@@ -364,10 +366,27 @@ public class MemberController {
 	@RequestMapping(value="/nickCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
 	public String memberNick(String memberNick , Model model) {
     	System.out.println(memberNick);
-		Member member = service.search(memberNick);
-		System.out.println("컨트롤러:"+ member);
+		int result = service.search(memberNick);
+		System.out.println("컨트롤러:"+ result);
 		String str="";
-		if(member != null) {
+		if(result == 1) {
+			str="1";
+			return str;
+		}else {
+			str="0";
+			return str;
+		}
+		
+	}
+  //이메일 유효성검사
+    @ResponseBody
+	@RequestMapping(value="/emailCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
+	public String memberId(String memberId , Model model) {
+    	System.out.println(memberId);
+		int result = service.searchId(memberId);
+		System.out.println("컨트롤러:"+ result);
+		String str="";
+		if(result == 1) {
 			str="1";
 			return str;
 		}else {

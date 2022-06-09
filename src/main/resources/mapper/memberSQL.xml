@@ -223,11 +223,28 @@
 
  	<!-- 대권 -->
  	<insert id="insertMember" parameterType="member">
- 		insert into member_tbl values(member_seq.nextval,#{memberId},#{memberPw},#{memberNick},#{memberPhone},#{memberPoint},#{memberReportCount},#{gender},#{birth},#{agreement},#{grade},#{memberPictureName},#{memberPicturePath},to_char(sysdate,'yyyy-mm-dd'))
+ 		insert into member_tbl values(
+ 			member_seq.nextval,
+ 			#{memberId},
+ 			#{memberPw},
+ 			#{memberNick},
+ 			#{memberPhone},
+ 			#{memberPoint},
+ 			#{memberReportCount},
+ 			#{gender},
+ 			#{birth},
+ 			#{agreement},
+ 			#{grade},
+ 			#{memberPictureName},
+ 			#{memberPicturePath},
+ 			to_char(sysdate,'yyyy-mm-dd'))
  	</insert>
+ 	
  	<!-- 대권 -->
- 	<select id="search" parameterType="member" resultType="member">
- 		select member_no as memberNo from member_tbl where member_Nick = #{memberNick}	
+ 	<select id="search" resultType="int">
+ 		select 
+ 			count(*)
+		from member_tbl where member_nick = #{memberNick}	
  	</select>
  	
  	<!-- 윤지 -->
@@ -248,6 +265,14 @@
 	<insert id="insertReport" parameterType="rpt">
 		insert into report_tbl values(report_seq.nextval, #{defendant}, #{plaintiff},#{reportContent},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{reportCategory},#{reportIndex},#{reportTitle},0)
 	</insert>
+	
+	<!-- 대권  -->
+ 	<select id="searchId" resultType="int">
+	select
+ 		count(*)
+	from member_tbl where member_id = #{memberId}	
+ 	</select>
+
 	<select id ="selectMyprojectDetail" parameterType="productAndExpertDetail" resultType="pro">
  		
 		select 
@@ -268,4 +293,5 @@
 		where product_no=#{productNo}
   
   	</select>
+  
 </mapper>

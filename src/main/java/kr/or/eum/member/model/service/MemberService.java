@@ -112,7 +112,7 @@ public class MemberService {
 		return dao.insertMember(m);
 	}
 
-	public Member search(String memberNick) {
+	public int search(String memberNick) {
 		// TODO Auto-generated method stub
 		return dao.search(memberNick);
   }
@@ -130,10 +130,17 @@ public class MemberService {
 
 	}
 
+  //대권
+	public int searchId(String memberId) {
+		// TODO Auto-generated method stub
+		return dao.searchId(memberId);
+  }
+  
 	public ArrayList<ProductAndExpertDetail> selectMyprojectDetail(int productNo) {
 		// TODO Auto-generated method stub
 		ArrayList<ProductAndExpertDetail> list = dao.selectMyprojectDetail(productNo);
 		return list;
+
 	}
 
 

@@ -31,6 +31,7 @@ import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
+import kr.or.eum.product.model.vo.ProductAndExpertDetail;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -106,14 +107,13 @@ public class MemberController {
 	//재민 내정보수정
 	@RequestMapping(value="/updateMember.do")
 	public String updateMember(Member m,HttpSession session) {
-		
-		
 		int result = service.updateMember(m);
-	
+		System.out.println(result);
 		if(result>0) {
 			session.setAttribute("member", m);
 		}
-		System.out.println(m);
+		
+		
 		return "redirect:/";
 	}
 	//재민 1:1 문의내역 확인
@@ -140,16 +140,17 @@ public class MemberController {
 		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
 		
 		model.addAttribute("list", list);
-		System.out.println(list);
+		
 		return "mypage/Myproject";
 	}
+	
 	@RequestMapping(value="/MyprojectDetail.do")
-	public String MyprojectDetail(Model model, HttpSession session, int memberNo) {
-		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
+	public String MyprojectDetail(Model model, HttpSession session, int productNo) {
+		ArrayList<ProductAndExpertDetail> list = service.selectMyprojectDetail(productNo);
 		
 		model.addAttribute("list", list);
 		System.out.println(list);
-		return "mypage/Myproject";
+		return "mypage/MyprojectDetail";
 	}
 	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
@@ -264,9 +265,10 @@ public class MemberController {
 	//재민 주문취소
 	@RequestMapping(value="/DeleteMyproduct.do")
 	public String DeleteMyproduct(int payNo) {
+		
 		int result = service.DeleteMyproduct(payNo);
 		
-		System.out.println(result);
+	
 		return "redirect:/";
 	}
 	@RequestMapping(value="/Myproductdetail.do")

@@ -610,6 +610,7 @@ public class ProductService {
 		return productDao.deleteReview(reviewNo);
 	}
 
+	//윤지
 	public int updateStartTime(String startTime, int counselNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startTime", startTime);

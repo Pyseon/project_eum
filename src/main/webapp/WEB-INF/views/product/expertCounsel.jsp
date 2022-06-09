@@ -233,7 +233,7 @@
 						    $('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
 							intervalId = window.setInterval(function(){
 								timeCount();
-							},10);
+							},1000);
 						},
 						error : function() {
 							alert('잘못된 접근입니다.');
@@ -385,9 +385,10 @@
 		
 		//서버에서 화면으로 데이터를 전송 시 처리할 함수 
 		function receiverMsg(param) {
-			appendChat(param.data); // 받은 메세지 출력해였는데..............................
+			appendChat(param.data); // 받은 메세지 출력해 였는데..............................
 			//메세지로 보낼 때도 있는데 읽음으로 바꿀 때도 있는 것.........
 			console.log(param);
+			console.log(JSON.stringify(param));
 		}
 		
 		//웹소켓 연결이 종료되면 실행 되는 함수 

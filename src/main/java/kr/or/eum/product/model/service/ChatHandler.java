@@ -11,7 +11,9 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class ChatHandler extends TextWebSocketHandler {
@@ -98,6 +100,8 @@ public class ChatHandler extends TextWebSocketHandler {
 					}else {
 						sendMsg ="<div class='chat-content-wrap'><div class='chat left'><span class='chatId'></span>"+msg+"</div><div class='content-sub-wrap'><div class='read-check'>1<div><div class='chat-time'>"+time+"</div></div></div>";
 					}
+					//new Gson().toJson(sendMsg);
+					
 					TextMessage tm = new TextMessage(sendMsg);						
 					int readResult = productService.updateReadCheck(counselNo, memberNo);
 					//나 외에 다른 사람이 있다 없다 체크

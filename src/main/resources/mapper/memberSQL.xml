@@ -76,6 +76,19 @@
 			
 
 	  </update>
+	  <!-- 재민 내 위시리스트삭제 -->
+	  <delete id ="DeleteMywish" parameterType="int">
+	 		delete from wishlist_tbl where wish_no =#{wishNo}
+	 		
+			
+
+	  </delete>
+	  <delete id ="deleteMember" parameterType="int">
+	 	delete from member_tbl where member_no =#{memberNo}
+	 		
+			
+
+	  </delete>
 	 <select id ="selectQuestionList" parameterType="map" resultType="q">
  		select
  		qst_no as qstNo,
@@ -121,13 +134,14 @@
 	  </select>
 	   <select id ="selectWishlist" resultType="productAndPayAndwish">
 	 		select 
-	 			payment_tbl.pay_no as payNo,
+	 			product_tbl.product_no as productNo,
+	 			wishlist_tbl.wish_no as wishNo,
 	 			product_tbl.product_type as productType,
 	 			product_tbl.product_imgPath as productImgPath,
-				product_tbl.product_title as productTitle, 
-				payment_tbl.payment as payment
+				product_tbl.product_title as productTitle
+				
 			from product_tbl
-			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
+			
 			join wishlist_tbl on (wishlist_tbl.product_no = product_tbl.product_no)
 			where wishlist_tbl.member_no=#{memberNo}
 	  </select>
@@ -273,7 +287,7 @@
 	from member_tbl where member_id = #{memberId}	
  	</select>
 
-	<select id ="selectMyprojectDetail" parameterType="productAndExpertDetail" resultType="pro">
+	<select id ="selectMyprojectDetail" parameterType="int" resultType="productAndExpertDetail">
  		
 		select 
 		expert_tbl.member_no as memberNo,
@@ -293,5 +307,20 @@
 		where product_no=#{productNo}
   
   	</select>
-  
+  	<select id ="selectMyproductDetail" parameterType="int" resultType="pay">
+ 		
+		select 
+		pay_no as payNo,
+		product_no as productNo,
+		member_no as memberNo,
+		pay_state as payState,
+		pay_method as payMethod,
+		pay_date as payDate,
+		payment as payment,
+		pay_usepoint as payUsepoint,
+		pay_addpoint as payAddpoint
+		from payment_tbl
+		where pay_no =#{payNo}
+		
+  	</select>
 </mapper>

@@ -9,7 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class ProductAndPayAndwish {
 	private String productTitle;
-	private int payMent;
-	private int payNo;
+	private String wishNo;
+	private String productNo;
 	private String productImgPath;
+	private String productType;
 }

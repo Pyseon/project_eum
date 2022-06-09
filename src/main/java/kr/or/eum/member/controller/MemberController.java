@@ -140,7 +140,7 @@ public class MemberController {
 		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
 		
 		model.addAttribute("list", list);
-		
+	
 		return "mypage/Myproject";
 	}
 	
@@ -148,8 +148,11 @@ public class MemberController {
 	public String MyprojectDetail(Model model, HttpSession session, int productNo) {
 		ArrayList<ProductAndExpertDetail> list = service.selectMyprojectDetail(productNo);
 		
-		model.addAttribute("list", list);
+		
 		System.out.println(list);
+		model.addAttribute("list", list);
+		
+		
 		return "mypage/MyprojectDetail";
 	}
 	//재민 구매내역
@@ -161,6 +164,18 @@ public class MemberController {
 		
 		return "mypage/Myproduct";
 	}
+	@RequestMapping(value="/Myproductdetail.do")
+	public String MyproductDetail(Model model, HttpSession session, int payNo) {
+		ArrayList<Payment> list = service.selectMyproductDetail(payNo);
+		
+		
+		System.out.println(list);
+		model.addAttribute("list", list);
+		
+		
+		return "mypage/Myproductdetail";
+	}
+	
 	//재민 찜내역
 	
 	@RequestMapping(value="/Mywishlist.do")
@@ -259,7 +274,7 @@ public class MemberController {
 		System.out.println(result);
 
 		
-		return null;
+		return "redirect:/";
 	}
 	
 	//재민 주문취소
@@ -271,6 +286,25 @@ public class MemberController {
 	
 		return "redirect:/";
 	}
+	//재민 회원탈퇴
+		@RequestMapping(value="/deleteMember.do")
+		public String deleteMember(int memberNo) {
+			
+			int result = service.deleteMember(memberNo);
+			
+		
+			return "redirect:/";
+		}
+	
+	@RequestMapping(value="/DeleteMywish.do")
+	public String DeleteMywish(int wishNo) {
+		
+		int result = service.DeleteMywish(wishNo);
+		
+	
+		return "redirect:/";
+	}
+	/*
 	@RequestMapping(value="/Myproductdetail.do")
 	public String Myproductdetail(int payNo) {
 	System.out.println(payNo+"payNo");
@@ -278,6 +312,7 @@ public class MemberController {
 	System.out.println(list);
 	return "mypage/Myproductdetail";
 	}
+	*/
 	//대권 아이디찾기
 	@RequestMapping(value="/findId.do")
 	public String findId() { 

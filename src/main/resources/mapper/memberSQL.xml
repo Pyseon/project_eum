@@ -231,6 +231,7 @@
  			#{memberPicturePath},
  			to_char(sysdate,'yyyy-mm-dd'))
  	</insert>
+ 	
  	<!-- 대권 -->
  	<select id="search" resultType="int">
  		select 

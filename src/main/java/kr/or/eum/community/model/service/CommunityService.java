@@ -13,6 +13,7 @@ import kr.or.eum.community.model.vo.Community;
 import kr.or.eum.community.model.vo.CommunityCo;
 import kr.or.eum.community.model.vo.CommunityDetailData;
 import kr.or.eum.community.model.vo.CommunityPageData;
+import kr.or.eum.community.model.vo.Pick;
 
 @Service
 @Transactional
@@ -39,17 +40,38 @@ public class CommunityService {
 		return cpd;
 	}
 //>>>>>>>>>> 읽기
-	public CommunityDetailData communityDetail(int commNo) {
+	//0번 카테고리 커뮤니티글내용 + 댓글리스트
+	public CommunityDetailData communityDetail0(int commNo) {
 		Community comm = dao.communityDetail(commNo);
 		// 댓글 불러옴 (대댓글 포함)
 		ArrayList<CommunityCo> cmntList = dao.selectCmntList(commNo);
-
+		
+		
 		if (comm != null) {
 			dao.readCountUp(commNo);
 		}
-		CommunityDetailData cdd = new CommunityDetailData(comm, cmntList);
+		CommunityDetailData cdd = new CommunityDetailData();
+		cdd.setComm(comm);
+		cdd.setCmntList(cmntList);
+		
 		return cdd;
 	}
+	
+	//1번 카테고리 커뮤니티글내용 + 픽 리스트
+	public CommunityDetailData communityDetail1(int commNo) {
+		Community comm = dao.communityDetail(commNo);
+		// 댓글 불러옴 (대댓글 포함)
+		ArrayList<Pick> pickList = dao.selectPickList(commNo);
+		if (comm != null) {
+			dao.readCountUp(commNo);
+		}
+		CommunityDetailData cdd = new CommunityDetailData();
+		cdd.setComm(comm);
+		cdd.setPickList(pickList);
+		return cdd;
+	}
+	
+	
 	//댓글없이 내용만 가져오기
 	public Community communityDetailNotCmnt(int commNo) {
 		return dao.communityDetail(commNo);
@@ -69,6 +91,11 @@ public class CommunityService {
 	public void commCoWrite(CommunityCo commCo) {
 		dao.commCoWrite(commCo);
 	}
+	
+	public void pickWrite(Pick pick) {
+		dao.pickWrite(pick);
+	}
+	
 
 //>>>>>>>>>> 수정
 	public void communityUpdate(Community comm) {
@@ -260,6 +287,7 @@ public class CommunityService {
 
 		return pageNavi;
 	}
+
 
 
 

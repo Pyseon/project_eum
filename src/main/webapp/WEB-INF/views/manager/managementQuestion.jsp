@@ -11,6 +11,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
+	<h1>>1:1상담</h1>
+	<hr>
 		<div>
 			<ul>
 				<li><button class="btn bc3" onclick="location.href='manaQuestion.do?reqPage=1&selectNum=0'">전체</button></li>
@@ -33,7 +35,14 @@
 						<td>${q.qstNo }</td>
 						<td>${q.qstTitle }</td>
 						<td>${q.qstDate.substring(0,10) }</td>
-						<td>${q.ansState }</td>
+						<c:choose>
+							<c:when test="${q.ansState == 0}">
+								<td class="fc-9">답변 안함</td>
+							</c:when>
+							<c:otherwise>
+								<td class="fc-7">답변함</td>
+							</c:otherwise>
+						</c:choose>
 						<td><button onclick="location.href='/insertAnswerFrm.do?qstNo=${q.qstNo}'">답변하기</button></td>
 					</tr>
 				</c:forEach>

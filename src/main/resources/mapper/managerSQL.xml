@@ -32,7 +32,7 @@
 				where grade=#{selectNum }
 			</when>
 			<otherwise>
-				where grade=1 or grade=2 or grade=3
+				where grade=1 or grade=2
 			</otherwise>
 		</choose>
 	</select>
@@ -41,10 +41,10 @@
 		update member_tbl set
 		<choose>
 			<when test="updateNo == 0">
-				grade=4
+				grade=2
 			</when>
 			<otherwise>
-				grade=2
+				grade=3
 			</otherwise>
 		</choose>
 		where member_no=#{memberNo}
@@ -207,7 +207,8 @@
 		report_category as reportCategory,
 		report_index as reportIndex,
 		report_Title as reportTitle,
-		report_is as reportIs
+		report_is as reportIs,
+		ans_result as ansResult
 		from report_tbl report
 		<choose>
 			<when test="selectNum == 1">
@@ -238,7 +239,8 @@
 		report_category as reportCategory,
 		report_index as reportIndex,
 		report_title as reportTitle,
-		report_is as reportIs
+		report_is as reportIs,
+		ans_result as ansResult
 		from report_tbl report
 		<choose>
 			<when test="searchType.equals('reportTitle') ">
@@ -274,17 +276,28 @@
 			report_date as reportDate,
 			report_category as reportCategory,
 			report_index as reportIndex,
-			report_title as reportTitle
-			from report_tbl report
-			where report_no = #{value }
+			report_title as reportTitle,
+			report_is as reportIs
+		from report_tbl report
+		where report_no = #{value }
+	</select>
+	<select id="selectAnsrpt" parameterType="int" resultType="ansrpt">
+		select
+			ansrpt_title as ansrptTitle,
+			ansrpt_content as ansrptContent
+		from ansrpt_tbl
+		where report_no = #{value }	
 	</select>
 	
 	<select id="reportMember" parameterType="int">
 		update member_tbl set 
-		grade=4,
+		grade=3,
 		member_reportcount = member_reportcount+1 
 		where member_no=#{value }
 	</select>
+	<update id="updateAnsResult" parameterType="map">
+		update report_tbl set ans_result = #{selectNum } where report_no = #{reportNo } 
+	</update>
 	
 	<delete id="deleteArticles" parameterType="map">
 		delete from 
@@ -314,7 +327,11 @@
 	</update>
 	
 	<insert id="answerReport" parameterType="map">
-		insert into ansrpt_tbl values(ansrpt_seq.nextval,#{reportNo},#{ansrpt_title},#{ansrpt_content})
+		insert into ansrpt_tbl values(
+		ansrpt_seq.nextval,
+		#{reportNo},
+		#{answerTitle},
+		#{answerContent})
 	</insert>
 	
 	<select id="FAQList" resultType="faq" parameterType="map">
@@ -741,4 +758,7 @@
 	<select id="selectRefuseContent" parameterType="int" resultType="String">
 		select refuse_content from refuseExpert_tbl where expert_no = #{value }
 	</select>
+	<update id="updateMemberGrade" parameterType="int">
+		update member_tbl set grade = 1 where member_no = (select member_no from expert_tbl where expert_no = #{value}) 
+	</update>
 </mapper>

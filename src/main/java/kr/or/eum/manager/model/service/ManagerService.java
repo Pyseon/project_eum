@@ -17,6 +17,7 @@ import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
 
 @Service
@@ -218,7 +219,7 @@ public class ManagerService {
 		return dao.detailPayment(payNo);
 	}
 
-	public ArrayList<Report> detailReport(int reportNo) {
+	public Report detailReport(int reportNo) {
 		return dao.detailReport(reportNo);
 	}
 	
@@ -235,14 +236,15 @@ public class ManagerService {
 
 	public int updateReportIs(int reportNo, int selNo) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("reportNo", selNo);
+		map.put("reportNo", reportNo);
 		map.put("selNo", selNo);
 		return dao.updateReportIs(map);
 	}
 	
-	public int answerReport(String answerTitle, String answerContent) {
-		HashMap<String, String> map = new HashMap<String, String>();
+	public int answerReport(int reportNo, String answerTitle, String answerContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("answerTitle", answerTitle);
+		map.put("reportNo", reportNo);
 		map.put("answerContent", answerContent);
 		return dao.answerReport(map);
 	}
@@ -376,6 +378,21 @@ public class ManagerService {
 	
 	public String selectRefuseContent(int expertNo) {
 		return dao.selectRefuseContnet(expertNo);
+	}
+
+	public int updateMemberGrade(int expertNo) {
+		return dao.updateMemberGrade(expertNo);
+	}
+
+	public AnswerReport selectAnsrpt(int reportNo) {
+		return dao.selectAnsrpt(reportNo);
+	}
+
+	public int updateAnsResult(int selectNum, int reportNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("selectNum", selectNum);
+		map.put("reportNo", reportNo);
+		return dao.updateAnsResult(map);
 	}
 	
 	

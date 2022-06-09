@@ -20,6 +20,7 @@ import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
 
 @Repository
@@ -27,8 +28,8 @@ public class ManagerDao {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
-	public ArrayList<Member> selectMember(HashMap<String, Integer> selMembtn) {
-		List list = sqlSession.selectList("manager.selectAllMember", selMembtn);
+	public ArrayList<Member> selectMember(HashMap<String, Integer> selectNumbtn) {
+		List list = sqlSession.selectList("manager.selectAllMember", selectNumbtn);
 		return (ArrayList<Member>)list;
 	}
 
@@ -42,8 +43,8 @@ public class ManagerDao {
 		return (ArrayList<Member>)list;
 	}
 
-	public int MemberCount(int selMem) {
-		int totalCount = sqlSession.selectOne("manager.memberCount",selMem);
+	public int MemberCount(int selectNum) {
+		int totalCount = sqlSession.selectOne("manager.memberCount",selectNum);
 		return totalCount;
 	}
 
@@ -112,12 +113,12 @@ public class ManagerDao {
 		return totalCount;
 	}
 
-	public ArrayList<Report> detailReport(int reportNo) {
-		List report = sqlSession.selectList("manager.detailReport", reportNo);
-		return (ArrayList<Report>) report;
+	public Report detailReport(int reportNo) {
+		Report report = sqlSession.selectOne("manager.detailReport", reportNo);
+		return report;
 	}
 
-	public int answerReport(HashMap<String, String> map) {
+	public int answerReport(HashMap<String, Object> map) {
 		int result = sqlSession.insert("manager.answerReport", map);
 		return result;
 	}
@@ -323,6 +324,21 @@ public class ManagerDao {
 	public String selectRefuseContnet(int expertNo) {
 		String refuseContent = sqlSession.selectOne("manager.selectRefuseContent", expertNo);
 		return refuseContent;
+	}
+
+	public int updateMemberGrade(int expertNo) {
+		int result= sqlSession.update("manager.updateMemberGrade", expertNo);
+		return result;
+	}
+
+	public AnswerReport selectAnsrpt(int reportNo) {
+		AnswerReport ansrpt = sqlSession.selectOne("manager.selectAnsrpt", reportNo);
+		return ansrpt;
+	}
+
+	public int updateAnsResult(HashMap<String, Object> map) {
+		int result = sqlSession.update("manager.updateAnsResult", map);
+		return result;
 	}
 	
 }

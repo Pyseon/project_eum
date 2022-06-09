@@ -80,7 +80,7 @@
 			<c:otherwise>
 				<div class="managerBtn">
 					<button class="btn bc4" onclick="location.href='/manaExpert.do?reqPage=1&selectNum=0'">목록으로</button>
-					<button class="btn bc3 modal-open-btn" target="#refuse-modal">기각</button>
+					<button class="btn bc2 modal-open-btn" target="#refuse-modal">기각</button>
 					<button class="btn bc1" onclick="location.href='/updateExpertApp.do?expertNo=${exp.expertNo}'">전문가 승인</button>
 				</div>
 			</c:otherwise>

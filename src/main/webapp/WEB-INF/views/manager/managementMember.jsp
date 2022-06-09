@@ -18,8 +18,7 @@
 				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=0'">전체</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=1'">전문가</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=2'">일반회원</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=3'">사업자</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=4'">블랙리스트</button></li>
+				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=3'">블랙리스트</button></li>
 			</ul>
 		</div>
 		<div class="searchBox">
@@ -61,11 +60,11 @@
 					<td>${member.enrollDate }</td>
 					<td>${member.memberReportCount }</td>
 					<c:choose>
-						<c:when test="${member.grade==4 }">
-							<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=1&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 해제</button></td>
+						<c:when test="${member.grade==3 }">
+							<td><button class="btn bc1 bs1 modal-open-btn rlsBlk" target="#rlsBlackList-modal" value=${member.memberNo }>블랙리스트 해제</button></td>
 						</c:when>
 						<c:otherwise>
-							<td><button class="btn bc1 bs1" onclick="location.href='/updateBlackList.do?updateNo=0&memberNo=${member.memberNo}&reqPage=${reqPage }'">블랙리스트 등록</button></td>
+							<td><button class="btn bc2 bs1 modal-open-btn regBlk" target="#regBlackList-modal" value=${member.memberNo }>블랙리스트 등록</button></td>
 						</c:otherwise>
 					</c:choose>					
 					</tr>
@@ -76,7 +75,64 @@
 			${pageNavi }
 		</div>
 	</div>
+	
+	<input type="hidden" id="reqPage" value="${reqPage }">
+	
+	<div id="rlsBlackList-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 회원을 블랙리스트에서 해제 하시겠습니까?</h2>
+				<br>
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="rlsBlack">
+					<button class="btn bc1" id="rlsBlackList">블랙리스트해제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="regBlackList-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 회원을 블랙리스트에 등록 하시겠습니까?</h2>
+				<br>	
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="regBlack">
+					<button class="btn bc1" id="regBlackList">블랙리스트 등록</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	
+<script>
+	const reqPage = $("#reqPage").val();
+	
+	$(".rlsBlk").on("click", function() {
+		$("#rlsBlack").val($(this).val());
+	});
+	$("#rlsBlackList").on("click", function() {
+		const memberNo = $("#rlsBlack").val();
+		location.href = '/updateBlackList.do?updateNo=0&memberNo='+memberNo+'&reqPage='+reqPage;
+	});
+	
+	$(".regBlk").on("click", function() {
+		$("#regBlack").val($(this).val());
+	});
+	$("#regBlackList").on("click", function() {
+		const memberNo = $("#regBlack").val();
+		location.href = '/updateBlackList.do?updateNo=1&memberNo='+memberNo+'&reqPage='+reqPage;
+	});
+	
+	
+</script>
 </body>
 </html>

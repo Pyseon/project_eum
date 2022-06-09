@@ -36,12 +36,77 @@
 			<h3>포인트 사용금액: ${pay.payUsepoint }</h3><br>
 			<h3>포인트 적립 예정 금액: ${pay.payAddpoint }</h3>
 		</div>
-	<div class="managerBtn">
-		<button class="btn bc3" onclick="location.href='/updatePayState.do?updateNo=0&payNo=${pay.payNo}&reqPage=0'">취소하기</button>
-		<button class="btn bc1" onclick="location.href='/manaPayment.do?reqPage=1&payState=0'">목록으로</button>
-	</div>
+		<c:choose>
+			<c:when test="${pay.payState == 3 }">
+				<div class="managerBtn">
+					<button class="btn bc3" onclick="location.href='/manaPayment.do?reqPage=1&payState=0'">목록으로</button>
+					<button class="btn bc1 bs1 modal-open-btn payRes" target="#payReserv-modal" value=${pay.payNo }>다시 예약</button>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="managerBtn">
+					<button class="btn bc3" onclick="location.href='/manaPayment.do?reqPage=1&payState=0'">목록으로</button>
+					<button class="btn bc2 bs1 modal-open-btn payCan" target="#payCancel-modal" value=${pay.payNo }>주문 취소</button>
+				</div>
+			</c:otherwise>
+		</c:choose>
 	</c:forEach>
 	</div>
+	
+	<input type="hidden" id="reqPage" value="${reqPage }">
+	
+	<div id="payCancel-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 주문을 취소 하시겠습니까?</h2>
+				<br>	
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="payCan">
+					<button class="btn bc1" id="payCancel">주문 취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="payReserv-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 주문을 다시 예약 하시겠습니까?</h2>
+				<br>	
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="payRes">
+					<button class="btn bc1" id="payReserv">다시 예약</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<script>
+const reqPage = $("#reqPage").val();
+
+$(".payCan").on("click", function() {
+	$("#payCan").val($(this).val());
+});
+$("#payCancel").on("click", function() {
+	const payNo = $("#payCan").val();
+	console.log(payNo);
+	location.href = '/updatePayState.do?updateNo=0&payNo='+payNo+'&reqPage='+reqPage;
+});
+$(".payRes").on("click", function() {
+	$("#payRes").val($(this).val());
+});
+$("#payReserv").on("click", function() {
+	const payNo = $("#payRes").val();
+	console.log(payNo);
+	location.href='/updatePayState.do?updateNo=1&payNo='+payNo+'&reqPage='+reqPage;
+});
+</script>
 </body>
 </html>

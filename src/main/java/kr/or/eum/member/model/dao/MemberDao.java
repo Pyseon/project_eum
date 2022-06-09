@@ -13,6 +13,7 @@ import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
+import kr.or.eum.product.model.vo.ProductAndExpertDetail;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -33,7 +34,8 @@ public class MemberDao {
 	//재민 내정보수정
 	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("여기서 vo 값 뭐가 null인지 확인");
+		System.out.println(m.toString());
 		int result = sqlSession.update("member.updateMember",m);
 		return result;
 	}
@@ -79,7 +81,7 @@ public class MemberDao {
 	}
 	
 	public int DeleteMyproduct(int payNo) {
-		int result = sqlSession.update("member.DeleteMyproduct");
+		int result = sqlSession.update("member.DeleteMyproduct",payNo);
 		return result;
 	}
 	
@@ -125,6 +127,11 @@ public class MemberDao {
 		
 		int result = sqlSession.insert("member.insertexpert",ex);
 		return result;
+	}
+	public ArrayList<ProductAndExpertDetail> selectMyprojectDetail(int productNo) {
+		List list = sqlSession.selectList("member.selectMyprojectDetail",productNo); 
+		
+		return (ArrayList<ProductAndExpertDetail>)list;
 	}
 
 }

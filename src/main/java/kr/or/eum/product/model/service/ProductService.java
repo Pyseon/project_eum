@@ -578,8 +578,14 @@ public class ProductService {
 	}
 
 	//윤지
-	public int insertReview(Review review) {
-		return productDao.insertReview(review);
+	public int insertReview(Review review, int payNo) {
+		//여기서 중복체크..작성된 리뷰가 있으면, 인서트를 리뷰를 안 하고 다른 값 리턴
+		int result = productDao.overlapCheckReview(payNo);
+		if(result == 0) {
+			return productDao.insertReview(review);			
+		}else {
+			return 0;
+		}
 	}
 
 	//윤지
@@ -602,11 +608,6 @@ public class ProductService {
 	//윤지
 	public int deleteReview(int reviewNo) {
 		return productDao.deleteReview(reviewNo);
-	}
-
-	//윤지
-	public int overlapCheckReview(int payNo) {
-		return productDao.overlapCheckReview(payNo);
 	}
 
 	public int updateStartTime(String startTime, int counselNo) {

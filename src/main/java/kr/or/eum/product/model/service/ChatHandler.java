@@ -54,6 +54,9 @@ public class ChatHandler extends TextWebSocketHandler {
 	//클라이언트가 서버로 메세지를 전송하면 수행되는 메소드
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception{
+		//내가 접속하면 이 세션은 내 접속세션..이 매개변수만..
+		//여기에도 내가 받았다는 걸 표시......
+		
 		//System.out.println("메세지 전송한 세션 : "+session);
 		System.out.println("전송 메세지 : "+message.getPayload());
 		//문자열을 Json 객체로 변환해줄 객체
@@ -85,6 +88,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			
 		//채팅메세지를 입력한 경우
 		}else if(type.equals("chat")) {//if문으로 이미지 있다 없다, 읽음 표시도 
+			//제이슨으로 넘겨줘..........
 			String sendMsg ="<div class='chat-content-wrap'><div class='chat left'><span class='chatId'></span>"+msg+"</div><div class='content-sub-wrap'><div class='read-check'>1<div><div class='chat-time'>"+time+"</div></div></div>";
 			int result = productService.insertChat(msg, memberNo,counselNo); 
 			for(WebSocketSession s : sessionMap.get(counselNo)) {
@@ -100,7 +104,7 @@ public class ChatHandler extends TextWebSocketHandler {
 					//DB에 보내는 것과 사용자가 접속해 있어서 메세지를 보내주는 것을 따로따로 생각하기
 					//insert는 읽음 여부와 관계없이
 					//상대방에게 전송까지 하는 건 접속여부 (읽음 여부)에 따라....
-					s.sendMessage(tm);
+					s.sendMessage(tm); // 읽었다는 걸 내 자신에게 알려줘야 함.....
 				}//if문
 			}//for문
 		}//else if(type.chat)

@@ -556,14 +556,9 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@ResponseBody
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(Review review) {
-		int check = productService.overlapCheckReview(review.getPayNo());
-		if(check != 0) {
-			return "product/paymentError";
-		}
-		System.out.println("check : "+check);
-		System.out.println("insertReview : "+review);
-		int result = productService.insertReview(review);
-		System.out.println(result);
+		//서비스를 한번만...
+		//int check = productService.overlapCheckReview(review.getPayNo());
+		int result = productService.insertReview(review, review.getPayNo());
 		return new Gson().toJson(result);			
 	}
 	
@@ -606,7 +601,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		return new Gson().toJson(startTime);
 	}
 	
-	
+	//윤지
 	@ResponseBody
 	@RequestMapping(value = "updateReadCheck.do")
 	public String updateReadCheck(String counselNo, String memberNo) {

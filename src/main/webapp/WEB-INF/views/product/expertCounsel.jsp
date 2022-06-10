@@ -89,7 +89,7 @@
 					<div class="product-detail">
 						<span class="material-icons fc-7 icon-schedule">schedule</span>
 						<div class="product-option">1:1상담&nbsp;&nbsp;/</div>&nbsp;&nbsp;
-						<div class="product-option op2">${p.productOption }분</div><span id="timeZone">-</span> <span id="msg"></span>					
+						<div class="product-option op2">${p.productOption }분</div><span id="timeZone">-</span> <span id="msg"></span>
 					</div>
 					<hr>
 					<div class="check-title-wrap">
@@ -198,6 +198,67 @@
 		//페이지 뜨자마자 initChat 함수 실행
 		initChat('${m.memberId}');
 		
+		let productOption = ${p.productOption };
+		console.log("productOPtion>>"+productOption);
+		productOption = Number(productOption) * 60;
+		console.log("productOptionAfter>>>"+productOption);
+		
+			
+		function productOptionCount(param){
+		    const paramSplit = param.split('');
+		    console.log(param);
+		    console.log(paramSplit);
+		    console.log(paramSplit.length);
+		    let rehour = "";
+		    let remin = "";
+		    let resec = "";
+		    for(let i = 0; i < paramSplit.length; i++) {
+		    	if(i<2) {
+		    		if(paramSplit[0]==0) {
+		    			paramSplit[0]="";
+			    	}
+		    		rehour = rehour+paramSplit[i];
+		    	}if(1<i && i<4) {
+		    		remin = remin+paramSplit[i];
+		    	}if(3<i && i<6){
+		    		resec = resec+paramSplit[i];
+		    	}
+		    }
+		    console.log(rehour);
+		    console.log(remin);
+		    console.log(resec);
+		    
+		    //숫자로 변환하면서 초 단위로 바꾸기
+		    rehour = Number(rehour) * 60 * 60;
+		    remin = Number(remin) * 60;
+		    resec = Number(resec);
+		    return rehour+remin+resec;
+		}
+		
+		//시간 계산 중
+		//현재시간
+   		const present = getTime2();
+		let rePresent = productOptionCount(present);
+		console.log("startTime2>>>>"+rePresent);
+	
+	    //상담시작시간
+		let counselStartTime = ${c.startTime};
+		console.log(counselStartTime);
+		console.log(typeof(counselStartTime));
+		const reStartTime = productOptionCount(counselStartTime.toString());
+		console.log("reStartTime >>>"+reStartTime);
+		
+		//현재-시작시간
+		let finalTime = rePresent-reStartTime;
+		console.log("finalTime>>>>"+finalTime)
+		
+		//옵션보다 현재-시간이 더 크면 상담종료 
+	    if(productOption < finalTime){
+	    	console.log("분으로 바꾸면>>>"+(productOption-finalTime)/60);
+	    	console.log('testtttt');
+	    }
+		
+		
 		//send-btn을 클릭하면 메세지 전송 함수 실행
 		$('.send-btn').on('click', function(){
 			sendMsg();
@@ -211,29 +272,14 @@
 				}else {
 				    $('.checkbox').attr('disabled',true);
 				    const counselNo = $('#counselNo').val();
-				    const startTime = getTime2();
-				    /*
-				    const startTimeSplit = startTime.split(':');
-				    console.log(startTime);
-				    console.log(startTimeSplit);
-				    let reTime = "";
-				    for(let i = 0; i < startTimeSplit.length; i++) {
-				    	reTime = reTime+startTimeSplit[i]
-				    }
-				    let testTime = 015030;013543
-				    const why = parseInt(015030-013543);
-				    const why2 = parseInt(013543+693);
-				    console.log('why2>>>'+why2)
-				    console.log('why'+why)
-				    console.log(reTime);
-				    let finalTime = testTime-reTime;
-				    console.log(finalTime);
-				    */
+				    
+				    
 				    $.ajax({//null값인 StartTime 칼럼에 시작버튼을 누른 시점 시간을 update해주고 interval로 시간 체크
 				    	url : "updateStartTime.do",
 				    	data : {startTime:startTime, counselNo:counselNo}, 
 				    	success : function(data) {
 				    		socketSend();
+				    		//두번째 인터벌 넣었던 자리
 				    		//appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
 						    //$('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
 							//intervalId = window.setInterval(function(){
@@ -244,12 +290,13 @@
 							alert('잘못된 접근입니다.');
 						}
 				    });
+				    //처음 인터벌 넣은 자리
 				    //appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
 				    //$('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
 					//intervalId = window.setInterval(function(){
 						//timeCount();
 					//},10);
-					//${p.productOption } //1000
+					//${p.productOption } //1000 
 				}
 			}else if($('#startBtn').text() == '후기작성') {
 				$('.checkbox').attr('checked', 'checked');
@@ -354,7 +401,7 @@
 			if(seconds<10) {
 				seconds = "0"+seconds;
 			}
-			return hours+":"+minutes+":"+seconds;
+			return hours+""+minutes+""+seconds;
 		}
 		
 		
@@ -399,6 +446,7 @@
 		}		
 		*/
 		
+		//시작버튼 누르면 실행 함수
 		function socketSend() {
 			const memberNo = $("#memberNo").val();
 			const counselNo = $('#counselNo').val();

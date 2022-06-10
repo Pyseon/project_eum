@@ -80,7 +80,7 @@
  		where co.comm_no = ${value} order by co.CMNT_group ,co.cmnt_no
 	</select> 
 
-	<select id="selectPickList" resultType="pick" parameterType="int">
+	<select id="selectPickList" resultType="pick" parameterType="map">
 		select 
 		    p.pick_no as pickNo,
 		    p.pick_category as pickCategory,
@@ -91,9 +91,10 @@
 		    p.pick_content as pickContent,
 		    p.pick_date as pickDate,
 		    p.comm_no as commNo,
-		    (select count(*) from picklike_tbl pl where p.pick_no = pl.pick_no) as pickLike
+		    (select count(*) from picklike_tbl pl where p.pick_no = pl.pick_no) as pickLike,
+    		(select count(*) from picklike_tbl pl where pl.pick_no = p.pick_no and pl.member_no=#{memberNo}) as pickLikeMemberCheck
 		from pick_tbl p
-		where p.comm_no = ${value} order by p.pick_no
+		where p.comm_no = #{commNo} order by p.pick_no
 	</select> 
 
 	<insert id="communityWrite" parameterType="comm">
@@ -234,7 +235,23 @@
 		delete from commlike_tbl where comm_no=#{commNo} and member_no=#{memberNo}
 	</delete>
 	
+	<select id="pickLikeCount" parameterType="int" resultType="int">
+		select count (*) 
+		from picklike_tbl
+		where pick_no=#{pickNo}
+	</select> 
 	
+	<insert id="pickLikeUp" parameterType="map">
+		insert into picklike_tbl values(picklike_seq.nextval,#{memberNo},#{pickNo})
+	</insert>
+	
+	<delete id="pickLikeDown" parameterType="map">
+		delete from picklike_tbl where pick_no=#{pickNo} and member_no=#{memberNo}
+	</delete>
+	
+	<select id="pickLikeMemberCheck" parameterType="map" resultType="int">
+		select count(*) from COMMLIKE_TBL where comm_no=#{commNo} and member_no=#{memberNo}
+	</select>
 	
 	
 </mapper>

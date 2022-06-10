@@ -193,7 +193,7 @@
 									</ul>
 								</div>
 								<!-- DB -->
-								<div class="report-wrap">
+								<div class="pro-report-wrap">
 									<ul>
 										<li><img id="icon-report" src="img/product/icon-report.png"></li>
 										<c:choose>
@@ -448,6 +448,7 @@
 			// 새 페이지 리뷰 삽입 //추후 프로필 수정
 			for(let i = 0; i < prm.length; i++) {
 				const item = prm[i];
+				const productNo = ${p.productNo};
 				const review = $(`
 					<div class="real-review">
 						<div class="member-picture">
@@ -472,7 +473,7 @@
 									<div class="report-wrap">
 										<ul>
 											<li><img id="icon-report" src="img/product/icon-report.png"></li>
-											<li><span id="report">신고</span></li>
+											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${productNo}')">신고</a></span></li>
 										</ul>
 									</div>
 								</div>

@@ -355,7 +355,8 @@
 			member_no as memberNo, 
 			expert_no as expertNo, 
 			pay_no as payNo, 
-			limit_time as limitTime 
+			limit_time as limitTime,
+			start_time as startTime
 		from counsel_tbl 
 		where pay_no=#{payNo}
 	</select>

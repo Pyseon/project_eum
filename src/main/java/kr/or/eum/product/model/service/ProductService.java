@@ -605,10 +605,13 @@ public class ProductService {
 	}
 
 	//윤지
+<<<<<<< HEAD
 	public int overlapCheckReview(int payNo) {
 		return productDao.overlapCheckReview(payNo);
 	}
 
+=======
+>>>>>>> branch 'master' of https://github.com/Pyseon/project_eum.git
 	public int updateStartTime(String startTime, int counselNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startTime", startTime);

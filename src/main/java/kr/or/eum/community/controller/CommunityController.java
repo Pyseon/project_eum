@@ -22,6 +22,7 @@ import kr.or.eum.community.model.vo.Community;
 import kr.or.eum.community.model.vo.CommunityCo;
 import kr.or.eum.community.model.vo.CommunityDetailData;
 import kr.or.eum.community.model.vo.CommunityPageData;
+import kr.or.eum.community.model.vo.Pick;
 
 @Controller
 public class CommunityController {
@@ -42,12 +43,15 @@ public class CommunityController {
 	@RequestMapping(value = "/communityDetail.do")
 	public String communityDetail(int commNo, int category, Model model) {
 		// Community cm = service.communityDetail(commNo);
-		CommunityDetailData cdd = service.communityDetail(commNo);
-		model.addAttribute("comm", cdd.getComm());
-		model.addAttribute("cmntList", cdd.getCmntList());
 		if (category == 0) {
+			CommunityDetailData cdd = service.communityDetail0(commNo);
+			model.addAttribute("comm", cdd.getComm());
+			model.addAttribute("cmntList", cdd.getCmntList());
 			return "community/detailCat0";
 		} else {
+			CommunityDetailData cdd = service.communityDetail1(commNo);
+			model.addAttribute("comm", cdd.getComm());
+			model.addAttribute("pickList", cdd.getPickList());
 			return "community/detailCat1";
 		}
 	}
@@ -131,6 +135,18 @@ public class CommunityController {
 		System.out.println(commCo);
 		//insert 후 selectKey를 이용해 방금 insert 한 pk값 얻어옴
 		service.commCoWrite(commCo);
+		//얻어온 pk값으로 데이터 조회 후 리턴
+		//CommunityCo comment = service.commCoDetail(commCo.getCmntNo());
+		//return new Gson().toJson(comment);
+	}
+	
+
+	@ResponseBody
+	@RequestMapping(value="/pickWrite.do", produces="application/json;charset=utf-8")
+	public void pickWrite(Pick pick) {
+		System.out.println(pick);
+		//insert 후 selectKey를 이용해 방금 insert 한 pk값 얻어옴
+		service.pickWrite(pick);
 		//얻어온 pk값으로 데이터 조회 후 리턴
 		//CommunityCo comment = service.commCoDetail(commCo.getCmntNo());
 		//return new Gson().toJson(comment);

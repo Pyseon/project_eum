@@ -32,7 +32,7 @@
 				where grade=#{selectNum }
 			</when>
 			<otherwise>
-				where grade=1 or grade=2 or grade=3
+				where grade=1 or grade=2
 			</otherwise>
 		</choose>
 	</select>
@@ -41,10 +41,10 @@
 		update member_tbl set
 		<choose>
 			<when test="updateNo == 0">
-				grade=4
+				grade=2
 			</when>
 			<otherwise>
-				grade=2
+				grade=3
 			</otherwise>
 		</choose>
 		where member_no=#{memberNo}
@@ -207,7 +207,8 @@
 		report_category as reportCategory,
 		report_index as reportIndex,
 		report_Title as reportTitle,
-		report_is as reportIs
+		report_is as reportIs,
+		ans_result as ansResult
 		from report_tbl report
 		<choose>
 			<when test="selectNum == 1">
@@ -238,7 +239,8 @@
 		report_category as reportCategory,
 		report_index as reportIndex,
 		report_title as reportTitle,
-		report_is as reportIs
+		report_is as reportIs,
+		ans_result as ansResult
 		from report_tbl report
 		<choose>
 			<when test="searchType.equals('reportTitle') ">
@@ -274,17 +276,28 @@
 			report_date as reportDate,
 			report_category as reportCategory,
 			report_index as reportIndex,
-			report_title as reportTitle
-			from report_tbl report
-			where report_no = #{value }
+			report_title as reportTitle,
+			report_is as reportIs
+		from report_tbl report
+		where report_no = #{value }
+	</select>
+	<select id="selectAnsrpt" parameterType="int" resultType="ansrpt">
+		select
+			ansrpt_title as ansrptTitle,
+			ansrpt_content as ansrptContent
+		from ansrpt_tbl
+		where report_no = #{value }	
 	</select>
 	
 	<select id="reportMember" parameterType="int">
 		update member_tbl set 
-		grade=4,
+		grade=3,
 		member_reportcount = member_reportcount+1 
 		where member_no=#{value }
 	</select>
+	<update id="updateAnsResult" parameterType="map">
+		update report_tbl set ans_result = #{selectNum } where report_no = #{reportNo } 
+	</update>
 	
 	<delete id="deleteArticles" parameterType="map">
 		delete from 
@@ -314,7 +327,11 @@
 	</update>
 	
 	<insert id="answerReport" parameterType="map">
-		insert into ansrpt_tbl values(ansrpt_seq.nextval,#{reportNo},#{ansrpt_title},#{ansrpt_content})
+		insert into ansrpt_tbl values(
+		ansrpt_seq.nextval,
+		#{reportNo},
+		#{answerTitle},
+		#{answerContent})
 	</insert>
 	
 	<select id="FAQList" resultType="faq" parameterType="map">
@@ -657,4 +674,91 @@
 	<insert id="insertQuestion" parameterType="map">
 		insert into question_tbl values(question_seq.nextval, #{memberNo}, #{qstTitle}, #{qstContent}, to_char(sysdate,'yyyy-mm-dd-hh24-mi'), 0)
 	</insert>
+	
+	<select id="expertPageData" resultType="expert" parameterType="map">
+		select * from
+		(select rownum as rnum, exp.* from
+		(select
+			expert_no as expertNo,
+			expert_name as expertName,
+			expert_category as expertCategory,
+			job_name as jobName,
+			expert_app as expertApp
+		from expert_tbl
+			<if test="selectNum != 0">
+				where expert_app = #{selectNum }-1
+			</if>
+		order by expert_no desc) exp)
+		where rnum between #{start} and #{end}
+	</select>
+	<select id="expertCount" resultType="int" parameterType="map">
+		select count(*) from expert_tbl
+			<if test="selectNum != 0">
+				where expert_app = #{selectNum }-1
+			</if>
+	</select>
+	<select id="searchExpertPageData" parameterType="map" resultType="expert">
+		select * from
+		(select rownum as rnum, exp.* from
+		(select
+			expert_no as expertNo,
+			expert_name as expertName,
+			expert_category as expertCategory,
+			job_name as jobName,
+			expert_app as expertApp
+		from expert_tbl
+		<choose>
+			<when test="searchType.equals('expertName') ">
+				where expert_name like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('category') ">
+				where expert_category like #{keyword}
+			</when>
+		</choose>
+		order by expert_no desc) exp)
+		where rnum between #{start} and #{end}
+	</select>
+	
+	<select id="searchExpertCount" parameterType="map" resultType="int">
+		select count(*) from expert_tbl
+		<choose>
+			<when test="searchType.equals('expertName') ">
+				where expert_name like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('category') ">
+				where expert_category like #{category}
+			</when>
+		</choose>
+	</select>
+	<select id="selectExpert" parameterType="int" resultType="expert">
+		select
+			expert_no as expertNo,
+			expert_category as expertCategory,
+			expert_tag as expertTag,
+			credential as credential,
+			issuing_authority as issuingAuthority,
+			acquistion_date as acquistionDate,
+			certificate_path as certificatePath,
+			
+			expert_name as expertName,
+			job_name as jobName,
+			expert_phone as expertPhone,
+			expert_email as expertEmail,
+			expert_app as expertApp 
+			
+			from expert_tbl
+			where expert_no = #{value }
+	</select>
+	<update id="updateExpertApp" parameterType="map">
+		update expert_tbl set expert_app = #{selectNum } where expert_no = #{expertNo }
+	</update>
+	<insert id="insertRefuseExpert">
+		insert into refuseexpert_tbl values(refuseexpert_seq.nextval, #{expertNo}, #{refuseContent})
+	</insert>
+	<select id="selectRefuseContent" parameterType="int" resultType="String">
+		select refuse_content from refuseExpert_tbl where expert_no = #{value }
+	</select>
+	<update id="updateMemberGrade" parameterType="int">
+		update member_tbl set grade = 1 where member_no = (select member_no from expert_tbl where expert_no = #{value}) 
+	</update>
 </mapper>

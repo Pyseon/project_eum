@@ -14,7 +14,6 @@
 	<div class="manaContentWrap">
 	<h1 class="fc-1 fs-full">>신고 상세정보</h1>
 	<hr>
-	<c:forEach items="${report }" var="rpt" varStatus="i">
 		<h2 class="fc-1 fs-bold">신고자: ${rpt.plaintiffId }</h2>
 		<hr>
 		<h2 class="fc-1 fs-bold">제목: ${rpt.reportTitle }</h2>
@@ -44,26 +43,41 @@
 	<div class="answerReport">
 	<span class="material-symbols-outlined ansRe">
 		subdirectory_arrow_right</span><h2>답변</h2>
-			<div>
+		<c:choose>
+			<c:when test="${rpt.reportIs == 0 }">
+				<div>
 				<form method="post" action="/answerReport.do" id="answerReport">
 					<h3>제목</h3>
 					<textarea rows="1" cols="150" name="answerTitle"></textarea>
 					<br> 
 					<h3>내용</h3>
-					<textarea rows="5" cols="150" name="answerReport"></textarea>
+					<textarea rows="5" cols="150" name="answerContent"></textarea>
 					<input type="hidden" value=${rpt.reportNo } name="reportNo">
 					<input type="hidden" value=${rpt.reportCategory } name="category">
 					<input type="hidden" value=${rpt.reportIndex } name="index">
 					<br> 
 					<input type="submit" value="답변 등록" class="btn bc3 reportSubmit">
 				</form>
-			</div>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<table>
+					<tr>
+						<th>제목</th>
+						<td>${ansrpt.ansrptTitle }</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>${ansrpt.ansrptContent }</td>
+					</tr>
+				</table>
+			</c:otherwise>
+		</c:choose>
 		</div>
 	<div class="resultReport">
 		<button class="btn bc1" onclick="location.href='/reportMember.do?memberNo=${rpt.defendant}&category=${rpt.reportCategory }&index=${rpt.reportIndex }&reportNo=${rpt.reportNo }&selNo=1'">사형</button>
-		<button class="btn bc1" onclick="location.href='/manaReport.do?reqPage=1&selectNum=0'">봐줌</button>
+		<button class="btn bc1" onclick="location.href='/updateAnsResult.do?selectNum=2&reportNo=${rpt.reportNo}'">봐줌</button>
 	</div>
-	</c:forEach>
 	</div>
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>

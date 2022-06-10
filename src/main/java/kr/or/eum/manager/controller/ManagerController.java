@@ -22,8 +22,10 @@ import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
 
 @Controller
@@ -38,14 +40,14 @@ public class ManagerController {
 		model.addAttribute("list", mpd.get("memberList"));
 		model.addAttribute("pageNavi", mpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
-		model.addAttribute("selMem", selectNum);
+		model.addAttribute("selectNum", selectNum);
 		return "manager/managementMember";
 	}
 	
 	@RequestMapping(value = "/updateBlackList.do")
 	public String updateBlackList(int updateNo, int memberNo, int reqPage) {
 		int result = service.updateBlackList(updateNo, memberNo);
-		return "redirect:/manaMember.do?reqPage="+reqPage+"&selMem=4";
+		return "redirect:/manaMember.do?reqPage="+reqPage+"&selectNum=3";
 	}
 	
 	@RequestMapping(value = "/manaPayment.do")
@@ -61,13 +63,17 @@ public class ManagerController {
 	}
 	@RequestMapping(value = "/updatePayState.do")
 	public String updatePayState(int updateNo, int payNo, int reqPage) {
+		System.out.println("u: "+updateNo);
+		System.out.println("p: "+payNo);
+		System.out.println("r: "+reqPage);
 		int result = service.updatePayState(updateNo, payNo);
-		return "redirect:/manaPayment.do?reqPage="+reqPage+"&payState=3";
+		return "redirect:/manaPayment.do?reqPage="+reqPage+"&selectNum=3";
 	}
 	@RequestMapping(value="/detailPayment.do")
-	public String detailPayment(int payNo, Model model) {
+	public String detailPayment(int payNo,int reqPage, Model model) {
 		ArrayList<Payment> pay = service.detailPayment(payNo);
 		model.addAttribute("pay", pay);
+		model.addAttribute("reqPage", reqPage);
 		return "manager/detailPayment";
 	}
 	@RequestMapping(value = "/manaReport.do")
@@ -82,8 +88,12 @@ public class ManagerController {
 	
 	@RequestMapping(value = "/detailReport.do")
 	public String detailReport(int reportNo,int categoryNo,int reportIndex, Model model) {
-		ArrayList<Report> report = service.detailReport(reportNo);
-		model.addAttribute("report", report);
+		Report report = service.detailReport(reportNo);
+		if(report.getReportIs()!=0) {
+			AnswerReport ansrpt = service.selectAnsrpt(reportNo);
+			model.addAttribute("ansrpt", ansrpt);
+		}
+		model.addAttribute("rpt", report);
 		model.addAttribute("category", categoryNo);
 		return "manager/detailReport";
 	}
@@ -91,15 +101,22 @@ public class ManagerController {
 	@RequestMapping(value="/answerReport.do")
 	public String answerReport(int reportNo, String answerTitle, String answerContent, int category, int index) {
 		int selNo = 1;
-		int result = service.answerReport(answerTitle, answerContent);
+		int result = service.answerReport(reportNo, answerTitle, answerContent);
 		int result2 = service.updateReportIs(reportNo, selNo);
-		return "manager/detailReport.do?reportNo="+reportNo+"&categoryNo="+category+"&reportIndex="+index;
+		return "redirect:/detailReport.do?reportNo="+reportNo+"&categoryNo="+category+"&reportIndex="+index;
 	}
 	@RequestMapping(value = "/reportMember.do")
 	public String reportMember(int memberNo, int category, int index, int reportNo,int selNo) {
 		int result = service.reportMember(memberNo);  //해당 멤버 정지, 리폿카운트 올림
 		int result2 = service.deleteArticles(category, index);  //글 없애기
+		int selectNum = 1;
+		int result3 = service.updateAnsResult(selectNum, reportNo);
 		return "redirect:/manaMember.do?reqPage=1&selectNum=0&searchType=memberNo&keyword="+memberNo;
+	}
+	@RequestMapping(value="/updateAnsResult.do")
+	public String updateAnsResult(int selectNum, int reportNo) {
+		int result = service.updateAnsResult(selectNum, reportNo);
+		return "redirect:/manaReport.do?reqPage=1&selectNum=0";
 	}
 	
 	@RequestMapping(value = "/manaFAQ.do")
@@ -124,9 +141,9 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/deleteFAQ.do")
-	public String deleteFAQ(int FAQNo) {
+	public String deleteFAQ(int FAQNo, int reqPage) {
 		int result = service.deleteFAQ(FAQNo);
-		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
+		return "redirect:/manaFAQ.do?reqPage="+reqPage+"&selectNum=0";
 	}
 	
 	@RequestMapping(value = "/updateFAQFrm.do")
@@ -167,9 +184,9 @@ public class ManagerController {
 		return "redirect:/manaNotice.do?reqPage=1";
 	}
 	@RequestMapping(value = "/deleteNotice.do")
-	public String deleteNotice(int noticeNo) {
+	public String deleteNotice(int noticeNo, int reqPage) {
 		int result = service.deletenotice(noticeNo);
-		return "redirect:/manaNotice.do?reqPage=1";
+		return "redirect:/manaNotice.do?reqPage="+reqPage;
 	}
 	@RequestMapping(value = "/updateNoticeFrm.do")
 	public String updateNoticeFrm(int noticeNo, Model model) {
@@ -275,4 +292,45 @@ public class ManagerController {
 		model.addAttribute("ans", ans);
 		return "mypage/detailQuestion";
 	}
+	@RequestMapping(value = "/manaExpert.do")
+	public String manaExpert(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		String wherePage = "manaExpert.do";
+		HashMap<String, Object> epd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", epd.get("expertList"));
+		model.addAttribute("pageNavi", epd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/managementExpert";
+	}
+	@RequestMapping(value = "/detailExpert.do")
+	public String detailExpert(int expertNo,int expertApp, Model model) {
+		Expert exp = service.selectExpert(expertNo);
+		if(expertApp==2) {
+			String refuseContent = service.selectRefuseContent(expertNo);
+			model.addAttribute("refuseContent", refuseContent);
+		}
+		model.addAttribute("exp", exp);
+		return "manager/detailExpert";
+	}
+	
+	@RequestMapping(value = "/refuseExpert.do")
+	public String refuseExpert(int expertNo, String refuseContent ) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("expertNo", expertNo);
+		map.put("refuseContent", refuseContent);
+		map.put("selectNum", 2);
+		int result = service.updateExpertApp(map);
+		int result2 = service.insertRefuseExpert(map);
+		return "redirect:/manaExpert.do?reqPage=1&selectNum=0";
+	}
+	@RequestMapping(value = "/updateExpertApp.do")
+	public String updateExpertApp(int expertNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("expertNo", expertNo);
+		map.put("selectNum", 1);
+		int result = service.updateExpertApp(map);
+		int result2 = service.updateMemberGrade(expertNo);
+		return "redirect:/manaExpert.do?reqPage=1&selectNum=0";
+	}
 }
+

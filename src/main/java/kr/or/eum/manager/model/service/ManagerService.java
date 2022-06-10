@@ -14,8 +14,10 @@ import kr.or.eum.manager.model.vo.MemberChart;
 import kr.or.eum.manager.model.vo.Notice;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
 
 @Service
@@ -120,6 +122,19 @@ public class ManagerService {
 			totalCount = dao.myQstCount(pageMap);
 			pageData.put("qstList", qstList);
 			break;
+		case "manaExpert.do":
+			ArrayList<Expert> expertList = new ArrayList<Expert>();
+			if(searchType == null) {
+				expertList = dao.expertPageData(pageMap);
+				totalCount = dao.expertCount(pageMap);
+			}else {
+				pageMap.put("searchType", searchType);
+				pageMap.put("keyword", keyword);
+				expertList = dao.searchExpertPageData(pageMap);
+				totalCount = dao.searchExpertCount(pageMap);
+			}
+			pageData.put("expertList", expertList);
+			break;
 		}
 		
 		int totalPage = 0;
@@ -204,7 +219,7 @@ public class ManagerService {
 		return dao.detailPayment(payNo);
 	}
 
-	public ArrayList<Report> detailReport(int reportNo) {
+	public Report detailReport(int reportNo) {
 		return dao.detailReport(reportNo);
 	}
 	
@@ -221,14 +236,15 @@ public class ManagerService {
 
 	public int updateReportIs(int reportNo, int selNo) {
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		map.put("reportNo", selNo);
+		map.put("reportNo", reportNo);
 		map.put("selNo", selNo);
 		return dao.updateReportIs(map);
 	}
 	
-	public int answerReport(String answerTitle, String answerContent) {
-		HashMap<String, String> map = new HashMap<String, String>();
+	public int answerReport(int reportNo, String answerTitle, String answerContent) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("answerTitle", answerTitle);
+		map.put("reportNo", reportNo);
 		map.put("answerContent", answerContent);
 		return dao.answerReport(map);
 	}
@@ -346,6 +362,37 @@ public class ManagerService {
 
 	public Answer selectAns(int qstNo) {
 		return dao.selectAns(qstNo);
+	}
+
+	public Expert selectExpert(int expertNo) {
+		return dao.selectExpert(expertNo);
+	}
+
+	public int updateExpertApp(HashMap<String, Object> map) {
+		return dao.updateExpertApp(map);
+	}
+
+	public int insertRefuseExpert(HashMap<String, Object> map) {
+		return dao.insertRefuseExpert(map);
+	}
+	
+	public String selectRefuseContent(int expertNo) {
+		return dao.selectRefuseContnet(expertNo);
+	}
+
+	public int updateMemberGrade(int expertNo) {
+		return dao.updateMemberGrade(expertNo);
+	}
+
+	public AnswerReport selectAnsrpt(int reportNo) {
+		return dao.selectAnsrpt(reportNo);
+	}
+
+	public int updateAnsResult(int selectNum, int reportNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("selectNum", selectNum);
+		map.put("reportNo", reportNo);
+		return dao.updateAnsResult(map);
 	}
 	
 	

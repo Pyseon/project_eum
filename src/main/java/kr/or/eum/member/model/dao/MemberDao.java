@@ -83,10 +83,12 @@ public class MemberDao {
 		return result;
 	}
 	
-	public ArrayList<Payment> Myproductdetail(int payNo) {
-		List list = sqlSession.selectList("member.Myproductdetail",payNo); 
+	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
 		
-		return (ArrayList<Payment>)list;
+		System.out.println(productNo+"dao");
+		List list = sqlSession.selectList("member.Myproductdetail",productNo); 
+		
+		return (ArrayList<ProductAndExpertDetail>)list;
 	}
 
 	//윤지
@@ -146,6 +148,21 @@ public class MemberDao {
 		int result = sqlSession.update("member.updatePw", m);
 		System.out.println("비밀번호dao:"+ result);
 		return result;
+	}
+	public int DeleteMywish(int wishNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("member.DeleteMywish",wishNo);
+		return result;
+	}
+	public int deleteMember(int memberNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("member.deleteMember",memberNo);
+		return result;
+	}
+	public ArrayList<Payment> selectMyproductDetail(int payNo) {
+		List list = sqlSession.selectList("member.selectMyproductDetail",payNo); 
+		
+		return (ArrayList<Payment>)list;
 	}
 
 }

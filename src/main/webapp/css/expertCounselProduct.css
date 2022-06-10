@@ -300,7 +300,8 @@ h3,h5{
     color: #fff;
     padding: 10px;
     font-size:12px;
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .chat-content-wrap{
 	display: flex;

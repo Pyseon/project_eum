@@ -9,7 +9,9 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
-	<div class="manaContentWrap">		
+	<div class="manaContentWrap">
+	<h1>>공지사항</h1>
+	<hr>		
 		<div class="searchBox">
 			<form action="/manaNotice.do" method="post">
 				<select name="searchType">
@@ -40,7 +42,8 @@
 					<td>${ntc.noticeDate }</td>
 					<td>${ntc.memberId }</td>
 					<td><button class="bc3 bs6" onclick="location.href='/updateNoticeFrm.do?noticeNo=${ntc.noticeNo}'">수정</button></td>
-					<td><button class="bc3 bs6" onclick="location.href='/deleteNotice.do?noticeNo=${ntc.noticeNo}'">삭제</button></td>			
+					<!--<td><button class="bc3 bs6" onclick="location.href='/deleteNotice.do?noticeNo=${ntc.noticeNo}'">삭제</button></td> -->
+					<td><button class="btn bc2 bs1 modal-open-btn delNtc" target="#deleteNotice-modal" value=${ntc.noticeNo }>삭제</button></td>
 					</tr>
 					</c:forEach>
 			</table>
@@ -52,6 +55,36 @@
 		<button class="bc1 bs5" onclick="location.href='/insertNoticeFrm.do'">글쓰기</button>
 		</div>
 	</div>
+	
+	<input type="hidden" id="reqPage" value="${reqPage }">
+	
+	<div id="deleteNotice-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 공지를 삭제 하시겠습니까?</h2>
+				<br>	
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="delNtc">
+					<button class="btn bc2" id="delNotice">공지 삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<script>
+	const reqPage = $("#reqPage").val();
+
+	$(".delNtc").on("click", function() {
+		$("#delNtc").val($(this).val());
+	});
+	$("#delNotice").on("click", function() {
+		const noticeNo = $("#delNtc").val();
+		location.href = '/deleteNotice.do?noticeNo='+noticeNo+'&reqPage='+reqPage;
+});
+</script>
 </body>
 </html>

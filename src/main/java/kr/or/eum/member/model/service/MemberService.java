@@ -92,8 +92,11 @@ public class MemberService {
 		return dao.DeleteMyproduct(payNo);
 	}
 
-	public ArrayList<Payment> Myproductdetail(int payNo) {
-		ArrayList<Payment> list = dao.Myproductdetail(payNo);
+	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
+		
+		System.out.println(productNo+"서비스");
+		ArrayList<ProductAndExpertDetail> list = dao.Myproductdetail(productNo);
+		
 		System.out.println(list);
 		return list;
 	}
@@ -148,6 +151,23 @@ public class MemberService {
         System.out.println("임시비밀번호 : "+memberPw);
         System.out.println("Member : "+ m);
 		return dao.updatePw(m);
+	}
+
+	public int DeleteMywish(int wishNo) {
+		// TODO Auto-generated method stub
+		
+		return dao.DeleteMywish(wishNo);
+	}
+
+	public int deleteMember(int memberNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteMember(memberNo);
+	}
+
+	public ArrayList<Payment> selectMyproductDetail(int payNo) {
+		// TODO Auto-generated method stub
+		ArrayList<Payment> list = dao.selectMyproductDetail(payNo);
+		return list;
 	}
 
 

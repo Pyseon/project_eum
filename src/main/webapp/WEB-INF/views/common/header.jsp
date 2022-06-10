@@ -276,8 +276,7 @@
               </div>
             </div>
             <div class="col-sm-3" style="text-align: right">
-              <a href="login.html" class="fc-1"
-                >원하시는 상담/클래스가 없나요?</a>
+              <a href="/requestList.do?reqPage=1&selReq=전체" class="fc-1">원하시는 상담/클래스가 없나요?</a>
             </div>
           </div>
         </div>

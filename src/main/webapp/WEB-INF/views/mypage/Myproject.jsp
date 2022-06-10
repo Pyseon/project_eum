@@ -221,7 +221,7 @@ li{
 			</ul>
 			</div>
 			<div>
-				<button class="btn bc3 bs3" id="login-btn" type="button" onclick="location.href='/MyprojectDetail.do?productNo=${p.productNo}'">해당클래스 편집</button>
+				<button class="btn bc3 bs3" id="login-btn" type="button" onclick="location.href='/MyprojectDetail.do?productNo=${p.productNo}'">${p.productNo}</button>
 		</div>
 		</div>
 		

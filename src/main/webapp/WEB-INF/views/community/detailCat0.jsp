@@ -11,7 +11,9 @@
 <style>
 </style>
 </head>
+<div class="header-div">
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+</div>
 <body>
 	<div class="container">
 		<div class="article-wrap">
@@ -721,7 +723,9 @@ function toastShow(title, icon){
 
 	
 </script>
+<div class="footer-div">
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</div>
 </body>
 
 

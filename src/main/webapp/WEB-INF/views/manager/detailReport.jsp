@@ -21,23 +21,31 @@
 		<h3 class="fc-1 fs-medium">내용: ${rpt.reportContent }</h3>
 		<hr>
 		<div class="reportDetail">
-			<c:choose>
+		<c:choose>
+			<c:when test="${scout == 0 }">
+				<h1>이미 삭제되어있는 글입니다.</h1>
+			</c:when>
+			<c:otherwise>
+				<c:choose>
 				<c:when test="${category == 0 }">
 					<jsp:include page="/productDetail.do?productNo=${rpt.reportIndex }&expertNo=${rpt.defendant }"></jsp:include>
 				</c:when>
 				<c:when test="${category == 1 }">
-					상품 후기
+					${reviewTitle }
+					${reviewContent }
 				</c:when>
 				<c:when test="${category == 2 }">
-					<jsp:include page="/communityDetail.do?commNo=${rpt.reportIndex }&category=${commCategory }"></jsp:include>
+					개설요청
 				</c:when>
 				<c:when test="${category == 3 }">
-					커뮤니티
+					<jsp:include page="/communityDetail.do?commNo=${rpt.reportIndex }&category=${commCategory }"></jsp:include>
 				</c:when>
 				<c:when test="${category == 0 }">
-					커뮤니티 댓글
+					${cmntContent }
 				</c:when>
-			</c:choose>
+				</c:choose>
+			</c:otherwise>
+		</c:choose>
 		</div>
 	<hr>
 	<div class="answerReport">
@@ -82,8 +90,11 @@
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+		//공통
 		$(".header-div").css("display","none");
 		$(".footer-div").css("display","none");
+		
+		//상품
 		$(".report-wrap").css("display","none");
 		$(".right-second-box").css("display", "none");
 		$(".right-third-box").css("display", "none");
@@ -91,6 +102,11 @@
 		$(".single-sidebar-widget").css("display", "none");
 		$(".wish-title-wrap").css("display", "none");
 		$("#purchaseBtn").css("display", "none");
+		
+		//카테고리
+		$(".article-list").css("display", "none");
+		$(".article-info-box").css("display", "none");
+		$(".haja-like").css("pointer-events", "none");
 	</script>
 </body>
 </html>

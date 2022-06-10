@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
+<link rel="stylesheet" href="css/report.css" />
+<script src="js/report.js"></script>
 <style>
 </style>
 </head>
@@ -111,7 +113,16 @@
 
 				<div class="article-cotent">${comm.commContent }</div>
 				<div class="report-wrap">
-					<i class="material-symbols-outlined">e911_emergency</i> <span>신고하기</span>
+					<i class="material-symbols-outlined">e911_emergency</i>
+					<c:choose>
+						<c:when test="${not empty sessionScope.member }">
+							<span id="report"><a style="cursor:pointer;"
+									onclick="report('${comm.memberNo }','3','${comm.commNo }')">신고하기</a></span>
+						</c:when>
+						<c:otherwise>
+							<span id="report"><a  style="cursor:pointer;" onclick="loginNeed();">신고하기</a></span>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>

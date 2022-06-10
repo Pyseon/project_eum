@@ -17,6 +17,7 @@ import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
 
@@ -393,6 +394,22 @@ public class ManagerService {
 		map.put("selectNum", selectNum);
 		map.put("reportNo", reportNo);
 		return dao.updateAnsResult(map);
+	}
+
+	public int selectCommCategoryNum(int reportIndex) {
+		return dao.selectCommCategoryNum(reportIndex);
+	}
+
+	public HashMap<String, Object> selectProductReview(int reportIndex) {
+		Review productReview = dao.selectProductReview(reportIndex);
+		HashMap<String, Object> reportReview = new HashMap<String, Object>();
+		reportReview.put("reviewTitle", productReview.getReviewTitle());
+		reportReview.put("reviewContent", productReview.getReviewContent());
+		return reportReview;
+	}
+
+	public String selectCmntContent(int reportIndex) {
+		return dao.selectCmntContent(reportIndex);
 	}
 	
 	

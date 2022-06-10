@@ -288,6 +288,19 @@
 		from ansrpt_tbl
 		where report_no = #{value }	
 	</select>
+	<select id="selectProductReview" parameterType="int" resultType="review">
+		select
+			review_title as reviewTitle,
+			review_content as reviewContent
+		from review_tbl
+		where review_no = #{value }
+	</select>
+	<select id="selectCommCategoryNum" parameterType="int" resultType="int">
+		select com_category from community_tbl where comm_no = #{value }
+	</select>
+	<select id="selectCmntContent" parameterType="int" resultType="String">
+		select cmnt_content from communityco_tbl where cmnt_no = #{value}
+	</select>
 	
 	<select id="reportMember" parameterType="int">
 		update member_tbl set 

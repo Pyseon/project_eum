@@ -75,7 +75,7 @@
 				</c:when>
 				<c:when test="${pay.payState eq 2}">
 					<div class="sendBox">
-						<input name="file" id="file" style="display:none"> <div class="fileBtn-wrap"><img class="fileBtn" src="/img/product/icon-folder.png"></div>
+						<%-- <input name="file" id="file" style="display:none"> <div class="fileBtn-wrap"><img class="fileBtn" src="/img/product/icon-folder.png"></div>--%>
 						<input type="text" id="sendMsg" placeholder="[안내] 상담이 종료되어 입력이 불가합니다. 상담에 문제가 있는 경우 고객센터로 문의해주세요." readonly>
 						<div class="send-btn-non"><span class="material-icons fc-7 send-icon">arrow_forward</span></div>
 					</div><!-- sendBox -->	
@@ -607,10 +607,10 @@
 			$("#sendMsg").on("keyup", function(key){
 				if(key.keyCode == 13){ //13번이 엔터키코드
 					sendMsg();
-				}
+				} 
 			});
 		});
-	});
+	}); 
 </script>
 </body>
 </html>

@@ -287,6 +287,7 @@
 	from member_tbl where member_id = #{memberId}	
  	</select>
 
+<!-- 
 	<select id ="selectMyprojectDetail" parameterType="int" resultType="productAndExpertDetail">
  		
 		select 
@@ -307,6 +308,9 @@
 		where product_no=#{productNo}
   
   	</select>
+  	
+  	 -->
+  	
   	<select id ="selectMyproductDetail" parameterType="int" resultType="pay">
  		
 		select 

@@ -146,15 +146,15 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="purchasebox">
 	<div class="purchasemain fs-bold">상품구매하기</div>
-	<div class="purchasesub fs-bold">상담제목</div>
-	<div class="purchaseall">
+	<div class="purchasesub fs-bold">상담제목</div> 						<!--상품 product_title  -->
+	<div class="purchaseall">														
 		<div class="purchase">
-			<div class="expert">전문가이름   &nbsp</div>
-			<div class="job">&nbsp | &nbsp&nbsp 직업명or분류</div>
+			<div class="expert">전문가이름   &nbsp</div>						<!--전문가 expert_name  -->
+			<div class="job">&nbsp | &nbsp&nbsp 직업명or분류</div>			<!--전문가 job_name -->
 		</div>
-		<div class="price fs-bold"> 50,000원</div>
-		<div class="consulting"> 1:1 상담 &nbsp 30분</div>
-		<div class="backgroundcolororange">
+		<div class="price fs-bold"> 50,000원</div>						<!--상품 cost -->
+		<div class="consulting"> 1:1 상담 &nbsp 30분</div>					<!--상품 product_opthion -->
+		<div class="backgroundcolororange">								<!--  -->
 			<div class="purchasebody">
 				<div class="explan" id="explan">
 					<div>꼭 확인 해주세요!</div>
@@ -162,17 +162,17 @@
 				</div>
 			</div>
 			<div class="pointbox">
-				<div class="point fs-bold">포인트</div>
+				<div class="point fs-bold">포인트</div>											<!--멤버 member_point -->
 				<form>
 					<input class="input-form" id="inputplus" type="text" name="memberPoint">
 					<button class="btn bc1 bs3" id="pointbtn" type="submit">사용하기</button>
 				</form>
 			</div>
 			<br>
-			<div class="pointstock">사용가능한 포인트 : <span>100,000</span></div>
+			<div class="pointstock">사용가능한 포인트 : <span>990,000</span></div>
 		</div>
 		<div class="finalbox">
-			<div class="final-payment fs-bold">최종 결제 금액</div>
+			<div class="final-payment fs-bold">최종 결제 금액</div>									<!-- 상품 cost - member_poit -->
 			<input class="final-price input-form" type="text" name="" value="50,000 원" readonly>
 		</div>
 	</div>

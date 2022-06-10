@@ -13,7 +13,6 @@ import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
-import kr.or.eum.product.model.vo.ProductAndExpertDetail;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -34,8 +33,7 @@ public class MemberDao {
 	//재민 내정보수정
 	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
-		System.out.println("여기서 vo 값 뭐가 null인지 확인");
-		System.out.println(m.toString());
+		
 		int result = sqlSession.update("member.updateMember",m);
 		return result;
 	}
@@ -81,7 +79,7 @@ public class MemberDao {
 	}
 	
 	public int DeleteMyproduct(int payNo) {
-		int result = sqlSession.update("member.DeleteMyproduct",payNo);
+		int result = sqlSession.update("member.DeleteMyproduct");
 		return result;
 	}
 	
@@ -105,6 +103,8 @@ public class MemberDao {
 	}
 	public int insertMember(Member m) {
 		int result = sqlSession.insert("member.insertMember",m);
+		System.out.println(m);
+		System.out.println(result);
 		return result;
 		
 	}
@@ -130,19 +130,24 @@ public class MemberDao {
 		int result = sqlSession.insert("member.insertexpert",ex);
 		return result;
 	}
-  //대권
 	public int searchId(String memberId) {
 		// TODO Auto-generated method stub
 		int result = sqlSession.selectOne("member.searchId",memberId);
-		System.out.println("dao:"+ result);
+		System.out.println("이메일dao:"+ result);
 		return result;
-  }
-  
-	public ArrayList<ProductAndExpertDetail> selectMyprojectDetail(int productNo) {
-		List list = sqlSession.selectList("member.selectMyprojectDetail",productNo); 
-		
-		return (ArrayList<ProductAndExpertDetail>)list;
-
+	}
+	public int searchPhone(String memberPhone) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.selectOne("member.searchPhone",memberPhone);
+		System.out.println("연락처dao:"+ result);
+		return result;
+	}
+	
+	public int updatePw(Member m) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("member.updatePw", m);
+		System.out.println("비밀번호dao:"+ result);
+		return result;
 	}
 	public int DeleteMywish(int wishNo) {
 		// TODO Auto-generated method stub

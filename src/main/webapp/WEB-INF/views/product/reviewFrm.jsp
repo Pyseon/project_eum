@@ -38,7 +38,7 @@
 	                <span id="star-result2">0</span>
 				</div>
 			</div>
-			<div class="review content col">
+			<div class="review content">
 				<div class="content-wrap">
 					<input type="hidden" class="payNo" value="${pay.payNo }">
 					<input type="hidden" class="memberNo" value="${m.memberNo }">

@@ -519,6 +519,7 @@
 		
 		//서버에서 화면으로 데이터를 전송 시 처리할 함수 
 		function receiverMsg(param) {
+
 			const msgData = JSON.parse(param.data); 
 			//나말고 누군가가 들어 온 경우
 			if(msgData.type === 'enter') {
@@ -539,6 +540,7 @@
 				timeCount();
 				},10); //시간초 추후 수정..지금은 테스트라 빠르게
 			}
+
 			console.log(param);
 		}//채팅도 데이터로 보내주지만, 읽음 여부 등도 데이터로 전송
 		

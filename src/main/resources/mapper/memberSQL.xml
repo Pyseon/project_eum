@@ -50,7 +50,7 @@
   	</select>
   	 
 	<!-- 재민 -->
-	<update id="updateMember" parameterType="member" >
+	<update id="updateMember" parameterType="m" >
 	update member_tbl set 
 		member_nick=#{memberNick}, 
 		member_pw=#{memberPw},

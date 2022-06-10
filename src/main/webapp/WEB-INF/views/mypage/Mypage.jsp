@@ -60,34 +60,24 @@
 	<div class="firstbox">
 	<div id="maintitle">>내 정보</div>
 	<div id="star">*는 필수 입력사항입니다.</div>
-	<form class="joinfrmbox" id="joinfrmbox" action="/updateMember.do" method="post">
+	<form class="joinfrmbox" action="/updateMember.do" method="post">
 		<fieldset>
-		
-			 
-		
+			<div class="emailbox">
+				<div>이메일*</div> 
+				<input class="input-form" type="text" name="memberId" placeholder="${sessionScope.member.memberId}">
+			</div>
 			<br>
 			<br>
 			닉네임* <input  class="input-form" type="text" name="memberNick" placeholder="${sessionScope.member.memberNick}"><br>
-			
 			비밀번호* <input  class="input-form" type="password" name="memberPw" placeholder="비밀번호를 입력해주세요."><br>
 			비밀번호 확인* <input class="input-form" type="password" name="memberPwRe" placeholder="비밀번호를 다시 입력해주세요."><br>
-			연락처*<input class="input-form" type="text" name="memberPhone" placeholder="${sessionScope.member.memberPhone}"><br>
-			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
-			<input type="hidden" name="memberId" value="${sessionScope.member.memberId}">
-			<input type="hidden" name="memberPoint" value="${sessionScope.member.memberPoint}">
-			<input type="hidden" name="gender" value="${sessionScope.member.gender}">
-			<input type="hidden" name="birth" value="${sessionScope.member.birth}">
-			<input type="hidden" name="agreement" value="${sessionScope.member.agreement}">
-			<input type="hidden" name="grade" value="${sessionScope.member.grade}">
-			<input type="hidden" name="enrollDate" value="${sessionScope.member.enrollDate}">
+			연락처*<input class="input-form" type="text" name="phone" placeholder="${sessionScope.member.memberPhone}"><br>
 			
 			<br>
-			
-			
 			<div class="birthbox">
 				
 				<button class="btn bc1 bs4" type="submit">수정완료</button>
-			</div> 
+			</div>
 		</fieldset>
 	</form>
 	<form class="joinfrmbox" id="joinfrmbox" action="/deleteMember.do" method="post">

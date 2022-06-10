@@ -40,10 +40,10 @@
 	}
 	.findbtn{
 		display: inline;
-		float: right;
 		width: 25%;
+		height: 120px;
 		vertical-align: middle;
-		margin:  10px 0px;
+		margin: 5px;
 		
 	}
 	.idfindmain{
@@ -77,6 +77,7 @@
 		border-bottom:4px solid gray;
 	}
 	.idpw{
+		overflow: hidden;
 		font-size:15px;
 		width: 10%;
 	}
@@ -89,6 +90,9 @@
 		width   : 85%;
 		margin: 0 auto;
 		border-bottom:4px solid #3865f2;
+	}
+	#pw-find{
+		overflow: hidden;
 	}
 </style>
 </head>
@@ -107,13 +111,88 @@
 				<div>가입하셨던 이메일 계정을 입력하시면,</div>
 				<div>임시비밀번호를 이메일로 발송해 드립니다.</div>
 			</div>
-			<form>
-				<input class="input-form inputplus" type="text" name="memberId">
-				<button class="btn bc1 bs3 findbtn" type="submit">확인</button>
+			<form id="pw-find">
+				<input class="input-form inputplus" type="text" id="memberId" name="memberId" placeholder="이메일을 입력하세요.">
+				<input class="input-form inputplus" type="text" id="memberPhone" name="memberPhone" placeholder="연락처를 입력해주세요(010-xxxx-xxxx)" maxlength="13" oninput="this.value = this.value.replace(/[^0-9.\-]/g, '').replace(/(\..*)\./g, '$1');">
+				<button class="btn bc1 bs3 findbtn" type="button" id="email-pw">확인</button>
 			</form>
+			<div id="email-text"></div>
+			<div id="phone-text"></div>
 		</div>
 	</div>
 </div>
+<script>
+//체인지로바꿔야할듯
+$("#email-pw").on("click",function(){
+	var email = $("#memberId").val();
+	var memberPhone = $("#membePhone").val();
+	var emailtext = $("#email-text");
+	var phonetext = $("#phone-text");
+	$.ajax({
+		   url : "/emailCheck.do?memberId=" + email,
+		   type:"POST",
+		   data:{},
+		   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+		   success: function(data){
+			   if(data == "1"){
+				   	emailtext.text("")
+				   	emailtext.css("color","#00adb5");
+				   	
+					var memberPhone = $("#memberPhone").val();
+					//연락처 중복 검사
+					$.ajax({
+						   url : "/phoneCheck.do?memberPhone=" + memberPhone,
+						   type:"POST",
+						   data:{},		
+						   success: function(data){
+							   if(data == "1"){
+									phonetext.text("");
+									phonetext.css("color","#ff2e63");
+									//연락처 중복 검사
+									$.ajax({
+										   url : "/pwCheck.do", 
+										   type:"POST",
+										   data:{memberId:email, memberPhone:memberPhone},		
+										   success: function(data){
+											   if(data == "1"){
+													phonetext.text("메일전송 완료");
+													phonetext.css("color","#ff2e63");
+													
+												}else if(data == "0"){
+													phonetext.text("메일전송 실패");
+													phonetext.css("color","#00adb5");
+													
+												}
+										   },
+										   error : function(){
+											   console.log("서버요청실패");
+										   }
+										});
+									
+								}else if(data == "0"){
+									phonetext.text("연락처 정보가 없습니다");
+									phonetext.css("color","#00adb5");
+									
+								}
+						   },
+						   error : function(){
+							   console.log("서버요청실패");
+						   }
+						});
+				
+				  
+				}else if(data == "0"){
+					emailtext.text("이메일 정보가 없습니다")
+					emailtext.css("color","#ff2e63");
+				
+				}
+		   },
+		   error : function(){
+			   console.log("서버요청실패");
+		   }
+	});
+});
+</script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>

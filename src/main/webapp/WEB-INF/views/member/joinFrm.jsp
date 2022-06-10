@@ -124,6 +124,8 @@
 		font-family:fs-bold !important;
 		border: 3px solid #3865f2 !important;
 	}
+	
+
 </style>
 <body>
 <%@ include file="/WEB-INF/views/member/memberheader.jsp"%>
@@ -166,8 +168,8 @@
 				<div>생년월일*</div>
 				<input type="hidden" name="birth" id="birth" value="">
 				<input  class="input-form inputplus changedata" type="text" id="year" name="birth-s" placeholder="년(4자)" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
-				<select class="input-form inputplus changedata" id="month" name="birth-s">
-					  <option value='' selected>월</option>
+				<select class="input-form inputplus changedata" id="month" name="birth-s" required>
+					  <option value='' selected >월</option>
 				</select>
 				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" placeholder="일" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 			</div>
@@ -181,7 +183,7 @@
 					<div><input type="checkbox" class="agreement" id="agreement" name="agreement" value="0"> <label> 이벤트 할인 혜택 알림 수신에 동의합니다(선택)</label></div>
 				</div>
 			</div>
-			<button class="btn bc1 bs4" id="joinButton" type="submit">가입완료</button>
+			<button class="btn bc1 bs4" id="joinButton" type="button">가입완료</button>
 		</fieldset>
 	</form>
 	</div>
@@ -189,10 +191,10 @@
 <script>
 	//1.button 활성화
 	//2.submit 유효성
-	let inputCheck = new Array(7).fill(true);
+	let inputCheck = new Array(7).fill(false);
 	let checkAll = true;
 	console.log(checkAll);
-	$("#joinfrmbox").submit(function() {
+	$("#joinButton").click(function() {
 		checkAll = true;
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
@@ -229,20 +231,25 @@
 					memberPicturePath:memberPicturePath},
 				success: function(data){
 					if(data == "1"){
-						const title = "수정이 완료되었습니다.";
+						const title = "회원가입 완료되었습니다.";
 						const icon = "success";
 						toastShow(title,icon);
 					}else if(data == "0"){
-						const title = "수정을 실패했습니다.";
+						const title = "회원가입을 실패했습니다.";
 						const icon = "error";
 						toastShow(title,icon);
 					}	
 				},
-			})
+				error : function(){
+					   console.log("서버요청실패");
+				}
+			});
+						
 		}else{
 			const title = "입력값을 확인해주세요";
 			const icon = "warning";
 			toastShow(title,icon);
+				
 		}
 	});
 	
@@ -257,6 +264,27 @@
 				$("#memberPhone-test").css("color","#ff2e63");
 				inputCheck[0] = false;
 			}else{
+				var memberPhone = $("#memberPhone").val();
+				//연락처 중복 검사
+				$.ajax({
+					   url : "/phoneCheck.do?memberPhone=" + memberPhone,
+					   type:"POST",
+					   data:{},		
+					   success: function(data){
+						   if(data == "1"){
+								$("#memberPhone-test").text("가입된 번호입니다.");
+								$("#memberPhone-test").css("color","#ff2e63");
+								inputCheck[0] = false;
+							}else if(data == "0"){
+								$("#memberPhone-test").text("사용가능한 번호입니다.");
+								$("#memberPhone-test").css("color","#00adb5");
+								inputCheck[0] = true;
+							}
+					   },
+					   error : function(){
+						   console.log("서버요청실패");
+					   }
+					});
 				inputCheck[0] = true;
 			}
 		});
@@ -420,6 +448,7 @@
 		    let year = $("#year").val();
 		    let month = $("#month").val();
 		    let day = $("#day").val();
+		    
 		    let birth = (year+"-"+month+"-"+day);
 		    $("#birth").val(birth);
 		    
@@ -429,45 +458,49 @@
 				$("#birth-test").text("미래에서 오셨군요^^");
 				$("#birth-test").css("color","#ff2e63");
 				inputCheck[4] = false;				
-			}else if(year < 1923){
+			}else if(year < 1922){
 				$("#birth-test").text("정말이세요?");
 				$("#birth-test").css("color","#ff2e63");
 				inputCheck[4] = false;
-			}else{
+			}else if(year!=""&&(year>1923||year<2022)){
 				//day 유효성 검사
 				if(month == 2 ){
-					if(day>30){
+					if(day>29||day<0){
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
 					}else{
-						$("#birth-test").text("끝?");
+						$("#birth-test").text("완료");
+						$("#birth-test").css("color","#3865f2");
 						inputCheck[4] = true;
 					}
 				}else if(month==4||month==6||month==9||month==11){
-					if(day>31){
+					if(day>30||day<0){
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
 					}else{
-						$("#birth-test").text("끝?");
+						$("#birth-test").text("완료");
+						$("#birth-test").css("color","#3865f2");
 					}
 				}else if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
-					if(day>32){
+					if(day>31||day<0){
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
 					}else{
-						$("#birth-test").text("끝?");
+						$("#birth-test").text("완료");
+						$("#birth-test").css("color","#3865f2");					
 						inputCheck[4] = true;
 					}
 				}
+			}else{
+				$("#birth-test").text("생년월일 확인해주세요");
+				$("#birth-test").css("color","#ff2e63");	
+				inputCheck[4] = false;
 			}
 			
 		});
-	
-	
-	
 	
 	//month 옵션
 	$(function () {
@@ -503,24 +536,26 @@
 		$("#woman").removeClass("bc1")
 	});
 	
+	//토스트 알림 함수		
 	function toastShow(title, icon){
 		const Toast = Swal.mixin({
-	    toast: true,
-	    position: 'center-center',
-	    showConfirmButton: false,
-	    timer: 1500,
-	    timerProgressBar: true,
-	    didOpen: (toast) => {
-	     // toast.addEventListener('mouseenter', Swal.stopTimer)
-	      toast.addEventListener('mouseleave', Swal.resumeTimer)
-	    }
-	 	});
+		    toast: true,
+		    position: 'center-center',
+		    showConfirmButton: false,
+		    timer: 1500,
+		    timerProgressBar: true,
+		    didOpen: (toast) => {
+		     // toast.addEventListener('mouseenter', Swal.stopTimer)
+		      toast.addEventListener('mouseleave', Swal.resumeTimer)
+		    }
+		 	})
 	
 	  	Toast.fire({
 	    title: title,
 	    icon: icon
-	  });
-	}//토스트 끝
+	  })
+	
+	}
 </script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>

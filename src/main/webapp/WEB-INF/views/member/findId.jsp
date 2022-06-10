@@ -77,6 +77,7 @@
 		border-bottom:4px solid #3865f2;
 	}
 	.idpw{
+		overflow: hidden;
 		font-size:15px;
 		width: 10%;
 	}
@@ -89,6 +90,20 @@
 		width   : 85%;
 		margin: 0 auto;
 		border-bottom:4px solid gray;
+	}
+	#find-text{
+		margin-top: 100px !important;
+		text-align: center;
+		margin: 0 auto;
+	}
+	#pw-find{
+		margin-top: 20px;
+		text-align: center;
+	}
+	#pw-find>a>div{
+		font-family: fs-bold !important;
+		font-size: 25px !important;
+		color: #3865f2 !important;
 	}
 </style>
 </head>
@@ -108,12 +123,47 @@
 				<div>가입여부를 확인해드립니다.	</div>
 			</div>
 			<form>
-				<input class="input-form inputplus" type="text" name="memberId">
-				<button class="btn bc1 bs3 findbtn" type="submit">확인</button>
+				<input class="input-form inputplus" type="text" id="memberId" name="memberId">
+				<button class="btn bc1 bs3 findbtn" id="email-test" type="button">확인</button>
 			</form>
+			<div class="fs-bold" id="find-text"></div>
+			<div id="pw-find">
+				<a href="/findPw.do"><div id="pw-text"></div></a>
+				<a href="/joinFrm.do"><div id="pw-text2"></div></a>
+			</div>
 		</div>
 	</div>
 </div>
+<script>
+$("#email-test").on("click",function(){
+	var email = $("#memberId").val();
+	var pwFind = $("#find-text");
+	var pwText = $("#pw-text");
+	var pwText2 = $("#pw-text2");
+	$.ajax({
+		   url : "/emailCheck.do?memberId=" + email,
+		   type:"POST",
+		   data:{},
+		   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+		   success: function(data){
+			   if(data == "1"){
+				   	pwFind.text("가입된 아이디 입니다")
+				   	pwFind.css("color","#00adb5");
+				    pwText.text("비밀번호도 기억이안나다면?");
+				    pwText2.text("");
+				}else if(data == "0"){
+					pwFind.text("가입된 정보가 없습니다")
+					pwFind.css("color","#ff2e63");
+					pwText2.text("바로 회원가입하러 가기");
+					pwText.text("");
+				}
+		   },
+		   error : function(){
+			   console.log("서버요청실패");
+		   }
+		});
+});
+</script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/jquery.scrollUp.min.js"></script>

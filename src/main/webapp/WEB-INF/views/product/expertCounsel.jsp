@@ -197,13 +197,59 @@
 		let memberId;
 		//페이지 뜨자마자 initChat 함수 실행
 		initChat('${m.memberId}');
+		//상담시간
+		let productOption = Number(${p.productOption }) * 60;
+		console.log("productOptionSec>>>"+productOption);
 		
-		let productOption = ${p.productOption };
-		console.log("productOPtion>>"+productOption);
-		productOption = Number(productOption) * 60;
-		console.log("productOptionAfter>>>"+productOption);
+
+		//send-btn을 클릭하면 메세지 전송 함수 실행
+		$('.send-btn').on('click', function(){
+			sendMsg();
+		});
+		//startBtn을 클릭하면 체크박스 여부 체크 및 시간 감소
+		$('#startBtn').on('click', function(){
+			if($('#startBtn').text() == '시작하기') {
+				//체크박스 체크여부
+				if($('.checkbox').is(':checked')==false){
+				    alert('확인사항 동의 후 시작하기를 눌러주세요.');
+				}else {
+				    $('.checkbox').attr('disabled',true);
+				    const counselNo = $('#counselNo').val();
+				    let startTime = getTime2();
+				    if(${c.startTime} == null ) {
+					    $.ajax({//null값인 StartTime 칼럼에 시작버튼을 누른 시점 시간을 update해주고 interval로 시간 체크
+					    	url : "updateStartTime.do",
+					    	data : {startTime:startTime, counselNo:counselNo}, 
+					    	success : function(data) {
+					    		socketSend();
+					    		//두번째 인터벌 넣었던 자리(오답)
+							},
+							error : function() {
+								alert('잘못된 접근입니다.');
+								$('#startBtn').attr('disabled',true);
+							}
+				   		});
+					}else {
+						socketSend();
+					}
+				    //처음 인터벌 넣은 자리(오답)
+				}
+			}else if($('#startBtn').text() == '후기작성') {
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/reviewFrm.do?payNo=${pay.payNo}';
+			}else if($('#startBtn').text() == '마이페이지') { 
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/Myproduct.do?memberNo=${m.memberNo}';
+			}else {
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/';
+			}
+		});	
 		
-			
+		//문자로 표기된 시간을 숫자 초단위로 바꾸는 함수	
 		function productOptionCount(param){
 		    const paramSplit = param.split('');
 		    console.log(param);
@@ -235,83 +281,35 @@
 		    return rehour+remin+resec;
 		}
 		
-		//시간 계산 중
-		//현재시간
-   		const present = getTime2();
-		let rePresent = productOptionCount(present);
-		console.log("startTime2>>>>"+rePresent);
-	
-	    //상담시작시간
-		let counselStartTime = ${c.startTime};
-		console.log(counselStartTime);
-		console.log(typeof(counselStartTime));
-		const reStartTime = productOptionCount(counselStartTime.toString());
-		console.log("reStartTime >>>"+reStartTime);
+		//현재시간과 상담시작시간을 구해서 그 차이와 상품 옵션 시간을 비교
+		function productOptionCompare() {
+			//현재시간
+	   		const present = getTime2();
+			let rePresent = productOptionCount(present);
+			console.log("rePresent>>>>"+rePresent);
 		
-		//현재-시작시간
-		let finalTime = rePresent-reStartTime;
-		console.log("finalTime>>>>"+finalTime)
-		
-		//옵션보다 현재-시간이 더 크면 상담종료 
-	    if(productOption < finalTime){
-	    	console.log("분으로 바꾸면>>>"+(productOption-finalTime)/60);
-	    	console.log('testtttt');
-	    }
-		
-		
-		//send-btn을 클릭하면 메세지 전송 함수 실행
-		$('.send-btn').on('click', function(){
-			sendMsg();
-		});
-		//startBtn을 클릭하면 체크박스 여부 체크 및 시간 감소
-		$('#startBtn').on('click', function(){
-			if($('#startBtn').text() == '시작하기') {
-				//체크박스 체크여부
-				if($('.checkbox').is(':checked')==false){
-				    alert('확인사항 동의 후 시작하기를 눌러주세요.');
-				}else {
-				    $('.checkbox').attr('disabled',true);
-				    const counselNo = $('#counselNo').val();
-				    
-				    
-				    $.ajax({//null값인 StartTime 칼럼에 시작버튼을 누른 시점 시간을 update해주고 interval로 시간 체크
-				    	url : "updateStartTime.do",
-				    	data : {startTime:startTime, counselNo:counselNo}, 
-				    	success : function(data) {
-				    		socketSend();
-				    		//두번째 인터벌 넣었던 자리
-				    		//appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
-						    //$('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
-							//intervalId = window.setInterval(function(){
-								//timeCount();
-							//},10);
-						},
-						error : function() {
-							alert('잘못된 접근입니다.');
-						}
-				    });
-				    //처음 인터벌 넣은 자리
-				    //appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
-				    //$('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
-					//intervalId = window.setInterval(function(){
-						//timeCount();
-					//},10);
-					//${p.productOption } //1000 
-				}
-			}else if($('#startBtn').text() == '후기작성') {
-				$('.checkbox').attr('checked', 'checked');
-				$('.checkbox').attr('disabled',true);
-				location.href='/reviewFrm.do?payNo=${pay.payNo}';
-			}else if($('#startBtn').text() == '마이페이지') { 
-				$('.checkbox').attr('checked', 'checked');
-				$('.checkbox').attr('disabled',true);
-				location.href='/Myproduct.do?memberNo=${m.memberNo}';
-			}else {
-				$('.checkbox').attr('checked', 'checked');
-				$('.checkbox').attr('disabled',true);
-				location.href='/';
-			}
-		});	
+		    //상담시작시간
+			let counselStartTime = ${c.startTime};
+			console.log(counselStartTime);
+			console.log(typeof(counselStartTime));
+			const reStartTime = productOptionCount(counselStartTime.toString());
+			console.log("reStartTime>>>>"+reStartTime);
+			
+			//현재-시작시간
+			let finalTime = rePresent-reStartTime;
+			console.log("finalTime>>>>"+finalTime)
+			
+			//옵션보다 현재-시간이 더 크면 상담종료 
+		    if(productOption < finalTime){
+		    	console.log("분으로 바꾸면>>>"+(productOption-finalTime)/60);
+		    	return 0
+		    }else if (productOption > finalTime) {
+		    	let wait = (productOption-finalTime)/60;
+		    	wait = Math.round(wait);
+		    	console.log("시간이 남았으면>>>"+wait);
+		    	return wait;
+		    }
+		}
 		
 		//시간계산 + 상담이 끝나면
 		function timeCount(){
@@ -336,7 +334,6 @@
 								$('#startBtn').text('홈페이지');
 							}
 							$('#sendMsg').attr("placeholder",'[안내] 상담이 종료되어 입력이 불가합니다. 상담에 문제가 있는 경우 고객센터로 문의해주세요.');
-							$('#file').attr("type","text");
 						},
 						error : function() {
 							console.log('에러');
@@ -534,8 +531,10 @@
 	 		//상담 시작버튼을 누른 경우	
 			}else if(msgData.type === 'countdown') {
 				// 인터벌 시작
+				let productTime = productOptionCompare();
+				console.log("intervalTime>>>>"+productTime);
 				appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
-				$('#timeZone').html("<span id='min'>${p.productOption }</span> : <span id='sec'>00</span>");
+				$('#timeZone').html("<span id='min'>"+productTime+"</span> : <span id='sec'>00</span>");
 				intervalId = window.setInterval(function(){
 				timeCount();
 				},10); //시간초 추후 수정..지금은 테스트라 빠르게

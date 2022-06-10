@@ -549,13 +549,6 @@ textarea.input-form {
 }
 
 /* 커뮤니티 페이지 */
-#comm-content {
-	/*
-	display: flex;
-	flex-flow: row wrap;
-	justify-content: space-around;
-	*/
-}
 
 .do-write-btn {
 	margin-right: 20px;

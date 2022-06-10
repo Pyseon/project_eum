@@ -31,6 +31,7 @@ public class CommunityService {
 		// pageNavi 작성
 		// 전체게시물 수 알야야 페이지수를 알 수 있음 >> db에서 전체 게시물수 조회해오기
 		int totalCount = dao.selectCommunityCount(map); // 전체게시물수 완료
+		
 		// 링크할 uri 정보
 		String uriData = "communityList";
 		// 페이징 처리
@@ -107,6 +108,9 @@ public class CommunityService {
 		dao.commCoUpdate(commCo);
 	}
 	
+	public void pickUpdate(Pick pick) {
+		dao.pickUpdate(pick);
+	}
 	
 //>>>>>>>>>> 삭제
 	public void communityDelete(int commNo) {
@@ -135,6 +139,11 @@ public class CommunityService {
 			dao.commCoDelete(cmntNo);
 		}
 	}
+	
+	public void pickDel(int pickNo) {
+		dao.pickDel(pickNo);
+	}
+
 	
 
 	
@@ -287,6 +296,7 @@ public class CommunityService {
 
 		return pageNavi;
 	}
+
 
 
 

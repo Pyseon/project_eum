@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.sun.javafx.scene.control.skin.IntegerFieldSkin;
 
 import kr.or.eum.community.model.service.CommunityService;
 import kr.or.eum.community.model.vo.Community;
@@ -184,6 +186,19 @@ public class CommunityController {
 	public void commCoUpdate(CommunityCo commCo) {
 		service.commCoUpdate(commCo);
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/pickUpdate.do")
+	public void pickUpdate(Pick pick) {
+		service.pickUpdate(pick);
+	}
+	@ResponseBody
+	@RequestMapping(value = "/pickDel.do")
+	public void pickDel(int pickNo) {
+		service.pickDel(pickNo);
+	}
+	
+	
 	
 	
 //>>>>>>>>>>삭제

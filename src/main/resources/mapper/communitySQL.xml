@@ -24,12 +24,12 @@
 		where comm_category = #{category}
 		</if>
 		order by comm.comm_no desc) c)
-		where rnum between #{start} and #{end}
+		where (rnum between #{start} and #{end}) and memberNo is not null
 	</select> 
 	<select id="selectTotalCount" resultType="int" parameterType="map">
-		select count(*) from community_tbl
+		select count(*) from community_tbl where (member_no is not null)
 		<if test="category != 2">
-		where comm_category = #{category}
+		and comm_category = #{category}
 		</if>
 	</select>
 	
@@ -63,9 +63,9 @@
 	select
 			co.CMNT_NO as cmntNo,
 			co.MEMBER_NO as memberNo,
-			(select member_nick from member_tbl m where co.member_no = m.member_no) as memberNick, --멤버닉
+			nvl((select member_nick from member_tbl m where co.member_no = m.member_no), '탈퇴한회원') as memberNick, --멤버닉
 			(select grade from member_tbl m where co.member_no = m.member_no) as memberGrade, --멤버등급
-			(select member_picturepath from member_tbl m where co.member_no = m.member_no) as memberPicturepath, --멤버프로필사진
+			nvl((select member_picturepath from member_tbl m where co.member_no = m.member_no),'delmember.jpg') as memberPicturepath, --멤버프로필사진
 			co.CMNT_CONTENT as cmntContent,
 			co.CMNT_DATE as cmntDate,
 			co.COMM_NO as commNo,
@@ -92,7 +92,7 @@
 		    p.comm_no as commNo,
 		    (select count(*) from picklike_tbl pl where p.pick_no = pl.pick_no) as pickLike
 		from pick_tbl p
-		where p.comm_no = ${value}
+		where p.comm_no = ${value} order by p.pick_no
 	</select> 
 
 	<insert id="communityWrite" parameterType="comm">
@@ -162,9 +162,9 @@
 		select
 			co.CMNT_NO as cmntNo,
 			co.MEMBER_NO as memberNo,
-			(select member_nick from member_tbl m where co.member_no = m.member_no) as memberNick, --멤버닉
+			nvl((select member_nick from member_tbl m where co.member_no = m.member_no), '탈퇴한회원') as memberNick, --멤버닉
 			(select grade from member_tbl m where co.member_no = m.member_no) as memberGrade, --멤버등급
-			(select member_picturepath from member_tbl m where co.member_no = m.member_no) as memberPicturepath, --멤버프로필사진
+			nvl((select NVL(member_picturepath, 'delmember.jpg') from member_tbl m where co.member_no = m.member_no),'delmember.jpg') as memberPicturepath, --멤버프로필사진
 			co.CMNT_CONTENT as cmntContent,
 			co.CMNT_DATE as cmntDate,
 			co.COMM_NO as commNo,
@@ -204,6 +204,16 @@
 		)
 	</insert>
 	
+	<update id="pickUpdate" parameterType="pick">
+		update pick_tbl set
+			pick_content = #{pickContent}
+		where pick_no = #{pickNo}
+	</update>
+	
+	<delete id="pickDel" parameterType="int">
+		delete from pick_tbl 
+			where pick_no = ${value}
+	</delete>
 	
 </mapper>
 

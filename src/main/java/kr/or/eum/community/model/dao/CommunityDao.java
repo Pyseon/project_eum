@@ -85,6 +85,14 @@ public class CommunityDao {
 		sqlSession.insert("community.pickWrite", pick);
 	}
 
+	public void pickUpdate(Pick pick) {
+		sqlSession.update("community.pickUpdate", pick);
+	}
+
+	public void pickDel(int pickNo) {
+		sqlSession.delete("community.pickDel", pickNo);
+	}
+
 
 
 }

@@ -74,7 +74,7 @@
 								</div>
 								<span class="card-user-name">${com.memberNick }</span>
 							<c:if test="${com.memberGrade eq 1}">
-								<span class="material-icons" id="verified-icon">verified</span>
+								<span class="material-icons" id="verified-icon-list">verified</span>
 							</c:if>
 							</div>
 							<div class="card-readcount">

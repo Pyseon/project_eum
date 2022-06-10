@@ -456,7 +456,7 @@
 						<div class="info">
 							<div class="info-one">
 								<span class="nickname">\${item.memberNick}</span>
-									<div class=\"review-btn-2 \${item.memberNo != memberNo ? 'hide' : ''}\">
+									<div class="review-btn-2">
 										\${item.memberNo != memberNo 
 											? '<br>' 
 											: `<a href="/modifyReviewFrm.do?reviewNo=\${item.reviewNo}">수정</a> <a href="#" onclick="deletereview(\${item.reviewNo})">삭제</a> <br>`

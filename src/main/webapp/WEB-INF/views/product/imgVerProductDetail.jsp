@@ -17,7 +17,7 @@
 			<div class="row">
 				<div class="col-lg-8 posts-list">
 					<div class="detail-wrap">
-						<img id="mainImg" src="img/product/mainImg/${p.productImgPath }">
+						<img id="mainImg" src="/img/product/ClassList/${p.productImgPath }">
 					</div>
 					<div class="left-product-detail">
 						<div class="detail-1">

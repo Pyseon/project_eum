@@ -29,7 +29,7 @@
 					상품 후기
 				</c:when>
 				<c:when test="${category == 2 }">
-					개설 요청
+					<jsp:include page="/communityDetail.do?commNo=${rpt.reportIndex }&category=${commCategory }"></jsp:include>
 				</c:when>
 				<c:when test="${category == 3 }">
 					커뮤니티
@@ -84,6 +84,12 @@
 	<script>
 		$(".header-div").css("display","none");
 		$(".footer-div").css("display","none");
+		$(".report-wrap").css("display","none");
+		$(".right-second-box").css("display", "none");
+		$(".right-third-box").css("display", "none");
+		$(".right-fourth-box").css("display", "none");
+		$(".single-sidebar-widget").css("display", "none");
+		$(".wish-title-wrap").css("display", "none");
 		$("#purchaseBtn").css("display", "none");
 	</script>
 </body>

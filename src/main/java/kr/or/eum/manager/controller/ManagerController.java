@@ -93,6 +93,27 @@ public class ManagerController {
 			AnswerReport ansrpt = service.selectAnsrpt(reportNo);
 			model.addAttribute("ansrpt", ansrpt);
 		}
+		
+		switch(categoryNo) {
+		case 0:
+			break;
+		case 1:
+			HashMap<String, Object> reportReview = service.selectProductReview(reportIndex);
+			model.addAttribute("reviewTitle", reportReview.get("reviewTitle"));
+			model.addAttribute("reviewContent", reportReview.get("reviewContent"));
+			break;
+		case 2:
+			break;
+		case 3:
+			int categoryNum = service.selectCommCategoryNum(reportIndex);
+			model.addAttribute("commCategory", categoryNum);
+			break;
+		case 4:
+			String cmntContent = service.selectCmntContent(reportIndex);
+			model.addAttribute("cmntContent", cmntContent);
+			break;
+		}
+		
 		model.addAttribute("rpt", report);
 		model.addAttribute("category", categoryNo);
 		return "manager/detailReport";

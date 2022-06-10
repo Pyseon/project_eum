@@ -20,6 +20,7 @@ import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
+import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
 
@@ -339,6 +340,21 @@ public class ManagerDao {
 	public int updateAnsResult(HashMap<String, Object> map) {
 		int result = sqlSession.update("manager.updateAnsResult", map);
 		return result;
+	}
+
+	public int selectCommCategoryNum(int reportIndex) {
+		int result = sqlSession.selectOne("manager.selectCommCategoryNum", reportIndex);
+		return result;
+	}
+
+	public Review selectProductReview(int reportIndex) {
+		Review productReview = sqlSession.selectOne("manager.selectProductReview", reportIndex);
+		return productReview;
+	}
+
+	public String selectCmntContent(int reportIndex) {
+		String cmntContent = sqlSession.selectOne("manager.selectcmntContent", reportIndex);
+		return cmntContent;
 	}
 	
 }

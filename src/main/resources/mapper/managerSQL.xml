@@ -199,7 +199,9 @@
 	</select>
 	
 	<select id="reportList" parameterType="map" resultType="rpt">
-		select
+		select * from
+		(select rownum as rnum, rpt.* from
+		(select
 		report_no as reportNo,
 		defendant,
 		(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
@@ -224,6 +226,8 @@
 				where report_is= 0 or report_is=1 or report_is=2
 			</otherwise>
 		</choose>
+		order by report_no desc) rpt)
+		where rnum between #{start} and #{end}
 	</select>
 	
 	<select id="reportCount" resultType="int">
@@ -251,6 +255,8 @@
         		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
 			</when>
 		</choose>
+		order by report_no desc) rpt)
+		where rnum between #{start} and #{end}
 	</select>
 	
 	<select id="searchReportCount" parameterType="map" resultType="int">

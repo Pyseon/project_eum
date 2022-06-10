@@ -42,8 +42,8 @@ public class CommunityDao {
 		return  (ArrayList<CommunityCo>) cmntList;
 	}
 
-	public ArrayList<Pick> selectPickList(int commNo) {
-		List pickList = sqlSession.selectList("community.selectPickList", commNo);
+	public ArrayList<Pick> selectPickList(HashMap<String, Object> map) {
+		List pickList = sqlSession.selectList("community.selectPickList", map);
 		return  (ArrayList<Pick>) pickList;
 	}
 	
@@ -108,6 +108,18 @@ public class CommunityDao {
 
 	public int selectLike(int commNo) {
 		return sqlSession.selectOne("community.selectLike", commNo);
+	}
+
+	public int pickLikeUp(HashMap<String, Object> map) {
+		return sqlSession.insert("community.pickLikeUp", map);
+	}
+
+	public int pickLikeDown(HashMap<String, Object> map) {
+		return sqlSession.delete("community.pickLikeDown", map);
+	}
+
+	public int pickLikeCount(int pickNo) {
+		return sqlSession.selectOne("community.pickLikeCount", pickNo);
 	}
 
 

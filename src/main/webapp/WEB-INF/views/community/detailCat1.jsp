@@ -152,17 +152,15 @@
 }
 
 .haja-like>i {
-	color: orangered;
 	font-size: 20px;
+	color: #a8a8a8;
+}
+.pickUp>i{
+	color: orangered;
 }
 
 .haja-like>span {
 	vertical-align: top;
-}
-
-* {
-	/* box-sizing: border-box; */
-	
 }
 
 .button-label {
@@ -293,8 +291,6 @@
 		</div>
 		<!--article-content-wrap end-->
 
-
-
 		<div class="attr-wrap">
 			<div class="pick-box">
 				<c:forEach items="${pickList }" var="p">
@@ -327,9 +323,20 @@
 									</span>
 									<div class="speech-bubble">${p.pickContent }</div>
 									<div class="haja-date-like">
-										<button class="haja-like">
-											<i class="material-icons">recommend</i> <span>${p.pickLike }</span>
-										</button>
+										<input type="hidden" value="${p.pickNo }">
+										<c:choose>
+											<c:when test="${p.pickLikeMemberCheck eq 0 }">
+												<button class="haja-like">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="haja-like pickUp">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:otherwise>
+										</c:choose>
+
 									</div>
 								</div>
 								<div class="pick-date">${p.pickDate }</div>
@@ -350,9 +357,19 @@
 									</span>
 									<div class="speech-bubble2">${p.pickContent }</div>
 									<div class="malja-date-like">
-										<button class="haja-like">
-											<i class="material-icons">recommend</i> <span>${p.pickLike }</span>
-										</button>
+									<input type="hidden" value="${p.pickNo }">
+												<c:choose>
+											<c:when test="${p.pickLikeMemberCheck eq 0 }">
+												<button class="haja-like">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="haja-like pickUp">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 
@@ -374,14 +391,8 @@
 						</div>
 					</c:if>
 				</c:forEach>
-
-			
-
-
-
 			</div>
 			<!--pick box end-->
-			
 		</div>
 		<!-- attr-wrap end-->
 		<c:if test="${sessionScope.member ne null }">
@@ -407,11 +418,6 @@
 	</div>
 	<!--container end-->
 
-
-
-
-
-
 	<!-- modal start -->
 	<div id="del-modal" class="modal-bg">
 		<div class="modal-wrap" style="margin-top: 300px;">
@@ -430,8 +436,6 @@
 	</div>
 
 	<!-- modal end -->
-	
-	
 	
 		<!-- pick update modal start -->
 	<div id="update-modal" class="modal-bg">
@@ -454,30 +458,21 @@
 	<!-- modal end -->
 	
 	
-	
-	
-	
-	
 
-	<script>
+<script>
 
 $(function(){
+	let likeNum = -1;
 	//좋아요(wish)
-	$('.icon-wish').on("click", function() {
-		console.log("클릭!");
+	$(document).on("click",'.haja-like', function() {
+		var pickNo = $(this).prev().val();
 		var memberNo = $("#memberNo").val();
-		var commNo = $("#commNo").val();
 		var currentValue = $(this).attr("class");
-		console.log(currentValue);
 		 if(memberNo > 0){
-	         if(currentValue == "fa-regular fa-heart icon-wish" && memberNo != 0) {
-	         	$(this).addClass("fa-solid");
-	         	console.log("참!");
-	         	like(memberNo, commNo);
+	         if(currentValue == "haja-like" && memberNo != 0) {
+	        	picklikeUp(memberNo, pickNo);
 	         }else {
-	        	 $(this).removeClass("fa-solid");
-	        	 console.log("리무브!");
-	           	 unLike(memberNo, commNo);
+	        	picklikeDown(memberNo, pickNo);
 	         }
 	 	}else{
 			var title = '로그인 후 이용해주세요.';
@@ -485,20 +480,19 @@ $(function(){
 	 		toastShow(title, icon);
 	 	}
 		 
-		 
 	});
 	
 	//좋아요(wish) insert
-	function like(memberNo, commNo) {
+	function picklikeUp(memberNo, pickNo) {
 		$.ajax({
-				url : "/insertLike.do",
+				url : "/pickLikeUp.do",
 				data : {
-					commNo : commNo,
+					pickNo : pickNo,
 					memberNo : memberNo
 				},
+				async: false,
 				success : function(data) {
-					$("#commLikeNum").text(data);
-					console.log('좋아요!');
+					$(".attr-wrap").load(location.href + " .attr-wrap");
 				},
 				error : function() {
 					console.log('에러');
@@ -507,16 +501,16 @@ $(function(){
 	};
 	
 	//좋아요(wish) delete
-	function unLike(memberNo, commNo) {
+	function picklikeDown(memberNo, pickNo) {
 			$.ajax({
-				url : "/deleteLike.do",
+				url : "/pickLikeDown.do",
 				data : {
-					commNo : commNo,
+					pickNo : pickNo,
 					memberNo : memberNo
 				},
+				async: false,
 				success : function(data) {
-					$("#commLikeNum").text(data);
-					console.log('관심없어요!');
+					$(".attr-wrap").load(location.href + " .attr-wrap");
 				},
 				error : function() {
 					console.log('에러');
@@ -555,7 +549,6 @@ $(function(){
 		})
 			
 	});
-	
 	
 	
 	//픽 수정하기
@@ -650,10 +643,6 @@ $(function(){
 	});
 	
 	
-	
-	
-	
-	
 	//글자수세기 댓글 입력!! 창 함수
 	$(document).on("keyup","#comment-textarea",function(){
 		 var comment = $("#comment-textarea").val();
@@ -679,15 +668,6 @@ $(function(){
 		$("#UpdateComment-num").text(UpdateComment.length);
 	});
 	
-
-	
-	
-	
-	
-	
-	
-
-	
 	
 }); //문서로딩 후 함수
 
@@ -695,19 +675,6 @@ $(function(){
 function replyFrm(replyLev, replyParentNo, replyNo, replyNick, thisReply){
 	$(".comment-cancel-btn").parent().parent().prev().show();
 	$(".comment-cancel-btn").parent().parent().remove();
-	
-
-	console.log("===============================");
-	console.log(replyLev);
-	console.log(replyParentNo);
-	console.log(replyNo);
-	console.log(replyNick);
-	console.log("this");
-	
-	console.log("===============================");
-	
-	
-	
 	var writeHtml = "";
 	writeHtml += '<div class="comment-write" style="margin-left:60px;")">';
 	writeHtml += '<div class="comment-write-head">';
@@ -728,12 +695,6 @@ function replyFrm(replyLev, replyParentNo, replyNo, replyNick, thisReply){
 }
 
 
-
-
-	
-	
-
-		
 function resize(obj) {
     obj.style.height = '1px';
     obj.style.height = (12 + obj.scrollHeight) + 'px';
@@ -773,11 +734,6 @@ function resizeUpdatearea(obj) {
 }
 
 
-
-
-
-
-
 //textarea 엔터시 <br>로 바꿔주고 히든 input 에 저장하는 함수
 function convertbr(){
    var str = document.getElementById("comment-textarea").value;
@@ -792,8 +748,6 @@ function returnBr(){
 	console.log(textBr);
 	return textBr;
 }
-
-
 
 
 //토스트 알림 함수		
@@ -815,8 +769,6 @@ function toastShow(title, icon){
   		  })
   		
   		}//토스트 알림 함수 끝		
-
-
 
 	
 </script>

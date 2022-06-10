@@ -60,7 +60,6 @@ public class CommunityController {
 			CommunityDetailData cdd = service.communityDetail1(commNo, member);
 			model.addAttribute("comm", cdd.getComm());
 			model.addAttribute("pickList", cdd.getPickList());
-			model.addAttribute("likeMemberCheck", cdd.getLikeMemberCheck());
 			return "community/detailCat1";
 		}
 	}
@@ -241,6 +240,25 @@ public class CommunityController {
 				return new Gson().toJson(afterLikeCount);
 			}
 		
+			@ResponseBody
+			@RequestMapping(value = "/pickLikeUp.do", produces = "application/json;charset=utf-8")
+			public String pickLikeUp(int pickNo, int memberNo) {
+				int result = service.pickLikeUp(pickNo, memberNo);
+				int pickLikeCount = service.pickLikeCount(pickNo);
+				return new Gson().toJson(pickLikeCount);
+				
+			}
+			
+			@ResponseBody
+			@RequestMapping(value = "/pickLikeDown.do", produces = "application/json;charset=utf-8")
+			public String pickLikeDown(int pickNo, int memberNo) {
+				int result = service.pickLikeDown(pickNo, memberNo);
+				int pickLikeCount = service.pickLikeCount(pickNo);
+				return new Gson().toJson(pickLikeCount);
+			}
+		
+			
+			
 			
 	
 	

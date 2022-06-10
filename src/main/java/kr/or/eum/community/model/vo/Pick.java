@@ -18,5 +18,6 @@ public class Pick {
 	private String pickDate;
 	private int commNo;
 	private int pickLike;
+	private int pickLikeMemberCheck;
 	
 }

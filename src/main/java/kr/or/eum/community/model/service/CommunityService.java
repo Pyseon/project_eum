@@ -67,7 +67,7 @@ public class CommunityService {
 		return cdd;
 	}
 	
-	
+//게시글 좋아요
 	public int insertLike(int commNo, int memberNo) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("commNo", commNo);
@@ -84,12 +84,28 @@ public class CommunityService {
 	public int afterLikeCount(int commNo) {
 		return dao.selectLike(commNo);
 	}
+
+//픽 댓글 좋아요
+	public int pickLikeUp(int pickNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pickNo", pickNo);
+		map.put("memberNo", memberNo);
+		return dao.pickLikeUp(map);
+	}
+	public int pickLikeDown(int pickNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pickNo", pickNo);
+		map.put("memberNo", memberNo);
+		return dao.pickLikeDown(map);
+	}
+	public int pickLikeCount(int pickNo) {
+		return dao.pickLikeCount(pickNo);
+	}
 	
 	//1번 카테고리 커뮤니티글내용 + 픽 리스트
 	public CommunityDetailData communityDetail1(int commNo, Member member) {
 		Community comm = dao.communityDetail(commNo);
 		// 댓글 불러옴 (대댓글 포함)
-		ArrayList<Pick> pickList = dao.selectPickList(commNo);
 		if (comm != null) {
 			dao.readCountUp(commNo);
 		}
@@ -100,11 +116,11 @@ public class CommunityService {
 		}else {
 			map.put("memberNo", 0);
 		}
-		int likeMemberCheck = dao.likeMemberCheck(map);
+		
+		ArrayList<Pick> pickList = dao.selectPickList(map);
 		CommunityDetailData cdd = new CommunityDetailData();
 		cdd.setComm(comm);
 		cdd.setPickList(pickList);
-		cdd.setLikeMemberCheck(likeMemberCheck);
 		return cdd;
 	}
 	
@@ -332,8 +348,6 @@ public class CommunityService {
 
 		return pageNavi;
 	}
-
-
 
 
 

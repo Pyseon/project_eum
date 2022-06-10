@@ -82,7 +82,7 @@ public class MemberDao {
 		int result = sqlSession.update("member.DeleteMyproduct");
 		return result;
 	}
-	
+	/* 주석처리함
 	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
 		
 		System.out.println(productNo+"dao");
@@ -90,6 +90,7 @@ public class MemberDao {
 		
 		return (ArrayList<ProductAndExpertDetail>)list;
 	}
+	*/
 
 	//윤지
 	public Expert selectOneExpertOnly2(int payNo) {

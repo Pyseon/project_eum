@@ -255,10 +255,21 @@
 						</div>
 					</div>
 					<div class="article-info-box">
-						<span class="article-info"> <i class="fa-regular fa-heart"></i>
-							<i class="fa-solid fa-heart"></i> <span>좋아요</span> <strong
-							class="num">${comm.commLike }</strong>
-						</span> <span class="article-info"> <i
+						<span class="article-info"> 
+<!-- 좋아요 -->						
+						<c:choose>
+							<c:when test="${likeMemberCheck eq 0 }">
+								<i class="fa-regular fa-heart icon-wish"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="fa-regular fa-heart icon-wish fa-solid"></i>
+							</c:otherwise>
+						</c:choose>
+							<span>좋아요</span>
+							<strong class="num" id="commLikeNum">${comm.commLike }</strong>
+						</span>
+<!-- 좋아요 -->	
+						<span class="article-info"> <i
 							class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
 							id="cmnt-total2" class="num">${comm.cmntCount }</strong>
 						</span>
@@ -451,6 +462,68 @@
 	<script>
 
 $(function(){
+	//좋아요(wish)
+	$('.icon-wish').on("click", function() {
+		console.log("클릭!");
+		var memberNo = $("#memberNo").val();
+		var commNo = $("#commNo").val();
+		var currentValue = $(this).attr("class");
+		console.log(currentValue);
+		 if(memberNo > 0){
+	         if(currentValue == "fa-regular fa-heart icon-wish" && memberNo != 0) {
+	         	$(this).addClass("fa-solid");
+	         	console.log("참!");
+	         	like(memberNo, commNo);
+	         }else {
+	        	 $(this).removeClass("fa-solid");
+	        	 console.log("리무브!");
+	           	 unLike(memberNo, commNo);
+	         }
+	 	}else{
+			var title = '로그인 후 이용해주세요.';
+			var icon = 'info';
+	 		toastShow(title, icon);
+	 	}
+		 
+		 
+	});
+	
+	//좋아요(wish) insert
+	function like(memberNo, commNo) {
+		$.ajax({
+				url : "/insertLike.do",
+				data : {
+					commNo : commNo,
+					memberNo : memberNo
+				},
+				success : function(data) {
+					$("#commLikeNum").text(data);
+					console.log('좋아요!');
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+	
+	//좋아요(wish) delete
+	function unLike(memberNo, commNo) {
+			$.ajax({
+				url : "/deleteLike.do",
+				data : {
+					commNo : commNo,
+					memberNo : memberNo
+				},
+				success : function(data) {
+					$("#commLikeNum").text(data);
+					console.log('관심없어요!');
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+	
 	$(document).on("click","#yes-button",function(){
 		$("#pickCategory").val(0);
 	});

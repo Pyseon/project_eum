@@ -93,6 +93,23 @@ public class CommunityDao {
 		sqlSession.delete("community.pickDel", pickNo);
 	}
 
+	public int likeMemberCheck(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("community.likeMemberCheck", map);
+		return result;
+	}
+
+	public int insertLike(HashMap<String, Object> map) {
+		return sqlSession.insert("community.insertLike", map);
+	}
+
+	public int deleteLike(HashMap<String, Object> map) {
+		return sqlSession.delete("community.deleteLike", map);
+	}
+
+	public int selectLike(int commNo) {
+		return sqlSession.selectOne("community.selectLike", commNo);
+	}
+
 
 
 }

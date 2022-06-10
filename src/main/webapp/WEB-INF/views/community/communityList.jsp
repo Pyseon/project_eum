@@ -59,8 +59,13 @@
 										class="noto-sb mb-1 fs-bold">${com.commLike }</span>
 								</div>
 								<div class="card-comment">
-									<i class="fa-solid fa-message"></i> <span
-										class="noto-sb mb-1 fs-bold">${com.cmntCount }</span>
+									<i class="fa-solid fa-message"></i> 
+									<c:if test="${com.commCategory eq 0}">
+									<span class="noto-sb mb-1 fs-bold">${com.cmntCount }</span>
+									</c:if>
+									<c:if test="${com.commCategory eq 1}">
+									<span class="noto-sb mb-1 fs-bold">${com.pickCount }</span>
+									</c:if>
 								</div>
 							</div>
 						</div>

@@ -52,7 +52,7 @@
 					</div>
 					<div class="article-info-box">
 						<span class="article-info"> 
-						<a href="#"><i class="fa-regular fa-heart"></i></a>
+						<a href="/doLike?commNo=${comm.commNo }" onclick><i class="fa-regular fa-heart"></i></a>
 							 <span>좋아요</span> 
 							 <strong
 							class="num">${comm.commLike }</strong>

@@ -74,6 +74,7 @@ public class ChatHandler extends TextWebSocketHandler {
 		String counselNo = element.getAsJsonObject().get("counselNo").getAsString();
 		String time = element.getAsJsonObject().get("time").getAsString();
 		String counselStart = element.getAsJsonObject().get("counselStart").getAsString();
+		String check = element.getAsJsonObject().get("check").getAsString();
 		
 		// 상담이 없을 때
 		if(!sessionMap.containsKey(counselNo)) {
@@ -104,7 +105,7 @@ public class ChatHandler extends TextWebSocketHandler {
 			//System.out.println("readResult : "+readResult);
 			
 		//채팅메세지를 입력한 경우
-		}else if(type.equals("chat")) {//if문으로 이미지 있다 없다, 읽음 표시도 
+		}else if(type.equals("chat")) {//if문으로 이미지 있다 없다, 읽음 표시도 - 이미지는 파이널에서 구현X 나중에...혼자..
 			//제이슨으로 넘기기
 			int result = productService.insertChat(msg, memberNo,counselNo); 
 			ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo); 
@@ -131,6 +132,8 @@ public class ChatHandler extends TextWebSocketHandler {
 				//상대방에게 전송까지 하는 건 접속여부 (읽음 여부)에 따라....또한 나도 읽었다는 걸 내 자신이 알아야 함
 				s.sendMessage(tm); 
 			}//for문
+		
+		//시작버튼을 누른 경우
 		}else if(type.equals("countdown")) {
 			ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo); 
 			for(WebSocketSession s : sessionList) {
@@ -139,6 +142,17 @@ public class ChatHandler extends TextWebSocketHandler {
 				msgData.put("counselStart", counselStart); 
 				TextMessage tm = makeTextMessage(msgData);
 				s.sendMessage(tm); 
+			}
+		}else if(type.equals("confirm")) {
+			ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo); 
+			for(WebSocketSession s : sessionList) {
+				if(!s.equals(session)) {
+					Map<String, Object> msgData = new HashMap<String, Object>();
+					msgData.put("type", "confirm");
+					msgData.put("check", check);
+					TextMessage tm = makeTextMessage(msgData);
+					s.sendMessage(tm);
+				}
 			}
 		}
 	}//handleTextMessage

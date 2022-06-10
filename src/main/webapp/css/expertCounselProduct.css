@@ -186,6 +186,7 @@ hr{
 	list-style-type:none;
 	padding: 0px;
 	margin: 0px;
+	height: 110px;
 }
 .check-list-content>ul> li{
 	margin: 10px;

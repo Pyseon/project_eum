@@ -264,4 +264,13 @@
  		count(*)
 	from member_tbl where member_id = #{memberId}	
  	</select>
+ 	<!-- 대권 -->
+ 	<select id="searchPhone" resultType="int">
+	select
+ 		count(*)
+	from member_tbl where member_phone = #{memberPhone}	
+ 	</select>
+ 	<update id="updatePw" parameterType="member">
+ 		update member_tbl set member_pw=#{memberPw} where member_id=#{memberId}
+ 	</update>
 </mapper>

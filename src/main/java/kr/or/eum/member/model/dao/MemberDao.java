@@ -101,6 +101,8 @@ public class MemberDao {
 	}
 	public int insertMember(Member m) {
 		int result = sqlSession.insert("member.insertMember",m);
+		System.out.println(m);
+		System.out.println(result);
 		return result;
 		
 	}
@@ -129,7 +131,20 @@ public class MemberDao {
 	public int searchId(String memberId) {
 		// TODO Auto-generated method stub
 		int result = sqlSession.selectOne("member.searchId",memberId);
-		System.out.println("dao:"+ result);
+		System.out.println("이메일dao:"+ result);
+		return result;
+	}
+	public int searchPhone(String memberPhone) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.selectOne("member.searchPhone",memberPhone);
+		System.out.println("연락처dao:"+ result);
+		return result;
+	}
+	
+	public int updatePw(Member m) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.update("member.updatePw", m);
+		System.out.println("비밀번호dao:"+ result);
 		return result;
 	}
 

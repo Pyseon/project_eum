@@ -107,8 +107,9 @@ public class MemberService {
 
 
 	public int insertMember(Member m) {
-		dao.insertMember(m);
-		return dao.insertMember(m);
+		int result = dao.insertMember(m);
+		System.out.println(m);
+		return result;
 	}
 
 	public int search(String memberNick) {
@@ -132,6 +133,21 @@ public class MemberService {
 	public int searchId(String memberId) {
 		// TODO Auto-generated method stub
 		return dao.searchId(memberId);
+	}
+
+	public int searchPhone(String memberPhone) {
+		// TODO Auto-generated method stub
+		return dao.searchPhone(memberPhone);
+	}
+
+	public int updatePw(int memberPw, String memberId, Member m) {
+		// TODO Auto-generated method stub
+		m.setMemberId(memberId);
+		m.setMemberPw(Integer.toString(memberPw));
+		System.out.println("이메일 : "+memberId);
+        System.out.println("임시비밀번호 : "+memberPw);
+        System.out.println("Member : "+ m);
+		return dao.updatePw(m);
 	}
 
 

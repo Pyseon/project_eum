@@ -340,7 +340,7 @@ public class MemberController {
         String content = 
                 "eum을 방문해주셔서 감사합니다." +
                 "<br><br>" + 
-                "인증 번호는 <span style='color:#3865f2;'> " + checkNum + "<span>입니다." + 
+                "인증 번호는 <span style='color:#3865f2;'> " + checkNum + "</span>입니다." + 
                 "<br>" + 
                 "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
         try {            
@@ -365,7 +365,7 @@ public class MemberController {
 	public String memberNick(String memberNick , Model model) {
     	System.out.println(memberNick);
 		int result = service.search(memberNick);
-		System.out.println("컨트롤러:"+ result);
+		System.out.println("닉네임컨트롤러:"+ result);
 		String str="";
 		if(result == 1) {
 			str="1";
@@ -376,13 +376,13 @@ public class MemberController {
 		}
 		
 	}
-  //이메일 유효성검사
+    //이메일 유효성검사
     @ResponseBody
 	@RequestMapping(value="/emailCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
 	public String memberId(String memberId , Model model) {
     	System.out.println(memberId);
 		int result = service.searchId(memberId);
-		System.out.println("컨트롤러:"+ result);
+		System.out.println("이메일컨트롤러:"+ result);
 		String str="";
 		if(result == 1) {
 			str="1";
@@ -393,4 +393,65 @@ public class MemberController {
 		}
 		
 	}
+    //연락처 유효성검사
+    @ResponseBody
+	@RequestMapping(value="/phoneCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
+	public String memberPhone(String memberPhone , Model model) {
+    	System.out.println(memberPhone);
+		int result = service.searchPhone(memberPhone);
+		System.out.println("연락처컨트롤러:"+ result);
+		String str="";
+		if(result == 1) {
+			str="1";
+			return str;
+		}else {
+			str="0";
+			return str;
+		}
+		
+	}
+	//대권 메일 임시 비밀번호
+    @RequestMapping(value="/pwCheck.do", method=RequestMethod.POST)
+    @ResponseBody
+    public String ramdomPwGET(String memberId, Member m) throws Exception{
+
+        Random random = new Random();
+        int memberPw = random.nextInt(888888) + 111111;
+        
+        String setFrom = "khoven@gmail.com";
+        String toMail = memberId;
+        String title = "eum 임시 비밀번호 발송 이메일 입니다.";
+        String content = 
+                "eum을 방문해주셔서 감사합니다." +
+                "<br><br>" + 
+                "임시 비밀번호는 는 <span style='color:#3865f2;'> " + memberPw + "</span>입니다." + 
+                "<br>" + 
+                "로그인 후 비밀번호 변경 후 이용해주시기 바랍니다.";
+        try {            
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
+            helper.setFrom(setFrom);
+            helper.setTo(toMail);
+            helper.setSubject(title);
+            helper.setText(content,true);
+            mailSender.send(message);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        
+        String num = Integer.toString(memberPw);
+        System.out.println("이메일 : "+memberId);
+        System.out.println("임시비밀번호 : "+memberPw);
+        System.out.println("Member : "+ m);
+        int result = service.updatePw(memberPw, memberId, m);
+        
+        String str="";
+		if(result == 1) {
+			str="1";
+			return str;
+		}else {
+			str="0";
+			return str;
+		}
+    }
 }

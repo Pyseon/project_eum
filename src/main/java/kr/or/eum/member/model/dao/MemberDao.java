@@ -13,6 +13,7 @@ import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
+import kr.or.eum.product.model.vo.ProductAndExpertDetail;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
@@ -33,7 +34,8 @@ public class MemberDao {
 	//재민 내정보수정
 	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
-		
+		System.out.println("여기서 vo 값 뭐가 null인지 확인");
+		System.out.println(m.toString());
 		int result = sqlSession.update("member.updateMember",m);
 		return result;
 	}
@@ -79,14 +81,16 @@ public class MemberDao {
 	}
 	
 	public int DeleteMyproduct(int payNo) {
-		int result = sqlSession.update("member.DeleteMyproduct");
+		int result = sqlSession.update("member.DeleteMyproduct",payNo);
 		return result;
 	}
 	
-	public ArrayList<Payment> Myproductdetail(int payNo) {
-		List list = sqlSession.selectList("member.Myproductdetail",payNo); 
+	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
 		
-		return (ArrayList<Payment>)list;
+		System.out.println(productNo+"dao");
+		List list = sqlSession.selectList("member.Myproductdetail",productNo); 
+		
+		return (ArrayList<ProductAndExpertDetail>)list;
 	}
 
 	//윤지
@@ -99,12 +103,23 @@ public class MemberDao {
 		ExpertAndMember expertPicture = sqlSession.selectOne("member.selectOneExpertPicture2",payNo);
 		return expertPicture;
 	}
+	public int insertMember(Member m) {
+		int result = sqlSession.insert("member.insertMember",m);
+		return result;
+		
+	}
+	public int search(String memberNick) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.selectOne("member.search",memberNick);
+		System.out.println("dao:"+ result);
+		return result;
+	}
 
 	//윤지
 	public ExpertAndMember selectOneExpert(int reviewNo) {
 		ExpertAndMember expertM = sqlSession.selectOne("member.selectOneExpert",reviewNo);
 		return expertM;
-  }
+	}
   
 	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
 		List list = sqlSession.selectList("member.selectMyproject",memberNo); 
@@ -114,6 +129,35 @@ public class MemberDao {
 		
 		int result = sqlSession.insert("member.insertexpert",ex);
 		return result;
+	}
+  //대권
+	public int searchId(String memberId) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.selectOne("member.searchId",memberId);
+		System.out.println("dao:"+ result);
+		return result;
+  }
+  
+	public ArrayList<ProductAndExpertDetail> selectMyprojectDetail(int productNo) {
+		List list = sqlSession.selectList("member.selectMyprojectDetail",productNo); 
+		
+		return (ArrayList<ProductAndExpertDetail>)list;
+
+	}
+	public int DeleteMywish(int wishNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("member.DeleteMywish",wishNo);
+		return result;
+	}
+	public int deleteMember(int memberNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.delete("member.deleteMember",memberNo);
+		return result;
+	}
+	public ArrayList<Payment> selectMyproductDetail(int payNo) {
+		List list = sqlSession.selectList("member.selectMyproductDetail",payNo); 
+		
+		return (ArrayList<Payment>)list;
 	}
 
 }

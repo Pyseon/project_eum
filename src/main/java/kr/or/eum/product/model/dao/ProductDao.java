@@ -229,12 +229,19 @@ public class ProductDao {
 		int result = sqlSession.update("product.updateReview", review);
 		return result;
 	}
+	//윤지
 	public int deleteReview(int reviewNo) {
 		int result = sqlSession.delete("product.deleteReview", reviewNo);
 		return result;
 	}
+	//윤지
 	public int overlapCheckReview(int payNo) {
 		int result = sqlSession.selectOne("product.overlapCheck", payNo);
+		return result;
+	}
+	//윤지
+	public int updateStartTime(HashMap<String, Object> map) {
+		int result = sqlSession.update("product.updateStartTime", map);
 		return result;
 	}
 

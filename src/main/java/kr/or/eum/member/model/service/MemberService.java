@@ -6,6 +6,8 @@ import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import kr.or.eum.member.model.dao.MemberDao;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.ExpertAndMember;
@@ -13,11 +15,13 @@ import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
+import kr.or.eum.product.model.vo.ProductAndExpertDetail;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Service
+@Transactional
 public class MemberService {
 
 	@Autowired
@@ -89,8 +93,11 @@ public class MemberService {
 		return dao.DeleteMyproduct(payNo);
 	}
 
-	public ArrayList<Payment> Myproductdetail(int payNo) {
-		ArrayList<Payment> list = dao.Myproductdetail(payNo);
+	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
+		
+		System.out.println(productNo+"서비스");
+		ArrayList<ProductAndExpertDetail> list = dao.Myproductdetail(productNo);
+		
 		System.out.println(list);
 		return list;
 	}
@@ -102,6 +109,17 @@ public class MemberService {
 		return member;
 	}
 
+
+	public int insertMember(Member m) {
+		dao.insertMember(m);
+		return dao.insertMember(m);
+	}
+
+	public int search(String memberNick) {
+		// TODO Auto-generated method stub
+		return dao.search(memberNick);
+  }
+  
 	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
 		ArrayList<ProductAndExpert> list = dao.selectMyproject(memberNo);
 		
@@ -112,6 +130,37 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		int result = dao.insertExpert(ex);
 		return result;
+
+	}
+
+  //대권
+	public int searchId(String memberId) {
+		// TODO Auto-generated method stub
+		return dao.searchId(memberId);
+  }
+  
+	public ArrayList<ProductAndExpertDetail> selectMyprojectDetail(int productNo) {
+		// TODO Auto-generated method stub
+		ArrayList<ProductAndExpertDetail> list = dao.selectMyprojectDetail(productNo);
+		return list;
+
+	}
+
+	public int DeleteMywish(int wishNo) {
+		// TODO Auto-generated method stub
+		
+		return dao.DeleteMywish(wishNo);
+	}
+
+	public int deleteMember(int memberNo) {
+		// TODO Auto-generated method stub
+		return dao.deleteMember(memberNo);
+	}
+
+	public ArrayList<Payment> selectMyproductDetail(int payNo) {
+		// TODO Auto-generated method stub
+		ArrayList<Payment> list = dao.selectMyproductDetail(payNo);
+		return list;
 	}
 
 

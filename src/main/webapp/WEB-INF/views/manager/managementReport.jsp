@@ -42,7 +42,7 @@
 					<th>신고일</th>
 					<th>답변여부</th>
 					<th>상세보기</th>
-					<th>답변 거부</th>
+					<th>결과</th>
 				</tr>
 				<c:forEach items="${list }" var="rpt" varStatus="i">
 				<tr class="tr-2">
@@ -79,14 +79,22 @@
 						<c:when test="${rpt.reportIs == 1}">
 							답변 완료						
 						</c:when>
-						<c:when test="${rpt.reportIs == 2}">
-							답변 거부						
-						</c:when>
 					</c:choose>
 					</td>
 					<td><button class="btn bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button></td>
-					<td><button class ="btn bc1" onclick="location.href=/refuseReport.do?reportNo=${rpt.reportNo}&selNo=2">답변거부</button></td>
-					
+					<td>
+					<c:choose>
+						<c:when test="${rpt.ansResult == 1 }">
+							사형
+						</c:when>
+						<c:when test="${rpt.ansResult == 2 }">
+							넘어감
+						</c:when>
+						<c:otherwise>
+							처리중
+						</c:otherwise>
+					</c:choose>
+					</td>
 				</tr>
 				</c:forEach>
 			</table>

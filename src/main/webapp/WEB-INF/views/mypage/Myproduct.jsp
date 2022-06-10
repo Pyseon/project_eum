@@ -243,7 +243,7 @@ li{
 						
 						
 						<c:if test="${p.payState eq 1}">
-							<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMyproduct.do?payNo=${p.payNo}'">주문취소</button>
+							<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMyproduct.do?payNo=${p.payNo}'">${p.payNo}</button>
 						</c:if>
 						
 						

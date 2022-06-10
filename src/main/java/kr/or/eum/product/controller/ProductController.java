@@ -494,7 +494,8 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		model.addAttribute("pay", map.get("payment"));
 		model.addAttribute("r", map.get("review"));
 		model.addAttribute("c", map.get("counsel"));
-		model.addAttribute("chat", map.get("chatList"));		
+		model.addAttribute("chat", map.get("chatList"));
+		model.addAttribute("firstDate", map.get("first"));
 		if(!map.get("paymentState").equals(1) && !map.get("paymentState").equals(2)) {
 			return "product/paymentError";
 		}
@@ -506,6 +507,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		System.out.println("Counsel_review : "+map.get("review"));
 		System.out.println("Counsel_counsel : "+map.get("counsel"));
 		System.out.println("Counsel_chat : "+map.get("chatList"));
+		System.out.println("Counsel_firstDate : "+map.get("first"));
 		
 		return "product/expertCounsel";
 	}
@@ -554,14 +556,10 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@ResponseBody
 	@RequestMapping(value = "/insertReview.do")
 	public String insertReview(Review review) {
-		int check = productService.overlapCheckReview(review.getPayNo());
-		if(check == 0) {
-			System.out.println("check : "+check);
-			System.out.println("insertReview : "+review);
-			int result = productService.insertReview(review);
-			return new Gson().toJson(result);			
-		}
-		return "product/paymentError";
+		//서비스를 한번만...
+		//int check = productService.overlapCheckReview(review.getPayNo());
+		int result = productService.insertReview(review, review.getPayNo());
+		return new Gson().toJson(result);			
 	}
 	
 	//윤지
@@ -585,11 +583,32 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	}
 	
 	//윤지
+	@ResponseBody
 	@RequestMapping(value = "/deleteReview.do")
 	public String deleteReview(int reviewNo) {
 		int result = productService.deleteReview(reviewNo);
-		return "redirect:/";
+		System.out.println(result);
+		return new Gson().toJson(result);
 	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "updateStartTime.do")
+	public String updateStartTime(String startTime, int counselNo) {
+		int result = productService.updateStartTime(startTime, counselNo);
+		System.out.println(result);
+		System.out.println(startTime);
+		return new Gson().toJson(startTime);
+	}
+	
+	//윤지
+	@ResponseBody
+	@RequestMapping(value = "updateReadCheck.do")
+	public String updateReadCheck(String counselNo, String memberNo) {
+		int readResult = productService.updateReadCheck(counselNo, memberNo);
+		return new Gson().toJson(readResult);
+	}
+	
 }
 
 

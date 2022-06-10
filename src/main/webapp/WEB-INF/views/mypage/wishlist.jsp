@@ -209,7 +209,7 @@ li{
 						<span class="card-category fs-bold">${w.productTitle }</span>
 					</div>
 					<div>
-						<span style="color: #bdbdbd;">${w.payMent} 원</span>
+						<span style="color: #bdbdbd;">${w.productType}</span>
 						
 					</div>
 					
@@ -218,50 +218,15 @@ li{
 			</ul>
 			</div>
 			<div>
-				<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMywish.do?payNo=${w.payNo}'">${w.payNo}</button>
-						<span class="material-icons icon-wish">favorite</span>
+				<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMywish.do?wishNo=${w.wishNo}'">찜삭제</button>
+						
 				
 			</div>
 		</div>
 		
 		</c:forEach>
 	</table>
-<div id="test-modal" class="modal-bg">
-	<div class="modal-wrap">
-		<div class="modal-head">
-			<h2>취소하시겠습니까?</h2>
-			<br>
-		</div>
-		<div class="modal-content">
-			<table class="modal-content-tbl">
-				<tr>
-					<th class="modal-tbl-th">주문내역</th>
-					<br>
-					<td class="modal-tbl-td">${p.productTitle }</td>
-				</tr>
-				
-				<tr>
-					<th class="modal-tbl-th">환불가격</th>
-					<td class="modal-tbl-td">${p.payMent} 원</td>
-				</tr>
-			</table>
-		</div>
-		<div class="modal-foot">
-			<p>
-				수업 진행후 취소시에 환불이 불가할 수 있습니다.<br> 카드결제 취소의 경우 취소 후
-				영업일 2-3일 내로 처리될 예정입니다.
-			</p>
-			<div class="modal-btns-container">
-				<button class="btn bc3" id="modal-btns-item">구매취소</button>
-				<button class="btn bc4 modal-close" id="modal-btns-item">돌아가기</button>
-			</div>
-		</div>
-	</div>
-</div>
-<script>
-	
-		
-</script>
+
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </html>

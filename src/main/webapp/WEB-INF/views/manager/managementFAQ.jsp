@@ -10,7 +10,9 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
-	<div class="manaContentWrap">		
+	<div class="manaContentWrap">
+	<h1>>F&Q</h1>
+	<hr>		
 		<div class="searchBox">
 			<form action="/manaFAQ.do" method="post" id="faqSelectBox">
 				<select name="searchType">
@@ -48,7 +50,8 @@
 					<td>${faq.FAQTitle }</td>
 					<td>${faq.FAQDate }</td>
 					<td><button class="bc3 bs6" onclick="location.href='/updateFAQFrm.do?FAQNo=${faq.FAQNo}'">수정</button></td>
-					<td><button class="bc3 bs6" onclick="location.href='/deleteFAQ.do?FAQNo=${faq.FAQNo}'">삭제</button></td>			
+					<!--<td><button class="bc3 bs6" onclick="location.href='/deleteFAQ.do?FAQNo=${faq.FAQNo}'">삭제</button></td> -->
+					<td><button class="btn bc2 bs1 modal-open-btn delFAQ" target="#deleteFAQ-modal" value=${faq.FAQNo }>삭제</button></td>	
 					</tr>
 					</c:forEach>
 			</table>
@@ -60,6 +63,25 @@
 		<button class="bc1 bs5" onclick="location.href='/insertFAQFrm.do'">글쓰기</button>
 		</div>
 	</div>
+	
+	<input type="hidden" id="reqPage" value="${reqPage }">
+	
+	<div id="deleteFAQ-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 F&Q를 삭제 하시겠습니까?</h2>
+				<br>	
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="delFAQ">
+					<button class="btn bc2" id="delFaQ">공지 삭제</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>
 	$(document).ready(function(){
@@ -71,6 +93,18 @@
 			}
 		});
 	});
+	
+	const reqPage = $("#reqPage").val();
+
+	$(".delFAQ").on("click", function() {
+		$("#delFAQ").val($(this).val());
+	});
+	$("#delFaQ").on("click", function() {
+		const FAQNo = $("#delFAQ").val();
+		location.href='/deleteFAQ.do?FAQNo='+FAQNo+'&reqPage='+reqPage;
+	});
+	
+	
 </script>
 </body>
 </html>

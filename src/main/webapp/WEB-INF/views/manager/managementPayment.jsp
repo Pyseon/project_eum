@@ -51,15 +51,25 @@
 					<td>${pay.memberId }</td>
 					<td>${pay.payment }</td>
 					<td>${pay.payMethod }</td>
-					<td>${pay.payState }</td>
+					<c:choose>
+						<c:when test="${pay.payState==1 }">
+							<td>예약 완료</td>
+						</c:when>
+						<c:when test="${pay.payState==2 }">
+							<td>구매 확정</td>
+						</c:when>
+						<c:when test="${pay.payState==3 }">
+							<td>예약 취소</td>
+						</c:when>
+					</c:choose>
 					<td>${pay.payDate }</td>
-					<td><button class="btn bc3 bc1" onclick="location.href='/detailPayment.do?payNo=${pay.payNo}'">상세보기</button></td>
+					<td><button class="btn bc3 bc1" onclick="location.href='/detailPayment.do?payNo=${pay.payNo}&reqPage=${reqPage }'">상세보기</button></td>
 					<c:choose>
 						<c:when test="${pay.payState==3 }">
-							<td><button class="btn bc1 bs1" onclick="location.href='/updatePayState.do?updateNo=1&payNo=${pay.payNo}&reqPage=${reqPage }'">다시 예약</button></td>
+						<td><button class="btn bc1 bs1 modal-open-btn payRes" target="#payReserv-modal" value=${pay.payNo }>다시 예약</button></td>
 						</c:when>
 						<c:otherwise>
-							<td><button class="btn bc1 bs1" onclick="location.href='/updatePayState.do?updateNo=0&payNo=${pay.payNo}&reqPage=${reqPage }'">주문 취소</button></td>
+							<td><button class="btn bc2 bs1 modal-open-btn payCan" target="#payCancel-modal" value=${pay.payNo }>주문 취소</button></td>
 						</c:otherwise>
 					</c:choose>
 					
@@ -72,8 +82,62 @@
 		</div>
 	</div>
 	
+	<input type="hidden" id="reqPage" value="${reqPage }">
 	
+	<div id="payCancel-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 주문을 취소 하시겠습니까?</h2>
+				<br>	
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="payCan">
+					<button class="btn bc1" id="payCancel">주문 취소</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="payReserv-modal" class="modal-bg">
+		<div class="modal-wrap">
+			<div class="modal-head">
+				<h2>해당 주문을 다시 예약 하시겠습니까?</h2>
+				<br>	
+			</div>
+			<div class="modal-foot">
+				<div class="modal-btns-container">
+					<button class="btn bc3 modal-close">취소</button>
+					<input type="hidden" id="payRes">
+					<button class="btn bc1" id="payReserv">다시 예약</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	
+<script>
+	const reqPage = $("#reqPage").val();
+	
+	$(".payCan").on("click", function() {
+		$("#payCan").val($(this).val());
+	});
+	$("#payCancel").on("click", function() {
+		const payNo = $("#payCan").val();
+		location.href = '/updatePayState.do?updateNo=0&payNo='+payNo+'&reqPage='+reqPage;
+	});
+	
+	$(".payRes").on("click", function() {
+		$("#payRes").val($(this).val());
+	});
+	$("#payReserv").on("click", function() {
+		const payNo = $("#payRes").val();
+		location.href='/updatePayState.do?updateNo=1&payNo='+payNo+'&reqPage='+reqPage;
+	});
+	
+	
+</script>
 </body>
 </html>

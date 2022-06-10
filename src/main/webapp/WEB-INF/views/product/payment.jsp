@@ -169,7 +169,7 @@
 				</form>
 			</div>
 			<br>
-			<div class="pointstock">사용가능한 포인트 : <span>100,000</span></div>
+			<div class="pointstock">사용가능한 포인트 : <span>990,000</span></div>
 		</div>
 		<div class="finalbox">
 			<div class="final-payment fs-bold">최종 결제 금액</div>									<!-- 상품 cost - member_poit -->

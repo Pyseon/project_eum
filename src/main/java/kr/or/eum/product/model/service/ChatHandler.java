@@ -105,7 +105,6 @@ public class ChatHandler extends TextWebSocketHandler {
 			
 		//채팅메세지를 입력한 경우
 		}else if(type.equals("chat")) {//if문으로 이미지 있다 없다, 읽음 표시도 
-			String sendMsg ="<div class='chat-content-wrap'><div class='chat left'><span class='chatId'></span>"+msg+"</div><div class='content-sub-wrap'><div class='read-check'>1<div><div class='chat-time'>"+time+"</div></div></div>";
 			//제이슨으로 넘기기
 			int result = productService.insertChat(msg, memberNo,counselNo); 
 			ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo); 
@@ -125,12 +124,12 @@ public class ChatHandler extends TextWebSocketHandler {
 				//내가 아닌 사람(세션)이 채팅 메세지를 입력하면 보고 있는 거니까 읽음표시
 				if(!s.equals(session)) {
 					int readResult = productService.updateReadCheck(counselNo, memberNo);
-            //나 외에 다른 사람이 있다 없다 체크
-                //DB에 보내는 것과, 사용자가 접속해 있어서 메세지를 보내주는 것을 따로따로 생각하기
-                //insert는 읽음 여부와 관계없이
-                //상대방에게 전송까지 하는 건 접속여부 (읽음 여부)에 따라....또한 나도 읽었다는 걸 내 자신이 알아야 함
-                s.sendMessage(tm); 
-        }
+				}
+				//나 외에 다른 사람이 있다 없다 체크
+				//DB에 보내는 것과, 사용자가 접속해 있어서 메세지를 보내주는 것을 따로따로 생각하기
+				//insert는 읽음 여부와 관계없이
+				//상대방에게 전송까지 하는 건 접속여부 (읽음 여부)에 따라....또한 나도 읽었다는 걸 내 자신이 알아야 함
+				s.sendMessage(tm); 
 			}//for문
 		}else if(type.equals("countdown")) {
 			ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo); 

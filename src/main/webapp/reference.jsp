@@ -15,7 +15,7 @@
 			<div class="fs-regular">가나다 abc ABC 0123</div>
 			<div class="fs-medium">가나다 abc ABC 0123</div>
 			<div class="fs-bold">가나다 abc ABC 0123</div>
-			<div class="fs-full">가나다 abc ABC 0123</div>
+			<div class="fs-full">가나다 abc ABC 01234</div>
 		</div>
 		<div>
 			<h2>글씨 색</h2>

@@ -82,8 +82,12 @@
 		});
 		
 		$('.icon-close').on('click', function(){
-			divSubwrap.fadeOut();
-			divWrap.fadeOut();
+			$('.modal-sub-wrap').fadeOut( "slow", function() {
+				$('.modal-sub-wrap').remove();
+			});
+			$('.report-modal-back').fadeOut( "slow", function() {
+				$('.report-modal-back').remove();
+			});
 		});
 		
 		$('.submitBtn').on('click',function(){
@@ -124,13 +128,21 @@
 					   },
 				success : function(data) {
 					alert('신고되었습니다. 감사합니다.');
-					divSubwrap.fadeOut();
-					divWrap.fadeOut();
+					$('.modal-sub-wrap').fadeOut( "slow", function() {
+						$('.modal-sub-wrap').remove();
+					});
+					$('.report-modal-back').fadeOut( "slow", function() {
+						$('.report-modal-back').remove();
+					});
 				},
 				error : function() {
 					alert('잘못된 접근입니다.');
-					divSubwrap.fadeOut();
-					divWrap.fadeOut();
+					$('.modal-sub-wrap').fadeOut( "slow", function() {
+						$('.modal-sub-wrap').remove();
+					});
+					$('.report-modal-back').fadeOut( "slow", function() {
+						$('.report-modal-back').remove();
+					});
 				}
 			});
 		});

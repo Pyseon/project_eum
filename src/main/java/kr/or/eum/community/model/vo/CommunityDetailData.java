@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 public class CommunityDetailData {
 	private Community comm;
 	private ArrayList<CommunityCo> cmntList;
+	private ArrayList<Pick> pickList;
 }

@@ -17,6 +17,7 @@ public class Report {
 	private int reportIndex;
 	private String reportTitle;
 	private int reportIs;
+	private int ansResult;
 	
 	private String defendantId;
 	private String plaintiffId;

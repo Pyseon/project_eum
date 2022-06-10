@@ -80,6 +80,32 @@
 			</div>
 		</fieldset>
 	</form>
+	<form class="joinfrmbox" id="joinfrmbox" action="/deleteMember.do" method="post">
+		<fieldset>
+		
+			
+			<input type="hidden" name="memberNick" value="${sessionScope.member.memberNick}">
+			<input type="hidden" name="memberPw" value="${sessionScope.member.memberPw}">
+			<input type="hidden" name="memberPhone" value="${sessionScope.member.memberPhone}">
+			
+			<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
+			<input type="hidden" name="memberId" value="${sessionScope.member.memberId}">
+			<input type="hidden" name="memberPoint" value="${sessionScope.member.memberPoint}">
+			<input type="hidden" name="gender" value="${sessionScope.member.gender}">
+			<input type="hidden" name="birth" value="${sessionScope.member.birth}">
+			<input type="hidden" name="agreement" value="${sessionScope.member.agreement}">
+			<input type="hidden" name="grade" value="${sessionScope.member.grade}">
+			<input type="hidden" name="enrollDate" value="${sessionScope.member.enrollDate}">
+			
+			<br>
+			
+			
+			<div class="birthbox">
+				
+				<button class="btn bc3 bs4" type="submit">탈퇴하기</button>
+			</div> 
+		</fieldset>
+	</form>
 	</div>
 	
 	

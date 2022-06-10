@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.eum.community.model.vo.Community;
 import kr.or.eum.community.model.vo.CommunityCo;
+import kr.or.eum.community.model.vo.Pick;
 
 @Repository
 public class CommunityDao {
@@ -41,6 +42,11 @@ public class CommunityDao {
 		return  (ArrayList<CommunityCo>) cmntList;
 	}
 
+	public ArrayList<Pick> selectPickList(int commNo) {
+		List pickList = sqlSession.selectList("community.selectPickList", commNo);
+		return  (ArrayList<Pick>) pickList;
+	}
+	
 	public int communityWrite(Community comm) {
 		return sqlSession.insert("community.communityWrite", comm);
 	}
@@ -74,5 +80,11 @@ public class CommunityDao {
 	public int commentCount(HashMap<String, Object> map) { //삭제하려는 댓글에 대댓글이 있는지 확인
 		return sqlSession.selectOne("community.commentCount", map);
 	}
+
+	public void pickWrite(Pick pick) {
+		sqlSession.insert("community.pickWrite", pick);
+	}
+
+
 
 }

@@ -79,6 +79,22 @@
  		where co.comm_no = ${value} order by co.CMNT_group ,co.cmnt_no
 	</select> 
 
+	<select id="selectPickList" resultType="pick" parameterType="int">
+		select 
+		    p.pick_no as pickNo,
+		    p.pick_category as pickCategory,
+		    p.member_no as memberNo,
+		    (select member_nick from member_tbl m where p.member_no = m.member_no) as memberNick, --멤버닉
+		    (select grade from member_tbl m where p.member_no = m.member_no) as memberGrade, --멤버등급
+			(select member_picturepath from member_tbl m where p.member_no = m.member_no) as memberPicturepath, --멤버프로필사진
+		    p.pick_content as pickContent,
+		    p.pick_date as pickDate,
+		    p.comm_no as commNo,
+		    (select count(*) from picklike_tbl pl where p.pick_no = pl.pick_no) as pickLike
+		from pick_tbl p
+		where p.comm_no = ${value}
+	</select> 
+
 	<insert id="communityWrite" parameterType="comm">
 		insert into community_tbl values(
 			COMMUNITY_SEQ.nextval,
@@ -176,6 +192,19 @@
 	<select id="commentCount" parameterType="map" resultType="int">
 		select count(*) from communityco_tbl where comm_no = #{commNo} and cmnt_group = #{cmntGroup}
 	</select>
+	
+	<insert id="pickWrite" parameterType="pick">
+		INSERT INTO PICK_TBL VALUES(
+		    PICK_SEQ.NEXTVAL,       --픽번호ㅓ
+		    #{pickCategory},                  -- 0 이면 해라, 1이면 하지마라
+		    #{memberNo},                     --회원번호
+		    #{pickContent},                      -- 픽 내용
+		    TO_CHAR(SYSDATE, 'mm.dd hh24:mi'),      -- 등록일
+		    #{commNo}                                    --글번호
+		)
+	</insert>
+	
+	
 </mapper>
 
 

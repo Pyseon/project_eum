@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="request">
+	<select id="selectRequestList" resultType="reqst">
+	select * from
+	(select rownum as rnum, b. * from
+	(
+	select
+	req_no as reqNo,
+	member_no as memberNo,
+	req_title as reqTitle,
+	req_category as reqCategory,
+	req_tag as reqTag,
+	req_nickname as reqNick,
+	req_content as reqContent,
+	req_date as reqDate,
+	req_accept as reqAccept
+	from request_tbl
+	<if test="selReq!='전체'.toString()">
+		where req_category=#{selReq}
+	</if>
+	order by req_no desc)b)
+	where rnum between 1 and 100
+	</select>
+	
+	<insert id="requestWrite" parameterType="reqst">
+		insert into
+		request_tbl values(
+		req_seq.nextval,
+		#{memberNo},
+		#{reqTitle},
+		#{reqCategory},
+		#{reqTag},
+		#{reqNick},
+		#{reqContent},
+		0,
+		TO_CHAR(SYSDATE,'YYYY-MM-DD'),
+		0,
+		0
+		)
+	</insert>
+	
+	<select id="selectTotalCount" resultType="int" parameterType="map">
+		select count(*) from request_tbl
+		<if test="!selReq.equals('전체')">
+		 	where req_category = #{selReq}
+		</if>
+  	</select>
+  	
+  	<select id="selectOneRequest" parameterType="int" resultType="reqst">
+  	select
+  		req_no as reqNo,
+  		member_no as memberNo,
+  		req_category as reqCategory,
+  		req_title as reqTitle,
+  		req_nickname as reqNick,
+  		req_date as reqDate,
+  		req_content as reqContent,
+  		req_tag as reqTag,
+  		req_accept as reqAccept,
+  		req_rfr as reqRfr,
+  		req_accept as reqAccept,
+  		member_picturepath as memberPicturepath
+
+  	from request_tbl
+  	join member_tbl using(member_no)
+  	where req_no=#{reqNo}
+  		
+ 
+  	</select>
+</mapper>

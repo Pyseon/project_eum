@@ -15,10 +15,11 @@
 			    comm_intro as commIntro,
 			    read_count as readCount,
 			    comm_date as commDate,
-			    comm_like as commLike,
+			    (select nvl(count(*),0) from commlike_tbl cl where cl.comm_no = comm.comm_no) as commLike, --좋아요수
 			    comm_filename as commFilename,
 			    comm_filepath as commFilepath,
-			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
+			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount,
+            (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no) as pickCount
 		from community_tbl comm 
 		<if test="category != 2">
 		where comm_category = #{category}
@@ -48,7 +49,7 @@
 			    advantage,
 			    weakness,
 			    comm_date as commDate,
-			    comm_like as commLike,
+			    (select nvl(count(*),0) from commlike_tbl cl where cl.comm_no = comm.comm_no) as commLike, --좋아요수
 			    comm_filename as commFilename,
 			    comm_filepath as commFilepath,
 			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
@@ -214,6 +215,27 @@
 		delete from pick_tbl 
 			where pick_no = ${value}
 	</delete>
+	
+	<select id="likeMemberCheck" parameterType="map" resultType="int">
+		select count(*) from COMMLIKE_TBL where comm_no=#{commNo} and member_no=#{memberNo}
+	</select>
+	
+	<select id="selectLike" parameterType="int" resultType="int">
+		select count (*) 
+		from commlike_tbl
+		where comm_no=#{commNo}
+	</select> 
+	
+	<insert id="insertLike" parameterType="map">
+		insert into commlike_tbl values(commlike_seq.nextval,#{memberNo},#{commNo})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="map">
+		delete from commlike_tbl where comm_no=#{commNo} and member_no=#{memberNo}
+	</delete>
+	
+	
+	
 	
 </mapper>
 

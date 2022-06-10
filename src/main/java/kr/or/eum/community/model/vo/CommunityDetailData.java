@@ -14,4 +14,5 @@ public class CommunityDetailData {
 	private Community comm;
 	private ArrayList<CommunityCo> cmntList;
 	private ArrayList<Pick> pickList;
+	private int likeMemberCheck;
 }

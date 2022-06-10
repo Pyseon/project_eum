@@ -98,14 +98,14 @@
 	<div class="container">
 	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">내 프로젝트</h1>
-		<form action="/classWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+		<form action="/productUpdate.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
 		
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
 		<div style="margin-top: -30px !important;">
 			<table class = "product-tab">
 				<tr>
-					<td><button type="button" class="exp" onclick="location.href='/expertWriterFrm.do'">1:1전문가상담</button></td>
+					<td><button type="button" class="exp">1:1전문가상담</button></td>
 					<td><button type="button" class="cla">클래스</button></td>
 					<td><button type="button" class="idm">지식마켓</button></td>
 				</tr>
@@ -126,18 +126,18 @@
 		<option value="IT/테크">IT/테크</option>
 		<option value="자기계발">자기계발</option>
 		</select>
-		
+		<c:forEach var="p" items="${list }" varStatus="i">
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="${productTitle }">
+			<input class="input-form" type="text" name="productTitle" placeholder="${p.productTitle }">
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="${productIntro }">
+			<input class="input-form" type="text" name="productIntro" placeholder="${p.productIntro }">
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>
-			<textarea id="summernote" name="productContent" class="input-form"></textarea>
+			<textarea id="summernote" name="productContent" class="input-form" placeholder = "${p.productContent }"></textarea>
 		</div>
 		
 						<div class="img-box-wrap">
@@ -177,24 +177,25 @@
 		</div>
 		<div style="margin-bottom: 20px">
 			<div><h3>클래스 수업 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;">
+			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력하세요" style="width: 80%;">
 		</div>
 			
 		<div style="margin-bottom: 20px">
 			<div><h3>가격설정</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;">
+			<input class="input-form" type="text" name="cost" placeholder="${p.cost }" style="width: 30%;">
 			<span style="line-height: 2.5;">&nbsp; 원</span>
 			</span>
 		</div>
 		
 		<div style="margin-bottom: 20px">
 		<div><h3>태그</h3></div>
-			<input class="input-form" type="text" name="productTag" placeholder="태그를 작성하세요" style="width: 60%;">
+			<input class="input-form" type="text" name="productTag" placeholder="${p.productTag }" style="width: 60%;">
 		</div>
 		<div>
 		<input type="submit" class="btn bc1 bs4" value="수정하기">
 		</div>
+		</c:forEach>
 		</form>
 	</div>
 	<script>

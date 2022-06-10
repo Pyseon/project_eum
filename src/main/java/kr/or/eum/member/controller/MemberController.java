@@ -155,6 +155,17 @@ public class MemberController {
 		
 		return "mypage/MyprojectDetail";
 	}
+	@RequestMapping(value="/productUpdate.do")
+	public String classUpdate(Model model, HttpSession session, int productNo) {
+		ArrayList<ProductAndExpertDetail> list = service.selectMyprojectDetail(productNo);
+		
+		
+		System.out.println(list);
+		model.addAttribute("list", list);
+		
+		
+		return "mypage/MyprojectDetail";
+	}
 	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {

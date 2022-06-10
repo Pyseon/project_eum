@@ -26,7 +26,7 @@
 					<h1>요즘뭐하니 글쓰기</h1>
 					<form action="/communityWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
 					<input type="hidden" name="commCategory" value="0">
-					<input type="hidden" name="memberNo" value="14">
+					<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo }">
 					<input type="hidden" name="advantage">
 					<input type="hidden" name="weakness">
 						<p class="comm-write-p">제목</p>

@@ -7,7 +7,8 @@
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
 <style>
-.pick-box{
+.attr-wrap{
+ width: 100%;
 }
 
 .pick-box {
@@ -299,9 +300,10 @@
 									</div>
 									<c:if test="${sessionScope.member.memberNo eq p.memberNo }">
 										<div>
-											<button class="pick-btn">수정</button>
+											<input type="hidden" value="${p.pickNo }">
+											<button class="pick-btn pick-update-btn">수정</button>
 											<span class="pick-btn">|</span>
-											<button class="pick-btn">삭제</button>
+											<button class="pick-btn pick-delete-btn">삭제</button>
 										</div>
 									</c:if>
 								</div>
@@ -350,9 +352,10 @@
 									</div>
 									<c:if test="${sessionScope.member.memberNo eq p.memberNo }">
 										<div class="malja-btn">
-											<button class="pick-btn">수정</button>
+											<input type="hidden" value="${p.pickNo }">
+											<button class="pick-btn pick-update-btn">수정</button>
 											<span class="pick-btn">|</span>
-											<button class="pick-btn">삭제</button>
+											<button class="pick-btn pick-delete-btn">삭제</button>
 										</div>
 									</c:if>
 								</div>
@@ -361,7 +364,17 @@
 					</c:if>
 				</c:forEach>
 
-				<div class="button-wrap" style="margin-top: 50px;">
+			
+
+
+
+			</div>
+			<!--pick box end-->
+			
+		</div>
+		<!-- attr-wrap end-->
+		<c:if test="${sessionScope.member ne null }">
+				<div class="button-wrap" style="margin-top: 50px; width:70%; margin: 0 auto;">
 					<!-- 전송 데이터 -->
 					<input type="hidden" name="commNo" id="commNo" value="${comm.commNo}">
 					<input type="hidden" name="memberNo" id="memberNo" value="${sessionScope.member.memberNo }">
@@ -378,14 +391,7 @@
 					<button class="btn" id="pick-reg"
 						style="width: 60px; height: 35px; background-color: yellow; color: #222; font-weight: bold;">전송</button>
 				</div>
-
-
-
-			</div>
-			<!--pick box end-->
-		</div>
-		<!-- attr-wrap end-->
-
+		</c:if>
 
 	</div>
 	<!--container end-->
@@ -413,6 +419,34 @@
 	</div>
 
 	<!-- modal end -->
+	
+	
+	
+		<!-- pick update modal start -->
+	<div id="update-modal" class="modal-bg">
+		<div class="modal-wrap" style="margin-top: 300px; width:40%;" >
+			<div class="modal-head" style="border-bottom: none;">
+				<h2 class="fc-1" style="color:#333;">내용 수정하기</h2>
+				<input type="text" class="input-form"
+						name="pickUpdateContent22" id="pickUpdateContent22" style="">
+			</div>
+			<div class="modal-btns-container" style="margin: 0 auto;">
+				<button class="btn bg-7 fc-5" id="pickUpdateBtn"
+					style="margin-right: 5px;"
+					name="pickUpdateBtn">수정하기</button>
+				<button class="btn bg-4 fc-5 modal-close" id="modal-btns-item"
+					style="margin-left: 5px;">취소하기</button>
+			</div>
+		</div>
+	</div>
+
+	<!-- modal end -->
+	
+	
+	
+	
+	
+	
 
 	<script>
 
@@ -426,7 +460,7 @@ $(function(){
 	});
 		
 	
-	//댓글등록하고 특정 div새로고침해서 불러오기
+	//픽 등록하고 특정 div새로고침해서 불러오기
 	$(document).on("click","#pick-reg",function(){
 		let commNo = $("#commNo").val();
 		let memberNo = $("#memberNo").val();
@@ -442,30 +476,8 @@ $(function(){
 			type:"post",
 			data: {commNo:commNo, memberNo:memberNo, pickContent:pickContent, pickCategory:pickCategory},
 			success:function(data){
-				/*
-				cmntHtml += '<div class="comment-list"><div class="single-comment justify-content-between dd-flex"><div class="user justify-content-between dd-flex"><div class="thumb">';
-				cmntHtml += '<img src="./img/member/'+data.memberPicturepath+'" alt="" class="card-user-img" /></div><div class="desc"><span class="writer-nick">';
-				cmntHtml += '<strong style="font-size: 15px">'+data.memberNick+'</strong>';
-				if(data.memberGrade == 1){
-					cmntHtml += '<span class="material-icons verified-icon">verified</span>';
-				}
-				if(data.memberNo == writerNo){
-					cmntHtml += '<span class="reply-writer">작성자</span>';
-				}
-				cmntHtml += '<p class="comment">'+data.cmntContent+'</p>';
-				cmntHtml += '<p class="date fs-light">'+data.cmntDate+'</p>';
-				cmntHtml += '</div>';
-				cmntHtml += '<div class="reply-btn"><a href="" class="btn-reply">답글쓰기</a></div></div>';
-				cmntHtml += '</div>';
-				$(".comment-list-wrap").append(cmntHtml);
-				*/
 				$("#pickContent").val("");
-				//$(".attr-wrap").load(location.href + " .attr-wrap");
-				$(".pick-box").load(location.href + " .pick-box");
-				$(".haja-wrap").load(location.href + " .haja-wrap");
-				$(".malja-wrap").load(location.href + " .malja-wrap");
-				
-				
+				$(".attr-wrap").load(location.href + " .attr-wrap");
 			}
 		})
 			
@@ -473,81 +485,48 @@ $(function(){
 	
 	
 	
-	//댓글 수정폼 띄우기
-	let updateCmntNo = 0;
-	let updatememberNo = 0;
-	$(document).on("click",".comment-update-btn", function() {
-		//기존창 살리고 입력창 없애기 (중복생성방지)
-		$(".comment-cancel-btn").parent().parent().prev().show();
-		$(".comment-cancel-btn").parent().parent().remove();
-		
-		updateCmntNo = $(this).prev().prev().val();
-		updatememberNo = $(this).prev().val();
-		
-		console.log("수정폼띄움!");
-		console.log("댓글번호 > "+updateCmntNo);
-		console.log("멤버번호 > "+updatememberNo);
-		
-		var writeHtml = "";
-		writeHtml += '<div class="comment-write">';
-		writeHtml += '<div class="comment-write-head">';
-		writeHtml += '<span style="font-family: fs-m; margin:0 0 8px 0; padding-left:2px;">댓글 수정</span>';
-		writeHtml += '<span class="comment-num-box"><span id="UpdateComment-num">0</span>/250</span>';
-		writeHtml += '</div>';
-		writeHtml += '<textarea id="comment-updatearea" placeholder="댓글 입력" onkeyup="resize(this)" onkeydown="resize(this)" maxlength="250"></textarea>';
-		writeHtml += '<div style="float: right;">';
-		writeHtml += '<button type="button" id="comment-update-btn" class="comment-write-btn btn fll" disabled>수정</button>';
-		writeHtml += '<button type="button" class="comment-cancel-btn btn fc-7">취소</button>';
-		writeHtml += '</div>';
-		writeHtml += '</div>';
-		
-		$(this).parent().parent().parent().hide();
-		$(this).parent().parent().parent().parent().append(writeHtml);
-		
-	})
+	//픽 수정하기
+	$(document).on("click",".pick-update-btn", function() {
+		var pickUpdateNo = $(this).prev().val();
+		showInputalert(pickUpdateNo);
+	});
+	
+	 function showInputalert(pickUpdateNo) {
+		 let pickUpdateContent = Swal.fire({
+		    title: '내용 수정하기',
+		    input: 'text',
+		    inputAttributes: {
+		        maxlength: 50
+		      },
+		    showCancelButton: true,
+		    confirmButtonColor: '#3865f2',
+		    cancelButtonColor: '#d33',
+		   confirmButtonText: '수정하기',
+		    cancelButtonText: '취소',
+		    preConfirm: (pickUpdateContent) => {
+		 	   		$.ajax({
+		    	    	url: "/pickUpdate.do",
+		    			data: {pickNo:pickUpdateNo, pickContent:pickUpdateContent},
+		    			success:function(data){
+		    				$(".attr-wrap").load(location.href + " .attr-wrap");
+		    			}
+		 	   		})
+		 	   }
+		 })
+		} 
 	
 	
-	//댓글 수정 취소시 -> 되돌리기
-	$(document).on("click",".comment-cancel-btn", function() {
-		$(this).parent().parent().prev().show();
-		$(this).parent().parent().remove();
-		
-	})
+	//픽 삭제하기 함수 sweetalert2 사용!!!
 	
-	
-	
-	//댓글수정하기 함수
-	$(document).on("click","#comment-update-btn", function() {
-		console.log("업데이트 버튼 누름!");
-		console.log("수정댓글번호 > "+updateCmntNo);
-		console.log("수정멤버번호 > "+updatememberNo);
-		//returnBr()이라는 함수를 통해서 엔터값을 br로바꿔주고 리턴받아서 저장해줌
-		let commentUpdateText = returnBr();
-		console.log("최종업데이트전 문자열>>"+commentUpdateText);
-		$.ajax({
-			url: "/commCoUpdate.do",
-			data: {cmntNo:updateCmntNo, cmntContent:commentUpdateText},
-			success:function(data){
-				$("#comment-updatearea").val("");
-				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
-			}
-		})
-		
-	})
-	
-	
-	
-	//댓글 삭제하기 함수 sweetalert2 사용!!!
-	
-	$(document).on('click', ".comment-del-btn", function(){
-		let deleteCmntNo = $(this).prev().prev().prev().prev().val();
-		alertFire(deleteCmntNo);
+	$(document).on('click', ".pick-delete-btn", function(){
+		var pickDelNo = $(this).prev().prev().prev().val();
+		alertFire(pickDelNo);
 	});
 	
 	//alert 함수 띄우기
-	function alertFire(deleteCmntNo){
+	function alertFire(pickDelNo){
 	  	const alertResult = Swal.fire({
-		    title: '댓글을 삭제 하시겠습니까?',
+		    title: '삭제 하시겠습니까?',
 		    text: "                         ",
 		    icon: 'warning',
 		    showCancelButton: true,
@@ -558,34 +537,15 @@ $(function(){
 	 	}).then(result => {
 	 	   // 만약 Promise리턴을 받으면,
 	 	   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-	 	   		console.log("삭제할게!");
-	 	   		console.log("삭제댓글번호 > "+deleteCmntNo);
-	 	   		var commentDelContent = "[ 사용자가 삭제한 댓글 입니다. ]";
-	 	   		//삭제안하고 내용만 바꾸려고할때 (추후 답글있을때만 하도록 구현)
-	 	   		/*
 	 	   		$.ajax({
-	 	   			url: "/commCoUpdate.do",
-	 	   			data: {cmntNo:deleteCmntNo, cmntContent:commentDelContent},
+	 	   			url: "/pickDel.do",
+	 	   			data: {pickNo:pickDelNo},
 		 	   		success:function(data){
-						$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
-					}
-	 	   		})
-	 	   		*/
-	 	   		
-	 	   		//그냥 삭제할때
-	 	   		$.ajax({
-	 	   			url: "/commCoDelete.do",
-	 	   			data: {cmntNo:deleteCmntNo},
-		 	   		success:function(data){
-						$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
-						$("#cmnt-total").load(location.href + " #cmnt-total");
-						$("#cmnt-total2").load(location.href + " #cmnt-total2");
+		 	   			$(".attr-wrap").load(location.href + " .attr-wrap");
 					}
 	 	   		})
 	 	   }
 	 	});
-
-		
 	} 
 	
 	//대댓글 쓰기  ////////////////////////////////////////////////////////////////////////////////////////////////// 

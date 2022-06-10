@@ -35,6 +35,9 @@
 								style="width: 40px; height: 40px;" />
 						</div>
 						<div class="nick-box">
+							<c:if test="${empty comm.memberNick}">
+							<span class="writer-nick"><strong style="font-size: 15px">탈퇴한회원</strong></span>	
+							</c:if>
 							<span class="writer-nick"><strong style="font-size: 15px">${comm.memberNick }</strong></span>
 							<c:if test="${comm.memberGrade eq 1 }">
 								<span class="material-icons verified-icon">verified</span>
@@ -48,8 +51,10 @@
 						</div>
 					</div>
 					<div class="article-info-box">
-						<span class="article-info"> <i class="fa-regular fa-heart"></i>
-							<i class="fa-solid fa-heart"></i> <span>좋아요</span> <strong
+						<span class="article-info"> 
+						<a href="/doLike?commNo=${comm.commNo }" onclick><i class="fa-regular fa-heart"></i></a>
+							 <span>좋아요</span> 
+							 <strong
 							class="num">${comm.commLike }</strong>
 						</span> <span class="article-info"> <i
 							class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
@@ -113,6 +118,7 @@
 		<div class="comments-area">
 			<div class="comment-list-wrap">
 				<c:forEach items="${cmntList }" var="cmnt">
+					<c:if test="{"></c:if>
 					<c:choose>
 						<c:when test="${cmnt.cmntLev eq 0 }">
 							<!--comment-->

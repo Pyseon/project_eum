@@ -42,8 +42,11 @@ public class RequestDao {
 	public Request requestDetail(int reqNo) {
 		// TODO Auto-generated method stub
 		Request req = sqlSession.selectOne("request.requestDetail", reqNo);
+		
 		return null;
 	}
+	
+	
 	
 	
 

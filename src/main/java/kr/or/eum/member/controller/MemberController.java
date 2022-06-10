@@ -148,6 +148,7 @@ public class MemberController {
 		return "mypage/MyprojectDetail";
 
 	}
+	/* 주석처리함
 	@RequestMapping(value="/productUpdate.do")
 	public String classUpdate(Model model, HttpSession session, int productNo) {
 		ArrayList<ProductAndExpertDetail> list = service.selectMyprojectDetail(productNo);
@@ -159,6 +160,7 @@ public class MemberController {
 		
 		return "mypage/MyprojectDetail";
 	}
+	*/
 	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {

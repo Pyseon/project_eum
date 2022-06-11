@@ -314,9 +314,8 @@
 				var memberPhone = $("#memberPhone").val();
 				//연락처 중복 검사
 				$.ajax({
-					   url : "/phoneCheck.do?memberPhone=" + memberPhone,
-					   type:"POST",
-					   data:{},		
+					   url : "/phoneCheck.do",
+					   data: {memberPhone:memberPhone},
 					   success: function(data){
 						   if(data == "1"){
 								$("#memberPhone-test").text("가입된 번호입니다.");

@@ -137,6 +137,7 @@ public class MemberService {
 
 	public int searchPhone(String memberPhone) {
 		// TODO Auto-generated method stub
+		System.out.println("서비스도착 멤버폰서치");
 		return dao.searchPhone(memberPhone);
 	}
 

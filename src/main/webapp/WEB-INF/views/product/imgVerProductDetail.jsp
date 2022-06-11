@@ -213,6 +213,7 @@
 								<c:when test="${memberNo ne 0}">
 									<form action="/purchase.do" method="get">
 									<input type="hidden" name="productNo" value="${p.productNo }"/>
+									<input type="hidden" name="expertNo" value="${expert.expertNo }"/>
 									<button type="submit" class="bc1" id="purchaseBtn">구매하기</button>
 									</form>
 								</c:when>

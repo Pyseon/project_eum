@@ -184,13 +184,20 @@
 							<div class="product-summary">
 								<span id="sele">${p.sale}%</span>
 								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span><br>
-								<div class="star-wrap">
+								<div class="pro-star-wrap star-wrap">
 									<!-- 별점  -->
-									<ul>
-										<li><span class="material-icons icons-star">star</span></li>
-										<li><span id="star-score">${reviewAvr }</span></li>
-										<li><span id="help-number">총 ${paymentCount}회 상담</span><br></li>
-									</ul>
+									<div class="star-sub-wrap">
+										<span class="material-icons icons-star">star</span>
+									</div>
+									<c:if test="${reviewCount ne 0 }">
+										<div class="star-sub-wrap">
+											<span id="star-score">${reviewAvr }</span>
+										</div>
+									</c:if>
+									<div class="star-sub-wrap">
+										<span id="help-number">총 ${paymentCount}회 상담</span>
+										<br>
+									</div>	
 								</div>
 								<!-- DB -->
 								<div class="pro-report-wrap">

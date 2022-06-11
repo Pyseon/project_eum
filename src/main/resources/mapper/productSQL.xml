@@ -464,5 +464,35 @@
 	<update id="updateStartTime" parameterType="map">
 		update counsel_tbl set start_time=#{startTime} where counsel_no=#{counselNo} 
 	</update>
+	
+	<!-- 대권 -->
+	<!-- 
+	<select id="selectProductNo" parameterType="int" resultType="pro">
+		select 
+				product_no as productNo
+				expert_no as expertNo
+				product_type as productType
+				product_title as productTitle
+				product_no as productNo
+				product_category as productCategory
+				product_intro as productIntro
+				product_intro as productTag
+				product_content as productContent
+				cost as cost
+				product_qst as productQst
+				product_ans as productAns
+				product_addr as productAddr
+				sale
+				salecost
+				reviewStar
+				revCount
+				productOption
+				productImgname
+				productImagPath
+				memberPicturepath
+				
+				from product_tbl where product_no=#{productNo}
+	</select>
+	 -->
 </mapper>
 	

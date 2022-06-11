@@ -445,8 +445,33 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	
 	//윤지 return값 대권님이 만들 페이지로 수정 필요
 	@RequestMapping(value = "/purchase.do")
-	public String purchase(int productNo) {
+	public String purchase(int productNo, Model model) {
+		//1.상품정보불러오기(product_type:1,2,3구분)
 		System.out.println(productNo);
+		Product p = productService.selectProduct(productNo);
+		System.out.println(p);
+		model.addAttribute("productNo",p.getProductNo());
+		model.addAttribute("expertNo",p.getExpertNo());
+		model.addAttribute("productType",p.getProductType());
+		model.addAttribute("productTitle",p.getProductTitle());
+		model.addAttribute("productNo",p.getProductNo());
+		model.addAttribute("productCategory",p.getProductCategory());
+		model.addAttribute("productIntro",p.getProductIntro());
+		model.addAttribute("productTag",p.getProductTag());
+		model.addAttribute("productContent",p.getProductContent());
+		model.addAttribute("cost",p.getCost());
+		model.addAttribute("productQst",p.getProductQst());
+		model.addAttribute("productAns",p.getProductAns());
+		model.addAttribute("productAddr",p.getProductAddr());
+		model.addAttribute("sale",p.getSale());
+		model.addAttribute("salecost",p.getSalecost());
+		model.addAttribute("reviewStar",p.getReviewStar());
+		model.addAttribute("revCount",p.getRevCount());
+		model.addAttribute("productOption",p.getProductOption());
+		model.addAttribute("productImgname",p.getProductImgname());
+		model.addAttribute("productImagPath",p.getProductImgPath());
+		model.addAttribute("memberPicturepath",p.getMemberPicturepath());
+		
 		return "product/payment";
 	}
 	

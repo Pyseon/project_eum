@@ -638,6 +638,13 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		return new Gson().toJson(readResult);
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/indexPageData.do" , produces = "application/json;charset=utf-8")
+	public String indexPageData() {
+		ArrayList<Product> list = productService.selectPopular();
+		return new Gson().toJson(list);
+	}
+	
 }
 
 

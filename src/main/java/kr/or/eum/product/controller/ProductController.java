@@ -541,15 +541,16 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		return new Gson().toJson(rpd);
 	}
 	
-	//윤지 return값 대권님이 만들 페이지로 수정 필요
+	
 	@RequestMapping(value = "/purchase.do")
-	public String purchase(int productNo, Model model) {
+	public String purchase(int productNo, int expertNo, Model model) {
 		//1.상품정보불러오기(product_type:1,2,3구분)
 		System.out.println(productNo);
+		System.out.println("expertNo>>>>"+expertNo);
 		Product p = productService.selectProduct(productNo);
 		System.out.println(p);
 		model.addAttribute("productNo",p.getProductNo());
-		model.addAttribute("expertNo",p.getExpertNo());
+		model.addAttribute("expertNo",expertNo);
 		model.addAttribute("productType",p.getProductType());
 		model.addAttribute("productTitle",p.getProductTitle());
 		model.addAttribute("productNo",p.getProductNo());

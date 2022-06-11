@@ -30,11 +30,19 @@
 			<textarea id="summernote" name="FAQContent"></textarea>
 		</div>
 		
-		<input type="submit" class="btn bc1 bs4" value="등록하기">
+		<input id="submit" type="submit" disabled="disabled" class="btn bc1 bs4" value="등록하기">
 		</form>
 	</div>
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+	window.onkeydown = function() {
+		const faqTitle = $("input[name=FAQTitle]").val();
+		const faqContent = $("#summernote").val();
+		if(faqTitle.length > 0 && faqContent.length > 0){
+			$("#submit").attr("disabled", false);
+		}
+	};
+	
 	 //썸머노트 불러오기 함수 
     $("#summernote").summernote({
     	  toolbar: [ //썸머노트 툴바 추가

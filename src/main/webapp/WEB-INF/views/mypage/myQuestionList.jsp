@@ -27,7 +27,16 @@
 							<td>${q.qstNo }</td>
 							<td><a href="/detailQuestion.do?qstNo=${q.qstNo }">${q.qstTitle }</a></td>
 							<td>${q.qstDate.substring(0,10) }</td>
-							<td>${q.ansState }</td>
+							<td>
+							<c:choose>
+								<c:when test="${q.ansState == 0 }">
+									답변 대기중
+								</c:when>
+								<c:otherwise>
+									답변 완료
+								</c:otherwise>
+							</c:choose>
+							</td>
 						</tr>
 						</c:forEach>
 					</table>

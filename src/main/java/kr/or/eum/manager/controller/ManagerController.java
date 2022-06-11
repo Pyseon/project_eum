@@ -264,6 +264,10 @@ public class ManagerController {
 	@RequestMapping(value = "/insertAnswerFrm.do")
 	public String insertAnswerFrm(int qstNo, Model model) {
 		Question qst = service.selectQst(qstNo);
+		if(qst.getAnsState() == 1) {
+			Answer ans = service.selectAns(qstNo);
+			model.addAttribute("ans", ans);
+		}
 		model.addAttribute("qst", qst);
 		return "manager/insertAnswerFrm";
 	}

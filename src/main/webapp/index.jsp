@@ -11,7 +11,7 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
-
+<h1><a href="/manaMember.do?reqPage=1&selectNum=0">매니저</a></h1>
 	<section id="slider">
 		<!--slider-->
 		<div class="container">

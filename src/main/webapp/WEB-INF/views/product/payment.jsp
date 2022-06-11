@@ -155,7 +155,7 @@
 			<div class="expert">전문가이름   &nbsp</div>						<!--전문가 expert_name  -->
 			<div class="job">&nbsp | &nbsp&nbsp 직업명or분류</div>			<!--전문가 job_name -->
 		</div>
-		<div class="price fs-bold"> 50,000원</div>						<!--상품 cost -->
+		<div class="price fs-bold"> ${cost } 원</div>						<!--상품 cost -->
 		<div class="consulting"> 1:1 상담 &nbsp 30분</div>					<!--상품 product_opthion -->
 		<div class="backgroundcolororange">								<!--  -->
 			<div class="purchasebody">
@@ -172,11 +172,11 @@
 				</form>
 			</div>
 			<br>
-			<div class="pointstock">사용가능한 포인트 : <span>990,000</span></div>
+			<div class="pointstock">사용가능한 포인트 : <span>${sessionScope.member.memberPoint }</span></div>
 		</div>
 		<div class="finalbox">
 			<div class="final-payment fs-bold">최종 결제 금액</div>									<!-- 상품 cost - member_poit -->
-			<input class="final-price input-form" type="text" name="" value="50,000 원" readonly>
+			<input class="final-price input-form" type="text" name="" value="${cost }" readonly>
 		</div>
 	</div>
 	<div class="checkedbox">

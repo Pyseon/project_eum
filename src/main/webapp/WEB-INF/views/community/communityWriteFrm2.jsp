@@ -15,14 +15,14 @@
 	<div class="container">
 		<div class="comm-write-tab-nav" style="margin-top: 40px;">
 			<ul class="tab_title" style="padding-left: 0;">
-				<li class="on">요즘뭐하니?</li>
-				<li>이거어때?!</li>
+				<li>요즘뭐하니?</li>
+				<li class="on">이거어때?!</li>
 			</ul>
 		</div>
 	
 		<div class="article-wrap" style="margin-top: 0;">
 			<div class="tab_cont">
-				<div class="write-frm on">
+				<div class="write-frm">
 					<h1>요즘뭐하니 글쓰기</h1>
 					<form action="/communityWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
 					<input type="hidden" name="commCategory" value="0">
@@ -90,7 +90,7 @@
 					</form>
 				</div>
 				
-				<div class="write-frm">
+				<div class="write-frm on">
 					<h1>이거어때 글쓰기</h1>
 					<form action="/communityWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
 					<input type="hidden" name="commCategory" value="1">

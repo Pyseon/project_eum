@@ -26,4 +26,6 @@ public class Community {
 	private String commFilepath;
 	private int cmntCount;
 	private int pickCount;
+	private int pick0Count;
+	private int pick1Count;
 }

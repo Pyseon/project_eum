@@ -60,13 +60,18 @@ public class CommunityController {
 			CommunityDetailData cdd = service.communityDetail1(commNo, member);
 			model.addAttribute("comm", cdd.getComm());
 			model.addAttribute("pickList", cdd.getPickList());
+			model.addAttribute("likeMemberCheck", cdd.getLikeMemberCheck());
 			return "community/detailCat1";
 		}
 	}
 
 	@RequestMapping(value="/communityWriteFrm.do")
-	public String communityWriteFrm() {
+	public String communityWriteFrm(int category) {
+		if (category == 1) {
+			return "community/communityWriteFrm2";
+		}else {
 			return "community/communityWriteFrm";
+		}
 	}
 	
 	@RequestMapping(value="/communityWrite.do")
@@ -131,7 +136,6 @@ public class CommunityController {
 			int result = service.communityWrite(comm);
 	
 			
-//		return "community/communityWriteFrm";
 			return "redirect:/communityList.do?category="+comm.getCommCategory()+"&reqPage=1";
 	}
 	
@@ -168,19 +172,28 @@ public class CommunityController {
 		model.addAttribute("comm", comm);
 		return "community/communityUpdateFrm";
 	}
+	
+	@RequestMapping(value = "/communityUpdateFrm2.do")
+	public String communityUpdateFrm2(int commNo, Model model) {
+		Community comm = service.communityDetailNotCmnt(commNo);
+		model.addAttribute("comm", comm);
+		return "community/communityUpdateFrm2";
+	}
+	
 
 	@RequestMapping(value = "/communityUpdate.do")
 	public String communityUpdate(Community comm, Model model, MultipartFile file, HttpServletRequest request) {
+		System.out.println("커뮤수정> "+comm);
 		String getUri;
 		// 파일이름을 가져옴
 		String filename = file.getOriginalFilename();
 		// 이미지 수정을 안하면 파일이름은 빈칸, 수정을했다면 파일이름이 존재
 		if (filename != "") {
 			Community community = imgUpload(comm, file, request);
-			service.communityUpdate(community);
+			service.communityUpdate(community, comm.getCommCategory());
 			getUri = communityDetail(community.getCommNo(), community.getCommCategory(), model, request);
 		} else {
-			service.communityUpdate(comm);
+			service.communityUpdate(comm, comm.getCommCategory());
 			getUri = communityDetail(comm.getCommNo(), comm.getCommCategory(), model,request);
 		}
 

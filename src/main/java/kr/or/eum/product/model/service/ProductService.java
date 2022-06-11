@@ -623,6 +623,15 @@ public class ProductService {
 		System.out.println(counselNo);
 		return productDao.updateStartTime(map);
 	}
+	//대권 구매페이지
+	public HashMap<String, Object> selectProduct(int productNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		Product product = productDao.selectProductPayment(productNo);
+		map.put("product", product);
+		Expert expert = memberDao.selectExepertPayment(product.getExpertNo());
+		map.put("expert",expert);
+		return map;
+	}
 
 
 

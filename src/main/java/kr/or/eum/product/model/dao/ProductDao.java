@@ -244,6 +244,10 @@ public class ProductDao {
 		int result = sqlSession.update("product.updateStartTime", map);
 		return result;
 	}
+	public Product selectProductPayment(int productNo) {
+		Product product = sqlSession.selectOne("product.selectProductPayment.", productNo);
+		return product;
+	}
 
 
 

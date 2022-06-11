@@ -548,7 +548,7 @@
 	</update>
 	
 	<!-- 대권 -->
-	<select id="selectProductNo" parameterType="int" resultType="pro">
+	<select id="selectProductPayment" parameterType="int" resultType="pro">
 		select 
 				product_no as productNo,
 				expert_no as expertNo,

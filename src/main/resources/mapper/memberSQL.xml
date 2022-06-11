@@ -357,6 +357,28 @@
 		where pay_no =#{payNo}
 		
   	</select>
-  	
+  	<!-- 대권 expertPayment -->
+  	<select id = "selectExpertPayment" parameterType="int" resultType="exeprt">
+  		select 
+  			expert_no as exeprtNo,
+  			expert_category as expertCategory,
+  			exeprt_tag as expertTage,
+  			credential as credential,
+  			issuing_authority as issuinAuthority,
+  			acquistion_date as acquistionDate,
+  			certificate_name as certificateName,
+  			certificate_path as certificatePath,
+  			expert_name as expertName,
+  			expert_phone as expertPhone,
+  			expert_email as expertEmail,
+  			expert_content as expertContent,
+  			job_name as jobName,
+  			expert_pr as expertPr,
+  			expert_career as expertcareer,
+  			expert_intro as expertIntro,
+  			expert_app as expertApp
+  		form expert_tbl
+  		where expert_No=${expertNo}
+  	</select>
   	
 </mapper>

@@ -170,5 +170,10 @@ public class MemberDao {
 		
 		return result;
 	}
+	//대권 productpayment
+	public Expert selectExepertPayment(int expertNo) {
+		Expert expert = sqlSession.selectOne("member.selectExepertPayment", expertNo);
+		return expert;
+	}
 
 }

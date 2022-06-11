@@ -46,7 +46,7 @@
 	.check-find{
 		display: inline;
 	}
-	.check-find>div>input{
+	.check-find>input{
 		display: inline;
 		float: left;
 		width: 70%;
@@ -56,6 +56,9 @@
 		display: inline;
 		float: right;
 		width: 27%;
+	}
+	#button-prr{
+		height: 50px;
 	}		
 	#button-pr{
 		height: 50px;
@@ -132,7 +135,10 @@
 	<div class="firstbox">
 	<div id="maintitle">회원가입</div>
 	<div id="star">*는 필수 입력사항입니다.</div>
-	<form class="joinfrmbox" id="joinfrmbox" action="/join.do" method="post">
+	<form class="joinfrmbox" id="joinfrmbox" action="/join.do" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="memberPoint" value="0">
+		<input type="hidden" name="memberReportCount" value="0">
+		<input type="hidden" name="grade" value="2">
 		<fieldset>
 			<div class="emailbox">
 				<div>이메일*</div> 
@@ -150,7 +156,7 @@
 			닉네임* <input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="닉네임을 입력해주세요.">
 			<div class="fs-light" id="memberNick-test"></div><br>
 			
-			비밀번호* <input  class="input-form inputplus" type="password" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요."><br>
+			비밀번호* <input  class="input-form inputplus" type="password" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요." maxlength=15><br>
 			
 			비밀번호 확인* <input class="input-form inputplus" type="password" name="memberPwRe" id="memberPwRe" placeholder="비밀번호를 다시 입력해주세요.">
 			<div class="fs-light" id="memberPw-test"></div><br>
@@ -160,42 +166,63 @@
 			
 			<div class="genderbox">
 				<div>성별*</div>
-				<input class="gender" type="hidden" id="gender" name="gender"> 
+				<input class="gender" type="hidden" id="gender" name="gender" required> 
 				<button class="btn bc1 bs3" type="button" id="man" onclick="statusChange(this)" value="1">남</button><button class="btn bc1 bs3" type="button" id="woman" onclick="statusChange(this)" value="2">여</button><br>
 			</div>
 			<br>
 			<div class="birthbox">
 				<div>생년월일*</div>
-				<input type="hidden" name="birth" id="birth" value="">
-				<input  class="input-form inputplus changedata" type="text" id="year" name="birth-s" placeholder="년(4자)" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+				<input type="hidden" name="birth" id="birth" value="" required>
+				<input  class="input-form inputplus changedata" type="text" id="year" name="birth-s" placeholder="년(4자)" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required>
 				<select class="input-form inputplus changedata" id="month" name="birth-s" required>
 					  <option value='' selected >월</option>
 				</select>
-				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" placeholder="일" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" placeholder="일" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
 			</div>
 			<div class="navi-birth fs-light fc-9" id="birth-test"></div>
+			
+			<div class="img-box-wrap" style="margin:30px 10px;">
+							<div class="commFileBox preview-image" style="margin-right: 10px;">
+								<p class="comm-write-p" style="margin-bottom: 5px;">프로필사진 등록</p>
+								<label for="input-file">사진 선택</label> <input type="file"
+									name="file" class="commFile upload-hidden"
+									id="input-file">
+							</div>
+							<div class="input-img-box" style="width: 80px; height:80px;"></div>
+							
+						</div>
+			
+			
+			
 			<div class="checkedbox">
 				<div><input type="checkbox" class="mainagreement" name="chkall"> <label> 모두 동의합니다.</label></div>
 				<div class="checkbox-s">
-					<div><input type="checkbox" class="agreement" value="0"> <label> 만 14세 이상입니다.(필수)</label></div>
-					<div><input type="checkbox" class="agreement" value="0"> <label> 서비스이용약관에 동의합니다.(필수)</label></div>
-					<div><input type="checkbox" class="agreement" value="0"> <label> 개인정보 수집/이용에 동의합니다.(필수)</label></div>
+					<div><input type="checkbox" class="agreement" value="0" required> <label> 만 14세 이상입니다.(필수)</label></div>
+					<div><input type="checkbox" class="agreement" value="0" required> <label> 서비스이용약관에 동의합니다.(필수)</label></div>
+					<div><input type="checkbox" class="agreement" value="0" required> <label> 개인정보 수집/이용에 동의합니다.(필수)</label></div>
 					<div><input type="checkbox" class="agreement" id="agreement" name="agreement" value="0"> <label> 이벤트 할인 혜택 알림 수신에 동의합니다(선택)</label></div>
 				</div>
 			</div>
-			<button class="btn bc1 bs4" id="joinButton" type="button">가입완료</button>
+			<button class="btn bc1 bs4" id="joinButton" type="submit" disabled>가입하기</button>
 		</fieldset>
 	</form>
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>
+	$(function(){
+		$('#man').click();
+	})
+
+
 	//1.button 활성화
 	//2.submit 유효성
-	let inputCheck = new Array(7).fill(false);
+	let inputCheck = new Array(7).fill(true);
 	let checkAll = true;
 	console.log(checkAll);
+	/*
 	$("#joinButton").click(function() {
-		checkAll = true;
+		console.log(checkAll); 
+		console.log(inputCheck); 
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
 				checkAll = false;
@@ -233,11 +260,13 @@
 					if(data == "1"){
 						const title = "회원가입 완료되었습니다.";
 						const icon = "success";
-						toastShow(title,icon);
+						const msgTime = 1500;
+						toastShow(title,icon, msgTime);
 					}else if(data == "0"){
 						const title = "회원가입을 실패했습니다.";
 						const icon = "error";
-						toastShow(title,icon);
+						const msgTime = 1500;
+						toastShow(title,icon, msgTime);
 					}	
 				},
 				error : function(){
@@ -248,10 +277,30 @@
 		}else{
 			const title = "입력값을 확인해주세요";
 			const icon = "warning";
-			toastShow(title,icon);
+			const msgTime = 1500;
+			toastShow(title,icon, msgTime);
 				
 		}
 	});
+	*/
+	
+	function formCheck(){
+		checkAll = true;
+		console.log("인풋체크> "+inputCheck);
+		for(let i = 0; i < inputCheck.length; i++){
+			if(inputCheck[i] == false){
+				checkAll = false;
+			}
+		}
+		console.log("체크올> "+checkAll);
+		if(checkAll){
+			$("#joinButton").attr("disabled",false);
+		}else{
+			$("#joinButton").attr("disabled",true);
+		}
+	}
+	
+	
 	
 	//연락처 유효성 검사
 	$("#memberPhone").change(function(){
@@ -263,22 +312,24 @@
 				$("#memberPhone-test").text(" 010-0000-0000 형식으로 입력해주세요.");
 				$("#memberPhone-test").css("color","#ff2e63");
 				inputCheck[0] = false;
+				formCheck();
 			}else{
 				var memberPhone = $("#memberPhone").val();
 				//연락처 중복 검사
 				$.ajax({
-					   url : "/phoneCheck.do?memberPhone=" + memberPhone,
-					   type:"POST",
-					   data:{},		
+					   url : "/phoneCheck.do",
+					   data: {memberPhone:memberPhone},
 					   success: function(data){
 						   if(data == "1"){
 								$("#memberPhone-test").text("가입된 번호입니다.");
 								$("#memberPhone-test").css("color","#ff2e63");
 								inputCheck[0] = false;
+								formCheck();
 							}else if(data == "0"){
 								$("#memberPhone-test").text("사용가능한 번호입니다.");
 								$("#memberPhone-test").css("color","#00adb5");
 								inputCheck[0] = true;
+								formCheck();
 							}
 					   },
 					   error : function(){
@@ -286,39 +337,60 @@
 					   }
 					});
 				inputCheck[0] = true;
+				formCheck();
 			}
 		});
 	//닉네임 유효성 검사
 	$("#memberNick").change(function(){
+		$("#memberNick-test").text("");
 		   var memberNick = $(this).val();
-		   $.ajax({
-			   url : "/nickCheck.do?memberNick=" + memberNick,
-			   type:"POST",
-			   data:{},
-			   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-			   success: function(data){
-				   if(data == "1"){
-						$("#memberNick-test").text("이미 사용중인 닉네임입니다.");
-						$("#memberNick-test").css("color","#ff2e63");
-						inputCheck[1] = false;
-					}else if(data == "0"){
-						$("#memberNick-test").text("사용가능한 닉네임입니다.");
-						$("#memberNick-test").css("color","#00adb5");
-						inputCheck[1] = true;
-					}
-			   },
-			   error : function(){
-				   console.log("서버요청실패");
-			   }
-			});
+		   let regExp1;
+			let regExp2;
+			regExp1 = /^[가-힣]{2,8}$/;
+			regExp2 = /^[a-zA-Z]{4,10}$/;
+			if(!regExp1.test(memberNick) && !regExp2.test(memberNick)){
+				 const title = "2~8글자 한글 또는 4~10글자 영어대소문자만 입력가능합니다.";
+					const icon = "error";
+					const msgTime = 1500;
+					toastShow(title,icon,msgTime);
+					inputCheck[1] = false;
+					formCheck();
+			}else{
+				   $.ajax({
+					   url : "/nickCheck.do?memberNick=" + memberNick,
+					   type:"POST",
+					   data:{},
+					   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+					   success: function(data){
+						   if(data == "1"){
+								$("#memberNick-test").text("이미 사용중인 닉네임입니다.");
+								$("#memberNick-test").css("color","#ff2e63");
+								inputCheck[1] = false;
+								formCheck();
+							}else if(data == "0"){
+								$("#memberNick-test").text("사용가능한 닉네임입니다.");
+								$("#memberNick-test").css("color","#00adb5");
+								inputCheck[1] = true;
+								formCheck();
+							}
+					   },
+					   error : function(){
+						   console.log("서버요청실패");
+					   }
+					});
+			}
+		   
+		   
+		   
 		});
 		    
 	//email인증
 	var code="";
 	
 	$("#button-pr").click(function(){
-		var email = $("#memberId").val();
+		$("#authMsg").text("");
 		var checkResult = $("#authMsg");
+		var email = $("#memberId").val();
 		var regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
 		if(!regExp.test(email)){
 			//이메일 유효성 검사
@@ -340,7 +412,11 @@
 					}else if(data == "0"){
 						//인증번호 발송
 						var checkBox = $("#numberId");      	// 인증번호 입력란
-					    var numBox = $("#numberId");    		// 인증번호 입력란 박스
+					    var numBox = $("#numberId");  		// 인증번호 입력란 박스
+					    const title = "인증번호를 발송중입니다.";
+						const icon = "info";
+						const msgTime = 5500;
+						toastShow(title,icon,msgTime);
 						$.ajax({
 							type:"GET",
 							url:"/mailCheck.do?email=" + email,
@@ -352,6 +428,10 @@
 								numBox.removeClass("mail-input-ture");
 								$(".check-hidden").removeClass("check-hidden");
 								code = data;
+							    const title = "인증번호를 발송했습니다!.";
+								const icon = "success";
+								const msgTime = 2000;
+								toastShow(title,icon,msgTime);
 							}		
 						});
 						
@@ -375,12 +455,51 @@
 	        $("#memberId").attr("readonly","readonly");
 	      	$(".check-find").addClass("check-hidden");
 	      	inputCheck[2] = true;
+	      	formCheck();
 	    } else {                                        // 일치하지 않을 경우
 	        checkResult.html("인증번호를 다시 확인해주세요.");
 	        checkResult.attr("class", "incorrect");
 	        inputCheck[2] = false;
+	        formCheck();
 	    }
 	});
+	
+	$("#memberPw").on("change", function(){
+		var password = $(this).val();
+		 var pwd1 = $("#memberPw").val();
+	        var pwd2 = $("#memberPwRe").val();
+		let regExp;
+		regExp = /^[0-9a-zA-Z!@#$%^+\-=]{6,15}$/;
+		if(!regExp.test(password)){
+			const title = "6~15자의 영문 대소문자,숫자,특수문자만 가능합니다.";
+			const icon = "error";
+			const msgTime = 1800;
+			toastShow(title,icon,msgTime);
+		}else{
+			
+		}
+		
+		  if (pwd1 != '' && pwd2 == '') {
+	            null;
+	        }else if (pwd1 != "" || pwd2 != "") {
+	            if (pwd1 == pwd2) {
+	            	$("#memberPw-test").text("비밀번호가 일치합니다.");
+					$("#memberPw-test").css("color","#3865f2");
+					inputCheck[3] = true;
+					formCheck();
+	            } else {
+	            	$("#memberPw-test").text("비밀번호가 일치하지 않습니다.");
+					$("#memberPw-test").css("color","#f05454");
+					inputCheck[3] = false;
+					formCheck();
+	            }
+	        }
+	});
+	
+	
+	
+	
+	
 		
 	//비밀번호 유효성 검사
 	$("[name=memberPwRe]").on("change",function (){
@@ -392,11 +511,13 @@
 	            if (pwd1 == pwd2) {
 	            	$("#memberPw-test").text("비밀번호가 일치합니다.");
 					$("#memberPw-test").css("color","#3865f2");
-					inputCheck[3] = false;
+					inputCheck[3] = true;
+					formCheck();
 	            } else {
 	            	$("#memberPw-test").text("비밀번호가 일치하지 않습니다.");
 					$("#memberPw-test").css("color","#f05454");
 					inputCheck[3] = false;
+					formCheck();
 	            }
 	        }
 	    });
@@ -449,55 +570,75 @@
 		    let month = $("#month").val();
 		    let day = $("#day").val();
 		    
-		    let birth = (year+"-"+month+"-"+day);
+		    if(month < 10){
+		    	newMonth = "0"+ month;
+		    }else{
+		    	newMonth = month;
+		    }
+		    if(day < 10){
+		    	newDay = "0"+ day;
+		    }else{
+		    	newDay = day;
+		    }
+		    
+		    console.log(month);
+		    let birth = (year+"-"+newMonth+"-"+newDay);
 		    $("#birth").val(birth);
 		    
 		   
 	  		//year 유효성검사
-			if(year > 2023){
+			if(year > 2022){
 				$("#birth-test").text("미래에서 오셨군요^^");
 				$("#birth-test").css("color","#ff2e63");
-				inputCheck[4] = false;				
+				inputCheck[4] = false;		
+				formCheck();
 			}else if(year < 1922){
 				$("#birth-test").text("정말이세요?");
 				$("#birth-test").css("color","#ff2e63");
 				inputCheck[4] = false;
+				formCheck();
 			}else if(year!=""&&(year>1923||year<2022)){
 				//day 유효성 검사
 				if(month == 2 ){
-					if(day>29||day<0){
+					if(day>29||day<0||!day){
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
+						formCheck();
 					}else{
-						$("#birth-test").text("완료");
+						$("#birth-test").text("완료1");
 						$("#birth-test").css("color","#3865f2");
 						inputCheck[4] = true;
+						formCheck();
 					}
 				}else if(month==4||month==6||month==9||month==11){
-					if(day>30||day<0){
+					if(day>30||day<0||!day){
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
+						formCheck();
 					}else{
-						$("#birth-test").text("완료");
+						$("#birth-test").text("완료2");
 						$("#birth-test").css("color","#3865f2");
 					}
 				}else if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
-					if(day>31||day<0){
+					if(day>31||day<0||!day){
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
-					}else{
-						$("#birth-test").text("완료");
+						formCheck();
+					}else {
+						$("#birth-test").text("완료3");
 						$("#birth-test").css("color","#3865f2");					
 						inputCheck[4] = true;
+						formCheck();
 					}
 				}
 			}else{
 				$("#birth-test").text("생년월일 확인해주세요");
 				$("#birth-test").css("color","#ff2e63");	
 				inputCheck[4] = false;
+				formCheck();
 			}
 			
 		});
@@ -536,13 +677,52 @@
 		$("#woman").removeClass("bc1")
 	});
 	
+    // 이미지 추가 함수 시작
+    var imgTarget = $('.preview-image .upload-hidden');
+
+    imgTarget.on('change', function(){
+      var parent = $(this).parent().next();
+      parent.children('.upload-display').remove();
+
+        if(window.FileReader){
+            //image 파일만
+            if (!$(this)[0].files[0].type.match(/image\//)) return;
+            
+            var reader = new FileReader();
+            reader.onload = function(e){
+                var src = e.target.result;
+                parent.append('<div class="upload-display" style="display:inline-block; border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb" style="width: 120px; height:120px;"></div></div>');
+            }
+            reader.readAsDataURL($(this)[0].files[0]);
+        }
+
+        else {
+            $(this)[0].select();
+            $(this)[0].blur();
+            var imgSrc = document.selection.createRange().text;
+            parent.prepend('<div class="upload-display" style="border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img class="upload-thumb" style="width: 120px; height:120px;"></div></div>');
+
+            var img = $(this).siblings('.upload-display').find('img');
+            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
+        }
+    });// 이미지 추가 함수 종료
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	//토스트 알림 함수		
-	function toastShow(title, icon){
+	function toastShow(title, icon, msgTime){
 		const Toast = Swal.mixin({
 		    toast: true,
 		    position: 'center-center',
 		    showConfirmButton: false,
-		    timer: 1500,
+		    timer: msgTime,
 		    timerProgressBar: true,
 		    didOpen: (toast) => {
 		     // toast.addEventListener('mouseenter', Swal.stopTimer)

@@ -58,11 +58,6 @@ public class ProductDao {
 		return totalCount;
 	}
 	
-	public int selectSerchCount(HashMap<String, Object> map) {
-		int totalCount = sqlSession.selectOne("product.selectSerchTotalCount", map);
-		return totalCount;
-	}
-	
 	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
 		int result = sqlSession.insert("product.classWrite", pro);
@@ -94,12 +89,6 @@ public class ProductDao {
 		int result = sqlSession.insert("product.ideamarketWrite", pro);
 		return result;
 	}
-	public ArrayList<Product> selectSerchList(HashMap<String, Object> map) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
 	
 
 	
@@ -255,7 +244,8 @@ public class ProductDao {
 		int result = sqlSession.update("product.updateStartTime", map);
 		return result;
 	}
-
+  
+  //영준
 	public Product selectProduct(int productNo) {
 		System.out.println(productNo);
 		Product product = sqlSession.selectOne("product.selectProductNo", productNo);
@@ -275,10 +265,6 @@ public class ProductDao {
 		Product product = sqlSession.selectOne("product.selectPopularProduct", integer);
 		return product;
 	}
-
-	
-
-
 
 
 

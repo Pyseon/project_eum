@@ -62,7 +62,7 @@
 <!-- 좋아요 -->						
 						<c:choose>
 							<c:when test="${likeMemberCheck eq 0 }">
-								<i class="fa-regular fa-heart icon-wish"></i>
+								<i class="fa-regular fa-heart icon-wish" style="pointer:cursor;"></i>
 							</c:when>
 							<c:otherwise>
 								<i class="fa-regular fa-heart icon-wish fa-solid"></i>

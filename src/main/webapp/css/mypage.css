@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+/*////좌측메뉴////////*/
+.member-img{
+	width: 150px;
+	height: 150px;
+}
+
+.all-wrap{
+	width: 100%;
+    margin-top: 35px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu-wrap{
+	margin-right: 65px;
+}
+
+.content-title{
+	background-color: black;
+}
+
+
+
+/*/////////mypage.jsp 관련///////*/
+.content-wrap{
+	margin-top: 35px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*/////레이아웃/////*/
+*,
+::after,
+::before {
+    box-sizing: border-box
+}
+
+
+@-ms-viewport {
+    width: device-width
+}
+
+
+@media (min-width:576px) {
+    .container {
+        max-width: 540px
+    }
+}
+
+@media (min-width:768px) {
+    .container {
+        max-width: 720px
+    }
+}
+
+@media (min-width:992px) {
+    .container {
+        max-width: 960px
+    }
+}
+
+@media (min-width:1200px) {
+    .container {
+        max-width: 1140px
+    }
+}
+
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px
+}
+
+.col-4,
+.col-8,
+.col-lg-4,
+.col-lg-8{
+    position: relative;
+    width: 100%;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px
+}
+
+.col {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
+    max-width: 100%
+}
+
+.col-auto {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: none
+}
+
+.col-4 {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%
+}
+
+.col-8 {
+    -ms-flex: 0 0 66.666667%;
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%
+}
+
+
+@media (min-width:992px) {
+    .col-lg-4 {
+        -ms-flex: 0 0 33.333333%;
+        flex: 0 0 33.333333%;
+        max-width: 25.444444%
+    }
+    .col-lg-8 {
+        -ms-flex: 0 0 66.666667%;
+        flex: 0 0 66.666667%;
+        max-width: 74.555556%
+    }
+}
+/*/////레이아웃 끝/////*/

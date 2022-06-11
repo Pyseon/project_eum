@@ -21,7 +21,7 @@
 				</select>
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="selectNum" value="0">
-				<input type="text" name="keyword">				
+				<input id="keyword" type="text" name="keyword">				
 				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>
 			<div id="categoryList">
@@ -88,8 +88,10 @@
 		$("select[name=searchType]").change(function(){
 			if($("select[name=searchType]").val() == 'faqCategory' ){
 				$('#categoryList').show();
+				$('#keyword').attr("type","number");
 			}else{
 				$('#categoryList').hide();
+				$('#keyword').attr("type","text");
 			}
 		});
 	});

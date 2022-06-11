@@ -64,7 +64,8 @@
 					<input type="hidden" value=${rpt.reportCategory } name="category">
 					<input type="hidden" value=${rpt.reportIndex } name="index">
 					<br> 
-					<input type="submit" value="답변 등록" class="btn bc3 reportSubmit">
+					<input type="submit" disabled="disabled" value="답변 등록" id="reportSubmit" class="btn bc1">
+					
 				</form>
 				</div>
 			</c:when>
@@ -83,13 +84,22 @@
 		</c:choose>
 		</div>
 	<div class="resultReport">
-		<button class="btn bc1" onclick="location.href='/reportMember.do?memberNo=${rpt.defendant}&category=${rpt.reportCategory }&index=${rpt.reportIndex }&reportNo=${rpt.reportNo }&selNo=1'">사형</button>
-		<button class="btn bc1" onclick="location.href='/updateAnsResult.do?selectNum=2&reportNo=${rpt.reportNo}'">봐줌</button>
+		<button class="btn bc2" onclick="location.href='/reportMember.do?memberNo=${rpt.defendant}&category=${rpt.reportCategory }&index=${rpt.reportIndex }&reportNo=${rpt.reportNo }&selNo=1'">사형</button>
+		<button class="btn bc3" onclick="location.href='/updateAnsResult.do?selectNum=2&reportNo=${rpt.reportNo}'">봐줌</button>
 	</div>
 	</div>
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+	$("textarea[name=answerContent]").change(function() {
+		const answerTitle = $("textarea[name=answerTitle]").val();
+		const answerContent = $("textarea[name=answerContent]").val();
+		if(answerTitle.length > 0 && answerContent.length > 0){
+			$("#reportSubmit").attr("disabled", false);
+		}
+	});
+	
+	
 		//공통
 		$(".header-div").css("display","none");
 		$(".footer-div").css("display","none");

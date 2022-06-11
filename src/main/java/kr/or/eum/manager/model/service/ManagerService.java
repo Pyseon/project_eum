@@ -216,8 +216,13 @@ public class ManagerService {
 		return dao.updatePayState(ups);
 	}
 
-	public ArrayList<Payment> detailPayment(int payNo) {
-		return dao.detailPayment(payNo);
+	public Payment detailPayment(int payNo) {
+		Payment payment = dao.detailPayment(payNo);
+		if(payment.getMemberNo()>0) {
+			String memberId = dao.selectMemberId(payNo);
+			payment.setMemberId(memberId);
+		}
+		return payment;
 	}
 
 	public Report detailReport(int reportNo) {

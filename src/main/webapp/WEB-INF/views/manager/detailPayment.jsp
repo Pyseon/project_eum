@@ -13,8 +13,9 @@
 	<div class="manaContentWrap">
 		<h1 class="fc-1 fs-full">>주문관리 상세내역</h1>
 		<hr>
-		<c:forEach items="${pay }" var="pay" varStatus="i">
 		<h2 class="fc-1 fs-bold">주문번호: ${pay.payNo }</h2>
+		<h3 class="fc-1 fs-bold">주문자: ${pay.memberId }</h3>
+		<h3 class="fc-1 fs-bold">회원번호: ${pay.memberNo }</h3>
 		<h3 class="fc-1 fs-bold">${pay.payDate }</h3>
 		<hr>
 			<table class="detailTbl tbl">
@@ -24,7 +25,7 @@
 				<th><h3 class="fc-1 fs-bold">주문상태</h3></th>
 			</tr>
 			<tr>
-				<td>${pay.productImgPath }</td>
+				<td><img id="mana-productImg" src="/img/product/ClassList/${pay.productImgPath }"></td>
 				<td><h3 class="fc-1 fs=midium">${pay.productTitle }</h3></td>
 				<td><h3 class="fc-1 fs=midium">${pay.payState }</h3></td>
 			</tr>
@@ -39,18 +40,17 @@
 		<c:choose>
 			<c:when test="${pay.payState == 3 }">
 				<div class="managerBtn">
-					<button class="btn bc3" onclick="location.href='/manaPayment.do?reqPage=1&payState=0'">목록으로</button>
+					<button class="btn bc3" onclick="location.href='/manaPayment.do?reqPage=1&selectNum=0'">목록으로</button>
 					<button class="btn bc1 bs1 modal-open-btn payRes" target="#payReserv-modal" value=${pay.payNo }>다시 예약</button>
 				</div>
 			</c:when>
 			<c:otherwise>
 				<div class="managerBtn">
-					<button class="btn bc3" onclick="location.href='/manaPayment.do?reqPage=1&payState=0'">목록으로</button>
+					<button class="btn bc3" onclick="location.href='/manaPayment.do?reqPage=1&selectNum=0'">목록으로</button>
 					<button class="btn bc2 bs1 modal-open-btn payCan" target="#payCancel-modal" value=${pay.payNo }>주문 취소</button>
 				</div>
 			</c:otherwise>
 		</c:choose>
-	</c:forEach>
 	</div>
 	
 	<input type="hidden" id="reqPage" value="${reqPage }">

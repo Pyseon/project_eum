@@ -193,9 +193,16 @@
 			payment,
 			pay_method as payMethod,
 			pay_usepoint as payUsepoint,
-			pay_addpoint as payAddpoint
+			pay_addpoint as payAddpoint,
+			member_no as memberNo
 			from payment_tbl pay
 			where pay_no = #{value }
+	</select>
+	<select id="selectMemberId" parameterType="int" resultType="String">
+		select
+			(select member_Id from member_tbl m where payment.member_no = m.member_no) as memberId
+		from payment_tbl payment
+		where pay_no = #{value }
 	</select>
 	
 	<select id="reportList" parameterType="map" resultType="rpt">

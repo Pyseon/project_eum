@@ -89,9 +89,9 @@ public class ManagerDao {
 		return result;
 	}
 
-	public ArrayList<Payment> detailPayment(int payNo) {
-		List pay = sqlSession.selectList("manager.detailPayment", payNo);
-		return (ArrayList<Payment>) pay;
+	public Payment detailPayment(int payNo) {
+		Payment pay = sqlSession.selectOne("manager.detailPayment", payNo);
+		return pay;
 	}
 
 	public ArrayList<Report> ReportPageData(HashMap<String, Object> map) {
@@ -364,6 +364,11 @@ public class ManagerDao {
 		} else {
 			return 1;
 		}
+	}
+
+	public String selectMemberId(int payNo) {
+		String memberId = sqlSession.selectOne("manager.selectMemberId", payNo);
+		return memberId;
 	}
 	
 }

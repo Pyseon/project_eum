@@ -94,7 +94,7 @@
 											
 										<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">마이페이지</a></li>
 										<li>
-											<button class="btn bc1 bs6" id="login-btn" type="button"
+											<button class="btn bc2 bs6" id="login-btn" type="button"
 												onclick="location.href='/logout.do'">로그아웃</button>
 										</li>
 									</c:otherwise>

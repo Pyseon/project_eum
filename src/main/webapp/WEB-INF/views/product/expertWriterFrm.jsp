@@ -186,8 +186,16 @@
 		
 		
 		<div style="margin-bottom: 20px">
-		<div><h3>태그</h3></div>
-			<input class="input-form" type="text" name="productTag" placeholder="태그를 작성하세요" style="width: 60%;">
+		<div>
+		<h3>태그
+		<button type="button" class="addOptBtn2 optButton" style="line-height: 2;">
+					<i class="fa-solid fa-square-plus"></i>
+		</button>
+		</h3>
+		</div>
+			<div id="tag-opt">
+			c
+			</div>
 		</div>
 		<div>
 		<input type="submit" class="btn bc1 bs4" value="등록하기">
@@ -313,6 +321,35 @@
               console.log(ansList);
               $(this).parent().remove();
               ansCount--;
+        });
+    });
+    
+    var tagCount = 1;
+    var tagList=[];
+    $(document).on("change", ".tag-val", function(){
+    	var tagStr = $(this).val();
+    	let regExp;
+    	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;
+
+    	tagList[$(".tag-val").index(this)] = tagStr+"|";
+    	$("[name=productTag]").val(tagList);
+    	console.log(tagList);
+		
+    });
+    $(".addOptBtn2").on("click",function(){
+        if(tagCount >= 20) return;
+        var tagDiv = document.createElement("div");
+        tagDiv.setAttribute("class","optBox");
+        tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+        $("#tag-opt").append(tagDiv);
+        tagCount++;
+        
+        $(".delOptBtn2").off().on("click",function(){
+        	tagList.splice($(".delOptBtn2").index(this)+1, 1);
+              $("[name=productTag]").val(tagList);
+              console.log(tagList);
+              $(this).parent().remove();
+              tagCount--;
         });
     });
 	</script>

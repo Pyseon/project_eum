@@ -267,6 +267,14 @@ public class ProductDao {
 		sqlSession.update("product.productUpdate", pro);
 		
 	}
+	public ArrayList<Integer> selectPopularNo() {
+		List list = sqlSession.selectList("product.selectPopularNo");
+		return (ArrayList<Integer>) list;
+	}
+	public Product selectPopularProduct(Integer integer) {
+		Product product = sqlSession.selectOne("product.selectPopularProduct", integer);
+		return product;
+	}
 
 	
 

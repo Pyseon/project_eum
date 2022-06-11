@@ -547,6 +547,40 @@
 		update counsel_tbl set start_time=#{startTime} where counsel_no=#{counselNo} 
 	</update>
 	
+	<!-- 영준 -->
+	<select id="selectPopularNo" resultType="int">
+	<![CDATA[
+		select product_no from (select product_no from wishlist_tbl group by product_no order by count(product_no) desc) where rownum <= 10
+	]]>
+	</select>
+	
+	<!-- 영준 -->
+	<select id="selectPopularProduct" parameterType="int" resultType="pro">
+	select b.* from(
+    (select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
+    cost,
+    sale,
+    (cost)*(sale)/100 as salecost,
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
+    from product_tbl p
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)) b)
+    where productNo = #{value}
+	</select>
+	
 	<!-- 대권 -->
 	<!-- 
 	<select id="selectProductNo" parameterType="int" resultType="pro">

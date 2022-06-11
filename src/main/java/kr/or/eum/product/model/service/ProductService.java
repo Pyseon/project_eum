@@ -696,6 +696,17 @@ public class ProductService {
 		
 	}
 
+	public ArrayList<Product> selectPopular() {
+		ArrayList<Integer> popularNo = productDao.selectPopularNo();
+		
+		ArrayList<Product> popularProduct = new ArrayList<Product>();
+		for(int i=0;i<popularNo.size();i++) {
+			popularProduct.add(productDao.selectPopularProduct(popularNo.get(i)));
+		} 
+		
+		return popularProduct;
+	}
+
 
 
 }

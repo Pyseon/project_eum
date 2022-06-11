@@ -172,12 +172,12 @@
 			<br>
 			<div class="birthbox">
 				<div>생년월일*</div>
-				<input type="hidden" name="birth" id="birth" value="">
+				<input type="hidden" name="birth" id="birth" value="" required>
 				<input  class="input-form inputplus changedata" type="text" id="year" name="birth-s" placeholder="년(4자)" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required>
 				<select class="input-form inputplus changedata" id="month" name="birth-s" required>
 					  <option value='' selected >월</option>
 				</select>
-				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" placeholder="일" maxlength="2" oninput="this.value = this.value.replace(/[^1-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" placeholder="일" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
 			</div>
 			<div class="navi-birth fs-light fc-9" id="birth-test"></div>
 			
@@ -209,7 +209,9 @@
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>
-	
+	$(function(){
+		$('#man').click();
+	})
 
 
 	//1.button 활성화

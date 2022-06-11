@@ -101,6 +101,7 @@ public class ProductController{
 	
 	@RequestMapping(value="/classWrite.do")
 		public String classWrite(Product pro, MultipartFile file, HttpServletRequest request) {
+		System.out.println("클래스작성>"+pro);
 		System.out.println(pro.getProductImgname());
 		System.out.println(pro.getProductImgPath());
 		System.out.println(file.getOriginalFilename());
@@ -206,6 +207,7 @@ public class ProductController{
 
 @RequestMapping(value="/expertWrite.do")
 	public String expertWrite(Product pro, MultipartFile file, HttpServletRequest request) {
+
 	System.out.println(pro.getProductImgname());
 	System.out.println(pro.getProductImgPath());
 	System.out.println(file.getOriginalFilename());
@@ -250,17 +252,8 @@ public class ProductController{
 		byte[] bytes = file.getBytes();
 		bos.write(bytes);
 		bos.close();
+
 		
-	}catch (FileNotFoundException e) {
-		e.printStackTrace();
-	}catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	pro.setProductImgname(filename);
-	pro.setProductImgPath(filepath);
-	
 	System.out.println(pro);
 	
 	int result = productService.expertWrite(pro);

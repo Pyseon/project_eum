@@ -62,7 +62,7 @@
 								<i class="fa-regular fa-heart icon-wish"></i>
 							</c:when>
 							<c:otherwise>
-								<i class="fa-regular fa-heart icon-wish fa-solid"></i>
+								<i class="fa-regular fa-heart icon-wish fa-solid" style="pointer:cursor;"></i>
 							</c:otherwise>
 						</c:choose>
 							<span>좋아요</span>

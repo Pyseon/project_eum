@@ -221,41 +221,14 @@ li{
 			</ul>
 			</div>
 			<div>
-				<button class="btn bc3 bs3" id="login-btn" type="button" onclick="location.href='/MyprojectDetail.do?productNo=${p.productNo}'">${p.productNo}</button>
+				<button class="btn bc3 bs3" id="login-btn" type="button" onclick="location.href='/MyprojectDetail.do?productNo=${p.productNo}'">수정하기</button>
 		</div>
 		</div>
 		
 		</c:forEach>
 	</div>
 </div>
-	
 
-<script>
-	$(function(){
-		var selPro = '${selPro}';
-		console.log(selPro);
-		
-		for(var i=0; i<3; i++){
-			var val = $(".btm_image").eq(i);
-			console.log(val);
-			if(selPro != '전체'){
-				for(var i=1; i<3; i++){
-					if(i != 1){
-				$(".btm_image").eq(i).addClass("selPro-active");
-					}
-				break;
-				}
-			}else{
-				$(".btm_image").eq(0).addClass("selPro-active");
-				
-			}
-			break;
-			}
-		
-	});
-	
-	
-</script>
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </html>

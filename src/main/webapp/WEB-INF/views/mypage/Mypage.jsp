@@ -55,7 +55,8 @@
 	}
 </style>
 <body>
-<%@ include file="/WEB-INF/views/member/memberheader.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp" %>
+
 <%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
 	<div class="firstbox">
 	<div id="maintitle">>내 정보</div>
@@ -108,7 +109,7 @@
 	</form>
 	</div>
 	
-	
+	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	
 	
 	

@@ -26,10 +26,18 @@
 			<button class="comm-nav" onclick="location.href='/communityList.do?category=0&reqPage=1'" >요즘뭐하니</button>
 			<button class="comm-nav" onclick="location.href='/communityList.do?category=1&reqPage=1'" >이건어때</button>
 			<div class="do-write">
-				<button class="do-write-btn" onclick="location.href='/communityWriteFrm.do'">
-				<span class='material-symbols-outlined fc-2 do-write-icon'>drive_file_rename_outline</span> 
-				<span class="do-write-text">글쓰기</span>			
-			</button>
+				<c:if test="${empty sessionScope.member }">
+					<button class="do-write-btn" onclick="login();">
+						<span class='material-symbols-outlined fc-2 do-write-icon'>drive_file_rename_outline</span> 
+						<span class="do-write-text" onclick=>글쓰기</span>			
+					</button>
+				</c:if>
+				<c:if test="${not empty sessionScope.member }">
+					<button class="do-write-btn" onclick="location.href='/communityWriteFrm.do?category=${category }'">
+						<span class='material-symbols-outlined fc-2 do-write-icon'>drive_file_rename_outline</span> 
+						<span class="do-write-text">글쓰기</span>			
+					</button>
+				</c:if>
 		</div>
 		</div>
 		<div id=comm-content>
@@ -70,8 +78,39 @@
 							</div>
 						</div>
 						<div class="card-title fs-bold">${com.commTitle }</div>
-						<div class="card-intro">${com.commIntro }</div>
-						<div class="card-info card-flex">
+
+							<c:if test="${com.commCategory eq 0}">
+								<div class="card-intro">${com.commIntro }</div>
+							</c:if>
+							<c:if test="${com.commCategory eq 1}">
+								<div class="card-intro2" style="display:flex; min-height:40px; margin-bottom:20px;">
+								<c:choose>
+									<c:when test="${com.pick0Count eq 0 and com.pick1Count eq 0}">
+										<div style="text-align:center; padding: 10px; background-color:#cdd8fc; flex-grow:1;">
+											<i class="fa-regular fa-face-laugh-squint" style="font-size:18px;margin-right:5px; color:#3666f1;"></i>
+											<span class="fs-full" style="font-size:18px; color:#3666f1;">${com.pick0Count}</span>
+										</div>
+										<div style="text-align:center; padding: 10px; background-color:#fcd4d4; flex-grow:1;">
+											<span class="fs-full" style="font-size:18px; color:#f05454;">${com.pick0Count}</span>
+											<i class="fa-regular fa-face-smile-wink" style="font-size:18px;margin-left:5px; color:#f05454;"></i>
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div style="text-align:center; padding: 10px; background-color:#cdd8fc; flex-grow:${com.pick0Count};">
+											<i class="fa-regular fa-face-laugh-squint" style="font-size:18px;margin-right:5px; color:#3666f1;"></i>
+											<span class="fs-full" style="font-size:18px; color:#3666f1;">${com.pick0Count}</span>
+										</div>
+										<div style="text-align:center; padding: 10px; background-color:#fcd4d4; flex-grow:${com.pick1Count};">
+											<span class="fs-full" style="font-size:18px; color:#f05454;">${com.pick1Count}</span>
+											<i class="fa-regular fa-face-smile-wink" style="font-size:18px;margin-left:5px; color:#f05454;"></i>
+										</div>
+									</c:otherwise>
+								</c:choose>
+								
+								</div>
+							</c:if>
+
+							<div class="card-info card-flex">
 							<div class="card-profile">
 								<div class="card-user-img-wrap">
 									<img class="card-user-img"
@@ -104,6 +143,26 @@
 				$(".comm-nav").eq(0).addClass("cat-active");
 			}
 		})
+		
+	 //sweeatalert2 confirm 함수
+			function login() {
+	 			Swal.fire({
+                  title: '로그인이 필요합니다',
+                  text: "로그인 하시겠습니까?",
+                  icon: 'warning',
+                  showCancelButton: true,
+                  confirmButtonColor: '#3085d6',
+                  cancelButtonColor: '#d33',
+                  confirmButtonText: '로그인 하기',
+                  cancelButtonText: '취소',
+                  reverseButtons: false, // 버튼 순서 거꾸로
+                  
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                	  location.href="/loginFrm.do";
+                  }
+                })
+			}
 	</script>	
 </body>
 </html>

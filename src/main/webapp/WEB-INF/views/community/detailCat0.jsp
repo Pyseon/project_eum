@@ -120,7 +120,7 @@
 									onclick="report('${comm.memberNo }','3','${comm.commNo }')">신고하기</a></span>
 						</c:when>
 						<c:otherwise>
-							<span id="report"><a  style="cursor:pointer;" onclick="loginNeed();">신고하기</a></span>
+							<span id="report"><a  style="cursor:pointer;" onclick="loginFrm();">신고하기</a></span>
 						</c:otherwise>
 					</c:choose>
 				</div>
@@ -138,7 +138,6 @@
 		<div class="comments-area">
 			<div class="comment-list-wrap">
 				<c:forEach items="${cmntList }" var="cmnt">
-					<c:if test="{"></c:if>
 					<c:choose>
 						<c:when test="${cmnt.cmntLev eq 0 }">
 							<!--comment-->
@@ -267,6 +266,21 @@
 					class="comment-write-btn btn fc-7">등록</button>
 			</div>
 			</c:if>
+			
+			<c:if test="${empty sessionScope.member }">
+			<div class="comment-write">
+				<div class="comment-write-head">
+					<span
+						style="font-family: fs-m; margin: 0 0 8px 0; padding-left: 2px;">댓글
+						쓰기</span> <span class="comment-num-box"><span id="comment-num">0</span>/250</span>
+				</div>
+				<textarea id="comment-textarea" placeholder="로그인을 하시면 입력하실 수 있습니다."
+					onkeyup="resize(this)" onkeydown="resize(this)" maxlength="250" onclick="loginFrm();" readonly></textarea>
+				<button type="button" id="comment-reg"
+					class="comment-write-btn btn fc-7" onclick="loginFrm();" disabled>등록</button>
+			</div>
+			</c:if>
+			
 		</div>
 		<!--comment-area-->
 		<!-- comment end -->
@@ -298,19 +312,15 @@ $(function(){
 	
 	//좋아요(wish)
 	$('.icon-wish').on("click", function() {
-		console.log("클릭!");
 		var memberNo = $("#memberNo").val();
 		var commNo = $("#commNo").val();
 		var currentValue = $(this).attr("class");
-		console.log(currentValue);
 		 if(memberNo > 0){
 	         if(currentValue == "fa-regular fa-heart icon-wish" && memberNo != 0) {
 	         	$(this).addClass("fa-solid");
-	         	console.log("참!");
 	         	like(memberNo, commNo);
 	         }else {
 	        	 $(this).removeClass("fa-solid");
-	        	 console.log("리무브!");
 	           	 unLike(memberNo, commNo);
 	         }
 	 	}else{
@@ -318,8 +328,6 @@ $(function(){
 			var icon = 'info';
 	 		toastShow(title, icon);
 	 	}
-		 
-		 
 	});
 	
 	//좋아요(wish) insert
@@ -332,7 +340,6 @@ $(function(){
 				},
 				success : function(data) {
 					$("#commLikeNum").text(data);
-					console.log('좋아요!');
 				},
 				error : function() {
 					console.log('에러');
@@ -350,7 +357,6 @@ $(function(){
 				},
 				success : function(data) {
 					$("#commLikeNum").text(data);
-					console.log('관심없어요!');
 				},
 				error : function() {
 					console.log('에러');
@@ -466,7 +472,6 @@ $(function(){
 				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
 			}
 		})
-		
 	})
 	
 	
@@ -717,7 +722,25 @@ function toastShow(title, icon){
   		
   		}//토스트 알림 함수 끝		
 
-
+  		 //sweeatalert2 confirm 함수
+		function loginFrm() {
+ 			Swal.fire({
+              title: '로그인이 필요합니다',
+              text: "로그인 하시겠습니까?",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: '로그인 하기',
+              cancelButtonText: '취소',
+              reverseButtons: false, // 버튼 순서 거꾸로
+              
+            }).then((result) => {
+              if (result.isConfirmed) {
+            	  location.href="/loginFrm.do";
+              }
+            })
+		}
 
 	
 </script>

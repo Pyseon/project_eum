@@ -19,7 +19,9 @@
 			    comm_filename as commFilename,
 			    comm_filepath as commFilepath,
 			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount,
-            (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no) as pickCount
+             (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no) as pickCount,
+            (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 0) as pick0Count,
+            (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 1) as pick1Count
 		from community_tbl comm 
 		<if test="category != 2">
 		where comm_category = #{category}
@@ -52,7 +54,10 @@
 			    (select nvl(count(*),0) from commlike_tbl cl where cl.comm_no = comm.comm_no) as commLike, --좋아요수
 			    comm_filename as commFilename,
 			    comm_filepath as commFilepath,
-			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
+				(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount,
+            	 (select nvl(count(*),0) from pick_tbl p where comm.comm_no = p.comm_no) as pickCount,
+                (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 0) as pick0Count,
+                (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 1) as pick1Count
 		from community_tbl comm where comm_no = ${value}
 	</select> 
 	

@@ -116,11 +116,12 @@ public class CommunityService {
 		}else {
 			map.put("memberNo", 0);
 		}
-		
+		int likeMemberCheck = dao.likeMemberCheck(map);
 		ArrayList<Pick> pickList = dao.selectPickList(map);
 		CommunityDetailData cdd = new CommunityDetailData();
 		cdd.setComm(comm);
 		cdd.setPickList(pickList);
+		cdd.setLikeMemberCheck(likeMemberCheck);
 		return cdd;
 	}
 	
@@ -137,8 +138,12 @@ public class CommunityService {
 	
 //>>>>>>>>>> 쓰기
 	public int communityWrite(Community comm) {
-		Community community = setToken(comm);
-		return dao.communityWrite(community);
+		if(comm.getCommCategory() == 0) {
+			Community community = setToken(comm);
+			return dao.communityWrite(community);
+		}else {
+			return dao.communityWrite(comm);
+		}
 	}
 
 	public void commCoWrite(CommunityCo commCo) {
@@ -151,9 +156,13 @@ public class CommunityService {
 	
 
 //>>>>>>>>>> 수정
-	public void communityUpdate(Community comm) {
-		Community community = setToken(comm);
-		dao.communityUpdate(community);
+	public void communityUpdate(Community comm, int category) {
+		if(comm.getCommCategory() == 0) {
+			Community community = setToken(comm);
+			dao.communityUpdate(community);
+		}else {
+			dao.communityUpdate(comm);
+		}
 	}
 	
 	public void commCoUpdate(CommunityCo commCo) {

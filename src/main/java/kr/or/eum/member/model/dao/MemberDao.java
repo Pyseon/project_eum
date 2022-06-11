@@ -162,6 +162,8 @@ public class MemberDao {
 		return (ArrayList<Payment>)list;
 	}
 	public int classUpdate(Product pro) {
+		
+		
 	
 		int result = sqlSession.update("member.classUpdate", pro);
 		

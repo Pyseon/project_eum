@@ -6,6 +6,9 @@
 <head>
 <meta charset="UTF-8">
 <title>구매하기</title>
+<!-- 결제 라이브러리 경로추가 -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 </head>
 <style>
 	.purchasebox{
@@ -146,7 +149,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="purchasebox">
 	<div class="purchasemain fs-bold">상품구매하기</div>
-	<div class="purchasesub fs-bold">상담제목</div> 						<!--상품 product_title  -->
+	<div class="purchasesub fs-bold">${productTitle }</div> 						<!--상품 product_title  -->
 	<div class="purchaseall">														
 		<div class="purchase">
 			<div class="expert">전문가이름   &nbsp</div>						<!--전문가 expert_name  -->

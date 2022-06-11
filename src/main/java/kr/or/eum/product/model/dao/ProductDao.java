@@ -255,12 +255,21 @@ public class ProductDao {
 		int result = sqlSession.update("product.updateStartTime", map);
 		return result;
 	}
+
+	public Product selectProduct(int productNo) {
+		System.out.println(productNo);
+		Product product = sqlSession.selectOne("product.selectProductNo", productNo);
+		System.out.println(product);
+		return product;
+	}
+
 	public void productUpdate(Product pro) {
 		sqlSession.update("product.productUpdate", pro);
 		
 	}
 
 	
+
 
 
 

@@ -679,6 +679,11 @@ public class ProductService {
 		System.out.println(counselNo);
 		return productDao.updateStartTime(map);
 	}
+	//대권	
+	public Product selectProduct(int productNo) {
+		System.out.println(productNo);
+		return productDao.selectProduct(productNo);
+	}
 
 	public Product productDetailUpdate(int productNo) {
 		return productDao.selectOneProduct(productNo);

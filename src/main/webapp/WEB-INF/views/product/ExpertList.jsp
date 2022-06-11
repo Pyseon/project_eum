@@ -224,7 +224,7 @@ li{
 		<button type="button" class="writeButton" id="writeButton" onclick="expertNeed();">등록하기</button>
 	</c:if>
 	<c:if test="${grade eq 2}">
-		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/expertWriterFrm.do'">등록하기</button>
 	</c:if>
 	<c:if test="${grade eq 3}">
 		<button type="button" class="writeButton" id="writeButton" onclick="blacklist();">등록하기</button>

@@ -199,7 +199,9 @@ li{
 		font-weight: normal;
 	}
 </style>
+<div>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
+</div>
 </head>
 <body>
 <div>
@@ -425,6 +427,7 @@ ${pageNavi }
 </script>
 
 </body>
+<div>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
-
+</div>
 </html>

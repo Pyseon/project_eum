@@ -356,5 +356,14 @@ public class ManagerDao {
 		String cmntContent = sqlSession.selectOne("manager.selectcmntContent", reportIndex);
 		return cmntContent;
 	}
+
+	public int scoutReport(HashMap<String, Object> scout) {
+		int result = sqlSession.selectOne("manager.scoutReport", scout);
+		if(result == 0) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 	
 }

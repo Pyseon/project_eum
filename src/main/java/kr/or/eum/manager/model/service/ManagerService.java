@@ -411,6 +411,13 @@ public class ManagerService {
 	public String selectCmntContent(int reportIndex) {
 		return dao.selectCmntContent(reportIndex);
 	}
+
+	public int scoutReport(int categoryNo, int reportIndex) {
+		HashMap<String, Object> scout = new HashMap<String, Object>();
+		scout.put("category", categoryNo);
+		scout.put("index", reportIndex);
+		return dao.scoutReport(scout);
+	}
 	
 	
 }

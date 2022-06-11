@@ -199,7 +199,9 @@
 	</select>
 	
 	<select id="reportList" parameterType="map" resultType="rpt">
-		select
+		select * from
+		(select rownum as rnum, rpt.* from
+		(select
 		report_no as reportNo,
 		defendant,
 		(select member_Id from member_tbl m where report.defendant = m.member_no) as defendantId,
@@ -224,6 +226,8 @@
 				where report_is= 0 or report_is=1 or report_is=2
 			</otherwise>
 		</choose>
+		order by report_no desc) rpt)
+		where rnum between #{start} and #{end}
 	</select>
 	
 	<select id="reportCount" resultType="int">
@@ -251,6 +255,8 @@
         		(select member_no from member_tbl where member_id like '%'||#{keyword }||'%')
 			</when>
 		</choose>
+		order by report_no desc) rpt)
+		where rnum between #{start} and #{end}
 	</select>
 	
 	<select id="searchReportCount" parameterType="map" resultType="int">
@@ -281,6 +287,27 @@
 		from report_tbl report
 		where report_no = #{value }
 	</select>
+	<select id="scoutReport" parameterType="map" resultType="int">
+		select count(*)
+			from 
+			<choose>
+				<when test="category == 0">
+					product_tbl where product_no = #{index }
+				</when>
+				<when test="category == 1">
+					review_tbl where review_no = #{index }
+				</when>
+				<when test="category == 2">
+					request_tbl where request_no = #{index }
+				</when>
+				<when test="category == 3">
+					community_tbl where comm_no = #{index }
+				</when>
+				<when test="category == 4">
+					communityco_tbl where cmnt_no = #{index }
+				</when>
+			</choose>
+	</select>
 	<select id="selectAnsrpt" parameterType="int" resultType="ansrpt">
 		select
 			ansrpt_title as ansrptTitle,
@@ -296,7 +323,7 @@
 		where review_no = #{value }
 	</select>
 	<select id="selectCommCategoryNum" parameterType="int" resultType="int">
-		select com_category from community_tbl where comm_no = #{value }
+		select comm_category from community_tbl where comm_no = #{value }
 	</select>
 	<select id="selectCmntContent" parameterType="int" resultType="String">
 		select cmnt_content from communityco_tbl where cmnt_no = #{value}

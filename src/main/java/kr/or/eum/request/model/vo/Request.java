@@ -21,6 +21,6 @@ public class Request {
 	private String reqRfr;
 	private String reqAccept;
 	private String memberPicturepath;
-
+	private int reqAsk;
 
 }

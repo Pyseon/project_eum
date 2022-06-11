@@ -9,7 +9,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+
+<div class="header-div">
+    <%@ include file="/WEB-INF/views/common/header.jsp"%>
+</div>
 <style>
 .writer{
 display: flex;
@@ -87,11 +90,18 @@ display: flex;
 					</li>
 				</c:otherwise>
 			</c:choose>
+			<form action="/insertreqask.do" metho="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+			<input type="text" name="expertNo" value="${expertNo }">
 			
+			
+			
+			</form>
 		</div>
 	
 	</div>
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<div class="footer-div">
+        <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</div>
 </body>
 
 </html>

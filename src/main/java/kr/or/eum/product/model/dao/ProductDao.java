@@ -94,6 +94,10 @@ public class ProductDao {
 		int result = sqlSession.insert("product.ideamarketWrite", pro);
 		return result;
 	}
+	public ArrayList<Product> selectSerchList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 	
@@ -255,6 +259,7 @@ public class ProductDao {
 		sqlSession.update("product.productUpdate", pro);
 		
 	}
+
 	
 
 

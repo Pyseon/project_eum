@@ -114,6 +114,46 @@
     order by product_no desc)b)
     where rnum between #{start} and #{end}
     </select>
+    
+    
+	<!-- 재건 -->
+	<select id="selectSerchList" resultType="pro">
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
+    cost,
+    sale,
+    (cost)*(sale)/100 as salecost,
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
+    from product_tbl p
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
+<choose>
+        <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
+            where product_Category=#{selPro} and product_type = 2
+        </when>
+        <otherwise>
+            where product_type = 2
+        </otherwise>
+    </choose>
+    order by product_no desc)b)
+    where rnum between #{start} and #{end}
+    </select>
+    
 
 <!-- 재건 -->
 	<select id="selectExpTotalCount" resultType="int" parameterType="map">

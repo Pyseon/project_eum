@@ -191,7 +191,7 @@ public class ProductController{
 	}
 	
 	@RequestMapping(value="/expertWriterFrm.do")
-	public String expertWriterFrm(int reqPage, String selPro, Model model, HttpServletRequest request) {
+	public String expertWriterFrm(Model model, HttpServletRequest request) {
 	HttpSession session = request.getSession(false);
     Member member = null;
     if(session != null) {
@@ -362,16 +362,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	
 }
 	@RequestMapping(value = "/productUpdateFrm.do")
-	public String productUpdateFrm(HttpServletRequest request, Model model) {
-		HttpSession session = request.getSession(false);
-	    Member member = null;
-	    if(session != null) {
-	        member = (Member)session.getAttribute("member");
-	    }
-	    int memberNo = member.getMemberNo();
-	    Expert expert = productService.selectExpertNo(memberNo);
-	    model.addAttribute("expertNo", expert.getExpertNo());
-	    System.out.println("expert : "+expert);
+	public String productUpdateFrm(int productNo, int expertNo, Model model) {
 		return "product/productUpdateFrm";
 	}
 	@RequestMapping(value = "/productUpdate.do")
@@ -440,6 +431,31 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		
 		System.out.println(pro);
 		return pro;
+		}
+	
+	@RequestMapping(value = "/productSerch.do")
+	public String productSerch(int reqPage, String selPro, Model model, HttpServletRequest request) {
+		ProductPageData ppd = productService.selectClassList(reqPage, selPro);
+
+		model.addAttribute("list",ppd.getList());
+		model.addAttribute("selPro", selPro);
+		model.addAttribute("pageNavi",ppd.getPageNavi());
+		model.addAttribute("reqPage", reqPage);
+		System.out.println("selPro : "+selPro);
+		
+		HttpSession session = request.getSession(false);
+        Member member = null;
+        if(session != null) {
+            member = (Member)session.getAttribute("member");
+        }
+        if(member != null) {
+        	model.addAttribute("grade", member.getGrade());
+			model.addAttribute("memberNo", member.getMemberNo());
+			System.out.println("memberNo : "+member.getMemberNo());
+			System.out.println("grade : "+member.getGrade());
+
+		}else {
+			model.addAttribute("memberNo", 0);
 		}
 	//윤지
 	@RequestMapping(value = "/productDetail.do")

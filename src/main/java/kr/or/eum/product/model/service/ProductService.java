@@ -315,7 +315,6 @@ public class ProductService {
 			}
 		}
 		productTag = "";
-		
 		for(int i=0;i<tagList.size();i++){
 			productTag += "#"+tagList.get(i)+"/";
 		}
@@ -631,6 +630,17 @@ public class ProductService {
 		Expert expert = memberDao.selectExepertPayment(product.getExpertNo());
 		map.put("expert",expert);
 		return map;
+	}
+
+	public ArrayList<Product> selectPopular() {
+		ArrayList<Integer> popularNo = productDao.selectPopularNo();
+		
+		ArrayList<Product> popularProduct = new ArrayList<Product>();
+		for(int i=0;i<popularNo.size();i++) {
+			popularProduct.add(productDao.selectPopularProduct(popularNo.get(i)));
+		} 
+		
+		return popularProduct;
 	}
 
 

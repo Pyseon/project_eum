@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -110,27 +113,97 @@
 	<hr>
 	 <div class="recommended_items container">
     <!--recommended_items-->
-    <h2 class="fs-bold"><a href="">마이페이지</a></h2>
+    <h2 class="fs-bold"><a href="/">마이페이지</a></h2>
     <div
       id="recommended-item-carousel"
       class="carousel slide"
-      data-ride="carousel"
-    >
+      data-ride="carousel">
       <div class="carousel-inner">
         <div class="item active">
-          <div class="col-sm-4">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="images/home/recommend1.jpg" alt="" />
-                  <h2>쉽게배우는 JAVA</h2>
-                  <a href="/manaMember.do?reqPage=1&selectNum=0" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
+        
+        
+          <div class="posting-item" style="cursor: pointer;" onclick="location.href='/imgVerProductDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
+	<img id="popularProductImg">
+		<div class="posting-connect">
+			<ul>
+				<li>
+					<div class="t1" style="font-family: fs-bold !important;">
+						<span class="card-category fs-bold">${c.productTitle }</span>
+						<span style="color: #bdbdbd; font-size: 14px !important; line-height: 2;">
+						${c.productCategory}
+						</span>
+					</div>
+				</li>
+			</ul>
+			
+			<ul style="margin-top:0px;">
+				<li>
+					<div class="t3" style="margin-bottom: 5px;" >
+					${c.productIntro }
+					</div>
+					<div style="border-bottom: 1px solid rgba(220, 220, 220, 0.59); ">
+					</div>
+				</li>
+			</ul>
+		
+		<ul>
+			<li>
+				<div class="t4">
+					<div>
+					<span>
+						<img src="./img/member/${c.memberPicturepath}">
+						&nbsp;
+						${c.expertName }
+					</span>
+					</div>
+					
+				<div class="t4-right" style="line-height: 2; margin : 0 7px 0 0px">
+					<div style="line-height: 2.5;"><span class="material-icons icons-message">message</span></div>
+					<div class="t4-info"><span>${c.revCount } </span></div>
+					 &nbsp;
+					<div style="line-height: 2.5;"><span class="material-icons icons-star">star</span></div>
+					<div class="t4-info"><span>${c.reviewStar }</span></div>
+				</div>	
+					
+						 
+				</div>
+			</li>
+		</ul>
+		
+		<div class="t2" style="margin: 20px 0 0px 0px;" >	
+		<c:choose>
+		<c:when test="${0 eq c.sale }">	
+			<span id="sele" style="width: auto;"></span>
+		<span class="t2" style="margin: 0px 0 30px 0px;">
+			<span id="price"  class="fc-1" style="width: auto; font-size: 18px; line-height: 1.5;">
+			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+			</span>
+		</span> 
+		</c:when>
+		<c:otherwise>
+		<span id="sele" style="width: auto;">${c.sale}%</span>
+	
+		<span class="t2" style="margin: 0px 0 30px 0px;">
+			<span id="price"  class="fc-7" style="width: auto; font-size: 18px; line-height: 1.5;">
+			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
+			</span>
+			&nbsp;
+			<span id="fixed-price" style="width: auto; font-size: 12px; font-style: italic; font-weight: bold; margin: 4px 0 0px 0px;">
+			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
+			</span>
+		</span> 
+		</c:otherwise>
+		</c:choose>
+		
+
+		</div><!-- t2 -->
+		
+		
+		</div><!-- posting-connect -->
+		
+		</div>
+          
+          
           <div class="col-sm-4">
             <div class="product-image-wrapper">
               <div class="single-products">
@@ -334,6 +407,18 @@
     </div>
   </div>
   <!--/recommended_items-->
+  
+<script>
+	$(function() {
+		$.ajax({
+			type : 'GET',
+			url : "/indexPageData.do",
+			success : function (data){
+				
+			}
+		});
+	});
+</script>
 
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

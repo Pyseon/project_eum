@@ -149,6 +149,10 @@ $("#email-pw").on("click",function(){
 									phonetext.text("");
 									phonetext.css("color","#ff2e63");
 									//연락처 중복 검사
+									var title = '비밀번호 생성중입니다............';
+									var icon = 'info';
+									var msgTime = 10000;
+									toastShow(title, icon, msgTime);
 									$.ajax({
 										   url : "/pwCheck.do", 
 										   type:"POST",
@@ -157,11 +161,18 @@ $("#email-pw").on("click",function(){
 											   if(data == "1"){
 													phonetext.text("메일전송 완료");
 													phonetext.css("color","#ff2e63");
+													var title = '임시비밀번호를 메일로 보냈습니다!!';
+													var icon = 'success';
+													var msgTime = 1800;
+													toastShow(title, icon, msgTime);
 													
 												}else if(data == "0"){
 													phonetext.text("메일전송 실패");
 													phonetext.css("color","#00adb5");
-													
+													var title = '메일전송에 실패했습니다. 관리자에 문의하세요!';
+													var icon = 'error';
+													var msgTime = 1800;
+													toastShow(title, icon, msgTime);
 												}
 										   },
 										   error : function(){
@@ -192,6 +203,30 @@ $("#email-pw").on("click",function(){
 		   }
 	});
 });
+
+
+
+//토스트 알림 함수		
+function toastShow(title, icon, msgTime){
+	const Toast = Swal.mixin({
+	    toast: false,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: msgTime,
+	    timerProgressBar: true,
+	    didOpen: (toast) => {
+	     // toast.addEventListener('mouseenter', Swal.stopTimer)
+	      toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	 	})
+
+  	Toast.fire({
+    title: title,
+    icon: icon
+  })
+}
+
+
 </script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>

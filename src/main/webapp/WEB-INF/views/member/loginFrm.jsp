@@ -54,8 +54,8 @@
 <div class="container2">
 	<form class="login-form" id="login-form" action="/login.do" method="post">
 		<fieldset>
-			<input type="text" class="input-form" name="memberId" id="memberId" placeholder="이메일을 입력해주세요." value=""><br>
-			<input type="password" class="input-form" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요." value=""><br>
+			<input type="text" class="input-form" name="memberId" id="memberId" placeholder="이메일을 입력해주세요." required><br>
+			<input type="password" class="input-form" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요." required><br>
 			<div class="navi-me" id="navi-me">이메일 또는 비밀번호를 확인해주세요</div><br>
 			<button class="btn bc1 bs4" type="submit" id="submitbtn">로그인</button>
 			

@@ -306,17 +306,22 @@
 	</insert>
 	
 	<!-- 대권  -->
- 	<select id="searchId" resultType="int">
-	select
- 		count(*)
-	from member_tbl where member_id = #{memberId}	
- 	</select>
- 	
- 	<select id="searchPhone" resultType="int">
-	select
- 		count(*)
-	from member_tbl where member_phone = #{memberPhone}	
- 	</select>
+	<select id="searchId" resultType="int">
+		select
+		count(*)
+		from member_tbl where member_id = #{memberId}
+	</select>
+
+	<select id="searchPhone" resultType="int">
+		select
+		count(*)
+		from member_tbl where member_phone = #{memberPhone}
+	</select>
+	
+	<update id="updatePw" parameterType="member">
+		update member_tbl set member_pw=#{memberPw} where member_Id=#{memberId}
+	</update>
+
 
 	<select id ="selectMyprojectDetail" parameterType="int" resultType="pro">
  		

@@ -192,7 +192,7 @@ public class ProductController{
 	}
 	
 	@RequestMapping(value="/expertWriterFrm.do")
-	public String expertWriterFrm(int reqPage, String selPro, Model model, HttpServletRequest request) {
+	public String expertWriterFrm(Model model, HttpServletRequest request) {
 	HttpSession session = request.getSession(false);
     Member member = null;
     if(session != null) {
@@ -638,6 +638,13 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	public String updateReadCheck(String counselNo, String memberNo) {
 		int readResult = productService.updateReadCheck(counselNo, memberNo);
 		return new Gson().toJson(readResult);
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/indexPageData.do" , produces = "application/json;charset=utf-8")
+	public String indexPageData() {
+		ArrayList<Product> list = productService.selectPopular();
+		return new Gson().toJson(list);
 	}
 	
 }

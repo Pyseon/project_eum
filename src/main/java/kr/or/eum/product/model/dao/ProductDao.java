@@ -244,11 +244,33 @@ public class ProductDao {
 		int result = sqlSession.update("product.updateStartTime", map);
 		return result;
 	}
+
 	public Product selectProductPayment(int productNo) {
 		Product product = sqlSession.selectOne("product.selectProductPayment.", productNo);
+    return product; 
+ }
+  
+  //영준
+	public Product selectProduct(int productNo) {
+		System.out.println(productNo);
+		Product product = sqlSession.selectOne("product.selectProductNo", productNo);
+		System.out.println(product);
+
 		return product;
 	}
 
+	public void productUpdate(Product pro) {
+		sqlSession.update("product.productUpdate", pro);
+		
+	}
+	public ArrayList<Integer> selectPopularNo() {
+		List list = sqlSession.selectList("product.selectPopularNo");
+		return (ArrayList<Integer>) list;
+	}
+	public Product selectPopularProduct(Integer integer) {
+		Product product = sqlSession.selectOne("product.selectPopularProduct", integer);
+		return product;
+	}
 
 
 

@@ -808,4 +808,5 @@
 	<update id="updateMemberGrade" parameterType="int">
 		update member_tbl set grade = 1 where member_no = (select member_no from expert_tbl where expert_no = #{value}) 
 	</update>
+
 </mapper>

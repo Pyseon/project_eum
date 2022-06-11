@@ -8,7 +8,7 @@
 
 .all-wrap{
 	width: 100%;
-    margin-top: 35px !important;
+    margin-top: 40px !important;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -17,22 +17,92 @@
 
 .menu-wrap{
 	margin-right: 65px;
+    margin-top: 20px;
 }
 
-.content-title{
-	background-color: black;
+.menu-detail{
+	margin-bottom: 15px;
+
 }
+.nickname{
+	text-align: center;
+    margin-top: 15px;
+    border-bottom: solid 3px #3865f2;
+    padding-bottom: 3px;
+    font-size: 16px;
+}
+.menu-detail>a{
+	font-size: 18px;
+}
+.menu-detail>a:hover{
+	font-weight: bold;
+	color: #3865f2;
+}
+
+
+
+
+
+
 
 
 
 /*/////////mypage.jsp 관련///////*/
-.content-wrap{
-	margin-top: 35px;
+.content-title{
+	margin-bottom: 50px;
+	font-size: 30px;
+    font-weight: bold;
 }
-
-
-
-
+.content-wrap{
+	margin-top: 40px;
+	margin-bottom: 50px;
+}
+.content-box-title {
+	margin-bottom: 5px;
+}
+.input-form{
+	width: 100% !important;
+	margin: 0 auto !important;
+	height: 60px;
+    padding: 10px;
+}
+#star{
+	font-size: 14px;
+    color: #3865f2;
+}
+.mypage-content{
+	width: 530px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+}
+.birthbox{
+	width: 530px;
+    margin: 0 auto;
+}
+.btn {
+	height: 50px !important;
+	font-size: 16px;
+    font-weight: bold;
+}
+.drop-btn {
+	border: 0px;
+	outline: 0px;
+	background-color: #fff;
+	padding-left: 0px !important;
+    text-decoration: underline;
+    color: #a7a7a7;
+}
+.drop-btn-wrap {
+	width: 530px;
+    margin: 0 auto !important;
+}
+.content-all-wrap{
+	margin-top: 30px;
+    margin-bottom: 50px;
+}
+.content-box-title-wrap{
+	font-size: 18px;
+}
 
 
 

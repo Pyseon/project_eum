@@ -93,16 +93,7 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return dao.DeleteMyproduct(payNo);
 	}
-/*
-	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
-		
-		System.out.println(productNo+"서비스");
-		ArrayList<ProductAndExpertDetail> list = dao.Myproductdetail(productNo);
-		
-		System.out.println(list);
-		return list;
-	}
-*/
+
 	public Member selectMypage(Member m) {
 		
 		Member member = dao.selectOneMember(m);

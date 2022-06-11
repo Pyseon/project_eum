@@ -209,7 +209,16 @@ li{
 						<span class="card-category fs-bold">${w.productTitle }</span>
 					</div>
 					<div>
-						<span style="color: #bdbdbd;">${w.productType}</span>
+						<c:if test="${w.productType eq 1}">
+								<span style="color: #3865f2;">상담</span>
+						</c:if>
+						<c:if test="${w.productType eq 2}">
+								<span style="color: #3865f2;">클래스</span>
+						</c:if>
+						<c:if test="${w.productType eq 3}">
+								<span style="color: #3865f2;">지식마켓</span>
+						</c:if>
+						
 						
 					</div>
 					

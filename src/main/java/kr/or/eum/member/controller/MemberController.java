@@ -141,17 +141,10 @@ public class MemberController {
 		model.addAttribute("list", list);
 		return "mypage/Myproject";
 	}
+	//재민 내 프로젝트 상세페이지
 	@RequestMapping(value="/MyprojectDetail.do")
-	public String MyprojectDetail(Model model, HttpSession session, int memberNo) {
-		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
-		model.addAttribute("list", list);
-		return "mypage/MyprojectDetail";
-
-	}
-	/* 주석처리함
-	@RequestMapping(value="/productUpdate.do")
 	public String classUpdate(Model model, HttpSession session, int productNo) {
-		ArrayList<ProductAndExpertDetail> list = service.selectMyprojectDetail(productNo);
+		ArrayList<Product> list = service.selectMyprojectDetail(productNo);
 		
 		
 		System.out.println(list);
@@ -160,7 +153,71 @@ public class MemberController {
 		
 		return "mypage/MyprojectDetail";
 	}
-	*/
+	
+	//재민 내 클래스 업데이트
+	
+	@RequestMapping(value="/MyclassUpdate.do")
+		public String productUpdate(Product pro, MultipartFile file, HttpServletRequest request) {
+		
+		String savePath 
+		= request.getSession().getServletContext().getRealPath("/img/product/ClassList/");
+		
+		//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
+		//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
+		//사용자가 업로드한 파일 이름
+		String filename = file.getOriginalFilename();
+		//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
+		//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
+		//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
+		//매개변수가 하나면 매개변수부터 잘라서 반환
+		String onlyFilename = filename.substring(0, filename.lastIndexOf("."));
+		String extension = filename.substring(filename.lastIndexOf("."));
+		//실제 업로드할 파일명을 저장할 변수
+		String filepath = null;
+		//파일명 중복시 뒤에 붙일 숫자 변수
+		int count = 0;
+		while(true) {
+			if(count == 0) {
+				//반복 첫번째 회차에서는 원본파일명을 그대로 적용
+				filepath = onlyFilename + extension; //test.txt
+			}
+			File checkFile = new File(savePath+filepath);
+			if(!checkFile.exists()) { //경로에 파일이 존재하지않으면 (exists() method 사용)
+				break; //겹치지않으면 >> while 문 종료
+			}else {
+				filepath = onlyFilename + "_" + count + extension;
+			}
+			count++; //존재하면 카운트를 ++ 하고 반복문 다시 실행
+		}
+		//파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
+		//해당파일 업로드 작업
+		try {
+			//중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
+			FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+			//업로드 속도증가를 위한 보조스트림 생성
+			BufferedOutputStream bos = new BufferedOutputStream(fos);
+			//파일 업로드
+			byte[] bytes = file.getBytes();
+			bos.write(bytes);
+			bos.close();
+			
+		}catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		pro.setProductImgname(filename);
+		pro.setProductImgPath(filepath);
+		
+		
+		
+		int result = service.classUpdate(pro);
+		
+		return "redirect:/";
+		
+	}
 	//재민 구매내역
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {
@@ -221,60 +278,7 @@ public class MemberController {
 	@RequestMapping(value="/Expertapply3.do", method = RequestMethod.POST)
 	public String Expertapply3(Expert ex) {
 		
-		/*
-		String savePath 
-		= request.getSession().getServletContext().getRealPath("/img/expert/");
 		
-			//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
-			//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
-			//사용자가 업로드한 파일 이름 
-			String certificateName = file.getOriginalFilename();
-			//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
-			//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
-			//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
-			//매개변수가 하나면 매개변수부터 잘라서 반환
-			String onlyFilename = certificateName.substring(0, certificateName.lastIndexOf("."));//test
-			String extension = certificateName.substring(certificateName.lastIndexOf("."));//.txt
-			//실제 업로드할 파일명을 저장할 변수
-			String certificatePath = null;
-			//파일명 중복시 뒤에 붙일 숫자 변수
-			int count = 0;
-			while(true) {
-				if(count == 0) {
-					//반복 첫번째 회차에서는 원본파일명을 그대로 적용
-					certificatePath = onlyFilename + extension; //test.txt
-				}
-				File checkFile = new File(savePath+certificatePath);
-				if(!checkFile.exists()) { //경로에 파일이 존재하지않으면 (exists() method 사용)
-					break; //겹치지않으면 >> while 문 종료
-				}else {
-					certificatePath = onlyFilename + "_" + count + extension;
-				}
-				count++; //존재하면 카운트를 ++ 하고 반복문 다시 실행
-			}
-			//파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
-			//해당파일 업로드 작업
-			try {
-				//중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
-				FileOutputStream fos = new FileOutputStream(new File(savePath+certificatePath));
-				//업로드 속도증가를 위한 보조스트림 생성
-				BufferedOutputStream bos = new BufferedOutputStream(fos);
-				//파일 업로드
-				byte[] bytes = file.getBytes();
-				bos.write(bytes);
-				bos.close();
-				
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	
-			ex.setCertificateName(certificateName);
-			ex.setCertificatePath(certificatePath);
-		*/
 		int result = service.insertExpert(ex);
 		
 		System.out.println(result);
@@ -293,10 +297,10 @@ public class MemberController {
 	}
 	//재민 회원탈퇴
 		@RequestMapping(value="/deleteMember.do")
-		public String deleteMember(int memberNo) {
+		public String deleteMember(int memberNo, HttpSession session) {
 			
 			int result = service.deleteMember(memberNo);
-			
+			session.invalidate();
 		
 			return "redirect:/";
 		}
@@ -309,15 +313,7 @@ public class MemberController {
 	
 		return "redirect:/";
 	}
-	/*
-	@RequestMapping(value="/Myproductdetail.do")
-	public String Myproductdetail(int payNo) {
-	System.out.println(payNo+"payNo");
-	ArrayList<Payment> list = service.Myproductdetail(payNo);
-	System.out.println(list);
-	return "mypage/Myproductdetail";
-	}
-	*/
+	
 	//대권 아이디찾기
 	@RequestMapping(value="/findId.do")
 	public String findId() { 

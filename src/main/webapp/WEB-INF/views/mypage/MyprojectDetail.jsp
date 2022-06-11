@@ -98,7 +98,7 @@
 	<div class="container">
 	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">내 프로젝트</h1>
-		<form action="/productUpdate.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+		<form action="/MyclassUpdate.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
 		
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">

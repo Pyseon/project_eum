@@ -149,13 +149,13 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="purchasebox">
 	<div class="purchasemain fs-bold">상품구매하기</div>
-	<div class="purchasesub fs-bold">${productTitle }</div> 						<!--상품 product_title  -->
+	<div class="purchasesub fs-bold">${product.productTitle }</div> 						<!--상품 product_title  -->
 	<div class="purchaseall">														
 		<div class="purchase">
-			<div class="expert">전문가이름   &nbsp</div>						<!--전문가 expert_name  -->
+			<div class="expert">${expert.expertName }   &nbsp</div>						<!--전문가 expert_name  -->
 			<div class="job">&nbsp | &nbsp&nbsp 직업명or분류</div>			<!--전문가 job_name -->
 		</div>
-		<div class="price fs-bold"> ${cost } 원</div>						<!--상품 cost -->
+		<div class="price fs-bold"> ${product.cost } 원</div>						<!--상품 cost -->
 		<div class="consulting"> 1:1 상담 &nbsp 30분</div>					<!--상품 product_opthion -->
 		<div class="backgroundcolororange">								<!--  -->
 			<div class="purchasebody">
@@ -176,7 +176,7 @@
 		</div>
 		<div class="finalbox">
 			<div class="final-payment fs-bold">최종 결제 금액</div>									<!-- 상품 cost - member_poit -->
-			<input class="final-price input-form" type="text" name="" value="${cost }" readonly>
+			<input class="final-price input-form" type="text" name="" value="${product.cost }" readonly>
 		</div>
 	</div>
 	<div class="checkedbox">

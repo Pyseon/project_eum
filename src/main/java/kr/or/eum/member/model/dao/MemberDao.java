@@ -172,7 +172,7 @@ public class MemberDao {
 	}
 	//대권 productpayment
 	public Expert selectExepertPayment(int expertNo) {
-		Expert expert = sqlSession.selectOne("member.selectExepertPayment", expertNo);
+		Expert expert = sqlSession.selectOne("member.selectExpertPayment", expertNo);
 		return expert;
 	}
 

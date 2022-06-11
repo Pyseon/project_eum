@@ -244,12 +244,18 @@ public class ProductDao {
 		int result = sqlSession.update("product.updateStartTime", map);
 		return result;
 	}
+
+	public Product selectProductPayment(int productNo) {
+		Product product = sqlSession.selectOne("product.selectProductPayment.", productNo);
+    return product; 
+ }
   
   //영준
 	public Product selectProduct(int productNo) {
 		System.out.println(productNo);
 		Product product = sqlSession.selectOne("product.selectProductNo", productNo);
 		System.out.println(product);
+
 		return product;
 	}
 

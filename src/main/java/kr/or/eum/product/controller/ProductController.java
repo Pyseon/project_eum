@@ -450,7 +450,9 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		//1.상품정보불러오기(product_type:1,2,3구분)
 		System.out.println(productNo);
 		System.out.println("expertNo>>>>"+expertNo);
-		//HashMap<String, Object> paymentpage = productService.selectProduct(productNo);
+		HashMap<String, Object> paymentpage = productService.selectProduct(productNo);
+		model.addAttribute("product",paymentpage.get("product"));
+		model.addAttribute("expert",paymentpage.get("exeprt"));
 		/*
 		Product p = productService.selectProduct(productNo);
 		System.out.println(p);		

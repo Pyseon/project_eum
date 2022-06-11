@@ -67,6 +67,13 @@ public class RequestController {
 		return "request/requestWriterFrm";
 	}
 	
+	@RequestMapping(value="insertreqask.do")
+	public String insertreqask(Request reqNo, HttpServletRequest request) {
+		
+		int result = service.insertreqask(reqNo);
+		return "request/requestDetail";
+	}
+	
 	@RequestMapping(value = "/requestDetail.do")
 	public String requestDetail(int reqNo, int memberNo, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
@@ -82,6 +89,7 @@ public class RequestController {
 			}else {
 				model.addAttribute("memberNo", 0);
 			}
+			model.addAttribute("reqaskList", rdd.getReqaskList());
 			model.addAttribute("req", rdd.getReq());
 			model.addAttribute("Tag", rdd.getTag());
 			System.out.println("req : "+rdd);

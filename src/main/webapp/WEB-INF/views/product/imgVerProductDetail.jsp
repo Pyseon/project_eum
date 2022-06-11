@@ -25,6 +25,8 @@
 							<span data-tab="tab-2" class="detail-title title2 tab-link">후기<span class="tab-review-count"> (${reviewCount})</span></span> <!-- 후기 수 DB -->
 						</div>	
 						<div class="product-content">
+						<button class="btn bc6 bs5 fc-1"
+						onclick="location.href='/classUpdateFrm.do?productNo=${p.productNo}&expertNo=${p.expertNo }'">수정</button>
 						
 							<div id="tab-1" class="tab-content current">
 								<div class="detail-wrap">
@@ -163,8 +165,17 @@
 					<div class="widget-wrap">
 						<div class="right-first-box">
 							<div class="product-summary">
+							<c:choose>
+							<c:when test="${0 eq p.sale }">
+								<span id="price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span>
+							</c:when>
+							<c:otherwise>								
 								<span id="sele">${p.sale}%</span>
-								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span><br>
+								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span>
+								<span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span>
+								</c:otherwise>
+								</c:choose>
+								<br>
 								<div class="star-wrap">
 									<!-- 별점  -->
 									<ul>
@@ -177,7 +188,7 @@
 								<div class="report-wrap">
 									<ul>
 										<li><img id="icon-report" src="img/product/icon-report.png"></li>
-										<li><span id="report">신고</span></li>
+										<li><span id="report" style="margin:0px 20px 0px 0px">신고 </span></li>
 									</ul>
 								</div>
 							</div><!-- product-summary -->

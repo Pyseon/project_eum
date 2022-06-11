@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.request.model.vo.Request;
+import kr.or.eum.request.model.vo.RequestAsk;
 
 @Repository
 public class RequestDao {
@@ -42,8 +43,17 @@ public class RequestDao {
 	public Request requestDetail(int reqNo) {
 		// TODO Auto-generated method stub
 		Request req = sqlSession.selectOne("request.requestDetail", reqNo);
-		
-		return null;
+		return req;
+	}
+	
+	public ArrayList<RequestAsk> selectReqaskList(int reqNo){
+		List reqaskList = sqlSession.selectList("request.selectReqAskList", reqNo);
+		return (ArrayList<RequestAsk>)reqaskList;
+	}
+	public int insertreqask(Request reqNo) {
+		// TODO Auto-generated method stub
+		int result = sqlSession.insert("request.insertreqask", reqNo);
+		return result;
 	}
 	
 	

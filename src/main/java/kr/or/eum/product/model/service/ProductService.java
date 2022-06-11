@@ -243,7 +243,7 @@ public class ProductService {
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
 		int result = productDao.expertWrite(pro);
-		Product product=setToken(pro);
+
 		return result;
 	}
 	
@@ -617,6 +617,17 @@ public class ProductService {
 		System.out.println(startTime);
 		System.out.println(counselNo);
 		return productDao.updateStartTime(map);
+	}
+
+	public Product productDetailUpdate(int productNo) {
+		return productDao.selectOneProduct(productNo);
+	}
+
+
+	public void productUpdate(Product pro) {
+		Product product = setToken(pro);
+		productDao.productUpdate(product);
+		
 	}
 
 

@@ -31,6 +31,9 @@ public class Product {
 	private String productImgname;
 	private String  productImgPath;
 	private String memberPicturepath;
-	
+	private int marketType;
+	private String marketPath;
+	private String marketName;
+	private int marketFileNo;
 
 }

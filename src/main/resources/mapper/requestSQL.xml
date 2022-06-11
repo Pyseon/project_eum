@@ -39,6 +39,7 @@
 		0
 		)
 	</insert>
+
 	
 	<select id="selectTotalCount" resultType="int" parameterType="map">
 		select count(*) from request_tbl
@@ -60,12 +61,34 @@
   		req_accept as reqAccept,
   		req_rfr as reqRfr,
   		req_accept as reqAccept,
-  		member_picturepath as memberPicturepath
-
+  		member_picturepath as memberPicturepath,
+  		req_ask as reqAsk
   	from request_tbl
   	join member_tbl using(member_no)
   	where req_no=#{reqNo}
-  		
- 
   	</select>
+ <select id="selectReqAskList" resultType="reqstAsk" parameterType="int">
+ select
+ 	 select
+ 	reqask_No as reqaskNo,
+ 	member_no as memberNo,
+ 	(select req_no from request_tbl r where rsk.req_no = r.req_no) as reqNo,
+ 	expert_No as expertNo,
+    expert_Name as expertName
+ 	from reqask_tbl rsk
+    join member_tbl using(member_no)
+    where req_No=${reqNo}
+ </select>
+ 	<insert id="insertreqask" parameterType="reqstAsk">
+	insert into
+	reqask_tbl values(
+	reqask_SEQ.nextval,
+	#{memberNo},
+	#{reqNo},
+	#{expertNo},
+	#{expertName)
+	)
+	</insert>
+  	
+  	
 </mapper>

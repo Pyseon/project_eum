@@ -183,7 +183,6 @@ public class CommunityController {
 
 	@RequestMapping(value = "/communityUpdate.do")
 	public String communityUpdate(Community comm, Model model, MultipartFile file, HttpServletRequest request) {
-		System.out.println("커뮤수정> "+comm);
 		String getUri;
 		// 파일이름을 가져옴
 		String filename = file.getOriginalFilename();

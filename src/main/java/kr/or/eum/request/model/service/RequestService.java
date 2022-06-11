@@ -134,7 +134,7 @@ public RequestDetailData selectOneRequest(int reqNo, Member member) {
 }
 
 
-public int insertReqask(Request reqNo, Request expertNo) {
+public int insertReqask(int reqNo, int expertNo) {
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	map.put("reqNo", reqNo);
 	map.put("expertNo", expertNo);

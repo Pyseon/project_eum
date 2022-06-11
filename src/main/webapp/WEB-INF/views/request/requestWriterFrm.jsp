@@ -64,7 +64,7 @@
 	
 	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold">요청사항을 상세하게 작성해 주세요
 		<div>
-		<textarea id="summernote" class="input-form" type="text" name="reqContent"></textarea>
+		<textarea id="summernote" class="input-form" name="reqContent"></textarea>
 		</div>
 		
 		

@@ -69,7 +69,7 @@ public class RequestController {
 	}
 	
 	@RequestMapping(value="insertreqask.do")
-	public String insertreqask(Request reqNo, Request expertNo, HttpServletRequest request) {
+	public String insertreqask(int reqNo, int expertNo, HttpServletRequest request) {
 		
 		int result = service.insertReqask(reqNo, expertNo);
 		
@@ -87,17 +87,20 @@ public class RequestController {
 		RequestDetailData rdd = service.selectOneRequest( reqNo, member);
 			if(member != null) {
 				model.addAttribute("memberNo", member.getMemberNo());
-				
+				int memberNo = member.getMemberNo();
+					Expert expert = service.selectExpertNo(memberNo);
+					if(expert != null) {
+					model.addAttribute("expertNo", expert.getExpertNo());
+					System.out.println("expert : "+expert);
+					}else {
+					model.addAttribute("expertNo", 0);
+				}
 			}else {
 				model.addAttribute("memberNo", 0);
 			}
-			int memberNo = member.getMemberNo();
-			Expert expert = service.selectExpertNo(memberNo);
 			model.addAttribute("reqaskList", rdd.getReqaskList());
 			model.addAttribute("req", rdd.getReq());
 			model.addAttribute("Tag", rdd.getTag());
-			model.addAttribute("expertNo", expert.getExpertNo());
-			System.out.println("expert : "+expert);
 			System.out.println("req : "+rdd);
 			
 		return "request/requestDetail";

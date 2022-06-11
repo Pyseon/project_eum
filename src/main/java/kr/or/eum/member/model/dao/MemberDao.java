@@ -82,15 +82,7 @@ public class MemberDao {
 		int result = sqlSession.update("member.DeleteMyproduct");
 		return result;
 	}
-	/* 주석처리함
-	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
-		
-		System.out.println(productNo+"dao");
-		List list = sqlSession.selectList("member.Myproductdetail",productNo); 
-		
-		return (ArrayList<ProductAndExpertDetail>)list;
-	}
-	*/
+	
 
 	//윤지
 	public Expert selectOneExpertOnly2(int payNo) {
@@ -125,6 +117,10 @@ public class MemberDao {
 	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
 		List list = sqlSession.selectList("member.selectMyproject",memberNo); 
 		return (ArrayList<ProductAndExpert>)list;
+	}
+	public ArrayList<Product> selectMyprojectDetail(int memberNo) {
+		List list = sqlSession.selectList("member.selectMyprojectDetail",memberNo); 
+		return (ArrayList<Product>)list;
 	}
 	public int insertExpert(Expert ex) {
 		
@@ -164,6 +160,14 @@ public class MemberDao {
 		List list = sqlSession.selectList("member.selectMyproductDetail",payNo); 
 		
 		return (ArrayList<Payment>)list;
+	}
+	public int classUpdate(Product pro) {
+		
+		
+	
+		int result = sqlSession.update("member.classUpdate", pro);
+		
+		return result;
 	}
 
 }

@@ -184,16 +184,23 @@
 							<div class="product-summary">
 								<span id="sele">${p.sale}%</span>
 								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span><br>
-								<div class="star-wrap">
+								<div class="pro-star-wrap star-wrap">
 									<!-- 별점  -->
-									<ul>
-										<li><span class="material-icons icons-star">star</span></li>
-										<li><span id="star-score">${reviewAvr }</span></li>
-										<li><span id="help-number">총 ${paymentCount}회 상담</span><br></li>
-									</ul>
+									<div class="star-sub-wrap">
+										<span class="material-icons icons-star">star</span>
+									</div>
+									<c:if test="${reviewCount ne 0 }">
+										<div class="star-sub-wrap">
+											<span id="star-score">${reviewAvr }</span>
+										</div>
+									</c:if>
+									<div class="star-sub-wrap">
+										<span id="help-number">총 ${paymentCount}회 상담</span>
+										<br>
+									</div>	
 								</div>
 								<!-- DB -->
-								<div class="report-wrap">
+								<div class="pro-report-wrap">
 									<ul>
 										<li><img id="icon-report" src="img/product/icon-report.png"></li>
 										<c:choose>
@@ -448,6 +455,7 @@
 			// 새 페이지 리뷰 삽입 //추후 프로필 수정
 			for(let i = 0; i < prm.length; i++) {
 				const item = prm[i];
+				const productNo = ${p.productNo};
 				const review = $(`
 					<div class="real-review">
 						<div class="member-picture">
@@ -456,7 +464,7 @@
 						<div class="info">
 							<div class="info-one">
 								<span class="nickname">\${item.memberNick}</span>
-									<div class=\"review-btn-2 \${item.memberNo != memberNo ? 'hide' : ''}\">
+									<div class="review-btn-2">
 										\${item.memberNo != memberNo 
 											? '<br>' 
 											: `<a href="/modifyReviewFrm.do?reviewNo=\${item.reviewNo}">수정</a> <a href="#" onclick="deletereview(\${item.reviewNo})">삭제</a> <br>`
@@ -472,7 +480,7 @@
 									<div class="report-wrap">
 										<ul>
 											<li><img id="icon-report" src="img/product/icon-report.png"></li>
-											<li><span id="report">신고</span></li>
+											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${productNo}')">신고</a></span></li>
 										</ul>
 									</div>
 								</div>

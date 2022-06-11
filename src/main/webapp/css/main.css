@@ -2697,6 +2697,14 @@ input[name=keyword]{
 	width: 200px;
 	height: 100px;
 }
+
+#mana-productImg{
+	width: 500px;
+	height: 500px;
+}
+.detailTbl{
+	margin-left: -200px;
+}
 /*************************
 *******mypage CSS******
 **************************/

@@ -77,11 +77,13 @@
 							답변 대기						
 						</c:when>
 						<c:when test="${rpt.reportIs == 1}">
-							답변 완료						
+							답변 완료			
 						</c:when>
 					</c:choose>
 					</td>
-					<td><button class="btn bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button></td>
+					<td>
+						<button class="btn bc1" onclick="location.href='/detailReport.do?reportNo=${rpt.reportNo}&categoryNo=${rpt.reportCategory }&reportIndex=${rpt.reportIndex }'">상세보기</button>
+					</td>
 					<td>
 					<c:choose>
 						<c:when test="${rpt.ansResult == 1 }">
@@ -102,9 +104,7 @@
 		<div class="memberPageNavi">
 			${pageNavi }
 		</div>
-	</div>
-		
-	
+	</div>	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 </body>
 </html>

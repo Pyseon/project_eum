@@ -23,14 +23,14 @@
 		</div>
 		<div class="searchBox">
 			<form action="/manaMember.do" method="post">
-				<select name="searchType">
+				<select id="searchType" name="searchType">
 					<option value="memberNo">회원번호</option>
 					<option value="memberId">이메일</option>
 					<option value="memberNick">닉네임</option>
 				</select>
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="selectNum" value="0">
-				<input type="text" name="keyword">				
+				<input type="number" name="keyword" id="keyword">
 				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>
 		</div>
@@ -114,6 +114,14 @@
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	
 <script>
+$("#searchType").change(function() {
+	const searchType = $("#searchType").val();
+	if(searchType == 'memberNo'){
+		$("#keyword").attr("type","number");	
+	}else{
+		$("#keyword").attr("type","text");	
+	}
+});
 	const reqPage = $("#reqPage").val();
 	
 	$(".rlsBlk").on("click", function() {

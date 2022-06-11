@@ -67,6 +67,31 @@
 		where member_no=#{memberNo}
 	
 	</update>
+	<update id="classUpdate" parameterType="pro" >
+	 
+		
+		update product_tbl set
+  			
+  			
+  			
+  			product_title=#{productTitle},
+  			product_Category=#{productCategory},
+  			product_Intro=#{productIntro},
+  			product_Tag=#{productTag},
+  			product_Content=#{productContent},
+  			cost=#{cost},
+  			product_Qst=#{productQst},
+  			product_Ans=#{productAns},
+  			product_Addr=#{productAddr},
+  			
+  			product_Option=#{productOption},
+  			product_ImgPath=#{productImgPath},
+  			product_Imgename=#{productImgname}
+  			
+		
+		where product_no=#{productNo}
+	
+	</update>
 		<!-- 재민 내 구매목록삭제 -->
 	  <update id ="DeleteMyproduct" parameterType="int">
 	 		 update payment_tbl set
@@ -277,7 +302,7 @@
 	</select>
 	
 	<insert id="insertReport" parameterType="rpt">
-		insert into report_tbl values(report_seq.nextval, #{defendant}, #{plaintiff},#{reportContent},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{reportCategory},#{reportIndex},#{reportTitle},0)
+		insert into report_tbl values(report_seq.nextval, #{defendant}, #{plaintiff},#{reportContent},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{reportCategory},#{reportIndex},#{reportTitle},0,0)
 	</insert>
 	
 	<!-- 대권  -->
@@ -287,8 +312,8 @@
 	from member_tbl where member_id = #{memberId}	
  	</select>
 
-<!-- 
-	<select id ="selectMyprojectDetail" parameterType="int" resultType="productAndExpertDetail">
+
+	<select id ="selectMyprojectDetail" parameterType="int" resultType="pro">
  		
 		select 
 		expert_tbl.member_no as memberNo,
@@ -309,7 +334,7 @@
   
   	</select>
   	
-  	 -->
+  
   	
   	<select id ="selectMyproductDetail" parameterType="int" resultType="pay">
  		

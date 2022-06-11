@@ -8,10 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.request.model.dao.RequestDao;
 import kr.or.eum.request.model.vo.Request;
+import kr.or.eum.request.model.vo.RequestAsk;
 import kr.or.eum.request.model.vo.RequestDetailData;
 import kr.or.eum.request.model.vo.RequestPageData;
 
@@ -28,8 +30,8 @@ public class RequestService {
 		return result;
 	}
 
+
 	private Request setToken(Request req) {
-		
 		String reqTag = req.getReqTag();
 		List<String> tagList = new ArrayList<String>();
 		String []tokens=reqTag.split("\\|");
@@ -112,20 +114,41 @@ public class RequestService {
 public RequestDetailData selectOneRequest(int reqNo, Member member) {
 	Request req = dao.selectOneRequest(reqNo);
 	
+	ArrayList<RequestAsk> reqaskList = dao.selectReqaskList(reqNo);
+	
+	
 	String[] tag = req.getReqTag().split("/");
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	map.put("reqNo", reqNo);
+	
 	
 	if(member != null) {
 		map.put("memberNo", member.getMemberNo());			
 	}else {
 		map.put("memberNo", 0);
 	}
-	RequestDetailData rdd = new RequestDetailData(req, tag);
+	
+	RequestDetailData rdd = new RequestDetailData(req, tag, reqaskList);
 	return rdd;
 	
 }
+
+
+public int insertReqask(int reqNo, int expertNo) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("reqNo", reqNo);
+	map.put("expertNo", expertNo);
+	
+	return dao.insertReqask(map);
+}
+
+
+public Expert selectExpertNo(int memberNo) {
+	return dao.selectExpertNo(memberNo);
+}
+
 /*
+
 	public Request selectOneRequest(int memberNo) {
 		// TODO Auto-generated method stub
 		Request req = dao.selectOneRequest(memberNo);
@@ -133,6 +156,7 @@ public RequestDetailData selectOneRequest(int reqNo, Member member) {
 		return req;
 	}
 */
+
 
 
 }

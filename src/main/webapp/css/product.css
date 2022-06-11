@@ -258,13 +258,17 @@ th{
 	font-size: 13px;
 }
 
-.star-wrap{
+.pro-star-wrap{
+	display: inline-block;
+	float: left;
 	border: 1px solid #f6f7fc;
 	border-radius:20px;
 	background-color: #f6f7fc;
 	padding-left: 5px;
 	padding-top: 5px;
-	width: 135px !important;
+	padding-bottom: 2px;
+    padding-right: 10px;
+    width: auto !important;
 }
 
 .star-wrap span {
@@ -277,12 +281,14 @@ th{
 	color: #333333;	
 	font-weight: bold;
 	padding-left: 5px;
+	line-height: 1.5 !important;
 }
 
 #help-number{
-	padding-left: 10px;
 	color: #a7a7a7;
 	font-size: 3px;
+	padding-left: 5px;
+	line-height: 0.5;
 }
 
 #icon-report{
@@ -300,11 +306,12 @@ th{
 #report:hover{
 	text-decoration: underline;
 }
-.report-wrap{
+.pro-report-wrap{
 	width:100%;
 	height:30px;
 	text-align: right;
 	position: relative;
+    margin-top: 3px;
 }
 .product-check{
 	padding-top: 20px;
@@ -622,15 +629,19 @@ th{
 	float: left;
 }
 
-.star-wrap{
+.star-sub-wrap {
 	display: inline-block;
-	float: left;
 }
 .star-wrap-2{
 	width:120px !important;
 	background-color: white;
 	margin-top: -6px;
 	margin-left: -5px;
+	position: relative;
+    overflow: hidden;
+	display: inline-block;
+	float: left;
+	margin-left: -1px;
 }
 /*
 .info {

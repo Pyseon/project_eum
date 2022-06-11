@@ -15,10 +15,13 @@
 			    comm_intro as commIntro,
 			    read_count as readCount,
 			    comm_date as commDate,
-			    comm_like as commLike,
+			    (select nvl(count(*),0) from commlike_tbl cl where cl.comm_no = comm.comm_no) as commLike, --좋아요수
 			    comm_filename as commFilename,
 			    comm_filepath as commFilepath,
-			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
+			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount,
+             (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no) as pickCount,
+            (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 0) as pick0Count,
+            (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 1) as pick1Count
 		from community_tbl comm 
 		<if test="category != 2">
 		where comm_category = #{category}
@@ -48,10 +51,13 @@
 			    advantage,
 			    weakness,
 			    comm_date as commDate,
-			    comm_like as commLike,
+			    (select nvl(count(*),0) from commlike_tbl cl where cl.comm_no = comm.comm_no) as commLike, --좋아요수
 			    comm_filename as commFilename,
 			    comm_filepath as commFilepath,
-			(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount
+				(select nvl(count(*),0) from communityco_tbl co where co.comm_no = comm.comm_no) as cmntCount,
+            	 (select nvl(count(*),0) from pick_tbl p where comm.comm_no = p.comm_no) as pickCount,
+                (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 0) as pick0Count,
+                (select nvl(count(*),0) from pick_tbl p where p.comm_no = comm.comm_no and p.pick_category = 1) as pick1Count
 		from community_tbl comm where comm_no = ${value}
 	</select> 
 	
@@ -79,7 +85,7 @@
  		where co.comm_no = ${value} order by co.CMNT_group ,co.cmnt_no
 	</select> 
 
-	<select id="selectPickList" resultType="pick" parameterType="int">
+	<select id="selectPickList" resultType="pick" parameterType="map">
 		select 
 		    p.pick_no as pickNo,
 		    p.pick_category as pickCategory,
@@ -90,9 +96,10 @@
 		    p.pick_content as pickContent,
 		    p.pick_date as pickDate,
 		    p.comm_no as commNo,
-		    (select count(*) from picklike_tbl pl where p.pick_no = pl.pick_no) as pickLike
+		    (select count(*) from picklike_tbl pl where p.pick_no = pl.pick_no) as pickLike,
+    		(select count(*) from picklike_tbl pl where pl.pick_no = p.pick_no and pl.member_no=#{memberNo}) as pickLikeMemberCheck
 		from pick_tbl p
-		where p.comm_no = ${value} order by p.pick_no
+		where p.comm_no = #{commNo} order by p.pick_no
 	</select> 
 
 	<insert id="communityWrite" parameterType="comm">
@@ -214,6 +221,43 @@
 		delete from pick_tbl 
 			where pick_no = ${value}
 	</delete>
+	
+	<select id="likeMemberCheck" parameterType="map" resultType="int">
+		select count(*) from COMMLIKE_TBL where comm_no=#{commNo} and member_no=#{memberNo}
+	</select>
+	
+	<select id="selectLike" parameterType="int" resultType="int">
+		select count (*) 
+		from commlike_tbl
+		where comm_no=#{commNo}
+	</select> 
+	
+	<insert id="insertLike" parameterType="map">
+		insert into commlike_tbl values(commlike_seq.nextval,#{memberNo},#{commNo})
+	</insert>
+	
+	<delete id="deleteLike" parameterType="map">
+		delete from commlike_tbl where comm_no=#{commNo} and member_no=#{memberNo}
+	</delete>
+	
+	<select id="pickLikeCount" parameterType="int" resultType="int">
+		select count (*) 
+		from picklike_tbl
+		where pick_no=#{pickNo}
+	</select> 
+	
+	<insert id="pickLikeUp" parameterType="map">
+		insert into picklike_tbl values(picklike_seq.nextval,#{memberNo},#{pickNo})
+	</insert>
+	
+	<delete id="pickLikeDown" parameterType="map">
+		delete from picklike_tbl where pick_no=#{pickNo} and member_no=#{memberNo}
+	</delete>
+	
+	<select id="pickLikeMemberCheck" parameterType="map" resultType="int">
+		select count(*) from COMMLIKE_TBL where comm_no=#{commNo} and member_no=#{memberNo}
+	</select>
+	
 	
 </mapper>
 

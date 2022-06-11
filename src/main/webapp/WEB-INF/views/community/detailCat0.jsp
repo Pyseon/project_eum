@@ -6,10 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
+<link rel="stylesheet" href="css/report.css" />
+<script src="js/report.js"></script>
 <style>
 </style>
 </head>
+<div class="header-div">
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+</div>
 <body>
 	<div class="container">
 		<div class="article-wrap">
@@ -51,12 +55,21 @@
 						</div>
 					</div>
 					<div class="article-info-box">
-						<span class="article-info"> 
-						<a href="/doLike?commNo=${comm.commNo }" onclick><i class="fa-regular fa-heart"></i></a>
-							 <span>좋아요</span> 
-							 <strong
-							class="num">${comm.commLike }</strong>
-						</span> <span class="article-info"> <i
+						<span class="article-info">
+<!-- 좋아요 -->						
+						<c:choose>
+							<c:when test="${likeMemberCheck eq 0 }">
+								<i class="fa-regular fa-heart icon-wish"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="fa-regular fa-heart icon-wish fa-solid"></i>
+							</c:otherwise>
+						</c:choose>
+							<span>좋아요</span>
+							<strong class="num" id="commLikeNum">${comm.commLike }</strong>
+						</span>
+<!-- 좋아요 -->	
+						<span class="article-info"> <i
 							class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
 							id="cmnt-total2" class="num">${comm.cmntCount }</strong>
 						</span>
@@ -102,7 +115,16 @@
 
 				<div class="article-cotent">${comm.commContent }</div>
 				<div class="report-wrap">
-					<i class="material-symbols-outlined">e911_emergency</i> <span>신고하기</span>
+					<i class="material-symbols-outlined">e911_emergency</i>
+					<c:choose>
+						<c:when test="${not empty sessionScope.member }">
+							<span id="report"><a style="cursor:pointer;"
+									onclick="report('${comm.memberNo }','3','${comm.commNo }')">신고하기</a></span>
+						</c:when>
+						<c:otherwise>
+							<span id="report"><a  style="cursor:pointer;" onclick="loginFrm();">신고하기</a></span>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
@@ -118,7 +140,6 @@
 		<div class="comments-area">
 			<div class="comment-list-wrap">
 				<c:forEach items="${cmntList }" var="cmnt">
-					<c:if test="{"></c:if>
 					<c:choose>
 						<c:when test="${cmnt.cmntLev eq 0 }">
 							<!--comment-->
@@ -247,6 +268,21 @@
 					class="comment-write-btn btn fc-7">등록</button>
 			</div>
 			</c:if>
+			
+			<c:if test="${empty sessionScope.member }">
+			<div class="comment-write">
+				<div class="comment-write-head">
+					<span
+						style="font-family: fs-m; margin: 0 0 8px 0; padding-left: 2px;">댓글
+						쓰기</span> <span class="comment-num-box"><span id="comment-num">0</span>/250</span>
+				</div>
+				<textarea id="comment-textarea" placeholder="로그인을 하시면 입력하실 수 있습니다."
+					onkeyup="resize(this)" onkeydown="resize(this)" maxlength="250" onclick="loginFrm();" readonly></textarea>
+				<button type="button" id="comment-reg"
+					class="comment-write-btn btn fc-7" onclick="loginFrm();" disabled>등록</button>
+			</div>
+			</c:if>
+			
 		</div>
 		<!--comment-area-->
 		<!-- comment end -->
@@ -276,6 +312,61 @@
 
 $(function(){
 	
+	//좋아요(wish)
+	$('.icon-wish').on("click", function() {
+		var memberNo = $("#memberNo").val();
+		var commNo = $("#commNo").val();
+		var currentValue = $(this).attr("class");
+		 if(memberNo > 0){
+	         if(currentValue == "fa-regular fa-heart icon-wish" && memberNo != 0) {
+	         	$(this).addClass("fa-solid");
+	         	like(memberNo, commNo);
+	         }else {
+	        	 $(this).removeClass("fa-solid");
+	           	 unLike(memberNo, commNo);
+	         }
+	 	}else{
+			var title = '로그인 후 이용해주세요.';
+			var icon = 'info';
+	 		toastShow(title, icon);
+	 	}
+	});
+	
+	//좋아요(wish) insert
+	function like(memberNo, commNo) {
+		$.ajax({
+				url : "/insertLike.do",
+				data : {
+					commNo : commNo,
+					memberNo : memberNo
+				},
+				success : function(data) {
+					$("#commLikeNum").text(data);
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+	
+	//좋아요(wish) delete
+	function unLike(memberNo, commNo) {
+			$.ajax({
+				url : "/deleteLike.do",
+				data : {
+					commNo : commNo,
+					memberNo : memberNo
+				},
+				success : function(data) {
+					$("#commLikeNum").text(data);
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+
+
 	
 	//댓글등록하고 특정 div새로고침해서 불러오기
 	$("#comment-reg").on("click",function(){
@@ -383,7 +474,6 @@ $(function(){
 				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
 			}
 		})
-		
 	})
 	
 	
@@ -634,11 +724,31 @@ function toastShow(title, icon){
   		
   		}//토스트 알림 함수 끝		
 
-
+  		 //sweeatalert2 confirm 함수
+		function loginFrm() {
+ 			Swal.fire({
+              title: '로그인이 필요합니다',
+              text: "로그인 하시겠습니까?",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: '로그인 하기',
+              cancelButtonText: '취소',
+              reverseButtons: false, // 버튼 순서 거꾸로
+              
+            }).then((result) => {
+              if (result.isConfirmed) {
+            	  location.href="/loginFrm.do";
+              }
+            })
+		}
 
 	
 </script>
+<div class="footer-div">
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</div>
 </body>
 
 

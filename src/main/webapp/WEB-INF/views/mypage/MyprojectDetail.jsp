@@ -97,9 +97,10 @@
 <body>
 	<div class="container">
 	
-		<h1 style="border-bottom: 3px solid rgb(0 0 0);">내 프로젝트</h1>
-		<form action="/productUpdate.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-		
+		<h1 style="border-bottom: 3px solid rgb(0 0 0);">내 프로젝트 수정하기</h1>
+		<form action="/MyclassUpdate.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+
+		<input type="hidden" name="productNo" value="${productNo }">
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
 		<div style="margin-top: -30px !important;">
@@ -129,15 +130,15 @@
 		<c:forEach var="p" items="${list }" varStatus="i">
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="${p.productTitle }">
+			<input class="input-form" type="text" name="productTitle" value="${p.productTitle }">
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="${p.productIntro }">
+			<input class="input-form" type="text" name="productIntro" value="${p.productIntro }">
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>
-			<textarea id="summernote" name="productContent" class="input-form" placeholder = "${p.productContent }"></textarea>
+			<textarea id="summernote" name="productContent" class="input-form">${p.productContent }</textarea>
 		</div>
 		
 						<div class="img-box-wrap">
@@ -147,8 +148,16 @@
 								<label for="input-file">파일 선택</label> 
 								<input type="file"name="file" class="commFile upload-hidden" id="input-file">
 							</div>
-							<div class="input-img-box"></div>
-						</div>
+								<div class="input-img-box">
+									<div class="upload-display"
+										style="display: inline-block; border: 1px solid #eee; padding: 10px;">
+										<div class="upload-thumb-wrap">
+											<img src="./img/product/ClassList/${p.productImgPath }"
+												class="upload-thumb" style="height: 160px;">
+										</div>
+									</div>
+					</div>
+				</div>
 		<div style="margin-bottom: 20px">
 			<div>
 			<span>
@@ -183,14 +192,14 @@
 		<div style="margin-bottom: 20px">
 			<div><h3>가격설정</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="cost" placeholder="${p.cost }" style="width: 30%;">
+			<input class="input-form" type="text" name="cost" value="${p.cost }" style="width: 30%;">
 			<span style="line-height: 2.5;">&nbsp; 원</span>
 			</span>
 		</div>
 		
 		<div style="margin-bottom: 20px">
 		<div><h3>태그</h3></div>
-			<input class="input-form" type="text" name="productTag" placeholder="${p.productTag }" style="width: 60%;">
+			<input class="input-form" type="text" name="productTag" value="${p.productTag }" style="width: 60%;">
 		</div>
 		<div>
 		<input type="submit" class="btn bc1 bs4" value="수정하기">

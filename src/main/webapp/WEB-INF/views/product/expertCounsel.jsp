@@ -75,7 +75,7 @@
 				</c:when>
 				<c:when test="${pay.payState eq 2}">
 					<div class="sendBox">
-						<input name="file" id="file" style="display:none"> <div class="fileBtn-wrap"><img class="fileBtn" src="/img/product/icon-folder.png"></div>
+						<%-- <input name="file" id="file" style="display:none"> <div class="fileBtn-wrap"><img class="fileBtn" src="/img/product/icon-folder.png"></div>--%>
 						<input type="text" id="sendMsg" placeholder="[안내] 상담이 종료되어 입력이 불가합니다. 상담에 문제가 있는 경우 고객센터로 문의해주세요." readonly>
 						<div class="send-btn-non"><span class="material-icons fc-7 send-icon">arrow_forward</span></div>
 					</div><!-- sendBox -->	
@@ -108,13 +108,17 @@
 					<!-- 주문상태가 2번 구매확정이면 후기작성 여부에 따라 후기작성/마이페이지 이동으로 나뉨 -->
 					<c:choose>
 						<c:when test="${pay.payState eq 1}">
-							<div class="check-box-allwrap">
-								<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox" name="agree"></div>
-								<div class="check-agree">위 내용을 확인하셨습니까?</div>
-							</div>
-							<div class="submit-wrap">
-								<button type="submit" class="bc1 submit-btn" id="startBtn">시작하기</button>
-							</div>
+						<c:choose>
+							<c:when test="${m.grade eq 2 }">
+								<div class="check-box-allwrap">
+									<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox" name="agree"></div>
+									<div class="check-agree">위 내용을 확인하셨습니까?</div>
+								</div>
+								<div class="submit-wrap">
+									<button type="submit" class="bc1 submit-btn" id="startBtn">시작하기</button>
+								</div>
+							</c:when>
+						</c:choose>
 						</c:when>
 						<c:when test="${pay.payState eq 2}">
 							<c:choose>
@@ -137,13 +141,22 @@
 									</c:choose>
 								</c:when>
 								<c:otherwise>
-									<div class="check-box-allwrap">
-										<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox"  checked disabled></div>
-										<div class="check-agree">위 내용을 확인하셨습니까?</div>
-									</div>
-									<div class="submit-wrap">
-										<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/Myproduct.do?memberNo=${m.memberNo}')">마이페이지</button>
-									</div>
+									<c:choose>
+										<c:when test="${m.grade eq 1 }">
+											<div class="submit-wrap">
+												<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/Myproject.do?memberNo=${m.memberNo }')">프로젝트 관리</button>
+											</div>
+										</c:when>
+										<c:otherwise>
+											<div class="check-box-allwrap">
+												<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox"  checked disabled></div>
+												<div class="check-agree">위 내용을 확인하셨습니까?</div>
+											</div>
+											<div class="submit-wrap">
+												<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/Myproduct.do?memberNo=${m.memberNo}')">마이페이지</button>
+											</div>
+										</c:otherwise>
+									</c:choose>
 								</c:otherwise>
 							</c:choose>
 						</c:when>
@@ -213,15 +226,16 @@
 				if($('.checkbox').is(':checked')==false){
 				    alert('확인사항 동의 후 시작하기를 눌러주세요.');
 				}else {
-				    $('.checkbox').attr('disabled',true);
 				    const counselNo = $('#counselNo').val();
 				    let startTime = getTime2();
-				    if(${c.startTime} == null ) {
+				    //if(${c.startTime} == '034810' ) {//null이 아닐 경우에만 startTime이 없데이트 되고, 이미 값이 있으면 그 시간으로 카운트 되게
 					    $.ajax({//null값인 StartTime 칼럼에 시작버튼을 누른 시점 시간을 update해주고 interval로 시간 체크
 					    	url : "updateStartTime.do",
 					    	data : {startTime:startTime, counselNo:counselNo}, 
 					    	success : function(data) {
-					    		socketSend();
+					    		confirmSend();
+					    		
+					    		//socketSend();
 					    		//두번째 인터벌 넣었던 자리(오답)
 							},
 							error : function() {
@@ -229,9 +243,10 @@
 								$('#startBtn').attr('disabled',true);
 							}
 				   		});
-					}else {
-						socketSend();
-					}
+					//}else {
+						//confirmSend();
+						//socketSend();
+					//}
 				    //처음 인터벌 넣은 자리(오답)
 				}
 			}else if($('#startBtn').text() == '후기작성') {
@@ -242,6 +257,10 @@
 				$('.checkbox').attr('checked', 'checked');
 				$('.checkbox').attr('disabled',true);
 				location.href='/Myproduct.do?memberNo=${m.memberNo}';
+			}else if($('#startBtn').text() == '프로젝트 관리'){
+				$('.checkbox').attr('checked', 'checked');
+				$('.checkbox').attr('disabled',true);
+				location.href='/Myproject.do?memberNo=${m.memberNo }';
 			}else {
 				$('.checkbox').attr('checked', 'checked');
 				$('.checkbox').attr('disabled',true);
@@ -252,9 +271,9 @@
 		//문자로 표기된 시간을 숫자 초단위로 바꾸는 함수	
 		function productOptionCount(param){
 		    const paramSplit = param.split('');
-		    console.log(param);
-		    console.log(paramSplit);
-		    console.log(paramSplit.length);
+		    console.log("productOptionCount>>"+param);
+		    console.log("productOptionCount>>"+paramSplit);
+		    console.log("productOptionCount>>"+paramSplit.length);
 		    let rehour = "";
 		    let remin = "";
 		    let resec = "";
@@ -270,9 +289,9 @@
 		    		resec = resec+paramSplit[i];
 		    	}
 		    }
-		    console.log(rehour);
-		    console.log(remin);
-		    console.log(resec);
+		    console.log("productOptionCount>>"+rehour);
+		    console.log("productOptionCount>>"+remin);
+		    console.log("productOptionCount>>"+resec);
 		    
 		    //숫자로 변환하면서 초 단위로 바꾸기
 		    rehour = Number(rehour) * 60 * 60;
@@ -289,10 +308,10 @@
 			console.log("rePresent>>>>"+rePresent);
 		
 		    //상담시작시간
-			let counselStartTime = ${c.startTime};
-			console.log(counselStartTime);
-			console.log(typeof(counselStartTime));
-			const reStartTime = productOptionCount(counselStartTime.toString());
+			//let counselStartTime = (${c.startTime}).toString();
+			//console.log("productOptionCompare>>"+counselStartTime);
+			//console.log("productOptionCompare>>"+typeof(counselStartTime));
+			const reStartTime = productOptionCount((${c.startTime}).toString());
 			console.log("reStartTime>>>>"+reStartTime);
 			
 			//현재-시작시간
@@ -318,7 +337,8 @@
 			const sec = $("#sec").text();
 			if(sec == "00") { // 초단위가 00이면 분단위 체크
 				if(min == 0){ // 둘다 0이면 > 상담이 끝나서
-					clearInterval(intervalId);
+					clearInterval(intervalId); // 한쪽만 종료되고 있음...
+					$('#startBtn').css('display', 'block');
 					$('#sendMsg').attr("readonly", true);
 					appendChat("<p class='check-in'>상담이 종료되었습니다.</p>");
 					const msg = $("#msg");
@@ -449,14 +469,35 @@
 			const counselNo = $('#counselNo').val();
 			const counselStart = getTime2();
 			let time = getTime()
+			const check = 'true';
 			const data = {
 						  type:"countdown",
 						  msg:memberId, 
 						  memberNo:memberNo,
 						  counselNo:counselNo,
 						  time:time,
-						  counselStart:counselStart
+						  counselStart:counselStart,
+						  check:check
 					 	 }; 
+			ws.send(JSON.stringify(data));
+		}
+		
+		//확인창 띄우는 함수
+		function confirmSend() {
+			const memberNo = $("#memberNo").val();
+			const counselNo = $('#counselNo').val();
+			const counselStart = getTime2();
+			let time = getTime()
+			const check = 'true';
+			const data = {
+						 type:"confirm",
+						 msg:memberId, 
+						 memberNo:memberNo,
+						 counselNo:counselNo,
+						 time:time,
+						 counselStart:counselStart,
+						 check:check
+						 };
 			ws.send(JSON.stringify(data));
 		}
 		
@@ -468,13 +509,15 @@
 			const counselStart = getTime2();
 			let time = getTime()
 			console.log(time);
+			const check = 'true';
 			const data = {
 						  type:"enter",
 						  msg:memberId, 
 						  memberNo:memberNo,
 						  counselNo:counselNo,
 						  time:time,
-						  counselStart:counselStart
+						  counselStart:counselStart,
+						  check:check
 						 }; 
 			ws.send(JSON.stringify(data)); //data객체를 문자열로 변환해서 웹소켓 서버로 전송
 			
@@ -516,7 +559,6 @@
 		
 		//서버에서 화면으로 데이터를 전송 시 처리할 함수 
 		function receiverMsg(param) {
-
 			const msgData = JSON.parse(param.data); 
 			//나말고 누군가가 들어 온 경우
 			if(msgData.type === 'enter') {
@@ -535,12 +577,20 @@
 				console.log("intervalTime>>>>"+productTime);
 				appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
 				$('#timeZone').html("<span id='min'>"+productTime+"</span> : <span id='sec'>00</span>");
+				$('#startBtn').css('display', 'none');
 				intervalId = window.setInterval(function(){
-				timeCount();
-				},10); //시간초 추후 수정..지금은 테스트라 빠르게
+					timeCount();
+				},10);//시간초 추후 수정..지금은 테스트라 빠르게
+			}else if(msgData.type === 'confirm') {
+				//확인 창
+				const confirmCheck = confirm('상담시작에 동의하십니까?');
+				if(confirmCheck == true) {
+					$('.checkbox').attr('disabled',true);
+					socketSend();
+				}else if(confirmCheck == false) {
+					appendChat("<p class='check-in'>상담 시작에 동의하지 않았습니다.</p>");
+				}
 			}
-
-			console.log(param);
 		}//채팅도 데이터로 보내주지만, 읽음 여부 등도 데이터로 전송
 		
 		//웹소켓 연결이 종료되면 실행 되는 함수 
@@ -555,6 +605,7 @@
 			const counselNo = $('#counselNo').val();
 			const counselStart = getTime2();
 			let time = getTime()
+			const check = 'true';
 			if(msg != ''){
 				const data = {
 					type:"chat",
@@ -562,7 +613,8 @@
 				  	memberNo:memberNo,
 				  	counselNo:counselNo,
 				  	time:time,
-				  	counselStart:counselStart
+				  	counselStart:counselStart,
+				  	check:check
 				};
 				ws.send(JSON.stringify(data));
 				
@@ -607,10 +659,10 @@
 			$("#sendMsg").on("keyup", function(key){
 				if(key.keyCode == 13){ //13번이 엔터키코드
 					sendMsg();
-				}
+				} 
 			});
 		});
-	});
+	}); 
 </script>
 </body>
 </html>

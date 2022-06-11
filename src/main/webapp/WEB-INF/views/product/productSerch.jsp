@@ -6,9 +6,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<div class="header-div">
+    <%@ include file="/WEB-INF/views/common/header.jsp"%>
+</div>
 <body>
-<%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
-
 
 </body>
+<div class="footer-div">
+        <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</div>
 </html>

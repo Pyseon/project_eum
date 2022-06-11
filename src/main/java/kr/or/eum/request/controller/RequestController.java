@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.request.model.service.RequestService;
 import kr.or.eum.request.model.vo.Request;
@@ -67,21 +68,37 @@ public class RequestController {
 		return "request/requestWriterFrm";
 	}
 	
+	@RequestMapping(value="insertreqask.do")
+	public String insertreqask(int reqNo, int expertNo, HttpServletRequest request) {
+		
+		int result = service.insertReqask(reqNo, expertNo);
+		
+		return "request/requestDetail";
+	}
+	
 	@RequestMapping(value = "/requestDetail.do")
-	public String requestDetail(int reqNo, int memberNo, HttpServletRequest request, Model model) {
+	public String requestDetail(int reqNo, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
 		Member member = null;
 		if(session != null) {
 			member = (Member)session.getAttribute("member");
 		}
 		
-		RequestDetailData rdd = service.selectOneRequest(reqNo, member);
+		RequestDetailData rdd = service.selectOneRequest( reqNo, member);
 			if(member != null) {
 				model.addAttribute("memberNo", member.getMemberNo());
-				
+				int memberNo = member.getMemberNo();
+					Expert expert = service.selectExpertNo(memberNo);
+					if(expert != null) {
+					model.addAttribute("expertNo", expert.getExpertNo());
+					System.out.println("expert : "+expert);
+					}else {
+					model.addAttribute("expertNo", 0);
+				}
 			}else {
 				model.addAttribute("memberNo", 0);
 			}
+			model.addAttribute("reqaskList", rdd.getReqaskList());
 			model.addAttribute("req", rdd.getReq());
 			model.addAttribute("Tag", rdd.getTag());
 			System.out.println("req : "+rdd);

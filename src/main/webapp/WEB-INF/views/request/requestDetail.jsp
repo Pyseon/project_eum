@@ -9,7 +9,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<%@ include file="/WEB-INF/views/common/header.jsp"%>
+
+<div class="header-div">
+    <%@ include file="/WEB-INF/views/common/header.jsp"%>
+</div>
 <style>
 .writer{
 display: flex;
@@ -21,6 +24,9 @@ display: flex;
 	border-radius: 50%;
 	}
 	.writer{
+	border-bottom: 2px solid rgba(220, 220, 220, 0.59);
+	}
+	.reportbutton{
 	border-bottom: 2px solid rgba(220, 220, 220, 0.59);
 	}
 </style>
@@ -83,10 +89,20 @@ display: flex;
 					</li>
 				</c:otherwise>
 			</c:choose>
+			<form action="/insertreqask.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+				<div>
+				<input type="text" name="expertNo" value="${expertNo }">
+				<input type="text" name='reqNo' value="${req.reqNo }">
+				
+				<input type="submit" class="btn bc1 bs4" value="등록하기">
+				</div>
+			</form>
 		</div>
 	
 	</div>
-<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<div class="footer-div">
+        <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</div>
 </body>
 
 </html>

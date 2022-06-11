@@ -42,7 +42,7 @@
     
     <!-- 재건 -->
 	<select id="selectExpertList" resultType="pro">
-    select * from
+     select * from
     (select rownum as rnum, b.* from
     (
     select 
@@ -68,7 +68,7 @@
     join member_tbl using(member_no)
 <choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
-            where product_Category=#{selPro} and product_type = 2
+            where product_Category=#{selPro} and product_type = 1
         </when>
         <otherwise>
             where product_type = 1
@@ -105,7 +105,7 @@
     join member_tbl using(member_no)
 <choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
-            where product_Category=#{selPro} and product_type = 2
+            where product_Category=#{selPro} and product_type = 3
         </when>
         <otherwise>
             where product_type = 3
@@ -114,6 +114,46 @@
     order by product_no desc)b)
     where rnum between #{start} and #{end}
     </select>
+    
+    
+	<!-- 재건 -->
+	<select id="selectSerchList" resultType="pro">
+    select * from
+    (select rownum as rnum, b.* from
+    (
+    select 
+    product_no as productNo, 
+    expert_no as expertNo,
+    expert_name as expertName,
+    member_picturePath as memberPicturePath,
+    member_no as memberNo, 
+    product_Category as productCategory,
+    product_title as productTitle,
+    product_Intro as productIntro,
+    member_picturename as memberPicturename,
+    product_Tag as productTag,
+    cost,
+    sale,
+    (cost)*(sale)/100 as salecost,
+    (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
+    (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
+    product_imgpath as productImgPath,
+    product_Imgename as productImgname
+    from product_tbl p
+    join expert_tbl e using (expert_no)
+    join member_tbl using(member_no)
+<choose>
+        <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
+            where product_Category=#{selPro} and product_type = 2
+        </when>
+        <otherwise>
+            where product_type = 2
+        </otherwise>
+    </choose>
+    order by product_no desc)b)
+    where rnum between #{start} and #{end}
+    </select>
+    
 
 <!-- 재건 -->
 	<select id="selectExpTotalCount" resultType="int" parameterType="map">
@@ -193,11 +233,57 @@
   			#{productAddr},
   			#{sale},
   			#{productOption},
+  			0,
+  			0
+  			)
+  </insert>
+  <insert id="ideamarketWrite" parameterType="pro">
+  		insert all 
+  		into product_tbl values(
+  			product_seq.nextval,
+  			#{expertNo},
+  			3,
+  			#{productTitle},
+  			#{productCategory},
+  			#{productIntro},
+  			#{productTag},
+  			#{productContent},
+  			#{cost},
+  			#{productQst},
+  			#{productAns},
+  			#{productAddr},
+  			#{sale},
+  			#{productOption},
   			#{productImgPath},
   			#{productImgname}
   			)
+  			into ideamarket_tbl values(
+  			ideamarket_seq.nextval,
+  			null,
+  			#{marketType},
+  			null,
+  			#{marketPath}
+  			)
+  
   </insert>
- 
+  <update id="productUpdate" parameterType="pro">
+  update product_tbl set
+  	product_title = #{productTitle},
+  	product_intro = #{productIntro},
+  	product_tag = #{productTag},
+  	product_content = #{productContent},
+  	cost = #{cost},
+  	product_qst = #{productQst},
+  	product_ans = #{productAns},
+  	sale = #{sale},
+  	product_option = #{productOption}
+  	<if test="productImgPath != null">
+  		,product_imgPath = #{productImgPath},
+  		product_imgname = #{productImgname}
+  	</if>
+  	where product_no = #{productNo} and expert_no=#{expertNo}
+  	</update>
+  	
 	<!-- 윤지 -->
 	<select id="selectOneProduct" parameterType="int" resultType="pro">
 		select
@@ -245,15 +331,11 @@
 	<!-- 윤지 -->
 	<select id="selectReviewStar" parameterType="int" resultType="double">
 		select 
-			case when avg(r.review_star) is null then 0
-         		 else avg(r.review_star)  
+			case when avg(review_star) is null then 0
+         		 else avg(review_star)  
     		end review_star
-		from product_tbl pro
-		join payment_tbl pay
-		on pro.product_no = pay.product_no
-		join review_tbl r
-		on pay.pay_no = r.pay_no
-		where pro.product_no = #{productNo}
+		from review_tbl
+		where product_no = #{productNo}
 	</select>
 	
 	<!-- 윤지 -->

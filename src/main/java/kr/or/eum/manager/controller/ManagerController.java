@@ -63,15 +63,12 @@ public class ManagerController {
 	}
 	@RequestMapping(value = "/updatePayState.do")
 	public String updatePayState(int updateNo, int payNo, int reqPage) {
-		System.out.println("u: "+updateNo);
-		System.out.println("p: "+payNo);
-		System.out.println("r: "+reqPage);
 		int result = service.updatePayState(updateNo, payNo);
 		return "redirect:/manaPayment.do?reqPage="+reqPage+"&selectNum=3";
 	}
 	@RequestMapping(value="/detailPayment.do")
 	public String detailPayment(int payNo,int reqPage, Model model) {
-		ArrayList<Payment> pay = service.detailPayment(payNo);
+		Payment pay = service.detailPayment(payNo);
 		model.addAttribute("pay", pay);
 		model.addAttribute("reqPage", reqPage);
 		return "manager/detailPayment";
@@ -80,6 +77,7 @@ public class ManagerController {
 	public String manaReport(int reqPage, int selectNum, String searchType, String keyword, Model model) {
 		String wherePage = "manaReport.do";
 		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		ArrayList<Object> report = new ArrayList<Object>();
 		model.addAttribute("list", rpd.get("reportList"));
 		model.addAttribute("pageNavi",rpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -89,31 +87,35 @@ public class ManagerController {
 	@RequestMapping(value = "/detailReport.do")
 	public String detailReport(int reportNo,int categoryNo,int reportIndex, Model model) {
 		Report report = service.detailReport(reportNo);
+		int scoutReport = service.scoutReport(categoryNo, reportIndex);
+		if(scoutReport == 1) {
+			switch(categoryNo) {
+			case 0: //상품
+				break;
+			case 1:	//상품 후기
+				HashMap<String, Object> reportReview = service.selectProductReview(reportIndex);
+				model.addAttribute("reviewTitle", reportReview.get("reviewTitle"));
+				model.addAttribute("reviewContent", reportReview.get("reviewContent"));
+				break;
+			case 2:	//개설요청
+				break;
+			case 3:	//커뮤니티
+				int categoryNum = service.selectCommCategoryNum(reportIndex);
+				model.addAttribute("commCategory", categoryNum);
+				break;
+			case 4:	//커뮤니티 댓글
+				String cmntContent = service.selectCmntContent(reportIndex);
+				model.addAttribute("cmntContent", cmntContent);
+				break;
+			}
+		}
+		
 		if(report.getReportIs()!=0) {
 			AnswerReport ansrpt = service.selectAnsrpt(reportNo);
 			model.addAttribute("ansrpt", ansrpt);
 		}
-		
-		switch(categoryNo) {
-		case 0:
-			break;
-		case 1:
-			HashMap<String, Object> reportReview = service.selectProductReview(reportIndex);
-			model.addAttribute("reviewTitle", reportReview.get("reviewTitle"));
-			model.addAttribute("reviewContent", reportReview.get("reviewContent"));
-			break;
-		case 2:
-			break;
-		case 3:
-			int categoryNum = service.selectCommCategoryNum(reportIndex);
-			model.addAttribute("commCategory", categoryNum);
-			break;
-		case 4:
-			String cmntContent = service.selectCmntContent(reportIndex);
-			model.addAttribute("cmntContent", cmntContent);
-			break;
-		}
-		
+
+		model.addAttribute("scout", scoutReport);
 		model.addAttribute("rpt", report);
 		model.addAttribute("category", categoryNo);
 		return "manager/detailReport";

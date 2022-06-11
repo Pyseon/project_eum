@@ -190,14 +190,7 @@ li{
 </head>
 
 <body>
-	<table class="category">
-				<tr>
-							
-					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ClassList.do?reqPage=1&selPro=전체'"><h3>전문가상담</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ClassList.do?reqPage=1&selPro=법률'"><h3>클래스</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ClassList.do?reqPage=1&selPro=비즈니스'"><h3>지식마켓</h3></button></td>
-				</tr>
-      </table>
+	
 
 	<div class="page-content">
 		
@@ -252,7 +245,15 @@ li{
 								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
 							</c:if>
 							<c:if test="${p.payState eq 2}">
-								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/.do'">후기작성</button>
+								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+							</c:if>
+						</c:if>
+						<c:if test="${p.productType eq 3}">
+							<c:if test="${p.payState eq 1}">
+								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
+							</c:if>
+							<c:if test="${p.payState eq 2}">
+								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
 							</c:if>
 						</c:if>
 						

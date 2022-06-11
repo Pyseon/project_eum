@@ -14,6 +14,7 @@ import kr.or.eum.community.model.vo.CommunityCo;
 import kr.or.eum.community.model.vo.CommunityDetailData;
 import kr.or.eum.community.model.vo.CommunityPageData;
 import kr.or.eum.community.model.vo.Pick;
+import kr.or.eum.member.model.vo.Member;
 
 @Service
 @Transactional
@@ -42,7 +43,7 @@ public class CommunityService {
 	}
 //>>>>>>>>>> 읽기
 	//0번 카테고리 커뮤니티글내용 + 댓글리스트
-	public CommunityDetailData communityDetail0(int commNo) {
+	public CommunityDetailData communityDetail0(int commNo, Member member) {
 		Community comm = dao.communityDetail(commNo);
 		// 댓글 불러옴 (대댓글 포함)
 		ArrayList<CommunityCo> cmntList = dao.selectCmntList(commNo);
@@ -51,24 +52,76 @@ public class CommunityService {
 		if (comm != null) {
 			dao.readCountUp(commNo);
 		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("commNo", commNo);
+		if(member != null) {
+			map.put("memberNo", member.getMemberNo());			
+		}else {
+			map.put("memberNo", 0);
+		}
+		int likeMemberCheck = dao.likeMemberCheck(map);
 		CommunityDetailData cdd = new CommunityDetailData();
 		cdd.setComm(comm);
 		cdd.setCmntList(cmntList);
-		
+		cdd.setLikeMemberCheck(likeMemberCheck);
 		return cdd;
 	}
 	
+//게시글 좋아요
+	public int insertLike(int commNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("commNo", commNo);
+		map.put("memberNo", memberNo);
+		return dao.insertLike(map);
+	}
+	public int deleteLike(int commNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("commNo", commNo);
+		map.put("memberNo", memberNo);
+		return dao.deleteLike(map);
+	}
+
+	public int afterLikeCount(int commNo) {
+		return dao.selectLike(commNo);
+	}
+
+//픽 댓글 좋아요
+	public int pickLikeUp(int pickNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pickNo", pickNo);
+		map.put("memberNo", memberNo);
+		return dao.pickLikeUp(map);
+	}
+	public int pickLikeDown(int pickNo, int memberNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("pickNo", pickNo);
+		map.put("memberNo", memberNo);
+		return dao.pickLikeDown(map);
+	}
+	public int pickLikeCount(int pickNo) {
+		return dao.pickLikeCount(pickNo);
+	}
+	
 	//1번 카테고리 커뮤니티글내용 + 픽 리스트
-	public CommunityDetailData communityDetail1(int commNo) {
+	public CommunityDetailData communityDetail1(int commNo, Member member) {
 		Community comm = dao.communityDetail(commNo);
 		// 댓글 불러옴 (대댓글 포함)
-		ArrayList<Pick> pickList = dao.selectPickList(commNo);
 		if (comm != null) {
 			dao.readCountUp(commNo);
 		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("commNo", commNo);
+		if(member != null) {
+			map.put("memberNo", member.getMemberNo());			
+		}else {
+			map.put("memberNo", 0);
+		}
+		int likeMemberCheck = dao.likeMemberCheck(map);
+		ArrayList<Pick> pickList = dao.selectPickList(map);
 		CommunityDetailData cdd = new CommunityDetailData();
 		cdd.setComm(comm);
 		cdd.setPickList(pickList);
+		cdd.setLikeMemberCheck(likeMemberCheck);
 		return cdd;
 	}
 	
@@ -85,8 +138,12 @@ public class CommunityService {
 	
 //>>>>>>>>>> 쓰기
 	public int communityWrite(Community comm) {
-		Community community = setToken(comm);
-		return dao.communityWrite(community);
+		if(comm.getCommCategory() == 0) {
+			Community community = setToken(comm);
+			return dao.communityWrite(community);
+		}else {
+			return dao.communityWrite(comm);
+		}
 	}
 
 	public void commCoWrite(CommunityCo commCo) {
@@ -99,9 +156,13 @@ public class CommunityService {
 	
 
 //>>>>>>>>>> 수정
-	public void communityUpdate(Community comm) {
-		Community community = setToken(comm);
-		dao.communityUpdate(community);
+	public void communityUpdate(Community comm, int category) {
+		if(comm.getCommCategory() == 0) {
+			Community community = setToken(comm);
+			dao.communityUpdate(community);
+		}else {
+			dao.communityUpdate(comm);
+		}
 	}
 	
 	public void commCoUpdate(CommunityCo commCo) {

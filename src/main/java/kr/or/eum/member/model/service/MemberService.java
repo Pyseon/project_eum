@@ -2,6 +2,8 @@ package kr.or.eum.member.model.service;
 
 
 import java.util.ArrayList;
+import java.util.List;
+
 import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,16 +93,7 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		return dao.DeleteMyproduct(payNo);
 	}
-/*
-	public ArrayList<ProductAndExpertDetail> Myproductdetail(int productNo) {
-		
-		System.out.println(productNo+"서비스");
-		ArrayList<ProductAndExpertDetail> list = dao.Myproductdetail(productNo);
-		
-		System.out.println(list);
-		return list;
-	}
-*/
+
 	public Member selectMypage(Member m) {
 		
 		Member member = dao.selectOneMember(m);
@@ -120,12 +113,16 @@ public class MemberService {
 		return dao.search(memberNick);
   }
   
+	public ArrayList<Product> selectMyprojectDetail(int memberNo) {
+		ArrayList<Product> list = dao.selectMyprojectDetail(memberNo);
+		
+		return list;
+	}
 	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
 		ArrayList<ProductAndExpert> list = dao.selectMyproject(memberNo);
 		
 		return list;
 	}
-
 	public int insertExpert(Expert ex) {
 		// TODO Auto-generated method stub
 		int result = dao.insertExpert(ex);
@@ -170,5 +167,84 @@ public class MemberService {
 		return list;
 	}
 
+	public int classUpdate(Product pro) {
+		
+			Product product=setToken(pro);
+			int result = dao.classUpdate(product);
+				
+				return result;
+	}
+	public Product setToken(Product pro) {
+		
+		String productQst = pro.getProductQst();
+		List<String> qstList = new ArrayList<String>();
+		String []tokens=productQst.split("\\|");
+		for(int i=0;i<tokens.length;i++) {
+			if(tokens[i] == null || tokens[i].trim().length() < 2) {
+			}else {
+				if(tokens[i].indexOf(",") == 0) {
+					qstList.add(tokens[i].replaceFirst(",", ""));
+				}else {
+					qstList.add(tokens[i].trim());
+				}
+			}
+			
+		}
+		productQst = "";
+		
+		for(int i=0;i<qstList.size();i++){
+			productQst += qstList.get(i)+"/";
+		}
+		
+		
+		String productAns = pro.getProductAns();
+		List<String> ansList = new ArrayList<String>();
+		String []tokens2=productAns.split("\\|");
+		for(int i=0;i<tokens2.length;i++){
+			if(tokens2[i] == null || tokens2[i].trim().length() < 2) {
+			}else {
+				if(tokens2[i].indexOf(",") == 0) {
+					ansList.add(tokens2[i].replaceFirst(",", ""));
+				}else {
+					ansList.add(tokens2[i].trim());
+				}
+			}
+		}
+		productAns = "";
+		for(int i=0;i<ansList.size();i++){
+			productAns += ansList.get(i)+"/";
+		}
+		
+		
+		String productTag = pro.getProductTag();
+		List<String> tagList = new ArrayList<String>();
+		String []tokens3=productTag.split("\\|");
+		for(int i=0;i<tokens3.length;i++){
+			if(tokens3[i] == null || tokens3[i].trim().length() < 2) {
+			}else {
+				if(tokens3[i].indexOf(",") == 0) {
+					tagList.add(tokens3[i].replaceFirst(",", ""));
+				}else {
+					tagList.add(tokens3[i].trim());
+				}
+			}
+		}
+		productTag = "";
+		for(int i=0;i<tagList.size();i++){
+			productTag += "#"+tagList.get(i)+"/";
+		}
+		
+	
+		
+		System.out.println("최종값>>"+productQst);
+		System.out.println("최종값>>"+productAns);
+		System.out.println("최종값>>"+productTag);
+		
+		pro.setProductQst(productQst);
+		pro.setProductAns(productAns);
+		pro.setProductTag(productTag);
+		
+		return pro;
+	}
 
 }

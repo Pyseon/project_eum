@@ -190,7 +190,9 @@ li{
 		font-weight: normal;
 	}
 </style>
+<div>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+</div>
 </head>
 
 <body>
@@ -218,7 +220,7 @@ li{
    	<button type="button" class="writeButton" id="writeButton" onclick="location.href='/ideamarketWriterFrm.do'">등록하기</button>
    	<div class="posting-wrap">
    		<c:forEach items="${list }" var="c" varStatus="i">
-   			<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
+   			<div class="posting-item" style="cursor: pointer;" onclick="location.href='/imgVerProductDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
    				<img src="./img/product/ExpertList/${c.productImgPath }">
    				<div class="posting-connect">
    					<ul>

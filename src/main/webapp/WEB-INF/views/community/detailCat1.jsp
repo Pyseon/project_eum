@@ -6,217 +6,18 @@
 <head>
 <meta charset="UTF-8">
 <title>이음 :: 커뮤니티</title>
+<link rel="stylesheet" href="css/report.css" />
+<script src="js/report.js"></script>
 <style>
 .attr-wrap{
  width: 100%;
 }
 
-.pick-box {
-	padding: 30px;
-	width: 70%;
-	border: 1px dashed #eee;
-	border-radius: 6px;
-	background-color: #f9f9fa;
-}
-
-.speech-bubble {
-	position: relative;
-	background: #cdd8fc;
-	border-radius: 0.4em;
-	min-height: 50px;
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-	/* color: #fff; */
-	padding: 15px;
-}
-
-.haja-nick {
-	margin-top: 5px;
-	margin-bottom: 3px;
-}
-
-.pick-date {
-	display: flex;
-	flex-direction: column-reverse;
-	padding: 0 15px 28px 15px;
-	color: #979797;
-}
-
-.speech-bubble:after {
-	content: '';
-	position: absolute;
-	left: 0;
-	top: 50%;
-	width: 0;
-	height: 0;
-	border: 15px solid transparent;
-	border-right-color: #cdd8fc;
-	border-left: 0;
-	border-top: 0;
-	margin-top: -12px;
-	margin-left: -15px;
-}
-
-.speech-bubble2 {
-	position: relative;
-	background: #fcd4d4;
-	border-radius: .4em;
-	min-height: 50px;
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-	/* color: #fff; */
-	padding: 15px;
-}
-
-.speech-bubble2:after {
-	content: '';
-	position: absolute;
-	right: 0;
-	top: 50%;
-	width: 0;
-	height: 0;
-	border: 15px solid transparent;
-	border-left-color: #fcd4d4;
-	border-right: 0;
-	border-top: 0;
-	margin-top: -12px;
-	margin-right: -15px;
-}
-
-.ali-right {
-	float: right;
-}
-
-.haja-content {
-	display: flex;
-	margin-bottom: 8px;
-}
-
-.haja-writer {
-	display: flex;
-	flex-direction: column;
-	margin-right: 20px;
-	padding-top: 15px;
-	text-align: center;
-}
-
-.malja-writer {
-	display: flex;
-	flex-direction: column;
-	text-align: right;
-}
-
-.haja-comment {
-	max-width: 60%;
-}
-
-.malja-content {
-	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 25px;
-}
-
-.malja-comment {
-	max-width: 50%;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-}
-
-.pick-btn {
-	background-color: transparent;
-	border: none;
-	padding: 0;
-	margin-top: 6px;
-	font-size: 13px;
-	color: #979797;
-}
-
-.malja-btn {
-	padding-right: 10px;
-}
-
-.malja-date-like {
-	display: flex;
-	justify-content: flex-start;
-}
-
-.haja-like {
-	background-color: #fff;
-	border: none;
-	border-radius: 20px;
-	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-	height: 22px;
-	margin-top: 3px;
-}
-
-.haja-like>i {
-	color: orangered;
-	font-size: 20px;
-}
-
-.haja-like>span {
-	vertical-align: top;
-}
-
-* {
-	/* box-sizing: border-box; */
-	
-}
-
-.button-label {
-	cursor: pointer;
-	border-radius: 0.25em;
-	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0
-		rgba(0, 0, 0, 0.22);
-	transition: 0.3s;
-	padding: 10px 15px;
-}
-
-.button-label:hover {
-	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0 -3px 0
-		rgba(0, 0, 0, 0.32);
-}
-
-.button-label:active {
-	transform: translateY(2px);
-	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2), inset 0px -1px 0
-		rgba(0, 0, 0, 0.22);
-}
-
-#yes-button:checked+.button-label {
-	background-color: #3666f1;
-	color: #eee;
-}
-
-#yes-button+.button-label:hover {
-	background-color: #2c4fbf;
-	color: #eee;
-}
-
-#no-button:checked+.button-label {
-	background-color: #f05454;
-	color: #eee;
-}
-
-#no-button+.button-label:hover {
-	background-color: #bd4242;
-	color: #eee;
-}
-
-#pickContent {
-	margin-left: 20px;
-	width: 65%;
-	min-height: 35px;
-	border-radius: 0.4em;
-	border: 1.5px solid #aaa;
-	padding-left: 10px;
-	outline: none;
-}
 </style>
 </head>
+<div class="header-div">
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+</div>
 <body>
 	<div class="container">
 		<div class="article-wrap">
@@ -225,10 +26,12 @@
 				<div class="article-list">
 					<a href="/communityList.do?category=1&reqPage=1" class="fc-7">이거어때
 						></a>
+					<c:if test="${comm.memberNo eq sessionScope.member.memberNo }">	
 					<button class="btn bc6 bs5 fc-1"
-						onclick="location.href='/communityUpdateFrm.do?commNo=${comm.commNo}'">수정</button>
+						onclick="location.href='/communityUpdateFrm2.do?commNo=${comm.commNo}'">수정</button>
 					<button class="btn bc6 bs5 fc-1  modal-open-btn"
 						target="#del-modal">삭제</button>
+					</c:if>
 				</div>
 				<div class="article-title">
 					<h2 style="font-size: 26px">${comm.commTitle}</h2>
@@ -255,37 +58,85 @@
 						</div>
 					</div>
 					<div class="article-info-box">
-						<span class="article-info"> <i class="fa-regular fa-heart"></i>
-							<i class="fa-solid fa-heart"></i> <span>좋아요</span> <strong
-							class="num">${comm.commLike }</strong>
-						</span> <span class="article-info"> <i
+						<span class="article-info"> 
+<!-- 좋아요 -->						
+						<c:choose>
+							<c:when test="${likeMemberCheck eq 0 }">
+								<i class="fa-regular fa-heart icon-wish"></i>
+							</c:when>
+							<c:otherwise>
+								<i class="fa-regular fa-heart icon-wish fa-solid"></i>
+							</c:otherwise>
+						</c:choose>
+							<span>좋아요</span>
+							<strong class="num" id="commLikeNum">${comm.commLike }</strong>
+						</span>
+<!-- 좋아요 -->	
+						<span class="article-info"> <i
 							class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
-							id="cmnt-total2" class="num">${comm.cmntCount }</strong>
+							id="cmnt-total2" class="num">${comm.pickCount }</strong>
 						</span>
 					</div>
 				</div>
 			</div>
 			<!-- article-content -->
 			<div class="article-content-wrap">
-				<div class="article-intro">
-					<i class="fa-solid fa-circle-question"></i> <span
-						class="title-text fs-medium fc-10">어떤게 고민이니?</span>
-					<p>${comm.commIntro }</p>
-				</div>
-
-
-				<div class="article-cotent">${comm.commContent }</div>
+				<div class="article-cotent" style="margin-top: 40px; margin-bottom:100px;">${comm.commContent }</div>
 				<div class="report-wrap">
-					<i class="material-symbols-outlined">e911_emergency</i> <span>신고하기</span>
+					<i class="material-symbols-outlined">e911_emergency</i>
+					<c:choose>
+						<c:when test="${not empty sessionScope.member }">
+							<span id="report"><a style="cursor:pointer;"
+									onclick="report('${comm.memberNo }','3','${comm.commNo }')">신고하기</a></span>
+						</c:when>
+						<c:otherwise>
+							<span id="report"><a  style="cursor:pointer;" onclick="loginFrm();">신고하기</a></span>
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 		</div>
 		<!--article-content-wrap end-->
 
-
-
 		<div class="attr-wrap">
 			<div class="pick-box">
+				<div class="card-intro2" style="display:flex; min-height:40px; margin-bottom:40px;">
+					<c:choose>
+						<c:when test="${comm.pick0Count eq 0 and comm.pick1Count eq 0}">
+							<div
+								style="text-align: center; padding: 10px; background-color: #cdd8fc; flex-grow: 1;">
+								<i class="fa-regular fa-face-laugh-squint"
+									style="font-size: 18px; margin-right: 5px; color: #3666f1;"></i>
+								<span class="fs-full" style="font-size: 18px; color: #3666f1;">${comm.pick0Count}</span>
+							</div>
+							<div
+								style="text-align: center; padding: 10px; background-color: #fcd4d4; flex-grow: 1;">
+								<span class="fs-full" style="font-size: 18px; color: #f05454;">${comm.pick0Count}</span>
+								<i class="fa-regular fa-face-smile-wink"
+									style="font-size: 18px; margin-left: 5px; color: #f05454;"></i>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<div
+								style="text-align:center; padding: 10px; background-color:#cdd8fc; flex-grow:${comm.pick0Count};">
+								<i class="fa-regular fa-face-laugh-squint"
+									style="font-size: 18px; margin-right: 5px; color: #3666f1;"></i>
+								<span class="" style="font-size: 18px; ">${comm.advantage}</span>
+								<span class="fs-full frr" style="margin:0 10px; font-size: 18px; color: #3666f1;">${comm.pick0Count}</span>
+							</div>
+							<div
+								style="text-align:center; padding: 10px; background-color:#fcd4d4; flex-grow:${comm.pick1Count};">
+								<span class="fs-full fll" style="margin:0 10px; font-size: 18px; color: #f05454;">${comm.pick1Count}</span>
+								<i class="fa-regular fa-face-smile-wink"
+									style="font-size: 18px; margin-right: 5px; color: #f05454;"></i>
+								<span class="" style="font-size: 18px; ">${comm.weakness}</span>
+							</div>
+						</c:otherwise>
+					</c:choose>
+
+
+
+				</div>
 				<c:forEach items="${pickList }" var="p">
 
 					<c:if test="${p.pickCategory eq 0 }">
@@ -316,9 +167,20 @@
 									</span>
 									<div class="speech-bubble">${p.pickContent }</div>
 									<div class="haja-date-like">
-										<button class="haja-like">
-											<i class="material-icons">recommend</i> <span>${p.pickLike }</span>
-										</button>
+										<input type="hidden" value="${p.pickNo }">
+										<c:choose>
+											<c:when test="${p.pickLikeMemberCheck eq 0 }">
+												<button class="haja-like">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="haja-like pickUp">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:otherwise>
+										</c:choose>
+
 									</div>
 								</div>
 								<div class="pick-date">${p.pickDate }</div>
@@ -339,9 +201,19 @@
 									</span>
 									<div class="speech-bubble2">${p.pickContent }</div>
 									<div class="malja-date-like">
-										<button class="haja-like">
-											<i class="material-icons">recommend</i> <span>${p.pickLike }</span>
-										</button>
+									<input type="hidden" value="${p.pickNo }">
+												<c:choose>
+											<c:when test="${p.pickLikeMemberCheck eq 0 }">
+												<button class="haja-like">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:when>
+											<c:otherwise>
+												<button class="haja-like pickUp">
+													<i class="material-icons pickLikeBtn">recommend</i> <span>${p.pickLike }</span>
+												</button>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 
@@ -363,43 +235,54 @@
 						</div>
 					</c:if>
 				</c:forEach>
-
-			
-
-
-
 			</div>
 			<!--pick box end-->
-			
 		</div>
 		<!-- attr-wrap end-->
 		<c:if test="${sessionScope.member ne null }">
-				<div class="button-wrap" style="margin-top: 50px; width:70%; margin: 0 auto;">
+				<div class="button-wrap" style="margin-top: 50px; width:50%; margin: 0 auto;">
 					<!-- 전송 데이터 -->
 					<input type="hidden" name="commNo" id="commNo" value="${comm.commNo}">
 					<input type="hidden" name="memberNo" id="memberNo" value="${sessionScope.member.memberNo }">
 					<input type="hidden" name="pickCategory" id="pickCategory" value="0">
 					<!--            -->
+					<div>
 					<input type="radio" name="accept-offers" id="yes-button"
 						class="hidden radio-label" checked> <label
-						for="yes-button" class="button-label">해봐!</label> <input
+						for="yes-button" class="button-label">${comm.advantage }</label> <input
 						type="radio" name="accept-offers" id="no-button"
 						class="hidden radio-label"> <label for="no-button"
-						class="button-label">하지마!</label> 
+						class="button-label">${comm.weakness }</label> 
+					</div>
 						<input type="text"
 						name="pickContent" id="pickContent">
 					<button class="btn" id="pick-reg"
-						style="width: 60px; height: 35px; background-color: yellow; color: #222; font-weight: bold;">전송</button>
+						style="margin-left:10px; width: 60px; height: 34px; background-color: #3666f1; color: #fff; font-weight: bold;">등록</button>
 				</div>
 		</c:if>
-
+		<c:if test="${sessionScope.member eq null }">
+			<div class="button-wrap" style="margin-top: 50px; width:70%; margin: 0 auto;">
+					<!-- 전송 데이터 -->
+					<input type="hidden" name="commNo" id="commNo" value="${comm.commNo}">
+					<input type="hidden" name="memberNo" id="memberNo" value="${sessionScope.member.memberNo }">
+					<input type="hidden" name="pickCategory" id="pickCategory" value="0">
+					<!--            -->
+				<div>
+					<input type="radio" name="accept-offers" id="yes-button"
+						class="hidden radio-label" checked> <label
+						for="yes-button" class="button-label">${comm.advantage }</label> <input
+						type="radio" name="accept-offers" id="no-button"
+						class="hidden radio-label"> <label for="no-button"
+						class="button-label">${comm.weakness }</label>
+				</div> 
+						<input type="text"
+						name="pickContent" id="pickContent" placeholder="로그인을 하시면 입력할 수 있습니다." readonly onclick="loginFrm();">
+					<button class="btn" id="pick-reg"
+						style="margin-left:10px; width: 60px; height: 34px; background-color: #3666f1; color: #fff; font-weight: bold;" onclick="loginFrm();">등록</button>
+				</div>
+		</c:if>
 	</div>
 	<!--container end-->
-
-
-
-
-
 
 	<!-- modal start -->
 	<div id="del-modal" class="modal-bg">
@@ -419,8 +302,6 @@
 	</div>
 
 	<!-- modal end -->
-	
-	
 	
 		<!-- pick update modal start -->
 	<div id="update-modal" class="modal-bg">
@@ -443,20 +324,131 @@
 	<!-- modal end -->
 	
 	
-	
-	
-	
-	
 
-	<script>
+<script>
 
 $(function(){
+	let likeNum = -1;
+	//좋아요(wish)
+	$(document).on("click",'.haja-like', function() {
+		var pickNo = $(this).prev().val();
+		var memberNo = $("#memberNo").val();
+		var currentValue = $(this).attr("class");
+		 if(memberNo > 0){
+	         if(currentValue == "haja-like" && memberNo != 0) {
+	        	picklikeUp(memberNo, pickNo);
+	         }else {
+	        	picklikeDown(memberNo, pickNo);
+	         }
+	 	}else{
+			var title = '로그인 후 이용해주세요.';
+			var icon = 'info';
+	 		toastShow(title, icon);
+	 	}
+		 
+	});
+	
+	//좋아요(wish) insert
+	function picklikeUp(memberNo, pickNo) {
+		$.ajax({
+				url : "/pickLikeUp.do",
+				data : {
+					pickNo : pickNo,
+					memberNo : memberNo
+				},
+				async: false,
+				success : function(data) {
+					$(".attr-wrap").load(location.href + " .attr-wrap");
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+	
+	//좋아요(wish) delete
+	function picklikeDown(memberNo, pickNo) {
+			$.ajax({
+				url : "/pickLikeDown.do",
+				data : {
+					pickNo : pickNo,
+					memberNo : memberNo
+				},
+				async: false,
+				success : function(data) {
+					$(".attr-wrap").load(location.href + " .attr-wrap");
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+	
+	//좋아요(wish)
+	$('.icon-wish').on("click", function() {
+		var memberNo = $("#memberNo").val();
+		var commNo = $("#commNo").val();
+		var currentValue = $(this).attr("class");
+		 if(memberNo > 0){
+	         if(currentValue == "fa-regular fa-heart icon-wish" && memberNo != 0) {
+	         	$(this).addClass("fa-solid");
+	         	like(memberNo, commNo);
+	         }else {
+	        	 $(this).removeClass("fa-solid");
+	           	 unLike(memberNo, commNo);
+	         }
+	 	}else{
+			var title = '로그인 후 이용해주세요.';
+			var icon = 'info';
+	 		toastShow(title, icon);
+	 	}
+		 
+		 
+	});
+	
+	//좋아요(wish) insert
+	function like(memberNo, commNo) {
+		$.ajax({
+				url : "/insertLike.do",
+				data : {
+					commNo : commNo,
+					memberNo : memberNo
+				},
+				success : function(data) {
+					$("#commLikeNum").text(data);
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+	
+	//좋아요(wish) delete
+	function unLike(memberNo, commNo) {
+			$.ajax({
+				url : "/deleteLike.do",
+				data : {
+					commNo : commNo,
+					memberNo : memberNo
+				},
+				success : function(data) {
+					$("#commLikeNum").text(data);
+				},
+				error : function() {
+					console.log('에러');
+				}
+			});	
+	};
+	
+	
 	$(document).on("click","#yes-button",function(){
 		$("#pickCategory").val(0);
+		$("#pick-reg").css("background-color", "#3666f1");
 	});
 	
 	$(document).on("click","#no-button",function(){
 		$("#pickCategory").val(1);
+		$("#pick-reg").css("background-color", "#f05454");
 	});
 		
 	
@@ -482,7 +474,6 @@ $(function(){
 		})
 			
 	});
-	
 	
 	
 	//픽 수정하기
@@ -577,10 +568,6 @@ $(function(){
 	});
 	
 	
-	
-	
-	
-	
 	//글자수세기 댓글 입력!! 창 함수
 	$(document).on("keyup","#comment-textarea",function(){
 		 var comment = $("#comment-textarea").val();
@@ -606,15 +593,6 @@ $(function(){
 		$("#UpdateComment-num").text(UpdateComment.length);
 	});
 	
-
-	
-	
-	
-	
-	
-	
-
-	
 	
 }); //문서로딩 후 함수
 
@@ -622,19 +600,6 @@ $(function(){
 function replyFrm(replyLev, replyParentNo, replyNo, replyNick, thisReply){
 	$(".comment-cancel-btn").parent().parent().prev().show();
 	$(".comment-cancel-btn").parent().parent().remove();
-	
-
-	console.log("===============================");
-	console.log(replyLev);
-	console.log(replyParentNo);
-	console.log(replyNo);
-	console.log(replyNick);
-	console.log("this");
-	
-	console.log("===============================");
-	
-	
-	
 	var writeHtml = "";
 	writeHtml += '<div class="comment-write" style="margin-left:60px;")">';
 	writeHtml += '<div class="comment-write-head">';
@@ -655,12 +620,6 @@ function replyFrm(replyLev, replyParentNo, replyNo, replyNick, thisReply){
 }
 
 
-
-
-	
-	
-
-		
 function resize(obj) {
     obj.style.height = '1px';
     obj.style.height = (12 + obj.scrollHeight) + 'px';
@@ -700,11 +659,6 @@ function resizeUpdatearea(obj) {
 }
 
 
-
-
-
-
-
 //textarea 엔터시 <br>로 바꿔주고 히든 input 에 저장하는 함수
 function convertbr(){
    var str = document.getElementById("comment-textarea").value;
@@ -719,8 +673,6 @@ function returnBr(){
 	console.log(textBr);
 	return textBr;
 }
-
-
 
 
 //토스트 알림 함수		
@@ -743,11 +695,30 @@ function toastShow(title, icon){
   		
   		}//토스트 알림 함수 끝		
 
-
-
+  		 //sweeatalert2 confirm 함수
+		function loginFrm() {
+ 			Swal.fire({
+              title: '로그인이 필요합니다',
+              text: "로그인 하시겠습니까?",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: '로그인 하기',
+              cancelButtonText: '취소',
+              reverseButtons: false, // 버튼 순서 거꾸로
+              
+            }).then((result) => {
+              if (result.isConfirmed) {
+            	  location.href="/loginFrm.do";
+              }
+            })
+		}
 	
 </script>
+<div class="footer-div">
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+</div>
 </body>
 
 

@@ -7,6 +7,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.gson.Gson;
+
 import kr.or.eum.community.model.service.CommunityService;
 import kr.or.eum.community.model.vo.Community;
 import kr.or.eum.community.model.vo.CommunityCo;
 import kr.or.eum.community.model.vo.CommunityDetailData;
 import kr.or.eum.community.model.vo.CommunityPageData;
 import kr.or.eum.community.model.vo.Pick;
+import kr.or.eum.member.model.vo.Member;
 
 @Controller
 public class CommunityController {
@@ -39,24 +43,35 @@ public class CommunityController {
 
 //>>>>>>>>>>>> 읽기	
 	@RequestMapping(value = "/communityDetail.do")
-	public String communityDetail(int commNo, int category, Model model) {
-		// Community cm = service.communityDetail(commNo);
+	public String communityDetail(int commNo, int category, Model model, HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");			
+		}
+		
 		if (category == 0) {
-			CommunityDetailData cdd = service.communityDetail0(commNo);
+			CommunityDetailData cdd = service.communityDetail0(commNo, member);
 			model.addAttribute("comm", cdd.getComm());
 			model.addAttribute("cmntList", cdd.getCmntList());
+			model.addAttribute("likeMemberCheck", cdd.getLikeMemberCheck());
 			return "community/detailCat0";
 		} else {
-			CommunityDetailData cdd = service.communityDetail1(commNo);
+			CommunityDetailData cdd = service.communityDetail1(commNo, member);
 			model.addAttribute("comm", cdd.getComm());
 			model.addAttribute("pickList", cdd.getPickList());
+			model.addAttribute("likeMemberCheck", cdd.getLikeMemberCheck());
 			return "community/detailCat1";
 		}
 	}
 
 	@RequestMapping(value="/communityWriteFrm.do")
-	public String communityWriteFrm() {
+	public String communityWriteFrm(int category) {
+		if (category == 1) {
+			return "community/communityWriteFrm2";
+		}else {
 			return "community/communityWriteFrm";
+		}
 	}
 	
 	@RequestMapping(value="/communityWrite.do")
@@ -121,7 +136,6 @@ public class CommunityController {
 			int result = service.communityWrite(comm);
 	
 			
-//		return "community/communityWriteFrm";
 			return "redirect:/communityList.do?category="+comm.getCommCategory()+"&reqPage=1";
 	}
 	
@@ -158,6 +172,14 @@ public class CommunityController {
 		model.addAttribute("comm", comm);
 		return "community/communityUpdateFrm";
 	}
+	
+	@RequestMapping(value = "/communityUpdateFrm2.do")
+	public String communityUpdateFrm2(int commNo, Model model) {
+		Community comm = service.communityDetailNotCmnt(commNo);
+		model.addAttribute("comm", comm);
+		return "community/communityUpdateFrm2";
+	}
+	
 
 	@RequestMapping(value = "/communityUpdate.do")
 	public String communityUpdate(Community comm, Model model, MultipartFile file, HttpServletRequest request) {
@@ -167,11 +189,11 @@ public class CommunityController {
 		// 이미지 수정을 안하면 파일이름은 빈칸, 수정을했다면 파일이름이 존재
 		if (filename != "") {
 			Community community = imgUpload(comm, file, request);
-			service.communityUpdate(community);
-			getUri = communityDetail(community.getCommNo(), community.getCommCategory(), model);
+			service.communityUpdate(community, comm.getCommCategory());
+			getUri = communityDetail(community.getCommNo(), community.getCommCategory(), model, request);
 		} else {
-			service.communityUpdate(comm);
-			getUri = communityDetail(comm.getCommNo(), comm.getCommCategory(), model);
+			service.communityUpdate(comm, comm.getCommCategory());
+			getUri = communityDetail(comm.getCommNo(), comm.getCommCategory(), model,request);
 		}
 
 		return getUri;
@@ -212,6 +234,44 @@ public class CommunityController {
 	
 	
 	
+	//좋아요 관련 메소드
+			@ResponseBody
+			@RequestMapping(value = "/insertLike.do", produces = "application/json;charset=utf-8")
+			public String insertLike(int commNo, int memberNo) {
+				int result = service.insertLike(commNo, memberNo);
+				int afterLikeCount = service.afterLikeCount(commNo);
+				return new Gson().toJson(afterLikeCount);
+				
+			}
+			
+			@ResponseBody
+			@RequestMapping(value = "/deleteLike.do", produces = "application/json;charset=utf-8")
+			public String deleteLike(int commNo, int memberNo) {
+				int result = service.deleteLike(commNo, memberNo);
+				int afterLikeCount = service.afterLikeCount(commNo);
+				return new Gson().toJson(afterLikeCount);
+			}
+		
+			@ResponseBody
+			@RequestMapping(value = "/pickLikeUp.do", produces = "application/json;charset=utf-8")
+			public String pickLikeUp(int pickNo, int memberNo) {
+				int result = service.pickLikeUp(pickNo, memberNo);
+				int pickLikeCount = service.pickLikeCount(pickNo);
+				return new Gson().toJson(pickLikeCount);
+				
+			}
+			
+			@ResponseBody
+			@RequestMapping(value = "/pickLikeDown.do", produces = "application/json;charset=utf-8")
+			public String pickLikeDown(int pickNo, int memberNo) {
+				int result = service.pickLikeDown(pickNo, memberNo);
+				int pickLikeCount = service.pickLikeCount(pickNo);
+				return new Gson().toJson(pickLikeCount);
+			}
+		
+			
+			
+			
 	
 	
 	

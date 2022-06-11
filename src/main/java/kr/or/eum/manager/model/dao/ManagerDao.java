@@ -89,9 +89,9 @@ public class ManagerDao {
 		return result;
 	}
 
-	public ArrayList<Payment> detailPayment(int payNo) {
-		List pay = sqlSession.selectList("manager.detailPayment", payNo);
-		return (ArrayList<Payment>) pay;
+	public Payment detailPayment(int payNo) {
+		Payment pay = sqlSession.selectOne("manager.detailPayment", payNo);
+		return pay;
 	}
 
 	public ArrayList<Report> ReportPageData(HashMap<String, Object> map) {
@@ -355,6 +355,20 @@ public class ManagerDao {
 	public String selectCmntContent(int reportIndex) {
 		String cmntContent = sqlSession.selectOne("manager.selectcmntContent", reportIndex);
 		return cmntContent;
+	}
+
+	public int scoutReport(HashMap<String, Object> scout) {
+		int result = sqlSession.selectOne("manager.scoutReport", scout);
+		if(result == 0) {
+			return 0;
+		} else {
+			return 1;
+		}
+	}
+
+	public String selectMemberId(int payNo) {
+		String memberId = sqlSession.selectOne("manager.selectMemberId", payNo);
+		return memberId;
 	}
 	
 }

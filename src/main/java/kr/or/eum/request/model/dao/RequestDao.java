@@ -9,8 +9,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.eum.member.model.vo.Expert;
+import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.request.model.vo.Request;
+import kr.or.eum.request.model.vo.RequestAsk;
 
 @Repository
 public class RequestDao {
@@ -42,9 +45,24 @@ public class RequestDao {
 	public Request requestDetail(int reqNo) {
 		// TODO Auto-generated method stub
 		Request req = sqlSession.selectOne("request.requestDetail", reqNo);
-		
-		return null;
+		return req;
 	}
+	
+	public ArrayList<RequestAsk> selectReqaskList(int reqNo){
+		List reqaskList = sqlSession.selectList("request.selectReqAskList", reqNo);
+		return (ArrayList<RequestAsk>)reqaskList;
+	}
+
+	public int insertReqask(HashMap<String, Object> map) {
+		int result = sqlSession.insert("request.insertReqAsk", map);
+		return result;
+	}
+
+	public Expert selectExpertNo(int memberNo) {
+		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
+		return expert;
+	}
+
 	
 	
 	

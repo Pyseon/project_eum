@@ -46,7 +46,7 @@
 	.check-find{
 		display: inline;
 	}
-	.check-find>div>input{
+	.check-find>input{
 		display: inline;
 		float: left;
 		width: 70%;
@@ -56,6 +56,9 @@
 		display: inline;
 		float: right;
 		width: 27%;
+	}
+	#button-prr{
+		height: 50px;
 	}		
 	#button-pr{
 		height: 50px;
@@ -191,7 +194,7 @@
 <script>
 	//1.button 활성화
 	//2.submit 유효성
-	let inputCheck = new Array(7).fill(false);
+	let inputCheck = new Array(7).fill(true);
 	let checkAll = true;
 	console.log(checkAll);
 	$("#joinButton").click(function() {
@@ -199,6 +202,7 @@
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
 				checkAll = false;
+				
 			}
 		}
 		if(checkAll){

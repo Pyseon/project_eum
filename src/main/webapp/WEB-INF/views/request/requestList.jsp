@@ -97,7 +97,9 @@
 	text-align:right;
 	}
 </style>
+<div class="header-div">
 <%@ include file="/WEB-INF/views/common/header.jsp" %>	
+</div>
 </head>
 <body>
 	<div>
@@ -185,5 +187,7 @@ $(function(){
 	}
 });
 </script>
+<div class="footer-div">
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
+</div>
 </html>

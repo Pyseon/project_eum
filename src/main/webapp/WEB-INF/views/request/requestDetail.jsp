@@ -23,12 +23,16 @@ display: flex;
 	.writer{
 	border-bottom: 2px solid rgba(220, 220, 220, 0.59);
 	}
+	.reportbutton{
+	border-bottom: 2px solid rgba(220, 220, 220, 0.59);
+	}
 </style>
 <link rel="stylesheet" href="css/report.css" />
 <script src="js/report.js"></script>
 <body>
 	
 	<div class="container">
+	<input type="text" name="memberNo" value="${member.memberNo }">
 		<div class="category">
 			<h1>${req.reqCategory}</h1>
 		</div>
@@ -83,6 +87,7 @@ display: flex;
 					</li>
 				</c:otherwise>
 			</c:choose>
+			
 		</div>
 	
 	</div>

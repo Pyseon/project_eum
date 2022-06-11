@@ -190,7 +190,9 @@ li{
 		font-weight: normal;
 	}
 </style>
+<div>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
+</div>
 </head>
 
 <body>

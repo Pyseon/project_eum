@@ -12,6 +12,7 @@ import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.request.model.dao.RequestDao;
 import kr.or.eum.request.model.vo.Request;
+import kr.or.eum.request.model.vo.RequestAsk;
 import kr.or.eum.request.model.vo.RequestDetailData;
 import kr.or.eum.request.model.vo.RequestPageData;
 
@@ -25,6 +26,10 @@ public class RequestService {
 		// TODO Auto-generated method stub
 		Request request=setToken(req);
 		int result = dao.requestWrite(request);
+		return result;
+	}
+	public int insertreqask(Request reqNo) {
+		int result = dao.insertreqask(reqNo);
 		return result;
 	}
 
@@ -112,20 +117,27 @@ public class RequestService {
 public RequestDetailData selectOneRequest(int reqNo, Member member) {
 	Request req = dao.selectOneRequest(reqNo);
 	
+	ArrayList<RequestAsk> reqaskList = dao.selectReqaskList(reqNo);
+	
+	
 	String[] tag = req.getReqTag().split("/");
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	map.put("reqNo", reqNo);
+	
 	
 	if(member != null) {
 		map.put("memberNo", member.getMemberNo());			
 	}else {
 		map.put("memberNo", 0);
 	}
-	RequestDetailData rdd = new RequestDetailData(req, tag);
+	
+	RequestDetailData rdd = new RequestDetailData(req, tag, reqaskList);
 	return rdd;
 	
 }
+
 /*
+
 	public Request selectOneRequest(int memberNo) {
 		// TODO Auto-generated method stub
 		Request req = dao.selectOneRequest(memberNo);
@@ -133,6 +145,7 @@ public RequestDetailData selectOneRequest(int reqNo, Member member) {
 		return req;
 	}
 */
+
 
 
 }

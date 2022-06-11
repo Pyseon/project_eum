@@ -338,6 +338,7 @@
 			if(sec == "00") { // 초단위가 00이면 분단위 체크
 				if(min == 0){ // 둘다 0이면 > 상담이 끝나서
 					clearInterval(intervalId); // 한쪽만 종료되고 있음...
+					$('#startBtn').css('display', 'block');
 					$('#sendMsg').attr("readonly", true);
 					appendChat("<p class='check-in'>상담이 종료되었습니다.</p>");
 					const msg = $("#msg");
@@ -576,9 +577,10 @@
 				console.log("intervalTime>>>>"+productTime);
 				appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
 				$('#timeZone').html("<span id='min'>"+productTime+"</span> : <span id='sec'>00</span>");
+				$('#startBtn').css('display', 'none');
 				intervalId = window.setInterval(function(){
 					timeCount();
-				},1000);//시간초 추후 수정..지금은 테스트라 빠르게
+				},10);//시간초 추후 수정..지금은 테스트라 빠르게
 			}else if(msgData.type === 'confirm') {
 				//확인 창
 				const confirmCheck = confirm('상담시작에 동의하십니까?');

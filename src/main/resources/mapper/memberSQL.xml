@@ -363,7 +363,7 @@
 		
   	</select>
   	<!-- 대권 expertPayment -->
-  	<select id = "selectExpertPayment" parameterType="int" resultType="exeprt">
+  	<select id = "selectExpertPayment" parameterType="int" resultType="expert">
   		select 
   			expert_no as exeprtNo,
   			expert_category as expertCategory,

@@ -228,12 +228,13 @@
 				}else {
 				    const counselNo = $('#counselNo').val();
 				    let startTime = getTime2();
-				    if(${c.startTime} == null ) {//null이 아닐 경우에만 startTime이 없데이트 되고, 이미 값이 있으면 그 시간으로 카운트 되게
+				    //if(${c.startTime} == '034810' ) {//null이 아닐 경우에만 startTime이 없데이트 되고, 이미 값이 있으면 그 시간으로 카운트 되게
 					    $.ajax({//null값인 StartTime 칼럼에 시작버튼을 누른 시점 시간을 update해주고 interval로 시간 체크
 					    	url : "updateStartTime.do",
 					    	data : {startTime:startTime, counselNo:counselNo}, 
 					    	success : function(data) {
 					    		confirmSend();
+					    		
 					    		//socketSend();
 					    		//두번째 인터벌 넣었던 자리(오답)
 							},
@@ -242,10 +243,10 @@
 								$('#startBtn').attr('disabled',true);
 							}
 				   		});
-					}else {
-						confirmSend();
+					//}else {
+						//confirmSend();
 						//socketSend();
-					}
+					//}
 				    //처음 인터벌 넣은 자리(오답)
 				}
 			}else if($('#startBtn').text() == '후기작성') {
@@ -270,9 +271,9 @@
 		//문자로 표기된 시간을 숫자 초단위로 바꾸는 함수	
 		function productOptionCount(param){
 		    const paramSplit = param.split('');
-		    console.log(param);
-		    console.log(paramSplit);
-		    console.log(paramSplit.length);
+		    console.log("productOptionCount>>"+param);
+		    console.log("productOptionCount>>"+paramSplit);
+		    console.log("productOptionCount>>"+paramSplit.length);
 		    let rehour = "";
 		    let remin = "";
 		    let resec = "";
@@ -288,9 +289,9 @@
 		    		resec = resec+paramSplit[i];
 		    	}
 		    }
-		    console.log(rehour);
-		    console.log(remin);
-		    console.log(resec);
+		    console.log("productOptionCount>>"+rehour);
+		    console.log("productOptionCount>>"+remin);
+		    console.log("productOptionCount>>"+resec);
 		    
 		    //숫자로 변환하면서 초 단위로 바꾸기
 		    rehour = Number(rehour) * 60 * 60;
@@ -307,10 +308,10 @@
 			console.log("rePresent>>>>"+rePresent);
 		
 		    //상담시작시간
-			let counselStartTime = ${c.startTime};
-			console.log(counselStartTime);
-			console.log(typeof(counselStartTime));
-			const reStartTime = productOptionCount(counselStartTime.toString());
+			//let counselStartTime = (${c.startTime}).toString();
+			//console.log("productOptionCompare>>"+counselStartTime);
+			//console.log("productOptionCompare>>"+typeof(counselStartTime));
+			const reStartTime = productOptionCount((${c.startTime}).toString());
 			console.log("reStartTime>>>>"+reStartTime);
 			
 			//현재-시작시간

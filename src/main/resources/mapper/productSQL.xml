@@ -548,33 +548,26 @@
 	</update>
 	
 	<!-- 대권 -->
-	<!-- 
 	<select id="selectProductNo" parameterType="int" resultType="pro">
 		select 
-				product_no as productNo
-				expert_no as expertNo
-				product_type as productType
-				product_title as productTitle
-				product_no as productNo
-				product_category as productCategory
-				product_intro as productIntro
-				product_intro as productTag
-				product_content as productContent
-				cost as cost
-				product_qst as productQst
-				product_ans as productAns
-				product_addr as productAddr
-				sale
-				salecost
-				reviewStar
-				revCount
-				productOption
-				productImgname
-				productImagPath
-				memberPicturepath
+				product_no as productNo,
+				expert_no as expertNo,
+				product_type as productType,
+				product_title as productTitle,
+				product_category as productCategory,
+				product_intro as productIntro,
+				product_tag as productTag,
+				product_content as productContent,
+				cost as cost,
+				product_qst as productQst,
+				product_ans as productAns,
+				product_addr as productAddr,
+				sale as sale,
+				product_option as productOption,
+				product_imgpath as productImgPath,
+				product_imgename as productImgname
 				
-				from product_tbl where product_no=#{productNo}
+		from product_tbl where product_no = #{productNo}
 	</select>
-	 -->
 </mapper>
 	

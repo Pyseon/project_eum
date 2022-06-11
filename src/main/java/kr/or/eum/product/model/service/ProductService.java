@@ -232,67 +232,6 @@ public class ProductService {
 		
 	}
 	
-	public ProductPageData selectSerchList(int reqPage, String selPro) {
-		int numPerPage = 4;
-		int end = reqPage * numPerPage;
-		int start = end - numPerPage + 1;
-		
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("start", start);
-		map.put("end", end);
-		map.put("selPro", selPro);
-
-		int totalCount = productDao.selectSerchCount(map);
-		ArrayList<Product> list = productDao.selectSerchList(map);
-
-		int totalPage = 0;
-		if(totalCount % numPerPage == 0) {
-			totalPage = totalCount/numPerPage;
-		}else {
-			totalPage = totalCount/numPerPage + 1;
-		}
-		int pageNaviSize = 5;
-		int pageNo = ((reqPage - 1) / pageNaviSize) * pageNaviSize + 1;
-		
-		String pageNavi = "<ul class='pagination'>";
-		if(pageNo != 1) { 
-			
-			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
-			pageNavi += "<span class='material-icons'>chevron_left</span>";
-			pageNavi += "</a></li>";
-		}
-		for(int i=0;i<pageNaviSize;i++) {
-			if(pageNo == reqPage) {
-				pageNavi += "<li>";
-				pageNavi += "<a class='page-item active-page' href='/ClassList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
-				pageNavi += pageNo;
-				pageNavi += "</a></li>";
-			}else {
-				pageNavi += "<li>";
-				pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
-				pageNavi += pageNo;
-				pageNavi += "</a></li>";
-			}
-			pageNo++;
-			if(pageNo > totalPage) {
-				break;
-			}
-		}
-		if(pageNo <= totalPage) {
-			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+pageNo+"&selPro="+selPro+"'>";
-			pageNavi += "<span class='material-icons'>chevron_right</span>";
-			pageNavi += "</a></li>";
-			
-		}
-		pageNavi += "</ul>";
-		ProductPageData ppd = new ProductPageData(list, pageNavi);	
-					 
-		return ppd;
-		
-	}
-	
 	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
 		Product product=setToken(pro);
@@ -304,7 +243,7 @@ public class ProductService {
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
 		int result = productDao.expertWrite(pro);
-
+		Product product=setToken(pro);
 		return result;
 	}
 	
@@ -678,22 +617,6 @@ public class ProductService {
 		System.out.println(startTime);
 		System.out.println(counselNo);
 		return productDao.updateStartTime(map);
-	}
-	//대권	
-	public Product selectProduct(int productNo) {
-		System.out.println(productNo);
-		return productDao.selectProduct(productNo);
-	}
-
-	public Product productDetailUpdate(int productNo) {
-		return productDao.selectOneProduct(productNo);
-	}
-
-
-	public void productUpdate(Product pro) {
-		Product product = setToken(pro);
-		productDao.productUpdate(product);
-		
 	}
 
 

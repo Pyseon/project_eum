@@ -135,6 +135,7 @@ public class MemberDao {
 	}
 	public int searchPhone(String memberPhone) {
 		// TODO Auto-generated method stub
+		System.out.println("연락처dao:");
 		int result = sqlSession.selectOne("member.searchPhone",memberPhone);
 		System.out.println("연락처dao:"+ result);
 		return result;

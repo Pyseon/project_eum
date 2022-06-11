@@ -501,7 +501,7 @@ public class MemberController {
 	}
     //연락처 유효성검사
     @ResponseBody
-	@RequestMapping(value="/phoneCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
+	@RequestMapping(value="/phoneCheck.do",produces = "application/text; charset=UTF-8")
 	public String memberPhone(String memberPhone , Model model) {
     	System.out.println(memberPhone);
 		int result = service.searchPhone(memberPhone);

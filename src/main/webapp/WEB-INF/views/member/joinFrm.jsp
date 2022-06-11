@@ -283,6 +283,7 @@
 	*/
 	
 	function formCheck(){
+		checkAll = true;
 		console.log("인풋체크> "+inputCheck);
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
@@ -350,6 +351,8 @@
 					const icon = "error";
 					const msgTime = 1500;
 					toastShow(title,icon,msgTime);
+					inputCheck[1] = false;
+					formCheck();
 			}else{
 				   $.ajax({
 					   url : "/nickCheck.do?memberNick=" + memberNick,
@@ -461,6 +464,8 @@
 	
 	$("#memberPw").on("change", function(){
 		var password = $(this).val();
+		 var pwd1 = $("#memberPw").val();
+	        var pwd2 = $("#memberPwRe").val();
 		let regExp;
 		regExp = /^[0-9a-zA-Z!@#$%^+\-=]{6,15}$/;
 		if(!regExp.test(password)){
@@ -471,6 +476,22 @@
 		}else{
 			
 		}
+		
+		  if (pwd1 != '' && pwd2 == '') {
+	            null;
+	        }else if (pwd1 != "" || pwd2 != "") {
+	            if (pwd1 == pwd2) {
+	            	$("#memberPw-test").text("비밀번호가 일치합니다.");
+					$("#memberPw-test").css("color","#3865f2");
+					inputCheck[3] = true;
+					formCheck();
+	            } else {
+	            	$("#memberPw-test").text("비밀번호가 일치하지 않습니다.");
+					$("#memberPw-test").css("color","#f05454");
+					inputCheck[3] = false;
+					formCheck();
+	            }
+	        }
 	});
 	
 	

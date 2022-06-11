@@ -34,7 +34,19 @@ public class ManagerController {
 	private ManagerService service;
 	
 	@RequestMapping(value = "/manaMember.do")
-	public String manaMember(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaMember(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		String wherePage = "manaMember.do";
 		HashMap<String, Object> mpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", mpd.get("memberList"));
@@ -51,7 +63,19 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/manaPayment.do")
-	public String manaPayment(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaPayment(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		String wherePage = "manaPayment.do";
 		//PaymentPageData ppd = service.paymentList(reqPage, payState, searchType, keyword);
 		HashMap<String, Object> ppd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
@@ -74,7 +98,19 @@ public class ManagerController {
 		return "manager/detailPayment";
 	}
 	@RequestMapping(value = "/manaReport.do")
-	public String manaReport(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaReport(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		String wherePage = "manaReport.do";
 		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		ArrayList<Object> report = new ArrayList<Object>();
@@ -181,7 +217,19 @@ public class ManagerController {
 		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
 	}
 	@RequestMapping(value = "/manaNotice.do")
-	public String manaNotice(int reqPage, String searchType, String keyword, Model model) {
+	public String manaNotice(HttpServletRequest request, int reqPage, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		String wherePage = "manaNotice.do";
 		int selectNum = 0;
 		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
@@ -223,7 +271,19 @@ public class ManagerController {
 		return "redirect:/manaNotice.do?reqPage=1";
 	}
 	@RequestMapping(value = "/manaChart.do")
-	public String manaChart(Model model) {
+	public String manaChart(HttpServletRequest request, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		Chart chart = service.selectChart();
 		model.addAttribute("chart", chart);
 		return "manager/managementChart";
@@ -242,7 +302,19 @@ public class ManagerController {
 		return new Gson().toJson(salesTypeChart);
 	}
 	@RequestMapping(value = "/manaAnswer.do")
-	public String manaAnswer(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaAnswer(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		String wherePage = "manaAnswer.do";
 		HashMap<String, Object> apd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", apd.get("answerList"));
@@ -252,7 +324,19 @@ public class ManagerController {
 		return "manager/managementAnswer";
 	}
 	@RequestMapping(value = "/manaQuestion.do")
-	public String manaQuestion(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaQuestion(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		String wherePage = "manaQuestion.do";
 		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", qpd.get("qstList"));
@@ -320,7 +404,19 @@ public class ManagerController {
 		return "mypage/detailQuestion";
 	}
 	@RequestMapping(value = "/manaExpert.do")
-	public String manaExpert(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaExpert(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		String wherePage = "manaExpert.do";
 		HashMap<String, Object> epd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", epd.get("expertList"));

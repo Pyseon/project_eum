@@ -290,7 +290,8 @@
 			report_category as reportCategory,
 			report_index as reportIndex,
 			report_title as reportTitle,
-			report_is as reportIs
+			report_is as reportIs,
+			ans_result as ansResult
 		from report_tbl report
 		where report_no = #{value }
 	</select>
@@ -656,7 +657,8 @@
 			(select member_Id from member_tbl m where question_tbl.member_no = m.member_no) as memberId,
 			qst_title as qstTitle,
 			qst_content as qstContent,
-			qst_date as qstDate
+			qst_date as qstDate,
+			ans_state as ansState
 			from question_tbl
 			where qst_no = #{value }
 	</select>

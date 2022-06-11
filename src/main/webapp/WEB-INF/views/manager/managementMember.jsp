@@ -54,7 +54,19 @@
 					<td>${member.memberNo }</td>
 					<td>${member.memberId }</td>
 					<td>${member.memberNick }</td>
-					<td>${member.grade }</td>
+					<td>
+					<c:choose>
+						<c:when test="${member.grade == 1 }">
+							전문가
+						</c:when>
+						<c:when test="${member.grade == 2 }">
+							일반 회원
+						</c:when>
+						<c:when test="${member.grade == 3 }">
+							블랙리스트
+						</c:when>
+					</c:choose>
+					</td>
 					<td>${member.memberPoint }</td>
 					<td>${member.memberPhone }</td>
 					<td>${member.enrollDate }</td>

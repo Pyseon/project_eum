@@ -82,15 +82,28 @@
 				</table>
 			</c:otherwise>
 		</c:choose>
+		<input type="hidden" id="reportIs" value=${rpt.reportIs }>
+		<input type="hidden" id="ansResult" value=${rpt.ansResult }>
 		</div>
 	<div class="resultReport">
-		<button class="btn bc2" onclick="location.href='/reportMember.do?memberNo=${rpt.defendant}&category=${rpt.reportCategory }&index=${rpt.reportIndex }&reportNo=${rpt.reportNo }&selNo=1'">사형</button>
-		<button class="btn bc3" onclick="location.href='/updateAnsResult.do?selectNum=2&reportNo=${rpt.reportNo}'">봐줌</button>
+		<button class="btn bc2 result-btn" disabled="disabled" onclick="location.href='/reportMember.do?memberNo=${rpt.defendant}&category=${rpt.reportCategory }&index=${rpt.reportIndex }&reportNo=${rpt.reportNo }&selNo=1'">사형</button>
+		<button class="btn bc3 result-btn" disabled="disabled" onclick="location.href='/updateAnsResult.do?selectNum=2&reportNo=${rpt.reportNo}'">봐줌</button>
 	</div>
 	</div>
 	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	<script>
+	$(function() {
+		const reportIs = $("#reportIs").val();
+		const ansResult = $("#ansResult").val();
+		if(reportIs == 1){
+			$(".result-btn").attr("disabled",false);
+		}
+		if(ansResult != 0){
+			$(".resultReport").css("display","none");
+		}
+	});
+	
 	$("textarea[name=answerContent]").change(function() {
 		const answerTitle = $("textarea[name=answerTitle]").val();
 		const answerContent = $("textarea[name=answerContent]").val();

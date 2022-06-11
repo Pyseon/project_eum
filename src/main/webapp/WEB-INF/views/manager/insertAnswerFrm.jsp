@@ -6,6 +6,16 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+	.ansTable{
+		margin-top: 20px;
+		border: 1px solid #3865f2;
+		width: 100%;
+	}
+	.ansTable th{
+		width: 20%;
+	}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -25,7 +35,9 @@
 			<hr>
 			<p>${qst.qstContent }</p>
 		</div>
-			<form action="insertAnswer.do" method="post" class="answerForm">
+		<c:choose>
+			<c:when test="${qst.ansState == 0 }">
+				<form action="insertAnswer.do" method="post" class="answerForm">
 			<span class="material-symbols-outlined ansRe">
 				subdirectory_arrow_right</span><h2>답변</h2>
 				<input type="text" class="managerTitle" name="ansTitle" placeholder="제목">
@@ -33,13 +45,44 @@
 					<textarea id="summernote" name="ansContent"></textarea>
 				</div>
 				<input type="hidden" name="qstNo" value="${qst.qstNo }">
-				<input type="submit" class="btn bc1 bs4" value="제출">
+				<input id="submit" type="submit" disabled="disabled" class="btn bc1 bs4" value="제출">
 			</form> 
+			</c:when>
+			<c:when test="${qst.ansState == 1 }">
+				<table class="ansTable">
+					<tr>
+						<th>제목</th>
+						<td>${ans.ansTitle }</td>
+					</tr>
+					<tr>
+						<th>내용</th>
+						<td>${ans.ansContent }</td>
+					</tr>
+				</table>
+			</c:when>
+		</c:choose>
 		</div>
 		
-	</div>
+	<input type="hidden" id="ansState" value=${qst.ansState }>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>
+$(function() {
+	const ansState = $("#ansState").val();
+	const ansTitle = $("#ansTitle").val();
+	const ansContent = $("#ansContent").val();
+	if(ansState == 1){
+		$("#submit").css("display","none");
+	}
+});
+
+window.onkeydown = function() {
+	const ansTitle = $("input[name=ansTitle]").val();
+	const ansContent = $("#summernote").val();
+	if(ansTitle.length > 0 && ansContent.length > 0){
+		$("#submit").attr("disabled", false);
+	}
+};
+
 $("#summernote").summernote({
 	  toolbar: [ //썸머노트 툴바 추가
 		    ['fontsize', ['fontsize']],

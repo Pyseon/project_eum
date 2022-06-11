@@ -558,7 +558,6 @@
 		
 		//서버에서 화면으로 데이터를 전송 시 처리할 함수 
 		function receiverMsg(param) {
-
 			const msgData = JSON.parse(param.data); 
 			//나말고 누군가가 들어 온 경우
 			if(msgData.type === 'enter') {
@@ -579,15 +578,15 @@
 				$('#timeZone').html("<span id='min'>"+productTime+"</span> : <span id='sec'>00</span>");
 				intervalId = window.setInterval(function(){
 					timeCount();
-				},10);//시간초 추후 수정..지금은 테스트라 빠르게
+				},1000);//시간초 추후 수정..지금은 테스트라 빠르게
 			}else if(msgData.type === 'confirm') {
 				//확인 창
-				let confirmCheck = confirm('상담시작에 동의하십니까?');
+				const confirmCheck = confirm('상담시작에 동의하십니까?');
 				if(confirmCheck == true) {
 					$('.checkbox').attr('disabled',true);
 					socketSend();
-				}else if(confrimCheck == false) {
-					alert('동의하지 않았습니다.');
+				}else if(confirmCheck == false) {
+					appendChat("<p class='check-in'>상담 시작에 동의하지 않았습니다.</p>");
 				}
 			}
 		}//채팅도 데이터로 보내주지만, 읽음 여부 등도 데이터로 전송

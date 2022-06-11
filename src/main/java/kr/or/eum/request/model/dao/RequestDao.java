@@ -59,7 +59,7 @@ public class RequestDao {
 	}
 
 	public Expert selectExpertNo(int memberNo) {
-		Expert expert = sqlSession.selectOne("product.selectMemberNo", memberNo);
+		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
 		return expert;
 	}
 

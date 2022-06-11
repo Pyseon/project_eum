@@ -35,7 +35,6 @@ display: flex;
 <body>
 	
 	<div class="container">
-	<input type="text" name="memberNo" value="${member.memberNo }">
 		<div class="category">
 			<h1>${req.reqCategory}</h1>
 		</div>
@@ -90,11 +89,13 @@ display: flex;
 					</li>
 				</c:otherwise>
 			</c:choose>
-			<form action="/insertreqask.do" metho="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-			<input type="text" name="expertNo" value="${expertNo }">
-			
-			
-			
+			<form action="/insertreqask.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+				<div>
+				<input type="text" name="expertNo" value="${expertNo }">
+				<input type="text" name='reqNo' value="${req.reqNo }">
+				
+				<input type="submit" class="btn bc1 bs4" value="등록하기">
+				</div>
 			</form>
 		</div>
 	

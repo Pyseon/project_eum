@@ -77,7 +77,7 @@ public class RequestController {
 	}
 	
 	@RequestMapping(value = "/requestDetail.do")
-	public String requestDetail(int reqNo, int memberNo, HttpServletRequest request, Model model) {
+	public String requestDetail(int reqNo, HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
 		Member member = null;
 		if(session != null) {
@@ -91,6 +91,7 @@ public class RequestController {
 			}else {
 				model.addAttribute("memberNo", 0);
 			}
+			int memberNo = member.getMemberNo();
 			Expert expert = service.selectExpertNo(memberNo);
 			model.addAttribute("reqaskList", rdd.getReqaskList());
 			model.addAttribute("req", rdd.getReq());

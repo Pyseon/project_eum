@@ -84,6 +84,7 @@ public class ProductController{
 		public String classWriterFrm(HttpServletRequest request, Model model) {
 		HttpSession session = request.getSession(false);
         Member member = null;
+        
         if(session != null) {
             member = (Member)session.getAttribute("member");
         }
@@ -432,7 +433,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		System.out.println(pro);
 		return pro;
 		}
-	
+	/*
 	@RequestMapping(value = "/productSerch.do")
 	public String productSerch(int reqPage, String selPro, Model model, HttpServletRequest request) {
 		ProductPageData ppd = productService.selectClassList(reqPage, selPro);
@@ -457,6 +458,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		}else {
 			model.addAttribute("memberNo", 0);
 		}
+		*/
 	//윤지
 	@RequestMapping(value = "/productDetail.do")
 	public String productDetail(Model model, int productNo, int expertNo, HttpServletRequest request) {

@@ -63,16 +63,14 @@ public class MemberController {
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
 		System.out.println(member);
-		String str="";
-		if(member != null) {
+		if(member.getGrade() == 3) {
+			return "member/blackListMsg";
+		}else if(member != null && member.getGrade() != 3 ){
 			session.setAttribute("member", member);
-			str="1";
 			return "redirect:/";
 		}else {
-			str="0";
 			return "member/loginFrmFail";
 		}
-		
 	}
 	
 	//대권 로그아웃

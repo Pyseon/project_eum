@@ -98,7 +98,11 @@ display: flex;
 				</div>
 			</form>
 		</div>
-	
+	<c:forEach items="${list }" var="c" varStatus="i">
+		<div>
+		${expertNo }
+		</div>
+	</c:forEach>
 	</div>
 <div class="footer-div">
         <%@ include file="/WEB-INF/views/common/footer.jsp"%>

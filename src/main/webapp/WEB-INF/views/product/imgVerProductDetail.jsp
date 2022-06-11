@@ -27,9 +27,6 @@
 							<span data-tab="tab-2" class="detail-title title2 tab-link">후기<span class="tab-review-count"> (${reviewCount})</span></span> <!-- 후기 수 DB -->
 						</div>	
 						<div class="product-content">
-						<button class="btn bc6 bs5 fc-1"
-						onclick="location.href='/classUpdateFrm.do?productNo=${p.productNo}&expertNo=${p.expertNo }'">수정</button>
-						
 							<div id="tab-1" class="tab-content current">
 								<div class="detail-wrap">
 									<span class="detail-sub-title">상담소개</span>

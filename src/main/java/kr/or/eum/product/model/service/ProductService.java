@@ -320,7 +320,9 @@ public class ProductService {
 		
 		String productQst = pro.getProductQst();
 		List<String> qstList = new ArrayList<String>();
+		
 		String []tokens=productQst.split("\\|");
+		
 		for(int i=0;i<tokens.length;i++) {
 			if(tokens[i] == null || tokens[i].trim().length() < 2) {
 			}else {
@@ -360,7 +362,9 @@ public class ProductService {
 		
 		String productTag = pro.getProductTag();
 		List<String> tagList = new ArrayList<String>();
+		
 		String []tokens3=productTag.split("\\|");
+		
 		for(int i=0;i<tokens3.length;i++){
 			if(tokens3[i] == null || tokens3[i].trim().length() < 2) {
 			}else {
@@ -372,6 +376,7 @@ public class ProductService {
 			}
 		}
 		productTag = "";
+		
 		for(int i=0;i<tagList.size();i++){
 			productTag += "#"+tagList.get(i)+"/";
 		}

@@ -12,6 +12,7 @@
 		<div class="all-wrap">
 				<div class="member-img-wrap">
 					<img class="member-img" src="/img/member/pngegg.png">
+					<div class="nickname">닉네임/DB데이터필요</div>
 					<h2></h2>
 				</div>
 			<div class="menu-wrap">

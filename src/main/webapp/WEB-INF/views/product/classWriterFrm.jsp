@@ -201,7 +201,7 @@
 			</div>
 			<div id="tag-opt">
 			<span style="display: flex;"> 
-			<input type="text" name="productQst2" class="pro-input tag-val" placeholder="태그를 작성하세요" required>
+			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required">
 			</span>
 			</div>
 		</div>

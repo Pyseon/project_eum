@@ -192,7 +192,7 @@ public class ProductController{
 	}
 	
 	@RequestMapping(value="/expertWriterFrm.do")
-	public String expertWriterFrm(int reqPage, String selPro, Model model, HttpServletRequest request) {
+	public String expertWriterFrm(Model model, HttpServletRequest request) {
 	HttpSession session = request.getSession(false);
     Member member = null;
     if(session != null) {

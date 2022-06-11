@@ -203,16 +203,19 @@
 					<div><input type="checkbox" class="agreement" id="agreement" name="agreement" value="0"> <label> 이벤트 할인 혜택 알림 수신에 동의합니다(선택)</label></div>
 				</div>
 			</div>
-			<button class="btn bc1 bs4" id="joinButton" type="submit">가입완료</button>
+			<button class="btn bc1 bs4" id="joinButton" type="submit" disabled>가입하기</button>
 		</fieldset>
 	</form>
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>
+	
+
+
 	//1.button 활성화
 	//2.submit 유효성
 	let inputCheck = new Array(7).fill(true);
-	let checkAll = false;
+	let checkAll = true;
 	console.log(checkAll);
 	/*
 	$("#joinButton").click(function() {
@@ -279,6 +282,23 @@
 	});
 	*/
 	
+	function formCheck(){
+		console.log("인풋체크> "+inputCheck);
+		for(let i = 0; i < inputCheck.length; i++){
+			if(inputCheck[i] == false){
+				checkAll = false;
+			}
+		}
+		console.log("체크올> "+checkAll);
+		if(checkAll){
+			$("#joinButton").attr("disabled",false);
+		}else{
+			$("#joinButton").attr("disabled",true);
+		}
+	}
+	
+	
+	
 	//연락처 유효성 검사
 	$("#memberPhone").change(function(){
 			$("#memberPhone-test").text("");			
@@ -289,6 +309,7 @@
 				$("#memberPhone-test").text(" 010-0000-0000 형식으로 입력해주세요.");
 				$("#memberPhone-test").css("color","#ff2e63");
 				inputCheck[0] = false;
+				formCheck();
 			}else{
 				var memberPhone = $("#memberPhone").val();
 				//연락처 중복 검사
@@ -301,10 +322,12 @@
 								$("#memberPhone-test").text("가입된 번호입니다.");
 								$("#memberPhone-test").css("color","#ff2e63");
 								inputCheck[0] = false;
+								formCheck();
 							}else if(data == "0"){
 								$("#memberPhone-test").text("사용가능한 번호입니다.");
 								$("#memberPhone-test").css("color","#00adb5");
 								inputCheck[0] = true;
+								formCheck();
 							}
 					   },
 					   error : function(){
@@ -312,6 +335,7 @@
 					   }
 					});
 				inputCheck[0] = true;
+				formCheck();
 			}
 		});
 	//닉네임 유효성 검사
@@ -338,10 +362,12 @@
 								$("#memberNick-test").text("이미 사용중인 닉네임입니다.");
 								$("#memberNick-test").css("color","#ff2e63");
 								inputCheck[1] = false;
+								formCheck();
 							}else if(data == "0"){
 								$("#memberNick-test").text("사용가능한 닉네임입니다.");
 								$("#memberNick-test").css("color","#00adb5");
 								inputCheck[1] = true;
+								formCheck();
 							}
 					   },
 					   error : function(){
@@ -425,10 +451,12 @@
 	        $("#memberId").attr("readonly","readonly");
 	      	$(".check-find").addClass("check-hidden");
 	      	inputCheck[2] = true;
+	      	formCheck();
 	    } else {                                        // 일치하지 않을 경우
 	        checkResult.html("인증번호를 다시 확인해주세요.");
 	        checkResult.attr("class", "incorrect");
 	        inputCheck[2] = false;
+	        formCheck();
 	    }
 	});
 	
@@ -438,7 +466,7 @@
 		regExp = /^[0-9a-zA-Z!@#$%^+\-=]{6,15}$/;
 		if(!regExp.test(password)){
 			const title = "6~15자의 영문 대소문자,숫자,특수문자만 가능합니다.";
-			const icon = "success";
+			const icon = "error";
 			const msgTime = 1800;
 			toastShow(title,icon,msgTime);
 		}else{
@@ -462,10 +490,12 @@
 	            	$("#memberPw-test").text("비밀번호가 일치합니다.");
 					$("#memberPw-test").css("color","#3865f2");
 					inputCheck[3] = true;
+					formCheck();
 	            } else {
 	            	$("#memberPw-test").text("비밀번호가 일치하지 않습니다.");
 					$("#memberPw-test").css("color","#f05454");
 					inputCheck[3] = false;
+					formCheck();
 	            }
 	        }
 	    });
@@ -538,11 +568,13 @@
 			if(year > 2022){
 				$("#birth-test").text("미래에서 오셨군요^^");
 				$("#birth-test").css("color","#ff2e63");
-				inputCheck[4] = false;				
+				inputCheck[4] = false;		
+				formCheck();
 			}else if(year < 1922){
 				$("#birth-test").text("정말이세요?");
 				$("#birth-test").css("color","#ff2e63");
 				inputCheck[4] = false;
+				formCheck();
 			}else if(year!=""&&(year>1923||year<2022)){
 				//day 유효성 검사
 				if(month == 2 ){
@@ -550,16 +582,19 @@
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
+						formCheck();
 					}else{
 						$("#birth-test").text("완료1");
 						$("#birth-test").css("color","#3865f2");
 						inputCheck[4] = true;
+						formCheck();
 					}
 				}else if(month==4||month==6||month==9||month==11){
 					if(day>30||day<0||!day){
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
+						formCheck();
 					}else{
 						$("#birth-test").text("완료2");
 						$("#birth-test").css("color","#3865f2");
@@ -569,16 +604,19 @@
 						$("#birth-test").text("생년월일 확인해주세요");
 						$("#birth-test").css("color","#ff2e63");	
 						inputCheck[4] = false;
+						formCheck();
 					}else {
 						$("#birth-test").text("완료3");
 						$("#birth-test").css("color","#3865f2");					
 						inputCheck[4] = true;
+						formCheck();
 					}
 				}
 			}else{
 				$("#birth-test").text("생년월일 확인해주세요");
 				$("#birth-test").css("color","#ff2e63");	
 				inputCheck[4] = false;
+				formCheck();
 			}
 			
 		});

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.request.model.dao.RequestDao;
@@ -28,13 +29,9 @@ public class RequestService {
 		int result = dao.requestWrite(request);
 		return result;
 	}
-	public int insertreqask(Request reqNo) {
-		int result = dao.insertreqask(reqNo);
-		return result;
-	}
+
 
 	private Request setToken(Request req) {
-		
 		String reqTag = req.getReqTag();
 		List<String> tagList = new ArrayList<String>();
 		String []tokens=reqTag.split("\\|");
@@ -134,6 +131,20 @@ public RequestDetailData selectOneRequest(int reqNo, Member member) {
 	RequestDetailData rdd = new RequestDetailData(req, tag, reqaskList);
 	return rdd;
 	
+}
+
+
+public int insertReqask(Request reqNo, Request expertNo) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("reqNo", reqNo);
+	map.put("expertNo", expertNo);
+	
+	return dao.insertReqask(map);
+}
+
+
+public Expert selectExpertNo(int memberNo) {
+	return dao.selectExpertNo(memberNo);
 }
 
 /*

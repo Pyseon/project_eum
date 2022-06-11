@@ -9,6 +9,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.or.eum.member.model.vo.Expert;
+import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.request.model.vo.Request;
 import kr.or.eum.request.model.vo.RequestAsk;
@@ -50,11 +52,17 @@ public class RequestDao {
 		List reqaskList = sqlSession.selectList("request.selectReqAskList", reqNo);
 		return (ArrayList<RequestAsk>)reqaskList;
 	}
-	public int insertreqask(Request reqNo) {
-		// TODO Auto-generated method stub
-		int result = sqlSession.insert("request.insertreqask", reqNo);
+
+	public int insertReqask(HashMap<String, Object> map) {
+		int result = sqlSession.insert("request.insertReqAsk", map);
 		return result;
 	}
+
+	public Expert selectExpertNo(int memberNo) {
+		Expert expert = sqlSession.selectOne("product.selectMemberNo", memberNo);
+		return expert;
+	}
+
 	
 	
 	

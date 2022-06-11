@@ -67,26 +67,21 @@
   	join member_tbl using(member_no)
   	where req_no=#{reqNo}
   	</select>
+  	
  <select id="selectReqAskList" resultType="reqstAsk" parameterType="int">
- select
- 	 select
- 	reqask_No as reqaskNo,
- 	member_no as memberNo,
- 	(select req_no from request_tbl r where rsk.req_no = r.req_no) as reqNo,
- 	expert_No as expertNo,
-    expert_Name as expertName
- 	from reqask_tbl rsk
-    join member_tbl using(member_no)
-    where req_No=${reqNo}
- </select>
- 	<insert id="insertreqask" parameterType="reqstAsk">
-	insert into
-	reqask_tbl values(
-	reqask_SEQ.nextval,
-	#{memberNo},
-	#{reqNo},
-	#{expertNo},
-	#{expertName)
+ 	select 
+ 	reqask_no as reqaskNo,
+ 	req_no as reqNo,
+ 	expert_no as expertNo
+ 	from reqask_tbl
+ 	where req_no = #{value}
+	</select>
+	
+	<insert id="insertReqAsk" parameterType="map">
+	insert into reqAsk_tbl values(
+		reqAsk_seq.nextval,
+		#{reqNo},
+		#{expertNo}
 	)
 	</insert>
   	

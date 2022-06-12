@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,7 @@
 				<div class="menu-detail"><a href="/Myreview.do?memberNo=${sessionScope.member.memberNo}">내리뷰</a></div>
 				<div class="menu-detail"><a href="/Myproject.do?memberNo=${sessionScope.member.memberNo}">내프로젝트</a></div>
 				<div class="menu-detail"><a href="/myQuestionList.do?memberNo=${sessionScope.member.memberNo}&reqPage=1&selectNum=0">1:1 문의 내역</a></div>
+				<div class="menu-detail"><a href="/appExpertList.do?memberNo=${sessionScope.member.memberNo}">전문가 신청내역</a></div>
 			</div>
 		</div>
 	</div>

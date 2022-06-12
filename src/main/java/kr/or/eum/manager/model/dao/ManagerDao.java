@@ -19,6 +19,7 @@ import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.member.model.vo.RefuseExpert;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.report.model.vo.AnswerReport;
@@ -369,6 +370,16 @@ public class ManagerDao {
 	public String selectMemberId(int payNo) {
 		String memberId = sqlSession.selectOne("manager.selectMemberId", payNo);
 		return memberId;
+	}
+
+	public ArrayList<Expert> selectExpertApp(int memberNo) {
+		List list = sqlSession.selectList("manager.selectExpertApp", memberNo);
+		return (ArrayList<Expert>) list;
+	}
+
+	public RefuseExpert selectMyRefuseExpert(int expertNo) {
+		RefuseExpert rexp = sqlSession.selectOne("manager.selectMyRefuseExpert", expertNo);
+		return rexp;
 	}
 	
 }

@@ -371,9 +371,9 @@
   	<!-- 대권 expertPayment -->
   	<select id = "selectExpertPayment" parameterType="int" resultType="expert">
   		select 
-  			expert_no as exeprtNo,
+  			expert_no as expertNo,
   			expert_category as expertCategory,
-  			exeprt_tag as expertTage,
+  			expert_tag as expertTage,
   			credential as credential,
   			issuing_authority as issuinAuthority,
   			acquistion_date as acquistionDate,
@@ -388,8 +388,8 @@
   			expert_career as expertcareer,
   			expert_intro as expertIntro,
   			expert_app as expertApp
-  		form expert_tbl
-  		where expert_No=${expertNo}
+  		from expert_tbl
+  		where expert_No=#{expertNo}
   	</select>
   	
 </mapper>

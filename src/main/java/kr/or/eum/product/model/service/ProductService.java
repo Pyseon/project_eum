@@ -242,8 +242,9 @@ public class ProductService {
 	
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
-		int result = productDao.expertWrite(pro);
 		Product product=setToken(pro);
+		int result = productDao.expertWrite(product);
+		
 		return result;
 	}
 	

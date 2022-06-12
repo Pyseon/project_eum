@@ -226,7 +226,6 @@ li{
    
    
 <div class="container">
-	테스트용 아이디 : eom15@gmail.com 비밀번호 :1234
 <button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
 	<!-- 실전용
 	<c:if test="${grade eq null}">
@@ -329,16 +328,6 @@ li{
 		
 		</div>
 	</c:forEach>
-		<c:choose>
-		<c:when test="${0 eq c.expertNo }">
-		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/oginFrm.do'">등록하기</button>
-		</c:when>
-		<c:otherwise>
-		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
-		</c:otherwise>
-		</c:choose>
-		<input type="text" name="memberNo" value="${grade }">
-		<input type="text" name="memberNo" value="${memberNo }">
 	</div>													   			
 ${pageNavi }
 

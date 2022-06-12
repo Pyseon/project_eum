@@ -238,8 +238,8 @@
   			)
   </insert>
   <insert id="ideamarketWrite" parameterType="pro">
-  		insert all 
-  		into product_tbl values(
+	insert into
+  			product_tbl values(
   			product_seq.nextval,
   			#{expertNo},
   			3,
@@ -254,15 +254,12 @@
   			#{productAddr},
   			#{sale},
   			#{productOption},
-  			#{productImgPath},
-  			#{productImgname}
-  			)
-  			into ideamarket_tbl values(
-  			ideamarket_seq.nextval,
-  			null,
+  			0,
+  			0,
+  			market_seq.nextval,
   			#{marketType},
-  			null,
-  			#{marketPath}
+  			#{marketPath},
+  			#{marketName}
   			)
   
   </insert>
@@ -309,9 +306,8 @@
 		insert into ideamarket_tbl values(
 		ideamarket_seq.nextval,
 		
-		)
 		
-	
+		)
 	</insert>
 	<!-- 윤지 -->
 	<select id="selectAllReview" parameterType="map" resultType="review">

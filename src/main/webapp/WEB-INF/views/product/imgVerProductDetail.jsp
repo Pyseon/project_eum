@@ -158,6 +158,9 @@
 				<div class="col-lg-4 sidebar-widgets">
 					<div class="widget-wrap">
 						<div class="right-first-box">
+							<div class="img-ver-title-wrap">
+								<span class="img-ver-title">${p.productTitle} </span><br> 
+							</div>
 							<div class="product-summary">
 								<span id="sele">${p.sale}%</span>
 								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span><br>

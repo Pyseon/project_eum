@@ -339,6 +339,11 @@
 				data : {reviewNo:param},
 				success : function(data) {
 					alert('후기가 삭제되었습니다.');
+					if(${p.productType} == 1 || ${p.productType} ==2) {
+						location.href="/productDetail.do?productNo=${p.productNo}&expertNo=${expert.expertNo}"						
+					}else if(${p.productType} == 3) {
+						location.href="/imgVerProductDetail.do?productNo=${p.productNo}&expertNo=${expert.expertNo}"
+					}
 				},
 				error : function() {
 					alert('잘못된 접근입니다.');

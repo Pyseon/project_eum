@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/manager.css" />
 <style>
 	.fc-13{
 		color: #6AA61E;
@@ -15,29 +16,33 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-	<h1>>전문가 승인</h1>
+	<h1 id="main-title">> 전문가 승인</h1>
 	<hr>
 		<div class="selectListBtn">
 			<ul>
-				<li><button class="btn bc3" onclick="location.href='manaExpert.do?reqPage=1&selectNum=0'">전체</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaExpert.do?reqPage=1&selectNum=2'">승인</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaExpert.do?reqPage=1&selectNum=3'">기각</button></li>
-				<li><button class="btn bc2" onclick="location.href='manaExpert.do?reqPage=1&selectNum=1'">대기 </button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=2'">승인</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=3'">기각</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=1'">대기 </button></li>
 			</ul>
 		</div>
 		<div class="searchBox">
 			<form action="/manaExpert.do" method="post">
-				<select name="searchType">
-					<option value="expertName">이름</option>
-					<option value="category">분야</option>
-				</select>
-				<input type="hidden" name="reqPage" value="1">
-				<input type="hidden" name="selectNum" value="0">
-				<input type="text" name="keyword">				
-				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
+				<div class="select-wrap">
+					<select id="searchType" name="searchType">
+						<option value="expertName">이름</option>
+						<option value="category">분야</option>
+					</select>
+				</div>	
+					<input type="hidden" name="reqPage" value="1">
+					<input type="hidden" name="selectNum" value="0">
+					<div class="keyword-wrap">
+						<input type="text" id="keyword" name="keyword">		
+					</div>			
+					<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>
 		</div>
-		<div id="resultTbl">
+		<div id="resultTbl-wrap">
 			<table class="tbl tbl-hover resultTbl">
 				<tr class="tr-1">
 					<th>번호</th>
@@ -68,5 +73,12 @@
 		</div>
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<script>
+	$(function(){
+	    let sel= ${selectNum};
+	    console.log(sel);
+	    $(".select-btn").eq(sel).addClass("manager-btn1");
+	});
+</script>
 </body>
 </html>

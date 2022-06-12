@@ -6,19 +6,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/manager.css" />
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-	<h1>>1:1상담</h1>
+	<h1 id="main-title">> 1:1상담</h1>
 	<hr>
-		<div class="selectListBtn">
+		<div class="selectListBtn sl-btn">
 			<ul>
-				<li><button class="btn bc3" onclick="location.href='manaQuestion.do?reqPage=1&selectNum=0'">전체</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaQuestion.do?reqPage=1&selectNum=1'">대기</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaQuestion.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaQuestion.do?reqPage=1&selectNum=1'">대기</button></li>
 			</ul>
-		</div>
+		</div>	
 		<div id="resultTbl" class="qstTbl">
 			<table class="tbl tbl-hover">
 				<tr class="tr-1">
@@ -53,5 +54,12 @@
 		</div>
 	</div>		
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
+<script>
+	$(function(){
+	    let sel= ${selectNum};
+	    console.log(sel);
+	    $(".select-btn").eq(sel).addClass("manager-btn1");
+	});
+</script>
 </body>
 </html>

@@ -230,7 +230,8 @@ th{
 /*/////right box/////*/
 .img-ver-title{
 	color: #333333;
-	font-size: 24px;
+	font-size: 22px;
+    font-weight: bold;
 }
 .img-ver-title-wrap{
 	margin-bottom: 10px;

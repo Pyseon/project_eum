@@ -6,37 +6,44 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/manager.css" />
 <script type="text/javascript"
 	src="http://code.jquery.com/jquery-3.3.1.js"></script>
+<style>
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-	<h1>>회원관리</h1>
+	<h1 id="main-title">> 회원관리</h1>
 	<hr>
 		<div class="selectListBtn">
-			<ul>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=0'">전체</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=1'">전문가</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=2'">일반회원</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=3'">블랙리스트</button></li>
+			<ul class="selectList-ul">
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaMember.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaMember.do?reqPage=1&selectNum=1'">전문가</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaMember.do?reqPage=1&selectNum=2'">일반회원</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaMember.do?reqPage=1&selectNum=3'">블랙리스트</button></li>
 			</ul>
 		</div>
 		<div class="searchBox">
 			<form action="/manaMember.do" method="post">
-				<select id="searchType" name="searchType">
-					<option value="memberNo">회원번호</option>
-					<option value="memberId">이메일</option>
-					<option value="memberNick">닉네임</option>
-				</select>
+				<div class="select-wrap">
+					<select id="searchType" name="searchType">
+						<option value="memberNo">회원번호</option>
+						<option value="memberId">이메일</option>
+						<option value="memberNick">닉네임</option>
+					</select>
+				</div>
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="selectNum" value="0">
-				<input type="number" name="keyword" id="keyword">
+				<div class="keyword-wrap">
+					<input type="number" name="keyword" id="keyword">
+				</div>
 				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>
 		</div>
-		<div id="resultTbl">
+		<div id="resultTbl-wrap">
 			<table class="tbl tbl-hover resultTbl">
 				<tr class="tr-1">
 					<th>번호</th>
@@ -154,6 +161,11 @@ $("#searchType").change(function() {
 		location.href = '/updateBlackList.do?updateNo=1&memberNo='+memberNo+'&reqPage='+reqPage;
 	});
 	
+	$(function(){
+        let sel= ${selectNum};
+        console.log(sel);
+        $(".select-btn").eq(sel).addClass("manager-btn1");
+	});
 	
 </script>
 </body>

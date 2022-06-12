@@ -2511,11 +2511,6 @@ textarea {
   padding: 0 20px;
 }
 
-.manager-leftmenu ul li:hover{
-  background-color: #333;
-  color: #fff;
-}
-
 .userprofilebox{
   width: 250px;
   height: 250px;
@@ -2773,11 +2768,6 @@ input[name=keyword]{
   line-height: 30px;
   display: block;
   padding: 0 20px;
-}
-
-.mypage-leftmenu ul li:hover{
-  background-color: #333;
-  color: #fff;
 }
 
 .userprofilebox{

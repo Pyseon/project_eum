@@ -81,14 +81,8 @@
 										<tr>
 											<th>대표자</th>
 											<td>${expert.expertName}</td>
-											<th>상호명</th>
-											<td>-</td>
-										</tr>
-										<tr>
 											<th>사업장주소</th>
 											<td>${p.productAddr}</td>
-											<th>사업자등록번호</th>
-											<td>-</td>
 										</tr>
 										<tr>
 											<th>연락처</th>

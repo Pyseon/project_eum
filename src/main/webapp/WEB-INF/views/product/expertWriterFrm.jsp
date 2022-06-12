@@ -101,17 +101,18 @@
 		<input type="hidden" name="expertNo" value="${expertNo }">
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
+		<input type="hidden" name="productTag">
 		<div style="margin-top: -30px !important;">
 			<table class = "product-tab">
 				<tr>
 					<td><button type="button" class="exp">1:1전문가상담</button></td>
 					<td><button type="button" class="cla" onclick="location.href='/classWriterFrm.do'">클래스</button></td>
-					<td><button type="button" class="idm">지식마켓</button></td>
+					<td><button type="button" class="idm" onclick="location.href='/ideamarketWriterFrm.do'">지식마켓</button></td>
 				</tr>
 			</table>	
 		</div>
 		<h3>카테고리 선택</h3>
-		<select id="category" name="productCategory" style="margin-bottom: 10px !important;">
+		<select id="category" name="productCategory" style="margin-bottom: 10px !important;" required>
 		<option value="">선택</option>
 		<option value="법률">법률</option>
 		<option value="비즈니스">비즈니스</option>
@@ -128,15 +129,15 @@
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요.">
+			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요">
+			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" required>
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>
-			<textarea id="summernote" name="productContent" class="input-form"></textarea>
+			<textarea id="summernote" name="productContent" class="input-form" required></textarea>
 		</div>
 		
 		<div style="margin-bottom: 20px">
@@ -152,7 +153,7 @@
 			<div id="qst-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000">
 				
 				</span>
 			</div>
@@ -160,26 +161,33 @@
 			<div id="ans-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000">
 				</span>
 			</div>
 			
 		</div>
 			<div style="margin-bottom: 20px">
-			<div><h3>사업장 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요">
+			<div><h3>상담예정지역</h3></div>
+			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" required>
 		</div>
+		
+		
+		
 		<div style="margin-bottom: 20px">
 			<div><h3>시간설정</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="productOption" style="width: 5%;">
+			<input class="input-form" type="text" name="productOption" style="width: 5%;" required>
 			<span style="line-height: 2.5;">&nbsp; 분 (분단위로 입력해 주세요)</span>
 			</span>
 		</div>
+		
+		
+		
+		
 		<div style="margin-bottom: 20px">
 			<div><h3>가격설정</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;">
+			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;" required>
 			<span style="line-height: 2.5;">&nbsp; 원</span>
 			</span>
 		</div>
@@ -187,14 +195,18 @@
 		
 		<div style="margin-bottom: 20px">
 		<div>
-		<h3>태그
-		<button type="button" class="addOptBtn2 optButton" style="line-height: 2;">
+		<span>
+			<h3>태그
+			<button type="button" class="addOptBtn2 optButton" style="line-height: 2;">
 					<i class="fa-solid fa-square-plus"></i>
-		</button>
-		</h3>
-		</div>
+			</button>
+			</h3>
+			</span>
+			</div>
 			<div id="tag-opt">
-			c
+			<span style="display: flex;"> 
+			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required>
+			</span>
 			</div>
 		</div>
 		<div>
@@ -203,155 +215,156 @@
 		</form>
 	</div>
 <script>
-	$("#summernote").summernote({
-        toolbar: [ //썸머노트 툴바 추가/수정
-            ['fontsize', ['fontsize']],
-            ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
-            ['color', ['forecolor','color']],
-            ['table', ['table']],
-            ['para', ['ul', 'ol', 'paragraph']],
-            ['height', ['height']],
-            ['insert',['picture','link','video']],
-            ['view', ['fullscreen', 'help']]
-              ],
-        fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-    height: 500,                 // 에디터 높이
-    minHeight: null,             // 최소 높이
-    maxHeight: null,             // 최대 높이
-    focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
-    lang: "ko-KR",                    // 한글 설정
-    placeholder: '최대 2048자까지 쓸 수 있습니다'    //placeholder 설정
-    
-	});
+$("#summernote").summernote({
+    toolbar: [ //썸머노트 툴바 추가/수정
+        ['fontsize', ['fontsize']],
+        ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+        ['color', ['forecolor','color']],
+        ['table', ['table']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['height', ['height']],
+        ['insert',['picture','link','video']],
+        ['view', ['fullscreen', 'help']]
+          ],
+    fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+height: 500,                 // 에디터 높이
+minHeight: null,             // 최소 높이
+maxHeight: null,             // 최대 높이
+focus: false,                  // 에디터 로딩후 포커스를 맞출지 여부
+lang: "ko-KR",                    // 한글 설정
+placeholder: '최대 2048자까지 쓸 수 있습니다'    //placeholder 설정
+
+});
+
+ // 이미지 추가 함수 시작
+var imgTarget = $('.preview-image .upload-hidden');
+
+imgTarget.on('change', function(){
+  var parent = $(this).parent().next();
+  parent.children('.upload-display').remove();
+
+    if(window.FileReader){
+        //image 파일만
+        if (!$(this)[0].files[0].type.match(/image\//)) return;
+        
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var src = e.target.result;
+            parent.append('<div class="upload-display" style="display:inline-block; border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb" style="height: 160px;"></div></div>');
+        }
+        reader.readAsDataURL($(this)[0].files[0]);
+    }
+
+    else {
+        $(this)[0].select();
+        $(this)[0].blur();
+        var imgSrc = document.selection.createRange().text;
+        parent.prepend('<div class="upload-display" style="border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img class="upload-thumb" style="width: 120px;"></div></div>');
+
+        var img = $(this).siblings('.upload-display').find('img');
+        img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
+    }
+});// 이미지 추가 함수 종료
+
+function inputNumberFormat(obj) {
+    obj.value = comma(uncomma(obj.value));
+}
+
+function comma(str) {
+    str = String(str);
+    return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
+}
+
+function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+}
+
+var qstList=[];
+$(document).on("change", ".qst-val", function(){
+	var qstStr = $(this).val();
+	let regExp;
+	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;	
+	qstList[$(".qst-val").index(this)] = qstStr+"|";
+	$("[name=productQst]").val(qstList);
+	console.log(qstList);
 	
-	 // 이미지 추가 함수 시작
-    var imgTarget = $('.preview-image .upload-hidden');
+});
 
-    imgTarget.on('change', function(){
-      var parent = $(this).parent().next();
-      parent.children('.upload-display').remove();
+var ansList=[];
+$(document).on("change", ".ans-val", function(){
+	var ansStr = $(this).val();
+	let regExp;
+	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;
 
-        if(window.FileReader){
-            //image 파일만
-            if (!$(this)[0].files[0].type.match(/image\//)) return;
-            
-            var reader = new FileReader();
-            reader.onload = function(e){
-                var src = e.target.result;
-                parent.append('<div class="upload-display" style="display:inline-block; border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb" style="height: 160px;"></div></div>');
-            }
-            reader.readAsDataURL($(this)[0].files[0]);
-        }
+	ansList[$(".ans-val").index(this)] = ansStr+"|";
+	$("[name=productAns]").val(ansList);
+	console.log(ansList);
+	
+});
 
-        else {
-            $(this)[0].select();
-            $(this)[0].blur();
-            var imgSrc = document.selection.createRange().text;
-            parent.prepend('<div class="upload-display" style="border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img class="upload-thumb" style="width: 120px;"></div></div>');
 
-            var img = $(this).siblings('.upload-display').find('img');
-            img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
-        }
-    });// 이미지 추가 함수 종료
+var qstCount = 1;
+var ansCount = 1;
+
+$(".addOptBtn").on("click",function(){
+    if(qstCount >= 10) return;
+    var qstDiv = document.createElement("div");
+    qstDiv.setAttribute("class","optBox");
+    qstDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+    $("#qst-opt").append(qstDiv);
+    qstCount++;
     
-    function inputNumberFormat(obj) {
-        obj.value = comma(uncomma(obj.value));
-    }
-
-    function comma(str) {
-        str = String(str);
-        return str.replace(/(\d)(?=(?:\d{3})+(?!\d))/g, '$1,');
-    }
-
-    function uncomma(str) {
-        str = String(str);
-        return str.replace(/[^\d]+/g, '');
-    }
+    if(ansCount >= 10) return;
+    var ansDiv = document.createElement("div");
+    ansDiv.setAttribute("class","optBox");
+    ansDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important;"><input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+    $("#ans-opt").append(ansDiv);
+    ansCount++;
     
-    var qstList=[];
-    $(document).on("change", ".qst-val", function(){
-    	var qstStr = $(this).val();
-    	let regExp;
-    	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;	
-    	qstList[$(".qst-val").index(this)] = qstStr+"|";
-    	$("[name=productQst]").val(qstList);
-    	console.log(qstList);
-		
+    $(".delOptBtn").off().on("click",function(){
+    	qstList.splice($(".delOptBtn").index(this)+1, 1);
+          $("[name=productQst]").val(qstList);
+          console.log(qstList);
+          $(this).parent().remove();
+          qstCount--;
+          
+          ansList.splice($(".delOptBtn").index(this)+1, 1);
+          $("[name=productAns]").val(ansList);
+          console.log(ansList);
+          $(this).parent().remove();
+          ansCount--;
     });
-    
-    var ansList=[];
-    $(document).on("change", ".ans-val", function(){
-    	var ansStr = $(this).val();
-    	let regExp;
-    	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;
+});
 
-    	ansList[$(".ans-val").index(this)] = ansStr+"|";
-    	$("[name=productAns]").val(ansList);
-    	console.log(ansList);
-		
-    });
-    
-    
-    var qstCount = 1;
-    var ansCount = 1;
-    $(".addOptBtn").on("click",function(){
-        if(qstCount >= 10) return;
-        var qstDiv = document.createElement("div");
-        qstDiv.setAttribute("class","optBox");
-        qstDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#qst-opt").append(qstDiv);
-        qstCount++;
-        
-        if(ansCount >= 10) return;
-        var ansDiv = document.createElement("div");
-        ansDiv.setAttribute("class","optBox");
-        ansDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important;"><input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#ans-opt").append(ansDiv);
-        ansCount++;
-        
-        $(".delOptBtn").off().on("click",function(){
-        	qstList.splice($(".delOptBtn").index(this)+1, 1);
-              $("[name=productQst]").val(qstList);
-              console.log(qstList);
-              $(this).parent().remove();
-              qstCount--;
-              
-              ansList.splice($(".delOptBtn").index(this)+1, 1);
-              $("[name=productAns]").val(ansList);
-              console.log(ansList);
-              $(this).parent().remove();
-              ansCount--;
-        });
-    });
-    
-    var tagCount = 1;
-    var tagList=[];
-    $(document).on("change", ".tag-val", function(){
-    	var tagStr = $(this).val();
-    	let regExp;
-    	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;
+var tagCount = 1;
+var tagList=[];
+$(document).on("change", ".tag-val", function(){
+	var tagStr = $(this).val();
+	let regExp;
+	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;
 
-    	tagList[$(".tag-val").index(this)] = tagStr+"|";
-    	$("[name=productTag]").val(tagList);
-    	console.log(tagList);
-		
+	tagList[$(".tag-val").index(this)] = tagStr+"|";
+	$("[name=productTag]").val(tagList);
+	console.log(tagList);
+	
+});
+$(".addOptBtn2").on("click",function(){
+    if(tagCount >= 20) return;
+    var tagDiv = document.createElement("div");
+    tagDiv.setAttribute("class","optBox");
+    tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+    $("#tag-opt").append(tagDiv);
+    tagCount++;
+    
+    $(".delOptBtn2").off().on("click",function(){
+    	tagList.splice($(".delOptBtn2").index(this)+1, 1);
+          $("[name=productTag]").val(tagList);
+          console.log(tagList);
+          $(this).parent().remove();
+          tagCount--;
     });
-    $(".addOptBtn2").on("click",function(){
-        if(tagCount >= 20) return;
-        var tagDiv = document.createElement("div");
-        tagDiv.setAttribute("class","optBox");
-        tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#tag-opt").append(tagDiv);
-        tagCount++;
-        
-        $(".delOptBtn2").off().on("click",function(){
-        	tagList.splice($(".delOptBtn2").index(this)+1, 1);
-              $("[name=productTag]").val(tagList);
-              console.log(tagList);
-              $(this).parent().remove();
-              tagCount--;
-        });
-    });
+});
 	</script>
 	
 

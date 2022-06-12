@@ -452,7 +452,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		System.out.println("expertNo>>>>"+expertNo);
 		HashMap<String, Object> paymentpage = productService.selectProduct(productNo);
 		model.addAttribute("product",paymentpage.get("product"));
-		model.addAttribute("expert",paymentpage.get("exeprt"));
+		model.addAttribute("expert",paymentpage.get("expert"));
 		/*
 		Product p = productService.selectProduct(productNo);
 		System.out.println(p);		

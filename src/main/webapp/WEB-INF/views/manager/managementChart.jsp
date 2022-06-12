@@ -12,6 +12,8 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 <div class="manaContentWrap">
+<h1>>사이트 통계</h1>
+	<hr>
 		<div class="newMemberChart chartDiv">
 		<h2>>이달의 신규 회원수: ${chart.memberMonth }</h2>
 		<div class="selectBox">
@@ -25,7 +27,7 @@
 			<canvas id="memberChart" width="100%" height="40"></canvas>
 		</div>
 		</div>
-		<div class="pieChart chartDiv">
+		<div class="pieChart chartDiv genderChart">
 		<h2>성별</h2>
 			<input type="hidden" name="genderMale" value=${chart.genderMale } >
 			<input type="hidden" name="genderFemale" value=${chart.genderFemale } >
@@ -35,7 +37,7 @@
 			</div>
 		</div>
 		<hr>
-		<div class="pieChart chartDiv">
+		<div class="pieChart chartDiv gradeChart">
 		<h2>등급</h2>
 			<input type="hidden" name="generalMember" value=${chart.generalMember } >
 			<input type="hidden" name="expertCount" value=${chart.expertCount } >

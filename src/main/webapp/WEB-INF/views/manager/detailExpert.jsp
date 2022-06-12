@@ -16,28 +16,28 @@
 		<table class="expertTbl expertTbl_top">
 			<tr>
 				<th>상담분야</th>
-				<td>${exp.expertCategory }</td>
+				<td colspan="2">${exp.expertCategory }</td>
 			</tr>
 			<tr>
 				<th>태그</th>
-				<td>${exp.expertTag }</td>
+				<td colspan="2">${exp.expertTag }</td>
 			</tr>
 			<tr>
 				<th>자격</th>
-				<td>가입자격은 이거이거가 필요하다</td>
+				<td colspan="2">가입자격은 이거이거가 필요하다</td>
 			</tr>
 			<tr>
 				<th>자격증</th>
-				<td>${exp.credential }</td>
+				<td colspan="2">${exp.credential }</td>
 			</tr>
 			<tr>
 				<th>발급기관/취득일시</th>
-				<td>${exp.issuingAuthority }</td>
-				<td>${exp.acquistionDate }</td>
+				<td id="iss">${exp.issuingAuthority }</td>
+				<td id="acq">${exp.acquistionDate }</td>
 			</tr>
 			<tr>
 				<th>자격증 사본</th>
-				<td>${exp.certificatePath}</td>
+				<td colspan="2">${exp.certificatePath}</td>
 			</tr>
 		</table>
 		<h2>판매자 정보</h2>

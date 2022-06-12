@@ -2658,6 +2658,13 @@ input[name=keyword]{
 .chartDiv > h2{
 	text-align: center;
 }
+.pieChart{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.gradeChart{
+	margin-top: 18px;
+}
 
 .selectBox{
 	position: relative;
@@ -2686,6 +2693,15 @@ input[name=keyword]{
 .expertTbl td{
 	width: 70%;
 }
+#iss, #acq{
+	width: 35%;
+}
+.expertTbl tr{
+	border-bottom: 1px solid #ddd;
+}
+.expertTbl tr:last-child{
+	border-bottom: 1px solid black;
+}
 .expertTbl_top{
 	height: 500px;
 }
@@ -2702,8 +2718,35 @@ input[name=keyword]{
 	width: 500px;
 	height: 500px;
 }
-.detailTbl{
-	margin-left: -200px;
+
+#resultTbl{
+	border: 1px solid black;
+	height: 680px;
+}
+.searchBox{
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.resultTbl th{
+	height: 50px;
+}
+.resultTbl td{
+	height: 15px;
+}
+.selectListBtn{
+	position: absolute;
+	margin-top: 10px;
+}
+.qstTbl{
+	margin-top: 80px;
+}
+.memberPageNavi{
+	margin-top: 50px;
+}
+
+.ansTable{
+	min-height: 150px;
+	height: fit-content;
 }
 /*************************
 *******mypage CSS******

@@ -40,6 +40,7 @@
 		<typeAlias type="kr.or.eum.product.model.vo.Counsel" alias="counsel"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Chat" alias="chat"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndExpert" alias="productAndExpert"/>
+		<typeAlias type="kr.or.eum.product.model.vo.productAndReview" alias="productAndReview"/>
 	</typeAliases>
 	<typeHandlers>
         <typeHandler handler="kr.or.eum.LongHandler" javaType="String" jdbcType="LONGVARCHAR"/>

@@ -19,6 +19,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.productAndReview;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Service
@@ -83,8 +84,8 @@ public class MemberService {
 		return list;
 	}
 	//재민 리뷰목록
-	public ArrayList<Review> selectReviewlist(int memberNo) {
-		ArrayList<Review> list = dao.selectReviewlist(memberNo);
+	public ArrayList<productAndReview> selectReviewlist(int memberNo) {
+		ArrayList<productAndReview> list = dao.selectReviewlist(memberNo);
 		
 		return list;
 	}

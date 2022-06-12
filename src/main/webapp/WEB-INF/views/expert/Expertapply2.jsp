@@ -52,17 +52,17 @@
 				</p>
 		
 		<br>
-		<textarea class="input-form" placeholder="반려견 지도사(구.훈련사) - 한국애견협회&#13;&#10;훈련사 -한국애견연맹&#13;&#10;양서파충류 관리사 - 한국양서파충류협회"></textarea><br>
+		<textarea class="input-form" placeholder="반려견 지도사(구.훈련사) - 한국애견협회&#13;&#10;훈련사 -한국애견연맹&#13;&#10;양서파충류 관리사 - 한국양서파충류협회" readonly></textarea><br>
 		
 		
 		<label><h2>자격증 사본*</h2></label><br>
-		<input type="text" name="certificateName"  class="input-form" placeholder="최대 MB 이하 첨부가능 jpg,png,pdf 지원"><br>
+		<br>
 		<label for="input-file">파일 선택</label> <input type="file"
 									name="file" class="commFile upload-hidden"
 									id="input-file">
 		
 		<label><h2>발급기관 / 취득일시*</h2></label><br>
-		<input type="text" class="input-form"  name="issuingAuthority" placeholder="발급기관"><br>
+		<input type="hidden" class="input-form"  name="issuingAuthority" placeholder="발급기관"><br>
 		
 		<input type="text" class="input-form"  name="acquistionDate" placeholder="취득일시"><br><br>
 		<br>
@@ -71,13 +71,14 @@
 		
 		<label>고객센터번호*</label>
 		<input type="text" class="input-form"  name="expertPhone" placeholder="070-0000-0000"><br>		
+		<div class="fs-light" id="expertPhone-test"></div><br>
 			
 		<label>고객센터 이메일*</label>
 		<input type="text" class="input-form"  name="expertEmail" placeholder="asdf@naver.com"><br>
-		
+		<button class="btn bc1 bs1" type="button" id="button-pr">인증하기</button>
 		<label>이름*</label>
 		<input type="text" class="input-form"  name="expertName" placeholder="박코딩"><br>
-		
+		<div class="fs-light" id="expertName-test"></div><br>
 		<label>상세설명*</label>
 		<input type="text" class="input-form"  name="expertContent" placeholder="상세설명"><br>
 		
@@ -87,7 +88,7 @@
 		<label>자격증명*</label>
 		<input type="text" class="input-form"  name="credential" placeholder="자격증명"><br>
 		<input type="hidden" name = "memberNo" value="${memberNo }" >
-		<button class="btn bc1 bs5" onclick="location.href='/Expertapply.do'">이전</button>
+		<button class="btn bc1 bs5" onclick="location.href='/'">돌아가기</button>
 		<button class="btn bc1 bs5" type="submit">제출완료</button>
 		
 		</form>
@@ -99,6 +100,279 @@
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	
-<script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous"></script>	
+<script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous">
+$(function(){
+	$('#man').click();
+})
+
+
+//1.button 활성화
+//2.submit 유효성
+let inputCheck = new Array(7).fill(true);
+let checkAll = true;
+console.log(checkAll);
+/*
+$("#joinButton").click(function() {
+	console.log(checkAll); 
+	console.log(inputCheck); 
+	for(let i = 0; i < inputCheck.length; i++){
+		if(inputCheck[i] == false){
+			checkAll = false;
+		}
+	}
+	if(checkAll){
+		const memberId = $("#memberId").val();
+		const memberNick = $("#memberNick").val();
+		const memberPw = $("#memberPw").val();
+		const memberPhone = $("#memberPhone").val();
+		const memberPoint = 0;
+		const memberReportCount = 0;
+		const gender = $("#gender").val();
+		const birth = $("#birth").val();
+		const agreement = $("#agreement").val();
+		const grade = 2;
+		const memberPictureName = null;
+		const memberPicturePath = null;
+		$.ajax({
+			url: "/join.do",
+			type: "post",
+			data: {memberId: memberId, 
+				memberNick: memberNick,
+				memberPw: memberPw, 
+				memberPhone: memberPhone,
+				memberPoint:memberPoint,
+				memberReportCount:memberReportCount, 
+				gender:gender, 
+				birth:birth, 
+				agreement:agreement,
+				grade:grade,
+				memberPictureName:memberPictureName,
+				memberPicturePath:memberPicturePath},
+			success: function(data){
+				if(data == "1"){
+					const title = "회원가입 완료되었습니다.";
+					const icon = "success";
+					const msgTime = 1500;
+					toastShow(title,icon, msgTime);
+				}else if(data == "0"){
+					const title = "회원가입을 실패했습니다.";
+					const icon = "error";
+					const msgTime = 1500;
+					toastShow(title,icon, msgTime);
+				}	
+			},
+			error : function(){
+				   console.log("서버요청실패");
+			}
+		});
+					
+	}else{
+		const title = "입력값을 확인해주세요";
+		const icon = "warning";
+		const msgTime = 1500;
+		toastShow(title,icon, msgTime);
+			
+	}
+});
+*/
+
+function formCheck(){
+	checkAll = true;
+	console.log("인풋체크> "+inputCheck);
+	for(let i = 0; i < inputCheck.length; i++){
+		if(inputCheck[i] == false){
+			checkAll = false;
+		}
+	}
+	console.log("체크올> "+checkAll);
+	if(checkAll){
+		$("#joinButton").attr("disabled",false);
+	}else{
+		$("#joinButton").attr("disabled",true);
+	}
+}
+//email인증
+var code="";
+
+$("#button-pr").click(function(){
+	$("#authMsg").text("");
+	var checkResult = $("#authMsg");
+	var email = $("#expertEmail").val();
+	var regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	if(!regExp.test(email)){
+		//이메일 유효성 검사
+		checkResult.text("이메일을 다시확인해주세요");
+		checkResult.css("color","#ff2e63");
+	}else{
+		//중복 이메일 확인
+	   $.ajax({
+		   url : "/emailCheck.do?expertEmail=" + email,
+		   type:"POST",
+		   data:{},
+		   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+		   success: function(data){
+			   
+			   if(data == "1"){
+				    checkResult.text("이미 사용중인 이메일입니다.");
+				    checkResult.css("color","#ff2e63");
+				    
+				}else if(data == "0"){
+					//인증번호 발송
+					var checkBox = $("#numberId");      	// 인증번호 입력란
+				    var numBox = $("#numberId");  		// 인증번호 입력란 박스
+				    const title = "인증번호를 발송중입니다.";
+					const icon = "info";
+					const msgTime = 5500;
+					toastShow(title,icon,msgTime);
+					$.ajax({
+						type:"GET",
+						url:"/mailCheck.do?email=" + email,
+						success:function(data){
+							
+							//console.log("data : " + data);
+							checkBox.attr("disabled",false);
+							numBox.addClass("mail-input-false");
+							numBox.removeClass("mail-input-ture");
+							$(".check-hidden").removeClass("check-hidden");
+							code = data;
+						    const title = "인증번호를 발송했습니다!.";
+							const icon = "success";
+							const msgTime = 2000;
+							toastShow(title,icon,msgTime);
+						}		
+					});
+					
+				}
+		   },
+		   error : function(){
+			   console.log("서버요청실패");
+		   }
+		});
+		
+	}
+});
+	
+//인증번호 검사
+$("#button-prr").click(function(){
+    var inputCode = $("#numberId").val();      		// 입력코드    
+    var checkResult = $("#authMsg");   	 			// 비교 결과 
+    if(inputCode == code){                          // 일치할 경우
+        checkResult.html("인증번호가 일치합니다.");
+        checkResult.attr("class", "correct");
+        $("#memberId").attr("readonly","readonly");
+      	$(".check-find").addClass("check-hidden");
+      	inputCheck[2] = true;
+      	formCheck();
+    } else {                                        // 일치하지 않을 경우
+        checkResult.html("인증번호를 다시 확인해주세요.");
+        checkResult.attr("class", "incorrect");
+        inputCheck[2] = false;
+        formCheck();
+    }
+});
+
+
+//연락처 유효성 검사
+$("#expertPhone").change(function(){
+		$("#expertPhone-test").text("");			
+		const value = $(this).val();
+		let regExp;
+		regExp = /^(01\d{1})-\d{3,4}-\d{4}$/;
+		if(!regExp.test(value)){
+			$("#expertPhone-test").text(" 010-0000-0000 형식으로 입력해주세요.");
+			$("#expertPhone-test").css("color","#ff2e63");
+			inputCheck[0] = false;
+			formCheck();
+		}else{
+			var expertPhone = $("#expertPhone").val();
+			//연락처 중복 검사
+			$.ajax({
+				   url : "/phoneCheck.do",
+				   data: {expertPhone:expertPhone},
+				   success: function(data){
+					   if(data == "1"){
+							$("#expertPhone-test").text("가입된 번호입니다.");
+							$("#expertPhone-test").css("color","#ff2e63");
+							inputCheck[0] = false;
+							formCheck();
+						}else if(data == "0"){
+							$("#expertPhone-test").text("사용가능한 번호입니다.");
+							$("#expertPhone-test").css("color","#00adb5");
+							inputCheck[0] = true;
+							formCheck();
+						}
+				   },
+				   error : function(){
+					   console.log("서버요청실패");
+				   }
+				});
+			inputCheck[0] = true;
+			formCheck();
+		}
+	});
+
+$("#expertName").change(function(){
+	$("#expertName-test").text("");
+	   var expertName = $(this).val();
+	   let regExp1;
+		let regExp2;
+		regExp1 = /^[가-힣]{2,8}$/;
+		regExp2 = /^[a-zA-Z]{4,10}$/;
+		if(!regExp1.test(expertName) && !regExp2.test(expertName)){
+			 const title = "2~8글자 한글 또는 4~10글자 영어대소문자만 입력가능합니다.";
+				const icon = "error";
+				const msgTime = 1500;
+				toastShow(title,icon,msgTime);
+				inputCheck[1] = false;
+				formCheck();
+		}else{
+			   $.ajax({
+				   url : "/nickCheck.do?expertName=" + expertName,
+				   type:"POST",
+				   data:{},
+				   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
+				   success: function(data){
+					   if(data == "1"){
+							$("#expertName-test").text("이미 사용중인 닉네임입니다.");
+							$("#expertName-test").css("color","#ff2e63");
+							inputCheck[1] = false;
+							formCheck();
+						}else if(data == "0"){
+							$("#expertName-test").text("사용가능한 닉네임입니다.");
+							$("#expertName-test").css("color","#00adb5");
+							inputCheck[1] = true;
+							formCheck();
+						}
+				   },
+				   error : function(){
+					   console.log("서버요청실패");
+				   }
+				});
+		}
+	   
+	   
+	   
+	});
+function toastShow(title, icon, msgTime){
+	const Toast = Swal.mixin({
+	    toast: true,
+	    position: 'center-center',
+	    showConfirmButton: false,
+	    timer: msgTime,
+	    timerProgressBar: true,
+	    didOpen: (toast) => {
+	     // toast.addEventListener('mouseenter', Swal.stopTimer)
+	      toast.addEventListener('mouseleave', Swal.resumeTimer)
+	    }
+	 	})
+
+  	Toast.fire({
+    title: title,
+    icon: icon
+  })
+
+}	
+
+</script>	
 </body>
 </html>

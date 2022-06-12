@@ -163,21 +163,23 @@
 	 			wishlist_tbl.wish_no as wishNo,
 	 			product_tbl.product_type as productType,
 	 			product_tbl.product_imgPath as productImgPath,
-				product_tbl.product_title as productTitle
-				
+				product_tbl.product_title as productTitle,
+				wishlist_tbl.member_no as memberNo
 			from product_tbl
 			
 			join wishlist_tbl on (wishlist_tbl.product_no = product_tbl.product_no)
 			where wishlist_tbl.member_no=#{memberNo}
 	  </select>
-	  <select id ="selectReviewlist" resultType="review">
-	 		select 
-	 		product_no as productNo,
-	 		review_No as reviewNo,
-	 		review_title as reviewTitle,
-	 		review_content as reviewContent,
-	 		review_date as reviewDate
+	  <select id ="selectReviewlist" resultType="productAndReview">
+	 		select  
+			review_tbl.product_no as productNo,
+			review_tbl.review_No as reviewNo,
+			review_tbl.review_title as reviewTitle,
+			review_tbl.review_content as reviewContent,
+			review_tbl.review_date as reviewDate,
+			product_tbl.expert_no as exportNo
 			from review_tbl
+			join product_tbl on (review_tbl.product_no = product_tbl.product_no)
 			where member_no=#{memberNo}
 	  </select>
 
@@ -336,7 +338,11 @@
 		product_tbl.product_Qst as productQst,
 		product_tbl.product_Ans as productAns,
 		product_tbl.product_Tag as productTag,
-		product_tbl.product_title as productTitle
+		product_tbl.product_title as productTitle,
+		product_tbl.product_type as productType,
+		product_tbl.product_imgename as productImgname,
+		product_tbl.product_imgpath as productImgpath,
+		product_tbl.product_addr as productAddr
 		
 		from product_tbl 
 		join expert_tbl on (expert_tbl.expert_no = product_tbl.expert_no)   

@@ -108,6 +108,14 @@
 			
 
 	  </delete>
+	  
+	  <delete id ="DeleteMyproject" parameterType="int">
+	 		delete from product_tbl where product_no =#{productNo}
+	 		
+			
+
+	  </delete>
+	  
 	  <delete id ="deleteMember" parameterType="int">
 	 	delete from member_tbl where member_no =#{memberNo}
 	 		

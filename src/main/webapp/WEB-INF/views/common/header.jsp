@@ -80,8 +80,9 @@
 							<ul class="nav navbar-nav">
 								<c:choose>
 									<c:when test="${empty sessionScope.member }">
-										<li><a href="/reference.jsp"
-											style="font-family: fs-bold; color: #555">전문가 등록</a></li>
+										<!-- <a href="/reference.jsp"
+											style="font-family: fs-bold; color: #555">전문가 등록</a> -->
+										<li></li>
 										<li><a href="/joinFrm.do">회원가입</a></li>
 										<li>
 											<button class="btn bc1 bs6" id="login-btn" type="button"
@@ -89,8 +90,13 @@
 										</li>
 									</c:when>
 									<c:otherwise>
-										<li><a href="/Expertapply.do"
-											style="font-family: fs-bold; color: #555">전문가 등록</a></li>
+										<li>
+											<c:if test="${sessionScope.member.grade eq 2 }">
+											<a href="/Expertapply.do"
+											style="font-family: fs-bold; color: #555">전문가 등록</a>
+											</c:if>
+											</li>
+											
 											
 										<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">마이페이지</a></li>
 										<li>

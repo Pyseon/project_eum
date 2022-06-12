@@ -316,6 +316,15 @@ public class MemberController {
 	
 		 return "redirect:/Mywishlist.do?memberNo="+memberNo;
 	}
+
+	@RequestMapping(value="/DeleteMyproject.do")
+	public String DeleteMyproject(int productNo,int memberNo) {
+		
+		int result = service.DeleteMyproject(productNo);
+		
+	
+		 return "redirect:/Myproject.do?memberNo="+memberNo;
+	}
 	
 	//대권 아이디찾기
 	@RequestMapping(value="/findId.do")

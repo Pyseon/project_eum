@@ -458,7 +458,7 @@
 									<div class="report-wrap">
 										<ul>
 											<li><img id="icon-report" src="img/product/icon-report.png"></li>
-											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${reviewNo}')">신고</a></span></li>
+											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${item.reviewNo}')">신고</a></span></li>
 										</ul>
 									</div>
 								</div>

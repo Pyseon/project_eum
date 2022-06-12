@@ -23,8 +23,10 @@
 				<div class="menu-detail"><a href="/Mywishlist.do?memberNo=${sessionScope.member.memberNo}">찜내역</a></div>
 				<div class="menu-detail"><a href="/Myreview.do?memberNo=${sessionScope.member.memberNo}">내리뷰</a></div>
 				<div class="menu-detail"><a href="/myQuestionList.do?memberNo=${sessionScope.member.memberNo}&reqPage=1&selectNum=0">1:1 문의 내역</a></div>
-
-				<div class="menu-detail"><a href="/appExpertList.do?memberNo=${sessionScope.member.memberNo}">전문가 신청내역</a></div>
+				
+				<c:if test="${sessionScope.member.grade ne 1 }">
+					<div class="menu-detail"><a href="/appExpertList.do?memberNo=${sessionScope.member.memberNo}">전문가 신청내역</a></div>
+				</c:if>
 
 				
 				<c:if test="${sessionScope.member.grade eq 1}">

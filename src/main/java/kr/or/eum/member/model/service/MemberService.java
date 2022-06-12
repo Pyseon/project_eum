@@ -249,4 +249,9 @@ public class MemberService {
 		return pro;
 	}
 
+	public int DeleteMyproject(int productNo) {
+		// TODO Auto-generated method stub
+		return dao.DeleteMyproject(productNo);
+	}
+
 }

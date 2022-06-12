@@ -178,5 +178,9 @@ public class MemberDao {
 		Expert expert = sqlSession.selectOne("member.selectExpertPayment", expertNo);
 		return expert;
 	}
+	public int DeleteMyproject(int productNo) {
+		int result = sqlSession.delete("member.DeleteMyproject",productNo);
+		return result;
+	}
 
 }

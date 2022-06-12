@@ -234,10 +234,10 @@ li{
 	<c:if test="${grade eq 0}">
 		<button type="button" class="writeButton" id="writeButton" onclick="manager();">등록하기</button>
 	</c:if>
-	<c:if test="${grade eq 1}">
+	<c:if test="${grade eq 2}">
 		<button type="button" class="writeButton" id="writeButton" onclick="expertNeed();">등록하기</button>
 	</c:if>
-	<c:if test="${grade eq 2}">
+	<c:if test="${grade eq 1}">
 		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
 	</c:if>
 	<c:if test="${grade eq 3}">

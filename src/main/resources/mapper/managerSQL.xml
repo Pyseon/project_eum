@@ -300,19 +300,19 @@
 			from 
 			<choose>
 				<when test="category == 0">
-					product_tbl where product_no = #{index }
+					product_tbl where product_no = #{reportIndex }
 				</when>
 				<when test="category == 1">
-					review_tbl where review_no = #{index }
+					review_tbl where review_no = #{reportIndex }
 				</when>
 				<when test="category == 2">
-					request_tbl where request_no = #{index }
+					request_tbl where request_no = #{reportIndex }
 				</when>
 				<when test="category == 3">
-					community_tbl where comm_no = #{index }
+					community_tbl where comm_no = #{reportIndex }
 				</when>
 				<when test="category == 4">
-					communityco_tbl where cmnt_no = #{index }
+					communityco_tbl where cmnt_no = #{reportIndex }
 				</when>
 			</choose>
 	</select>

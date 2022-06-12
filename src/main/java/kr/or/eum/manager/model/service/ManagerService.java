@@ -421,7 +421,7 @@ public class ManagerService {
 	public int scoutReport(int categoryNo, int reportIndex) {
 		HashMap<String, Object> scout = new HashMap<String, Object>();
 		scout.put("category", categoryNo);
-		scout.put("index", reportIndex);
+		scout.put("reportIndex", reportIndex);
 		return dao.scoutReport(scout);
 	}
 

@@ -144,9 +144,6 @@ public class MemberController {
 	@RequestMapping(value="/MyprojectDetail.do")
 	public String classUpdate(Model model, HttpSession session, int productNo) {
 		ArrayList<Product> list = service.selectMyprojectDetail(productNo);
-		
-		
-		System.out.println(list);
 		model.addAttribute("list", list);
 		model.addAttribute("productNo", productNo);
 		
@@ -257,6 +254,7 @@ public class MemberController {
 	@RequestMapping(value="/Myreview.do")
 	public String Myreview(Model model,int memberNo) {
 		ArrayList<productAndReview> list = service.selectReviewlist(memberNo);
+		System.out.println(list);
 		model.addAttribute("list", list);
 		
 		return "mypage/Myreview";

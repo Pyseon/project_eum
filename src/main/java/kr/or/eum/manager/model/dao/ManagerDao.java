@@ -361,7 +361,7 @@ public class ManagerDao {
 	public int scoutReport(HashMap<String, Object> scout) {
 		int result = sqlSession.selectOne("manager.scoutReport", scout);
 		if(result == 0) {
-			return 0;
+			return -1;
 		} else {
 			return 1;
 		}

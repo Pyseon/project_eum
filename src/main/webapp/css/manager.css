@@ -1,0 +1,110 @@
+@charset "UTF-8";
+
+/*현재 main.css에 이미 작업한 상태라 추가로 필요한 부분만 여기에 적음*/
+
+#resultTbl-wrap{
+	padding: 10px;
+}
+.resultTbl{
+	border: 1px solid #a7a7a7;
+	padding: 10px;
+}
+
+.searchBox {
+    margin-bottom: 30px !important;
+}
+#searchType {
+	font-size: 18px;
+    margin-top: 50px;
+}
+.select-wrap{
+	display: inline !important;
+}
+.keyword-wrap{
+	display: inline !important;
+}
+
+#keyword {
+	border: none;
+    border-bottom: 1px solid;
+    outline: none;
+}
+
+.selectListBtn {
+	left: -30px;	
+}
+
+.select-btn {
+	width: 130px;
+    font-size: 18px;
+    height: 45px;
+    border-radius: 0px !important;
+}
+#main-title {
+	font-weight: bold;
+}
+
+.sl-btn {
+	left: -41px;
+}
+
+.sl-btn-wrap{
+	margin: 20px;
+}
+
+#resultTbl {
+	margin-top: 130px;
+}
+.insertFAQBtn{
+	margin-right: 10px;
+}
+
+.manager-leftmenu{
+	margin-top:40px;
+}
+
+.manager-menu:hover{
+	font-weight: bold !important;
+	background: #fff !important;
+	color: #3865f2 !important;
+}
+
+.manager-menu{
+	font-size: 18px !important;
+	text-align: left;
+}
+
+.menu-list{
+	margin-bottom: 15px;
+}
+
+#nick{
+	border-bottom:3px solid #3865f2;
+}
+.nick-wrap {
+	padding: 0 30px;
+    margin-bottom: 50px;
+}
+
+.manager-btn1 { 
+	background: #3865f2 !important;
+    color: #fff !important;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 20%), inset 1px 1px 7px 2px #284aaf !important;
+    letter-spacing: 1px;
+}
+.btn99{
+	min-width: 74px;
+    height: 40px;
+    padding: 0 14px 0;
+    border-radius: 4px;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #e5e5e5;
+    background: none;
+}
+
+.menu-list-wrap{
+    margin-left: 35px !important;
+}

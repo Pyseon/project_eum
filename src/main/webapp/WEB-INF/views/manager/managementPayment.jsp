@@ -6,34 +6,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/manager.css" />
+<style>
+.manager-btn1 { 
+	background: #3865f2 !important;
+    color: #fff !important;
+    box-shadow: 0 3px 10px rgb(0 0 0 / 20%), inset 1px 1px 7px 2px #284aaf !important;
+    letter-spacing: 1px;
+}
+.btn99{
+	min-width: 74px;
+    height: 40px;
+    padding: 0 14px 0;
+    border-radius: 4px;
+    text-align: center;
+    color: #555;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #e5e5e5;
+    background: none;
+}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-	<h1>>주문관리</h1>
+	<h1 id="main-title">> 주문관리</h1>
 	<hr>
 		<div class="selectListBtn">
 			<ul>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=0'">전체</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=1'">예약</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=2'">완료</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=3'">예약 취소</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaPayment.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaPayment.do?reqPage=1&selectNum=1'">예약</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaPayment.do?reqPage=1&selectNum=2'">완료</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaPayment.do?reqPage=1&selectNum=3'">예약 취소</button></li>
 			</ul>
 		</div>
 		<div class="searchBox">
 			<form action="/manaPayment.do" method="post">
-				<select id="searchType" name="searchType">
-					<option value="payNo">주문번호</option>
-					<option value="memberId">이메일</option>
-				</select>
+				<div class="select-wrap">
+					<select id="searchType" name="searchType">
+						<option value="payNo">주문번호</option>
+						<option value="memberId">이메일</option>
+					</select>
+				</div>
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="selectNum" value="0">
-				<input type="number" name="keyword" id="keyword">	
+				<div class="keyword-wrap">
+					<input type="number" name="keyword" id="keyword">	
+				</div>
 				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>
 		</div>
-		<div id="resultTbl">
+		<div id="resultTbl-wrap">
 			<table class="tbl tbl-hover resultTbl">
 				<tr class="tr-1">
 					<th>번호</th>
@@ -148,6 +173,11 @@ $("#searchType").change(function() {
 		location.href='/updatePayState.do?updateNo=1&payNo='+payNo+'&reqPage='+reqPage;
 	});
 	
+	$(function(){
+        let sel= ${payState};
+        console.log(sel);
+        $(".select-btn").eq(sel).addClass("manager-btn1");
+	});
 	
 </script>
 </body>

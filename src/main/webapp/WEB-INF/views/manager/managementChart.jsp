@@ -6,13 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/manager.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 <div class="manaContentWrap">
-<h1>>사이트 통계</h1>
+<h1 id="main-title">> 사이트 통계</h1>
 	<hr>
 		<div class="newMemberChart chartDiv">
 		<h2>>이달의 신규 회원수: ${chart.memberMonth }</h2>

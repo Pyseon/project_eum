@@ -6,33 +6,38 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="css/manager.css" />
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-	<h1>>신고모니터링</h1>
+	<h1 id="main-title">> 신고모니터링</h1>
 	<hr>
-		<div class="selectListBtn">
+		<div class="selectListBtn ">
 			<ul>
-				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=0'">전체</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=1'">답변대기</button></li>
-				<li><button class="btn bc3" onclick="location.href='manaReport.do?reqPage=1&selectNum=2'">답변완료</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaReport.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaReport.do?reqPage=1&selectNum=1'">답변대기</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaReport.do?reqPage=1&selectNum=2'">답변완료</button></li>
 			</ul>
 		</div>
 		<div class="searchBox">
 			<form action="/manaReport.do" method="post">
-				<select name="searchType">
-					<option value="reportTitle">글제목</option>
-					<option value="memberId">이메일</option>
-				</select>
+				<div class="select-wrap">
+					<select id="searchType" name="searchType">
+						<option value="reportTitle">글제목</option>
+						<option value="memberId">이메일</option>
+					</select>
+				</div>
 				<input type="hidden" name="reqPage" value="1">
 				<input type="hidden" name="selectNum" value="0">
-				<input type="text" name="keyword">				
+				<div class="keyword-wrap">
+					<input type="text" id="keyword" name="keyword">
+				</div>				
 				<input id="searchBoxSubmit" type="submit" value="검색" class="btn bc3">
 			</form>
 		</div>
-		<div id="resultTbl">
+		<div id="resultTbl-wrap">
 			<table class = "tbl tbl-hover resultTbl">
 				<tr class="tr-1">
 					<th>번호</th>
@@ -108,5 +113,12 @@
 		</div>
 	</div>	
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>
+	<script>
+		$(function(){
+	        let sel= ${selectNum};
+	        console.log(sel);
+	        $(".select-btn").eq(sel).addClass("manager-btn1");
+		});
+	</script>
 </body>
 </html>

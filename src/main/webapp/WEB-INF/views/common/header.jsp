@@ -268,10 +268,10 @@
                       </a></li>
                     </ul>
                   </li>
-                  <li><a href="/ExpertList.do?reqPage=1&selPro=전체">전문가 상담</a></li>
-                  <li><a href="/ClassList.do?reqPage=1&selPro=전체">클래스</a></li>
-                  <li><a href="/IdeamarketList.do?reqPage=1&selPro=전체">지식마켓</a></li>
-                  <li><a href="/communityList.do?category=2&reqPage=1">커뮤니티</a></li>
+                  <li class="mainNav-select"><a href="/ExpertList.do?reqPage=1&selPro=전체">전문가 상담</a></li>
+                  <li class="mainNav-select"><a href="/ClassList.do?reqPage=1&selPro=전체">클래스</a></li>
+                  <li class="mainNav-select"><a href="/IdeamarketList.do?reqPage=1&selPro=전체">지식마켓</a></li>
+                  <li class="mainNav-select"><a href="/communityList.do?category=2&reqPage=1">커뮤니티</a></li>
                 </ul>
               </div>
             </div>

@@ -810,5 +810,27 @@
 	<update id="updateMemberGrade" parameterType="int">
 		update member_tbl set grade = 1 where member_no = (select member_no from expert_tbl where expert_no = #{value}) 
 	</update>
+	
+	<select id="selectExpertApp" parameterType="int" resultType="expert">
+		select * from
+		(select rownum as rnum, exp.* from
+		(select
+			expert_no as expertNo,
+			expert_category as expertCategory,
+			expert_app as expertApp
+			
+		from expert_tbl expert
+
+		where member_no = #{value }
+
+		order by expert_no desc) exp)
+	</select>
+	<select id="selectMyRefuseExpert" parameterType="int" resultType="rexp">
+		select
+			refuse_no as refuseNo,
+			refuse_content as refuseContent
+		from refuseExpert_tbl
+		where expert_no = #{value}
+	</select>
 
 </mapper>

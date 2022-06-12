@@ -24,6 +24,7 @@ import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.member.model.vo.RefuseExpert;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
@@ -454,6 +455,20 @@ public class ManagerController {
 		int result = service.updateExpertApp(map);
 		int result2 = service.updateMemberGrade(expertNo);
 		return "redirect:/manaExpert.do?reqPage=1&selectNum=0";
+	}
+	@RequestMapping(value ="/appExpertList.do" )
+	public String appExpertList(int memberNo, Model model) {
+		ArrayList<Expert> myExpertList = service.appExpertList(memberNo);
+		model.addAttribute("list", myExpertList);
+		return "mypage/appExpertList";
+	}
+	@RequestMapping(value = "/detailMyExpert.do")
+	public String detailMyExpert(int expertNo, Model model){
+		Expert exp = service.selectExpert(expertNo);
+		RefuseExpert rexp = service.selectMyRefuseExpert(expertNo);
+		model.addAttribute("exp", exp);
+		model.addAttribute("rexp", rexp);
+		return "mypage/detailMyExpert";
 	}
 }
 

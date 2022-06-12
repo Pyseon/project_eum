@@ -25,7 +25,7 @@
 			<tr>
 			<c:forEach var="r" items="${list }" varStatus="i">
 			<tr class="tr-2">
-				<th><a href="/productdetail.do?productNo=${r.productNo}">${r.reviewTitle }</a></th>
+				<th><a href="/imgVerProductDetail.do?productNo=${r.productNo}&expertNo="${r.expertNo}>${r.reviewTitle }</a></th>
 				<td>${r.reviewStar }</td>
 				<td>${r.reviewDate }</td>
 			</tr>

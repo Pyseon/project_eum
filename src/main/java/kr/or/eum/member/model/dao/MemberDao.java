@@ -15,6 +15,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.productAndReview;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Repository
@@ -66,9 +67,9 @@ public class MemberDao {
 	}
 
 	//재민 리뷰테이블
-	public ArrayList<Review> selectReviewlist(int memberNo) {
+	public ArrayList<productAndReview> selectReviewlist(int memberNo) {
 		List list = sqlSession.selectList("member.selectReviewlist",memberNo);
-		return (ArrayList<Review>)list;
+		return (ArrayList<productAndReview>)list;
 	}
 	
 	//재민 찜목록
@@ -79,7 +80,7 @@ public class MemberDao {
 	}
 	
 	public int DeleteMyproduct(int payNo) {
-		int result = sqlSession.update("member.DeleteMyproduct");
+		int result = sqlSession.update("member.DeleteMyproduct",payNo);
 		return result;
 	}
 	

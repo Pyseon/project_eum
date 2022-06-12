@@ -33,6 +33,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.productAndReview;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 import javax.mail.internet.MimeMessage;
@@ -255,9 +256,9 @@ public class MemberController {
 	//재민 리뷰목록
 	@RequestMapping(value="/Myreview.do")
 	public String Myreview(Model model,int memberNo) {
-		ArrayList<Review> list = service.selectReviewlist(memberNo);
+		ArrayList<productAndReview> list = service.selectReviewlist(memberNo);
 		model.addAttribute("list", list);
-		System.out.println(list);
+		
 		return "mypage/Myreview";
 	}
 	
@@ -293,11 +294,11 @@ public class MemberController {
 	
 	//재민 주문취소
 	@RequestMapping(value="/DeleteMyproduct.do")
-	public String DeleteMyproduct(int payNo) {
+	public String DeleteMyproduct(int payNo, int memberNo) {
 		int result = service.DeleteMyproduct(payNo);
 		
-		System.out.println(result);
-		return "redirect:/";
+		
+		return "redirect:/Myproduct.do?memberNo="+memberNo;
 	}
 	//재민 회원탈퇴
 		@RequestMapping(value="/deleteMember.do")
@@ -310,12 +311,12 @@ public class MemberController {
 		}
 	
 	@RequestMapping(value="/DeleteMywish.do")
-	public String DeleteMywish(int wishNo) {
+	public String DeleteMywish(int wishNo,int memberNo) {
 		
 		int result = service.DeleteMywish(wishNo);
 		
 	
-		return "redirect:/";
+		 return "redirect:/Mywishlist.do?memberNo="+memberNo;
 	}
 	
 	//대권 아이디찾기

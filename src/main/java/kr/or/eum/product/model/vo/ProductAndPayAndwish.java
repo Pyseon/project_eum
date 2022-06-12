@@ -11,6 +11,7 @@ public class ProductAndPayAndwish {
 	private String productTitle;
 	private String wishNo;
 	private String productNo;
+	private String memberNo;
 	private String productImgPath;
 	private String productType;
 }

@@ -8,7 +8,6 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
-<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<h1>>1:1 질문</h1>
 	<hr>
 	<div class="container">
@@ -19,11 +18,19 @@
 		<div class="pt-1" style="margin-bottom: 50px;">
 			<textarea id="summernote" name="qstContent"></textarea>
 		</div>
-		<input type="submit" class="btn bc1 bs4" value="등록하기">
+		<input id="submit" type="submit" disabled="disabled" class="btn bc1 bs4" value="등록하기">
 	</form>
 	</div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>
+window.onkeydown = function() {
+	const qstTitle = $("input[name=qstTitle]").val();
+	const qstContent = $("#summernote").val();
+	if(qstTitle.length > 0 && qstContent.length > 0){
+		$("#submit").attr("disabled", false);
+	}
+};
+
 $("#summernote").summernote({
 	  toolbar: [ //썸머노트 툴바 추가
 		    ['fontsize', ['fontsize']],

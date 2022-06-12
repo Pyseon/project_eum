@@ -214,7 +214,7 @@
 
 											<c:if test="${cmnt.cmntLev eq 2 }">
 												<p class="comment">
-													<span class="ref-nick">@${cmnt.cmntRefNick } </span>${cmnt.cmntContent }</p>
+													<span class="ref-nick">${cmnt.cmntRefNick } </span>${cmnt.cmntContent }</p>
 											</c:if>
 
 											<p class="date fs-light">${cmnt.cmntDate }</p>
@@ -226,7 +226,7 @@
 											value="${cmnt.cmntNo}"> <input type="hidden"
 											class="reply-writer-no" value="${cmnt.memberNo}"> <a
 											href="javascript:void(0);" class="btn-reply re-replyBtn"
-											onclick="replyFrm(2, ${cmnt.cmntRef}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
+											onclick="replyFrm(2, ${cmnt.cmntGroup}, ${cmnt.cmntNo}, '${cmnt.memberNick }',this)">답글쓰기</a>
 										<c:if test="${sessionScope.member.memberNo eq cmnt.memberNo }">
 										<div class="comment-btn-wrap">
 											<input type="hidden" class="reply-cmnt-no"

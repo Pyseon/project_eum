@@ -227,12 +227,12 @@ li{
 			</ul>
 			</div>
 			<div>
-				<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMywish.do?wishNo=${w.wishNo}'">찜삭제</button>
+				<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMywish.do?wishNo=${w.wishNo}&&memberNo=${sessionScope.member.memberNo}'">찜삭제</button>
 						
 				
 			</div>
 		</div>
-		
+	
 		</c:forEach>
 	</table>
 

@@ -15,6 +15,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.product.model.vo.ProductAndExpert;
 import kr.or.eum.product.model.vo.ProductAndPayment;
 import kr.or.eum.product.model.vo.Review;
+import kr.or.eum.product.model.vo.productAndReview;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 
 @Repository
@@ -66,9 +67,9 @@ public class MemberDao {
 	}
 
 	//재민 리뷰테이블
-	public ArrayList<Review> selectReviewlist(int memberNo) {
+	public ArrayList<productAndReview> selectReviewlist(int memberNo) {
 		List list = sqlSession.selectList("member.selectReviewlist",memberNo);
-		return (ArrayList<Review>)list;
+		return (ArrayList<productAndReview>)list;
 	}
 	
 	//재민 찜목록
@@ -79,7 +80,7 @@ public class MemberDao {
 	}
 	
 	public int DeleteMyproduct(int payNo) {
-		int result = sqlSession.update("member.DeleteMyproduct");
+		int result = sqlSession.update("member.DeleteMyproduct",payNo);
 		return result;
 	}
 	
@@ -116,10 +117,12 @@ public class MemberDao {
   
 	public ArrayList<ProductAndExpert> selectMyproject(int memberNo) {
 		List list = sqlSession.selectList("member.selectMyproject",memberNo); 
+		
 		return (ArrayList<ProductAndExpert>)list;
 	}
 	public ArrayList<Product> selectMyprojectDetail(int memberNo) {
 		List list = sqlSession.selectList("member.selectMyprojectDetail",memberNo); 
+		System.out.println(list);
 		return (ArrayList<Product>)list;
 	}
 	public int insertExpert(Expert ex) {
@@ -174,6 +177,10 @@ public class MemberDao {
 	public Expert selectExepertPayment(int expertNo) {
 		Expert expert = sqlSession.selectOne("member.selectExpertPayment", expertNo);
 		return expert;
+	}
+	public int DeleteMyproject(int productNo) {
+		int result = sqlSession.delete("member.DeleteMyproject",productNo);
+		return result;
 	}
 
 }

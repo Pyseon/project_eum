@@ -15,6 +15,7 @@
 		<typeAlias type="kr.or.eum.community.model.vo.Haja" alias="haja"/>
 		<typeAlias type="kr.or.eum.community.model.vo.Malja" alias="Malja"/>
 		<typeAlias type="kr.or.eum.member.model.vo.Member" alias="member"/>
+		<typeAlias type="kr.or.eum.member.model.vo.RefuseExpert" alias="rexp"/>
 		<typeAlias type="kr.or.eum.product.model.vo.Payment" alias="pay"/>
 		<typeAlias type="kr.or.eum.report.model.vo.Report" alias="rpt"/>
 		<typeAlias type="kr.or.eum.report.model.vo.AnswerReport" alias="ansrpt"/>
@@ -39,6 +40,7 @@
 		<typeAlias type="kr.or.eum.product.model.vo.Counsel" alias="counsel"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.Chat" alias="chat"/> <!-- 윤지 -->
 		<typeAlias type="kr.or.eum.product.model.vo.ProductAndExpert" alias="productAndExpert"/>
+		<typeAlias type="kr.or.eum.product.model.vo.productAndReview" alias="productAndReview"/>
 	</typeAliases>
 	<typeHandlers>
         <typeHandler handler="kr.or.eum.LongHandler" javaType="String" jdbcType="LONGVARCHAR"/>

@@ -32,7 +32,7 @@
 		
 	</c:forEach>
 	</div>
-	<button class="btn bc1 bs3" id="" type="">이전으로</button>
+	<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproduct.do?memberNo=${sessionScope.member.memberNo}'">이전으로</button>
 
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>

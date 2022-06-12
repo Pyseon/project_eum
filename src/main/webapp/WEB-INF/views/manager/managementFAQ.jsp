@@ -11,7 +11,7 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-	<h1>>F&Q</h1>
+	<h1>>FAQ</h1>
 	<hr>		
 		<div class="searchBox">
 			<form action="/manaFAQ.do" method="post" id="faqSelectBox">

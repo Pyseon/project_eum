@@ -15,7 +15,9 @@
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-		<div>
+	<h1>>전문가 승인</h1>
+	<hr>
+		<div class="selectListBtn">
 			<ul>
 				<li><button class="btn bc3" onclick="location.href='manaExpert.do?reqPage=1&selectNum=0'">전체</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaExpert.do?reqPage=1&selectNum=2'">승인</button></li>
@@ -52,12 +54,12 @@
 					<td>${expert.expertCategory }</td>
 					<td>${expert.jobName }</td>
 					<c:choose>
-						<c:when test="${expert.expertApp == 0 }"><td><h4 class="fc-13">승인 대기</h4></td></c:when>
-						<c:when test="${expert.expertApp == 1 }"><td><h4 class="fc-7">승인 완료</h4></td></c:when>
-						<c:when test="${expert.expertApp == 2 }"><td><h4 class="fc-9">승인 기각</h4></td></c:when>
+						<c:when test="${expert.expertApp == 0 }"><td class="fc-13">승인 대기</td></c:when>
+						<c:when test="${expert.expertApp == 1 }"><td class="fc-7">승인 완료</td></c:when>
+						<c:when test="${expert.expertApp == 2 }"><td class="fc-9">기각</td></c:when>
 					</c:choose>
-					<td><button class="btn bc3 bc1" onclick="location.href='/detailExpert.do?expertNo=${expert.expertNo}&expertApp=${expert.expertApp }'">상세보기</button></td>
-					</tr>
+					<td><button class="btn bc1" onclick="location.href='/detailExpert.do?expertNo=${expert.expertNo}&expertApp=${expert.expertApp }'">상세보기</button></td>
+				</tr>
 					</c:forEach>
 			</table>
 		</div>

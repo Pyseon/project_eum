@@ -16,6 +16,7 @@ import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.manager.model.vo.SalesChart;
 import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
+import kr.or.eum.member.model.vo.RefuseExpert;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.report.model.vo.AnswerReport;
@@ -420,9 +421,18 @@ public class ManagerService {
 	public int scoutReport(int categoryNo, int reportIndex) {
 		HashMap<String, Object> scout = new HashMap<String, Object>();
 		scout.put("category", categoryNo);
-		scout.put("index", reportIndex);
+		scout.put("reportIndex", reportIndex);
 		return dao.scoutReport(scout);
 	}
+
+	public ArrayList<Expert> appExpertList(int memberNo) {
+		return dao.selectExpertApp(memberNo);
+	}
+
+	public RefuseExpert selectMyRefuseExpert(int expertNo) {
+		return dao.selectMyRefuseExpert(expertNo);
+	}
+
 	
 	
 }

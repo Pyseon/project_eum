@@ -100,18 +100,15 @@
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">내 프로젝트 수정하기</h1>
 		<form action="/MyclassUpdate.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
 
-		<input type="hidden" name="productNo" value="${productNo }">
+		
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
 		<div style="margin-top: -30px !important;">
 			<table class = "product-tab">
-				<tr>
-					<td><button type="button" class="exp">1:1전문가상담</button></td>
-					<td><button type="button" class="cla">클래스</button></td>
-					<td><button type="button" class="idm">지식마켓</button></td>
-				</tr>
+				
 			</table>	
-		</div>
+		</div><br><br>
+		
 		<h3>카테고리 선택</h3>
 		<select id="category" name="productCategory" style="margin-bottom: 10px !important;">
 		<option value="">선택</option>
@@ -128,6 +125,7 @@
 		<option value="자기계발">자기계발</option>
 		</select>
 		<c:forEach var="p" items="${list }" varStatus="i">
+		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
 			<input class="input-form" type="text" name="productTitle" value="${p.productTitle }">
@@ -171,7 +169,7 @@
 			<div id="qst-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="${p.productQst }" maxlength="1000" required>
 				
 				</span>
 			</div>
@@ -179,14 +177,14 @@
 			<div id="ans-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="${p.productAns }" maxlength="1000" required>
 				</span>
 			</div>
 			
 		</div>
 		<div style="margin-bottom: 20px">
 			<div><h3>클래스 수업 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력하세요" style="width: 80%;">
+			<input class="input-form" type="text" name="productAddr" placeholder="${p.productAddr }" style="width: 80%;">
 		</div>
 			
 		<div style="margin-bottom: 20px">
@@ -206,6 +204,8 @@
 		</div>
 		</c:forEach>
 		</form>
+		
+		
 	</div>
 	<script>
 	$("#summernote").summernote({

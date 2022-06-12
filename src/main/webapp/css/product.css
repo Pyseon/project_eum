@@ -228,6 +228,13 @@ th{
 
 
 /*/////right box/////*/
+.img-ver-title{
+	color: #333333;
+	font-size: 24px;
+}
+.img-ver-title-wrap{
+	margin-bottom: 10px;
+}
 .right-first-box{
 	border: 1px solid #ececec;
 	border-radius:10px;

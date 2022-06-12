@@ -64,14 +64,8 @@
 										<tr>
 											<th>대표자</th>
 											<td>${expert.expertName}</td>
-											<th>상호명</th>
-											<td>-</td>
-										</tr>
-										<tr>
 											<th>사업장주소</th>
 											<td>${p.productAddr}</td>
-											<th>사업자등록번호</th>
-											<td>-</td>
 										</tr>
 										<tr>
 											<th>연락처</th>
@@ -164,6 +158,9 @@
 				<div class="col-lg-4 sidebar-widgets">
 					<div class="widget-wrap">
 						<div class="right-first-box">
+							<div class="img-ver-title-wrap">
+								<span class="img-ver-title">${p.productTitle} </span><br> 
+							</div>
 							<div class="product-summary">
 								<span id="sele">${p.sale}%</span>
 								<span id="price"><fmt:formatNumber value="${cost }" pattern="#,###"/>원</span><span id="fixed-price"><fmt:formatNumber value="${p.cost }" pattern="#,###"/>원</span><br>
@@ -464,7 +461,7 @@
 									<div class="report-wrap">
 										<ul>
 											<li><img id="icon-report" src="img/product/icon-report.png"></li>
-											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${productNo}')">신고</a></span></li>
+											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${item.reviewNo}')">신고</a></span></li>
 										</ul>
 									</div>
 								</div>

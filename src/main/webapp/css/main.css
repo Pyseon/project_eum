@@ -1,4 +1,4 @@
-﻿﻿/*************************
+﻿﻿﻿/*************************
 *******Typography******
 **************************/
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
@@ -239,16 +239,28 @@ a#scrollUp i {
   font-weight: 300;
   padding: 0;
   padding-bottom: 10px;
-  border: 3px solid transparent;
   box-sizing: border-box;
 }
-
+/* 태선
 .mainmenu ul li:nth-child(n + 2):not(.sub-menu > li) a:hover,
 .mainmenu ul li:nth-child(n + 2) a.active {
   background: none;
   font-weight: 700;
   border-bottom: 3px solid #3865f2;
+  box-sizing: border-box;
 }
+*/
+
+.mainNav-select:hover >a{
+  background: none;
+  font-weight: 700;
+  margin-bottom:-3px;
+  border-bottom: 3px solid #3865f2;
+  transition: 0ms !important;
+  -webkit-transition: 0ms !important;
+}
+
+
 
 .search_box input {
   border: medium none;
@@ -609,15 +621,15 @@ ul.sub-menu2 {
 	width: 180px;
 }
 
+/* 태선
 .cate-icon > tbody > tr > td > img{
 	width: 150px;
 	height: 150px;	
 }
-
 #slider {
   padding-bottom: 45px;
 }
-
+*/
 .carousel-indicators li {
   background: #c4c4be;
 }
@@ -625,11 +637,11 @@ ul.sub-menu2 {
 .carousel-indicators li.active {
   background: #3865f2;
 }
-
+/* 태선
 .item {
   padding-left: 100px;
 }
-
+*/
 .pricing {
   position: absolute;
   right: 40%;
@@ -2658,6 +2670,13 @@ input[name=keyword]{
 .chartDiv > h2{
 	text-align: center;
 }
+.pieChart{
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+.gradeChart{
+	margin-top: 18px;
+}
 
 .selectBox{
 	position: relative;
@@ -2686,6 +2705,15 @@ input[name=keyword]{
 .expertTbl td{
 	width: 70%;
 }
+#iss, #acq{
+	width: 35%;
+}
+.expertTbl tr{
+	border-bottom: 1px solid #ddd;
+}
+.expertTbl tr:last-child{
+	border-bottom: 1px solid black;
+}
 .expertTbl_top{
 	height: 500px;
 }
@@ -2702,8 +2730,35 @@ input[name=keyword]{
 	width: 500px;
 	height: 500px;
 }
-.detailTbl{
-	margin-left: -200px;
+
+#resultTbl{
+	border: 1px solid black;
+	height: 680px;
+}
+.searchBox{
+	margin-top: 10px;
+	margin-right: 10px;
+}
+.resultTbl th{
+	height: 50px;
+}
+.resultTbl td{
+	height: 15px;
+}
+.selectListBtn{
+	position: absolute;
+	margin-top: 10px;
+}
+.qstTbl{
+	margin-top: 80px;
+}
+.memberPageNavi{
+	margin-top: 50px;
+}
+
+.ansTable{
+	min-height: 150px;
+	height: fit-content;
 }
 /*************************
 *******mypage CSS******

@@ -9,96 +9,199 @@
 <meta charset="UTF-8">
 <title>프로젝트 : 이음</title>
 </head>
+<style>
+.m-slider-img1{
+  background-color: #057cb9;
+   background-image: url("./img/mainpage/coun1.png") !important;
+  background-position: 65% 50%;
+  background-repeat:no-repeat;
+	background-size: auto 100%;
+    height:450px;
+}
+.m-slider-img2{
+  background-color: #8c6841;
+   background-image: url("./img/mainpage/class2.png") !important;
+  background-position: 65% 50%;
+  background-repeat:no-repeat;
+    height:450px;
+}
+.m-slider-img3{
+  background-color: #5a40c8;
+   background-image: url("./img/mainpage/comm1.png") !important;
+  background-position: 65% 50%;
+  background-repeat:no-repeat;
+	background-size: auto 100%;
+    height:450px;
+}
+
+.col-sm-6{
+	background-color:transparent;
+}
+.main-slider-wrap>.col-sm-6:first-child{
+	   display:inline-block;
+	   width:60%;
+	   margin-top: 80px;
+	   padding-left:30%;
+}
+.main-slider-wrap>.col-sm-6:last-child{
+		display:inline-block;
+	  width:40%; 
+	   margin: 0 auto;
+}
+.f-white{
+	color:#fff !important;
+}
+#slider{
+/*
+	width: 60%;
+	margin:0 auto;
+	padding: 3%;
+	*/
+}
+#slider-wrap{
+	/*
+	 background-color:#4966f5;
+	 */ 
+}
+
+    .main-img-btn{
+        width: 186px;
+        height: 46px;
+        font-size: 22px;
+        margin-top: 40px;
+        background-color: transparent;
+        border: 2px solid #fff;
+        text-align: center;
+        
+    }  
+    
+    .main-img-btn:hover{
+       cursor: pointer;
+        background-color: rgba(255, 255, 255, 0.33) !important;
+        transition-duration: 1.5s;
+    }
+
+	.cat-img-wrap td img{
+		width:80px;
+		height:80px;
+	}
+</style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<!-- 
 <h1><a href="/manaMember.do?reqPage=1&selectNum=0">매니저</a></h1>
-	<section id="slider">
-		<!--slider-->
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-12">
-					<div id="slider-carousel" class="carousel slide"
-						data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#slider-carousel" data-slide-to="0"
-								class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
-							<li data-target="#slider-carousel" data-slide-to="2"></li>
-						</ol>
+	 -->
+<div id=slider-wrap>
+			<section id="slider">
+				<!--slider-->
+				<div class="row">
+					<div class="col-sm-12">
+						<div id="slider-carousel" class="carousel slide"
+							data-ride="carousel">
+							<ol class="carousel-indicators">
+								<li data-target="#slider-carousel" data-slide-to="0"
+									class="active"></li>
+								<li data-target="#slider-carousel" data-slide-to="1"></li>
+								<li data-target="#slider-carousel" data-slide-to="2"></li>
+							</ol>
 
-						<div class="carousel-inner">
-							<div class="item active">
-								<div class="col-sm-6">
-									<h1>
-										<span>전문가 상담</span>
-									</h1>
-									<h2>1:1로 전문가의 노하우, 방법 등을 물어볼 수 있는곳</h2>
-									<p>서비스가 필요한 고객과 서비스를 제공하는 전문가를 쉽고 빠르게 연결해드리는 전문가 매칭 서비스입니다.
-										맘에 쏙 드는 전문가의 맞춤형 서비스를 받아보세요.</p>
-									<button type="button" class="btn bc1 bs3 get">전문가 상담</button>
+							<div class="carousel-inner">
+								<div class="item active">
+									<div class="main-slider-wrap m-slider-img1">
+
+										<div class="col-sm-6">
+											<h2>
+												<span class="f-white">당신의 고민을</span>
+											</h2>
+											<h2>
+												<span class="f-white">속 시원하게</span>
+											</h2>
+											<h2>
+												<span class="f-white">해결해 드립니다!</span>
+											</h2>
+											
+											<button type="button" class="main-img-btn fc-5">전문가 상담</button>
+										</div>
+										<div class="col-sm-6">
+											<img src="" class="girl img-responsive" alt="" />
+										</div>
+									</div>
+
 								</div>
-								<div class="col-sm-6">
-									<img src="./img/mainpage/indexCounseling.jpg"
-										class="girl img-responsive" alt="" />
+
+
+								<div class="item">
+										<div class="main-slider-wrap m-slider-img2">
+
+										<div class="col-sm-6">
+											<h2>
+												<span class="f-white">거리두기 끝!!</span>
+											</h2>
+											<h2>
+												<span class="f-white">다 같이 모여서</span>
+											</h2>
+											<h2>
+												<span class="f-white">다양한 사람들과</span>
+											</h2>
+											<h2>
+												<span class="f-white">함께 해요!</span>
+											</h2>
+											
+											<button type="button" class="main-img-btn fc-5" style="margin-top:30px;">클래스</button>
+										</div>
+										<div class="col-sm-6">
+											<img src="" class="girl img-responsive" alt="" />
+										</div>
+									</div>
 								</div>
-							</div>
-							<div class="item">
-								<div class="col-sm-6">
-									<h1>
-										<span>클래스</span>
-									</h1>
-									<h2>각 분야 전문가와 오프라인으로 직접 만나 배워보세요!</h2>
-									<p>자신이 원하는 분야가 배우고 싶다면 직접 만나보세요!</p>
-									<button type="button" class="btn bc1 bs3 get">클래스</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="./img/mainpage/indexClass.jpg"
-										class="girl img-responsive" alt="" />
+
+								<div class="item">
+										<div class="main-slider-wrap m-slider-img3">
+
+										<div class="col-sm-6">
+											<h2>
+												<span class="f-white">당신의 일상과 생각을 자유롭게</span>
+											</h2>
+											<h2>
+												<span class="f-white">자유롭게, 다양하게</span>
+											</h2>
+											<h2>
+												<span class="f-white">여러 사람들과 소통해보세요!</span>
+											</h2>
+											
+											<button type="button" class="main-img-btn fc-5">커뮤니티</button>
+										</div>
+										<div class="col-sm-6">
+											<img src="" class="girl img-responsive" alt="" />
+										</div>
+									</div>
 								</div>
 							</div>
 
-							<div class="item">
-								<div class="col-sm-6">
-									<h1>
-										<span>커뮤니티</span>
-									</h1>
-									<h2>요즘뭐하니, 이거어때?</h2>
-									<p>자신의 취미를 공유하거나 배워보고 싶은 취미가 있다면 사람들에게 말해보세요!</p>
-									<button type="button" class="btn bc1 bs3 get">커뮤니티</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="./img/mainpage/indexCommunity.jpg"
-										class="girl img-responsive" alt="" />
-								</div>
-							</div>
+							<a href="#slider-carousel"
+								class="left control-carousel hidden-xs" data-slide="prev"> <i
+								class="fa fa-angle-left"></i>
+							</a> <a href="#slider-carousel"
+								class="right control-carousel hidden-xs" data-slide="next">
+								<i class="fa fa-angle-right"></i>
+							</a>
 						</div>
-
-						<a href="#slider-carousel" class="left control-carousel hidden-xs"
-							data-slide="prev"> <i class="fa fa-angle-left"></i>
-						</a> <a href="#slider-carousel"
-							class="right control-carousel hidden-xs" data-slide="next">
-							<i class="fa fa-angle-right"></i>
-						</a>
 					</div>
 				</div>
-			</div>
+			</section>
 		</div>
-	</section>
-	<!--/slider-->
-    <hr>
+		<!--/slider-->
 	<div class="container" style="text-align: left;">
-		<h2 class="fs-bold">88개 카테고리에서 원하는 서비스를 찾아보세요!</h2>
+		<h2 class="fs-bold">다양한 카테고리에서 원하는 서비스를 찾아보세요!</h2>
 		<div>
 			<table class="cate-icon">
-				<tr>
+				<tr class="cat-img-wrap">
 					<td><img src="./img/category/전체.png"><h3>전체</h3></td>
 					<td><img src="./img/category/법률.png"><h3>법률</h3></td>
 					<td><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></td>
 					<td><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></td>
 					<td><img src="./img/category/학습.png"><h3>학습</h3></td>
 					<td><img src="./img/category/금융.png"><h3>금융</h3></td>
-          			</tr>
-          			<tr>
 					<td><img src="./img/category/라이프.png"><h3>라이프</h3></td>
 					<td><img src="./img/category/취미.png"><h3>레저</h3></td>
 					<td><img src="./img/category/어학.png"><h3>어학</h3></td>

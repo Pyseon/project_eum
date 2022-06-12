@@ -643,6 +643,14 @@ public class ProductService {
 		return popularProduct;
 	}
 
+	public int insertIdeamarket(int productNo, int marketfileNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("productNo", productNo);
+		map.put("marketfileNo", marketfileNo);
+		
+		return productDao.insertIdeamarket(map);
+	}
+
 
 
 }

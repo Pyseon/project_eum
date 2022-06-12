@@ -227,22 +227,24 @@ li{
    
 <div class="container">
 	테스트용 아이디 : eom15@gmail.com 비밀번호 :1234
-	
+<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+	<!-- 실전용
 	<c:if test="${grade eq null}">
 		<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
 	</c:if>
 	<c:if test="${grade eq 0}">
 		<button type="button" class="writeButton" id="writeButton" onclick="manager();">등록하기</button>
 	</c:if>
-	<c:if test="${grade eq 1}">
+	<c:if test="${grade eq 2}">
 		<button type="button" class="writeButton" id="writeButton" onclick="expertNeed();">등록하기</button>
 	</c:if>
-	<c:if test="${grade eq 2}">
+	<c:if test="${grade eq 1}">
 		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
 	</c:if>
 	<c:if test="${grade eq 3}">
 		<button type="button" class="writeButton" id="writeButton" onclick="blacklist();">등록하기</button>
 	</c:if>
+	 -->
 			<div class="posting-wrap">
 
 	<c:forEach items="${list }" var="c" varStatus="i">

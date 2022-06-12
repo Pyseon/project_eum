@@ -258,6 +258,9 @@
 		select count(*) from COMMLIKE_TBL where comm_no=#{commNo} and member_no=#{memberNo}
 	</select>
 	
+	<select id="reCommentCount" parameterType="int" resultType="int">
+		select count(*) from communityco_tbl where cmnt_ref = ${value}
+	</select>
 	
 </mapper>
 

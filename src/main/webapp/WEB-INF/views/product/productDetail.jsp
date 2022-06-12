@@ -81,14 +81,8 @@
 										<tr>
 											<th>대표자</th>
 											<td>${expert.expertName}</td>
-											<th>상호명</th>
-											<td>-</td>
-										</tr>
-										<tr>
 											<th>사업장주소</th>
 											<td>${p.productAddr}</td>
-											<th>사업자등록번호</th>
-											<td>-</td>
 										</tr>
 										<tr>
 											<th>연락처</th>
@@ -345,6 +339,11 @@
 				data : {reviewNo:param},
 				success : function(data) {
 					alert('후기가 삭제되었습니다.');
+					if(${p.productType} == 1 || ${p.productType} ==2) {
+						location.href="/productDetail.do?productNo=${p.productNo}&expertNo=${expert.expertNo}"						
+					}else if(${p.productType} == 3) {
+						location.href="/imgVerProductDetail.do?productNo=${p.productNo}&expertNo=${expert.expertNo}"
+					}
 				},
 				error : function() {
 					alert('잘못된 접근입니다.');
@@ -481,7 +480,7 @@
 									<div class="report-wrap">
 										<ul>
 											<li><img id="icon-report" src="img/product/icon-report.png"></li>
-											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${productNo}')">신고</a></span></li>
+											<li><span id="report"><a onclick="report('\${item.memberNo }','1','\${reviewNo}')">신고</a></span></li>
 										</ul>
 									</div>
 								</div>

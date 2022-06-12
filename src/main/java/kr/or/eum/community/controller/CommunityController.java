@@ -147,7 +147,7 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value="/commCoWrite.do", produces="application/json;charset=utf-8")
 	public void communityCoWrite(CommunityCo commCo) {
-		System.out.println(commCo);
+		System.out.println("댓글컨트롤러"+commCo);
 		//insert 후 selectKey를 이용해 방금 insert 한 pk값 얻어옴
 		service.commCoWrite(commCo);
 		//얻어온 pk값으로 데이터 조회 후 리턴

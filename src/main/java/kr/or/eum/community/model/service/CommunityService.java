@@ -147,6 +147,7 @@ public class CommunityService {
 	}
 
 	public void commCoWrite(CommunityCo commCo) {
+		System.out.println("댓글서비스");
 		dao.commCoWrite(commCo);
 	}
 	
@@ -188,9 +189,12 @@ public class CommunityService {
 		map.put("cmntGroup", cmntNo);
 		int result = dao.commentCount(map);
 		
-		//대댓글이 있는 댓글은 삭제시 댓글을 삭제하지않고 내용만 업데이트 해준다
+		//대댓글을 지울때 나를 참고하는 대대댓글이 있으면 내용만 업데이트 해준다
+		int result2 = dao.reCommentCount(cmntNo);
 		
-		if(result > 1) { //대댓글이 있는경우
+		
+		//대댓글이 있는 댓글은 삭제시 댓글을 삭제하지않고 내용만 업데이트 해준다
+		if(result > 1 || result2 > 0) { //대댓글이 있는경우
 			CommunityCo commCo = new CommunityCo();
 			String delCommentMsg = "[사용자가 삭제한 댓글 입니다.]";
 			commCo.setCmntNo(cmntNo);

@@ -108,12 +108,12 @@
 				<tr>
 					<td><button type="button" class="exp" onclick="location.href='/expertWriterFrm.do'">1:1전문가상담</button></td>
 					<td><button type="button" class="cla">클래스</button></td>
-					<td><button type="button" class="idm">지식마켓</button></td>
+					<td><button type="button" class="idm" onclick="location.href='/ideamarketWriterFrm.do'">지식마켓</button></td>
 				</tr>
 			</table>	
 		</div>
 		<h3>카테고리 선택</h3>
-		<select id="category" name="productCategory" style="margin-bottom: 10px !important;">
+		<select id="category" name="productCategory" style="margin-bottom: 10px !important;" required>
 		<option value="">선택</option>
 		<option value="법률">법률</option>
 		<option value="비즈니스">비즈니스</option>
@@ -130,11 +130,11 @@
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요.">
+			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요">
+			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" required>
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>
@@ -146,7 +146,7 @@
 								<p class="comm-write-p" style="margin-bottom: 5px;">대표이미지</p>
 								<h4 class="fc-3" style="margin-top: 0;">(세로로 긴 사진이 적합합니다.)</h4>
 								<label for="input-file">파일 선택</label> 
-								<input type="file"name="file" class="commFile upload-hidden" id="input-file">
+								<input type="file"name="file" class="commFile upload-hidden" id="input-file" required>
 							</div>
 							<div class="input-img-box"></div>
 						</div>
@@ -163,7 +163,7 @@
 			<div id="qst-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000">
 				
 				</span>
 			</div>
@@ -171,22 +171,32 @@
 			<div id="ans-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000">
 				</span>
 			</div>
 			
 		</div>
 		<div style="margin-bottom: 20px">
 			<div><h3>클래스 수업 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;">
+			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;" required>
 		</div>
 			
 		<div style="margin-bottom: 20px">
 			<div><h3>가격설정</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;">
+			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;" required>
 			<span style="line-height: 2.5;">&nbsp; 원</span>
 			</span>
+		</div>
+		
+		<div style="margin-bottom: 20px">
+			<div>
+				<h3>할인율 설정</h3>
+				<span style="display: flex;">
+					<input class="input-form" type="text" name="sale" style="width: 30%;">
+					<span style="line-height: 2.5;">&nbsp; %(없으시면 자동으로 0%가 됩니다)</span>
+				</span>
+			</div>
 		</div>
 		
 		<div style="margin-bottom: 20px">
@@ -201,7 +211,7 @@
 			</div>
 			<div id="tag-opt">
 			<span style="display: flex;"> 
-			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required">
+			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required>
 			</span>
 			</div>
 		</div>

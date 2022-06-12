@@ -271,6 +271,10 @@ public class ProductDao {
 		Product product = sqlSession.selectOne("product.selectPopularProduct", integer);
 		return product;
 	}
+	public int insertIdeamarket(HashMap<String, Object> map) {
+		int result = sqlSession.insert("product.insertIdeamarket", map);
+		return 0;
+	}
 
 
 

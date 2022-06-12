@@ -37,26 +37,30 @@
 	.cla{
 	width: 110px;
 	height: 50px;
+	background-color: #ffffff;
+    border: 1px solid #a7a7a7;
+    padding: 6px 10px;
+    border-radius: 4px;
+	}
+	
+	.cla:hover{
+	background: #3865f2 !important;
+	color: #fff !important;
+	border: 1px solid #3865f2;
+	transition-duration: 0.5s;
+	}
+	
+	
+	.idm{
+	width: 110px;
+	height: 50px;
 	background: #3865f2 !important;
 	color: #fff !important;
     border: 1px solid #3865f2;
     padding: 6px 10px;
     border-radius: 4px;
 	}
-	.idm{
-	width: 110px;
-	height: 50px;
-	background-color: #ffffff;
-    border: 1px solid #a7a7a7;
-    padding: 6px 10px;
-    border-radius: 4px;
-	}
-	.idm:hover{
-	background: #3865f2 !important;
-	color: #fff !important;
-	border: 1px solid #3865f2;
-	transition-duration: 0.5s;
-	}
+	
 	.product-tab{
 	margin-top: 3px !important;
 	margin-bottom:-15px !important;
@@ -104,7 +108,7 @@
 			<table class = "product-tab">
 				<tr>
 					<td><button type="button" class="exp" onclick="location.href='/expertWriterFrm.do'">1:1전문가상담</button></td>
-					<td><button type="button" class="cla">클래스</button></td>
+					<td><button type="button" class="cla" onclick="location.href='/classWriterFrm.do'">클래스</button></td>
 					<td><button type="button" class="idm">지식마켓</button></td>
 				</tr>
 			</table>	

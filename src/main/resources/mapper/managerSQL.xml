@@ -300,19 +300,19 @@
 			from 
 			<choose>
 				<when test="category == 0">
-					product_tbl where product_no = #{index }
+					product_tbl where product_no = #{reportIndex }
 				</when>
 				<when test="category == 1">
-					review_tbl where review_no = #{index }
+					review_tbl where review_no = #{reportIndex }
 				</when>
 				<when test="category == 2">
-					request_tbl where request_no = #{index }
+					request_tbl where request_no = #{reportIndex }
 				</when>
 				<when test="category == 3">
-					community_tbl where comm_no = #{index }
+					community_tbl where comm_no = #{reportIndex }
 				</when>
 				<when test="category == 4">
-					communityco_tbl where cmnt_no = #{index }
+					communityco_tbl where cmnt_no = #{reportIndex }
 				</when>
 			</choose>
 	</select>
@@ -810,5 +810,27 @@
 	<update id="updateMemberGrade" parameterType="int">
 		update member_tbl set grade = 1 where member_no = (select member_no from expert_tbl where expert_no = #{value}) 
 	</update>
+	
+	<select id="selectExpertApp" parameterType="int" resultType="expert">
+		select * from
+		(select rownum as rnum, exp.* from
+		(select
+			expert_no as expertNo,
+			expert_category as expertCategory,
+			expert_app as expertApp
+			
+		from expert_tbl expert
+
+		where member_no = #{value }
+
+		order by expert_no desc) exp)
+	</select>
+	<select id="selectMyRefuseExpert" parameterType="int" resultType="rexp">
+		select
+			refuse_no as refuseNo,
+			refuse_content as refuseContent
+		from refuseExpert_tbl
+		where expert_no = #{value}
+	</select>
 
 </mapper>

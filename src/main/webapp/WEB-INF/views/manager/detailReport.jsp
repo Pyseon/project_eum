@@ -22,7 +22,7 @@
 		<hr>
 		<div class="reportDetail">
 		<c:choose>
-			<c:when test="${scout == 0 }">
+			<c:when test="${scout eq -1 }">
 				<h1>이미 삭제되어있는 글입니다.</h1>
 			</c:when>
 			<c:otherwise>
@@ -126,10 +126,11 @@
 		$(".wish-title-wrap").css("display", "none");
 		$("#purchaseBtn").css("display", "none");
 		
-		//카테고리
+		//커뮤니티
 		$(".article-list").css("display", "none");
 		$(".article-info-box").css("display", "none");
 		$(".haja-like").css("pointer-events", "none");
+		$(".button-wrap").css("display", "none");
 	</script>
 </body>
 </html>

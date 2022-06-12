@@ -11,7 +11,9 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-		<div>
+	<h1>>주문관리</h1>
+	<hr>
+		<div class="selectListBtn">
 			<ul>
 				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=0'">전체</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaPayment.do?reqPage=1&selectNum=1'">예약</button></li>

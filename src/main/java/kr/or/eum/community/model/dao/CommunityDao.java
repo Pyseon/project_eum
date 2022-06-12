@@ -122,6 +122,10 @@ public class CommunityDao {
 		return sqlSession.selectOne("community.pickLikeCount", pickNo);
 	}
 
+	public int reCommentCount(int cmntNo) { //삭제하려는 대댓글에 대대댓글이 있는지 확인
+		return sqlSession.selectOne("community.reCommentCount", cmntNo);
+	}
+
 
 
 }

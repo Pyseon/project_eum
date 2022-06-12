@@ -13,14 +13,14 @@
 	<div class="manaContentWrap">
 	<h1>>1:1상담</h1>
 	<hr>
-		<div>
+		<div class="selectListBtn">
 			<ul>
 				<li><button class="btn bc3" onclick="location.href='manaQuestion.do?reqPage=1&selectNum=0'">전체</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaQuestion.do?reqPage=1&selectNum=1'">대기</button></li>
 			</ul>
 		</div>
-		<div id="resultTbl">
-			<table class="tbl tbl-hover resultTbl">
+		<div id="resultTbl" class="qstTbl">
+			<table class="tbl tbl-hover">
 				<tr class="tr-1">
 					<th>번호</th>
 					<th>질문번호</th>
@@ -43,7 +43,7 @@
 								<td class="fc-7">답변함</td>
 							</c:otherwise>
 						</c:choose>
-						<td><button onclick="location.href='/insertAnswerFrm.do?qstNo=${q.qstNo}'">답변하기</button></td>
+						<td><button class="btn bc3 bs1" onclick="location.href='/insertAnswerFrm.do?qstNo=${q.qstNo}'">답변하기</button></td>
 					</tr>
 				</c:forEach>
 			</table>

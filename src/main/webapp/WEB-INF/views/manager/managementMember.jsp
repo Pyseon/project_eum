@@ -13,7 +13,9 @@
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<%@ include file="/WEB-INF/views/manager/managerHeader.jsp"%>
 	<div class="manaContentWrap">
-		<div>
+	<h1>>회원관리</h1>
+	<hr>
+		<div class="selectListBtn">
 			<ul>
 				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=0'">전체</button></li>
 				<li><button class="btn bc3" onclick="location.href='manaMember.do?reqPage=1&selectNum=1'">전문가</button></li>

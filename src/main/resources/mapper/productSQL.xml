@@ -305,6 +305,14 @@
         where product_no=#{productNo}
 	</select>
 	
+	<insert id="insertIdeamarket" parameterType="map">
+		insert into ideamarket_tbl values(
+		ideamarket_seq.nextval,
+		
+		)
+		
+	
+	</insert>
 	<!-- 윤지 -->
 	<select id="selectAllReview" parameterType="map" resultType="review">
 		select 

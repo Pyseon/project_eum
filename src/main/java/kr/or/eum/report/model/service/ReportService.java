@@ -23,8 +23,11 @@ public class ReportService {
 			report.setPlaintiff(member.getMemberNo());
 			report.setReportContent(reportRadio+"/"+report.getReportContent());
 		}
-		return dao.insertReport(report);
-	}
-	
-	
+		int result = dao.overlapReport(report);
+		if(result != 0) {
+			return 0;
+		}else {
+			return dao.insertReport(report);			
+		}
+	}	
 }

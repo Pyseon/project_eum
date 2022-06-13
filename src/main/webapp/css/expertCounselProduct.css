@@ -16,7 +16,7 @@ body{
 
 .messageArea{
 	overflow-y: auto;
-	height: 624px;
+	height: 770px;
 	display: flex;
 	flex-direction: column;
 	background-color : #eaeaea;
@@ -25,7 +25,7 @@ body{
 .buy-detail{
 	overflow-y: auto;
 	border : 1px solid #ececec;
-	height: 725px;
+	height: 871px;
 	display: flex;
 	flex-direction: column;
 	background-color : #e9ebf8;

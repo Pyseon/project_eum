@@ -296,7 +296,7 @@
 								const icon = "success";
 								const msgTime = 1500;
 								toastShow(title,icon, msgTime);
-								location.replace("/purchaseSuccess.do");
+								location.replace("/purchaseSuccess.do?memberNo="+memberNo+"&productNo="+productNo);
 							}else if(data == "0"){
 								const title = "결제에 실패했습니다.";
 								const icon = "error";
@@ -455,7 +455,7 @@
 						const icon = "success";
 						const msgTime = 1500;
 						toastShow(title,icon, msgTime);
-						location.replace("/purchaseSuccess.do");
+						location.replace("/purchaseSuccess.do?memberNo="+memberNo+"&productNo="+productNo);
 					}else if(data == "0"){
 						const title = "결제에 실패했습니다.";
 						const icon = "error";
@@ -467,6 +467,11 @@
 					   console.log("서버요청실패");
 				}
 			});
+		}else{
+			const title = "서비스 이용 동의가 필요합니다.";
+			const icon = "info";
+			const msgTime = 1500;
+			toastShow(title,icon,msgTime);	
 		}
 	});
 		

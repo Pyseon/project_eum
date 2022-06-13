@@ -660,6 +660,18 @@ public class ProductService {
 		// TODO Auto-generated method stub
 		return productDao.counselInsert(c);
 	}
+	//결제성공출력
+	public HashMap<String, Object> purchaseSuccess(int memberNo, int productNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo",memberNo);
+		map.put("productNo",productNo);
+		HashMap<String, Object> pay = productDao.purchaseSuccess(map);
+		HashMap<String, Object> pro = productDao.purchaseSuccess2(map);
+		map.put("payment",pay);
+		map.put("product",pro);
+		//System.out.println("성공2"+map);
+		return map;
+	}
 
 
 }

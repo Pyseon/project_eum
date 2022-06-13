@@ -91,9 +91,12 @@ display: flex;
 		</div>
 		<div style="margin: 70px 0px 0px 680px; display: flex; justify-content: space-between;">
 		
-		<button type="button" class="writeButton btn bc1 bs4" id="writeButton" onclick="#" style="width:100%; height:40px;">수정하기</button>
-		
-		<button type="button" class="writeButton btn bc1 bs4" id="writeButton" onclick="#" style="width:100%; height:40px; margin-left:10px;">취소하기</button>
+			<c:if test="${sei eq 0 }">
+				<button class="btn bc1 bs4" onclick="location.href='/updateRequestFrm.do?reqNo=${req.reqNo }'" style="width:100%; height:40px;">수정하기</button>
+				
+				<button class="btn bc1 bs4" onclick="location.href='/deleteRequest.do?reqNo=${req.reqNo}'" style="width:100%; height:40px; margin-left:10px;">취소하기</button>	
+			</c:if>
+
 	
 		</div>
 		</div>

@@ -114,8 +114,8 @@ public class MemberService {
 		return dao.search(memberNick);
   }
   
-	public ArrayList<Product> selectMyprojectDetail(int memberNo) {
-		ArrayList<Product> list = dao.selectMyprojectDetail(memberNo);
+	public ArrayList<Product> selectMyprojectDetail(int productNo) {
+		ArrayList<Product> list = dao.selectMyprojectDetail(productNo);
 		
 		return list;
 	}

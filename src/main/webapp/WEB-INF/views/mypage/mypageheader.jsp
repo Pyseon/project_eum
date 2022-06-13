@@ -27,6 +27,7 @@
 				<c:if test="${sessionScope.member.grade ne 1 }">
 					<div class="menu-detail"><a href="/appExpertList.do?memberNo=${sessionScope.member.memberNo}">전문가 신청내역</a></div>
 				</c:if>
+				
 
 				
 				<c:if test="${sessionScope.member.grade eq 1}">

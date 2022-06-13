@@ -62,6 +62,33 @@ public class RequestDao {
 		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
 		return expert;
 	}
+	
+	
+	public ArrayList<RequestAsk>selectReqAskExpList(int reqNo){
+		List list = sqlSession.selectList("request.selectReqAskExpList", reqNo);
+		return (ArrayList<RequestAsk>)list;
+	}
+
+	public int updateSelectExpert(int reqNo) {
+		int result = sqlSession.update("request.updateSelectExpert", reqNo);
+		return result;
+	}
+
+	public int deleteUnselectExpert(HashMap<String, Object> map) {
+		int result = sqlSession.delete("request.deleteUnselectExpert", map);
+		return result;
+	}
+
+	public int selectExpert(int reqNo) {
+		int selectExpert = sqlSession.selectOne("request.selectExpert", reqNo);
+		return selectExpert;
+	}
+
+	public int selectExpertIs(int reqNo) {
+		int result = sqlSession.selectOne("request.selectExpertIs", reqNo);
+		return result;
+	}
+	
 
 	
 	

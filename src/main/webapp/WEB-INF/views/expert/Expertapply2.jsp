@@ -12,7 +12,95 @@
 		font-size: 15px;
 		margin-bottom:3%;
 	}
+.flex-wrap{
+	width: 60%;
+	margin: 0 auto;
+}
+	.check-find{
+		display: inline;
+	}
+	.check-find>input{
+		display: inline;
+		float: left;
+		width: 70%;
+		margin-bottom: 5px;
+	}
+	.check-find>div>button{
+		display: inline;
+		float: right;
+		width: 27%;
+	}
+	#button-prr{
+		height: 50px;
+	}		
+	#button-pr{
+		height: 50px;
+	}
+	.genderbox>button{
+		width: 48%;
+		margin-left: 1%;
+		margin-right: 1%;
+		height: 50px;
+	}
+	.birthbox>.input-form{
+		display:inline;
+		width: 32%;
+		font-size: 15px;
+		margin-bottom:3%;
+	}
+	[name=month]{
+		height: 50px;
+	}
+	.checkedbox{
+		margin-top: 5%;
+		margin-bottom: 5%;
+		padding: 10px;
+		border: 1px solid #000;
+	}
 	
+	.checkbox-s{
+		font-size: 15px;
+		
+	}
+	.checkbox-s>div{
+		height: 20px;
+		position: relative;
+		vertical-align: middle;
+		margin: 5px;
+		margin-left: 3%;
+	}
+	.checkox-s>div>label{
+		margin-left: 5px;
+	}
+	.navi-birth{
+		font-size: 15px;
+		
+	}
+	.correct{
+	    color : green;
+	}
+	.incorrect{
+	    color : red;
+	}	
+	.mail-input-false{
+		background-color:#ebebe4;
+	}
+	.mail-input-ture{
+		background-color:#white;
+	}
+	.check-hidden{
+		display: none;
+	}
+	#authMsg{
+		margin-top: 30px;
+	}
+	.bc8{
+		background-color: white;
+		color: #3865f2;
+		font-family:fs-bold !important;
+		border: 3px solid #3865f2 !important;
+	}
+
 </style>
 </head>
 
@@ -21,75 +109,85 @@
 
 		<div class="page-content">
 		<div class="flex-wrap">
-		<form action="/Expertapply3.do" method="post">
+		<form action="/Expertapply3.do" method="post" enctype="multipart/form-data" >
+		<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo }">
+		<input type="hidden" name="expertContent" value="전문가입니다.">
 		<br>
 				<label><h2>상담분야*</h2></label>
 				<div class="consultbox">
-				
-				<select class="input-form" name='expertCategory'>
-				 	<option value='law' selected>법률</option>
-					<option value='law' selected>비지니스</option>
-					<option value='law' selected>심리/헬스</option>
-					<option value='law' selected>학습</option>
-					<option value='law' selected>금융</option>
-					<option value='law' selected>라이프</option>
-					<option value='law' selected>취미</option>
-					<option value='law' selected>어학</option>
-					<option value='law' selected>레저</option>
-					<option value='law' selected>IT/테크</option>
-					<option value='law' selected>자기계발</option>
-					  
+
+					<select class="input-form" name='expertCategory' required>
+						<option value="">카테고리 선택</option>
+						<option value="법률">법률</option>
+						<option value="비즈니스">비즈니스</option>
+						<option value="심리/헬스">심리/헬스</option>
+						<option value="학습">학습</option>
+						<option value="금융">금융</option>
+						<option value="라이프">라이프</option>
+						<option value="취미">취미</option>
+						<option value="어학">어학</option>
+						<option value="레저">레저</option>
+						<option value="IT/테크">IT/테크</option>
+						<option value="자기계발">자기계발</option>
+
+					</select>
+				</div><br>
+			
+			<h2>간단한 전문가 자기소개 (20자이내)</h2> 
+			<input type="text" class="input-form"
+					name="expertIntro" placeholder="20자 이내 한글로 적어주세요" maxlength=20  required><br>
+
+
+		<h2>자격증 정보</h2>
+		<label>직업명</label>
+		<input type="text" class="input-form"  name="jobName" placeholder="직업명" required><br>
+		<label>전문가 실명</label>
+		<input type="text" class="input-form"  name="expertName" placeholder="실명을 입력해주세요" required><br>
+		<label>자격증 이름</label>
+		<input type="text" class="input-form"  name="credential" placeholder="자격증명" required><br>
+		<label>발급기관</label><br>
+		<input type="text" class="input-form"  name="issuingAuthority" placeholder="발급기관" required><br>
+		
+		
+		<div class="birthbox">
+				<div>발급일자</div>
+				<input type="hidden" name="acquistionDate" id="birth" value="" required>
+				<input  class="input-form inputplus changedata" type="text" id="year" name="birth-s" placeholder="년(4자)" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required>
+				<select class="input-form inputplus changedata" id="month" name="birth-s" required>
+					  <option value='' selected >월</option>
 				</select>
-			</div><br>
-		<label><h2>태그*</h2></label><br>
-		<textarea class="input-form" name="expertTag" placeholder="#태그"></textarea><br>
+				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" placeholder="일" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+		</div>	
+		<div class="navi-birth fs-light fc-9" id="birth-test"></div>
 		
-		
-		<label><h2>자격*</h2></label>
-				<p>
-					선택분야의 가입 자격입니다.
-					아래의 신청 자격을 확인 후 해당되는 자격정보로 입력해 주세요
-				</p>
-		
+		<!-- 
+				<div class="img-box-wrap" style="margin: 30px 10px;">
+					<div class="commFileBox preview-image" style="margin-right: 10px;">
+						<p class="comm-write-p" style="margin-bottom: 5px;">자격증 사본<p>
+						<label for="input-file">파일 선택</label> 
+						<input type="file"
+							name="file" class="commFile upload-hidden" id="input-file" required>
+					</div>
+					<div class="input-img-box" style="width: 80px; height: 80px;"></div>
+
+				</div>
+		-->
+		<label>자격증사본</label>
+		<input type="file" name="file" class="commFile upload-hidden" id="input-file" required>
 		<br>
-		<textarea class="input-form" placeholder="반려견 지도사(구.훈련사) - 한국애견협회&#13;&#10;훈련사 -한국애견연맹&#13;&#10;양서파충류 관리사 - 한국양서파충류협회" readonly></textarea><br>
 		
-		
-		<label><h2>자격증 사본*</h2></label><br>
-		<br>
-		<label for="input-file">파일 선택</label> <input type="file"
-									name="file" class="commFile upload-hidden"
-									id="input-file">
-		
-		<label><h2>발급기관 / 취득일시*</h2></label><br>
-		<input type="hidden" class="input-form"  name="issuingAuthority" placeholder="발급기관"><br>
-		
-		<input type="text" class="input-form"  name="acquistionDate" placeholder="취득일시"><br><br>
-		<br>
-		<label>직업명*</label>
-		<input type="text" class="input-form"  name="jobName" placeholder="직업명"><br>
-		
-		<label>고객센터번호*</label>
-		<input type="text" class="input-form"  name="expertPhone" placeholder="070-0000-0000"><br>		
+		<label>고객센터 연락처</label>
+		<input type="text" class="input-form"  name="expertPhone" id="expertPhone" placeholder="(-)하이픈을 넣어주세요" maxlength=14 required><br>
 		<div class="fs-light" id="expertPhone-test"></div><br>
 			
-		<label>고객센터 이메일*</label>
-		<input type="text" class="input-form"  name="expertEmail" placeholder="asdf@naver.com"><br>
-		<button class="btn bc1 bs1" type="button" id="button-pr">인증하기</button>
-		<label>이름*</label>
-		<input type="text" class="input-form"  name="expertName" placeholder="박코딩"><br>
-		<div class="fs-light" id="expertName-test"></div><br>
-		<label>상세설명*</label>
-		<input type="text" class="input-form"  name="expertContent" placeholder="상세설명"><br>
+		<label>고객센터 이메일</label>
+		<input type="text" class="input-form"  name="expertEmail" id="expertEmail" placeholder="example@naver.com"  maxlength=80 required><br>
+		<div class="fs-light" id="expertEmail-test"></div><br>
 		
-		<label>자기소개*</label>
-		<input type="text" class="input-form"  name="expertPr" placeholder="자기소개"><br>
 		
-		<label>자격증명*</label>
-		<input type="text" class="input-form"  name="credential" placeholder="자격증명"><br>
-		<input type="hidden" name = "memberNo" value="${memberNo }" >
+
 		<button class="btn bc1 bs5" onclick="location.href='/'">돌아가기</button>
-		<button class="btn bc1 bs5" type="submit">제출완료</button>
+		<button class="btn bc1 bs5" type="submit" id="regExpert">제출완료</button>
 		
 		</form>
 	</div>
@@ -100,278 +198,319 @@
 
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 	
-<script src="https://kit.fontawesome.com/2fade9eaba.js" crossorigin="anonymous">
+<script>
 $(function(){
-	$('#man').click();
-})
-
-
-//1.button 활성화
-//2.submit 유효성
-let inputCheck = new Array(7).fill(true);
-let checkAll = true;
-console.log(checkAll);
-/*
-$("#joinButton").click(function() {
-	console.log(checkAll); 
-	console.log(inputCheck); 
-	for(let i = 0; i < inputCheck.length; i++){
-		if(inputCheck[i] == false){
-			checkAll = false;
-		}
-	}
-	if(checkAll){
-		const memberId = $("#memberId").val();
-		const memberNick = $("#memberNick").val();
-		const memberPw = $("#memberPw").val();
-		const memberPhone = $("#memberPhone").val();
-		const memberPoint = 0;
-		const memberReportCount = 0;
-		const gender = $("#gender").val();
-		const birth = $("#birth").val();
-		const agreement = $("#agreement").val();
-		const grade = 2;
-		const memberPictureName = null;
-		const memberPicturePath = null;
-		$.ajax({
-			url: "/join.do",
-			type: "post",
-			data: {memberId: memberId, 
-				memberNick: memberNick,
-				memberPw: memberPw, 
-				memberPhone: memberPhone,
-				memberPoint:memberPoint,
-				memberReportCount:memberReportCount, 
-				gender:gender, 
-				birth:birth, 
-				agreement:agreement,
-				grade:grade,
-				memberPictureName:memberPictureName,
-				memberPicturePath:memberPicturePath},
-			success: function(data){
-				if(data == "1"){
-					const title = "회원가입 완료되었습니다.";
-					const icon = "success";
-					const msgTime = 1500;
-					toastShow(title,icon, msgTime);
-				}else if(data == "0"){
-					const title = "회원가입을 실패했습니다.";
-					const icon = "error";
-					const msgTime = 1500;
-					toastShow(title,icon, msgTime);
-				}	
-			},
-			error : function(){
-				   console.log("서버요청실패");
-			}
-		});
-					
-	}else{
-		const title = "입력값을 확인해주세요";
-		const icon = "warning";
-		const msgTime = 1500;
-		toastShow(title,icon, msgTime);
-			
-	}
-});
-*/
-
-function formCheck(){
-	checkAll = true;
-	console.log("인풋체크> "+inputCheck);
-	for(let i = 0; i < inputCheck.length; i++){
-		if(inputCheck[i] == false){
-			checkAll = false;
-		}
-	}
-	console.log("체크올> "+checkAll);
-	if(checkAll){
-		$("#joinButton").attr("disabled",false);
-	}else{
-		$("#joinButton").attr("disabled",true);
-	}
-}
-//email인증
-var code="";
-
-$("#button-pr").click(function(){
-	$("#authMsg").text("");
-	var checkResult = $("#authMsg");
-	var email = $("#expertEmail").val();
-	var regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
-	if(!regExp.test(email)){
-		//이메일 유효성 검사
-		checkResult.text("이메일을 다시확인해주세요");
-		checkResult.css("color","#ff2e63");
-	}else{
-		//중복 이메일 확인
-	   $.ajax({
-		   url : "/emailCheck.do?expertEmail=" + email,
-		   type:"POST",
-		   data:{},
-		   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-		   success: function(data){
-			   
-			   if(data == "1"){
-				    checkResult.text("이미 사용중인 이메일입니다.");
-				    checkResult.css("color","#ff2e63");
-				    
-				}else if(data == "0"){
-					//인증번호 발송
-					var checkBox = $("#numberId");      	// 인증번호 입력란
-				    var numBox = $("#numberId");  		// 인증번호 입력란 박스
-				    const title = "인증번호를 발송중입니다.";
-					const icon = "info";
-					const msgTime = 5500;
-					toastShow(title,icon,msgTime);
-					$.ajax({
-						type:"GET",
-						url:"/mailCheck.do?email=" + email,
-						success:function(data){
-							
-							//console.log("data : " + data);
-							checkBox.attr("disabled",false);
-							numBox.addClass("mail-input-false");
-							numBox.removeClass("mail-input-ture");
-							$(".check-hidden").removeClass("check-hidden");
-							code = data;
-						    const title = "인증번호를 발송했습니다!.";
-							const icon = "success";
-							const msgTime = 2000;
-							toastShow(title,icon,msgTime);
-						}		
-					});
-					
-				}
-		   },
-		   error : function(){
-			   console.log("서버요청실패");
-		   }
-		});
-		
-	}
-});
+	let inputCheck = new Array(3).fill(true);
+	let checkAll = true;
 	
-//인증번호 검사
-$("#button-prr").click(function(){
-    var inputCode = $("#numberId").val();      		// 입력코드    
-    var checkResult = $("#authMsg");   	 			// 비교 결과 
-    if(inputCode == code){                          // 일치할 경우
-        checkResult.html("인증번호가 일치합니다.");
-        checkResult.attr("class", "correct");
-        $("#memberId").attr("readonly","readonly");
-      	$(".check-find").addClass("check-hidden");
-      	inputCheck[2] = true;
-      	formCheck();
-    } else {                                        // 일치하지 않을 경우
-        checkResult.html("인증번호를 다시 확인해주세요.");
-        checkResult.attr("class", "incorrect");
-        inputCheck[2] = false;
-        formCheck();
-    }
-});
+	function formCheck(){
+		checkAll = true;
+		console.log("인풋체크> "+inputCheck);
+		for(let i = 0; i < inputCheck.length; i++){
+			if(inputCheck[i] == false){
+				checkAll = false;
+			}
+		}
+		console.log("체크올> "+checkAll);
+		if(checkAll){
+			$("#regExpert").attr("disabled",false);
+		}else{
+			$("#regExpert").attr("disabled",true);
+		}
+	}
+	
 
 
-//연락처 유효성 검사
-$("#expertPhone").change(function(){
-		$("#expertPhone-test").text("");			
-		const value = $(this).val();
-		let regExp;
-		regExp = /^(01\d{1})-\d{3,4}-\d{4}$/;
-		if(!regExp.test(value)){
-			$("#expertPhone-test").text(" 010-0000-0000 형식으로 입력해주세요.");
-			$("#expertPhone-test").css("color","#ff2e63");
+	
+  //날짜 입력 합쳐주는 함수
+	$(".changedata").on("keydown",function(){
+		    let year = $("#year").val();
+		    let month = $("#month").val();
+		    let day = $("#day").val();
+		    
+		    if(month < 10){
+		    	newMonth = "0"+ month;
+		    }else{
+		    	newMonth = month;
+		    }
+		    if(day < 10){
+		    	newDay = "0"+ day;
+		    }else{
+		    	newDay = day;
+		    }
+		    
+		    console.log(month);
+		    let birth = (year+"-"+newMonth+"-"+newDay);
+		    $("#birth").val(birth);
+		    
+		   
+		  //year 유효성검사
+			if(year > 2022){
+				$("#birth-test").text("날짜를 확인해주세요");
+				$("#birth-test").css("color","#ff2e63");
+				inputCheck[0] = false;
+				formCheck();
+			
+			}else if(year < 1922){
+				$("#birth-test").text("날짜를 확인해주세요");
+				$("#birth-test").css("color","#ff2e63");
+				inputCheck[0] = false;
+				formCheck();
+			
+			}else if(year!=""&&(year>1923||year<2022)){
+				//day 유효성 검사
+				if(month == 2 ){
+					if(day>29||day<0||!day){
+						$("#birth-test").text("날짜를 확인해주세요");
+						$("#birth-test").css("color","#ff2e63");
+						inputCheck[0] = false;
+						formCheck();
+						
+					}else{
+						$("#birth-test").text("완료");
+						$("#birth-test").css("color","#3865f2");
+						inputCheck[0] = true;
+						formCheck();
+						
+					}
+				}else if(month==4||month==6||month==9||month==11){
+					if(day>30||day<0||!day){
+						$("#birth-test").text("날짜를 확인해주세요");
+						$("#birth-test").css("color","#ff2e63");	
+						inputCheck[0] = false;
+						formCheck();
+						
+					}else{
+						$("#birth-test").text("완료");
+						$("#birth-test").css("color","#3865f2");
+						inputCheck[0] = true;
+						formCheck();
+					}
+				}else if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
+					if(day>31||day<0||!day){
+						$("#birth-test").text("날짜를 확인해주세요");
+						$("#birth-test").css("color","#ff2e63");	
+						inputCheck[0] = false;
+						formCheck();
+						
+					}else {
+						$("#birth-test").text("완료");
+						$("#birth-test").css("color","#3865f2");	
+						inputCheck[0] = true;
+						formCheck();
+					}
+				}
+			}else{
+				$("#birth-test").text("날짜를 확인해주세요");
+				$("#birth-test").css("color","#ff2e63");	
+				inputCheck[0] = false;
+				formCheck();
+				
+			}
+			
+		});
+
+	
+	$(".changedata").on("keyup",function(){
+	    let year = $("#year").val();
+	    let month = $("#month").val();
+	    let day = $("#day").val();
+	    
+	    if(month < 10){
+	    	newMonth = "0"+ month;
+	    }else{
+	    	newMonth = month;
+	    }
+	    if(day < 10){
+	    	newDay = "0"+ day;
+	    }else{
+	    	newDay = day;
+	    }
+	    
+	    console.log(month);
+	    let birth = (year+"-"+newMonth+"-"+newDay);
+	    $("#birth").val(birth);
+	    
+	   
+	  //year 유효성검사
+		if(year > 2022){
+			$("#birth-test").text("날짜를 확인해주세요");
+			$("#birth-test").css("color","#ff2e63");
 			inputCheck[0] = false;
 			formCheck();
-		}else{
-			var expertPhone = $("#expertPhone").val();
-			//연락처 중복 검사
-			$.ajax({
-				   url : "/phoneCheck.do",
-				   data: {expertPhone:expertPhone},
-				   success: function(data){
-					   if(data == "1"){
-							$("#expertPhone-test").text("가입된 번호입니다.");
-							$("#expertPhone-test").css("color","#ff2e63");
-							inputCheck[0] = false;
-							formCheck();
-						}else if(data == "0"){
-							$("#expertPhone-test").text("사용가능한 번호입니다.");
-							$("#expertPhone-test").css("color","#00adb5");
-							inputCheck[0] = true;
-							formCheck();
-						}
-				   },
-				   error : function(){
-					   console.log("서버요청실패");
-				   }
-				});
-			inputCheck[0] = true;
+		
+		}else if(year < 1922){
+			$("#birth-test").text("날짜를 확인해주세요");
+			$("#birth-test").css("color","#ff2e63");
+			inputCheck[0] = false;
 			formCheck();
-		}
-	});
-
-$("#expertName").change(function(){
-	$("#expertName-test").text("");
-	   var expertName = $(this).val();
-	   let regExp1;
-		let regExp2;
-		regExp1 = /^[가-힣]{2,8}$/;
-		regExp2 = /^[a-zA-Z]{4,10}$/;
-		if(!regExp1.test(expertName) && !regExp2.test(expertName)){
-			 const title = "2~8글자 한글 또는 4~10글자 영어대소문자만 입력가능합니다.";
-				const icon = "error";
-				const msgTime = 1500;
-				toastShow(title,icon,msgTime);
-				inputCheck[1] = false;
-				formCheck();
+		
+		}else if(year!=""&&(year>1923||year<2022)){
+			//day 유효성 검사
+			if(month == 2 ){
+				if(day>29||day<0||!day){
+					$("#birth-test").text("날짜를 확인해주세요");
+					$("#birth-test").css("color","#ff2e63");
+					inputCheck[0] = false;
+					formCheck();
+					
+				}else{
+					$("#birth-test").text("완료");
+					$("#birth-test").css("color","#3865f2");
+					inputCheck[0] = true;
+					formCheck();
+					
+				}
+			}else if(month==4||month==6||month==9||month==11){
+				if(day>30||day<0||!day){
+					$("#birth-test").text("날짜를 확인해주세요");
+					$("#birth-test").css("color","#ff2e63");	
+					inputCheck[0] = false;
+					formCheck();
+					
+				}else{
+					$("#birth-test").text("완료");
+					$("#birth-test").css("color","#3865f2");
+					inputCheck[0] = true;
+					formCheck();
+				}
+			}else if(month==1||month==3||month==5||month==7||month==8||month==10||month==12){
+				if(day>31||day<0||!day){
+					$("#birth-test").text("날짜를 확인해주세요");
+					$("#birth-test").css("color","#ff2e63");	
+					inputCheck[0] = false;
+					formCheck();
+					
+				}else {
+					$("#birth-test").text("완료");
+					$("#birth-test").css("color","#3865f2");	
+					inputCheck[0] = true;
+					formCheck();
+				}
+			}
 		}else{
-			   $.ajax({
-				   url : "/nickCheck.do?expertName=" + expertName,
-				   type:"POST",
-				   data:{},
-				   contentType: "application/x-www-form-urlencoded;charset=UTF-8",
-				   success: function(data){
-					   if(data == "1"){
-							$("#expertName-test").text("이미 사용중인 닉네임입니다.");
-							$("#expertName-test").css("color","#ff2e63");
-							inputCheck[1] = false;
-							formCheck();
-						}else if(data == "0"){
-							$("#expertName-test").text("사용가능한 닉네임입니다.");
-							$("#expertName-test").css("color","#00adb5");
-							inputCheck[1] = true;
-							formCheck();
-						}
-				   },
-				   error : function(){
-					   console.log("서버요청실패");
-				   }
-				});
+			$("#birth-test").text("날짜를 확인해주세요");
+			$("#birth-test").css("color","#ff2e63");	
+			inputCheck[0] = false;
+			formCheck();
+			
 		}
-	   
-	   
-	   
+		
 	});
-function toastShow(title, icon, msgTime){
-	const Toast = Swal.mixin({
-	    toast: true,
-	    position: 'center-center',
-	    showConfirmButton: false,
-	    timer: msgTime,
-	    timerProgressBar: true,
-	    didOpen: (toast) => {
-	     // toast.addEventListener('mouseenter', Swal.stopTimer)
-	      toast.addEventListener('mouseleave', Swal.resumeTimer)
+
+//month 옵션
+$(function () {
+        for (var i = 1; i < 13; i++) {
+            $('#month').append('<option value="' + i + '">' + i + '</option>');
+        }  
+    }
+);
+	
+
+$("#expertPhone").on("keyup",function(){
+    $("#expertPhone-test").text("");
+    const value = $(this).val();
+    let regExp;
+    regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+    if(!regExp.test(value)){
+        $("#expertPhone-test").text(" 연락처를 확인하세요");
+        $("#expertPhone-test").css("color","#ff2e63");
+        inputCheck[1] = false;
+		formCheck();
+    }else{
+        var memberPhone = $("#expertPhone").val();
+        inputCheck[1] = true;
+		formCheck();
+
+    }
+});
+	
+	
+	
+	
+	$("#expertPhone").on("keydown",function(){
+	    $("#expertPhone-test").text("");
+	    const value = $(this).val();
+	    let regExp;
+	    regExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
+	    if(!regExp.test(value)){
+	        $("#expertPhone-test").text(" 연락처를 확인하세요");
+	        $("#expertPhone-test").css("color","#ff2e63");
+	        inputCheck[1] = false;
+			formCheck();
+	    }else{
+	        var memberPhone = $("#expertPhone").val();
+	        inputCheck[1] = true;
+			formCheck();
+
 	    }
-	 	})
+	});
+	
+	$("#expertEmail").on("keydown",function(){
+	    $("#expertEmail-test").text("");
+	    const value = $(this).val();
+	    var regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	    if(!regExp.test(value)){
+	        $("#expertEmail-test").text("이메일을 확인하세요");
+	        $("#expertEmail-test").css("color","#ff2e63");
+	        inputCheck[2] = false;
+			formCheck();
+	    }else{
+	        var memberPhone = $("#expertPhone").val();
+	        inputCheck[2] = true;
+			formCheck();
 
-  	Toast.fire({
-    title: title,
-    icon: icon
-  })
+	    }
+	});
+	$("#expertEmail").on("keyup",function(){
+	    $("#expertEmail-test").text("");
+	    const value = $(this).val();
+	    var regExp = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
+	    if(!regExp.test(value)){
+	        $("#expertEmail-test").text("이메일을 확인하세요");
+	        $("#expertEmail-test").css("color","#ff2e63");
+	        inputCheck[2] = false;
+			formCheck();
+	    }else{
+	        var memberPhone = $("#expertPhone").val();
+	        inputCheck[2] = true;
+			formCheck();
 
-}	
+	    }
+	});
+
+});
+
+
+// 이미지 추가 함수 시작
+var imgTarget = $('.preview-image .upload-hidden');
+
+imgTarget.on('change', function(){
+  var parent = $(this).parent().next();
+  parent.children('.upload-display').remove();
+
+    if(window.FileReader){
+        //image 파일만
+        if (!$(this)[0].files[0].type.match(/image\//)) return;
+        
+        var reader = new FileReader();
+        reader.onload = function(e){
+            var src = e.target.result;
+            parent.append('<div class="upload-display" style="display:inline-block; border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img src="'+src+'" class="upload-thumb" style="width: 120px; height:120px;"></div></div>');
+        }
+        reader.readAsDataURL($(this)[0].files[0]);
+    }
+
+    else {
+        $(this)[0].select();
+        $(this)[0].blur();
+        var imgSrc = document.selection.createRange().text;
+        parent.prepend('<div class="upload-display" style="border: 1px solid #eee; padding: 10px;"><div class="upload-thumb-wrap"><img class="upload-thumb" style="width: 120px; height:120px;"></div></div>');
+
+        var img = $(this).siblings('.upload-display').find('img');
+        img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""+imgSrc+"\")";        
+    }
+});// 이미지 추가 함수 종료
 
 </script>	
 </body>

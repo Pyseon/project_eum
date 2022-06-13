@@ -381,5 +381,15 @@ public class ManagerDao {
 		RefuseExpert rexp = sqlSession.selectOne("manager.selectMyRefuseExpert", expertNo);
 		return rexp;
 	}
+
+	public int deleteBeforeExpert(int memberNo) {
+		int result = sqlSession.delete("manager.deleteBeforeExpert", memberNo);
+		return result;
+	}
+
+	public int selectMemberNo(int expertNo) {
+		int memberNo = sqlSession.selectOne("manager.selectMemberNo", expertNo);
+		return memberNo;
+	}
 	
 }

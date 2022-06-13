@@ -28,13 +28,13 @@ public class MemberDao {
 	public Member selectOneMember(Member m) {
 		// TODO Auto-generated method stub
 		Member member = sqlSession.selectOne("member.selectOneMember", m);
-		System.out.println(member);
+		//System.out.println(member);
 		return member;
 	}
 	//재민 내정보수정
 	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
-		
+		System.out.println(m.toString());
 		int result = sqlSession.update("member.updateMember",m);
 		return result;
 	}
@@ -120,13 +120,12 @@ public class MemberDao {
 		
 		return (ArrayList<ProductAndExpert>)list;
 	}
-	public ArrayList<Product> selectMyprojectDetail(int memberNo) {
-		List list = sqlSession.selectList("member.selectMyprojectDetail",memberNo); 
-		System.out.println(list);
+	public ArrayList<Product> selectMyprojectDetail(int productNo) {
+		List list = sqlSession.selectList("member.selectMyprojectDetail",productNo); 
+		
 		return (ArrayList<Product>)list;
 	}
 	public int insertExpert(Expert ex) {
-		
 		int result = sqlSession.insert("member.insertexpert",ex);
 		return result;
 	}

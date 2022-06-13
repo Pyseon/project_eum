@@ -35,8 +35,11 @@
  	 <select id ="selectMyproject" parameterType="productAndExpert" resultType="pro">
  		
 		select 
+		
 		expert_tbl.member_no as memberNo,
 		expert_tbl.expert_no as expertNo,
+		expert_tbl.expert_name as expertName,
+		
 		product_tbl.product_no as productNo,
 		product_tbl.product_title as productTitle,
 		product_tbl.product_ImgPath as productImgPath,
@@ -52,6 +55,10 @@
 	<!-- 재민 -->
 	<update id="updateMember" parameterType="m" >
 	update member_tbl set 
+	
+		member_picturename =#{memberPictureName},
+ 		member_picturepath =#{memberPicturePath},
+		
 		member_nick=#{memberNick}, 
 		member_pw=#{memberPw},
 		member_Id=#{memberId}, 
@@ -185,7 +192,7 @@
 			review_tbl.review_title as reviewTitle,
 			review_tbl.review_content as reviewContent,
 			review_tbl.review_date as reviewDate,
-			product_tbl.expert_no as exportNo
+			product_tbl.expert_no as expertNo
 			from review_tbl
 			join product_tbl on (review_tbl.product_no = product_tbl.product_no)
 			where member_no=#{memberNo}
@@ -344,6 +351,7 @@
 		select 
 		expert_tbl.member_no as memberNo,
 		expert_tbl.expert_no as expertNo,
+		expert_tbl.expert_name as expertName,
 		product_tbl.product_no as productNo,
 		product_tbl.product_Category as productCategory,
 		product_tbl.product_Intro as productIntro,

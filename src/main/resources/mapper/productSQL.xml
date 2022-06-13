@@ -238,8 +238,8 @@
   			)
   </insert>
   <insert id="ideamarketWrite" parameterType="pro">
-  		insert all 
-  		into product_tbl values(
+	insert into
+  			product_tbl values(
   			product_seq.nextval,
   			#{expertNo},
   			3,
@@ -254,15 +254,12 @@
   			#{productAddr},
   			#{sale},
   			#{productOption},
-  			#{productImgPath},
-  			#{productImgname}
-  			)
-  			into ideamarket_tbl values(
-  			ideamarket_seq.nextval,
-  			null,
+  			0,
+  			0,
+  			market_seq.nextval,
   			#{marketType},
-  			null,
-  			#{marketPath}
+  			#{marketPath},
+  			#{marketName}
   			)
   
   </insert>
@@ -309,9 +306,8 @@
 		insert into ideamarket_tbl values(
 		ideamarket_seq.nextval,
 		
-		)
 		
-	
+		)
 	</insert>
 	<!-- 윤지 -->
 	<select id="selectAllReview" parameterType="map" resultType="review">
@@ -609,6 +605,58 @@
 			product_imgpath as productImgPath,
 			product_imgename as productImgname				
 		from product_tbl where product_no = #{productNo}
+	</select>
+	<!-- 대권 payment -->
+	<insert id="paymentInsert" parameterType="pay" useGeneratedKeys="false">
+		insert into payment_tbl values
+		(
+		payment_seq.nextval,
+		#{memberNo},
+		#{productNo},
+		#{payState},
+		#{payMethod},
+		to_char(sysdate,'yy-mm-dd'),
+		#{payment},
+		#{payUsepoint},
+		#{payAddpoint}
+		)
+		<selectKey keyProperty="payNo" resultType="int" order="AFTER">
+			select payment_seq.currval from dual
+		</selectKey>
+	</insert>
+		<!-- 대권 counsel -->
+	<insert id="counselInsert" parameterType="counsel">
+		insert into counsel_tbl values
+		(
+		counsel_seq.nextval,
+		#{memberNo},
+		(select member_no from expert_tbl where expert_no=#{expertNo}),
+		#{payNo},
+		#{limitTime},
+		#{startTime}
+		<!--#{startTime}-->
+		)
+	</insert>
+	<select id="purchaseSuccess" parameterType="map" resultType="map">
+	select  
+		pay_no as payNo,
+		member_no as memberNo,
+		product_no as productNo,
+		pay_state as payState,
+		pay_method as payMethod,
+		pay_date as payDate,
+		payment as payment,
+		pay_usepoint as payUsepoint,
+		pay_addpoint as payAddpoint
+		from payment_tbl 
+	where 
+	pay_no=(select max(pay_no) from payment_tbl where member_no=#{memberNo} and product_no=#{productNo})
+	</select>	
+	<select id="purchaseSuccess2" parameterType="map" resultType="map">
+	select * from 
+	product_tbl
+	where 
+	product_no=#{productNo}
 	</select>
 </mapper>
 	

@@ -67,11 +67,13 @@ public class ProductService {
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
-			
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage=1&selPro="+selPro+"'>";
 			pageNavi += "<li>";
 			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
+			
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
@@ -244,8 +246,9 @@ public class ProductService {
 	
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
-		int result = productDao.expertWrite(pro);
 		Product product=setToken(pro);
+		int result = productDao.expertWrite(product);
+		
 		return result;
 	}
 	
@@ -659,7 +662,28 @@ public class ProductService {
 		
 		return productDao.insertIdeamarket(map);
 	}
-
+	//결제페이지등록
+	public int paymentInsert(Payment p) {
+		
+		return productDao.paymentInsert(p);
+	}
+	//결제상담페이지등록
+	public int counselInsert(Counsel c) {
+		// TODO Auto-generated method stub
+		return productDao.counselInsert(c);
+	}
+	//결제성공출력
+	public HashMap<String, Object> purchaseSuccess(int memberNo, int productNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo",memberNo);
+		map.put("productNo",productNo);
+		HashMap<String, Object> pay = productDao.purchaseSuccess(map);
+		HashMap<String, Object> pro = productDao.purchaseSuccess2(map);
+		map.put("payment",pay);
+		map.put("product",pro);
+		//System.out.println("성공2"+map);
+		return map;
+	}
 
 
 }

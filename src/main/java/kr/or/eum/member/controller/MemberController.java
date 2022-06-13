@@ -63,7 +63,7 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
-		System.out.println(member);
+		//System.out.println(member);
 		if(member.getGrade() == 3) {
 			return "member/blackListMsg";
 		}else if(member != null && member.getGrade() != 3 ){
@@ -103,9 +103,69 @@ public class MemberController {
 		return "mypage/Mypage";
 	}
 	//재민 내정보수정
-	@RequestMapping(value="/updateMember.do")
-	public String updateMember(Member m,HttpSession session) {
+	@RequestMapping(value="/updateMember.do",method = RequestMethod.POST)
+	public String updateMember(Member m,HttpSession session, MultipartFile file, HttpServletRequest request) {
 		
+		String filename = file.getOriginalFilename();
+		if(filename == "") {
+			System.out.println("등록된이미지 없음!");
+			m.setMemberPictureName("default-img.png");
+			m.setMemberPicturePath("default-img.png");
+		}else {
+			String savePath 
+			= request.getSession().getServletContext().getRealPath("/img/member/");
+			
+				//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
+				//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
+				//사용자가 업로드한 파일 이름 
+				//String filename = file.getOriginalFilename();
+				//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
+				//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
+				//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
+				//매개변수가 하나면 매개변수부터 잘라서 반환
+				String onlyFilename = filename.substring(0, filename.lastIndexOf("."));//test
+				String extension = filename.substring(filename.lastIndexOf("."));//.txt
+				//실제 업로드할 파일명을 저장할 변수
+				String filepath = null;
+				//파일명 중복시 뒤에 붙일 숫자 변수
+				int count = 0;
+				while(true) {
+					if(count == 0) {
+						//반복 첫번째 회차에서는 원본파일명을 그대로 적용
+						filepath = onlyFilename + extension; //test.txt
+					}
+					File checkFile = new File(savePath+filepath);
+					if(!checkFile.exists()) { //경로에 파일이 존재하지않으면 (exists() method 사용)
+						break; //겹치지않으면 >> while 문 종료
+					}else {
+						filepath = onlyFilename + "_" + count + extension;
+					}
+					count++; //존재하면 카운트를 ++ 하고 반복문 다시 실행
+				}
+				//파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
+				//해당파일 업로드 작업
+				try {
+					//중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
+					FileOutputStream fos = new FileOutputStream(new File(savePath+filepath));
+					//업로드 속도증가를 위한 보조스트림 생성
+					BufferedOutputStream bos = new BufferedOutputStream(fos);
+					//파일 업로드
+					byte[] bytes = file.getBytes();
+					bos.write(bytes);
+					bos.close();
+					
+				} catch (FileNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+		
+				m.setMemberPictureName(filename);
+				m.setMemberPicturePath(filepath);
+					
+		}
 		
 		int result = service.updateMember(m);
 	
@@ -279,15 +339,67 @@ public class MemberController {
 	}
 	//재민 전문가 신청페이지3로 이동
 	@RequestMapping(value="/Expertapply3.do", method = RequestMethod.POST)
-	public String Expertapply3(Expert ex) {
+	public String Expertapply3(Expert ex, MultipartFile file, HttpServletRequest request) {
+		System.out.println("전문가등록!!"+ex);
+		
+		String filename = file.getOriginalFilename();
+			String savePath = request.getSession().getServletContext().getRealPath("/img/expert/");
+
+			// 파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
+			// 파일명 중복처리 (뒤에 넘버를 붙인다든가..)
+			// 사용자가 업로드한 파일 이름
+			// String filename = file.getOriginalFilename();
+			// test.txt -> text_1.text / text_1.txt->text_2.txt 중복처리 로직
+			// 업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
+			// subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
+			// 매개변수가 하나면 매개변수부터 잘라서 반환
+			String onlyFilename = filename.substring(0, filename.lastIndexOf("."));// test
+			String extension = filename.substring(filename.lastIndexOf("."));// .txt
+			// 실제 업로드할 파일명을 저장할 변수
+			String filepath = null;
+			// 파일명 중복시 뒤에 붙일 숫자 변수
+			int count = 0;
+			while (true) {
+				if (count == 0) {
+					// 반복 첫번째 회차에서는 원본파일명을 그대로 적용
+					filepath = onlyFilename + extension; // test.txt
+				}
+				File checkFile = new File(savePath + filepath);
+				if (!checkFile.exists()) { // 경로에 파일이 존재하지않으면 (exists() method 사용)
+					break; // 겹치지않으면 >> while 문 종료
+				} else {
+					filepath = onlyFilename + "_" + count + extension;
+				}
+				count++; // 존재하면 카운트를 ++ 하고 반복문 다시 실행
+			}
+			// 파일명 중복검사했을때 경로에 중복 파일이 존재하지 않아서 while문나온시점
+			// 해당파일 업로드 작업
+			try {
+				// 중복처리가 끝난파일명 (filepath)으로 파일을 업로드할 FileOutputStream객체 생성
+				FileOutputStream fos = new FileOutputStream(new File(savePath + filepath));
+				// 업로드 속도증가를 위한 보조스트림 생성
+				BufferedOutputStream bos = new BufferedOutputStream(fos);
+				// 파일 업로드
+				byte[] bytes = file.getBytes();
+				bos.write(bytes);
+				bos.close();
+
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			ex.setCertificateName(filename);
+			ex.setCertificatePath(filepath);
+
 		
 		
 		int result = service.insertExpert(ex);
 		
-		System.out.println(result);
-
-		
-		return "redirect:/";
+		return "redirect:/appExpertList.do?memberNo="+ex.getMemberNo();
 	}
 	
 	//재민 주문취소

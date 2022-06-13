@@ -28,11 +28,10 @@
 				<th><a href="/imgVerProductDetail.do?productNo=${r.productNo}&&expertNo=${r.expertNo}">${r.reviewTitle }</a></th>
 				<td>${r.reviewStar }</td>
 				<td>${r.reviewDate }</td>
-				<td>${r.expertNo }</td>
+				<td>${r.reviewContent}</td>
+				
 			</tr>
-			<tr class="tr-3">
-				<th>${r.reviewContent}</th>
-			</tr>
+			
 			</c:forEach>
 			
 		</table>

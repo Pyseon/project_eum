@@ -801,6 +801,9 @@
 	<update id="updateExpertApp" parameterType="map">
 		update expert_tbl set expert_app = #{selectNum } where expert_no = #{expertNo }
 	</update>
+	<delete id="deleteBeforeExpert" parameterType="int">
+		delete from expert_tbl where member_no = #{value} and (expert_app = 0 or expert_app = 2)
+	</delete>
 	<insert id="insertRefuseExpert">
 		insert into refuseexpert_tbl values(refuseexpert_seq.nextval, #{expertNo}, #{refuseContent})
 	</insert>
@@ -810,6 +813,10 @@
 	<update id="updateMemberGrade" parameterType="int">
 		update member_tbl set grade = 1 where member_no = (select member_no from expert_tbl where expert_no = #{value}) 
 	</update>
+	
+	<select id="selectMemberNo" parameterType="int" resultType="int">
+		select member_no from expert_tbl where expert_no = #{value }
+	</select>
 	
 	<select id="selectExpertApp" parameterType="int" resultType="expert">
 		select * from

@@ -36,7 +36,7 @@ public class MemberService {
 			throw new IllegalArgumentException("아이디나 패스워드를 입력해야됩니다.");
 		}
 		Member member = dao.selectOneMember(m);
-		System.out.println(member);
+		//System.out.println(member);
 		return member;
 	}
 	
@@ -114,8 +114,8 @@ public class MemberService {
 		return dao.search(memberNick);
   }
   
-	public ArrayList<Product> selectMyprojectDetail(int memberNo) {
-		ArrayList<Product> list = dao.selectMyprojectDetail(memberNo);
+	public ArrayList<Product> selectMyprojectDetail(int productNo) {
+		ArrayList<Product> list = dao.selectMyprojectDetail(productNo);
 		
 		return list;
 	}

@@ -99,7 +99,7 @@
 	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">상담 등록하기</h1>
 		<form action="/classWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-		<input type="text" name="expertNo" value="${expertNo }">
+		<input type="hidden" name="expertNo" value="${expertNo }">
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
 		<input type="hidden" name="productTag">
@@ -150,10 +150,11 @@
 							</div>
 							<div class="input-img-box"></div>
 						</div>
+						
 		<div style="margin-bottom: 20px">
 			<div>
 			<span>
-			<h3>자주묻는 질문 (선택)
+			<h3>자주묻는 질문 (최소 하나씩은 작성해 주세요)
 			<button type="button" class="addOptBtn optButton" style="line-height: 2;">
 					<i class="fa-solid fa-square-plus"></i>
 			</button>
@@ -163,7 +164,7 @@
 			<div id="qst-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000">
+				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" required>
 				
 				</span>
 			</div>
@@ -171,7 +172,7 @@
 			<div id="ans-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000">
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" required>
 				</span>
 			</div>
 			
@@ -211,7 +212,7 @@
 			</div>
 			<div id="tag-opt">
 			<span style="display: flex;"> 
-			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required>
+			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 20%; height: 33px"required>
 			</span>
 			</div>
 		</div>
@@ -359,7 +360,7 @@
         if(tagCount >= 20) return;
         var tagDiv = document.createElement("div");
         tagDiv.setAttribute("class","optBox");
-        tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19.5%; required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
         $("#tag-opt").append(tagDiv);
         tagCount++;
         

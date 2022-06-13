@@ -13,6 +13,7 @@ import kr.or.eum.member.model.vo.Expert;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.request.model.service.RequestService;
 import kr.or.eum.request.model.vo.Request;
+import kr.or.eum.request.model.vo.RequestAskPageData;
 import kr.or.eum.request.model.vo.RequestDetailData;
 import kr.or.eum.request.model.vo.RequestPageData;
 
@@ -83,8 +84,11 @@ public class RequestController {
 		if(session != null) {
 			member = (Member)session.getAttribute("member");
 		}
+		RequestAskPageData rapd = service.selectReqAskExpList(reqNo);
+		model.addAttribute("list", rapd.getList());
+		System.out.println("list : " + rapd.getList());
 		
-		RequestDetailData rdd = service.selectOneRequest( reqNo, member);
+		RequestDetailData rdd = service.selectOneRequest(reqNo, member);
 			if(member != null) {
 				model.addAttribute("memberNo", member.getMemberNo());
 				int memberNo = member.getMemberNo();
@@ -103,7 +107,21 @@ public class RequestController {
 			model.addAttribute("Tag", rdd.getTag());
 			System.out.println("req : "+rdd);
 			
+			int selectExpertIs = service.selectExpertIs(reqNo);
+			if(selectExpertIs != 0) {
+				int selectExpert = service.selectExpert(reqNo);
+				model.addAttribute("se", selectExpert);
+			}
 		return "request/requestDetail";
 		
 	}
+	
+	@RequestMapping(value = "/selectExpert.do")
+		public String selectExpert(int reqNo, int expertNo) {
+			int result = service.updateSelectExpert(reqNo);
+			int result2 = service.deleteUnselectExpert(reqNo, expertNo);
+			return "redirect:/requestDetail.do?reqNo="+reqNo;
+		}
+	
+	
 }

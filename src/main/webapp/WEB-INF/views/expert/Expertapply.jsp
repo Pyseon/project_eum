@@ -22,11 +22,12 @@
 			사업자를 등록하지 않은 개인 자격으로 신청하는경우 선택합니다.
 		단, 회계/법률/관세 등 법적으로 겸업 금지인 분야는 소속되어 있는 사업자로만 신청이 가능하여 선택할 수 없습니다.
 		</p>
+		<!-- 
 		<div style="border:1px solid; padding:10px;">
 		필요서류 미리보기
 		공통 : 분야 별 신청자격에 따른 첨부 서류 
 		</div>
-		
+		 -->
 		<div class="checkedbox">
 				<div class="checkbox-s">
 					<div><label><input type="checkbox" name = "agreement" value="0" required>(이음)서비스 전문가 이용약관 동의</label><br>

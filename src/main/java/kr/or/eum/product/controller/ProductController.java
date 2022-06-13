@@ -3,6 +3,7 @@ package kr.or.eum.product.controller;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.member.model.vo.Expert;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
@@ -659,24 +661,37 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	}
 	
 	@GetMapping("/download.do")
-	public void download(String marketfile, HttpServletResponse response) throws Exception {
+	public void download(String marketfile, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		System.out.println(marketfile);
-		try {
-			String path = "/ideamarket/file/"+marketfile; // 경로에 접근할 때 역슬래시('\') 사용
-			File file = new File(path);
-			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더
-			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
-			OutputStream out = response.getOutputStream();
-			int read = 0;
-			 byte[] buffer = new byte[1024];// 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을 파일이 없음
-             while ((read = fileInputStream.read(buffer)) != -1) {
-            	 out.write(buffer, 0, read);
-             }
-             
-		} catch (Exception e) {
-            throw new Exception("download error");
-        }
-
+		
+		//4.결과처리
+				//파일과 현재 서블릿을 연결
+				//String root =request.getSession().getServletContext().getRealPath("/"); //webapp폴더
+				String root = request.getSession().getServletContext().getRealPath("/ideamarket/file/");
+				String downLoadFile = root+marketfile;
+				//파일을 서블릿으로 읽어오기 위한 스트림생성
+				FileInputStream fis = new FileInputStream(downLoadFile);
+				BufferedInputStream bis = new BufferedInputStream(fis);
+				//읽어온 파일을 사용자에게 전달할 스트림 생성
+				ServletOutputStream sos = response.getOutputStream();
+				BufferedOutputStream bos = new BufferedOutputStream(sos);
+				//파일명처리
+				String resFilename = new String(marketfile.getBytes("utf-8"),"ISO-8859-1");
+				//파일다운로드를 위한 http header설정
+				response.setContentType("application/octet-stream");
+				response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+				//파일전송
+				while(true) {
+					int read = bis.read();
+					if(read != -1) {
+						bos.write(read);
+					}else {
+						break;
+					}
+				}
+				bos.close();
+				bis.close();
+		
 	}
 	
 	

@@ -630,7 +630,7 @@
 		(
 		counsel_seq.nextval,
 		#{memberNo},
-		#{expertNo},
+		(select member_no from expert_tbl where expert_no=#{expertNo}),
 		#{payNo},
 		#{limitTime},
 		#{startTime}

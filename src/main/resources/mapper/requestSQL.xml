@@ -126,9 +126,6 @@
   	<update id="updateRequset" parameterType="reqst">
   		update request_tbl set 
   		req_title = #{reqTitle},
-  		req_Category = #{reqCategory},
-  		req_tag = #{reqTag},
-  		req_nick = #{reqNick},
   		req_content = #{reqContent}
   		where req_no = #{reqNo}
   	</update>

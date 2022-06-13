@@ -144,6 +144,7 @@ public class RequestController {
 	@RequestMapping(value = "/updateRequest.do")
 	public String updateRequest(Request request) {
 		int result = service.updateRequest(request);
+		System.out.println("request : "+request);
 		return "redirect:/requestDetail.do?reqNo="+request.getReqNo();
 	}
 }

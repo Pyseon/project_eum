@@ -106,6 +106,12 @@
   		delete from reqask_tbl where req_no = #{reqNo} and expert_no != #{expertNo }
   	</delete>
   	
+  	<select id="selectExpertIs" parameterType="int" resultType="int">
+  		select count(*)
+  		from reqask_tbl 
+  		where req_no = #{value}
+  	</select>
+  	
   	<select id="selectExpert" parameterType="int" resultType="int">
   		select
   		select_Expert as selectExpert

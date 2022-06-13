@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -416,8 +417,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		ReviewPageData rpd = productService.selectReviewList(productNo, reqPage);
 		return new Gson().toJson(rpd);
 	}
-	
-	
+	//대권 구매페이지
 	@RequestMapping(value = "/purchase.do")
 	public String purchase(int productNo, int expertNo, Model model) {
 		//1.상품정보불러오기(product_type:1,2,3구분)
@@ -619,7 +619,32 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		ArrayList<Product> list = productService.selectPopular();
 		return new Gson().toJson(list);
 	}
-	
+	//결제테이블or전문가상담
+	@ResponseBody
+	@RequestMapping(value = "/paymentResult.do" ,method = RequestMethod.POST)
+	public int paymentInsert(Payment p,int productType,  Counsel c){
+		System.out.println("시작payment"+p);
+		System.out.println("시작payment"+productType);
+		System.out.println("시작payment"+c);
+		int result = productService.paymentInsert(p);
+		if(productType == 1) {
+			c.setPayNo(result);
+		System.out.println("컨트롤러들어가야지counsel"+c);
+		int result2 = productService.counselInsert(c);			
+		}
+		
+		int str = 0;
+		if(result != 0) {
+			str = 1;
+			return str;
+			
+		}else {
+			str = 0;
+			return str;
+		}
+		
+	}
+
 }
 
 

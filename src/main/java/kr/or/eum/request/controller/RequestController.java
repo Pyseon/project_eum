@@ -107,6 +107,8 @@ public class RequestController {
 			model.addAttribute("Tag", rdd.getTag());
 			System.out.println("req : "+rdd);
 			
+			int selectExpert = service.selectExpert(reqNo);
+			model.addAttribute("se", selectExpert);
 		return "request/requestDetail";
 		
 	}
@@ -117,6 +119,7 @@ public class RequestController {
 			int result2 = service.deleteUnselectExpert(reqNo, expertNo);
 			return "redirect:/requestDetail.do?reqNo="+reqNo;
 		}
+	
 	
 	
 }

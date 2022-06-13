@@ -138,6 +138,7 @@ public RequestAskPageData selectReqAskExpList(int reqNo) {
 	ArrayList<RequestAsk> list = dao.selectReqAskExpList(reqNo);
 	HashMap<String, Object> map = new HashMap<String, Object>();
 	map.put("reqNo", reqNo);
+	
 	RequestAskPageData rapd = new RequestAskPageData(list);
 	return rapd;
 	
@@ -177,6 +178,12 @@ public int deleteUnselectExpert(int reqNo, int expertNo) {
 	map.put("reqNo", reqNo);
 	map.put("expertNo", expertNo);
 	return dao.deleteUnselectExpert(map);
+}
+
+
+public int selectExpert(int reqNo) {
+	// TODO Auto-generated method stub
+	return dao.selectExpert(reqNo);
 }
 
 /*

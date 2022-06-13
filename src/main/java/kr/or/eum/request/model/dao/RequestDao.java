@@ -78,6 +78,11 @@ public class RequestDao {
 		int result = sqlSession.delete("request.deleteUnselectExpert", map);
 		return result;
 	}
+
+	public int selectExpert(int reqNo) {
+		int selectExpert = sqlSession.selectOne("request.selectExpert", reqNo);
+		return selectExpert;
+	}
 	
 
 	

@@ -101,9 +101,16 @@
   	</select>
   	
   	<update id="updateSelectExpert" parameterType="int">
-  		update reqask_tbl set select_expert = 1 where reqask_no = #{value}
+  		update reqask_tbl set select_expert = 1 where req_no = #{value}
   	</update>
-  	<delete id="deleteUnselectExpert" parameterType="int">
+  	<delete id="deleteUnselectExpert" parameterType="map">
   		delete from reqask_tbl where req_no = #{reqNo} and expert_no != #{expertNo }
   	</delete>
+  	
+  	<select id="selectExpert" parameterType="int" resultType="int">
+  		select
+  		select_Expert as selectExpert
+  		from reqask_tbl
+  		where req_no = #{value}
+  	</select>
 </mapper>

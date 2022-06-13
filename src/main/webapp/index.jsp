@@ -85,6 +85,11 @@
 		width:80px;
 		height:80px;
 	}
+	.cat-img-wrap>td>button{
+		padding: 0 !important;
+		border: none !important;
+		background: none !important;
+	}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -120,7 +125,7 @@
 												<span class="f-white">해결해 드립니다!</span>
 											</h2>
 											
-											<button type="button" class="main-img-btn fc-5">전문가 상담</button>
+											<button type="button" class="main-img-btn fc-5" id="expertView">전문가 상담</button>
 										</div>
 										<div class="col-sm-6">
 											<img src="" class="girl img-responsive" alt="" />
@@ -147,7 +152,7 @@
 												<span class="f-white">함께 해요!</span>
 											</h2>
 											
-											<button type="button" class="main-img-btn fc-5" style="margin-top:30px;">클래스</button>
+											<button type="button" class="main-img-btn fc-5" style="margin-top:30px;" id="classView">클래스</button>
 										</div>
 										<div class="col-sm-6">
 											<img src="" class="girl img-responsive" alt="" />
@@ -169,7 +174,7 @@
 												<span class="f-white">여러 사람들과 소통해보세요!</span>
 											</h2>
 											
-											<button type="button" class="main-img-btn fc-5">커뮤니티</button>
+											<button type="button" class="main-img-btn fc-5" id="communityView">커뮤니티</button>
 										</div>
 										<div class="col-sm-6">
 											<img src="" class="girl img-responsive" alt="" />
@@ -196,18 +201,18 @@
 		<div>
 			<table class="cate-icon">
 				<tr class="cat-img-wrap">
-					<td><img src="./img/category/전체.png"><h3>전체</h3></td>
-					<td><img src="./img/category/법률.png"><h3>법률</h3></td>
-					<td><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></td>
-					<td><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></td>
-					<td><img src="./img/category/학습.png"><h3>학습</h3></td>
-					<td><img src="./img/category/금융.png"><h3>금융</h3></td>
-					<td><img src="./img/category/라이프.png"><h3>라이프</h3></td>
-					<td><img src="./img/category/취미.png"><h3>레저</h3></td>
-					<td><img src="./img/category/어학.png"><h3>어학</h3></td>
-					<td><img src="./img/category/레저.png"><h3>레저</h3></td>
-					<td><img src="./img/category/it.png"><h3>IT/테크</h3></td>
-					<td><img src="./img/category/자기개발.png"><h3>자기계발</h3></td>
+					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ExpertList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"><h3>전체</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ExpertList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"><h3>법률</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ExpertList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/ExpertList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn5" onclick="location.href='/ExpertList.do?reqPage=1&selPro=학습'"><img src="./img/category/학습.png"><h3>학습</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn6" onclick="location.href='/ExpertList.do?reqPage=1&selPro=금융'"><img src="./img/category/금융.png"><h3>금융</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn7" onclick="location.href='/ExpertList.do?reqPage=1&selPro=라이프'"><img src="./img/category/라이프.png"><h3>라이프</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn8" onclick="location.href='/ExpertList.do?reqPage=1&selPro=취미'"><img src="./img/category/취미.png"><h3>취미</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn9" onclick="location.href='/ExpertList.do?reqPage=1&selPro=어학'"><img src="./img/category/어학.png"><h3>어학</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/ExpertList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"><h3>레저</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/ExpertList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"><h3>IT/테크</h3></button></td>
+					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/ExpertList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"><h3>자기계발</h3></button></td>
 				</tr>
 			</table>
 		</div>
@@ -512,6 +517,17 @@
   <!--/recommended_items-->
   
 <script>
+	//전문가, 클래스, 커뮤니티
+	$("#expertView").click(function(){
+		window.location.href ='/ExpertList.do?reqPage=1&selPro=전체'
+	});	
+	$("#classView").click(function(){
+		window.location.href ='/ClassList.do?reqPage=1&selPro=전체'
+	});
+	$("#communityView").click(function(){
+		window.location.href ='/commnityList.do?category=2&reqPage=1'
+	});	
+	
 	$(function() {
 		$.ajax({
 			type : 'GET',

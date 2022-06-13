@@ -114,6 +114,7 @@ public class RequestController {
 			}else {
 				model.addAttribute("se", 0);
 			}
+			model.addAttribute("sei", selectExpertIs);
 		return "request/requestDetail";
 	}
 	
@@ -126,7 +127,7 @@ public class RequestController {
 	@RequestMapping(value = "/deleteRequest.do")
 	public String deleteRequest(int reqNo) {
 		int result = service.deleteRequest(reqNo);
-		return "redirect:/requestList.do?reqPage=1&selReq=전체";
+		return "redirect:/requestList.do?reqPage=1&selReq=%EC%A0%84%EC%B2%B4";
 	}
 	@RequestMapping(value = "/updateRequestFrm.do")
 	public String updateRequestFrm(HttpServletRequest request, int reqNo, Model model) {
@@ -136,7 +137,8 @@ public class RequestController {
 			member = (Member)session.getAttribute("member");
 		}
 		RequestDetailData rdd = service.selectOneRequest(reqNo, member);
-		
+		model.addAttribute("req", rdd.getReq());
+		model.addAttribute("Tag", rdd.getTag());
 		return "request/updateRequestFrm";
 	}
 	@RequestMapping(value = "/updateRequest.do")

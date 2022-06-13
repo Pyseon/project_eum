@@ -10,7 +10,6 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
-<%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
 	<div class="page-content container">
 		<div class="posting-wrap">
 					<table class="tbl tbl-hover">

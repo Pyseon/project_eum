@@ -94,8 +94,8 @@ public class RequestDao {
 		return result;
 	}
 
-	public int updateRequest(Request request) {
-		int result = sqlSession.update("request.updateRequest", request);
+	public int updateRequest(HashMap<String, Object> map) {
+		int result = sqlSession.update("request.updateRequest", map);
 		return result;
 	}
 	

@@ -123,7 +123,7 @@
   		delete from request_tbl where req_no = #{value}
   	</delete>
   	
-  	<update id="updateRequset" parameterType="reqst">
+  	<update id="updateRequest" parameterType="map">
   		update request_tbl set 
   		req_title = #{reqTitle},
   		req_content = #{reqContent}

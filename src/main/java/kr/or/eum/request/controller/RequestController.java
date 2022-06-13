@@ -111,6 +111,8 @@ public class RequestController {
 			if(selectExpertIs != 0) {
 				int selectExpert = service.selectExpert(reqNo);
 				model.addAttribute("se", selectExpert);
+			}else {
+				model.addAttribute("se", 0);
 			}
 		return "request/requestDetail";
 	}

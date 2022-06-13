@@ -61,11 +61,13 @@ public class ProductDao {
 	
 	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
+		System.out.println("class pro>>>>>>>>>>>>>>>>"+pro);
 		int result = sqlSession.insert("product.classWrite", pro);
 		return result;
 	}
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
+		System.out.println("expert pro>>>>>>>>>>>>>>>>"+pro);
 		int result = sqlSession.insert("product.expertWrite", pro);
 		return result;
 	}
@@ -87,6 +89,7 @@ public class ProductDao {
 	
 	public int ideamarketWrite(Product pro) {
 		// TODO Auto-generated method stub
+		System.out.println("idea pro>>>>>>>>>>>>>>>>"+pro);
 		int result = sqlSession.insert("product.ideamarketWrite", pro);
 		return result;
 	}

@@ -145,6 +145,8 @@
 	 			product_tbl.product_no as productNo,
 	 			product_title as productTitle,
 	 			product_type as productType,
+	 			market_name as marketName,
+	 			market_path as marketPath,
 	 			pay_date as payDate, 
 	 			product_imgPath as productImgPath,
 	 			payment, 

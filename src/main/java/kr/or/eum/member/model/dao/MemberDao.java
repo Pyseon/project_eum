@@ -126,7 +126,6 @@ public class MemberDao {
 		return (ArrayList<Product>)list;
 	}
 	public int insertExpert(Expert ex) {
-		
 		int result = sqlSession.insert("member.insertexpert",ex);
 		return result;
 	}

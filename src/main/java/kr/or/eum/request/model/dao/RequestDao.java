@@ -88,6 +88,16 @@ public class RequestDao {
 		int result = sqlSession.selectOne("request.selectExpertIs", reqNo);
 		return result;
 	}
+
+	public int deleteRequest(int reqNo) {
+		int result = sqlSession.delete("request.deleteRequest", reqNo);
+		return result;
+	}
+
+	public int updateRequest(Request request) {
+		int result = sqlSession.update("request.updateRequest", request);
+		return result;
+	}
 	
 
 	

@@ -25,7 +25,7 @@ display: flex;
 	border-radius: 50%;
 	}
 	.writer{
-	border-bottom: 2px solid rgba(220, 220, 220, 0.59);
+	
 	}
 	.Ask{
 	 text-align: right;
@@ -77,7 +77,7 @@ display: flex;
 		<div>		
 			<img src="./img/member/${req.memberPicturepath}">
 		</div>
-		<div style="margin: 20px 0px 0px 1px;">
+		<div style="margin: 20px 0px 0px 30px;">
 		<div class="writername">
 			${req.reqNick }
 		</div>
@@ -139,10 +139,12 @@ display: flex;
 			</ul>
 			</div>
 			
-			
+	
+	<c:if test="${memberNo eq req.memberNo}">
 		<h1>제안한 전문가</h1>
 	<div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
+	
 		<div class="posting-item" style="cursor: pointer;">
 		<div class="posting-connect" style="text-align: center;">
 		<img src="./img/member/${c.memberPicturepath}">
@@ -159,6 +161,27 @@ display: flex;
 		</div>
 	</c:forEach>
 	</div>
+	</c:if>
+	
+	<c:if test="${memberNo ne req.memberNo }">
+	<h1>제안한 전문가</h1>
+	<div class="posting-wrap">
+	<c:forEach items="${list }" var="c" varStatus="i">
+	
+		<div class="posting-item" style="cursor: pointer;">
+		<div class="posting-connect" style="text-align: center;">
+		<img src="./img/member/${c.memberPicturepath}">
+		<div class="expertName fs-bold">
+		${c.expertName }
+		</div>
+		<div class="expertCategory">
+		${c.expertCategory }
+		</div>
+		</div>
+		</div>
+	</c:forEach>
+	</div>
+	</c:if>
 	</div>
 <div class="footer-div">
         <%@ include file="/WEB-INF/views/common/footer.jsp"%>

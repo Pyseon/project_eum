@@ -217,7 +217,8 @@
 			</div>
 		</div>
 		<div>
-		<input type="submit" class="btn bc1 bs4" value="등록하기">
+		<input type="submit" id="submit-btn" class="btn bc1 bs4" value="등록하기">
+		<input type="button" id="test-btn" value="테스트">
 		</div>
 		</form>
 	</div>
@@ -242,6 +243,22 @@
     placeholder: '최대 2048자까지 쓸 수 있습니다'    //placeholder 설정
     
 	});
+	
+	$('#submit-btn').on("submit", function(event) {
+		if($('#summernote').summernote('isEmpty')) {
+			console.log('contents is empty, fill it!');
+			event.preventDefault();
+		}	
+	});	  
+	
+	$('#test-btn').on("click", function(event) {
+		if($('#summernote').summernote('isEmpty')) {
+			console.log('contents is empty, fill it!');
+			event.preventDefault();
+		}else {
+			console.log('잘 되는 중');	
+		}
+	});	 
 	
 	 // 이미지 추가 함수 시작
     var imgTarget = $('.preview-image .upload-hidden');

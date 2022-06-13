@@ -90,6 +90,17 @@
 		border: none !important;
 		background: none !important;
 	}
+	.fa-angle-right{
+		padding-right: 100px;
+	}
+	.fa-angle-left{
+		padding-left: 100px;
+	}
+	
+	.fs-bold{
+		text-align: center;
+    	margin: 50px 0px;
+	}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -201,7 +212,12 @@
 		<div>
 			<table class="cate-icon">
 				<tr class="cat-img-wrap">
-					<td><button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ExpertList.do?reqPage=1&selPro=전체'"><img src="./img/category/전체.png"><h3>전체</h3></button></td>
+						<td>
+							<button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ExpertList.do?reqPage=1&selPro=전체'">
+							<img src="./img/category/전체.png">
+							<h3>전체</h3>
+							</button>
+						</td>
 					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ExpertList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"><h3>법률</h3></button></td>
 					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ExpertList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></button></td>
 					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/ExpertList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></button></td>

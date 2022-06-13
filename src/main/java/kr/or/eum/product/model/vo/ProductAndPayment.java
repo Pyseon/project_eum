@@ -17,4 +17,6 @@ public class ProductAndPayment {
 	private int productType;
 	private int memberNo;
 	private int payNo;
+	private String marketPath;
+	private String marketName;
 }

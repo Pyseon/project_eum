@@ -5,10 +5,12 @@ import kr.or.eum.member.model.vo.Expert;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,12 +19,14 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +71,7 @@ public class ProductController{
 		
 		HttpSession session = request.getSession(false);
         Member member = null;
+        
         if(session != null) {
             member = (Member)session.getAttribute("member");
         }
@@ -651,6 +656,29 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		}
 		
 	}
+	
+	@GetMapping("/download.do")
+	public void download(String marketfile, HttpServletResponse response) throws Exception {
+		System.out.println(marketfile);
+		try {
+			String path = "/ideamarket/file/"+marketfile; // 경로에 접근할 때 역슬래시('\') 사용
+			File file = new File(path);
+			response.setHeader("Content-Disposition", "attachment;filename=" + file.getName()); // 다운로드 되거나 로컬에 저장되는 용도로 쓰이는지를 알려주는 헤더
+			FileInputStream fileInputStream = new FileInputStream(path); // 파일 읽어오기
+			OutputStream out = response.getOutputStream();
+			int read = 0;
+			 byte[] buffer = new byte[1024];// 1024바이트씩 계속 읽으면서 outputStream에 저장, -1이 나오면 더이상 읽을 파일이 없음
+             while ((read = fileInputStream.read(buffer)) != -1) {
+            	 out.write(buffer, 0, read);
+             }
+             
+		} catch (Exception e) {
+            throw new Exception("download error");
+        }
+
+	}
+	
+	
 
 }
 

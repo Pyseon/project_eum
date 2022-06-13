@@ -14,6 +14,7 @@ import kr.or.eum.product.model.vo.Product;
 import kr.or.eum.request.model.dao.RequestDao;
 import kr.or.eum.request.model.vo.Request;
 import kr.or.eum.request.model.vo.RequestAsk;
+import kr.or.eum.request.model.vo.RequestAskPageData;
 import kr.or.eum.request.model.vo.RequestDetailData;
 import kr.or.eum.request.model.vo.RequestPageData;
 
@@ -133,6 +134,16 @@ public RequestDetailData selectOneRequest(int reqNo, Member member) {
 	
 }
 
+public RequestAskPageData selectReqAskExpList(int reqNo) {
+	ArrayList<RequestAsk> list = dao.selectReqAskExpList(reqNo);
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("reqNo", reqNo);
+	RequestAskPageData rapd = new RequestAskPageData(list);
+	return rapd;
+	
+	
+}
+
 
 public int insertReqask(int reqNo, int expertNo) {
 	HashMap<String, Object> map = new HashMap<String, Object>();
@@ -146,6 +157,14 @@ public int insertReqask(int reqNo, int expertNo) {
 public Expert selectExpertNo(int memberNo) {
 	return dao.selectExpertNo(memberNo);
 }
+/*
+public RequestAskPageData selectReqAskExpList() {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	ArrayList<RequestAsk> list = dao.selectReqAskExpList(map);
+	RequestAskPageData rapd = new RequestAskPageData(list);
+	return rapd;
+}
+*/
 
 /*
 

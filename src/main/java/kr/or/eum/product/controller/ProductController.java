@@ -263,15 +263,16 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 
 @RequestMapping(value="/ideamarketWrite.do")
 	public String ideamarketWrite(Product pro, MultipartFile file, HttpServletRequest request) {
-	System.out.println(pro.getProductImgname());
-	System.out.println(pro.getProductImgPath());
+	System.out.println(pro.getMarketName());
+	System.out.println(pro.getMarketPath());
 	System.out.println(file.getOriginalFilename());
 	String savePath 
-	= request.getSession().getServletContext().getRealPath("/img/product/IdeamarketList/");
+	= request.getSession().getServletContext().getRealPath("/ideamarket/file/");
 	
 	//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
 	//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
 	//사용자가 업로드한 파일 이름
+	
 	String filename = file.getOriginalFilename();
 	//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
 	//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
@@ -315,8 +316,8 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		e.printStackTrace();
 	}
 	
-	pro.setProductImgname(filename);
-	pro.setProductImgPath(filepath);
+	pro.setMarketName(filename);
+	pro.setMarketPath(filepath);
 	
 	System.out.println(pro);
 	

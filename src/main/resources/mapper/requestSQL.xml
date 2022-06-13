@@ -85,5 +85,18 @@
 	)
 	</insert>
   	
+  	<select id="selectReqAskExpList" resultType="reqstAsk" parameterType="int">
+  	 select 
+    req_no as reqNo,
+ 	reqask_no as reqaskNo,
+ 	expert_no as expertNo,
+    expert_name as expertName,
+    expert_category as expertCategory,
+    member_picturepath as memberPicturepath
+ 	from reqask_tbl
+    join expert_tbl using(expert_no)
+    join member_tbl using(member_no)
+    where req_no= #{reqNo}
+  	</select>
   	
 </mapper>

@@ -1,5 +1,7 @@
 package kr.or.eum.product.model.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -475,8 +477,15 @@ public class ProductService {
 		int reviewUploadCheck = productDao.selectReviewUploadCheck(payNo);
 		ArrayList<Chat> chatList = productDao.selectChat(payNo);
 		String first = "";
-		for(int i = 0; i < 1; i++) {
-			first = chatList.get(i).getChatDate();
+		if(chatList.size() > 0) {
+			for(int i = 0; i < 1; i++) {
+				first = chatList.get(i).getChatDate();
+			}
+		}else {
+			LocalDate now = LocalDate.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
+			String formatedNow = now.format(formatter);
+			first = formatedNow;
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("product", product);

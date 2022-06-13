@@ -12,7 +12,7 @@
 <div class="manager-leftmenuWrap">
 	<nav class="manager-leftmenu">
 		<div class="userprofileBox">
-			<img class="userprofile" src="/images/home/girl1.jpg">
+			<img class="userprofile" src="./img/member/${sessionScope.member.memberPicturePath}">
 			<div class="nick-wrap">
 				<h2 id="nick">${sessionScope.member.memberNick}</h2>
 			</div>

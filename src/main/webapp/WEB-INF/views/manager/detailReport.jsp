@@ -35,7 +35,7 @@
 					${reviewContent }
 				</c:when>
 				<c:when test="${category == 2 }">
-					개설요청
+					<jsp:include page="/requestDetail.do?reqNo=${rpt.reportIndex }"></jsp:include>
 				</c:when>
 				<c:when test="${category == 3 }">
 					<jsp:include page="/communityDetail.do?commNo=${rpt.reportIndex }&category=${commCategory }"></jsp:include>
@@ -131,6 +131,12 @@
 		$(".article-info-box").css("display", "none");
 		$(".haja-like").css("pointer-events", "none");
 		$(".button-wrap").css("display", "none");
+		$(".comments-area").css("display", "none");
+		
+		//개설요청
+		$(".reportbutton").css("display", "none");
+		$("#submit").css("display", "none");
+		$(".reqbtn").css("display", "none");
 	</script>
 </body>
 </html>

@@ -67,7 +67,7 @@
               <div class="single-widget">
                 <h2>지원</h2>
                 <ul class="nav nav-pills nav-stacked">
-                  <li><a href="#">공지사항</a></li>
+                  <li><a href="/noticeList.do?reqPage=1">공지사항</a></li>
                   <li><a href="#">자주묻는질문</a></li>
                   <li><a href="#">1:1문의</a></li>
                   <li><a href="#">이용약관</a></li>

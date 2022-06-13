@@ -105,6 +105,19 @@ public class ManagerService {
 			}
 			pageData.put("noticeList", noticeList);
 			break;
+		case "noticeList.do":
+			ArrayList<Notice> noticeList2 = new ArrayList<Notice>();
+			if(searchType == null) {
+				noticeList2 = dao.noticePageData(pageMap);
+				totalCount = dao.noticeCount();
+			}else {
+				pageMap.put("searchType", searchType);
+				pageMap.put("keyword", keyword);
+				noticeList2 = dao.searchNoticePageData(pageMap);
+				totalCount = dao.searchNoticeCount(pageMap);
+			}
+			pageData.put("noticeList", noticeList2);
+			break;
 		case "manaAnswer.do":
 			ArrayList<Answer> answerList = new ArrayList<Answer>();
 			answerList = dao.answerPageData(pageMap);
@@ -439,6 +452,10 @@ public class ManagerService {
 
 	public int selectMemberNo(int expertNo) {
 		return dao.selectMemberNo(expertNo);
+	}
+
+	public Notice selectNoticeDetail(int noticeNo) {
+		return dao.selectNoticeDetail(noticeNo);
 	}
 
 	

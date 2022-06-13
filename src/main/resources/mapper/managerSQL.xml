@@ -839,5 +839,16 @@
 		from refuseExpert_tbl
 		where expert_no = #{value}
 	</select>
+	
+	<select id="selectNoticeDetail" parameterType="int" resultType="ntc">
+		select
+			notice_no as noticeNo,
+			(select member_Id from member_tbl m where notice.member_no = m.member_no) as memberId,
+			notice_title as noticeTitle,
+			notice_content as noticeContent,
+			notice_date as noticeDate
+		from notice_tbl notice
+		where notice_no = #{value }
+	</select>
 
 </mapper>

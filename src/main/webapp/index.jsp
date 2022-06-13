@@ -101,136 +101,205 @@
 		text-align: center;
     	margin: 50px 0px;
 	}
+	
+	.icon-img {
+		width: 80px;
+   		height: 80px;
+	}
+	.img-btn-all-wrap{
+		display: flex;
+    	justify-content: center;
+   		align-items: center;
+    	flex-direction: revert;
+	}
+	.img-btn{
+		background: none;
+		border: none;
+	}
+	.img-btn-wrap {
+		margin-right: 25px;
+	}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<!-- 
 <h1><a href="/manaMember.do?reqPage=1&selectNum=0">매니저</a></h1>
 	 -->
-<div id=slider-wrap>
-			<section id="slider">
-				<!--slider-->
-				<div class="row">
-					<div class="col-sm-12">
-						<div id="slider-carousel" class="carousel slide"
-							data-ride="carousel">
-							<ol class="carousel-indicators">
-								<li data-target="#slider-carousel" data-slide-to="0"
-									class="active"></li>
-								<li data-target="#slider-carousel" data-slide-to="1"></li>
-								<li data-target="#slider-carousel" data-slide-to="2"></li>
-							</ol>
+	<div id=slider-wrap>
+		<section id="slider">
+			<!--slider-->
+			<div class="row">
+				<div class="col-sm-12">
+					<div id="slider-carousel" class="carousel slide"
+						data-ride="carousel">
+						<ol class="carousel-indicators">
+							<li data-target="#slider-carousel" data-slide-to="0"
+								class="active"></li>
+							<li data-target="#slider-carousel" data-slide-to="1"></li>
+							<li data-target="#slider-carousel" data-slide-to="2"></li>
+						</ol>
 
-							<div class="carousel-inner">
-								<div class="item active">
-									<div class="main-slider-wrap m-slider-img1">
+						<div class="carousel-inner">
+							<div class="item active">
+								<div class="main-slider-wrap m-slider-img1">
 
-										<div class="col-sm-6">
-											<h2>
-												<span class="f-white">당신의 고민을</span>
-											</h2>
-											<h2>
-												<span class="f-white">속 시원하게</span>
-											</h2>
-											<h2>
-												<span class="f-white">해결해 드립니다!</span>
-											</h2>
-											
-											<button type="button" class="main-img-btn fc-5" id="expertView">전문가 상담</button>
-										</div>
-										<div class="col-sm-6">
-											<img src="" class="girl img-responsive" alt="" />
-										</div>
+									<div class="col-sm-6">
+										<h2>
+											<span class="f-white">당신의 고민을</span>
+										</h2>
+										<h2>
+											<span class="f-white">속 시원하게</span>
+										</h2>
+										<h2>
+											<span class="f-white">해결해 드립니다!</span>
+										</h2>
+										
+										<button type="button" class="main-img-btn fc-5" id="expertView">전문가 상담</button>
 									</div>
-
-								</div>
-
-
-								<div class="item">
-										<div class="main-slider-wrap m-slider-img2">
-
-										<div class="col-sm-6">
-											<h2>
-												<span class="f-white">거리두기 끝!!</span>
-											</h2>
-											<h2>
-												<span class="f-white">다 같이 모여서</span>
-											</h2>
-											<h2>
-												<span class="f-white">다양한 사람들과</span>
-											</h2>
-											<h2>
-												<span class="f-white">함께 해요!</span>
-											</h2>
-											
-											<button type="button" class="main-img-btn fc-5" style="margin-top:30px;" id="classView">클래스</button>
-										</div>
-										<div class="col-sm-6">
-											<img src="" class="girl img-responsive" alt="" />
-										</div>
+									<div class="col-sm-6">
+										<img src="" class="girl img-responsive" alt="" />
 									</div>
 								</div>
 
-								<div class="item">
-										<div class="main-slider-wrap m-slider-img3">
+							</div>
 
-										<div class="col-sm-6">
-											<h2>
-												<span class="f-white">당신의 일상과 생각을 자유롭게</span>
-											</h2>
-											<h2>
-												<span class="f-white">자유롭게, 다양하게</span>
-											</h2>
-											<h2>
-												<span class="f-white">여러 사람들과 소통해보세요!</span>
-											</h2>
-											
-											<button type="button" class="main-img-btn fc-5" id="communityView">커뮤니티</button>
-										</div>
-										<div class="col-sm-6">
-											<img src="" class="girl img-responsive" alt="" />
-										</div>
+
+							<div class="item">
+									<div class="main-slider-wrap m-slider-img2">
+
+									<div class="col-sm-6">
+										<h2>
+											<span class="f-white">거리두기 끝!!</span>
+										</h2>
+										<h2>
+											<span class="f-white">다 같이 모여서</span>
+										</h2>
+										<h2>
+											<span class="f-white">다양한 사람들과</span>
+										</h2>
+										<h2>
+											<span class="f-white">함께 해요!</span>
+										</h2>
+										
+										<button type="button" class="main-img-btn fc-5" style="margin-top:30px;" id="classView">클래스</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="" class="girl img-responsive" alt="" />
 									</div>
 								</div>
 							</div>
 
-							<a href="#slider-carousel"
-								class="left control-carousel hidden-xs" data-slide="prev"> <i
-								class="fa fa-angle-left"></i>
-							</a> <a href="#slider-carousel"
-								class="right control-carousel hidden-xs" data-slide="next">
-								<i class="fa fa-angle-right"></i>
-							</a>
+							<div class="item">
+									<div class="main-slider-wrap m-slider-img3">
+
+									<div class="col-sm-6">
+										<h2>
+											<span class="f-white">당신의 일상과 생각을 자유롭게</span>
+										</h2>
+										<h2>
+											<span class="f-white">자유롭게, 다양하게</span>
+										</h2>
+										<h2>
+											<span class="f-white">여러 사람들과 소통해보세요!</span>
+										</h2>
+										
+										<button type="button" class="main-img-btn fc-5" id="communityView">커뮤니티</button>
+									</div>
+									<div class="col-sm-6">
+										<img src="" class="girl img-responsive" alt="" />
+									</div>
+								</div>
+							</div>
 						</div>
+
+						<a href="#slider-carousel"
+							class="left control-carousel hidden-xs" data-slide="prev"> <i
+							class="fa fa-angle-left"></i>
+						</a> <a href="#slider-carousel"
+							class="right control-carousel hidden-xs" data-slide="next">
+							<i class="fa fa-angle-right"></i>
+						</a>
 					</div>
 				</div>
-			</section>
-		</div>
-		<!--/slider-->
+			</div>
+		</section>
+	</div> <!--/slider-->
 	<div class="container" style="text-align: left;">
 		<h2 class="fs-bold">다양한 카테고리에서 원하는 서비스를 찾아보세요!</h2>
-		<div>
-			<table class="cate-icon">
-				<tr class="cat-img-wrap">
-						<td>
-							<button type="button" class="btm_image" id="img_btn1" onclick="location.href='/ExpertList.do?reqPage=1&selPro=전체'">
-							<img src="./img/category/전체.png">
-							<h3>전체</h3>
-							</button>
-						</td>
-					<td><button type="button" class="btm_image" id="img_btn2" onclick="location.href='/ExpertList.do?reqPage=1&selPro=법률'"><img src="./img/category/법률.png"><h3>법률</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn3" onclick="location.href='/ExpertList.do?reqPage=1&selPro=비즈니스'"><img src="./img/category/비즈니스.png"><h3>비즈니스</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn4" onclick="location.href='/ExpertList.do?reqPage=1&selPro=심리/헬스'"><img src="./img/category/심리_헬스.png"><h3>심리/헬스</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn5" onclick="location.href='/ExpertList.do?reqPage=1&selPro=학습'"><img src="./img/category/학습.png"><h3>학습</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn6" onclick="location.href='/ExpertList.do?reqPage=1&selPro=금융'"><img src="./img/category/금융.png"><h3>금융</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn7" onclick="location.href='/ExpertList.do?reqPage=1&selPro=라이프'"><img src="./img/category/라이프.png"><h3>라이프</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn8" onclick="location.href='/ExpertList.do?reqPage=1&selPro=취미'"><img src="./img/category/취미.png"><h3>취미</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn9" onclick="location.href='/ExpertList.do?reqPage=1&selPro=어학'"><img src="./img/category/어학.png"><h3>어학</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn10" onclick="location.href='/ExpertList.do?reqPage=1&selPro=레저'"><img src="./img/category/레저.png"><h3>레저</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn11" onclick="location.href='/ExpertList.do?reqPage=1&selPro=IT/테크'"><img src="./img/category/it.png"><h3>IT/테크</h3></button></td>
-					<td><button type="button" class="btm_image" id="img_btn12" onclick="location.href='/ExpertList.do?reqPage=1&selPro=자기계발'"><img src="./img/category/자기개발.png"><h3>자기계발</h3></button></td>
-				</tr>
-			</table>
+		<div class="img-btn-all-wrap">
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn1" onclick="location.href='/ExpertList.do?reqPage=1&selPro=전체'">
+					<img class="icon-img" id="icon-img1" name="전체" src="./img/category/전체.png">
+					<img class="icon-img2" src="./img/category/전체b.png" style="display: none">
+					<h3 id="icon-name1">전체</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn2" onclick="location.href='/ExpertList.do?reqPage=1&selPro=법률'">
+					<img class="icon-img" id="icon-img2" name="법률" src="./img/category/법률.png" >
+					<h3 id="icon-name2">법률</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn3" onclick="location.href='/ExpertList.do?reqPage=1&selPro=비즈니스'">
+					<img class="icon-img" id="icon-img3" name="비즈니스" src="./img/category/비즈니스.png">
+					<h3 id="icon-name3">비즈니스</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn4" onclick="location.href='/ExpertList.do?reqPage=1&selPro=심리/헬스'">
+					<img class="icon-img" id="icon-img4" name="심리_헬스" src="./img/category/심리_헬스.png">
+					<h3 id="icon-name4">심리/헬스</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn5" onclick="location.href='/ExpertList.do?reqPage=1&selPro=학습'">
+					<img class="icon-img" id="icon-img5" name="학습" src="./img/category/학습.png">
+					<h3 id="icon-name5">학습</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn6" onclick="location.href='/ExpertList.do?reqPage=1&selPro=금융'">
+					<img class="icon-img" id="icon-img6" name="금융" src="./img/category/금융.png">
+					<h3 id="icon-name6">금융</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn7" onclick="location.href='/ExpertList.do?reqPage=1&selPro=라이프'">
+					<img class="icon-img" id="icon-img7" name="라이프" src="./img/category/라이프.png">
+					<h3 id="icon-name7">라이프</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn8" onclick="location.href='/ExpertList.do?reqPage=1&selPro=취미'">
+					<img class="icon-img" id="icon-img8" name="취미" src="./img/category/취미.png">
+					<h3 id="icon-name8">취미</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn9" onclick="location.href='/ExpertList.do?reqPage=1&selPro=어학'">
+					<img class="icon-img" id="icon-img9" name="어학" src="./img/category/어학.png">
+					<h3 id="icon-name9">어학</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn10" onclick="location.href='/ExpertList.do?reqPage=1&selPro=레저'">
+					<img class="icon-img" id="icon-img10" name="레저" src="./img/category/레저.png">
+					<h3 id="icon-name10">레저</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn11" onclick="location.href='/ExpertList.do?reqPage=1&selPro=IT/테크'">
+					<img class="icon-img" id="icon-img11" name="it" src="./img/category/it.png">
+					<h3 id="icon-name11">IT/테크</h3>
+				</button>
+			</div>
+			<div class="img-btn-wrap">
+				<button type="button" class="img-btn" id="img_btn12" onclick="location.href='/ExpertList.do?reqPage=1&selPro=자기계발'">
+					<img class="icon-img" id="icon-img12" name="자기개발" src="./img/category/자기개발.png">
+					<h3 id="icon-name12">자기계발</h3>
+				</button>
+			</div>
 		</div>
 	</div>
 	
@@ -553,6 +622,17 @@
 			}
 		});
 	});
+	
+	
+	
+	$('#icon-img1').hover(function() {
+		$('#icon-img1').attr("src", "./img/category/전체b.png");
+		$('#icon-name1').css("color", "#3865f2");
+	}, function() {
+		$('#icon-img1').attr("src", "./img/category/전체.png");
+		$('#icon-name1').css("color", "#333333");
+	});
+	
 </script>
 
 </body>

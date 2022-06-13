@@ -61,6 +61,10 @@ display: flex;
 	color: #878686; 
 	font-size: 16px;
 	}
+	#report{
+	 line-height: 3;
+	 font-size : 16px;
+	}
 </style>
 <link rel="stylesheet" href="css/report.css" />
 <script src="js/report.js"></script>
@@ -68,17 +72,17 @@ display: flex;
 	
 	<div class="container">
 		<div class="category">
-			<h1>${req.reqCategory}</h1>
+			<h1 style="font-weight:bold;">${req.reqCategory}</h1>
 		</div>
 		<div class="title">
 			<h2>${req.reqTitle }</h2>
 		</div>
-		<div class="writer" style="margin: 0px 0px 0px 0px;">
+		<div class="writer" style="margin: 0px 0px 20px 0px;">
 		<div>		
 			<img src="./img/member/${req.memberPicturepath}">
 		</div>
 		<div style="margin: 20px 0px 0px 30px;">
-		<div class="writername">
+		<div class="writername" style="font-weight:bold; font-size:16px;">
 			${req.reqNick }
 		</div>
 		<div class="date" style="margin: 10px 0px 0px 0px;">
@@ -93,9 +97,9 @@ display: flex;
 	
 		</div>
 		</div>
-		<div class="content" style="top-bottom: 1px solid rgba(220, 220, 220, 0.59);">
-		 <h1>요구사항</h1>
-		 <div>
+		<div class="content" style="border-top: 2px solid rgba(220, 220, 220, 0.59);">
+		 <h1 style="font-weight:bold;">요구사항</h1>
+		 <div style="min-height: 300px; margin: 30px 0px 0px 0px; font-size:20px">
 		 ${req.reqContent }
 		 </div>
 		</div>
@@ -111,43 +115,45 @@ display: flex;
 			</form>
 			</c:if>
 		
-		
+		<div style="display: flex; justify-content: space-between; border-bottom: 2px solid rgba(220, 220, 220, 0.59);">
 		<div class="tag-list-wrap">
 			<ul>
 			<c:forEach items="${Tag}" var="tag" step="1">
-				<li class="tag-li">
+				<li class="tag-li" style="font-size:20px; line-height: 2.5;">
 				${tag }
 				</li>
 			</c:forEach>
 			</ul>
 		</div>
-		
-		
 		<div class="reportbutton">
-		<ul>
-			<li><img id="icon-report" src="img/product/icon-report.png"></li>
+		<ul style="padding-left: 0px; width: 130px; display: flex; justify-content: space-between;">
+		<li>
+			<span>
+			<img id="icon-report" src="img/product/icon-report.png">
 			<c:choose>
 				<c:when test="${memberNo ne 0 }">
 					<li>
 						<span id="report">
-							<a onclick="report('${req.memberNo }','2','${req.reqNo }')">신고</a>
+							<a onclick="report('${req.memberNo }','2','${req.reqNo }')">신고하기</a>
 						</span>
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li><span id="report"><a onclick="loginNeed();">신고</a></span></li>
+					<li><span id="report"><a onclick="loginNeed();">신고하기</a></span></li>
 				</c:otherwise>
 			</c:choose>
+			</span>
 			</ul>
+			</div>
 			</div>
 			
 	
 	<c:choose>
 	<c:when test="${se eq 0 }">
-		<h1>제안한 전문가</h1>
+		<h1 style="font-weight:bold;">제안한 전문가</h1>
 	</c:when>
 	<c:otherwise>
-	<h1>선택받은 전문가</h1>
+	<h1 style="font-weight:bold;">선택받은 전문가</h1>
 	</c:otherwise>
 	</c:choose>
 	<div class="posting-wrap">

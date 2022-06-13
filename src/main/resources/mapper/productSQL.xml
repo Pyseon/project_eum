@@ -215,6 +215,7 @@
   			#{productImgname},
   			null,
   			null,
+  			null,
   			null
   			)
   </insert>

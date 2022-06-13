@@ -118,6 +118,7 @@ public class ManagerController {
 		model.addAttribute("list", rpd.get("reportList"));
 		model.addAttribute("pageNavi",rpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
 		return "manager/managementReport";
 	}
 	

@@ -142,9 +142,9 @@ public class RequestController {
 		return "request/updateRequestFrm";
 	}
 	@RequestMapping(value = "/updateRequest.do")
-	public String updateRequest(Request request) {
-		int result = service.updateRequest(request);
-		System.out.println("request : "+request);
-		return "redirect:/requestDetail.do?reqNo="+request.getReqNo();
+	public String updateRequest(int reqNo, String reqTitle, String reqContent) {
+		System.out.println(reqNo+ reqTitle+ reqContent);
+		int result = service.updateRequest(reqNo, reqTitle, reqContent);
+		return "redirect:/requestDetail.do?reqNo="+reqNo;
 	}
 }

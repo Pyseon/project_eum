@@ -197,8 +197,12 @@ public int deleteRequest(int reqNo) {
 }
 
 
-public int updateRequest(Request request) {
-	return dao.updateRequest(request);
+public int updateRequest(int reqNo, String reqTitle, String reqContent) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("reqNo", reqNo);
+	map.put("reqTitle", reqTitle);
+	map.put("reqContent", reqContent);
+	return dao.updateRequest(map);
 }
 
 /*

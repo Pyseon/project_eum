@@ -2,6 +2,11 @@
 
 /*현재 main.css에 이미 작업한 상태라 추가로 필요한 부분만 여기에 적음*/
 
+.manager-leftmenuWrap {
+	background: aqua;
+	z-index: 10000000;
+}
+
 #resultTbl-wrap{
 	padding: 10px;
 }

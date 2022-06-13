@@ -433,6 +433,14 @@ public class ManagerService {
 		return dao.selectMyRefuseExpert(expertNo);
 	}
 
+	public int deleteBeforeExpert(int memberNo) {
+		return dao.deleteBeforeExpert(memberNo);
+	}
+
+	public int selectMemberNo(int expertNo) {
+		return dao.selectMemberNo(expertNo);
+	}
+
 	
 	
 }

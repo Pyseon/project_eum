@@ -454,6 +454,10 @@ public class ManagerController {
 		map.put("selectNum", 1);
 		int result = service.updateExpertApp(map);
 		int result2 = service.updateMemberGrade(expertNo);
+		int memberNo = service.selectMemberNo(expertNo);
+		if(result > 0) {
+			int result3 = service.deleteBeforeExpert(memberNo);
+		}
 		return "redirect:/manaExpert.do?reqPage=1&selectNum=0";
 	}
 	@RequestMapping(value ="/appExpertList.do" )

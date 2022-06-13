@@ -21,9 +21,9 @@
 		<div class="selectListBtn">
 			<ul>
 				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=0'">전체</button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=1'">대기</button></li>
 				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=2'">승인</button></li>
-				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=3'">기각</button></li>
-				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=1'">대기 </button></li>
+				<li><button class="btn btn99 select-btn" onclick="location.href='manaExpert.do?reqPage=1&selectNum=3'">기각 </button></li>
 			</ul>
 		</div>
 		<div class="searchBox">

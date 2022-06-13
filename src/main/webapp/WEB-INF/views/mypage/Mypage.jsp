@@ -40,7 +40,7 @@
 									<div class="content-box">	
 										<!--  <input  class="input-form" type="text" name="memberNick" id="nick" placeholder="">							
 										<div class="fs-light" id="memberNick-test"></div><br>-->
-										<input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="${sessionScope.member.memberNick}">
+										<input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" value="${sessionScope.member.memberNick}">
 												<div class="fs-light" id="memberNick-test"></div><br>
 									</div>
 								</div> <%--mypage-content --%>
@@ -67,7 +67,7 @@
 										<label for="phone">연락처* </label>
 									</div>
 									<div class="content-box">	
-										<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" placeholder="${sessionScope.member.memberPhone}">
+										<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" value="${sessionScope.member.memberPhone}">
 										<div class="fs-light" id="memberPhone-test"></div><br>
 									</div>
 									

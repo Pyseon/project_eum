@@ -212,7 +212,10 @@
   			#{sale},
   			#{productOption},
   			#{productImgPath},
-  			#{productImgname}
+  			#{productImgname},
+  			null,
+  			null,
+  			null
   			)
   </insert>
   

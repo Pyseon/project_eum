@@ -65,11 +65,13 @@ public class ProductService {
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
-			
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage=1&selPro="+selPro+"'>";
 			pageNavi += "<li>";
 			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
+			
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {

@@ -61,9 +61,8 @@
   		req_accept as reqAccept,
   		req_rfr as reqRfr,
   		req_accept as reqAccept,
-  		member_picturepath as memberPicturepath,
-  		req_ask as reqAsk
-  	from request_tbl
+  		member_picturepath as memberPicturepath
+  	from request_tbl 
   	join member_tbl using(member_no)
   	where req_no=#{reqNo}
   	</select>
@@ -110,7 +109,7 @@
   	<select id="selectExpert" parameterType="int" resultType="int">
   		select
   		select_Expert as selectExpert
-  		from reqask_tbl
-  		where req_no = #{value}
+  		from reqask_tbl 
+  		where req_no = #{value} and rownum = 1
   	</select>
 </mapper>

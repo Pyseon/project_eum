@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="css/mypage.css" />
 </head>
 <body>
-<%@ include file="/WEB-INF/views/common/header.jsp" %>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
 		<%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
 		<div class="col-lg-8 posts-list">
@@ -36,7 +36,7 @@
 									<div class="content-box">	
 										<!--  <input  class="input-form" type="text" name="memberNick" id="nick" placeholder="">							
 										<div class="fs-light" id="memberNick-test"></div><br>-->
-										닉네임* <input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="${sessionScope.member.memberNick}">
+										<input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="${sessionScope.member.memberNick}">
 												<div class="fs-light" id="memberNick-test"></div><br>
 									</div>
 								</div> <%--mypage-content --%>

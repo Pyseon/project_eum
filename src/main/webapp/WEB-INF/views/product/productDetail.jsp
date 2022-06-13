@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="css/product.css" />
 <link rel="stylesheet" href="css/report.css" />
 <script src="js/report.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<div class="header-div"><%@ include file="/WEB-INF/views/common/header.jsp"%></div>

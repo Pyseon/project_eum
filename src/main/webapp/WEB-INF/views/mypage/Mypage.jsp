@@ -17,14 +17,18 @@
 				<div class="content-title">> 내 정보
 					<div id="star">*는 필수 입력사항입니다.</div>
 				</div>
-						<form class="joinfrmbox" action="/updateMember.do" method="post">
+						<form class="joinfrmbox" action="/updateMember.do" method="post" method="post" enctype="multipart/form-data">
 						<fieldset>
 							<div class="content-all-wrap">
 								<div class="mypage-content">
+									<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
+									<input type="hidden" name="birth" value="${sessionScope.member.birth}">
+										<input type="hidden" name="enrollDate" value="${sessionScope.member.enrollDate}">
 									<div class="content-box-title-wrap">
 										<label for="email">이메일*</label>
 									</div>
 									<div class="content-box">
+									
 										<input class="input-form" type="text" name="memberId" id="email" value="${sessionScope.member.memberId}" readonly>
 									</div>
 								</div> <%--mypage-content --%>
@@ -66,6 +70,19 @@
 										<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" placeholder="${sessionScope.member.memberPhone}">
 										<div class="fs-light" id="memberPhone-test"></div><br>
 									</div>
+									
+									<div class="img-box-wrap" style="margin:30px 10px;">
+							<div class="commFileBox preview-image" style="margin-right: 10px;">
+								<p class="comm-write-p" style="margin-bottom: 5px;">프로필사진 등록</p>
+								<label for="input-file">사진 선택</label> <input type="file"
+									name="file" class="commFile upload-hidden"
+									id="input-file">
+							</div>
+							<div class="input-img-box" style="width: 80px; height:80px;"></div>
+							
+						</div>
+									
+									
 								</div>
 							</div><!-- content-all-wrap -->	
 							<div class="birthbox">

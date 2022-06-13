@@ -55,6 +55,10 @@
 	<!-- 재민 -->
 	<update id="updateMember" parameterType="m" >
 	update member_tbl set 
+	
+		member_picturename =#{memberPictureName},
+ 		member_picturepath =#{memberPicturePath},
+		
 		member_nick=#{memberNick}, 
 		member_pw=#{memberPw},
 		member_Id=#{memberId}, 

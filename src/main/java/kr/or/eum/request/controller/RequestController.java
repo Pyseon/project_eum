@@ -74,7 +74,7 @@ public class RequestController {
 		
 		int result = service.insertReqask(reqNo, expertNo);
 		
-		return "request/requestDetail";
+		return "redirect:/requestDetail.do?reqNo="+reqNo;
 	}
 	
 	@RequestMapping(value = "/requestDetail.do")
@@ -96,6 +96,13 @@ public class RequestController {
 					if(expert != null) {
 					model.addAttribute("expertNo", expert.getExpertNo());
 					System.out.println("expert : "+expert);
+					int existReqAsk = service.selectExistReqAsk(expert.getExpertNo(), reqNo);
+					if(existReqAsk != 0) {
+						model.addAttribute("existReqAsk", 1);
+					}else {
+						model.addAttribute("existReqAsk", 0);
+					}
+					
 					}else {
 					model.addAttribute("expertNo", 0);
 				}

@@ -129,4 +129,8 @@
   		req_content = #{reqContent}
   		where req_no = #{reqNo}
   	</update>
+  	
+  	<select id="selectExistReqAsk" parameterType="map" resultType="int">
+  		select count(*) from reqask_tbl where req_no = #{reqNo} and expert_no = #{expertNo}
+  	</select>
 </mapper>

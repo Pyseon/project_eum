@@ -98,6 +98,11 @@ public class RequestDao {
 		int result = sqlSession.update("request.updateRequest", map);
 		return result;
 	}
+
+	public int selectExistReqAsk(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("request.selectExistReqAsk", map);
+		return result;
+	}
 	
 
 	

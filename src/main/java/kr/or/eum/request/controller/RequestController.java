@@ -113,15 +113,33 @@ public class RequestController {
 				model.addAttribute("se", selectExpert);
 			}
 		return "request/requestDetail";
-		
 	}
 	
 	@RequestMapping(value = "/selectExpert.do")
-		public String selectExpert(int reqNo, int expertNo) {
-			int result = service.updateSelectExpert(reqNo);
-			int result2 = service.deleteUnselectExpert(reqNo, expertNo);
-			return "redirect:/requestDetail.do?reqNo="+reqNo;
+	public String selectExpert(int reqNo, int expertNo) {
+		int result = service.updateSelectExpert(reqNo);
+		int result2 = service.deleteUnselectExpert(reqNo, expertNo);
+		return "redirect:/requestDetail.do?reqNo="+reqNo;
+	}
+	@RequestMapping(value = "/deleteRequest.do")
+	public String deleteRequest(int reqNo) {
+		int result = service.deleteRequest(reqNo);
+		return "redirect:/requestList.do?reqPage=1&selReq=전체";
+	}
+	@RequestMapping(value = "/updateRequestFrm.do")
+	public String updateRequestFrm(HttpServletRequest request, int reqNo, Model model) {
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");
 		}
-	
-	
+		RequestDetailData rdd = service.selectOneRequest(reqNo, member);
+		
+		return "request/updateRequestFrm";
+	}
+	@RequestMapping(value = "/updateRequest.do")
+	public String updateRequest(Request request) {
+		int result = service.updateRequest(request);
+		return "redirect:/requestDetail.do?reqNo="+request.getReqNo();
+	}
 }

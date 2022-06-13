@@ -191,6 +191,16 @@ public int selectExpertIs(int reqNo) {
 	return dao.selectExpertIs(reqNo);
 }
 
+
+public int deleteRequest(int reqNo) {
+	return dao.deleteRequest(reqNo);
+}
+
+
+public int updateRequest(Request request) {
+	return dao.updateRequest(request);
+}
+
 /*
 
 	public Request selectOneRequest(int memberNo) {

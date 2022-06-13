@@ -83,6 +83,11 @@ public class RequestDao {
 		int selectExpert = sqlSession.selectOne("request.selectExpert", reqNo);
 		return selectExpert;
 	}
+
+	public int selectExpertIs(int reqNo) {
+		int result = sqlSession.selectOne("request.selectExpertIs", reqNo);
+		return result;
+	}
 	
 
 	

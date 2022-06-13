@@ -186,6 +186,11 @@ public int selectExpert(int reqNo) {
 	return dao.selectExpert(reqNo);
 }
 
+
+public int selectExpertIs(int reqNo) {
+	return dao.selectExpertIs(reqNo);
+}
+
 /*
 
 	public Request selectOneRequest(int memberNo) {

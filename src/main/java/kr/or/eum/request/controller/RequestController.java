@@ -66,7 +66,7 @@ public class RequestController {
 		
 		int result = service.requestWrite(req);
 		
-		return "request/requestWriterFrm";
+		return "redirect:/requestList.do?reqPage=1&selReq=%EC%A0%84%EC%B2%B4";
 	}
 	
 	@RequestMapping(value="insertreqask.do")

@@ -360,7 +360,7 @@ public class ProductService {
 		}
 		int reviewCount = productDao.selectReviewCount(productNo);
 		int paymentCount = productDao.selectPaymentExpertNoCount(productNo);
-		int cost = product.getCost()*product.getSale()/100;
+		int cost = (product.getCost()-(product.getCost()*product.getSale()/100));
 		String[] tag = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
 		int wishCount = productDao.selectwish(productNo);

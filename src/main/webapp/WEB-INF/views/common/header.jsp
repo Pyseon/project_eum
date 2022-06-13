@@ -97,8 +97,14 @@
 											</c:if>
 											</li>
 											
-											
-										<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">마이페이지</a></li>
+											<c:choose>
+												<c:when test="${sessionScope.member.grade eq 0 }">
+													<li><a href="manaMember.do?reqPage=1&selectNum=0">관리자페이지</a></li>
+												</c:when>
+												<c:otherwise>
+													<li><a href="/Mypage.do?memberNo=${sessionScope.member.memberNo}">마이페이지</a></li>
+												</c:otherwise>
+											</c:choose>
 										<li>
 											<button class="btn bc2 bs6" id="login-btn" type="button"
 												onclick="location.href='/logout.do'">로그아웃</button>

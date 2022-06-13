@@ -306,7 +306,7 @@
 					review_tbl where review_no = #{reportIndex }
 				</when>
 				<when test="category == 2">
-					request_tbl where request_no = #{reportIndex }
+					request_tbl where req_no = #{reportIndex }
 				</when>
 				<when test="category == 3">
 					community_tbl where comm_no = #{reportIndex }

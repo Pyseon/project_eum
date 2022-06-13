@@ -92,9 +92,9 @@ display: flex;
 		<div style="margin: 70px 0px 0px 680px; display: flex; justify-content: space-between;">
 		
 			<c:if test="${sei eq 0 }">
-				<button class="btn bc1 bs4" onclick="location.href='/updateRequestFrm.do?reqNo=${req.reqNo }'" style="width:100%; height:40px;">수정하기</button>
+				<button class="btn bc1 bs4 reqbtn" onclick="location.href='/updateRequestFrm.do?reqNo=${req.reqNo }'" style="width:100%; height:40px;">수정하기</button>
 				
-				<button class="btn bc1 bs4" onclick="location.href='/deleteRequest.do?reqNo=${req.reqNo}'" style="width:100%; height:40px; margin-left:10px;">취소하기</button>	
+				<button class="btn bc1 bs4 reqbtn" onclick="location.href='/deleteRequest.do?reqNo=${req.reqNo}'" style="width:100%; height:40px; margin-left:10px;">취소하기</button>	
 			</c:if>
 
 	
@@ -113,7 +113,7 @@ display: flex;
 				<input type="hidden" name="expertNo" value="${expertNo }">
 				<input type="hidden" name='reqNo' value="${req.reqNo }">
 			
-				<input type="submit" class="btn bc1 bs4" value="제안하기" style="width:10%; height:40px; margin: 0px 0px 20px 0px">
+				<input type="submit" id="submit"class="btn bc1 bs4" value="제안하기" style="width:10%; height:40px; margin: 0px 0px 20px 0px">
 				</div>
 			</form>
 			</c:if>

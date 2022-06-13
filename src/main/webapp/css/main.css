@@ -2505,7 +2505,7 @@ textarea {
 }
 
 .manager-leftmenu{
-  position: fixed;
+  position: absolute;
   text-align: center;
 }
 

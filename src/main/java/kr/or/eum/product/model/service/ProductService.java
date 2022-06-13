@@ -238,6 +238,7 @@ public class ProductService {
 	
 	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
+		
 		Product product=setToken(pro);
 		int result = productDao.classWrite(product);
 		
@@ -284,6 +285,7 @@ public class ProductService {
 			productQst += qstList.get(i)+"/";
 		}
 		
+		System.out.println("최종값>>"+productQst);
 		
 		String productAns = pro.getProductAns();
 		List<String> ansList = new ArrayList<String>();
@@ -302,15 +304,16 @@ public class ProductService {
 		for(int i=0;i<ansList.size();i++){
 			productAns += ansList.get(i)+"/";
 		}
-		
-		
+		System.out.println("최종값>>"+productAns);
+//////////////////////////////////////////////////////////////////////////////		
 		String productTag = pro.getProductTag();
 		List<String> tagList = new ArrayList<String>();
 		
 		String []tokens3=productTag.split("\\|");
 		
 		for(int i=0;i<tokens3.length;i++){
-			if(tokens3[i] == null || tokens3[i].trim().length() < 2) {
+			if(tokens3[i] == null || tokens3[i].trim().length() < 1) {//null 또는 공백제거후 1글자 일때
+				
 			}else {
 				if(tokens3[i].indexOf(",") == 0) {
 					tagList.add(tokens3[i].replaceFirst(",", ""));
@@ -324,10 +327,6 @@ public class ProductService {
 			productTag += "#"+tagList.get(i)+"/";
 		}
 		
-	
-		
-		System.out.println("최종값>>"+productQst);
-		System.out.println("최종값>>"+productAns);
 		System.out.println("최종값>>"+productTag);
 		
 		pro.setProductQst(productQst);

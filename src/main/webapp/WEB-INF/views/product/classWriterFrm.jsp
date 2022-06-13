@@ -98,7 +98,7 @@
 	<div class="container">
 	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">상담 등록하기</h1>
-		<form action="/classWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+		<form action="/classWrite.do" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="expertNo" value="${expertNo }">
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
@@ -129,16 +129,16 @@
 		</select>
 		
 		<div class="title" style="margin-bottom: 20px">
-			<div><h3>상담명</h3></div>
+			<div><h3>클래스명</h3></div>
 			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
-			<div><h3>상담 간단한 소개</h3></div>
+			<div><h3>클래스 간단한 소개</h3></div>
 			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" required>
 		</div>
 		<div class="content" style="margin-bottom: 20px">
-			<div><h3>상담 상세 설명</h3></div>
-			<textarea id="summernote" name="productContent" class="input-form"></textarea>
+			<div><h3>클래스 상세 설명</h3></div>
+			<textarea id="summernote" name="productContent" class="input-form" required></textarea>
 		</div>
 		
 						<div class="img-box-wrap">
@@ -203,7 +203,7 @@
 		<div style="margin-bottom: 20px">
 		<div>
 		<span>
-			<h3>태그
+			<h3>태그(특수문자불가)
 			<button type="button" class="addOptBtn2 optButton" style="line-height: 2;">
 					<i class="fa-solid fa-square-plus"></i>
 			</button>
@@ -212,7 +212,7 @@
 			</div>
 			<div id="tag-opt">
 			<span style="display: flex;"> 
-			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 20%; height: 33px"required>
+			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 20%; height: 33px" onkeydown="checkSpacebar();" onkeyup="checkSpacebar();" required>
 			</span>
 			</div>
 		</div>
@@ -360,7 +360,7 @@
         if(tagCount >= 20) return;
         var tagDiv = document.createElement("div");
         tagDiv.setAttribute("class","optBox");
-        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19.5%; required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" id="tag22" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19.5%;  onkeydown="checkSpacebar();" onkeyup="checkSpacebar();" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
         $("#tag-opt").append(tagDiv);
         tagCount++;
         
@@ -372,6 +372,42 @@
               tagCount--;
         });
     });
+    
+    //스페이스바 금지 함수
+    function checkSpacebar(){
+    	  var kcode = event.keyCode;
+    	  if(kcode == 32) event.returnValue = false;
+    	}
+    
+    
+    // 특수문자 정규식 변수(공백 미포함)
+   var replaceChar = /[\s~!@\#$%^&*\()\-=+_'\;<>0-9\/.\`:\"\\,\[\]?|{}]/gi;
+ 
+    // 완성형 아닌 한글 정규식
+        
+        $(document).on("keyup",".tag-val", function() {
+        	
+            var x = $(this).val();
+            
+            if (x.length > 0) {
+                if (x.match(replaceChar)) {
+                    x = x.replace(replaceChar, "");
+                    tagList[$(".tag-val").index(this)] = "";
+                }
+                $(this).val(x);
+            }
+            }).on("keyup", function() {
+                $(this).val($(this).val().replace(replaceChar, ""));
+                tagList[$(".tag-val").index(this)] = "";
+
+       });
+
+    
+    
+    
+    
+    
+    
 	</script>
 	
 

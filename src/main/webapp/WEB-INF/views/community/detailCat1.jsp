@@ -485,6 +485,9 @@ $(function(){
 		console.log(commNo);
 		console.log(memberNo);
 		console.log(pickCategory);
+		if(pickContent == ""){
+			return;
+		}
 		
 		$.when(ajax1(commNo, memberNo, pickContent, pickCategory)).done(function(){
 			console.log("스크롤 실행go");
@@ -792,7 +795,9 @@ function toastShow(title, icon){
 			   div.scrollTop = div.scrollHeight - div.clientHeight;
 			}
 		function scrollToBottom() {
+			console.log("스크 함수수수");
 			 $("#pickBox").scrollTop($("#pickBox")[0].scrollHeight); 
+			 $(".attr-wrap").scrollTop($(".attr-wrap")[0].scrollHeight); 
 		}
 
 		

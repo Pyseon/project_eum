@@ -107,6 +107,7 @@ public class ProductController{
 	
 	@RequestMapping(value="/classWrite.do")
 		public String classWrite(Product pro, MultipartFile file, HttpServletRequest request) {
+		System.out.println("=======>?>>"+pro);
 		System.out.println(pro.getProductImgname());
 		System.out.println(pro.getProductImgPath());
 		System.out.println(file.getOriginalFilename());

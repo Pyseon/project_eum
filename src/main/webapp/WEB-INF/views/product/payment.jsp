@@ -218,7 +218,7 @@
 		</div>
 	</div>
 	<button class="btn bc1 bs4" id="purchase-btn"  type="buttion">구매하기</button>
-	<button class="btn bc2 bs4" id="purchase-btn" onclick="location.href='/purchaseFailed.do'" type="submit">실패하기</button>
+	<br><button class="btn bc4 bs4" id="purchase-btn2"  type="buttion">구매하기테스트!</button>
 </div>
 <%@ include file="/WEB-INF/views/common/footer.jsp"%>
 <script>
@@ -251,23 +251,32 @@
 					const memberNo = ${sessionScope.member.memberNo};
 					const productNo = ${product.productNo};
 					const payState = 1;
-					const payMethod = "신용카드";
+					const payMethod = '카드';
 					//const payDate = 오늘날짜;
-					const payment = finalPrice;
-					const payUsepoint =$("[name=memberPoint]");
-					const payAddpoint = null;
+					const payment = payPrice;
+					const payUsepoint =	0;//$("[name=memberPoint]");
+					const payAddpoint = 0;//parseInt(payPrice*0.02);
 					//counserl_tbl
 					//상담번호
 					//주문번호
 					//회원번호
-					//전문가회원번호
+					const expertNo = ${product.expertNo};
 					const limitTime = ${product.productOption};
 					const startTime = null;
 					//상담 counsel_tbl추가용
-					const prductType = ${product.productType};
-					$.ajax({
+					const productType = ${product.productType};
+					console.log("ajax실행");
+					console.log(memberNo);
+					console.log(productNo);
+					console.log(payState);
+					console.log(payMethod);
+					console.log(payment);
+					console.log(payUsepoint);
+					console.log(payAddpoint);
+					$.ajax({						
 						url: "/paymentResult.do",
 						type: "post",
+						//dataType: "json",
 						data: {
 							memberNo:memberNo,
 							productNo:productNo,
@@ -276,6 +285,7 @@
 							payment:payment,
 							payUsepoint:payUsepoint,
 							payAddpoint:payAddpoint,
+							expertNo:expertNo,
 							limitTime:limitTime,
 							startTime:startTime,
 							productType:productType
@@ -286,6 +296,7 @@
 								const icon = "success";
 								const msgTime = 1500;
 								toastShow(title,icon, msgTime);
+								location.replace("/purchaseSuccess.do");
 							}else if(data == "0"){
 								const title = "결제에 실패했습니다.";
 								const icon = "error";
@@ -390,6 +401,75 @@
 	  })
 	
 	}
+	//임시구매
+	$("#purchase-btn2").click(function(){
+		if(checkInput&&pointUse){
+			const payPrice = $("#final-price").val();
+			console.log(payPrice);
+	
+			const memberNo = ${sessionScope.member.memberNo};
+			const productNo = ${product.productNo};
+			const payState = 1;
+			const payMethod = '카드';
+			//const payDate = 오늘날짜;
+			const payment = payPrice;
+			const payUsepoint =	$("[name=memberPoint]").val();
+			const payAddpoint = parseInt(payPrice*0.02);
+			//counserl_tbl
+			//상담번호
+			//주문번호
+			//회원번호
+			const expertNo = ${product.expertNo};
+			const limitTime = ${product.productOption};
+			const startTime = null;
+			//상담 counsel_tbl추가용
+			const productType = ${product.productType};
+			console.log("ajax실행");
+			console.log(memberNo);
+			console.log(productNo);
+			console.log(payState);
+			console.log(payMethod);
+			console.log(payment);
+			console.log(payUsepoint);
+			console.log(payAddpoint);
+			$.ajax({						
+				url: "/paymentResult.do",
+				type: "post",
+				//dataType: "json",
+				data: {
+					memberNo:memberNo,
+					productNo:productNo,
+					payState:payState,
+					payMethod:payMethod,
+					payment:payment,
+					payUsepoint:payUsepoint,
+					payAddpoint:payAddpoint,
+					expertNo:expertNo,
+					limitTime:limitTime,
+					startTime:startTime,
+					productType:productType
+					},
+				success: function(data){
+					if(data == "1"){
+						const title = "결제가 완료되었습니다.";
+						const icon = "success";
+						const msgTime = 1500;
+						toastShow(title,icon, msgTime);
+						location.replace("/purchaseSuccess.do");
+					}else if(data == "0"){
+						const title = "결제에 실패했습니다.";
+						const icon = "error";
+						const msgTime = 1500;
+						toastShow(title,icon, msgTime);
+					}	
+				},
+				error : function(){
+					   console.log("서버요청실패");
+				}
+			});
+		}
+	});
+		
 </script>
 <script src="js/jquery.js"></script>
 <script src="js/bootstrap.min.js"></script>

@@ -14,7 +14,7 @@
 		<div class="userprofileBox">
 			<img class="userprofile" src="/images/home/girl1.jpg">
 			<div class="nick-wrap">
-				<h2 id="nick">DB로 바꾸세요</h2>
+				<h2 id="nick">${sessionScope.member.memberNick}</h2>
 			</div>
 		</div>
 		<ul class="menu-list-wrap">

@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 
 <div class="header-div">
@@ -24,10 +25,41 @@ display: flex;
 	border-radius: 50%;
 	}
 	.writer{
-	border-bottom: 2px solid rgba(220, 220, 220, 0.59);
+	
 	}
-	.reportbutton{
-	border-bottom: 2px solid rgba(220, 220, 220, 0.59);
+	.Ask{
+	 text-align: right;
+	}
+	.posting-item{
+	    box-sizing: border-box;
+	    width: 170px !important;
+	    padding: 10px !important;
+	    height: 250px !important;
+	    margin: 25px 10px 25px 10px;
+	    border-radius: 6px;
+	    background-color: #ffffff;
+	    box-shadow: 3px 3px 3px 3px #a1a1a1;
+	}
+	.posting-connect{
+    	padding-top: 10px;
+    	padding-right: 20px;
+   		padding-bottom: 20px;
+    	padding-left: 20px;
+}
+	.posting-connect > img{
+	width:100px;
+	height:100px;
+	vertical-align: middle;
+	border-radius: 50%;
+	margin: 5px 0px 20px 0px;
+	}
+	.expertName{
+	font-size: 20px;
+	margin: 0px 0px 7px 0px;
+	}
+	.expertCategory{
+	color: #878686; 
+	font-size: 16px;
 	}
 </style>
 <link rel="stylesheet" href="css/report.css" />
@@ -41,32 +73,45 @@ display: flex;
 		<div class="title">
 			<h2>${req.reqTitle }</h2>
 		</div>
-		<div class="writer">
-		<div>
-		
+		<div class="writer" style="margin: 0px 0px 0px 0px;">
+		<div>		
 			<img src="./img/member/${req.memberPicturepath}">
-		
 		</div>
-		<div>
+		<div style="margin: 20px 0px 0px 30px;">
 		<div class="writername">
 			${req.reqNick }
 		</div>
-		<div class="date">
+		<div class="date" style="margin: 10px 0px 0px 0px;">
 			요청일자 : ${req.reqDate }
 		</div>
 		</div>
-		<div>
-		<button type="button" class="writeButton" id="writeButton" onclick="#">수정하기</button>
-		<button type="button" class="writeButton" id="writeButton" onclick="#">취소하기</button>
+		<div style="margin: 70px 0px 0px 680px; display: flex; justify-content: space-between;">
+		
+		<button type="button" class="writeButton btn bc1 bs4" id="writeButton" onclick="#" style="width:100%; height:40px;">수정하기</button>
+		
+		<button type="button" class="writeButton btn bc1 bs4" id="writeButton" onclick="#" style="width:100%; height:40px; margin-left:10px;">취소하기</button>
+	
 		</div>
 		</div>
-		<div class="content">
-		 <h1>오구사항</h1>
+		<div class="content" style="top-bottom: 1px solid rgba(220, 220, 220, 0.59);">
+		 <h1>요구사항</h1>
+		 <div>
 		 ${req.reqContent }
+		 </div>
 		</div>
-		<div>
-			<button type="button" class="writeButton" id="writeButton" onclick="#">제안하기</button>
-		</div>
+		
+			<c:if test="${se eq 0 }">
+			<form action="/insertreqask.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+				<div class="Ask">
+				<input type="hidden" name="expertNo" value="${expertNo }">
+				<input type="hidden" name='reqNo' value="${req.reqNo }">
+			
+				<input type="submit" class="btn bc1 bs4" value="제안하기" style="width:10%; height:40px; margin: 0px 0px 20px 0px">
+				</div>
+			</form>
+			</c:if>
+		
+		
 		<div class="tag-list-wrap">
 			<ul>
 			<c:forEach items="${Tag}" var="tag" step="1">
@@ -76,33 +121,56 @@ display: flex;
 			</c:forEach>
 			</ul>
 		</div>
+		
+		
 		<div class="reportbutton">
+		<ul>
+			<li><img id="icon-report" src="img/product/icon-report.png"></li>
 			<c:choose>
 				<c:when test="${memberNo ne 0 }">
 					<li>
-						<span id="report"><a onclick="report('${req.memberNo }','2','${req.reqNo }')">신고</a></span>
+						<span id="report">
+							<a onclick="report('${req.memberNo }','2','${req.reqNo }')">신고</a>
+						</span>
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li>
-						<span id="report"><a onclick="loginNeed();">신고</a></span>
-					</li>
+					<li><span id="report"><a onclick="loginNeed();">신고</a></span></li>
 				</c:otherwise>
 			</c:choose>
-			<form action="/insertreqask.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-				<div>
-				<input type="text" name="expertNo" value="${expertNo }">
-				<input type="text" name='reqNo' value="${req.reqNo }">
-				
-				<input type="submit" class="btn bc1 bs4" value="등록하기">
-				</div>
-			</form>
-		</div>
+			</ul>
+			</div>
+			
+	
+	<c:choose>
+	<c:when test="${se eq 0 }">
+		<h1>제안한 전문가</h1>
+	</c:when>
+	<c:otherwise>
+	<h1>선택받은 전문가</h1>
+	</c:otherwise>
+	</c:choose>
+	<div class="posting-wrap">
 	<c:forEach items="${list }" var="c" varStatus="i">
+		<div class="posting-item" style="cursor: pointer;">
+		<div class="posting-connect" style="text-align: center;">
+		<img src="./img/member/${c.memberPicturepath}">
+		<div class="expertName fs-bold">
+		${c.expertName }
+		</div>
+		<div class="expertCategory">
+		${c.expertCategory }
+		</div>
 		<div>
-		${expertNo }
+		<c:if test="${se eq 0 }">
+			<button class="btn bc1" onclick="location.href='selectExpert.do?reqNo=${c.reqNo}&expertNo=${c.expertNo }'" >선택하기</button>
+		</c:if>
+		
+		</div>
+		</div>
 		</div>
 	</c:forEach>
+	</div>
 	</div>
 <div class="footer-div">
         <%@ include file="/WEB-INF/views/common/footer.jsp"%>

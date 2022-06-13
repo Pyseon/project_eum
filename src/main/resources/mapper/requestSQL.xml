@@ -81,9 +81,36 @@
 	insert into reqAsk_tbl values(
 		reqAsk_seq.nextval,
 		#{reqNo},
-		#{expertNo}
+		#{expertNo},
+		0
 	)
 	</insert>
   	
+  	<select id="selectReqAskExpList" resultType="reqstAsk" parameterType="int">
+  	 select 
+    req_no as reqNo,
+ 	reqask_no as reqaskNo,
+ 	expert_no as expertNo,
+    expert_name as expertName,
+    expert_category as expertCategory,
+    member_picturepath as memberPicturepath
+ 	from reqask_tbl
+    join expert_tbl using(expert_no)
+    join member_tbl using(member_no)
+    where req_no= #{reqNo}
+  	</select>
   	
+  	<update id="updateSelectExpert" parameterType="int">
+  		update reqask_tbl set select_expert = 1 where req_no = #{value}
+  	</update>
+  	<delete id="deleteUnselectExpert" parameterType="map">
+  		delete from reqask_tbl where req_no = #{reqNo} and expert_no != #{expertNo }
+  	</delete>
+  	
+  	<select id="selectExpert" parameterType="int" resultType="int">
+  		select
+  		select_Expert as selectExpert
+  		from reqask_tbl
+  		where req_no = #{value}
+  	</select>
 </mapper>

@@ -14,6 +14,13 @@
 		line-height: 40px; 
 	}
 	
+	#marketType{
+		font:bold 16px "malgun gothic";
+		width: 135px;
+		height:30px;
+		color:black;
+		line-height: 40px; 
+	}
 		#category > ul >li:hover > ul{
 		display:block;
 		}
@@ -100,7 +107,7 @@
 	
 		<h1 style="border-bottom: 3px solid rgb(0 0 0);">상담 등록하기</h1>
 		<form action="ideamarketWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-		<input type="text" name="expertNo" value="${expertNo }">
+		<input type="hidden" name="expertNo" value="${expertNo }">
 		<input type="hidden" name="productQst">
 		<input type="hidden" name="productAns">
 		<input type="hidden" name="productTag">
@@ -114,7 +121,7 @@
 			</table>	
 		</div>
 		<h3>카테고리 선택</h3>
-		<select id="category" name="productCategory" style="margin-bottom: 10px !important;">
+		<select id="category" name="productCategory" style="margin-bottom: 10px !important;" required>
 		<option value="">선택</option>
 		<option value="법률">법률</option>
 		<option value="비즈니스">비즈니스</option>
@@ -129,42 +136,35 @@
 		<option value="자기계발">자기계발</option>
 		</select>
 		
-		<div class="img-box-wrap">
-			<div class="commFileBox preview-image">
-				<p class="comm-write-p" style="margin-bottom: 5px;">대표이미지</p>
-				<h4 class="fc-3" style="margin-top: 0;">(세로로 긴 사진이 적합합니다.)</h4>
-				<label for="input-file">파일 선택</label> 
-				<input type="file"name="file" class="commFile upload-hidden" id="input-file">
-			</div>
-			<div class="input-img-box"></div>
-		</div>
-		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요.">
+			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요">
+			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" required>
 		</div>
-		<div class="content" style="margin-bottom: 20px">
+		<div class="content" style="margin-bottom: 30px">
 			<div><h3>상담 상세 설명</h3></div>
 			<textarea id="summernote" name="productContent" class="input-form"></textarea>
 		</div>
 		
-		<select id="marketType" name="marketType">
-		<option value=null>선택</option>
+		<div>
+		<h3>업로드할 파일 선택</h3>
+		<select id="marketType" name="marketType" style="margin-bottom: 10px !important;" required>
+		<option value=null>파일 종류 선택</option>
 		<option value=1>문서</option>
 		<option value=2>영상</option>
 		<option value=3>기타파일</option>
 		</select>
-		<input type="file" name="marketPath">
-						
+		<input type="file" name="file">
+		
+		</div>		
 		<div style="margin-bottom: 20px">
 			<div>
 			<span>
-			<h3>자주묻는 질문 (선택)
-			<button type="button" class="addOptBtn optButton" style="line-height: 2;">
+			<h3>자주묻는 질문 (최소 하나씩 작성)
+			<button type="button" class="addOptBtn optButton" style="line-height: 2;" >
 					<i class="fa-solid fa-square-plus"></i>
 			</button>
 			</h3>
@@ -188,16 +188,24 @@
 		</div>
 		<div style="margin-bottom: 20px">
 			<div><h3>클래스 수업 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;">
+			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;"required>
 		</div>
 			
 		<div style="margin-bottom: 20px">
 			<div><h3>가격설정</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;">
+			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;" required>
 			<span style="line-height: 2.5;">&nbsp; 원</span>
 			</span>
 		</div>
+				<div style="margin-bottom: 20px">
+			<div><h3>할인률</h3></div>
+			<span style="display: flex;">
+			<input class="input-form" type="text" name="sale" style="width: 5%;" required>
+			<span style="line-height: 2.5;">&nbsp; %(미작성시 0%입니다)</span>
+			</span>
+		</div>
+		
 		
 		<div style="margin-bottom: 20px">
 		<div>
@@ -211,7 +219,7 @@
 			</div>
 			<div id="tag-opt">
 			<span style="display: flex;"> 
-			<input type="text" name="productQst2" class="pro-input tag-val" placeholder="태그를 작성하세요" required>
+			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 20%; height: 33px"required>
 			</span>
 			</div>
 		</div>
@@ -359,7 +367,7 @@
         if(tagCount >= 20) return;
         var tagDiv = document.createElement("div");
         tagDiv.setAttribute("class","optBox");
-        tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19.5%; required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
         $("#tag-opt").append(tagDiv);
         tagCount++;
         

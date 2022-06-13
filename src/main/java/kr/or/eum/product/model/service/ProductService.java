@@ -242,8 +242,9 @@ public class ProductService {
 	
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
-		int result = productDao.expertWrite(pro);
 		Product product=setToken(pro);
+		int result = productDao.expertWrite(product);
+		
 		return result;
 	}
 	
@@ -650,7 +651,16 @@ public class ProductService {
 		
 		return productDao.insertIdeamarket(map);
 	}
-
+	//결제페이지등록
+	public int paymentInsert(Payment p) {
+		
+		return productDao.paymentInsert(p);
+	}
+	//결제상담페이지등록
+	public int counselInsert(Counsel c) {
+		// TODO Auto-generated method stub
+		return productDao.counselInsert(c);
+	}
 
 
 }

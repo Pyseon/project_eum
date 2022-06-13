@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -262,15 +263,16 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 
 @RequestMapping(value="/ideamarketWrite.do")
 	public String ideamarketWrite(Product pro, MultipartFile file, HttpServletRequest request) {
-	System.out.println(pro.getProductImgname());
-	System.out.println(pro.getProductImgPath());
+	System.out.println(pro.getMarketName());
+	System.out.println(pro.getMarketPath());
 	System.out.println(file.getOriginalFilename());
 	String savePath 
-	= request.getSession().getServletContext().getRealPath("/img/product/IdeamarketList/");
+	= request.getSession().getServletContext().getRealPath("/ideamarket/file/");
 	
 	//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
 	//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
 	//사용자가 업로드한 파일 이름
+	
 	String filename = file.getOriginalFilename();
 	//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
 	//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
@@ -314,8 +316,8 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		e.printStackTrace();
 	}
 	
-	pro.setProductImgname(filename);
-	pro.setProductImgPath(filepath);
+	pro.setMarketName(filename);
+	pro.setMarketPath(filepath);
 	
 	System.out.println(pro);
 	
@@ -416,8 +418,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		ReviewPageData rpd = productService.selectReviewList(productNo, reqPage);
 		return new Gson().toJson(rpd);
 	}
-	
-	
+	//대권 구매페이지
 	@RequestMapping(value = "/purchase.do")
 	public String purchase(int productNo, int expertNo, Model model) {
 		//1.상품정보불러오기(product_type:1,2,3구분)
@@ -619,7 +620,32 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		ArrayList<Product> list = productService.selectPopular();
 		return new Gson().toJson(list);
 	}
-	
+	//결제테이블or전문가상담
+	@ResponseBody
+	@RequestMapping(value = "/paymentResult.do" ,method = RequestMethod.POST)
+	public int paymentInsert(Payment p,int productType,  Counsel c){
+		System.out.println("시작payment"+p);
+		System.out.println("시작payment"+productType);
+		System.out.println("시작payment"+c);
+		int result = productService.paymentInsert(p);
+		if(productType == 1) {
+			c.setPayNo(result);
+		System.out.println("컨트롤러들어가야지counsel"+c);
+		int result2 = productService.counselInsert(c);			
+		}
+		
+		int str = 0;
+		if(result != 0) {
+			str = 1;
+			return str;
+			
+		}else {
+			str = 0;
+			return str;
+		}
+		
+	}
+
 }
 
 

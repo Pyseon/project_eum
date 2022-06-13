@@ -34,7 +34,7 @@ public class MemberDao {
 	//재민 내정보수정
 	public int updateMember(Member m) {
 		// TODO Auto-generated method stub
-		
+		System.out.println(m.toString());
 		int result = sqlSession.update("member.updateMember",m);
 		return result;
 	}

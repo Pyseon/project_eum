@@ -106,18 +106,21 @@ display: flex;
 		 ${req.reqContent }
 		 </div>
 		</div>
-		
+		<c:if test="${sessionScope.member.grade == 1 }">
 			<c:if test="${se eq 0 }">
-			<form action="/insertreqask.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-				<div class="Ask">
-				<input type="hidden" name="expertNo" value="${expertNo }">
-				<input type="hidden" name='reqNo' value="${req.reqNo }">
-			
-				<input type="submit" id="submit"class="btn bc1 bs4" value="제안하기" style="width:10%; height:40px; margin: 0px 0px 20px 0px">
-				</div>
-			</form>
+				<c:if test="${existReqAsk eq 0 }">
+					<form action="/insertreqask.do" method="post"
+						onsubmit="checkForm();return false" enctype="multipart/form-data">
+						<div class="Ask">
+							<input type="hidden" name="expertNo" value="${expertNo }">
+							<input type="hidden" name='reqNo' value="${req.reqNo }">
+							<input type="submit" id="submit" class="btn bc1 bs4" value="제안하기"
+								style="width: 10%; height: 40px; margin: 0px 0px 20px 0px">
+						</div>
+					</form>
+				</c:if>
 			</c:if>
-		
+		</c:if>
 		<div style="display: flex; justify-content: space-between; border-bottom: 2px solid rgba(220, 220, 220, 0.59);">
 		<div class="tag-list-wrap">
 			<ul>
@@ -171,7 +174,7 @@ display: flex;
 		${c.expertCategory }
 		</div>
 		<div>
-		<c:if test="${se eq 0 }">
+		<c:if test="${sessionScope.member.memberNo eq req.memberNo}">
 			<button class="btn bc1" onclick="location.href='selectExpert.do?reqNo=${c.reqNo}&expertNo=${c.expertNo }'" >선택하기</button>
 		</c:if>
 		

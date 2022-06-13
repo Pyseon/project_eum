@@ -205,6 +205,14 @@ public int updateRequest(int reqNo, String reqTitle, String reqContent) {
 	return dao.updateRequest(map);
 }
 
+
+public int selectExistReqAsk(int memberNo, int reqNo) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("expertNo", memberNo);
+	map.put("reqNo", reqNo);
+	return dao.selectExistReqAsk(map);
+}
+
 /*
 
 	public Request selectOneRequest(int memberNo) {

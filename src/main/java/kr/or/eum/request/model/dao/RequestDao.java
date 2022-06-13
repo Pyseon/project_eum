@@ -68,6 +68,16 @@ public class RequestDao {
 		List list = sqlSession.selectList("request.selectReqAskExpList", reqNo);
 		return (ArrayList<RequestAsk>)list;
 	}
+
+	public int updateSelectExpert(int reqNo) {
+		int result = sqlSession.update("request.updateSelectExpert", reqNo);
+		return result;
+	}
+
+	public int deleteUnselectExpert(HashMap<String, Object> map) {
+		int result = sqlSession.delete("request.deleteUnselectExpert", map);
+		return result;
+	}
 	
 
 	

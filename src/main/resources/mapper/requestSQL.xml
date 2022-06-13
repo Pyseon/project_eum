@@ -81,7 +81,8 @@
 	insert into reqAsk_tbl values(
 		reqAsk_seq.nextval,
 		#{reqNo},
-		#{expertNo}
+		#{expertNo},
+		0
 	)
 	</insert>
   	
@@ -99,4 +100,10 @@
     where req_no= #{reqNo}
   	</select>
   	
+  	<update id="updateSelectExpert" parameterType="int">
+  		update reqask_tbl set select_expert = 1 where reqask_no = #{value}
+  	</update>
+  	<delete id="deleteUnselectExpert" parameterType="int">
+  		delete from reqask_tbl where req_no = #{reqNo} and expert_no != #{expertNo }
+  	</delete>
 </mapper>

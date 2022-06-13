@@ -166,6 +166,19 @@ public RequestAskPageData selectReqAskExpList() {
 }
 */
 
+
+public int updateSelectExpert(int reqNo) {
+	return dao.updateSelectExpert(reqNo);
+}
+
+
+public int deleteUnselectExpert(int reqNo, int expertNo) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("reqNo", reqNo);
+	map.put("expertNo", expertNo);
+	return dao.deleteUnselectExpert(map);
+}
+
 /*
 
 	public Request selectOneRequest(int memberNo) {

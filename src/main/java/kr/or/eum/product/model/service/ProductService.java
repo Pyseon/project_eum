@@ -650,7 +650,16 @@ public class ProductService {
 		
 		return productDao.insertIdeamarket(map);
 	}
-
+	//결제페이지등록
+	public int paymentInsert(Payment p) {
+		
+		return productDao.paymentInsert(p);
+	}
+	//결제상담페이지등록
+	public int counselInsert(Counsel c) {
+		// TODO Auto-generated method stub
+		return productDao.counselInsert(c);
+	}
 
 
 }

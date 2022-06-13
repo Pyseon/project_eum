@@ -111,7 +111,7 @@
 		
 		<h3>카테고리 선택</h3>
 		<select id="category" name="productCategory" style="margin-bottom: 10px !important;">
-		<option value="">선택</option>
+		<option value="법률">선택</option>
 		<option value="법률">법률</option>
 		<option value="비즈니스">비즈니스</option>
 		<option value="심리/헬스">심리/헬스</option>

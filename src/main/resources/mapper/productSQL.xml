@@ -233,8 +233,13 @@
   			#{productAddr},
   			#{sale},
   			#{productOption},
-  			0,
-  			0
+  			null,
+  			null,
+  			null,
+  			null,
+  			null,
+  			null
+  			
   			)
   </insert>
   <insert id="ideamarketWrite" parameterType="pro">

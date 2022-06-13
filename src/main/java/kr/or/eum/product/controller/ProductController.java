@@ -220,7 +220,7 @@ public class ProductController{
 
 @RequestMapping(value="/expertWrite.do")
 	public String expertWrite(Product pro, HttpServletRequest request) {
-	System.out.println(pro);
+	System.out.println("expertWirte>>>>>>"+pro);
 	int result = productService.expertWrite(pro);
 	return "redirect:/ExpertList.do?reqPage=1&selPro=%EC%A0%84%EC%B2%B4";
 

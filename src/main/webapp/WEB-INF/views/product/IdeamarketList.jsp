@@ -216,7 +216,7 @@ li{
           </table>
    </div>
       <div class="container">
-      테스트용 아이디 : eom15@gmail.com 비밀번호 :1234
+
    	<button type="button" class="writeButton" id="writeButton" onclick="location.href='/ideamarketWriterFrm.do'">등록하기</button>
    	<div class="posting-wrap">
    		<c:forEach items="${list }" var="c" varStatus="i">

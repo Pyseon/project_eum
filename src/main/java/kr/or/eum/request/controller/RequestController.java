@@ -112,14 +112,14 @@ public class RequestController {
 		return "request/requestDetail";
 		
 	}
-	
+	/*
 	@RequestMapping(value = "/selectExpert.do")
 		public String selectExpert(int reqNo, int expertNo) {
 			int result = service.updateSelectExpert(reqNo);
 			int result2 = service.deleteUnselectExpert(reqNo, expertNo);
 			return "redirect:/requestDetail.do?reqNo="+reqNo;
 		}
-	
+	*/
 	
 	
 }

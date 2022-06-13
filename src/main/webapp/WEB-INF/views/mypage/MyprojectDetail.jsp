@@ -125,6 +125,11 @@
 		<option value="자기계발">자기계발</option>
 		</select>
 		<c:forEach var="p" items="${list }" varStatus="i">
+		<input type="hidden" name="expertNo" value="${p.expertNo }">
+		<input type="hidden" name="expertName" value="${p.expertName }">
+		<input type="hidden" name="productNo" value="${p.productNo }">
+		<input type="hidden" name="memberNo" value="${p.memberNo }">
+		<input type="hidden" name="productType" value="${p.productType }">
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
@@ -169,7 +174,7 @@
 			<div id="qst-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="${p.productQst }" maxlength="1000" required>
+				<input type="text" name="productQst2" class="pro-input qst-val" value="${p.productQst }" maxlength="1000" required>
 				
 				</span>
 			</div>
@@ -177,15 +182,28 @@
 			<div id="ans-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="${p.productAns }" maxlength="1000" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" value="${p.productAns }" maxlength="1000" required>
 				</span>
 			</div>
 			
 		</div>
 		<div style="margin-bottom: 20px">
 			<div><h3>클래스 수업 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="${p.productAddr }" style="width: 80%;">
+			<input class="input-form" type="text" name="productAddr" value="${p.productAddr }" style="width: 80%;">
 		</div>
+			
+		<c:if test="${p.productType eq 1 }">
+					<div style="margin-bottom: 20px">
+			<div><h3>시간설정</h3></div>
+			<span style="display: flex;">
+			<input class="input-form" type="text" name="productOption" style="width: 5%;" required>
+			<span style="line-height: 2.5;" value="${p.productOption}" >&nbsp; 분 (분단위로 입력해 주세요)</span>
+			</span>
+		</div>
+		</c:if>	
+		
+		
+			
 			
 		<div style="margin-bottom: 20px">
 			<div><h3>가격설정</h3></div>
@@ -195,10 +213,20 @@
 			</span>
 		</div>
 		
-		<div style="margin-bottom: 20px">
-		<div><h3>태그</h3></div>
-			<input class="input-form" type="text" name="productTag" value="${p.productTag }" style="width: 60%;">
-		</div>
+		<div>
+		<span>
+			<h3>태그
+			<button type="button" class="addOptBtn2 optButton" style="line-height: 2;">
+					<i class="fa-solid fa-square-plus"></i>
+			</button>
+			</h3>
+			</span>
+			</div>
+			<div id="tag-opt">
+			<span style="display: flex;"> 
+			<input type="text" name="productTag" class="pro-input tag-val" value="${p.productTag }" >
+			</span>
+			</div>
 		<div>
 		<input type="submit" class="btn bc1 bs4" value="수정하기">
 		</div>
@@ -208,6 +236,23 @@
 		
 	</div>
 	<script>
+	$(".addOptBtn2").on("click",function(){
+	    if(tagCount >= 20) return;
+	    var tagDiv = document.createElement("div");
+	    tagDiv.setAttribute("class","optBox");
+	    tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+	    $("#tag-opt").append(tagDiv);
+	    tagCount++;
+	    
+	    $(".delOptBtn2").off().on("click",function(){
+	    	tagList.splice($(".delOptBtn2").index(this)+1, 1);
+	          $("[name=productTag]").val(tagList);
+	          console.log(tagList);
+	          $(this).parent().remove();
+	          tagCount--;
+	    });
+	});
+	
 	$("#summernote").summernote({
         toolbar: [ //썸머노트 툴바 추가/수정
             ['fontsize', ['fontsize']],

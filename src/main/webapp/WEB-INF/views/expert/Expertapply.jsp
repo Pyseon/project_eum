@@ -28,7 +28,6 @@
 		</div>
 		
 		<div class="checkedbox">
-				<div><input type="checkbox" class="mainagreement" name="chkall"> <label> 이용약관, 개인정보 수집 및 이용, 상담전문가의 개인정보보호 의무에 모두 동의합니다.</label></div>
 				<div class="checkbox-s">
 					<div><label><input type="checkbox" name = "agreement" value="0" required>(이음)서비스 전문가 이용약관 동의</label><br>
 					

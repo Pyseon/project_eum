@@ -120,9 +120,9 @@ public class MemberDao {
 		
 		return (ArrayList<ProductAndExpert>)list;
 	}
-	public ArrayList<Product> selectMyprojectDetail(int memberNo) {
-		List list = sqlSession.selectList("member.selectMyprojectDetail",memberNo); 
-		System.out.println(list);
+	public ArrayList<Product> selectMyprojectDetail(int productNo) {
+		List list = sqlSession.selectList("member.selectMyprojectDetail",productNo); 
+		
 		return (ArrayList<Product>)list;
 	}
 	public int insertExpert(Expert ex) {

@@ -571,5 +571,23 @@ public class ManagerController {
 		model.addAttribute("rexp", rexp);
 		return "mypage/detailMyExpert";
 	}
+	
+	@RequestMapping(value = "/noticeList.do")
+	public String noticeList(int reqPage, String searchType, String keyword, Model model) {
+		String wherePage = "noticeList.do";
+		int selectNum = 0;
+		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		model.addAttribute("list", npd.get("noticeList"));
+		model.addAttribute("pageNavi", npd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/noticeList";
+	}
+	@RequestMapping(value = "/noticeDetail.do")
+	public String noticeDetail(int noticeNo, Model model) {
+		Notice notice = service.selectNoticeDetail(noticeNo);
+		model.addAttribute("ntc", notice);
+		return "manager/noticeDetail";
+	}
 }
 

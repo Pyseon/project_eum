@@ -128,7 +128,7 @@
 					   },
 				success : function(data) {
 					if(data == 0) {
-						alert('이미 신고접수 되었습니다. 감사합니다.');
+						alert('이미 신고 접수 되었습니다. 감사합니다.');
 						$('.modal-sub-wrap').fadeOut( "slow", function() {
 							$('.modal-sub-wrap').remove();
 						});

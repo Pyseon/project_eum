@@ -22,10 +22,12 @@
 				<div class="article-list">
 					<a href="/communityList.do?category=0&reqPage=1" class="fc-7">요즘
 						뭐하니 ></a>
+					<c:if test="${comm.memberNo eq sessionScope.member.memberNo }">	
 					<button class="btn bc6 bs5 fc-1"
 						onclick="location.href='/communityUpdateFrm.do?commNo=${comm.commNo}'">수정</button>
 					<button class="btn bc6 bs5 fc-1  modal-open-btn"
 						target="#del-modal">삭제</button>
+					</c:if>
 				</div>
 				<div class="article-title">
 					<h2 style="font-size: 26px">${comm.commTitle}</h2>
@@ -59,10 +61,10 @@
 <!-- 좋아요 -->						
 						<c:choose>
 							<c:when test="${likeMemberCheck eq 0 }">
-								<i class="fa-regular fa-heart icon-wish"></i>
+								<i class="fa-regular fa-heart icon-wish" style="cursor:pointer;"></i>
 							</c:when>
 							<c:otherwise>
-								<i class="fa-regular fa-heart icon-wish fa-solid" style="pointer:cursor;"></i>
+								<i class="fa-regular fa-heart icon-wish fa-solid" style="cursor:pointer;"></i>
 							</c:otherwise>
 						</c:choose>
 							<span>좋아요</span>

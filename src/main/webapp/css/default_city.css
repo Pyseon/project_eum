@@ -938,6 +938,10 @@ figcaption {
 		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 	/* color: #fff; */
 	padding: 15px;
+
+overflow:hidden;
+word-wrap:break-word; 
+word-break:break-all;
 }
 
 .haja-nick {
@@ -965,6 +969,7 @@ figcaption {
 	border-top: 0;
 	margin-top: -12px;
 	margin-left: -15px;
+	
 }
 
 .speech-bubble2 {
@@ -974,8 +979,10 @@ figcaption {
 	min-height: 50px;
 	box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
 		rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
-	/* color: #fff; */
 	padding: 15px;
+		overflow:hidden;
+word-wrap:break-word; 
+word-break:break-all;
 }
 
 .speech-bubble2:after {
@@ -1017,7 +1024,7 @@ figcaption {
 }
 
 .haja-comment {
-	max-width: 60%;
+	max-width: 42%;
 }
 
 .malja-content {
@@ -1027,7 +1034,7 @@ figcaption {
 }
 
 .malja-comment {
-	max-width: 50%;
+	max-width: 42%;
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;

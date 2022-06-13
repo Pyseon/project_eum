@@ -64,13 +64,13 @@ public class MemberController {
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
 		//System.out.println(member);
-		if(member.getGrade() == 3) {
+		if(member == null) {
+			return "member/loginFrmFail";
+		}else if(member.getGrade() == 3) {
 			return "member/blackListMsg";
-		}else if(member != null && member.getGrade() != 3 ){
+		}else {
 			session.setAttribute("member", member);
 			return "redirect:/";
-		}else {
-			return "member/loginFrmFail";
 		}
 	}
 	
@@ -109,8 +109,8 @@ public class MemberController {
 		String filename = file.getOriginalFilename();
 		if(filename == "") {
 			System.out.println("등록된이미지 없음!");
-			m.setMemberPictureName("default-img.png");
-			m.setMemberPicturePath("default-img.png");
+			m.setMemberPictureName("delmember.jpg");
+			m.setMemberPicturePath("delmember.jpg");
 		}else {
 			String savePath 
 			= request.getSession().getServletContext().getRealPath("/img/member/");

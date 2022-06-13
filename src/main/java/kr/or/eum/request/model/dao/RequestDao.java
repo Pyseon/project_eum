@@ -62,6 +62,13 @@ public class RequestDao {
 		Expert expert = sqlSession.selectOne("product.selectExpertNo", memberNo);
 		return expert;
 	}
+	
+	
+	public ArrayList<RequestAsk>selectReqAskExpList(int reqNo){
+		List list = sqlSession.selectList("request.selectReqAskExpList", reqNo);
+		return (ArrayList<RequestAsk>)list;
+	}
+	
 
 	
 	

@@ -123,7 +123,19 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/detailReport.do")
-	public String detailReport(int reportNo,int categoryNo,int reportIndex, Model model) {
+	public String detailReport(HttpServletRequest request, int reportNo,int categoryNo,int reportIndex, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		Report report = service.detailReport(reportNo);
 		int scoutReport = service.scoutReport(categoryNo, reportIndex);
 		if(scoutReport > 0) {
@@ -181,7 +193,19 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/manaFAQ.do")
-	public String manaFAQ(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaFAQ(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		String wherePage = "manaFAQ.do";
 		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
 		model.addAttribute("list", fpd.get("FAQList"));
@@ -191,12 +215,24 @@ public class ManagerController {
 		return "manager/managementFAQ";
 	}
 	@RequestMapping(value = "/insertFAQFrm.do")
-	public String inorupFAQFrm() {
+	public String inorupFAQFrm(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		return "manager/insertFAQFrm";
 	}
 	
 	@RequestMapping(value = "/insertFAQ.do")
-	public String insertFAQ(int FAQType, String FAQTitle, String FAQContent) {
+	public String insertFAQ(HttpServletRequest request, int FAQType, String FAQTitle, String FAQContent) {
 		int result = service.insertFAQ(FAQType, FAQTitle, FAQContent);
 		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
 	}
@@ -208,7 +244,19 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/updateFAQFrm.do")
-	public String updateFAQFrm(int FAQNo, Model model) {
+	public String updateFAQFrm(HttpServletRequest request, int FAQNo, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		ArrayList<FaQ> list = service.selectFAQ(FAQNo);
 		model.addAttribute("list", list);
 		return "manager/updateFAQFrm";
@@ -242,7 +290,19 @@ public class ManagerController {
 		return "manager/managementNotice";
 	}
 	@RequestMapping(value = "/insertNoticeFrm.do")
-	public String insertNoticeFrm() {
+	public String insertNoticeFrm(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		return "manager/insertNoticeFrm";
 	}
 	@RequestMapping(value = "/insertNotice.do")
@@ -262,7 +322,19 @@ public class ManagerController {
 		return "redirect:/manaNotice.do?reqPage="+reqPage;
 	}
 	@RequestMapping(value = "/updateNoticeFrm.do")
-	public String updateNoticeFrm(int noticeNo, Model model) {
+	public String updateNoticeFrm(HttpServletRequest request, int noticeNo, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		ArrayList<Notice> list = service.selectNotice(noticeNo);
 		model.addAttribute("list", list);
 		return "manager/updateNoticeFrm";
@@ -348,7 +420,19 @@ public class ManagerController {
 		return "manager/managementQuestion";
 	}
 	@RequestMapping(value = "/insertAnswerFrm.do")
-	public String insertAnswerFrm(int qstNo, Model model) {
+	public String insertAnswerFrm(HttpServletRequest request, int qstNo, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		Question qst = service.selectQst(qstNo);
 		if(qst.getAnsState() == 1) {
 			Answer ans = service.selectAns(qstNo);
@@ -398,7 +482,7 @@ public class ManagerController {
 		return "redirect:/myQuestionList.do?reqPage=1&selectNum=0&memberNo="+member.getMemberNo();
 	}
 	@RequestMapping(value = "/detailQuestion.do")
-	public String detailQuestion(int qstNo, Model model) {
+	public String detailQuestion(HttpServletRequest request, int qstNo, Model model) {
 		Question qst = service.selectQst(qstNo);
 		Answer ans = service.selectAns(qstNo);
 		model.addAttribute("qst", qst);
@@ -428,7 +512,19 @@ public class ManagerController {
 		return "manager/managementExpert";
 	}
 	@RequestMapping(value = "/detailExpert.do")
-	public String detailExpert(int expertNo,int expertApp, Model model) {
+	public String detailExpert(HttpServletRequest request, int expertNo,int expertApp, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		Expert exp = service.selectExpert(expertNo);
 		if(expertApp==2) {
 			String refuseContent = service.selectRefuseContent(expertNo);

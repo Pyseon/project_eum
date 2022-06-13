@@ -637,6 +637,26 @@
 		<!--#{startTime}-->
 		)
 	</insert>
-	
+	<select id="purchaseSuccess" parameterType="map" resultType="map">
+	select  
+		pay_no as payNo,
+		member_no as memberNo,
+		product_no as productNo,
+		pay_state as payState,
+		pay_method as payMethod,
+		pay_date as payDate,
+		payment as payment,
+		pay_usepoint as payUsepoint,
+		pay_addpoint as payAddpoint
+		from payment_tbl 
+	where 
+	pay_no=(select max(pay_no) from payment_tbl where member_no=#{memberNo} and product_no=#{productNo})
+	</select>	
+	<select id="purchaseSuccess2" parameterType="map" resultType="map">
+	select * from 
+	product_tbl
+	where 
+	product_no=#{productNo}
+	</select>
 </mapper>
 	

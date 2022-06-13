@@ -422,8 +422,8 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@RequestMapping(value = "/purchase.do")
 	public String purchase(int productNo, int expertNo, Model model) {
 		//1.상품정보불러오기(product_type:1,2,3구분)
-		System.out.println(productNo);
-		System.out.println("expertNo>>>>"+expertNo);
+		//System.out.println(productNo);
+		//System.out.println("expertNo>>>>"+expertNo);
 		HashMap<String, Object> paymentpage = productService.selectProduct(productNo);
 		model.addAttribute("product",paymentpage.get("product"));
 		model.addAttribute("expert",paymentpage.get("expert"));
@@ -548,7 +548,12 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	
 	//대권 구매성공
 	@RequestMapping(value="/purchaseSuccess.do")
-	public String purchaseSuccess() {
+	public String purchaseSuccess(Model model, int memberNo, int productNo,  HttpServletRequest request) {
+		HashMap<String, Object> purchase = productService.purchaseSuccess(memberNo, productNo);
+		//System.out.println("성공1"+purchase);
+		model.addAttribute("pay", purchase);
+		//System.out.println("다안들어가나!"+model);
+
 		return "product/purchaseSuccess";
 	}
 	//대권 구매실패
@@ -623,14 +628,15 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	//결제테이블or전문가상담
 	@ResponseBody
 	@RequestMapping(value = "/paymentResult.do" ,method = RequestMethod.POST)
-	public int paymentInsert(Payment p,int productType,  Counsel c){
-		System.out.println("시작payment"+p);
-		System.out.println("시작payment"+productType);
-		System.out.println("시작payment"+c);
+	public int paymentInsert( Payment p,int productType,  Counsel c){
+		//System.out.println("시작payment"+p);
+		//System.out.println("시작payment"+productType);
+		//System.out.println("시작payment"+c);
 		int result = productService.paymentInsert(p);
+		
 		if(productType == 1) {
 			c.setPayNo(result);
-		System.out.println("컨트롤러들어가야지counsel"+c);
+		//System.out.println("컨트롤러들어가야지counsel"+c);
 		int result2 = productService.counselInsert(c);			
 		}
 		

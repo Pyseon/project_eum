@@ -63,7 +63,7 @@ public class MemberController {
 	@RequestMapping(value="/login.do")
 	public String login(Member m , HttpSession session) {
 		Member member = service.selectOneMember(m);
-		System.out.println(member);
+		//System.out.println(member);
 		if(member.getGrade() == 3) {
 			return "member/blackListMsg";
 		}else if(member != null && member.getGrade() != 3 ){

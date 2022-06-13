@@ -278,21 +278,31 @@ public class ProductDao {
 	}
 	//대권
 	public int paymentInsert(Payment p) {
-		System.out.println("daopayment"+p);
+		//System.out.println("daopayment"+p);
 		//Map<String, Object> map = new HashMap<>();
 		//map.put("payment", p);
 		//sqlSession.insert("product.paymentInsert", map);
 		int result = sqlSession.insert("product.paymentInsert", p);
 		//int result = (Integer)map.get("payNo");
 		int payNo = p.getPayNo();
-		System.out.println("sql갔다온거"+p);
-		System.out.println("payNo"+payNo);
+		//System.out.println("sql갔다온거"+p);
+		//System.out.println("payNo"+payNo);
 		return payNo;
 	}
 	public int counselInsert(Counsel c) {
 		System.out.println("daocounsel"+c);
 		int result2 = sqlSession.insert("product.counselInsert", c);
 		return result2;
+	}
+	public HashMap<String, Object> purchaseSuccess(HashMap<String, Object> map) {
+		HashMap<String, Object> list =sqlSession.selectOne("product.purchaseSuccess",map);
+		//System.out.println("성공3"+list);
+		return list;
+	}
+	public HashMap<String, Object> purchaseSuccess2(HashMap<String, Object> map) {
+		HashMap<String, Object> list =sqlSession.selectOne("product.purchaseSuccess2",map);
+		//System.out.println("성공4"+list);
+		return list;
 	}
 
 }

@@ -311,9 +311,15 @@
         where review_no=#{reviewNo}
 	</select>
 	
+	<!-- 윤지 -->
 	<insert id="insertReport" parameterType="rpt">
 		insert into report_tbl values(report_seq.nextval, #{defendant}, #{plaintiff},#{reportContent},TO_CHAR(SYSDATE,'YYYY-MM-DD'),#{reportCategory},#{reportIndex},#{reportTitle},0,0)
 	</insert>
+	
+	<!-- 윤지 -->
+	<select id="selectReport" parameterType="rpt" resultType="int">
+		select count(*) from report_tbl where defendant=#{defendant} and plaintiff=#{plaintiff} and report_category=#{reportCategory} and report_index=#{reportIndex}
+	</select>
 	
 	<!-- 대권  -->
 	<select id="searchId" resultType="int">

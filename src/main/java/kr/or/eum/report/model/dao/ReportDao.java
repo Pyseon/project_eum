@@ -15,6 +15,11 @@ public class ReportDao {
 		int result = sqlSession.insert("member.insertReport", report);
 		return result;
 	}
+
+	public int overlapReport(Report report) {
+		int result = sqlSession.selectOne("member.selectReport", report);
+		return result;
+	}
 	
 	
 }

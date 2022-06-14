@@ -142,7 +142,7 @@
 		<fieldset>
 			<div class="emailbox">
 				<div>이메일*</div> 
-				<input class="input-form inputplus" type="text" id="memberId" name="memberId" placeholder="이메일을 입력해주세요.">
+				<input class="input-form inputplus" type="text" id="memberId" name="memberId" placeholder="이메일을 입력해주세요." required>
 				<button class="btn bc1 bs1" type="button" id="button-pr">인증하기</button>
 			</div>
 			<div class="check-find check-hidden">
@@ -153,15 +153,21 @@
 			<div id="timeZone"></div>
 			<div id="authMsg"></div>
 			<br><br>
-			닉네임* <input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="닉네임을 입력해주세요.">
+			닉네임* <input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" 
+			placeholder="닉네임을 입력해주세요." pattern=".{2,10}" required title="2~10글자 이내로 입력하세요" required>
 			<div class="fs-light" id="memberNick-test"></div><br>
 			
-			비밀번호* <input  class="input-form inputplus" type="password" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요." maxlength=15><br>
+			비밀번호* <input  class="input-form inputplus" type="password" name="memberPw" id="memberPw" 
+			placeholder="비밀번호를 입력해주세요." maxlength=15 pattern=".{6,15}" required title="6~15글자 이내로 입력하세요" required><br>
 			
-			비밀번호 확인* <input class="input-form inputplus" type="password" name="memberPwRe" id="memberPwRe" placeholder="비밀번호를 다시 입력해주세요.">
+			비밀번호 확인* <input class="input-form inputplus" type="password" name="memberPwRe" id="memberPwRe" 
+			placeholder="비밀번호를 다시 입력해주세요." maxlength=15  pattern=".{6,15}" required title="6~15글자 이내로 입력하세요" required>
 			<div class="fs-light" id="memberPw-test"></div><br>
 			
-			연락처*<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" placeholder="연락처를 입력해주세요.(010-0000-0000)" maxlength="13" oninput="this.value = this.value.replace(/[^0-9.\-]/g, '').replace(/(\..*)\./g, '$1');">
+			연락처*<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" 
+			placeholder="연락처를 입력해주세요.(010-0000-0000)" maxlength="13" 
+			oninput="this.value = this.value.replace(/[^0-9.\-]/g, '').replace(/(\..*)\./g, '$1');"
+			 pattern=".{2,13}" required title="올바른 형식으로 입력하세요." required>
 			<div class="fs-light" id="memberPhone-test"></div><br>
 			
 			<div class="genderbox">
@@ -173,11 +179,16 @@
 			<div class="birthbox">
 				<div>생년월일*</div>
 				<input type="hidden" name="birth" id="birth" value="" required>
-				<input  class="input-form inputplus changedata" type="text" id="year" name="birth-s" placeholder="년(4자)" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  required>
+				<input  class="input-form inputplus changedata" type="text" id="year" name="birth-s" 
+				placeholder="년(4자)" maxlength="4" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"  
+				maxlength=14  pattern=".{4,4}" required title="올바른 연도 4자리를 입력하세요" required>
 				<select class="input-form inputplus changedata" id="month" name="birth-s" required>
 					  <option value='' selected >월</option>
 				</select>
-				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" placeholder="일" maxlength="2" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required>
+				<input  class="input-form inputplus changedata" type="text" id="day" name="birth-s" 
+				placeholder="일" maxlength="2" 
+				oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" 
+				maxlength=2  pattern=".{1,2}" required title="올바른 일자를 입력하세요" required>
 			</div>
 			<div class="navi-birth fs-light fc-9" id="birth-test"></div>
 			
@@ -204,6 +215,7 @@
 				</div>
 			</div>
 			<button class="btn bc1 bs4" id="joinButton" type="submit" disabled>가입하기</button>
+			<h5 id="joinX" style="color: red"></h5>
 		</fieldset>
 	</form>
 	</div>
@@ -293,11 +305,15 @@
 			}
 		}
 		console.log("체크올> "+checkAll);
+		
 		if(checkAll){
 			$("#joinButton").attr("disabled",false);
+			$("#joinX").text("");
 		}else{
 			$("#joinButton").attr("disabled",true);
+			$("#joinX").text("폼의 입력값을 확인해주세요!")
 		}
+		
 	}
 	
 	
@@ -350,8 +366,8 @@
 			regExp2 = /^[a-zA-Z]{4,10}$/;
 			if(!regExp1.test(memberNick) && !regExp2.test(memberNick)){
 				 const title = "2~8글자 한글 또는 4~10글자 영어대소문자만 입력가능합니다.";
-					const icon = "error";
-					const msgTime = 1500;
+					const icon = "info";
+					const msgTime = 2000;
 					toastShow(title,icon,msgTime);
 					inputCheck[1] = false;
 					formCheck();
@@ -472,8 +488,8 @@
 		regExp = /^[0-9a-zA-Z!@#$%^+\-=]{6,15}$/;
 		if(!regExp.test(password)){
 			const title = "6~15자의 영문 대소문자,숫자,특수문자만 가능합니다.";
-			const icon = "error";
-			const msgTime = 1800;
+			const icon = "info";
+			const msgTime = 2000;
 			toastShow(title,icon,msgTime);
 		}else{
 			
@@ -723,7 +739,7 @@
 		const Toast = Swal.mixin({
 		    toast: true,
 		    position: 'center-center',
-		    showConfirmButton: false,
+		    showConfirmButton: true,
 		    timer: msgTime,
 		    timerProgressBar: true,
 		    didOpen: (toast) => {

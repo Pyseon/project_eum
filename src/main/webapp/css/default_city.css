@@ -550,6 +550,12 @@ textarea.input-form {
 
 /* 커뮤니티 페이지 */
 
+#comm-content{
+	display:flex;
+justify-content: space-evenly;
+	flex-wrap: wrap;
+}
+
 .do-write-btn {
 	margin-right: 20px;
 }
@@ -578,7 +584,7 @@ textarea.input-form {
 .card-wrap {
 	display: inline-block;
 	width: 250px;
-	/* height:1500px; */
+	min-height: 494px;
 	border: 1px solid #ddd;
 	margin: 25px 15px 25px 10px;
 }
@@ -592,6 +598,7 @@ textarea.input-form {
 
 figcaption {
 	padding: 10px;
+	height: 218px;
 }
 
 .card-caption {
@@ -601,6 +608,7 @@ figcaption {
 
 .card-title {
 	margin-bottom: 10px;
+	min-height: 20px;
 }
 
 .card-intro {
@@ -642,8 +650,21 @@ figcaption {
 
 .fa-heart {
 	color: #f54a5d;
-	font-size: 14px;
 }
+
+.heartCon {
+	color: #f54a5d;
+	font-size: 20px;
+	margin-right: 5px;
+}
+.fc100{
+	font-size:16px;
+}
+.commentCon {
+	font-size: 20px;
+	margin-right: 5px;
+}
+
 
 .fa-message {
 	color: #3a1b1b;

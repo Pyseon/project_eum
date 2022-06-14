@@ -61,19 +61,19 @@
 <!-- 좋아요 -->						
 						<c:choose>
 							<c:when test="${likeMemberCheck eq 0 }">
-								<i class="fa-regular fa-heart icon-wish" style="cursor:pointer;"></i>
+								<i class="fa-regular fa-heart icon-wish heartCon" style="cursor:pointer;"></i>
 							</c:when>
 							<c:otherwise>
-								<i class="fa-regular fa-heart icon-wish fa-solid" style="cursor:pointer;"></i>
+								<i class="fa-regular fa-heart icon-wish fa-solid heartCon" style="cursor:pointer;"></i>
 							</c:otherwise>
 						</c:choose>
-							<span>좋아요</span>
-							<strong class="num" id="commLikeNum">${comm.commLike }</strong>
+							<span class="fc100">좋아요</span>
+							<strong class="num fc100" id="commLikeNum">${comm.commLike }</strong>
 						</span>
 <!-- 좋아요 -->	
 						<span class="article-info"> <i
-							class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
-							id="cmnt-total2" class="num">${comm.cmntCount }</strong>
+							class="fa-solid fa-comment fc-6 commentCon"></i> <span class="fc100">댓글</span> <strong
+							id="cmnt-total2" class="num fc100">${comm.cmntCount }</strong>
 						</span>
 					</div>
 				</div>
@@ -320,7 +320,7 @@ $(function(){
 		var commNo = $("#commNo").val();
 		var currentValue = $(this).attr("class");
 		 if(memberNo > 0){
-	         if(currentValue == "fa-regular fa-heart icon-wish" && memberNo != 0) {
+	         if(currentValue == "fa-regular fa-heart icon-wish heartCon" && memberNo != 0) {
 	         	$(this).addClass("fa-solid");
 	         	like(memberNo, commNo);
 	         }else {

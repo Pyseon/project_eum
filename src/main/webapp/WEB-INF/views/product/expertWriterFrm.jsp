@@ -131,7 +131,7 @@
 			<div><h3>상담명</h3></div>
 
 			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." 
-			pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>>
+			pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
@@ -227,7 +227,6 @@
 		</div>
 		<div>
 		<input type="submit" id="submit-btn" class="btn bc1 bs4" value="등록하기">
-		<input type="button" id="test-btn" value="테스트">
 		</div>
 		</form>
 	</div>

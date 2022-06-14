@@ -24,6 +24,7 @@ import kr.or.eum.product.model.vo.Chat;
 import kr.or.eum.product.model.vo.Counsel;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndEtc;
 import kr.or.eum.product.model.vo.ProductPageData;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.product.model.vo.ReviewPageData;
@@ -684,7 +685,7 @@ public class ProductService {
 		return map;
 	}
 
-	public ArrayList<Product> selectProductList() {
+	public ArrayList<ProductAndEtc> selectProductList() {
 		return productDao.selectProductList();
 	}
 

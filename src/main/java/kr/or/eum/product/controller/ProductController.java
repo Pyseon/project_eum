@@ -28,6 +28,8 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -57,6 +59,7 @@ import kr.or.eum.product.model.vo.Counsel;
 import kr.or.eum.product.model.vo.Ideamarket;
 import kr.or.eum.product.model.vo.Payment;
 
+@ControllerAdvice 
 @Controller
 public class ProductController{
 	@Autowired
@@ -544,7 +547,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		System.out.println(compare.get("expertTrue"));
 		System.out.println(compare.get("memberTrue"));
 		if(compare.get("expertTrue").equals(false) && compare.get("memberTrue").equals(false)) {
-			return "product/paymentError";
+			return "common/error";
 		}
 		model.addAttribute("m", compare.get("member"));
 		HashMap<String, Object> map = productService.selectProductAndExpertAndPayment(payNo);
@@ -557,7 +560,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		model.addAttribute("chat", map.get("chatList"));
 		model.addAttribute("firstDate", map.get("first"));
 		if(!map.get("paymentState").equals(1) && !map.get("paymentState").equals(2)) {
-			return "product/paymentError";
+			return "common/error";
 		}
 		System.out.println("Counsel_member : "+compare.get("member"));
 		System.out.println("Counsel_product : "+map.get("product"));
@@ -585,7 +588,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	public String reviewFrm(Model model, int payNo, HttpServletRequest request) {
 		Boolean compare = productService.reviewMemberCompare(payNo, request);
 		if(compare == false) {
-			return "product/paymentError";
+			return "common/error";
 		}
 		HttpSession session = request.getSession(false);
 		Member member = null;
@@ -749,6 +752,13 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 			System.out.println(list.get(i).getProductTitle());
 		}
 		return "common/main";
+	}
+	
+	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
+	@ExceptionHandler
+	public String error1(Exception e) {
+		System.out.println(e.getMessage());
+		return "common/error";
 	}
 
 }

@@ -21,6 +21,9 @@ import kr.or.eum.community.model.vo.Community;
 import kr.or.eum.manager.model.vo.Answer;
 import kr.or.eum.manager.model.vo.Question;
 import kr.or.eum.member.model.service.MemberService;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -43,7 +46,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 
 
-
+@ControllerAdvice 
 @Controller
 public class MemberController {
 	
@@ -689,4 +692,12 @@ public class MemberController {
 		}
 		return "redirect:/myQuestionList.do?memberNo="+member.getMemberNo()+"&reqPage=1&selectNum=0";
     }
+    
+	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
+	@ExceptionHandler
+	public String error1(Exception e) {
+		System.out.println(e.getMessage());
+		return "common/error";
+	}
+
 }

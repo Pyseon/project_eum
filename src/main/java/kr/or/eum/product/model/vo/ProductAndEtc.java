@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 public class ProductAndEtc {
 	private int productNo;
 	private String productTitle;
+	private int productType;
 	private String productCategory;
 	private int exeprtNo;
 	private String productIntro;

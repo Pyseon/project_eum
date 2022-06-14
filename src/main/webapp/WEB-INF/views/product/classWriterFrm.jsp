@@ -174,7 +174,9 @@
 			</div>
 			<div id="ans-opt">
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="50" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="20" required>
+
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="50" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
+
 
 			</div>
 		</div>	

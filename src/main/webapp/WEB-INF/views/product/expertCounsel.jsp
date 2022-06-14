@@ -111,7 +111,7 @@
 					<c:choose>
 						<c:when test="${pay.payState eq 1}">
 						<c:choose>
-							<c:when test="${m.grade eq 2 }">
+							<c:when test="${sessionScope.member.memberNo eq c.expertNo }">
 								<div class="check-box-allwrap">
 									<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox" name="agree"></div>
 									<div class="check-agree">위 내용을 확인하셨습니까?</div>
@@ -130,12 +130,12 @@
 										<div class="check-agree">위 내용을 확인하셨습니까?</div>
 									</div>
 									<c:choose>
-										<c:when test="${m.grade eq 1 }">
+										<c:when test="${sessionScope.member.memberNo eq c.expertNo }">
 											<div class="submit-wrap">
 											<button type="button" class="bc1 submit-btn" id="startBtn" onclick="location.href='/'">홈페이지</button>
 											</div>
 										</c:when>
-										<c:when test="${m.grade eq 2 }">
+										<c:when test="${sessionScope.member.memberNo eq c.memberNo }">
 											<div class="submit-wrap">
 											<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/reviewFrm.do?payNo=${pay.payNo}')">후기작성</button>
 											</div>										
@@ -144,7 +144,7 @@
 								</c:when>
 								<c:otherwise>
 									<c:choose>
-										<c:when test="${m.grade eq 1 }">
+										<c:when test="${sessionScope.member.memberNo eq c.expertNo }">
 											<div class="submit-wrap">
 												<button type="button" class="bc1 submit-btn" id="startBtn" onclick="('/Myproject.do?memberNo=${m.memberNo }')">프로젝트 관리</button>
 											</div>

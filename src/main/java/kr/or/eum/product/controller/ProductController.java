@@ -266,9 +266,34 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	model.addAttribute("reqPage", reqPage);
 	System.out.println("selPro : "+selPro);
 	System.out.println(ppd);
+	
+	HttpSession session = request.getSession(false);
+	Member member = null;
 
+	if(session != null) {
+	    member = (Member)session.getAttribute("member");
+	}
+	if(member != null) {
+		int memberNo = member.getMemberNo();
+		model.addAttribute("grade", member.getGrade());
+		model.addAttribute("memberNo", member.getMemberNo());
+		System.out.println("memberNo : "+member.getMemberNo());
+		System.out.println("grade : "+member.getGrade());
+
+	}else {
+		model.addAttribute("memberNo", 0);
+	}
 	return "product/IdeamarketList";
 }
+
+
+
+
+
+
+
+
+
 @RequestMapping(value="/ideamarketWriterFrm.do")
 	public String ideamarketWriterFrm(HttpServletRequest request, Model model) {
 	HttpSession session = request.getSession(false);

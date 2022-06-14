@@ -137,15 +137,15 @@
 		</select>
 		
 		<div class="title" style="margin-bottom: 20px">
-			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
+			<div><h3>제목</h3></div>
+			<input class="input-form" type="text" name="productTitle" placeholder="제목을 입력해주세요." pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
-			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
+			<div><h3>제품 간단한 소개</h3></div>
+			<input class="input-form" type="text" name="productIntro" placeholder="제품에 간단한 소개를 해주세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</div>
 		<div class="content" style="margin-bottom: 30px">
-			<div><h3>상담 상세 설명</h3></div>
+			<div><h3>제품 상세 설명</h3></div>
 			<textarea id="summernote" name="productContent" class="input-form"></textarea>
 		</div>
 		
@@ -186,10 +186,6 @@
 			</div>
 		</div>	
 			
-		</div>
-		<div style="margin-bottom: 20px">
-			<div><h3>클래스 수업 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;"pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</div>
 			
 		<div style="margin-bottom: 20px">

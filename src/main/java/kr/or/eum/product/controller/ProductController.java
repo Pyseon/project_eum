@@ -694,7 +694,15 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		
 	}
 	
-	
+	@RequestMapping(value = "/main.do")
+	public String main(Model model) {
+		ArrayList<Product> list = productService.selectProductList();
+		model.addAttribute("list",list);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getProductTitle());
+		}
+		return "common/main";
+	}
 
 }
 

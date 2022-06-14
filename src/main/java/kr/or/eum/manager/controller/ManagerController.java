@@ -589,5 +589,10 @@ public class ManagerController {
 		model.addAttribute("ntc", notice);
 		return "manager/noticeDetail";
 	}
+	
+	@RequestMapping(value = "/main.do")
+	public String main() {
+		return "common/main";
+	}
 }
 

@@ -682,6 +682,16 @@ public class MemberController {
 		}
     }
     
+    @RequestMapping(value = "/redirectFaq.do")
+	public String manaMember(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}
+		return "redirect:/myQuestionList.do?memberNo="+member.getMemberNo()+"&reqPage=1&selectNum=0";
+    }
     
 	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
 	@ExceptionHandler
@@ -689,4 +699,5 @@ public class MemberController {
 		System.out.println(e.getMessage());
 		return "common/error";
 	}
+
 }

@@ -139,7 +139,6 @@ public class CommunityController {
 			comm.setCommFilename(filename);
 			comm.setCommFilepath(filepath);
 
-			System.out.println(comm);
 		}
 		int result = service.communityWrite(comm);
 
@@ -152,7 +151,6 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value="/commCoWrite.do", produces="application/json;charset=utf-8")
 	public void communityCoWrite(CommunityCo commCo) {
-		System.out.println("댓글컨트롤러"+commCo);
 		//insert 후 selectKey를 이용해 방금 insert 한 pk값 얻어옴
 		service.commCoWrite(commCo);
 		//얻어온 pk값으로 데이터 조회 후 리턴
@@ -281,7 +279,6 @@ public class CommunityController {
 
 //////  >>>>>>>>>>>>>>   이미지 업로드 메소드  <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 	public Community imgUpload(Community comm, MultipartFile file, HttpServletRequest request) {
-		System.out.println("이미지 업로드 메소드 진입!!");
 		// 파일 저장할 경로 설정
 		String savePath = request.getSession().getServletContext().getRealPath("/img/community/");
 
@@ -340,7 +337,6 @@ public class CommunityController {
 	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
 	@ExceptionHandler
 	public String error1(Exception e) {
-		System.out.println(e.getMessage());
 		return "common/error";
 	}
 

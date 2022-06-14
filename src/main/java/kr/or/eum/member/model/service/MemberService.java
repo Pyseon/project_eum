@@ -98,14 +98,12 @@ public class MemberService {
 	public Member selectMypage(Member m) {
 		
 		Member member = dao.selectOneMember(m);
-		System.out.println(member+"Mypage");
 		return member;
 	}
 
 
 	public int insertMember(Member m) {
 		int result = dao.insertMember(m);
-		System.out.println(m);
 		return result;
 	}
 
@@ -138,7 +136,6 @@ public class MemberService {
 
 	public int searchPhone(String memberPhone) {
 		// TODO Auto-generated method stub
-		System.out.println("서비스도착 멤버폰서치");
 		return dao.searchPhone(memberPhone);
 	}
 
@@ -146,9 +143,6 @@ public class MemberService {
 		// TODO Auto-generated method stub
 		m.setMemberId(memberId);
 		m.setMemberPw(Integer.toString(memberPw));
-		System.out.println("이메일 : "+memberId);
-        System.out.println("임시비밀번호 : "+memberPw);
-        System.out.println("Member : "+ m);
 		return dao.updatePw(m);
 	}
 
@@ -238,9 +232,6 @@ public class MemberService {
 		
 	
 		
-		System.out.println("최종값>>"+productQst);
-		System.out.println("최종값>>"+productAns);
-		System.out.println("최종값>>"+productTag);
 		
 		pro.setProductQst(productQst);
 		pro.setProductAns(productAns);

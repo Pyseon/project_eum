@@ -147,7 +147,6 @@ public class CommunityService {
 	}
 
 	public void commCoWrite(CommunityCo commCo) {
-		System.out.println("댓글서비스");
 		dao.commCoWrite(commCo);
 	}
 	
@@ -263,8 +262,6 @@ public class CommunityService {
 		for(int i=0;i<weakList.size();i++){
 			weakness += weakList.get(i)+"|";
 		}
-		System.out.println("최종값>>"+advantage);
-		System.out.println("최종값>>"+weakness);
 		
 		comm.setAdvantage(advantage);
 		comm.setWeakness(weakness);

@@ -33,7 +33,6 @@ public class RequestController {
 		model.addAttribute("selReq", selReq);
 		model.addAttribute("pageNavi",rpd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
-		System.out.println("selReq : "+selReq);
 		
 		HttpSession session = request.getSession(false);
         Member member = null;
@@ -43,13 +42,10 @@ public class RequestController {
         }
         if(member != null) {
 			model.addAttribute("memberNo", member.getMemberNo());
-			System.out.println("memberNo : "+member.getMemberNo());
 
 		}else {
 			model.addAttribute("memberNo", 0);
 		}
-   
-        System.out.println("list : " + rpd.getList());
 		return "request/requestList";
 	}
 	
@@ -62,7 +58,6 @@ public class RequestController {
             member = (Member)session.getAttribute("member");
         } 
         model.addAttribute("memberNo", member.getMemberNo());
-        System.out.println("memberNo : "+member.getMemberNo());
         
 		return "request/requestWriterFrm";
 	}
@@ -92,7 +87,6 @@ public class RequestController {
 		}
 		RequestAskPageData rapd = service.selectReqAskExpList(reqNo);
 		model.addAttribute("list", rapd.getList());
-		System.out.println("list : " + rapd.getList());
 		
 		RequestDetailData rdd = service.selectOneRequest(reqNo, member);
 			if(member != null) {
@@ -101,7 +95,6 @@ public class RequestController {
 					Expert expert = service.selectExpertNo(memberNo);
 					if(expert != null) {
 					model.addAttribute("expertNo", expert.getExpertNo());
-					System.out.println("expert : "+expert);
 					int existReqAsk = service.selectExistReqAsk(expert.getExpertNo(), reqNo);
 					if(existReqAsk != 0) {
 						model.addAttribute("existReqAsk", 1);
@@ -118,19 +111,16 @@ public class RequestController {
 			model.addAttribute("reqaskList", rdd.getReqaskList());
 			model.addAttribute("req", rdd.getReq());
 			model.addAttribute("Tag", rdd.getTag());
-			System.out.println("req : "+rdd);
 			
 			int selectExpertIs = service.selectExpertIs(reqNo);
 			if(selectExpertIs != 0) {
 				int selectExpert = service.selectExpert(reqNo);
 				model.addAttribute("se", selectExpert);
-				System.out.println("se : " +selectExpert);
 			}else {
 				model.addAttribute("se", 0);
 				
 			}
 			model.addAttribute("sei", selectExpertIs);
-			System.out.println("sei : "+selectExpertIs);
 			
 		return "request/requestDetail";
 	}
@@ -160,7 +150,6 @@ public class RequestController {
 	}
 	@RequestMapping(value = "/updateRequest.do")
 	public String updateRequest(int reqNo, String reqTitle, String reqContent) {
-		System.out.println(reqNo+ reqTitle+ reqContent);
 		int result = service.updateRequest(reqNo, reqTitle, reqContent);
 		return "redirect:/requestDetail.do?reqNo="+reqNo;
 	}
@@ -168,7 +157,6 @@ public class RequestController {
 	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
 	@ExceptionHandler
 	public String error1(Exception e) {
-		System.out.println(e.getMessage());
 		return "common/error";
 	}
 }

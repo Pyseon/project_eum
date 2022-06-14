@@ -62,13 +62,11 @@ public class ProductDao {
 	
 	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
-		System.out.println("class pro>>>>>>>>>>>>>>>>"+pro);
 		int result = sqlSession.insert("product.classWrite", pro);
 		return result;
 	}
 	public int expertWrite(Product pro) {
 		// TODO Auto-generated method stub
-		System.out.println("expert pro>>>>>>>>>>>>>>>>"+pro);
 		int result = sqlSession.insert("product.expertWrite", pro);
 		return result;
 	}
@@ -90,7 +88,6 @@ public class ProductDao {
 	
 	public int ideamarketWrite(Product pro) {
 		// TODO Auto-generated method stub
-		System.out.println("idea pro>>>>>>>>>>>>>>>>"+pro);
 		int result = sqlSession.insert("product.ideamarketWrite", pro);
 		return result;
 	}
@@ -207,7 +204,6 @@ public class ProductDao {
 	public int updatePaymentState(int counselNo) {
 		Payment payment = sqlSession.selectOne("product.selectPayment", counselNo);
 		int result = sqlSession.update("product.updatePaymentState", payment.getPayNo());
-		System.out.println(result);
 		return result;
 	}
 
@@ -257,9 +253,7 @@ public class ProductDao {
   
   //영준
 	public Product selectProduct(int productNo) {
-		System.out.println(productNo);
 		Product product = sqlSession.selectOne("product.selectProductNo", productNo);
-		System.out.println(product);
 
 		return product;
 	}
@@ -294,7 +288,6 @@ public class ProductDao {
 		return payNo;
 	}
 	public int counselInsert(Counsel c) {
-		System.out.println("daocounsel"+c);
 		int result2 = sqlSession.insert("product.counselInsert", c);
 		return result2;
 	}

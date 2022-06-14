@@ -73,7 +73,6 @@ public class ProductController{
 		model.addAttribute("selPro", selPro);
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
-		System.out.println("selPro : "+selPro);
 		
 		HttpSession session = request.getSession(false);
         Member member = null;
@@ -87,15 +86,12 @@ public class ProductController{
             if(expert !=null) {
             	model.addAttribute("expertNo", expert.getExpertNo());
             	model.addAttribute("expertApp", expert.getExpertApp());
-            	System.out.println("expert : "+expert);
             }else {
             	model.addAttribute("expertNo", 0);
             	
             }
         	model.addAttribute("grade", member.getGrade());
 			model.addAttribute("memberNo", member.getMemberNo());
-			System.out.println("memberNo : "+member.getMemberNo());
-			System.out.println("grade : "+member.getGrade());
 
 		}else {
 			model.addAttribute("memberNo", 0);
@@ -115,12 +111,10 @@ public class ProductController{
         Expert expert = productService.selectExpertNo(memberNo);
         if(expert !=null) {
         	model.addAttribute("expertNo", expert.getExpertNo());
-        	System.out.println("expert : "+expert);
         }else {
         	model.addAttribute("expertNo", 0);
         }
         model.addAttribute("memberNo", member.getMemberNo());
-        System.out.println("memberNo : "+member.getMemberNo());
         
  
 		return "product/classWriterFrm";
@@ -185,8 +179,6 @@ public class ProductController{
 		pro.setProductImgname(filename);
 		pro.setProductImgPath(filepath);
 		
-		System.out.println(pro);
-		
 		int result = productService.classWrite(pro);
 		
 		return "redirect:/ClassList.do?reqPage=1&selPro=%EC%A0%84%EC%B2%B4";
@@ -200,7 +192,6 @@ public class ProductController{
 		model.addAttribute("selPro", selPro);
 		model.addAttribute("pageNavi",ppd.getPageNavi());
 		model.addAttribute("reqPage", reqPage);
-		System.out.println("selPro : "+selPro);
 		
 		HttpSession session = request.getSession(false);
         Member member = null;
@@ -213,15 +204,12 @@ public class ProductController{
             if(expert !=null) {
             	model.addAttribute("expertNo", expert.getExpertNo());
             	model.addAttribute("expertApp", expert.getExpertApp());
-            	System.out.println("expert : "+expert);
             }else {
             	model.addAttribute("expertNo", 0);
             	
             }
         	model.addAttribute("grade", member.getGrade());
 			model.addAttribute("memberNo", member.getMemberNo());
-			System.out.println("memberNo : "+member.getMemberNo());
-			System.out.println("grade : "+member.getGrade());
 
 		}else {
 			model.addAttribute("memberNo", 0);
@@ -240,12 +228,10 @@ public class ProductController{
     Expert expert = productService.selectExpertNo(memberNo);
     if(expert !=null) {
     	model.addAttribute("expertNo", expert.getExpertNo());
-    	System.out.println("expert : "+expert);
     }else {
     	model.addAttribute("expertNo", 0);
     }
     model.addAttribute("memberNo", member.getMemberNo());
-    System.out.println("memberNo : "+member.getMemberNo());
     
 
 	return "product/expertWriterFrm";
@@ -269,8 +255,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	model.addAttribute("selPro", selPro);
 	model.addAttribute("pageNavi",ppd.getPageNavi());
 	model.addAttribute("reqPage", reqPage);
-	System.out.println("selPro : "+selPro);
-	System.out.println(ppd);
 	
 	HttpSession session = request.getSession(false);
 	Member member = null;
@@ -282,8 +266,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		int memberNo = member.getMemberNo();
 		model.addAttribute("grade", member.getGrade());
 		model.addAttribute("memberNo", member.getMemberNo());
-		System.out.println("memberNo : "+member.getMemberNo());
-		System.out.println("grade : "+member.getGrade());
 
 	}else {
 		model.addAttribute("memberNo", 0);
@@ -310,12 +292,10 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
     Expert expert = productService.selectExpertNo(memberNo);
     if(expert !=null) {
     	model.addAttribute("expertNo", expert.getExpertNo());
-    	System.out.println("expert : "+expert);
     }else {
     	model.addAttribute("expertNo", 0);
     }
     model.addAttribute("memberNo", member.getMemberNo());
-    System.out.println("memberNo : "+member.getMemberNo());
     
 
 	return "product/ideamarketWriterFrm";
@@ -323,9 +303,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 
 @RequestMapping(value="/ideamarketWrite.do")
 	public String ideamarketWrite(Product pro, MultipartFile file, HttpServletRequest request) {
-	System.out.println(pro.getMarketName());
-	System.out.println(pro.getMarketPath());
-	System.out.println(file.getOriginalFilename());
 	String savePath 
 	= request.getSession().getServletContext().getRealPath("/ideamarket/file/");
 	
@@ -379,8 +356,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	pro.setMarketName(filename);
 	pro.setMarketPath(filepath);
 	
-	System.out.println(pro);
-	
 	int result = productService.ideamarketWrite(pro);
 	
 	return "redirect:/IdeamarketList.do?reqPage=1&selPro=%EC%A0%84%EC%B2%B4";
@@ -423,22 +398,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 			model.addAttribute("memberNo", 0);
 		}
 		model.addAttribute("wishMemberCheck", pd.getWishMemberCheck());
-		System.out.println("--------------------------------------");
-		System.out.println("product : "+pd.getProduct());
-		System.out.println("expert : "+pd.getExpert());
-		System.out.println("expertM : "+pd.getExpertAndMember());
-		System.out.println("reviewRnum : "+pd.getReviewRnum());
-		System.out.println("reviewAvr : "+pd.getReviewAvr());
-		System.out.println("reviewCount : "+pd.getReviewCount());
-		System.out.println("payment : "+pd.getPaymentCount());
-		System.out.println("cost : "+pd.getCost());
-		System.out.println("wishList :"+pd.getWishList());
-		System.out.println("wishCount : "+pd.getWishCount());
-		if(member != null) {
-			System.out.println("memberNo : "+member.getMemberNo());
-		}
-		System.out.println("wishMemberCheck : "+pd.getWishMemberCheck());
-		System.out.println("--------------------------------------");
+
 		return "product/productDetail";
 	}
 	
@@ -519,11 +479,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@ResponseBody
 	@RequestMapping(value = "/insertWish.do", produces = "application/json;charset=utf-8")
 	public String insertWish(int productNo, int memberNo) {
-		System.out.println("-------insertWish");
-		System.out.println("productNo : "+productNo);
-		System.out.println("memberNo : "+memberNo);
 		int result = productService.insertWish(productNo, memberNo);
-		System.out.println("result : "+result);
 		int afterWishCount = productService.afterWishCount(productNo);
 		return new Gson().toJson(afterWishCount);
 		
@@ -533,11 +489,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@ResponseBody
 	@RequestMapping(value = "/deleteWish.do", produces = "application/json;charset=utf-8")
 	public String deleteWish(int productNo, int memberNo) {
-		System.out.println("-------deleteWish");
-		System.out.println("productNo : "+productNo);
-		System.out.println("memberNo : "+memberNo);
 		int result = productService.deleteWish(productNo, memberNo);
-		System.out.println("result : "+result);
 		int afterWishCount = productService.afterWishCount(productNo);
 		return new Gson().toJson(afterWishCount);
 	}
@@ -546,8 +498,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@RequestMapping(value = "/expertCounsel.do")
 	public String expertCounsel(Model model, int payNo, HttpServletRequest request) {
 		HashMap<String, Object> compare = productService.compareMemberNo(payNo, request);
-		System.out.println(compare.get("expertTrue"));
-		System.out.println(compare.get("memberTrue"));
 		if(compare.get("expertTrue").equals(false) && compare.get("memberTrue").equals(false)) {
 			return "common/error";
 		}
@@ -564,15 +514,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		if(!map.get("paymentState").equals(1) && !map.get("paymentState").equals(2)) {
 			return "common/error";
 		}
-		System.out.println("Counsel_member : "+compare.get("member"));
-		System.out.println("Counsel_product : "+map.get("product"));
-		System.out.println("Counsel_expert : "+map.get("expert"));
-		System.out.println("Counsel_expertM : "+map.get("expertM"));
-		System.out.println("Counsel_payment : "+map.get("payment"));
-		System.out.println("Counsel_review : "+map.get("review"));
-		System.out.println("Counsel_counsel : "+map.get("counsel"));
-		System.out.println("Counsel_chat : "+map.get("chatList"));
-		System.out.println("Counsel_firstDate : "+map.get("first"));
 		
 		return "product/expertCounsel";
 	}
@@ -646,9 +587,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@ResponseBody
 	@RequestMapping(value = "/updateReview.do")
 	public String updateReview(Review review) {
-		System.out.println("updateReview : "+review);
 		int result = productService.updateReview(review);
-		System.out.println(result);
 		return new Gson().toJson(result);
 	}
 	
@@ -657,7 +596,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@RequestMapping(value = "/deleteReview.do")
 	public String deleteReview(int reviewNo) {
 		int result = productService.deleteReview(reviewNo);
-		System.out.println(result);
 		return new Gson().toJson(result);
 	}
 	
@@ -666,8 +604,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@RequestMapping(value = "updateStartTime.do")
 	public String updateStartTime(String startTime, int counselNo) {
 		int result = productService.updateStartTime(startTime, counselNo);
-		System.out.println(result);
-		System.out.println(startTime);
 		return new Gson().toJson(startTime);
 	}
 	
@@ -714,7 +650,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	
 	@GetMapping("/download.do")
 	public void download(String marketfile, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println(marketfile);
 		
 		//4.결과처리
 				//파일과 현재 서블릿을 연결
@@ -751,7 +686,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		ArrayList<ProductAndEtc> list = productService.selectProductList();
 		model.addAttribute("list",list);
 		for (int i = 0; i < list.size(); i++) {
-			System.out.println(list.get(i).getProductTitle());
 		}
 		return "common/main";
 	}
@@ -759,7 +693,6 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
 	@ExceptionHandler
 	public String error1(Exception e) {
-		System.out.println(e.getMessage());
 		return "common/error";
 	}
 

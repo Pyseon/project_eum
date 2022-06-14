@@ -111,7 +111,6 @@ public class MemberController {
 		
 		String filename = file.getOriginalFilename();
 		if(filename == "") {
-			System.out.println("등록된이미지 없음!");
 			m.setMemberPictureName("delmember.jpg");
 			m.setMemberPicturePath("delmember.jpg");
 		}else {
@@ -175,7 +174,6 @@ public class MemberController {
 		if(result>0) {
 			session.setAttribute("member", m);
 		}
-		System.out.println(m);
 		return "redirect:/";
 	}
 	//재민 1:1 문의내역 확인
@@ -200,7 +198,6 @@ public class MemberController {
 	@RequestMapping(value="/Myproject.do")
 	public String Myproject(Model model, HttpSession session, int memberNo) {
 		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
-		System.out.println(list);
 		model.addAttribute("list", list);
 		return "mypage/Myproject";
 	}
@@ -218,7 +215,6 @@ public class MemberController {
 	
 	@RequestMapping(value="/MyclassUpdate.do")
 		public String productUpdate(Product pro, MultipartFile file, HttpServletRequest request) {
-		System.out.println("내프로젝트수정> "+pro);
 		String filename = file.getOriginalFilename();
 		// 이미지 수정을 안하면 파일이름은 빈칸, 수정을했다면 파일이름이 존재
 		if (filename == "") {
@@ -288,7 +284,6 @@ public class MemberController {
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {
 		ArrayList<ProductAndPayment> list = service.selectProductList(memberNo);
-		System.out.println(list);
 		model.addAttribute("list", list);
 		
 		return "mypage/Myproduct";
@@ -298,7 +293,6 @@ public class MemberController {
 		ArrayList<Payment> list = service.selectMyproductDetail(payNo);
 		
 		
-		System.out.println(list);
 		model.addAttribute("list", list);
 		
 		
@@ -318,7 +312,6 @@ public class MemberController {
 	@RequestMapping(value="/Myreview.do")
 	public String Myreview(Model model,int memberNo) {
 		ArrayList<productAndReview> list = service.selectReviewlist(memberNo);
-		System.out.println(list);
 		model.addAttribute("list", list);
 		
 		return "mypage/Myreview";
@@ -344,7 +337,6 @@ public class MemberController {
 	//재민 전문가 신청페이지3로 이동
 	@RequestMapping(value="/Expertapply3.do", method = RequestMethod.POST)
 	public String Expertapply3(Expert ex, MultipartFile file, HttpServletRequest request) {
-		System.out.println("전문가등록!!"+ex);
 		
 		String filename = file.getOriginalFilename();
 			String savePath = request.getSession().getServletContext().getRealPath("/img/expert/");
@@ -455,11 +447,10 @@ public class MemberController {
 	//대권 회원가입
 	@RequestMapping(value="/join.do",method = RequestMethod.POST)
 	public String join(Member m, MultipartFile file, HttpServletRequest request) {
-		//System.out.println("컨트롤러 진입!");
-		//System.out.println(m);
+
 		String filename = file.getOriginalFilename();
 		if(filename == "") {
-			//System.out.println("등록된이미지 없음!");
+
 			m.setMemberPictureName("default-img.png");
 			m.setMemberPicturePath("default-img.png");
 		}else {
@@ -591,9 +582,7 @@ public class MemberController {
     @ResponseBody
 	@RequestMapping(value="/nickCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
 	public String memberNick(String memberNick , Model model) {
-    	System.out.println(memberNick);
 		int result = service.search(memberNick);
-		System.out.println("닉네임컨트롤러:"+ result);
 		String str="";
 		if(result == 1) {
 			str="1";
@@ -608,9 +597,7 @@ public class MemberController {
     @ResponseBody
 	@RequestMapping(value="/emailCheck.do",produces = "application/text; charset=UTF-8", method=RequestMethod.POST)
 	public String memberId(String memberId , Model model) {
-    	System.out.println(memberId);
 		int result = service.searchId(memberId);
-		System.out.println("이메일컨트롤러:"+ result);
 		String str="";
 		if(result == 1) {
 			str="1";
@@ -625,9 +612,7 @@ public class MemberController {
     @ResponseBody
 	@RequestMapping(value="/phoneCheck.do",produces = "application/text; charset=UTF-8")
 	public String memberPhone(String memberPhone , Model model) {
-    	System.out.println(memberPhone);
 		int result = service.searchPhone(memberPhone);
-		System.out.println("연락처컨트롤러:"+ result);
 		String str="";
 		if(result == 1) {
 			str="1";
@@ -668,9 +653,6 @@ public class MemberController {
         }
         
         String num = Integer.toString(memberPw);
-        System.out.println("이메일 : "+memberId);
-        System.out.println("임시비밀번호 : "+memberPw);
-        System.out.println("Member : "+ m);
         int result = service.updatePw(memberPw, memberId, m);
         
         String str="";
@@ -697,7 +679,6 @@ public class MemberController {
 	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
 	@ExceptionHandler
 	public String error1(Exception e) {
-		System.out.println(e.getMessage());
 		return "common/error";
 	}
 

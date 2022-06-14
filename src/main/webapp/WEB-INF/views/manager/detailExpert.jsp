@@ -19,14 +19,6 @@
 				<td colspan="2">${exp.expertCategory }</td>
 			</tr>
 			<tr>
-				<th>태그</th>
-				<td colspan="2">${exp.expertTag }</td>
-			</tr>
-			<tr>
-				<th>자격</th>
-				<td colspan="2">가입자격은 이거이거가 필요하다</td>
-			</tr>
-			<tr>
 				<th>자격증</th>
 				<td colspan="2">${exp.credential }</td>
 			</tr>

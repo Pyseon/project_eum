@@ -49,8 +49,6 @@ public class ChatHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception{
 		//sessionList.add(session);
-		System.out.println("새 클라이언트 접속!");
-		System.out.println("session : "+ session.getId());
 		//i++;
 	}//afterConnectionEstablished
 	
@@ -61,7 +59,6 @@ public class ChatHandler extends TextWebSocketHandler {
 		// 여기에도 내가 받았다는 걸 표시 해야함
 		//System.out.println("메세지 전송한 세션 : "+session);
 		
-		System.out.println("전송 메세지 : "+message.getPayload());
 		//문자열을 Json 객체로 변환해줄 객체
 		JsonParser parser = new JsonParser();
 		//parser를 이용해서 String > Json형태로 변화
@@ -84,9 +81,6 @@ public class ChatHandler extends TextWebSocketHandler {
 		
 		// 새로 채팅방에 회원이 들어온 경우
 		if(type.equals("enter")) {
-			System.out.println("---------------");
-			System.out.println(counselNo);
-			System.out.println("---------------");
 			//웹소켓 세션 리스트에 세션 맵
 			ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo);
 			sessionList.add(session);
@@ -110,9 +104,6 @@ public class ChatHandler extends TextWebSocketHandler {
 			int result = productService.insertChat(msg, memberNo,counselNo); 
 			ArrayList<WebSocketSession> sessionList = sessionMap.get(counselNo); 
 			for(WebSocketSession s : sessionList) {
-				System.out.println(s);
-				System.out.println(session);
-				System.out.println(s.equals(session));
 				String sendMsg = makeSendMsg(s.equals(session), sessionList.size() == 2, msg, time);
 				// { type: 'chat', 'msg : sendMsg, roomMemberCount : 2 }
 				// 위와 같이 키값과 밸류를 주려면 map이 필요하겠지 > 맵에 값을 넣어주고 > 데이터타입에 맞게 json, gson으로 변환해주고 > sendMessage

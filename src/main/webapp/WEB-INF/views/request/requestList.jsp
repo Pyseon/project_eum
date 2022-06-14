@@ -182,11 +182,9 @@ function loginNeed(){
 
 $(function(){
 	var selReq = '${selReq}';
-	console.log(selReq);
 	
 	for(var i=0; i<12; i++){
 		var val = $(".btm_image").eq(i);
-		console.log(val);
 		if(selReq != '전체'){
 			for(var i=1; i<12; i++){
 				if(i != 1){

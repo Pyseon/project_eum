@@ -184,7 +184,7 @@ li{
 	.selPro-active{
 	border-bottom: 5px solid rgb(56 101 242) !important;
 	}
-	.sizeBtn{
+	.sizeBtn2{
 		width: 32% !important;
 		text-align: center !important;
 		font-size: 15px !important;
@@ -192,6 +192,16 @@ li{
 	}
 	.marginBtn{
 		margin-bottom: 2px !important;
+	}
+	.bc11{
+		background-color: skyblue;
+	}
+	
+	#p-title-2{
+		overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 180px;
 	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
@@ -216,14 +226,21 @@ li{
 		
 		<div class="posting-item" style="cursor: pointer;" >
 			
-			  
-			 <img src="./img/product/ClassList/${p.productImgPath }">
+			 <c:if test="${p.productType eq 1}">
+			 	<img src="./img/ExpertList/coun1.png" style="width:245px; height:180px;">
+			 </c:if>
+			 <c:if test="${p.productType eq 2}">
+				 <img src="./img/product/ClassList/${p.productImgPath }">
+			 </c:if>
+			 <c:if test="${p.productType eq 3}">
+			 	 <img src="./img/ExpertList/idmar.png" style="width:245px; height:180px;">>
+			 </c:if>
 			<div class="posting-connect">
 			
 			<ul>
 				<li>
 					
-					<div>
+					<div id="p-title-2">
 						<span class="card-category fs-bold">${p.productTitle }</span>
 					</div>
 					<div>
@@ -247,35 +264,41 @@ li{
 			</div>
 
 			<div class="marginBtn">		
-						<button class="btn bc3 bs7 sizeBtn" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">주문상세</button>
+						<button class="btn bc1 bs7 sizeBtn" id="login-btn" type="button" 
+						onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">상세</button>
 		
 						
 						
 						<c:if test="${p.productType eq 1}">
 							<c:if test="${p.payState eq 1}">
-								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
-								<button class="btn bc3 bs7 sizeBtn" id="login-btn" type="button" onclick="location.href='/DeleteMyproduct.do?payNo=${p.payNo}&&memberNo=${sessionScope.member.memberNo}'">주문취소</button>
+								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  
+								onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작</button>
+								<button class="btn bc2 bs7 sizeBtn" id="login-btn" type="button" 
+								onclick="location.href='/DeleteMyproduct.do?payNo=${p.payNo}&&memberNo=${sessionScope.member.memberNo}'">취소</button>
 						
 							</c:if>
 							<c:if test="${p.payState eq 2}">
 
 								
-									<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+									<button class="btn bc4 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  
+									onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기</button>
 							</c:if>
 						</c:if>
 					
 						<c:if test="${p.productType eq 2}">
 							
 
-								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+								<button class="btn bc4 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  
+								onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기</button>
 							
 						</c:if>
 						
 						
 						
 						<c:if test="${p.productType eq 3}">
-							<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
-               				<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'">다운로드</button>
+							<button class="btn bc4 bs7" id="login-btn" type="button" value="${p.payNo}"  
+							onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기</button>
+               				<button class="btn bc11 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'">다운</button>
 						</c:if>
 			
 			</div>

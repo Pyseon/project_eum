@@ -142,7 +142,38 @@
     	font-weight: bold !important;
     	color: #a7a7a7 !important;
     }
-    .
+    
+    .productIntro p {
+		overflow: hidden;  		
+		text-overflow: ellipsis;  	
+		white-space: nowrap; 		
+		word-break:break-all;
+		width: 200px;
+		height: 20px;
+		margin-left: 25px;
+		margin-top: -14px;
+    }
+    .category {
+    	margin: 15px;
+    	font-size: 16px;
+    	font-weight: bold;
+    }
+    .icon-wish-wrap{
+    	margin-top: -28px;
+    	display: flex;
+  		justify-content: center;
+    }
+    .wishCount {
+    	margin-left: 10px;
+    	line-height: 1.8;
+    }
+    .icon-wish{
+    	color: red;
+    }
+    
+    .icon-star {
+    	color:#ff990d;
+    }
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -342,9 +373,14 @@
               <div class="single-products">
                 <div class="productinfo text-center">
                   <img src="/img/product/ClassList/${list.productImgPath }" />
-                  <a href="#" class="btn">${list.productIntro}</a><br>
-                  ${list.productCategory}
-                  ${list.wishCount } ${list.revscore }
+                  <div class="category">${list.productCategory}</div>
+                  <div class="productIntro"><p>${list.productIntro}</p></div><br>
+                  <div class="icon-wish-wrap">
+                  	<span class="material-icons icon-wish">favorite</span>
+                  	<span class="wishCount">${list.wishCount }</span>
+                  	<span class="material-icons icon-star">star</span>
+                  	<span class="wishCount">${list.revscore }</span>
+                  </div>
                   <!-- 별점추가 -->
                 </div>
               </div>

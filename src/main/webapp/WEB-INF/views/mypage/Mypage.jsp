@@ -129,7 +129,6 @@
 	//2.submit 유효성
 	let inputCheck = new Array(7).fill(true);
 	let checkAll = true;
-	console.log(checkAll);
 	/*
 	$("#joinButton").click(function() {
 		console.log(checkAll); 
@@ -197,13 +196,11 @@
 	
 	function formCheck(){
 		checkAll = true;
-		console.log("인풋체크> "+inputCheck);
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
 				checkAll = false;
 			}
 		}
-		console.log("체크올> "+checkAll);
 		if(checkAll){
 			$("#joinButton").attr("disabled",false);
 		}else{
@@ -244,7 +241,7 @@
 							}
 					   },
 					   error : function(){
-						   console.log("서버요청실패");
+						   
 					   }
 					});
 				inputCheck[0] = true;
@@ -286,7 +283,7 @@
 							}
 					   },
 					   error : function(){
-						   console.log("서버요청실패");
+						   
 					   }
 					});
 			}
@@ -349,7 +346,7 @@
 					}
 			   },
 			   error : function(){
-				   console.log("서버요청실패");
+				   
 			   }
 			});
 			
@@ -492,7 +489,7 @@
 		    	newDay = day;
 		    }
 		    
-		    console.log(month);
+		    
 		    let birth = (year+"-"+newMonth+"-"+newDay);
 		    $("#birth").val(birth);
 		    

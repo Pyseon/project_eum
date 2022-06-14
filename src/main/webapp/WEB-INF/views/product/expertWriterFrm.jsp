@@ -131,7 +131,7 @@
 			<div><h3>상담명</h3></div>
 
 			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." 
-			pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>>
+			pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
@@ -204,7 +204,7 @@
 			<div><h3>할인률</h3></div>
 			<span style="display: flex;">
 			<input class="input-form" type="text" name="sale" style="width: 5%;" oninput="this.value = this.value.replace(/[^0-9.\-]/g, '').replace(/(\..*)\./g, '$1');" required>
-			<span style="line-height: 2.5;">&nbsp; %(미작성시 자동으로 0%가 됩니다)</span>
+			
 			</span>
 		</div>
 		
@@ -227,7 +227,6 @@
 		</div>
 		<div>
 		<input type="submit" id="submit-btn" class="btn bc1 bs4" value="등록하기">
-		<input type="button" id="test-btn" value="테스트">
 		</div>
 		</form>
 	</div>
@@ -255,36 +254,16 @@
 	
 	$('#submit-btn').on("submit", function(event) {
 		if($('#summernote').summernote('isEmpty')) {
-			console.log('contents is empty, fill it!');
 			event.preventDefault();
 		}	
 	});	  
 	
-	$('#test-btn').on("click", function(event) {
-		if($('#summernote').summernote('isEmpty')) {
-			console.log('contents is empty, fill it!');
-			event.preventDefault();
-		}else {
-			console.log('잘 되는 중');	
-		}
-	});	 
-	
-	
-	$("#summernote").on("change", function(){
-		if($('#summernote').summernote('isEmpty')) {
-			console.log('contents is empty, fill it!');
-			event.preventDefault();
-		}else {
-			console.log('잘 되는 중');	
-		}
-	});
-	
 	
 	function checkNull(){
 		if(("#summernote").val() == ""){
-			console.log("빈칸");
+			
 		}else{
-			console.log("있음");
+			
 		}
 	}
 	
@@ -341,7 +320,6 @@
     	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;	
     	qstList[$(".qst-val").index(this)] = qstStr+"|";
     	$("[name=productQst]").val(qstList);
-    	console.log(qstList);
 		
     });
     
@@ -353,7 +331,6 @@
 
     	ansList[$(".ans-val").index(this)] = ansStr+"|";
     	$("[name=productAns]").val(ansList);
-    	console.log(ansList);
 		
     });
     
@@ -379,11 +356,9 @@
         $(".delOptBtn").off().on("click",function(){
         	qstList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productQst]").val(qstList);
-              console.log(qstList);
               
               ansList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productAns]").val(ansList);
-              console.log(ansList);
               qstCount--;
               ansCount--;
               $(this).parent().remove();
@@ -400,7 +375,6 @@
 
     	tagList[$(".tag-val").index(this)] = tagStr+"|";
     	$("[name=productTag]").val(tagList);
-    	console.log(tagList);
 		
     });
     $(".addOptBtn2").on("click",function(){
@@ -414,7 +388,6 @@
         $(".delOptBtn2").off().on("click",function(){
         	tagList.splice($(".delOptBtn2").index(this)+1, 1);
               $("[name=productTag]").val(tagList);
-              console.log(tagList);
               $(this).parent().remove();
               tagCount--;
         });

@@ -90,13 +90,11 @@ $(function(){
 	
 	function formCheck(){
 		checkAll = true;
-		console.log("인풋체크> "+inputCheck);
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
 				checkAll = false;
 			}
 		}
-		console.log("체크올> "+checkAll);
 		if(checkAll){
 			$("#joinButton").attr("disabled",false);
 		}else{
@@ -108,7 +106,6 @@ $(function(){
 //2.submit 유효성
 let inputCheck = new Array(7).fill(true);
 let checkAll = true;
-console.log(checkAll);
 
 
 //체크박스 전체선택 해제

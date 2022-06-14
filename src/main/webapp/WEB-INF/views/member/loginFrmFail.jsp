@@ -31,6 +31,7 @@
       	width:22%;
       	justify-content:center;
       	margin: 0 auto !important;
+      	margin-top: 10px !important;
       }
       .navi-me{
       	
@@ -50,7 +51,7 @@
     </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/member/memberheader.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="container2">
 	<form class="login-form" id="login-form" action="/login.do" method="post">
 		<fieldset>

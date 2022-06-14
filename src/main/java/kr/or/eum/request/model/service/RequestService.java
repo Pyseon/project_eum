@@ -51,7 +51,6 @@ public class RequestService {
 			reqTag += "#"+tagList.get(i)+" ";
 		}
 		
-		System.out.println("태그값>>"+reqTag);
 		req.setReqTag(reqTag);
 		return req;
 	}

@@ -387,7 +387,6 @@ $(function(){
 					$(".attr-wrap").load(location.href + " .attr-wrap");
 				},
 				error : function() {
-					console.log('에러');
 				}
 			});	
 	};
@@ -405,14 +404,12 @@ $(function(){
 					$(".attr-wrap").load(location.href + " .attr-wrap");
 				},
 				error : function() {
-					console.log('에러');
 				}
 			});	
 	};
 	
 	//좋아요(wish)
 	$('.icon-wish').on("click", function() {
-		console.log("클릭");
 		var memberNo = $("#memberNo").val();
 		var commNo = $("#commNo").val();
 		var currentValue = $(this).attr("class");
@@ -445,7 +442,6 @@ $(function(){
 					$("#commLikeNum").text(data);
 				},
 				error : function() {
-					console.log('에러');
 				}
 			});	
 	};
@@ -462,7 +458,6 @@ $(function(){
 					$("#commLikeNum").text(data);
 				},
 				error : function() {
-					console.log('에러');
 				}
 			});	
 	};
@@ -485,18 +480,12 @@ $(function(){
 		let memberNo = $("#memberNo").val();
 		let pickContent = $("#pickContent").val();
 		let pickCategory = $("#pickCategory").val();
-		console.log(pickContent);
-		console.log(commNo);
-		console.log(memberNo);
-		console.log(pickCategory);
 		if(pickContent == ""){
 			return;
 		}
 		
 		$.when(ajax1(commNo, memberNo, pickContent, pickCategory)).done(function(){
-			console.log("스크롤 실행go");
 			//scrollToBottom();
-			console.log("스크롤 끝");
 		});
 
 			
@@ -509,11 +498,9 @@ $(function(){
 		type:"post",
 		data: {commNo:commNo, memberNo:memberNo, pickContent:pickContent, pickCategory:pickCategory},
 		success:function(data){
-			console.log("111");
 			location.reload();
 			//$(".attr-wrap").load(location.href + " .attr-wrap");
 			//$("#pickContent").val("");
-			console.log("222");
 		}
 	});
 	
@@ -624,10 +611,6 @@ $(function(){
 		let replyLevel = $(this).prev().prev().val();	//1이면 대댓글, 2이면 대대댓글
 		let replyNum = $(this).prev().prev().prev().val();	//답글다는 댓글의번호
 		
-		console.log("조상번호>"+replyParentNo);	
-		
-		
-		console.log("참조번호>"+replyNum);		
 		
 		
 		$.ajax({
@@ -653,7 +636,6 @@ $(function(){
 		 }else{
 			 $("#comment-reg").attr("disabled",false);
 		 }
-		 console.log(comment.length);
 		$("#comment-num").text(comment.length);
 	});
 //글자수세기 댓글 수정!! 창 함수
@@ -666,7 +648,6 @@ $(function(){
 			 $("#comment-update-btn").attr("disabled",false);
 			 $("#reComment-write-btn").attr("disabled",false);
 		 }
-		 console.log(UpdateComment.length);
 		$("#UpdateComment-num").text(UpdateComment.length);
 	});
 	
@@ -747,7 +728,6 @@ function convertbr(){
 function returnBr(){
 	var text = document.getElementById("comment-updatearea").value;
 	var textBr = text.replace(/\r\n|\n/g,'<br>');
-	console.log(textBr);
 	return textBr;
 }
 
@@ -800,7 +780,6 @@ function toastShow(title, icon){
 			   div.scrollTop = div.scrollHeight - div.clientHeight;
 			}
 		function scrollToBottom() {
-			console.log("스크 함수수수");
 			 $("#pickBox").scrollTop($("#pickBox")[0].scrollHeight); 
 			 $(".attr-wrap").scrollTop($(".attr-wrap")[0].scrollHeight); 
 		}

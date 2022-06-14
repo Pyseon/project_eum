@@ -6,6 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <title>이음 :: 관리자</title>
+<style>
+	.expertTbl_top td{
+		height: 75px;
+	}
+	#cer-img{
+		height: 300px;
+		width: 300px;
+	}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -29,7 +38,7 @@
 			</tr>
 			<tr>
 				<th>자격증 사본</th>
-				<td colspan="2">${exp.certificatePath}</td>
+				<td colspan="2"><img id="cer-img" src="/img/expert/${exp.certificatePath}"></td>
 			</tr>
 		</table>
 		<h2>판매자 정보</h2>

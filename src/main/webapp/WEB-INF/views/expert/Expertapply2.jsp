@@ -205,13 +205,11 @@ $(function(){
 	
 	function formCheck(){
 		checkAll = true;
-		console.log("인풋체크> "+inputCheck);
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
 				checkAll = false;
 			}
 		}
-		console.log("체크올> "+checkAll);
 		if(checkAll){
 			$("#regExpert").attr("disabled",false);
 		}else{
@@ -239,7 +237,6 @@ $(function(){
 		    	newDay = day;
 		    }
 		    
-		    console.log(month);
 		    let birth = (year+"-"+newMonth+"-"+newDay);
 		    $("#birth").val(birth);
 		    
@@ -327,7 +324,6 @@ $(function(){
 	    	newDay = day;
 	    }
 	    
-	    console.log(month);
 	    let birth = (year+"-"+newMonth+"-"+newDay);
 	    $("#birth").val(birth);
 	    

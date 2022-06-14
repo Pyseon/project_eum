@@ -178,7 +178,6 @@
     			}else{
 	            	advList[$(".adv-val").index(this)] = advStr+"|";     
 	            	$("[name=advantage]").val(advList);
-	            	console.log(advList);
     			}
            
             });
@@ -196,7 +195,6 @@
     			}else{
 	            	weakList[$(".weak-val").index(this)] = weakStr+"|";
 	            	$("[name=weakness]").val(weakList);
-	            	console.log(weakList);
     			}
            
             });
@@ -216,7 +214,6 @@
             $(".delOptBtn").off().on("click",function(){
                   advList.splice($(".delOptBtn").index(this)+1, 1);
                   $("[name=advantage]").val(advList);
-                  console.log(advList);
                   $(this).parent().remove();
                   advCount--;
             });
@@ -232,7 +229,6 @@
             $(".delOptBtn2").off().on("click",function(){
             	weakList.splice($(".delOptBtn2").index(this)+1, 1);
                 $("[name=weakness]").val(weakList);
-                console.log(weakList);
                   $(this).parent().remove();
                   weakCount--;
             });
@@ -380,7 +376,6 @@
             
                 // 첫 글자 공백만 사용 못 하게       
             function noSpaceForm() {
-    			console.log("ddd");
             	if(obj.value == " "){ // 공백 체크
             		alert("해당 항목에는 공백을 사용할 수 없습니다.\n\n공백 제거됩니다.");                
             		obj.focus();              

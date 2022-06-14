@@ -396,7 +396,6 @@
 				},
 				success : function(data) {
 					isLoadedReview = true;
-					console.log('data>>>>', data);
 					putReviewList(data.prm);
 					setPageNav(data.pageNavi);
 				}
@@ -500,10 +499,10 @@
 					},
 					success : function(data) {
 						$('.wish-count').text(data);
-						console.log('좋아요!');
+						
 					},
 					error : function() {
-						console.log('에러');
+						
 					}
 				});	
 			}else {
@@ -525,10 +524,10 @@
 					},
 					success : function(data) {
 						$('.wish-count').text(data);
-						console.log('관심없어요!');
+						
 					},
 					error : function() {
-						console.log('에러');
+						
 					}
 				});	
 			}else {

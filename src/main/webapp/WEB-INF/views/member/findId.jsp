@@ -108,7 +108,7 @@
 </style>
 </head>
 <body>
-<%@ include file="/WEB-INF/views/member/memberheader.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="idfindbox">
 	<div class="idfindmain fs-bold">아이디/비밀번호 찾기</div>
 	<div class="idpwbox">
@@ -159,7 +159,7 @@ $("#email-test").on("click",function(){
 				}
 		   },
 		   error : function(){
-			   console.log("서버요청실패");
+			   
 		   }
 		});
 });

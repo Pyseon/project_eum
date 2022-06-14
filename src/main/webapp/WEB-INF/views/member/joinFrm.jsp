@@ -10,6 +10,7 @@
 <style>
 	.firstbox{
 		margin: 0 auto;
+		margin-top: 30px !important;
 		width: 30%;
 	}
 	.joinfrmbox fieldset{
@@ -107,6 +108,7 @@
 	    color : green;
 	}
 	.incorrect{
+		margin-top: 70px !important;
 	    color : red;
 	}	
 	.mail-input-false{
@@ -131,7 +133,7 @@
 
 </style>
 <body>
-<%@ include file="/WEB-INF/views/member/memberheader.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="firstbox">
 	<div id="maintitle">회원가입</div>
 	<div id="star">*는 필수 입력사항입니다.</div>
@@ -230,7 +232,6 @@
 	//2.submit 유효성
 	let inputCheck = new Array(7).fill(true);
 	let checkAll = true;
-	console.log(checkAll);
 	/*
 	$("#joinButton").click(function() {
 		console.log(checkAll); 
@@ -298,13 +299,11 @@
 	
 	function formCheck(){
 		checkAll = true;
-		console.log("인풋체크> "+inputCheck);
 		for(let i = 0; i < inputCheck.length; i++){
 			if(inputCheck[i] == false){
 				checkAll = false;
 			}
 		}
-		console.log("체크올> "+checkAll);
 		
 		if(checkAll){
 			$("#joinButton").attr("disabled",false);
@@ -349,7 +348,7 @@
 							}
 					   },
 					   error : function(){
-						   console.log("서버요청실패");
+
 					   }
 					});
 				inputCheck[0] = true;
@@ -391,7 +390,7 @@
 							}
 					   },
 					   error : function(){
-						   console.log("서버요청실패");
+						   
 					   }
 					});
 			}
@@ -454,7 +453,7 @@
 					}
 			   },
 			   error : function(){
-				   console.log("서버요청실패");
+				   
 			   }
 			});
 			
@@ -597,7 +596,6 @@
 		    	newDay = day;
 		    }
 		    
-		    console.log(month);
 		    let birth = (year+"-"+newMonth+"-"+newDay);
 		    $("#birth").val(birth);
 		    

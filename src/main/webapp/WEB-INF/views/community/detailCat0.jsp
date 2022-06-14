@@ -346,7 +346,6 @@ $(function(){
 					$("#commLikeNum").text(data);
 				},
 				error : function() {
-					console.log('에러');
 				}
 			});	
 	};
@@ -363,7 +362,6 @@ $(function(){
 					$("#commLikeNum").text(data);
 				},
 				error : function() {
-					console.log('에러');
 				}
 			});	
 	};
@@ -428,10 +426,6 @@ $(function(){
 		updateCmntNo = $(this).prev().prev().val();
 		updatememberNo = $(this).prev().val();
 		
-		console.log("수정폼띄움!");
-		console.log("댓글번호 > "+updateCmntNo);
-		console.log("멤버번호 > "+updatememberNo);
-		
 		var writeHtml = "";
 		writeHtml += '<div class="comment-write">';
 		writeHtml += '<div class="comment-write-head">';
@@ -462,12 +456,8 @@ $(function(){
 	
 	//댓글수정하기 함수
 	$(document).on("click","#comment-update-btn", function() {
-		console.log("업데이트 버튼 누름!");
-		console.log("수정댓글번호 > "+updateCmntNo);
-		console.log("수정멤버번호 > "+updatememberNo);
 		//returnBr()이라는 함수를 통해서 엔터값을 br로바꿔주고 리턴받아서 저장해줌
 		let commentUpdateText = returnBr();
-		console.log("최종업데이트전 문자열>>"+commentUpdateText);
 		$.ajax({
 			url: "/commCoUpdate.do",
 			data: {cmntNo:updateCmntNo, cmntContent:commentUpdateText},
@@ -501,8 +491,6 @@ $(function(){
 		    cancelButtonText: '취소'
 	 	}).then(result => {
 	 	   if (result.isConfirmed) { // 만약 모달창에서 confirm 버튼을 눌렀다면
-	 	   		console.log("삭제할게!");
-	 	   		console.log("삭제댓글번호 > "+deleteCmntNo);
 	 	   		var commentDelContent = "[ 사용자가 삭제한 댓글 입니다. ]";
 	 	   		//삭제안하고 내용만 바꾸려고할때 (추후 답글있을때만 하도록 구현)
 	 	   		/*
@@ -540,10 +528,6 @@ $(function(){
 		let replyLevel = $(this).prev().prev().val();	//1이면 대댓글, 2이면 대대댓글
 		let replyNum = $(this).prev().prev().prev().val();	//답글다는 댓글의번호
 		
-		console.log("조상번호>"+replyParentNo);	
-		
-		
-		console.log("참조번호>"+replyNum);		
 		
 		
 		$.ajax({
@@ -572,7 +556,6 @@ $(function(){
 		 }else{
 			 $("#comment-reg").attr("disabled",false);
 		 }
-		 console.log(comment.length);
 		$("#comment-num").text(comment.length);
 	});
 //글자수세기 댓글 수정!! 창 함수
@@ -585,7 +568,6 @@ $(function(){
 			 $("#comment-update-btn").attr("disabled",false);
 			 $("#reComment-write-btn").attr("disabled",false);
 		 }
-		 console.log(UpdateComment.length);
 		$("#UpdateComment-num").text(UpdateComment.length);
 	});
 	
@@ -605,16 +587,6 @@ $(function(){
 function replyFrm(replyLev, replyParentNo, replyNo, replyNick, thisReply){
 	$(".comment-cancel-btn").parent().parent().prev().show();
 	$(".comment-cancel-btn").parent().parent().remove();
-	
-
-	console.log("===============================");
-	console.log(replyLev);
-	console.log(replyParentNo);
-	console.log(replyNo);
-	console.log(replyNick);
-	console.log("this");
-	
-	console.log("===============================");
 	
 	
 	
@@ -699,7 +671,6 @@ function convertbr(){
 function returnBr(){
 	var text = document.getElementById("comment-updatearea").value;
 	var textBr = text.replace(/\r\n|\n/g,'<br>');
-	console.log(textBr);
 	return textBr;
 }
 

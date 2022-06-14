@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매완료</title>
+<title>이음 :: 구매완료</title>
 </head>
 <style>
 	.successbox{

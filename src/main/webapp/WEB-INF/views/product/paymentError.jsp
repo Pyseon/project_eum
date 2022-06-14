@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 구매하기</title>
 </head>
 <body>
 잘못된 접근입니다.

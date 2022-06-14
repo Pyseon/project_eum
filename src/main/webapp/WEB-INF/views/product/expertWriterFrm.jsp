@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 전문가상담</title>
 <style>
 	#category{
 		font:bold 16px "malgun gothic";
@@ -137,7 +137,7 @@
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>
-			<textarea id="summernote" name="productContent" class="input-form"></textarea>
+			<textarea id="summernote" name="productContent" class="input-form" onkeydown="checkNull();" onkeyup="checkNull();"></textarea>
 		</div>
 		
 		<div style="margin-bottom: 20px">
@@ -259,6 +259,26 @@
 			console.log('잘 되는 중');	
 		}
 	});	 
+	
+	
+	$("#summernote").on("change", function(){
+		if($('#summernote').summernote('isEmpty')) {
+			console.log('contents is empty, fill it!');
+			event.preventDefault();
+		}else {
+			console.log('잘 되는 중');	
+		}
+	});
+	
+	
+	function checkNull(){
+		if(("#summernote").val() == ""){
+			console.log("빈칸");
+		}else{
+			console.log("있음");
+		}
+	}
+	
 	
 	 // 이미지 추가 함수 시작
     var imgTarget = $('.preview-image .upload-hidden');

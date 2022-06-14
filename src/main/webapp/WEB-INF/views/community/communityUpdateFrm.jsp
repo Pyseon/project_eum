@@ -164,7 +164,6 @@
     			}else{
 	            	advList[$(".adv-val").index(this)] = advStr + "|";     
 	            	$("[name=advantage]").val(advList);
-	            	console.log(advList);
     			}
            
             });
@@ -193,13 +192,10 @@
     			}else{
 	            	weakList[$(".weak-val").index(this)] = weakStr+"|";
 	            	$("[name=weakness]").val(weakList);
-	            	console.log(weakList);
     			}
            
             });
             
-            console.log(advList);
-            console.log(weakList);
             //옵션 추가 버튼함수 시작
             var advCount = $(".adv-val").length;
             var weakCount = $(".weak-val").length;
@@ -215,7 +211,6 @@
             $(".delOptBtn").off().on("click",function(){
                   advList.splice($(".delOptBtn").index(this)+1, 1);
                   $("[name=advantage]").val(advList);
-                  console.log(advList);
                   $(this).parent().remove();
                   advCount--;
             });
@@ -231,7 +226,6 @@
             $(".delOptBtn2").off().on("click",function(){
             	weakList.splice($(".delOptBtn2").index(this)+1, 1);
                 $("[name=weakness]").val(weakList);
-                console.log(weakList);
                   $(this).parent().remove();
                   weakCount--;
             });

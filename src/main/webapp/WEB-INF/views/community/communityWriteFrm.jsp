@@ -31,10 +31,10 @@
 					<input type="hidden" name="weakness">
 						<p class="comm-write-p">제목</p>
 						<input type="text" name="commTitle" class="commTitle comm-input"
-							placeholder="제목을 입력하세요 (15자 이내)" maxlength=15 required>
+							placeholder="제목을 입력하세요 (15자 이내)" maxlength=15 pattern=".{2,15}" required title="2~15글자 이내로 입력하세요" required>
 						<p class="comm-write-p">간단한 소개</p>
 						<input type="text" name="commIntro" class="commIntro comm-input"
-							placeholder="간단한 소개 (100자 이내)" maxlength=99 required>
+							placeholder="간단한 소개 (100자 이내)" maxlength=99 pattern=".{2,100}" required title="2~100글자 이내로 입력하세요" required>
 						<!-- 대표이미지 -->
 						<div class="img-box-wrap">
 							<div class="commFileBox preview-image">
@@ -237,8 +237,13 @@
                   weakCount--;
             });
         });
+
         
-            
+        
+        
+        
+        
+        
             
             //썸머노트 불러오기 함수 
             $("#summernote").summernote({
@@ -370,6 +375,20 @@
     		
     		}//토스트 알림 함수 끝		
 
+    		
+    		
+            
+                // 첫 글자 공백만 사용 못 하게       
+            function noSpaceForm() {
+    			console.log("ddd");
+            	if(obj.value == " "){ // 공백 체크
+            		alert("해당 항목에는 공백을 사용할 수 없습니다.\n\n공백 제거됩니다.");                
+            		obj.focus();              
+            		obj.value = obj.value.replace(' ','');  // 공백 제거                
+            		return false;
+            	} 
+            }
+          
         });
   </script>
   </body>

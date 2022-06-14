@@ -31,10 +31,10 @@
 					<input type="hidden" name="weakness">
 						<p class="comm-write-p">제목</p>
 						<input type="text" name="commTitle" class="commTitle comm-input"
-							placeholder="제목을 입력하세요">
+							placeholder="제목을 입력하세요 (15자 이내)" maxlength=15 pattern=".{2,15}" required title="2~15글자 이내로 입력하세요" required>
 						<p class="comm-write-p">간단한 소개</p>
 						<input type="text" name="commIntro" class="commIntro comm-input"
-							placeholder="간단한 소개">
+							placeholder="간단한 소개 (100자 이내)" maxlength=99 pattern=".{2,100}" required title="2~100글자 이내로 입력하세요" required>
 						<!-- 대표이미지 -->
 						<div class="img-box-wrap">
 							<div class="commFileBox preview-image">

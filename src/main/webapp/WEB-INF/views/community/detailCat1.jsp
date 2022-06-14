@@ -83,10 +83,10 @@ overflow-y: auto;
 <!-- 좋아요 -->						
 						<c:choose>
 							<c:when test="${likeMemberCheck eq 0 }">
-								<i class="fa-regular fa-heart icon-wish"  style="cursor:pointer;"></i>
+								<i class="fa-regular fa-heart icon-wish heartCon"  style="cursor:pointer;"></i>
 							</c:when>
 							<c:otherwise>
-								<i class="fa-regular fa-heart icon-wish fa-solid" style="cursor:pointer;"></i>
+								<i class="fa-regular fa-heart icon-wish fa-solid heartCon" style="cursor:pointer;"></i>
 							</c:otherwise>
 						</c:choose>
 							<span>좋아요</span>
@@ -94,7 +94,7 @@ overflow-y: auto;
 						</span>
 <!-- 좋아요 -->	
 						<span class="article-info"> <i
-							class="fa-solid fa-comment fc-6"></i> <span>댓글</span> <strong
+							class="fa-solid fa-comment fc-6 commentCon"></i> <span>댓글</span> <strong
 							id="cmnt-total2" class="num">${comm.pickCount }</strong>
 						</span>
 					</div>
@@ -276,9 +276,10 @@ overflow-y: auto;
 						class="button-label">${comm.weakness }</label> 
 					</div>
 						<input type="text"
-						name="pickContent" id="pickContent" maxlength="65">
+						name="pickContent" id="pickContent" maxlength="65" placeholder="60자 이내로 작성해주세요">
 					<button class="btn" id="pick-reg"
-						style="margin-left:10px; width: 60px; height: 34px; background-color: #3666f1; color: #fff; font-weight: bold;">등록</button>
+						style="margin-left:10px; width: 60px; height: 34px; background-color: #3666f1; 
+						color: #fff; font-weight: bold;">등록</button>
 				</div>
 		</c:if>
 		<c:if test="${sessionScope.member eq null }">
@@ -297,9 +298,11 @@ overflow-y: auto;
 						class="button-label">${comm.weakness }</label>
 				</div> 
 						<input type="text"
-						name="pickContent" id="pickContent" placeholder="로그인을 하시면 입력할 수 있습니다." readonly onclick="loginFrm();">
+						name="pickContent" id="pickContent" placeholder="로그인을 하시면 입력할 수 있습니다." 
+						readonly onclick="loginFrm();">
 					<button class="btn" id="pick-reg"
-						style="margin-left:10px; width: 60px; height: 34px; background-color: #3666f1; color: #fff; font-weight: bold;" onclick="loginFrm();">등록</button>
+						style="margin-left:10px; width: 60px; height: 34px; background-color: #3666f1; 
+						color: #fff; font-weight: bold;" onclick="loginFrm();">등록</button>
 				</div>
 		</c:if>
 	</div>
@@ -409,11 +412,12 @@ $(function(){
 	
 	//좋아요(wish)
 	$('.icon-wish').on("click", function() {
+		console.log("클릭");
 		var memberNo = $("#memberNo").val();
 		var commNo = $("#commNo").val();
 		var currentValue = $(this).attr("class");
 		 if(memberNo > 0){
-	         if(currentValue == "fa-regular fa-heart icon-wish" && memberNo != 0) {
+	         if(currentValue == "fa-regular fa-heart icon-wish heartCon" && memberNo != 0) {
 	         	$(this).addClass("fa-solid");
 	         	like(memberNo, commNo);
 	         }else {
@@ -491,7 +495,7 @@ $(function(){
 		
 		$.when(ajax1(commNo, memberNo, pickContent, pickCategory)).done(function(){
 			console.log("스크롤 실행go");
-			scrollToBottom();
+			//scrollToBottom();
 			console.log("스크롤 끝");
 		});
 
@@ -506,8 +510,9 @@ $(function(){
 		data: {commNo:commNo, memberNo:memberNo, pickContent:pickContent, pickCategory:pickCategory},
 		success:function(data){
 			console.log("111");
-			$(".attr-wrap").load(location.href + " .attr-wrap");
-			$("#pickContent").val("");
+			location.reload();
+			//$(".attr-wrap").load(location.href + " .attr-wrap");
+			//$("#pickContent").val("");
 			console.log("222");
 		}
 	});

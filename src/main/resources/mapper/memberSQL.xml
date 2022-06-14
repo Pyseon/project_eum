@@ -151,7 +151,7 @@ from product_tbl p
 	 			market_name as marketName,
 	 			market_path as marketPath,
 	 			pay_date as payDate, 
-	 			product_imgPath as productImgPath,
+	 			product_imgpath as productImgPath,
 	 			payment as payMent, 
 	 			pay_state as payState,
 	 			pay_No as payNo,

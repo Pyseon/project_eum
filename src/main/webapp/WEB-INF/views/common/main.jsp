@@ -123,6 +123,10 @@
 	.blueAdd{
         filter:invert(31%) sepia(87%) saturate(2886%) hue-rotate(219deg) brightness(98%) contrast(94%);
     }
+    
+    .productinfo img{
+    	height: 400px;
+    }
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -323,6 +327,7 @@
                   	<h2>${list.productTitle }</h2>
                   <a href="#" class="btn">${list.productIntro}</a><br>
                   ${list.sale }% ${list.cost }원
+                  <!-- 별점추가 -->
                 </div>
               </div>
             </div>
@@ -349,11 +354,10 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/recommend1.jpg" alt="" />
-                  <h2>쉽게배우는 JAVA</h2>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
-                  >
+                  <img src="/img/product/ClassList/breakfast-4.png" alt="" />
+                  <h2>여긴HTML로(상품명)</h2>
+                  <a href="#" class="btn">여긴HTML로(상품설명)<br></a>
+                  <p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
                 </div>
               </div>
             </div>
@@ -362,11 +366,10 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/recommend2.jpg" alt="" />
-                  <h2>CSS만들기</h2>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
-                  >
+                  <img src="/img/product/ClassList/breakfast-4.png" alt="" />
+                  <h2>여긴HTML로(상품명)</h2>
+                  <a href="#" class="btn">여긴HTML로(상품설명)<br></a>
+                  <p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
                 </div>
               </div>
             </div>
@@ -375,11 +378,10 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/recommend3.jpg" alt="" />
-                  <h2>jQuery 이렇게만 하면 된다!</h2>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
-                  >
+                	<img src="/img/product/ClassList/breakfast-4.png" alt="" />
+                  <h2>여긴HTML로(상품명)</h2>
+                  <a href="#" class="btn">여긴HTML로(상품설명)<br></a>
+                  <p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
                 </div>
               </div>
             </div>
@@ -390,12 +392,10 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/recommend1.jpg" alt="" />
-                  <h2>$56</h2>
-                  <p>Easy Polo Black Edition</p>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
-                  >
+                  <img src="/img/product/ClassList/breakfast-4.png" alt="" />
+                  <h2>여긴HTML로(상품명)</h2>
+                  <a href="#" class="btn">여긴HTML로(상품설명)<br></a>
+                  <p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
                 </div>
               </div>
             </div>
@@ -404,12 +404,10 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/recommend2.jpg" alt="" />
-                  <h2>$56</h2>
-                  <p>Easy Polo Black Edition</p>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
-                  >
+                  <img src="/img/product/ClassList/breakfast-4.png" alt="" />
+                  <h2>여긴HTML로(상품명)</h2>
+                  <a href="#" class="btn">여긴HTML로(상품설명)<br></a>
+                  <p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
                 </div>
               </div>
             </div>
@@ -418,32 +416,16 @@
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/recommend3.jpg" alt="" />
-                  <h2>$56</h2>
-                  <p>Easy Polo Black Edition</p>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
-                  >
+                  <img src="/img/product/ClassList/breakfast-4.png" alt="" />
+                  <h2>여긴HTML로(상품명)</h2>
+                  <a href="#" class="btn">여긴HTML로(상품설명)<br></a>
+                  <p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <a
-        class="left recommended-item-control"
-        href="#recommended-item-carousel"
-        data-slide="prev"
-      >
-        <i class="fa fa-angle-left"></i>
-      </a>
-      <a
-        class="right recommended-item-control"
-        href="#recommended-item-carousel"
-        data-slide="next"
-      >
-        <i class="fa fa-angle-right"></i>
-      </a>
     </div>
   </div>
   <!--/recommended_items-->

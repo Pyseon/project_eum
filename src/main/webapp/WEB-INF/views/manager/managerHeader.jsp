@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 관리자</title>
 <link rel="stylesheet" href="css/manager.css" />
 <style>
 </style>

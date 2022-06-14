@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 지식마켓</title>
 <style>
 	#category{
 		font:bold 16px "malgun gothic";

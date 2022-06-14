@@ -332,18 +332,6 @@
         $("#qna").append(qstDiv);
         qstCount++;
         
-        /*
-        if(ansCount >= 10) return;
-        var ansDiv = document.createElement("div");
-        ansDiv.setAttribute("class","optBox");
-        ansDiv.innerHTML += '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important;">';
-        ansDiv.innerHTML += '<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" required">';
-        ansDiv.innerHTML += '<button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#ans-opt").append(ansDiv);
-        ansCount++;
-        */
-        
-        
         $(".delOptBtn").off().on("click",function(){
         	qstList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productQst]").val(qstList);
@@ -358,16 +346,7 @@
         });
     });
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+//태그함수    
     var tagCount = 1;
     var tagList=[];
     $(document).on("change", ".tag-val", function(){

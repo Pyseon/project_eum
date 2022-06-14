@@ -15,8 +15,8 @@
 	<div class="container">
 		<div class="comm-write-tab-nav" style="margin-top: 40px;">
 			<ul class="tab_title" style="padding-left: 0;">
-				<li>요즘뭐하니?</li>
-				<li class="on">이거어때?!</li>
+			<li onclick="location.href='/communityWriteFrm.do?category=0'">요즘뭐하니?</li>
+				<li class="on" onclick="location.href='/communityWriteFrm.do?category=1'">이거어때?!</li>
 			</ul>
 		</div>
 	
@@ -105,7 +105,7 @@
 						</div>
 						<p class="comm-write-p">제목</p>
 						<input type="text" name="commTitle" class="commTitle comm-input"
-							placeholder="제목을 입력하세요">
+							placeholder="제목을 입력하세요" required>
 						
 						<!-- 대표이미지 -->
 						<div class="img-box-wrap" style="margin-top: 20px;">

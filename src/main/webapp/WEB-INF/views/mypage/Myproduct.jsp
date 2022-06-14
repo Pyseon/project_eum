@@ -228,7 +228,7 @@ li{
 								<span style="color: #1abc9c;">예약완료</span>
 						</c:if>
 						<c:if test="${p.payState eq 2}">
-								<span style="color: #3865f2;">구매확정</span>
+								<span style="color: #3865f2;">구매완료</span>
 						</c:if>
 						<c:if test="${p.payState eq 3}">
 								<span style="color: #f05454;">취소완료</span>
@@ -238,8 +238,15 @@ li{
 				</li>
 			</ul>
 			</div>
+
 			<div class="marginBtn">		
 						<button class="btn bc3 bs7 sizeBtn" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">주문상세</button>
+
+			<div>		
+
+			
+						<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'"></button>
+
 						
 						<!-- <button class="btn bc3 modal-open-btn" target="#test-modal" id = "">주문취소</button> -->
 						
@@ -255,24 +262,30 @@ li{
 								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
 							</c:if>
 							<c:if test="${p.payState eq 2}">
-								<c:if test="${p.reviewNo eq null}">
+
+								
 									<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
-								</c:if>
 							</c:if>
 						</c:if>
-						<c:if test="${p.productType eq 3}">
-							<c:if test="${p.payState eq 1}">
-								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
-							</c:if>
-							<c:if test="${p.payState eq 2}">
-								<c:if test="${p.marketPath ne null}">
+					
+						<c:if test="${p.productType eq 2}">
+							
+								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  >구매완료</button>
 								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
-								<button class="btn bc3 bc7 sizeBtn" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'">다운로드</button>
-								</c:if>
-								<c:if test="${p.marketPath eq null}">
-								<button class="btn bc5 bs7" id="login-btn sizeBtn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
-								</c:if>
-							</c:if>
+							
+						</c:if>
+						
+						
+						
+						<c:if test="${p.productType eq 3}">
+
+							
+								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  >구매완료</button>
+								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+                <button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'">다운로드</button>
+							
+
+
 						</c:if>
 					
 			</div>

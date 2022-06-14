@@ -30,8 +30,11 @@
 				</c:if>
 				
 
-				
+				<input type="text"  value="${sessionScope.member.grade}">
+				<input type="text" value="${sessionScope.expert.expertApp}">
 				<c:if test="${sessionScope.member.grade eq 1}">
+					
+					
 					<c:if test="${sessionScope.member.agreement eq 1}">
 				
 							<div class="menu-detail"><a href="/Myproject.do?memberNo=${sessionScope.member.memberNo}">내프로젝트</a></div>

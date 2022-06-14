@@ -66,7 +66,7 @@ public class RequestController {
 		
 		int result = service.requestWrite(req);
 		
-		return "request/requestWriterFrm";
+		return "redirect:/requestList.do?reqPage=1&selReq=%EC%A0%84%EC%B2%B4";
 	}
 	
 	@RequestMapping(value="insertreqask.do")
@@ -74,7 +74,7 @@ public class RequestController {
 		
 		int result = service.insertReqask(reqNo, expertNo);
 		
-		return "request/requestDetail";
+		return "redirect:/requestDetail.do?reqNo="+reqNo;
 	}
 	
 	@RequestMapping(value = "/requestDetail.do")
@@ -96,6 +96,13 @@ public class RequestController {
 					if(expert != null) {
 					model.addAttribute("expertNo", expert.getExpertNo());
 					System.out.println("expert : "+expert);
+					int existReqAsk = service.selectExistReqAsk(expert.getExpertNo(), reqNo);
+					if(existReqAsk != 0) {
+						model.addAttribute("existReqAsk", 1);
+					}else {
+						model.addAttribute("existReqAsk", 0);
+					}
+					
 					}else {
 					model.addAttribute("expertNo", 0);
 				}
@@ -107,19 +114,44 @@ public class RequestController {
 			model.addAttribute("Tag", rdd.getTag());
 			System.out.println("req : "+rdd);
 			
-			int selectExpert = service.selectExpert(reqNo);
-			model.addAttribute("se", selectExpert);
+			int selectExpertIs = service.selectExpertIs(reqNo);
+			if(selectExpertIs != 0) {
+				int selectExpert = service.selectExpert(reqNo);
+				model.addAttribute("se", selectExpert);
+			}else {
+				model.addAttribute("se", 0);
+			}
+			model.addAttribute("sei", selectExpertIs);
 		return "request/requestDetail";
-		
 	}
 	
 	@RequestMapping(value = "/selectExpert.do")
-		public String selectExpert(int reqNo, int expertNo) {
-			int result = service.updateSelectExpert(reqNo);
-			int result2 = service.deleteUnselectExpert(reqNo, expertNo);
-			return "redirect:/requestDetail.do?reqNo="+reqNo;
+	public String selectExpert(int reqNo, int expertNo) {
+		int result = service.updateSelectExpert(reqNo);
+		int result2 = service.deleteUnselectExpert(reqNo, expertNo);
+		return "redirect:/requestDetail.do?reqNo="+reqNo;
+	}
+	@RequestMapping(value = "/deleteRequest.do")
+	public String deleteRequest(int reqNo) {
+		int result = service.deleteRequest(reqNo);
+		return "redirect:/requestList.do?reqPage=1&selReq=%EC%A0%84%EC%B2%B4";
+	}
+	@RequestMapping(value = "/updateRequestFrm.do")
+	public String updateRequestFrm(HttpServletRequest request, int reqNo, Model model) {
+		HttpSession session = request.getSession(false);
+		Member member = null;
+		if(session != null) {
+			member = (Member)session.getAttribute("member");
 		}
-	
-	
-	
+		RequestDetailData rdd = service.selectOneRequest(reqNo, member);
+		model.addAttribute("req", rdd.getReq());
+		model.addAttribute("Tag", rdd.getTag());
+		return "request/updateRequestFrm";
+	}
+	@RequestMapping(value = "/updateRequest.do")
+	public String updateRequest(int reqNo, String reqTitle, String reqContent) {
+		System.out.println(reqNo+ reqTitle+ reqContent);
+		int result = service.updateRequest(reqNo, reqTitle, reqContent);
+		return "redirect:/requestDetail.do?reqNo="+reqNo;
+	}
 }

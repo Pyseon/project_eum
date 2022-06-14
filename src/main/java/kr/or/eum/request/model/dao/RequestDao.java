@@ -83,6 +83,26 @@ public class RequestDao {
 		int selectExpert = sqlSession.selectOne("request.selectExpert", reqNo);
 		return selectExpert;
 	}
+
+	public int selectExpertIs(int reqNo) {
+		int result = sqlSession.selectOne("request.selectExpertIs", reqNo);
+		return result;
+	}
+
+	public int deleteRequest(int reqNo) {
+		int result = sqlSession.delete("request.deleteRequest", reqNo);
+		return result;
+	}
+
+	public int updateRequest(HashMap<String, Object> map) {
+		int result = sqlSession.update("request.updateRequest", map);
+		return result;
+	}
+
+	public int selectExistReqAsk(HashMap<String, Object> map) {
+		int result = sqlSession.selectOne("request.selectExistReqAsk", map);
+		return result;
+	}
 	
 
 	

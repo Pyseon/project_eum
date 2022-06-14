@@ -49,7 +49,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaMember.do";
-		HashMap<String, Object> mpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> mpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", mpd.get("memberList"));
 		model.addAttribute("pageNavi", mpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -78,8 +79,9 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaPayment.do";
+		int faqType = 0;
 		//PaymentPageData ppd = service.paymentList(reqPage, payState, searchType, keyword);
-		HashMap<String, Object> ppd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		HashMap<String, Object> ppd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", ppd.get("paymentList"));
 		model.addAttribute("pageNavi", ppd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -113,16 +115,30 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaReport.do";
-		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		ArrayList<Object> report = new ArrayList<Object>();
 		model.addAttribute("list", rpd.get("reportList"));
 		model.addAttribute("pageNavi",rpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
 		return "manager/managementReport";
 	}
 	
 	@RequestMapping(value = "/detailReport.do")
-	public String detailReport(int reportNo,int categoryNo,int reportIndex, Model model) {
+	public String detailReport(HttpServletRequest request, int reportNo,int categoryNo,int reportIndex, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}else {
+			if(member.getGrade() != 0) {
+				request.setAttribute("msg", "관리자가 아닙니다.");
+				request.setAttribute("url", "/");
+				return "common/alert"; 
+			}
+		}
 		Report report = service.detailReport(reportNo);
 		int scoutReport = service.scoutReport(categoryNo, reportIndex);
 		if(scoutReport > 0) {
@@ -180,9 +196,22 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/manaFAQ.do")
-	public String manaFAQ(int reqPage, int selectNum, String searchType, String keyword, Model model) {
+	public String manaFAQ(HttpServletRequest request, int reqPage, int selectNum, String searchType, String keyword, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		String wherePage = "manaFAQ.do";
-		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", fpd.get("FAQList"));
 		model.addAttribute("pageNavi", fpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -190,12 +219,24 @@ public class ManagerController {
 		return "manager/managementFAQ";
 	}
 	@RequestMapping(value = "/insertFAQFrm.do")
-	public String inorupFAQFrm() {
+	public String inorupFAQFrm(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		return "manager/insertFAQFrm";
 	}
 	
 	@RequestMapping(value = "/insertFAQ.do")
-	public String insertFAQ(int FAQType, String FAQTitle, String FAQContent) {
+	public String insertFAQ(HttpServletRequest request, int FAQType, String FAQTitle, String FAQContent) {
 		int result = service.insertFAQ(FAQType, FAQTitle, FAQContent);
 		return "redirect:/manaFAQ.do?reqPage=1&selectNum=0";
 	}
@@ -207,7 +248,19 @@ public class ManagerController {
 	}
 	
 	@RequestMapping(value = "/updateFAQFrm.do")
-	public String updateFAQFrm(int FAQNo, Model model) {
+	public String updateFAQFrm(HttpServletRequest request, int FAQNo, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		ArrayList<FaQ> list = service.selectFAQ(FAQNo);
 		model.addAttribute("list", list);
 		return "manager/updateFAQFrm";
@@ -232,8 +285,9 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaNotice.do";
+		int faqType = 0;
 		int selectNum = 0;
-		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", npd.get("noticeList"));
 		model.addAttribute("pageNavi", npd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -241,7 +295,19 @@ public class ManagerController {
 		return "manager/managementNotice";
 	}
 	@RequestMapping(value = "/insertNoticeFrm.do")
-	public String insertNoticeFrm() {
+	public String insertNoticeFrm(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		return "manager/insertNoticeFrm";
 	}
 	@RequestMapping(value = "/insertNotice.do")
@@ -261,7 +327,19 @@ public class ManagerController {
 		return "redirect:/manaNotice.do?reqPage="+reqPage;
 	}
 	@RequestMapping(value = "/updateNoticeFrm.do")
-	public String updateNoticeFrm(int noticeNo, Model model) {
+	public String updateNoticeFrm(HttpServletRequest request, int noticeNo, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		ArrayList<Notice> list = service.selectNotice(noticeNo);
 		model.addAttribute("list", list);
 		return "manager/updateNoticeFrm";
@@ -317,7 +395,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaAnswer.do";
-		HashMap<String, Object> apd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> apd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", apd.get("answerList"));
 		model.addAttribute("pageNavi", apd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -339,7 +418,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaQuestion.do";
-		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", qpd.get("qstList"));
 		model.addAttribute("pageNavi", qpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -347,7 +427,19 @@ public class ManagerController {
 		return "manager/managementQuestion";
 	}
 	@RequestMapping(value = "/insertAnswerFrm.do")
-	public String insertAnswerFrm(int qstNo, Model model) {
+	public String insertAnswerFrm(HttpServletRequest request, int qstNo, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		Question qst = service.selectQst(qstNo);
 		if(qst.getAnsState() == 1) {
 			Answer ans = service.selectAns(qstNo);
@@ -374,7 +466,8 @@ public class ManagerController {
 		String wherePage = "myQuestionList.do";
 		String searchType = null;
 		String keyword = Integer.toString(memberNo);
-		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", qpd.get("qstList"));
 		model.addAttribute("pageNavi", qpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -397,7 +490,7 @@ public class ManagerController {
 		return "redirect:/myQuestionList.do?reqPage=1&selectNum=0&memberNo="+member.getMemberNo();
 	}
 	@RequestMapping(value = "/detailQuestion.do")
-	public String detailQuestion(int qstNo, Model model) {
+	public String detailQuestion(HttpServletRequest request, int qstNo, Model model) {
 		Question qst = service.selectQst(qstNo);
 		Answer ans = service.selectAns(qstNo);
 		model.addAttribute("qst", qst);
@@ -419,7 +512,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaExpert.do";
-		HashMap<String, Object> epd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> epd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", epd.get("expertList"));
 		model.addAttribute("pageNavi", epd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -427,7 +521,19 @@ public class ManagerController {
 		return "manager/managementExpert";
 	}
 	@RequestMapping(value = "/detailExpert.do")
-	public String detailExpert(int expertNo,int expertApp, Model model) {
+	public String detailExpert(HttpServletRequest request, int expertNo,int expertApp, Model model) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+					request.setAttribute("msg", "로그인이 필요합니다.");
+					request.setAttribute("url", "/");
+					return "common/alert";
+				}else {
+					if(member.getGrade() != 0) {
+						request.setAttribute("msg", "관리자가 아닙니다.");
+						request.setAttribute("url", "/");
+						return "common/alert"; 
+					}
+				}
 		Expert exp = service.selectExpert(expertNo);
 		if(expertApp==2) {
 			String refuseContent = service.selectRefuseContent(expertNo);
@@ -474,5 +580,43 @@ public class ManagerController {
 		model.addAttribute("rexp", rexp);
 		return "mypage/detailMyExpert";
 	}
+	
+	@RequestMapping(value = "/noticeList.do")
+	public String noticeList(int reqPage, String searchType, String keyword, Model model) {
+		String wherePage = "noticeList.do";
+		int selectNum = 0;
+		int faqType = 0;
+		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword , faqType);
+		model.addAttribute("list", npd.get("noticeList"));
+		model.addAttribute("pageNavi", npd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/noticeList";
+	}
+	@RequestMapping(value = "/noticeDetail.do")
+	public String noticeDetail(int noticeNo, Model model) {
+		Notice notice = service.selectNoticeDetail(noticeNo);
+		model.addAttribute("ntc", notice);
+		return "manager/noticeDetail";
+	}
+	
+	@RequestMapping(value = "/faqList.do")
+	public String faqList(int reqPage, String searchType, String keyword,int faqType, Model model) {
+		String wherePage="faqList.do";
+		int selectNum = 0;
+		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
+		model.addAttribute("list", fpd.get("FAQList"));
+		model.addAttribute("pageNavi", fpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/faqList";
+	}
+	@RequestMapping(value = "/faqDetail.do")
+	public String faqDetail(int faqNo, Model model) {
+		FaQ faq = service.selectFaqDetail(faqNo);
+		model.addAttribute("faq", faq);
+		return "manager/faqDetail";
+	}
+
 }
 

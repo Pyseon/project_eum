@@ -7,10 +7,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 상품상세설명</title>
 <link rel="stylesheet" href="css/product.css" />
 <link rel="stylesheet" href="css/report.css" />
 <script src="js/report.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 <body>
 	<div class="header-div"><%@ include file="/WEB-INF/views/common/header.jsp"%></div>

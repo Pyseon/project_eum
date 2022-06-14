@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>>내 구매내역</title>
+<title>이음 :: 마이페이지</title>
 <style>
 
 li{
@@ -204,6 +204,7 @@ li{
 			  
 			 <img src="./img/product/ClassList/${p.productImgPath }">
 			<div class="posting-connect">
+			
 			<ul>
 				<li>
 					
@@ -229,7 +230,7 @@ li{
 				</li>
 			</ul>
 			</div>
-			<div>
+			<div>		<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'"></button>
 						<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">주문상세</button>
 						
 						<!-- <button class="btn bc3 modal-open-btn" target="#test-modal" id = "">주문취소</button> -->
@@ -268,6 +269,7 @@ li{
 		</c:forEach>
 	</table>
 <div id="test-modal" class="modal-bg">
+
 	<div class="modal-wrap">
 		<div class="modal-head">
 			<h2>취소하시겠습니까?</h2>

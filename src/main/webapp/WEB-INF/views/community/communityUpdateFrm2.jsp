@@ -36,7 +36,7 @@
 						</div>
 						<p class="comm-write-p">제목</p>
 						<input type="text" name="commTitle" class="commTitle comm-input"
-							placeholder="제목을 입력하세요" value="${comm.commTitle }">
+							placeholder="제목을 입력하세요" value="${comm.commTitle }" required>
 						
 						<!-- 대표이미지 -->
 						<div class="img-box-wrap" style="margin-top: 20px;">

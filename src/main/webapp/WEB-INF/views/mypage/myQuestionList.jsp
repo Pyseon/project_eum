@@ -5,11 +5,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 마이페이지</title>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
-<%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
 <%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
 	<div class="page-content container">
 		<div class="posting-wrap">

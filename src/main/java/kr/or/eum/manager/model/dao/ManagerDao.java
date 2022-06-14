@@ -391,5 +391,15 @@ public class ManagerDao {
 		int memberNo = sqlSession.selectOne("manager.selectMemberNo", expertNo);
 		return memberNo;
 	}
+
+	public Notice selectNoticeDetail(int noticeNo) {
+		Notice notice = sqlSession.selectOne("manager.selectNoticeDetail", noticeNo);
+		return notice;
+	}
+
+	public FaQ selectFaqDetail(int faqNo) {
+		FaQ faq = sqlSession.selectOne("manager.selectFaqDetail", faqNo);
+		return faq;
+	}
 	
 }

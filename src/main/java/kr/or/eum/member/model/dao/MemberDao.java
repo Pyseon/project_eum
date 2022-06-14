@@ -28,7 +28,7 @@ public class MemberDao {
 	public Member selectOneMember(Member m) {
 		// TODO Auto-generated method stub
 		Member member = sqlSession.selectOne("member.selectOneMember", m);
-		System.out.println(member);
+		//System.out.println(member);
 		return member;
 	}
 	//재민 내정보수정
@@ -126,7 +126,6 @@ public class MemberDao {
 		return (ArrayList<Product>)list;
 	}
 	public int insertExpert(Expert ex) {
-		
 		int result = sqlSession.insert("member.insertexpert",ex);
 		return result;
 	}

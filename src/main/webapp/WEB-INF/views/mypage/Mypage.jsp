@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>My page</title>
+<title>이음 :: 마이페이지</title>
 <link rel="stylesheet" href="css/mypage.css" />
 </head>
 <body>
@@ -38,8 +38,11 @@
 										
 									</div>
 									<div class="content-box">	
-										
-										<input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="${sessionScope.member.memberNick}" required>
+
+										<!--  <input  class="input-form" type="text" name="memberNick" id="nick" placeholder="">							
+										<div class="fs-light" id="memberNick-test"></div><br>-->
+										<input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" value="${sessionScope.member.memberNick}">
+
 												<div class="fs-light" id="memberNick-test"></div><br>
 									</div>
 								</div> <%--mypage-content --%>
@@ -66,7 +69,10 @@
 										<label for="phone">연락처* </label>
 									</div>
 									<div class="content-box">	
-										<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" placeholder="${sessionScope.member.memberPhone}" required>
+
+
+										<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" value="${sessionScope.member.memberPhone}">
+
 										<div class="fs-light" id="memberPhone-test"></div><br>
 									</div>
 									

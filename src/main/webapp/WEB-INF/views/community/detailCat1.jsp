@@ -12,6 +12,27 @@
 .attr-wrap{
  width: 100%;
 }
+#pickBox{
+max-height:700px;
+overflow-y: auto;
+  direction: ltr;
+  scrollbar-color: #d4aa70 #e4e4e4;
+  scrollbar-width: thin;
+}
+#pickBox::-webkit-scrollbar {
+  width: 20px;
+}
+
+#pickBox::-webkit-scrollbar-track {
+  background-color: #e4e4e4;
+  border-radius: 100px;
+}
+#pickBox::-webkit-scrollbar-thumb {
+  border-radius: 100px;
+  background-image: linear-gradient(to bottom, rgba(205,216,252,1) 0%, rgba(205,216,252,1) 50%, rgba(252,212,212,1) 100%);
+  box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
+  
+}
 
 </style>
 </head>
@@ -62,10 +83,10 @@
 <!-- 좋아요 -->						
 						<c:choose>
 							<c:when test="${likeMemberCheck eq 0 }">
-								<i class="fa-regular fa-heart icon-wish" style="pointer:cursor;"></i>
+								<i class="fa-regular fa-heart icon-wish"  style="cursor:pointer;"></i>
 							</c:when>
 							<c:otherwise>
-								<i class="fa-regular fa-heart icon-wish fa-solid"></i>
+								<i class="fa-regular fa-heart icon-wish fa-solid" style="cursor:pointer;"></i>
 							</c:otherwise>
 						</c:choose>
 							<span>좋아요</span>
@@ -98,9 +119,8 @@
 		</div>
 		<!--article-content-wrap end-->
 
-		<div class="attr-wrap">
-			<div class="pick-box">
-				<div class="card-intro2" style="display:flex; min-height:40px; margin-bottom:40px;">
+		<div class="attr-wrap" style="display:block;">
+				<div class="card-intro2" style="display:flex; min-height:40px; margin-top:40px">
 					<c:choose>
 						<c:when test="${comm.pick0Count eq 0 and comm.pick1Count eq 0}">
 							<div
@@ -137,6 +157,7 @@
 
 
 				</div>
+			<div class="pick-box" id="pickBox">
 				<c:forEach items="${pickList }" var="p">
 
 					<c:if test="${p.pickCategory eq 0 }">
@@ -255,7 +276,7 @@
 						class="button-label">${comm.weakness }</label> 
 					</div>
 						<input type="text"
-						name="pickContent" id="pickContent">
+						name="pickContent" id="pickContent" maxlength="65">
 					<button class="btn" id="pick-reg"
 						style="margin-left:10px; width: 60px; height: 34px; background-color: #3666f1; color: #fff; font-weight: bold;">등록</button>
 				</div>
@@ -309,7 +330,7 @@
 			<div class="modal-head" style="border-bottom: none;">
 				<h2 class="fc-1" style="color:#333;">내용 수정하기</h2>
 				<input type="text" class="input-form"
-						name="pickUpdateContent22" id="pickUpdateContent22" style="">
+						name="pickUpdateContent22" id="pickUpdateContent22" style=""  maxlength="65">
 			</div>
 			<div class="modal-btns-container" style="margin: 0 auto;">
 				<button class="btn bg-7 fc-5" id="pickUpdateBtn"
@@ -328,6 +349,8 @@
 <script>
 
 $(function(){
+	scrollToBottom();
+	
 	let likeNum = -1;
 	//좋아요(wish)
 	$(document).on("click",'.haja-like', function() {
@@ -462,19 +485,65 @@ $(function(){
 		console.log(commNo);
 		console.log(memberNo);
 		console.log(pickCategory);
+		if(pickContent == ""){
+			return;
+		}
+		
+		$.when(ajax1(commNo, memberNo, pickContent, pickCategory)).done(function(){
+			console.log("스크롤 실행go");
+			scrollToBottom();
+			console.log("스크롤 끝");
+		});
+
+			
+	});
+	function ajax1(commNo, memberNo, pickContent, pickCategory) {
+		
+	
+	return $.ajax({
+		url: "/pickWrite.do",
+		type:"post",
+		data: {commNo:commNo, memberNo:memberNo, pickContent:pickContent, pickCategory:pickCategory},
+		success:function(data){
+			console.log("111");
+			$(".attr-wrap").load(location.href + " .attr-wrap");
+			$("#pickContent").val("");
+			console.log("222");
+		}
+	});
+	
+	}
+	
+	
+	
+	
+	/*
+	
+	//픽 등록하고 특정 div새로고침해서 불러오기
+	$(document).on("click","#pick-reg",function(){
+		let commNo = $("#commNo").val();
+		let memberNo = $("#memberNo").val();
+		let pickContent = $("#pickContent").val();
+		let pickCategory = $("#pickCategory").val();
+		console.log(pickContent);
+		console.log(commNo);
+		console.log(memberNo);
+		console.log(pickCategory);
 		
 		$.ajax({
 			url: "/pickWrite.do",
 			type:"post",
 			data: {commNo:commNo, memberNo:memberNo, pickContent:pickContent, pickCategory:pickCategory},
 			success:function(data){
-				$("#pickContent").val("");
+				console.log("111");
 				$(".attr-wrap").load(location.href + " .attr-wrap");
+				$("#pickContent").val("");
+				console.log("111");
 			}
 		})
 			
 	});
-	
+	*/
 	
 	//픽 수정하기
 	$(document).on("click",".pick-update-btn", function() {
@@ -500,11 +569,12 @@ $(function(){
 		    			data: {pickNo:pickUpdateNo, pickContent:pickUpdateContent},
 		    			success:function(data){
 		    				$(".attr-wrap").load(location.href + " .attr-wrap");
+		    				scrollToBottom();
 		    			}
 		 	   		})
-		 	   }
+		 	   }	
 		 })
-		} 
+		}
 	
 	
 	//픽 삭제하기 함수 sweetalert2 사용!!!
@@ -532,7 +602,8 @@ $(function(){
 	 	   			url: "/pickDel.do",
 	 	   			data: {pickNo:pickDelNo},
 		 	   		success:function(data){
-		 	   			$(".attr-wrap").load(location.href + " .attr-wrap");
+		 	   		$(".attr-wrap").load(location.href + " .attr-wrap");
+		 	   		scrollToBottom();
 					}
 	 	   		})
 	 	   }
@@ -562,6 +633,7 @@ $(function(){
 				$(".comment-list-wrap").load(location.href + " .comment-list-wrap");
 				$("#cmnt-total").load(location.href + " #cmnt-total");
 				$("#cmnt-total2").load(location.href + " #cmnt-total2");
+				scrollToBottom();
 			}
 		})
 		
@@ -714,7 +786,22 @@ function toastShow(title, icon){
               }
             })
 		}
-	
+  		
+		var objDiv = document.getElementById("pickBox");
+		objDiv.scrollTop = objDiv.scrollHeight;
+  		
+		function scrollToBottom2() {
+			   var div = document.getElementById("pickBox");
+			   div.scrollTop = div.scrollHeight - div.clientHeight;
+			}
+		function scrollToBottom() {
+			console.log("스크 함수수수");
+			 $("#pickBox").scrollTop($("#pickBox")[0].scrollHeight); 
+			 $(".attr-wrap").scrollTop($(".attr-wrap")[0].scrollHeight); 
+		}
+
+		
+		
 </script>
 <div class="footer-div">
 	<%@ include file="/WEB-INF/views/common/footer.jsp"%>

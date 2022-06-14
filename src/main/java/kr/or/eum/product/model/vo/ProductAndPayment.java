@@ -17,5 +17,8 @@ public class ProductAndPayment {
 	private int productType;
 	private int memberNo;
 	private int payNo;
-	private int reviewNo;
+
+	private String marketPath;
+	private String marketName;
+
 }

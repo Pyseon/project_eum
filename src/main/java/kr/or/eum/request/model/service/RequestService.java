@@ -186,6 +186,33 @@ public int selectExpert(int reqNo) {
 	return dao.selectExpert(reqNo);
 }
 
+
+public int selectExpertIs(int reqNo) {
+	return dao.selectExpertIs(reqNo);
+}
+
+
+public int deleteRequest(int reqNo) {
+	return dao.deleteRequest(reqNo);
+}
+
+
+public int updateRequest(int reqNo, String reqTitle, String reqContent) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("reqNo", reqNo);
+	map.put("reqTitle", reqTitle);
+	map.put("reqContent", reqContent);
+	return dao.updateRequest(map);
+}
+
+
+public int selectExistReqAsk(int memberNo, int reqNo) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+	map.put("expertNo", memberNo);
+	map.put("reqNo", reqNo);
+	return dao.selectExistReqAsk(map);
+}
+
 /*
 
 	public Request selectOneRequest(int memberNo) {

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매하기</title>
+<title>이음 :: 구매하기</title>
 <!-- 결제 라이브러리 경로추가 -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -296,7 +296,7 @@
 								const icon = "success";
 								const msgTime = 1500;
 								toastShow(title,icon, msgTime);
-								location.replace("/purchaseSuccess.do");
+								location.replace("/purchaseSuccess.do?memberNo="+memberNo+"&productNo="+productNo);
 							}else if(data == "0"){
 								const title = "결제에 실패했습니다.";
 								const icon = "error";
@@ -455,7 +455,7 @@
 						const icon = "success";
 						const msgTime = 1500;
 						toastShow(title,icon, msgTime);
-						location.replace("/purchaseSuccess.do");
+						location.replace("/purchaseSuccess.do?memberNo="+memberNo+"&productNo="+productNo);
 					}else if(data == "0"){
 						const title = "결제에 실패했습니다.";
 						const icon = "error";
@@ -467,6 +467,11 @@
 					   console.log("서버요청실패");
 				}
 			});
+		}else{
+			const title = "서비스 이용 동의가 필요합니다.";
+			const icon = "info";
+			const msgTime = 1500;
+			toastShow(title,icon,msgTime);	
 		}
 	});
 		

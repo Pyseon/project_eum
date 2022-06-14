@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 관리자</title>
 <link rel="stylesheet" href="css/manager.css" />
 <style>
 </style>
@@ -12,7 +12,7 @@
 <div class="manager-leftmenuWrap">
 	<nav class="manager-leftmenu">
 		<div class="userprofileBox">
-			<img class="userprofile" src="/images/home/girl1.jpg">
+			<img class="userprofile" src="./img/member/${sessionScope.member.memberPicturePath}">
 			<div class="nick-wrap">
 				<h2 id="nick">${sessionScope.member.memberNick}</h2>
 			</div>

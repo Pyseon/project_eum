@@ -64,7 +64,7 @@ public class CommunityController {
 			return "community/detailCat1";
 		}
 	}
-
+///////// 쓰기
 	@RequestMapping(value="/communityWriteFrm.do")
 	public String communityWriteFrm(int category) {
 		if (category == 1) {
@@ -79,7 +79,8 @@ public class CommunityController {
 
 		String filename = file.getOriginalFilename();
 		if (filename == "") {
-			System.out.println("이미지없음! 처리 요망");
+			comm.setCommFilename("de-comm-img.png");
+			comm.setCommFilepath("de-comm-img.png");
 
 		} else {
 
@@ -143,6 +144,7 @@ public class CommunityController {
 	}
 	
 	
+///쓰기	
 	
 	@ResponseBody
 	@RequestMapping(value="/commCoWrite.do", produces="application/json;charset=utf-8")
@@ -159,12 +161,7 @@ public class CommunityController {
 	@ResponseBody
 	@RequestMapping(value="/pickWrite.do", produces="application/json;charset=utf-8")
 	public void pickWrite(Pick pick) {
-		System.out.println(pick);
-		//insert 후 selectKey를 이용해 방금 insert 한 pk값 얻어옴
 		service.pickWrite(pick);
-		//얻어온 pk값으로 데이터 조회 후 리턴
-		//CommunityCo comment = service.commCoDetail(commCo.getCmntNo());
-		//return new Gson().toJson(comment);
 	}
 	
 	

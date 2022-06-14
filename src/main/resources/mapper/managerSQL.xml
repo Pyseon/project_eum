@@ -306,7 +306,7 @@
 					review_tbl where review_no = #{reportIndex }
 				</when>
 				<when test="category == 2">
-					request_tbl where request_no = #{reportIndex }
+					request_tbl where req_no = #{reportIndex }
 				</when>
 				<when test="category == 3">
 					community_tbl where comm_no = #{reportIndex }
@@ -391,9 +391,9 @@
 			faq_type as FAQType,
 			faq_date as FAQDate
 		from faq_tbl
-		<if test="selectNum != 0">
-			where faq_type = #{selectNum }
-		</if>
+			<if test="faqType != 0">
+				where faq_type = #{faqType}
+			</if>
 		order by faq_no desc) faq)
 		where rnum between #{start} and #{end}
 	</select>
@@ -412,8 +412,16 @@
 			faq_type as FAQType,
 			faq_date as FAQDate
 		from faq_tbl
-		<if test="searchType.equals('FAQTitle') ">
-			where faq_title like '%'||#{keyword}||'%'
+		<choose>
+			<when test="searchType.equals('FAQTitle') ">
+				where faq_title like '%'||#{keyword}||'%'
+			</when>
+			<when test="searchType.equals('faqCategory') ">
+				where faq_type = #{keyword}
+			</when>
+		</choose>
+		<if test="faqType != 0">
+			where faq_type = #{faqType }
 		</if>
 		order by faq_no desc) faq)
 		where rnum between #{start} and #{end}
@@ -838,6 +846,27 @@
 			refuse_content as refuseContent
 		from refuseExpert_tbl
 		where expert_no = #{value}
+	</select>
+	
+	<select id="selectNoticeDetail" parameterType="int" resultType="ntc">
+		select
+			notice_no as noticeNo,
+			(select member_Id from member_tbl m where notice.member_no = m.member_no) as memberId,
+			notice_title as noticeTitle,
+			notice_content as noticeContent,
+			notice_date as noticeDate
+		from notice_tbl notice
+		where notice_no = #{value }
+	</select>
+	<select id="selectFaqDetail" parameterType="int" resultType="faq">
+		select
+			faq_no as faqNo,
+			faq_title as faqTitle,
+			faq_content as faqContent,
+			faq_type as faqType,
+			faq_date as faqDate
+		from faq_tbl
+		where faq_no = #{value }
 	</select>
 
 </mapper>

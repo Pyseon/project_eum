@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 전문가상담</title>
 <link rel="stylesheet" href="css/expertCounselProduct.css" />
 <link rel="stylesheet" href="css/default_city.css" />
 <script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.js"></script>
@@ -69,6 +69,7 @@
 						<%--  <input type="file" name="file" id="file" accept=".jpg,.png,.jpeg" style="display:none"> <div class="fileBtn-wrap" onclick="document.all.file.click()"><img class="fileBtn" src="/img/product/icon-folder.png"></div>--%>
 						<input type="hidden" id="memberNo" value="${m.memberNo }">
 						<input type="hidden" id="counselNo" value="${c.counselNo }">
+						<input type="hidden" id="startTime" value="${c.startTime }">
 						<input type="text" id="sendMsg" placeholder="[안내] 상담이 종료되면 입력이 불가합니다.">
 						<div class="send-btn"><span class="material-icons fc-7 send-icon">arrow_forward</span></div>
 					</div><!-- sendBox -->				
@@ -89,7 +90,7 @@
 					<div class="product-detail">
 						<span class="material-icons fc-7 icon-schedule">schedule</span>
 						<div class="product-option">1:1상담&nbsp;&nbsp;/</div>&nbsp;&nbsp;
-						<div class="product-option op2">${p.productOption }분</div><span id="timeZone">-</span> <span id="msg"></span>
+						<div class="product-option op2">${c.limitTime }분</div><span id="timeZone">-</span> <span id="msg"></span>
 					</div>
 					<hr>
 					<div class="check-title-wrap">
@@ -102,6 +103,7 @@
 							<li>&#183; 전문가와 협의 후에 상담 시작을 눌러주세요.<br></li>
 							<li>&#183; 지정된 시간이 지나면 자동 종료 됩니다.<br></li>
 							<li>&#183; 중간에 멈출 수 없습니다.</li>
+							<li>&#183; 채팅방 이탈 후 재접속 시 남은 시간이 보이지 않습니다. <br>&nbsp;새로고침하여 상담 시작 버튼을 다시 눌러주세요.</li>
 						</ul>
 					</div>
 					<!-- 체크박스 여부 확인하는 스크립트 -->
@@ -213,6 +215,9 @@
 		//상담시간
 		let productOption = Number(${p.productOption }) * 60;
 		console.log("productOptionSec>>>"+productOption);
+		let counselStartTime = $('#startTime').val();
+		//인터벌 변수
+		let intervalId; 
 		
 
 		//send-btn을 클릭하면 메세지 전송 함수 실행
@@ -228,7 +233,7 @@
 				}else {
 				    const counselNo = $('#counselNo').val();
 				    let startTime = getTime2();
-				    //if(${c.startTime} == '034810' ) {//null이 아닐 경우에만 startTime이 없데이트 되고, 이미 값이 있으면 그 시간으로 카운트 되게
+				    if(counselStartTime == '') {//null이 아닐 경우에만 startTime이 없데이트 되고, 이미 값이 있으면 그 시간으로 카운트 되게
 					    $.ajax({//null값인 StartTime 칼럼에 시작버튼을 누른 시점 시간을 update해주고 interval로 시간 체크
 					    	url : "updateStartTime.do",
 					    	data : {startTime:startTime, counselNo:counselNo}, 
@@ -243,10 +248,10 @@
 								$('#startBtn').attr('disabled',true);
 							}
 				   		});
-					//}else {
-						//confirmSend();
+					}else {
+						confirmSend();
 						//socketSend();
-					//}
+					}
 				    //처음 인터벌 넣은 자리(오답)
 				}
 			}else if($('#startBtn').text() == '후기작성') {
@@ -307,24 +312,79 @@
 			let rePresent = productOptionCount(present);
 			console.log("rePresent>>>>"+rePresent);
 		
-		    //상담시작시간
-			//let counselStartTime = (${c.startTime}).toString();
-			//console.log("productOptionCompare>>"+counselStartTime);
-			//console.log("productOptionCompare>>"+typeof(counselStartTime));
-			const reStartTime = productOptionCount((${c.startTime}).toString());
-			console.log("reStartTime>>>>"+reStartTime);
-			
+			let reStartTime = '';
+			if(counselStartTime == '') {
+				reStartTime = rePresent;				
+			}else {
+				if(getHours()<10) {
+					counselStartTime = '0'+counselStartTime;
+					console.log(counselStartTime);
+				}
+				console.log("getHours>>>>>>"+getHours());
+				reStartTime = productOptionCount(counselStartTime.toString());
+				console.log("reStartTime>>>>"+reStartTime);
+			}
+							
 			//현재-시작시간
 			let finalTime = rePresent-reStartTime;
 			console.log("finalTime>>>>"+finalTime)
 			
+			//몫이 분이고
+			//나머지가 남은 초
+			//나머지 연산 % 하면 소수점 안나오니까
+			//그 숫자를 가지고 리턴을 바로 ㅐ줘ㅡ..그리고 round말고 floor써서 분계산 
+			
 			//옵션보다 현재-시간이 더 크면 상담종료 
 		    if(productOption < finalTime){
 		    	console.log("분으로 바꾸면>>>"+(productOption-finalTime)/60);
-		    	return 0
+		    	return 00
 		    }else if (productOption > finalTime) {
+		    	console.log("productOpTion>>>>>"+productOption);
+		    	console.log(productOption-finalTime);
+		    	let wait = (productOption-finalTime)%60;
+		    	wait = Math.floor(wait);
+		    	console.log("시간이 남았으면>>>"+wait);
+		    	return wait;
+		    }
+		}
+		
+		function productOptionCompare2() {
+			//현재시간
+	   		const present = getTime2();
+			let rePresent = productOptionCount(present);
+			console.log("rePresent>>>>"+rePresent);
+		
+			let reStartTime = '';
+			if(counselStartTime == '') {
+				reStartTime = rePresent;				
+			}else {
+				if(getHours()<10) {
+					counselStartTime = '0'+counselStartTime;
+					console.log(counselStartTime);
+				}
+				console.log("getHours>>>>>>"+getHours());
+				reStartTime = productOptionCount(counselStartTime.toString());
+				console.log("reStartTime>>>>"+reStartTime);
+			}
+							
+			//현재-시작시간
+			let finalTime = rePresent-reStartTime;
+			console.log("finalTime>>>>"+finalTime)
+			
+			//몫이 분이고
+			//나머지가 남은 초
+			//나머지 연산 % 하면 소수점 안나오니까
+			//그 숫자를 가지고 리턴을 바로 ㅐ줘ㅡ..그리고 round말고 floor써서 분계산 
+			
+			//옵션보다 현재-시간이 더 크면 상담종료 
+		    if(productOption < finalTime){
+		    	console.log("분으로 바꾸면>>>"+(productOption-finalTime)/60);
+		    	return 00
+		    }else if (productOption > finalTime) {
+		    	console.log("productOpTion>>>>>"+productOption);
+		    	console.log(productOption-finalTime);
 		    	let wait = (productOption-finalTime)/60;
-		    	wait = Math.round(wait);
+		    	wait = Math.floor(wait);
 		    	console.log("시간이 남았으면>>>"+wait);
 		    	return wait;
 		    }
@@ -334,7 +394,9 @@
 		function timeCount(){
 			const counselNo = $('#counselNo').val();
 			const min = Number($("#min").text());
-			const sec = $("#sec").text();
+			const sec = Number($("#sec").text());
+			console.log(min);
+			console.log(sec);
 			if(sec == "00") { // 초단위가 00이면 분단위 체크
 				if(min == 0){ // 둘다 0이면 > 상담이 끝나서
 					clearInterval(intervalId); // 한쪽만 종료되고 있음...
@@ -419,6 +481,13 @@
 				seconds = "0"+seconds;
 			}
 			return hours+""+minutes+""+seconds;
+		}
+		
+		function getHours() {
+			var now = new Date();
+			var hours = now.getHours(); 
+			
+			return hours;
 		}
 		
 		
@@ -573,14 +642,23 @@
 	 		//상담 시작버튼을 누른 경우	
 			}else if(msgData.type === 'countdown') {
 				// 인터벌 시작
-				let productTime = productOptionCompare();
-				console.log("intervalTime>>>>"+productTime);
+				
+				let productSec = productOptionCompare();
+				console.log("1111111111111111111111111111111111111111111111111111111");
+				console.log(productSec, typeof productSec);
+				let productMin = productOptionCompare2();
+				console.log("intervalSec>>>>"+productSec);
+				console.log("intervalmin>>>>"+productMin);
 				appendChat("<p class='check-in'>상담이 시작되었습니다.</p>");
-				$('#timeZone').html("<span id='min'>"+productTime+"</span> : <span id='sec'>00</span>");
+				$('#timeZone').html("<span id='min'>"+productMin+"</span> : <span id='sec'>"+productSec+"</span>"); //초도 계산으로 불러오기
 				$('#startBtn').css('display', 'none');
-				intervalId = window.setInterval(function(){
-					timeCount();
-				},10);//시간초 추후 수정..지금은 테스트라 빠르게
+				console.log(intervalId);
+				if (intervalId === undefined) {
+					intervalId = window.setInterval(function(){
+						//console.log("setInterval in>>>>>>"+intervalId);
+						timeCount();
+					},1000);
+				}
 			}else if(msgData.type === 'confirm') {
 				//확인 창
 				const confirmCheck = confirm('상담시작에 동의하십니까?');

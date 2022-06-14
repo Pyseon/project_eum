@@ -3,26 +3,32 @@ package kr.or.eum.product.controller;
 import kr.or.eum.member.model.vo.Member;
 import kr.or.eum.member.model.vo.Expert;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.lang.ProcessBuilder.Redirect;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,6 +73,7 @@ public class ProductController{
 		
 		HttpSession session = request.getSession(false);
         Member member = null;
+        
         if(session != null) {
             member = (Member)session.getAttribute("member");
         }
@@ -107,6 +114,7 @@ public class ProductController{
 	
 	@RequestMapping(value="/classWrite.do")
 		public String classWrite(Product pro, MultipartFile file, HttpServletRequest request) {
+		System.out.println("=======>?>>"+pro);
 		System.out.println(pro.getProductImgname());
 		System.out.println(pro.getProductImgPath());
 		System.out.println(file.getOriginalFilename());
@@ -220,7 +228,7 @@ public class ProductController{
 
 @RequestMapping(value="/expertWrite.do")
 	public String expertWrite(Product pro, HttpServletRequest request) {
-	System.out.println(pro);
+	System.out.println("expertWirte>>>>>>"+pro);
 	int result = productService.expertWrite(pro);
 	return "redirect:/ExpertList.do?reqPage=1&selPro=%EC%A0%84%EC%B2%B4";
 
@@ -236,6 +244,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	model.addAttribute("pageNavi",ppd.getPageNavi());
 	model.addAttribute("reqPage", reqPage);
 	System.out.println("selPro : "+selPro);
+	System.out.println(ppd);
 
 	return "product/IdeamarketList";
 }
@@ -422,8 +431,8 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	@RequestMapping(value = "/purchase.do")
 	public String purchase(int productNo, int expertNo, Model model) {
 		//1.상품정보불러오기(product_type:1,2,3구분)
-		System.out.println(productNo);
-		System.out.println("expertNo>>>>"+expertNo);
+		//System.out.println(productNo);
+		//System.out.println("expertNo>>>>"+expertNo);
 		HashMap<String, Object> paymentpage = productService.selectProduct(productNo);
 		model.addAttribute("product",paymentpage.get("product"));
 		model.addAttribute("expert",paymentpage.get("expert"));
@@ -548,7 +557,12 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	
 	//대권 구매성공
 	@RequestMapping(value="/purchaseSuccess.do")
-	public String purchaseSuccess() {
+	public String purchaseSuccess(Model model, int memberNo, int productNo,  HttpServletRequest request) {
+		HashMap<String, Object> purchase = productService.purchaseSuccess(memberNo, productNo);
+		//System.out.println("성공1"+purchase);
+		model.addAttribute("pay", purchase);
+		//System.out.println("다안들어가나!"+model);
+
 		return "product/purchaseSuccess";
 	}
 	//대권 구매실패
@@ -623,14 +637,15 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	//결제테이블or전문가상담
 	@ResponseBody
 	@RequestMapping(value = "/paymentResult.do" ,method = RequestMethod.POST)
-	public int paymentInsert(Payment p,int productType,  Counsel c){
-		System.out.println("시작payment"+p);
-		System.out.println("시작payment"+productType);
-		System.out.println("시작payment"+c);
+	public int paymentInsert( Payment p,int productType,  Counsel c){
+		//System.out.println("시작payment"+p);
+		//System.out.println("시작payment"+productType);
+		//System.out.println("시작payment"+c);
 		int result = productService.paymentInsert(p);
+		
 		if(productType == 1) {
 			c.setPayNo(result);
-		System.out.println("컨트롤러들어가야지counsel"+c);
+		//System.out.println("컨트롤러들어가야지counsel"+c);
 		int result2 = productService.counselInsert(c);			
 		}
 		
@@ -644,6 +659,50 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 			return str;
 		}
 		
+	}
+	
+	@GetMapping("/download.do")
+	public void download(String marketfile, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		System.out.println(marketfile);
+		
+		//4.결과처리
+				//파일과 현재 서블릿을 연결
+				//String root =request.getSession().getServletContext().getRealPath("/"); //webapp폴더
+				String root = request.getSession().getServletContext().getRealPath("/ideamarket/file/");
+				String downLoadFile = root+marketfile;
+				//파일을 서블릿으로 읽어오기 위한 스트림생성
+				FileInputStream fis = new FileInputStream(downLoadFile);
+				BufferedInputStream bis = new BufferedInputStream(fis);
+				//읽어온 파일을 사용자에게 전달할 스트림 생성
+				ServletOutputStream sos = response.getOutputStream();
+				BufferedOutputStream bos = new BufferedOutputStream(sos);
+				//파일명처리
+				String resFilename = new String(marketfile.getBytes("utf-8"),"ISO-8859-1");
+				//파일다운로드를 위한 http header설정
+				response.setContentType("application/octet-stream");
+				response.setHeader("Content-Disposition", "attachment;filename="+resFilename);
+				//파일전송
+				while(true) {
+					int read = bis.read();
+					if(read != -1) {
+						bos.write(read);
+					}else {
+						break;
+					}
+				}
+				bos.close();
+				bis.close();
+		
+	}
+	
+	@RequestMapping(value = "/main.do")
+	public String main(Model model) {
+		ArrayList<Product> list = productService.selectProductList();
+		model.addAttribute("list",list);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getProductTitle());
+		}
+		return "common/main";
 	}
 
 }

@@ -1,5 +1,7 @@
 package kr.or.eum.product.model.service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -65,11 +67,13 @@ public class ProductService {
 		
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
-			
+			pageNavi += "<li>";
+			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage=1&selPro="+selPro+"'>";
 			pageNavi += "<li>";
 			pageNavi += "<a class='page-item' href='/ClassList.do?reqPage="+(pageNo-1)+"&selPro="+selPro+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
+			
 		}
 		for(int i=0;i<pageNaviSize;i++) {
 			if(pageNo == reqPage) {
@@ -234,6 +238,7 @@ public class ProductService {
 	
 	public int classWrite(Product pro) {
 		// TODO Auto-generated method stub
+		
 		Product product=setToken(pro);
 		int result = productDao.classWrite(product);
 		
@@ -280,6 +285,7 @@ public class ProductService {
 			productQst += qstList.get(i)+"/";
 		}
 		
+		System.out.println("최종값>>"+productQst);
 		
 		String productAns = pro.getProductAns();
 		List<String> ansList = new ArrayList<String>();
@@ -298,15 +304,16 @@ public class ProductService {
 		for(int i=0;i<ansList.size();i++){
 			productAns += ansList.get(i)+"/";
 		}
-		
-		
+		System.out.println("최종값>>"+productAns);
+//////////////////////////////////////////////////////////////////////////////		
 		String productTag = pro.getProductTag();
 		List<String> tagList = new ArrayList<String>();
 		
 		String []tokens3=productTag.split("\\|");
 		
 		for(int i=0;i<tokens3.length;i++){
-			if(tokens3[i] == null || tokens3[i].trim().length() < 2) {
+			if(tokens3[i] == null || tokens3[i].trim().length() < 1) {//null 또는 공백제거후 1글자 일때
+				
 			}else {
 				if(tokens3[i].indexOf(",") == 0) {
 					tagList.add(tokens3[i].replaceFirst(",", ""));
@@ -320,10 +327,6 @@ public class ProductService {
 			productTag += "#"+tagList.get(i)+"/";
 		}
 		
-	
-		
-		System.out.println("최종값>>"+productQst);
-		System.out.println("최종값>>"+productAns);
 		System.out.println("최종값>>"+productTag);
 		
 		pro.setProductQst(productQst);
@@ -356,7 +359,7 @@ public class ProductService {
 		}
 		int reviewCount = productDao.selectReviewCount(productNo);
 		int paymentCount = productDao.selectPaymentExpertNoCount(productNo);
-		int cost = product.getCost()*product.getSale()/100;
+		int cost = (product.getCost()-(product.getCost()*product.getSale()/100));
 		String[] tag = product.getProductTag().split("/");
 		ArrayList<ProductAndWishList> wishList = productDao.selectWishList();
 		int wishCount = productDao.selectwish(productNo);
@@ -476,8 +479,15 @@ public class ProductService {
 		int reviewUploadCheck = productDao.selectReviewUploadCheck(payNo);
 		ArrayList<Chat> chatList = productDao.selectChat(payNo);
 		String first = "";
-		for(int i = 0; i < 1; i++) {
-			first = chatList.get(i).getChatDate();
+		if(chatList.size() > 0) {
+			for(int i = 0; i < 1; i++) {
+				first = chatList.get(i).getChatDate();
+			}
+		}else {
+			LocalDate now = LocalDate.now();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy년MM월dd일");
+			String formatedNow = now.format(formatter);
+			first = formatedNow;
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("product", product);
@@ -660,6 +670,22 @@ public class ProductService {
 	public int counselInsert(Counsel c) {
 		// TODO Auto-generated method stub
 		return productDao.counselInsert(c);
+	}
+	//결제성공출력
+	public HashMap<String, Object> purchaseSuccess(int memberNo, int productNo) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo",memberNo);
+		map.put("productNo",productNo);
+		HashMap<String, Object> pay = productDao.purchaseSuccess(map);
+		HashMap<String, Object> pro = productDao.purchaseSuccess2(map);
+		map.put("payment",pay);
+		map.put("product",pro);
+		//System.out.println("성공2"+map);
+		return map;
+	}
+
+	public ArrayList<Product> selectProductList() {
+		return productDao.selectProductList();
 	}
 
 

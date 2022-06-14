@@ -286,7 +286,6 @@ public class ProductService {
 			productQst += qstList.get(i)+"/";
 		}
 		
-		System.out.println("최종값>>"+productQst);
 		
 		String productAns = pro.getProductAns();
 		List<String> ansList = new ArrayList<String>();
@@ -305,7 +304,6 @@ public class ProductService {
 		for(int i=0;i<ansList.size();i++){
 			productAns += ansList.get(i)+"/";
 		}
-		System.out.println("최종값>>"+productAns);
 //////////////////////////////////////////////////////////////////////////////		
 		String productTag = pro.getProductTag();
 		List<String> tagList = new ArrayList<String>();
@@ -328,7 +326,6 @@ public class ProductService {
 			productTag += "#"+tagList.get(i)+"/";
 		}
 		
-		System.out.println("최종값>>"+productTag);
 		
 		pro.setProductQst(productQst);
 		pro.setProductAns(productAns);
@@ -389,7 +386,6 @@ public class ProductService {
 		map.put("end", end);
 		
 		ArrayList<ProReviewMember> list = productDao.selectReviewList(map); 
-		System.out.println(list);
 		//전체 페이지 계산을 위한 전체 게시물 수 조회
 		int totalCount = productDao.selectReviewCount(productNo);
 		
@@ -525,13 +521,11 @@ public class ProductService {
 	public HashMap<String, Object> compareMemberNo(int payNo, HttpServletRequest request) {
 		Expert expert = memberDao.selectOneExpertOnly2(payNo);
 		Payment payment = productDao.selectPaymentState(payNo);
-		System.out.println("payment : "+payment);
 		HashMap<String, Object> compare = new HashMap<String, Object>();
 		HttpSession session = request.getSession(false);
 		Member member = null;
 		if(session != null) {
 			member = (Member)session.getAttribute("member");	
-			System.out.println("member : "+member);
 			compare.put("member", member);
 			boolean expertNoCheck = false;
 			boolean paymentMemberNoCheck = false;
@@ -585,7 +579,6 @@ public class ProductService {
 		boolean memberCheck = false;
 		if(session != null) {
 			member = (Member)session.getAttribute("member");	
-			System.out.println("member : "+member);
 			if(member.getMemberNo() == payment.getMemberNo()) {
 				memberCheck = true;
 			}
@@ -630,8 +623,6 @@ public class ProductService {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("startTime", startTime);
 		map.put("counselNo", counselNo);
-		System.out.println(startTime);
-		System.out.println(counselNo);
 		return productDao.updateStartTime(map);
 	}
 	//대권 구매페이지

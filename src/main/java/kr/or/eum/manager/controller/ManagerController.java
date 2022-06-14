@@ -624,7 +624,6 @@ public class ManagerController {
 	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
 	@ExceptionHandler
 	public String error1(Exception e) {
-		System.out.println(e.getMessage());
 		return "common/error";
 	}
 

@@ -297,6 +297,25 @@ li{
    	${pageNavi }
    </div>
    <script>
+		function loginNeed(){
+		alert('로그인 후 이용해주세요.');
+		location.href="/loginFrm.do";
+		}
+		
+		function manager(){
+			alert('관리인은 클래스를 등록할 수 없습니다.');
+			location.href="/ClassList.do?reqPage=1&selPro=전체";
+			}
+		
+		function expertNeed(){
+			alert('전문가 인증을 받고 오세요.');
+			location.href="/ClassList.do?reqPage=1&selPro=전체";
+		}
+		function blacklist(){
+			alert('블랙리스트 회원은 등록할 수 없습니다.');
+			location.href="/ClassList.do?reqPage=1&selPro=전체";
+		}
+   
 	$(function(){
 		var selPro = '${selPro}';
 		console.log(selPro);
@@ -315,9 +334,48 @@ li{
 				$(".btm_image").eq(0).addClass("selPro-active");
 				
 			}
-			break;
-		}
-	
+		
+			<!--
+			if(selPro == '전체'){
+				$(".btm_image").eq(0).addClass("selPro-active");
+			}
+			if(selPro == '법률'){
+				$(".btm_image").eq(1).addClass("selPro-active");
+			}
+			if(selPro == '비즈니스'){
+				$(".btm_image").eq(2).addClass("selPro-active");
+			}
+			if(selPro == '심리/헬스'){
+				$(".btm_image").eq(3).addClass("selPro-active");
+			}
+			if(selPro == '학습'){
+				$(".btm_image").eq(4).addClass("selPro-active");
+			}
+			if(selPro == '금융'){
+				$(".btm_image").eq(5).addClass("selPro-active");
+			}
+			if(selPro == '라이프'){
+				$(".btm_image").eq(6).addClass("selPro-active");
+			}
+			if(selPro == '취미'){
+				$(".btm_image").eq(7).addClass("selPro-active");
+			}
+			if(selPro == '어학'){
+				$(".btm_image").eq(8).addClass("selPro-active");
+			}
+			if(selPro == '레저'){
+				$(".btm_image").eq(9).addClass("selPro-active");
+			}
+			if(selPro == 'IT/테크'){
+				$(".btm_image").eq(10).addClass("selPro-active");
+			}
+			if(selPro == '자기계발'){
+				$(".btm_image").eq(11).addClass("selPro-active");
+			}
+			-->
+				break;
+			}
+		
 	});
 	
 	</script>

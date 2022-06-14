@@ -230,7 +230,7 @@ li{
 				</li>
 			</ul>
 			</div>
-			<div>		<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'"></button>
+			<div>		
 						<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">주문상세</button>
 						
 						<!-- <button class="btn bc3 modal-open-btn" target="#test-modal" id = "">주문취소</button> -->
@@ -255,7 +255,13 @@ li{
 								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
 							</c:if>
 							<c:if test="${p.payState eq 2}">
+								<c:if test="${p.marketPath ne null}">
 								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+								<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'">다운로드</button>
+								</c:if>
+								<c:if test="${p.marketPath eq null}">
+								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+								</c:if>
 							</c:if>
 						</c:if>
 						

@@ -156,7 +156,6 @@ imgTarget.on('change', function(){
 
 	    	tagList[$(".tag-val").index(this)] = tagStr+"|";
 	    	$("[name=reqTag]").val(tagList);
-	    	console.log(tagList);
 			
 	    });
 	 $(".addOptBtn").on("click",function(){
@@ -170,7 +169,6 @@ imgTarget.on('change', function(){
 	        $(".delOptBtn").off().on("click",function(){
 	        	tagList.splice($(".delOptBtn").index(this)+1, 1);
 	              $("[name=reqTag]").val(tagList);
-	              console.log(tagList);
 	              $(this).parent().remove();
 	              tagCount--;
 	        });

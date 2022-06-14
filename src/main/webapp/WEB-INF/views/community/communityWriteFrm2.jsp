@@ -178,7 +178,6 @@
     			}else{
 	            	advList[$(".adv-val").index(this)] = advStr+"|";     
 	            	$("[name=advantage]").val(advList);
-	            	console.log(advList);
     			}
            
             });
@@ -196,7 +195,6 @@
     			}else{
 	            	weakList[$(".weak-val").index(this)] = weakStr+"|";
 	            	$("[name=weakness]").val(weakList);
-	            	console.log(weakList);
     			}
            
             });
@@ -216,7 +214,6 @@
             $(".delOptBtn").off().on("click",function(){
                   advList.splice($(".delOptBtn").index(this)+1, 1);
                   $("[name=advantage]").val(advList);
-                  console.log(advList);
                   $(this).parent().remove();
                   advCount--;
             });
@@ -232,7 +229,6 @@
             $(".delOptBtn2").off().on("click",function(){
             	weakList.splice($(".delOptBtn2").index(this)+1, 1);
                 $("[name=weakness]").val(weakList);
-                console.log(weakList);
                   $(this).parent().remove();
                   weakCount--;
             });

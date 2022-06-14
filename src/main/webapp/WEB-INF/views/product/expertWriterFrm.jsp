@@ -254,7 +254,6 @@
 	
 	$('#submit-btn').on("submit", function(event) {
 		if($('#summernote').summernote('isEmpty')) {
-			console.log('contents is empty, fill it!');
 			event.preventDefault();
 		}	
 	});	  
@@ -262,9 +261,9 @@
 	
 	function checkNull(){
 		if(("#summernote").val() == ""){
-			console.log("빈칸");
+			
 		}else{
-			console.log("있음");
+			
 		}
 	}
 	
@@ -321,7 +320,6 @@
     	regExp = /^[0-9a-zA-Zㄱ-ㅎㅏ-ㅣ가-힣/\s/g(!><@#%*()-_)]{2,51}$/;	
     	qstList[$(".qst-val").index(this)] = qstStr+"|";
     	$("[name=productQst]").val(qstList);
-    	console.log(qstList);
 		
     });
     
@@ -333,7 +331,6 @@
 
     	ansList[$(".ans-val").index(this)] = ansStr+"|";
     	$("[name=productAns]").val(ansList);
-    	console.log(ansList);
 		
     });
     
@@ -359,11 +356,9 @@
         $(".delOptBtn").off().on("click",function(){
         	qstList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productQst]").val(qstList);
-              console.log(qstList);
               
               ansList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productAns]").val(ansList);
-              console.log(ansList);
               qstCount--;
               ansCount--;
               $(this).parent().remove();
@@ -380,7 +375,6 @@
 
     	tagList[$(".tag-val").index(this)] = tagStr+"|";
     	$("[name=productTag]").val(tagList);
-    	console.log(tagList);
 		
     });
     $(".addOptBtn2").on("click",function(){
@@ -394,7 +388,6 @@
         $(".delOptBtn2").off().on("click",function(){
         	tagList.splice($(".delOptBtn2").index(this)+1, 1);
               $("[name=productTag]").val(tagList);
-              console.log(tagList);
               $(this).parent().remove();
               tagCount--;
         });

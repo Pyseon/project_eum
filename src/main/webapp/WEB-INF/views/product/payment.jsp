@@ -226,10 +226,8 @@
 	$("#purchase-btn").click(function(){
 		if(checkInput&&pointUse){
 			const payPrice = $("#final-price").val();
-			console.log(payPrice);
 			const d = new Date();
 			const date = d.getFullYear()+""+(d.getMonth()+1)+""+d.getDate()+""+d.getHours()+""+d.getMinutes()+""+d.getSeconds();
-			console.log(date);
 			IMP.init("imp75861734");				//결제 API 사용을 위한 식별코드 입력
 			IMP.request_pay({
 				merchant_uid : "${product.productNo}"+date , 			//거래 ID
@@ -242,11 +240,6 @@
 				buyer_postcode : "12345"							//구매자 우편번호
 			},function(rsp){
 				if(rsp.success){
-					console.log("결제가 완료되었습니다.");
-					console.log("교유ID : "+rsp.imp_uid);
-					console.log("상점거래ID : "+rsp.merchant_uid);
-					console.log("결제 금액 : "+rsp.paid_amount);
-					console.log("카드승인번호 : "+rsp.apply_num);
 					//추가 DB작업이 필요한경우 이 부분에 결제내역을 DB에 저장하는 코드 작성
 					const memberNo = ${sessionScope.member.memberNo};
 					const productNo = ${product.productNo};
@@ -270,14 +263,6 @@
 						payState = 2;
 					}
 					*/
-					console.log("ajax실행");
-					console.log(memberNo);
-					console.log(productNo);
-					console.log(payState);
-					console.log(payMethod);
-					console.log(payment);
-					console.log(payUsepoint);
-					console.log(payAddpoint);
 					$.ajax({						
 						url: "/paymentResult.do",
 						type: "post",
@@ -310,7 +295,7 @@
 							}	
 						},
 						error : function(){
-							   console.log("서버요청실패");
+							   
 						}
 					});
 				}else{
@@ -355,8 +340,6 @@
 		var memberPoint = ${sessionScope.member.memberPoint };
 		var inputPoint = $("[name=memberPoint]").val();
 		if(inputPoint>memberPoint){
-				console.log(inputPoint);
-				console.log(memberPoint);
 				$("#pointText").text("포인트를 확인해주세요");
 				$("#pointText").css("color","#ff2e63");
 				pointUse = false;
@@ -378,13 +361,11 @@
 		var number = Math.round(finalcost);
 		$("#final-price").val(finalcost);
 		$("[name=memberPoint]").val(0);
-		console.log(pointUse);
 	});
 	//포인트사용-결제금액 변경
 	$("#pointBtn").click(function(){
 		var price = ${product.cost };
 		var point = $("[name=memberPoint]").val();	
-		console.log(price);
 		if(pointUse){
 			var finalPrice = (Number(price)-Number(point));
 			$("#final-price").val(finalPrice);
@@ -414,7 +395,6 @@
 	$("#purchase-btn2").click(function(){
 		if(checkInput&&pointUse){
 			const payPrice = $("#final-price").val();
-			console.log(payPrice);
 	
 			const memberNo = ${sessionScope.member.memberNo};
 			const productNo = ${product.productNo};
@@ -433,14 +413,6 @@
 			const startTime = null;
 			//상담 counsel_tbl추가용
 			const productType = ${product.productType};
-			console.log("ajax실행");
-			console.log(memberNo);
-			console.log(productNo);
-			console.log(payState);
-			console.log(payMethod);
-			console.log(payment);
-			console.log(payUsepoint);
-			console.log(payAddpoint);
 			$.ajax({						
 				url: "/paymentResult.do",
 				type: "post",
@@ -473,7 +445,7 @@
 					}	
 				},
 				error : function(){
-					   console.log("서버요청실패");
+					   
 				}
 			});
 		}else{

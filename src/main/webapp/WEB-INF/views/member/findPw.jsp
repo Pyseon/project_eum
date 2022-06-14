@@ -176,7 +176,7 @@ $("#email-pw").on("click",function(){
 												}
 										   },
 										   error : function(){
-											   console.log("서버요청실패");
+											   
 										   }
 										});
 									
@@ -187,7 +187,7 @@ $("#email-pw").on("click",function(){
 								}
 						   },
 						   error : function(){
-							   console.log("서버요청실패");
+							   
 						   }
 						});
 				
@@ -199,7 +199,7 @@ $("#email-pw").on("click",function(){
 				}
 		   },
 		   error : function(){
-			   console.log("서버요청실패");
+			   
 		   }
 	});
 });

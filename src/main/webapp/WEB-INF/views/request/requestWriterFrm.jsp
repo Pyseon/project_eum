@@ -38,9 +38,10 @@
 	<span>개설요청글 작성하기</span>
 </div>
 <div class="container">
-
+	
 <a href="/requestList.do?reqPage=1&selReq=전체"><h1 style="height: 30px; font-size:30px; font-family: fs-bold">< 개설요청</h1></a>
 <form action="/requestWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
+<input type="hidden" name="reqTag">
 <input type="hidden" name="memberNo" value="${memberNo }">
 <h3>카테고리 선택</h3>
 		<select class ="category" id="category" name="reqCategory" style="margin-bottom: 10px !important;" required>
@@ -81,7 +82,7 @@
 	</div>
 	<div id="tag-opt">
 		<span style="display: flex;">
-		<input type="text" name="reqTag" class="req-input tag-val" placeholder="태그를 작성하세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
+		<input type="text" name="reqTag2" class="req-input tag-val" placeholder="태그를 작성하세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</span>
 	</div>
 	
@@ -174,6 +175,45 @@ imgTarget.on('change', function(){
 	              tagCount--;
 	        });
 	    });
+	 
+	    //스페이스바 금지 함수
+	    function checkSpacebar(){
+	    	  var kcode = event.keyCode;
+	    	  if(kcode == 32) event.returnValue = false;
+	    	}
+	    
+	    
+	    // 특수문자 정규식 변수(공백 미포함)
+	   var replaceChar = /[\s~!@\#$%^&*\()\-=+_'\;<>0-9\/.\`:\"\\,\[\]?|{}]/gi;
+	 
+	    // 완성형 아닌 한글 정규식
+	        
+	        $(document).on("keyup",".tag-val", function() {
+	        	
+	            var x = $(this).val();
+	            
+	            if (x.length > 0) {
+	                if (x.match(replaceChar)) {
+	                    x = x.replace(replaceChar, "");
+	                    tagList[$(".tag-val").index(this)] = "";
+	                }
+	                $(this).val(x);
+	            }
+	            }).on("keyup", function() {
+	                $(this).val($(this).val().replace(replaceChar, ""));
+	                tagList[$(".tag-val").index(this)] = "";
+
+	       });
+	    
+	        function length_check() {
+	            var desc = $("#reqContent").val();
+
+	            if( desc.length > 300 ) {
+	                alert("입력 메세지는 300자를 초과할 수 없습니다.");
+	                $("#reqContent").val(desc.substring(0, 300));
+	            }
+	        }
+
 </script>
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>

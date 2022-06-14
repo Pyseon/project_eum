@@ -115,11 +115,13 @@
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="${productTitle }">
+			<input class="input-form" type="text" name="productTitle" placeholder="${productTitle }" 
+			pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="${productIntro }">
+			<input class="input-form" type="text" name="productIntro" placeholder="${productIntro }"
+			pattern=".{2,60}" required title="2~60글자 이내로 입력하세요" maxlength="60" required>
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>

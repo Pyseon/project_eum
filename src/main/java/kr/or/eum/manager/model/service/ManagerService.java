@@ -27,7 +27,7 @@ public class ManagerService {
 	@Autowired
 	private ManagerDao dao;
 	
-	public HashMap<String, Object> PageList(int reqPage, int selectNum, String wherePage,String searchType, String keyword) {
+	public HashMap<String, Object> PageList(int reqPage, int selectNum, String wherePage,String searchType, String keyword, int faqType) {
 		int numPerPage = 10;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
@@ -36,6 +36,7 @@ public class ManagerService {
 		pageMap.put("start", start);
 		pageMap.put("end", end);
 		pageMap.put("selectNum", selectNum);
+		pageMap.put("faqType", faqType);
 		
 		HashMap<String, Object> pageData = new HashMap<String, Object>();
 		int totalCount = 0;
@@ -149,6 +150,19 @@ public class ManagerService {
 				totalCount = dao.searchExpertCount(pageMap);
 			}
 			pageData.put("expertList", expertList);
+			break;
+		case "faqList.do":
+			ArrayList<FaQ> FAQList2 = new ArrayList<FaQ>();
+			if(searchType == null) {
+				FAQList2 = dao.FAQPageData(pageMap);
+				totalCount = dao.FAQCount(selectNum);
+			}else {
+				pageMap.put("searchType", searchType);
+				pageMap.put("keyword", keyword);
+				FAQList2 = dao.searchFAQPageData(pageMap);
+				totalCount = dao.searchFAQCount(pageMap);
+			}
+			pageData.put("FAQList", FAQList2);
 			break;
 		}
 		
@@ -456,6 +470,10 @@ public class ManagerService {
 
 	public Notice selectNoticeDetail(int noticeNo) {
 		return dao.selectNoticeDetail(noticeNo);
+	}
+
+	public FaQ selectFaqDetail(int faqNo) {
+		return dao.selectFaqDetail(faqNo);
 	}
 
 	

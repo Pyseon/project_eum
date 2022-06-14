@@ -49,7 +49,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaMember.do";
-		HashMap<String, Object> mpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> mpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", mpd.get("memberList"));
 		model.addAttribute("pageNavi", mpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -78,8 +79,9 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaPayment.do";
+		int faqType = 0;
 		//PaymentPageData ppd = service.paymentList(reqPage, payState, searchType, keyword);
-		HashMap<String, Object> ppd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		HashMap<String, Object> ppd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", ppd.get("paymentList"));
 		model.addAttribute("pageNavi", ppd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -113,7 +115,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaReport.do";
-		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> rpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		ArrayList<Object> report = new ArrayList<Object>();
 		model.addAttribute("list", rpd.get("reportList"));
 		model.addAttribute("pageNavi",rpd.get("pageNavi"));
@@ -207,7 +210,8 @@ public class ManagerController {
 					}
 				}
 		String wherePage = "manaFAQ.do";
-		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", fpd.get("FAQList"));
 		model.addAttribute("pageNavi", fpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -281,8 +285,9 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaNotice.do";
+		int faqType = 0;
 		int selectNum = 0;
-		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", npd.get("noticeList"));
 		model.addAttribute("pageNavi", npd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -390,7 +395,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaAnswer.do";
-		HashMap<String, Object> apd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> apd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", apd.get("answerList"));
 		model.addAttribute("pageNavi", apd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -412,7 +418,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaQuestion.do";
-		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", qpd.get("qstList"));
 		model.addAttribute("pageNavi", qpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -459,7 +466,8 @@ public class ManagerController {
 		String wherePage = "myQuestionList.do";
 		String searchType = null;
 		String keyword = Integer.toString(memberNo);
-		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> qpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", qpd.get("qstList"));
 		model.addAttribute("pageNavi", qpd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -504,7 +512,8 @@ public class ManagerController {
 			}
 		}
 		String wherePage = "manaExpert.do";
-		HashMap<String, Object> epd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> epd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
 		model.addAttribute("list", epd.get("expertList"));
 		model.addAttribute("pageNavi", epd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -576,7 +585,8 @@ public class ManagerController {
 	public String noticeList(int reqPage, String searchType, String keyword, Model model) {
 		String wherePage = "noticeList.do";
 		int selectNum = 0;
-		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword);
+		int faqType = 0;
+		HashMap<String, Object> npd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword , faqType);
 		model.addAttribute("list", npd.get("noticeList"));
 		model.addAttribute("pageNavi", npd.get("pageNavi"));
 		model.addAttribute("reqPage", reqPage);
@@ -588,6 +598,24 @@ public class ManagerController {
 		Notice notice = service.selectNoticeDetail(noticeNo);
 		model.addAttribute("ntc", notice);
 		return "manager/noticeDetail";
+	}
+	
+	@RequestMapping(value = "/faqList.do")
+	public String faqList(int reqPage, String searchType, String keyword,int faqType, Model model) {
+		String wherePage="faqList.do";
+		int selectNum = 0;
+		HashMap<String, Object> fpd = service.PageList(reqPage, selectNum, wherePage, searchType, keyword, faqType);
+		model.addAttribute("list", fpd.get("FAQList"));
+		model.addAttribute("pageNavi", fpd.get("pageNavi"));
+		model.addAttribute("reqPage", reqPage);
+		model.addAttribute("selectNum", selectNum);
+		return "manager/faqList";
+	}
+	@RequestMapping(value = "/faqDetail.do")
+	public String faqDetail(int faqNo, Model model) {
+		FaQ faq = service.selectFaqDetail(faqNo);
+		model.addAttribute("faq", faq);
+		return "manager/faqDetail";
 	}
 
 }

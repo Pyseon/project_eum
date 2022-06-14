@@ -130,11 +130,15 @@
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>클래스명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
+
+			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." 
+			pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>클래스 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
+			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" 
+			pattern=".{5,20}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
+
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>클래스 상세 설명</h3></div>
@@ -165,11 +169,13 @@
 		<div id="qna">
 			<div id="qst-opt">
 					<span style="line-height: 2.5;">질문 &nbsp;</span>
-					<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요"  pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
+
+					<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="30" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 			</div>
 			<div id="ans-opt">
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요"  pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="50" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="20" required>
+
 			</div>
 		</div>	
 		

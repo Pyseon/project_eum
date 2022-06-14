@@ -372,7 +372,11 @@
 	//최종 금액액 불러오기-바로실행
 	$(function(){
 		var firstPrice = ${product.cost };
-		$("#final-price").val(firstPrice);
+		var salePrice = 0.01*${product.sale };
+		var saleCost = firstPrice*salePrice;
+		var finalcost = firstPrice - saleCost;
+		var number = Math.round(finalcost);
+		$("#final-price").val(finalcost);
 		$("[name=memberPoint]").val(0);
 		console.log(pointUse);
 	});

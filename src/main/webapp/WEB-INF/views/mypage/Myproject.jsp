@@ -228,7 +228,10 @@ li {
 			<div>
 				<button class="btn bc1 bs3" id="login-btn" type="button" onclick="location.href='/MyprojectDetail.do?productNo=${p.productNo}'">수정하기</button>
 				<button class="btn bc2 bs2" id="login-btn" type="button" onclick="location.href='/DeleteMyproject.do?productNo=${p.productNo}&&memberNo=${p.memberNo}'">삭제하기</button>
-				<button class="btn bc3 bs3" id="login-btn" type="button" onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
+				
+				<c:if test="${p.productType eq 1}">
+					<button class="btn bc3 bs3" id="login-btn" type="button" onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
+		  		</c:if>
 		  </div>
 
 				</div>

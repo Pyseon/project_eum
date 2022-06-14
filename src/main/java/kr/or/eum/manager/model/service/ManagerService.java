@@ -354,7 +354,7 @@ public class ManagerService {
 			salesCharts.add(dao.selectSalesChart(map));
 			map.put("productCategory", "비즈니스");
 			salesCharts.add(dao.selectSalesChart(map));
-			map.put("productCategory", "심리");
+			map.put("productCategory", "심리/헬스");
 			salesCharts.add(dao.selectSalesChart(map));
 			map.put("productCategory", "학습");
 			salesCharts.add(dao.selectSalesChart(map));
@@ -368,7 +368,7 @@ public class ManagerService {
 			salesCharts.add(dao.selectSalesChart(map));
 			map.put("productCategory", "레저");
 			salesCharts.add(dao.selectSalesChart(map));
-			map.put("productCategory", "IT");
+			map.put("productCategory", "IT/테크");
 			salesCharts.add(dao.selectSalesChart(map));
 			map.put("productCategory", "자기계발");
 			salesCharts.add(dao.selectSalesChart(map));

@@ -196,6 +196,13 @@ li{
 	.bc11{
 		background-color: skyblue;
 	}
+	
+	#p-title-2{
+		overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 180px;
+	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp" %>
 <%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>	
@@ -219,14 +226,21 @@ li{
 		
 		<div class="posting-item" style="cursor: pointer;" >
 			
-			  
-			 <img src="./img/product/ClassList/${p.productImgPath }">
+			 <c:if test="${p.productType eq 1}">
+			 	<img src="./img/ExpertList/coun1.png" style="width:245px; height:180px;">
+			 </c:if>
+			 <c:if test="${p.productType eq 2}">
+				 <img src="./img/product/ClassList/${p.productImgPath }">
+			 </c:if>
+			 <c:if test="${p.productType eq 3}">
+			 	 <img src="./img/ExpertList/idmar.png" style="width:245px; height:180px;">>
+			 </c:if>
 			<div class="posting-connect">
 			
 			<ul>
 				<li>
 					
-					<div>
+					<div id="p-title-2">
 						<span class="card-category fs-bold">${p.productTitle }</span>
 					</div>
 					<div>

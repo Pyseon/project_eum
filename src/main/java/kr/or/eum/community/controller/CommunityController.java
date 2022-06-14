@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +28,7 @@ import kr.or.eum.community.model.vo.CommunityPageData;
 import kr.or.eum.community.model.vo.Pick;
 import kr.or.eum.member.model.vo.Member;
 
+@ControllerAdvice 
 @Controller
 public class CommunityController {
 	@Autowired
@@ -332,6 +335,13 @@ public class CommunityController {
 		comm.setCommFilepath(filepath);
 
 		return comm;
+	}
+	
+	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
+	@ExceptionHandler
+	public String error1(Exception e) {
+		System.out.println(e.getMessage());
+		return "common/error";
 	}
 
 }

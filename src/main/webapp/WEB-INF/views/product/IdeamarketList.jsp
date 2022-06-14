@@ -233,12 +233,12 @@ li{
    	<div class="posting-wrap">
    		<c:forEach items="${list }" var="c" varStatus="i">
    			<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
-   				<img src="./img/product/ExpertList/${c.productImgPath }">
+   				<img src="./img/product/ExpertList/ba7da2c7fa66b6a81d357df4a4113333.jpg">
    				<div class="posting-connect">
    					<ul>
    						<li>
    							<div class="t1" style="font-family: fs-bold !important;">
-								<span class="card-category fs-bold">${c.productTitle }</span>
+								<span class="card-category fs-bold" style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 140px;">${c.productTitle }</span>
 								<span style="color: #bdbdbd; font-size: 14px !important; line-height: 2;">
 									${c.productCategory}
 								</span>
@@ -290,11 +290,11 @@ li{
 		<span id="sele" style="width: auto;">${c.sale}%</span>
 	
 		<span class="t2" style="margin: 0px 0 30px 0px;">
-			<span id="price"  class="fc-7" style="width: auto; font-size: 18px; line-height: 1.5;">
+			<span id="price"  class="fc-7" style="width: auto; font-size: 15px; line-height: 1.8;">
 			<fmt:formatNumber value="${c.salecost }" pattern="#,###,###,###,###"/>원
 			</span>
 			&nbsp;
-			<span id="fixed-price" style="width: auto; font-size: 12px; font-style: italic; font-weight: bold; margin: 4px 0 0px 0px;">
+			<span id="fixed-price" style="width: auto; font-size: 11px; font-style: italic; font-weight: bold; margin: 1px 0 0px 0px;">
 			<fmt:formatNumber value="${c.cost }" pattern="#,###,###,###,###"/>원
 			</span>
 		</span> 

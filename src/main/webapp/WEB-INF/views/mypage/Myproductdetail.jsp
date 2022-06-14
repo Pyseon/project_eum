@@ -51,7 +51,7 @@
 		
 				</c:forEach>
 		<div class="backPage">
-			<button class="btn bc1 bs4" onclick="location.href=/appExpertList.do?memberNo=${sessionScope.member.memberNo}">목록으로</button>
+			<button class="btn bc1 bs4" onclick="location.href='/Myproduct.do?memberNo=${sessionScope.member.memberNo}'">목록으로</button>
 		</div>
 	</div>
 </div>

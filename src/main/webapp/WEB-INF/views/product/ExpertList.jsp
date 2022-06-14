@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 전문가상담</title>
 <style>
 
 li{
@@ -334,28 +334,67 @@ li{
 		}
    
    
-	$(function(){
-		var selPro = '${selPro}';
-		console.log(selPro);
-		
-		for(var i=0; i<12; i++){
-			var val = $(".btm_image").eq(i);
-			console.log(val);
-			if(selPro != '전체'){
-				for(var i=1; i<12; i++){
-					if(i != 1){
-				$(".btm_image").eq(i).addClass("selPro-active");
+		$(function(){
+			var selPro = '${selPro}';
+			console.log(selPro);
+			
+			for(var i=0; i<12; i++){
+				var val = $(".btm_image").eq(i);
+				console.log(val);
+				if(selPro != '전체'){
+					for(var i=1; i<12; i++){
+						if(i != 1){
+					$(".btm_image").eq(i).addClass("selPro-active");
+						}
+					break;
 					}
-				break;
+				}else{
+					$(".btm_image").eq(0).addClass("selPro-active");
+					
 				}
-			}else{
-				$(".btm_image").eq(0).addClass("selPro-active");
-				
-			}
-			break;
-		}
-	
-	});
+			
+				<!--
+				if(selPro == '전체'){
+					$(".btm_image").eq(0).addClass("selPro-active");
+				}
+				if(selPro == '법률'){
+					$(".btm_image").eq(1).addClass("selPro-active");
+				}
+				if(selPro == '비즈니스'){
+					$(".btm_image").eq(2).addClass("selPro-active");
+				}
+				if(selPro == '심리/헬스'){
+					$(".btm_image").eq(3).addClass("selPro-active");
+				}
+				if(selPro == '학습'){
+					$(".btm_image").eq(4).addClass("selPro-active");
+				}
+				if(selPro == '금융'){
+					$(".btm_image").eq(5).addClass("selPro-active");
+				}
+				if(selPro == '라이프'){
+					$(".btm_image").eq(6).addClass("selPro-active");
+				}
+				if(selPro == '취미'){
+					$(".btm_image").eq(7).addClass("selPro-active");
+				}
+				if(selPro == '어학'){
+					$(".btm_image").eq(8).addClass("selPro-active");
+				}
+				if(selPro == '레저'){
+					$(".btm_image").eq(9).addClass("selPro-active");
+				}
+				if(selPro == 'IT/테크'){
+					$(".btm_image").eq(10).addClass("selPro-active");
+				}
+				if(selPro == '자기계발'){
+					$(".btm_image").eq(11).addClass("selPro-active");
+				}
+				-->
+					break;
+				}
+			
+		});
 	
 	</script>
    

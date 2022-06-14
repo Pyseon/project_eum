@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 개설요청</title>
 <style>
 
 .writetitle{
@@ -41,9 +41,9 @@
 
 <a href="/requestList.do?reqPage=1&selReq=전체"><h1 style="height: 30px; font-size:30px; font-family: fs-bold">< 개설요청</h1></a>
 <form action="/requestWrite.do" method="post" onsubmit="checkForm();return false" enctype="multipart/form-data">
-<input type="text" name="memberNo" value="${memberNo }">
+<input type="hidden" name="memberNo" value="${memberNo }">
 <h3>카테고리 선택</h3>
-		<select class ="category" id="category" name="reqCategory" style="margin-bottom: 10px !important;">
+		<select class ="category" id="category" name="reqCategory" style="margin-bottom: 10px !important;" required>
 		<option value="">선택</option>
 		<option value="법률">법률</option>
 		<option value="비즈니스">비즈니스</option>
@@ -57,8 +57,8 @@
 		<option value="IT/테크">IT/테크</option>
 		<option value="자기계발">자기계발</option>
 		</select>
-	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold">요청 제목을 작성해 주세요
-		<input class="input-form" type="text" name="reqTitle" >
+	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold " >요청 제목을 작성해 주세요
+		<input class="input-form" type="text" name="reqTitle" required>
 	</div>
 	
 	
@@ -70,13 +70,13 @@
 		
 	</div>
 	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold">요청페이지에서 사용할 닉네임을 작성해 주세요
-		<input class="input-form" type="text" name="reqNick">
+		<input class="input-form" type="text" name="reqNick" required>
 	</div>
 	
 	
 	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold">태그를 작성해 주세요
 	<button type="button" class="addOptBtn optButton" style="line-height: 2;">
-		<i class="fa-solid fa-square-plus"></i>
+		<i class="fa-solid fa-square-plus " style="line-height: 1.5;"></i>
 	</button>
 	</div>
 	<div id="tag-opt">

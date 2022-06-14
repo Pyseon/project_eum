@@ -244,6 +244,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	model.addAttribute("pageNavi",ppd.getPageNavi());
 	model.addAttribute("reqPage", reqPage);
 	System.out.println("selPro : "+selPro);
+	System.out.println(ppd);
 
 	return "product/IdeamarketList";
 }
@@ -694,7 +695,15 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 		
 	}
 	
-	
+	@RequestMapping(value = "/main.do")
+	public String main(Model model) {
+		ArrayList<Product> list = productService.selectProductList();
+		model.addAttribute("list",list);
+		for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getProductTitle());
+		}
+		return "common/main";
+	}
 
 }
 

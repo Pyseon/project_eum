@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>>내 구매내역</title>
+<title>이음 :: 마이페이지</title>
 <style>
 
 li{

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 공지사항</title>
 <style>
 	.page-top-content{
 		color: #999;

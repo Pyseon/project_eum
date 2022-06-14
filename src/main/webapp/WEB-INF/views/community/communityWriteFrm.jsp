@@ -15,8 +15,8 @@
 	<div class="container">
 		<div class="comm-write-tab-nav" style="margin-top: 40px;">
 			<ul class="tab_title" style="padding-left: 0;">
-				<li class="on">요즘뭐하니?</li>
-				<li>이거어때?!</li>
+				<li class="on" onclick="location.href='/communityWriteFrm.do?category=0'">요즘뭐하니?</li>
+				<li onclick="location.href='/communityWriteFrm.do?category=1'">이거어때?!</li>
 			</ul>
 		</div>
 	
@@ -31,10 +31,10 @@
 					<input type="hidden" name="weakness">
 						<p class="comm-write-p">제목</p>
 						<input type="text" name="commTitle" class="commTitle comm-input"
-							placeholder="제목을 입력하세요 (15자 이내)" maxlength=15>
+							placeholder="제목을 입력하세요 (15자 이내)" maxlength=15 required>
 						<p class="comm-write-p">간단한 소개</p>
 						<input type="text" name="commIntro" class="commIntro comm-input"
-							placeholder="간단한 소개 (100자 이내)" maxlength=99>
+							placeholder="간단한 소개 (100자 이내)" maxlength=99 required>
 						<!-- 대표이미지 -->
 						<div class="img-box-wrap">
 							<div class="commFileBox preview-image">
@@ -63,7 +63,7 @@
 							<h4 class="fc-3" style="margin-top: 10px;">(최대 5개까지 추가 가능)</h4>
 							<div id="adv-opt">
 								<input type="text" name="advantage2" class="comm-input adv-val"
-									placeholder="내용을 입력하세요.(20자이내)" maxlength="20" required>
+									placeholder="내용을 입력하세요.(20자이내)" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 							</div>
 						</div>
 						<div class="weak-input" style="margin-top: 50px;">
@@ -75,7 +75,7 @@
 							<h4 class="fc-3" style="margin-top: 10px;"><span>(최대 5개까지 추가 가능)</span><span></span></h4>
 							<div id="weak-opt">
 								<input type="text" name="weakness2" class="comm-input weak-val"
-									placeholder="내용을 입력하세요.(20자이내)" maxlength="20" required>
+									placeholder="내용을 입력하세요.(20자이내)" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 							</div>
 						</div>
 
@@ -157,7 +157,7 @@
 <!-- script -->
 <script>
         $(document).ready(function() {
-            $(".tab_title li").click(function() {
+            $(".tab_title li2").click(function() {
                 var idx = $(this).index();
                 $(".tab_title li").removeClass("on");
                 $(".tab_title li").eq(idx).addClass("on");
@@ -210,7 +210,7 @@
             if(advCount >= 5) return;
             var advDiv = document.createElement("div");
             advDiv.setAttribute("class","optBox");
-            advDiv.innerHTML = '<input type="text" name="advantage2" class="comm-input adv-val" placeholder="내용을 입력하세요." maxlength="20" required><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
+            advDiv.innerHTML = '<input type="text" name="advantage2" class="comm-input adv-val" placeholder="내용을 입력하세요." pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
             $("#adv-opt").append(advDiv);
             advCount++;
             $(".delOptBtn").off().on("click",function(){
@@ -226,7 +226,7 @@
             if(weakCount >= 5) return;
             var newDiv = document.createElement("div");
             newDiv.setAttribute("class","optBox");
-            newDiv.innerHTML = '<input type="text" name="weakness2" class="comm-input weak-val" maxlength="20" placeholder="내용을 입력하세요."><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
+            newDiv.innerHTML = '<input type="text" name="weakness2" class="comm-input weak-val" placeholder="내용을 입력하세요." pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
             $("#weak-opt").append(newDiv);
             weakCount++;
             $(".delOptBtn2").off().on("click",function(){

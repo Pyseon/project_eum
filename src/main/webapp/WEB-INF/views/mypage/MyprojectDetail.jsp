@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>>내 프로젝트 수정</title>
+<title>이음 :: 마이페이지</title>
 <style>
 	#category{
 		font:bold 16px "malgun gothic";

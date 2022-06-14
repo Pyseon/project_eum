@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>구매실패</title>
+<title>이음 :: 구매실패</title>
 </head>
 <style>
 	.failbox{

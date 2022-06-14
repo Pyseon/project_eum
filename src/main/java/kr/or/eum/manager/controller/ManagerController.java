@@ -617,5 +617,6 @@ public class ManagerController {
 		model.addAttribute("faq", faq);
 		return "manager/faqDetail";
 	}
+
 }
 

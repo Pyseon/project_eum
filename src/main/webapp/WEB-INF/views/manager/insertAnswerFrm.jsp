@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 관리자</title>
 <style>
 	.ansTable{
 		margin-top: 20px;

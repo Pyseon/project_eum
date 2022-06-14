@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 전문가상담</title>
 <style>
 	#category{
 		font:bold 16px "malgun gothic";
@@ -137,7 +137,7 @@
 		</div>
 		<div class="content" style="margin-bottom: 20px">
 			<div><h3>상담 상세 설명</h3></div>
-			<textarea id="summernote" name="productContent" class="input-form"></textarea>
+			<textarea id="summernote" name="productContent" class="input-form" onkeydown="checkNull();" onkeyup="checkNull();"></textarea>
 		</div>
 		
 		<div style="margin-bottom: 20px">
@@ -260,6 +260,26 @@
 		}
 	});	 
 	
+	
+	$("#summernote").on("change", function(){
+		if($('#summernote').summernote('isEmpty')) {
+			console.log('contents is empty, fill it!');
+			event.preventDefault();
+		}else {
+			console.log('잘 되는 중');	
+		}
+	});
+	
+	
+	function checkNull(){
+		if(("#summernote").val() == ""){
+			console.log("빈칸");
+		}else{
+			console.log("있음");
+		}
+	}
+	
+	
 	 // 이미지 추가 함수 시작
     var imgTarget = $('.preview-image .upload-hidden');
 
@@ -304,6 +324,7 @@
         return str.replace(/[^\d]+/g, '');
     }
     
+    
     var qstList=[];
     $(document).on("change", ".qst-val", function(){
     	var qstStr = $(this).val();
@@ -332,35 +353,35 @@
     var ansCount = 1;
     
     $(".addOptBtn").on("click",function(){
-        if(qstCount >= 10) return;
+        if(qstCount >= 5) return;
+        
         var qstDiv = document.createElement("div");
         qstDiv.setAttribute("class","optBox");
-        qstDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#qst-opt").append(qstDiv);
-        qstCount++;
+        qstDiv.innerHTML += '<span style="line-height: 2.5;">질문 &nbsp;</span>';
+        qstDiv.innerHTML +='<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="30" required>';
+        qstDiv.innerHTML +='<button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span><br>';
         
-        if(ansCount >= 10) return;
-        var ansDiv = document.createElement("div");
-        ansDiv.setAttribute("class","optBox");
-        ansDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important;"><input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#ans-opt").append(ansDiv);
-        ansCount++;
+        qstDiv.innerHTML += '<span style="line-height: 2.5;">답변 &nbsp;</span>';
+        qstDiv.innerHTML += '<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="30" required>';
+        
+        $("#qna").append(qstDiv);
+        qstCount++;
         
         $(".delOptBtn").off().on("click",function(){
         	qstList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productQst]").val(qstList);
               console.log(qstList);
-              $(this).parent().remove();
-              qstCount--;
               
               ansList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productAns]").val(ansList);
               console.log(ansList);
-              $(this).parent().remove();
+              qstCount--;
               ansCount--;
+              $(this).parent().remove();
         });
     });
     
+//태그함수    
     var tagCount = 1;
     var tagList=[];
     $(document).on("change", ".tag-val", function(){
@@ -377,7 +398,7 @@
         if(tagCount >= 20) return;
         var tagDiv = document.createElement("div");
         tagDiv.setAttribute("class","optBox");
-        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19%; required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" id="tag22" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19.5%;  onkeydown="checkSpacebar();" onkeyup="checkSpacebar();" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
         $("#tag-opt").append(tagDiv);
         tagCount++;
         
@@ -389,6 +410,39 @@
               tagCount--;
         });
     });
+    
+    //스페이스바 금지 함수
+    function checkSpacebar(){
+    	  var kcode = event.keyCode;
+    	  if(kcode == 32) event.returnValue = false;
+    	}
+    
+    
+    // 특수문자 정규식 변수(공백 미포함)
+   var replaceChar = /[\s~!@\#$%^&*\()\-=+_'\;<>0-9\/.\`:\"\\,\[\]?|{}]/gi;
+ 
+    // 완성형 아닌 한글 정규식
+        
+        $(document).on("keyup",".tag-val", function() {
+        	
+            var x = $(this).val();
+            
+            if (x.length > 0) {
+                if (x.match(replaceChar)) {
+                    x = x.replace(replaceChar, "");
+                    tagList[$(".tag-val").index(this)] = "";
+                }
+                $(this).val(x);
+            }
+            }).on("keyup", function() {
+                $(this).val($(this).val().replace(replaceChar, ""));
+                tagList[$(".tag-val").index(this)] = "";
+
+       });
+
+    
+    
+    
 	</script>
 	
 

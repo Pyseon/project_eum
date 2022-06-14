@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>클래스목록</title>
+<title>이음 :: 클래스</title>
 <style>
 
 li{

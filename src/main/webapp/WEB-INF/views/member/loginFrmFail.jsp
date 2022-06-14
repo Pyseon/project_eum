@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>로그인</title>
+<title>이음 :: 로그인</title>
 
     <style>
       #login-btn {

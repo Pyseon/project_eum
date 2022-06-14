@@ -60,6 +60,7 @@ public class RequestService {
 		int numPerPage = 12;
 		int end = reqPage * numPerPage;
 		int start = end - numPerPage + 1;
+		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("start", start);
 		map.put("end", end);
@@ -81,7 +82,7 @@ public class RequestService {
 		String pageNavi = "<ul class='pagination'>";
 		if(pageNo != 1) { 
 			pageNavi += "<li>";
-			pageNavi += "<a class='page-item' href='/requestList.do?reqPage="+(pageNo-1)+"&selReq="+selReq+"'>";
+			pageNavi += "<a class='page-item' href='/requestList.do?reqPage="+(pageNo-1)+"&selPro="+selReq+"'>";
 			pageNavi += "<span class='material-icons'>chevron_left</span>";
 			pageNavi += "</a></li>";
 		}
@@ -100,13 +101,15 @@ public class RequestService {
 			if(pageNo > totalPage) {
 				break;
 			}
-		}if(pageNo <= totalPage) {
+		}
+		if(pageNo <= totalPage) {
 			pageNavi += "<li>";
 			pageNavi += "<a class='page-item' href='/requestList.do?reqPage="+pageNo+"&selReq="+selReq+"'>";
 			pageNavi += "<span class='material-icons'>chevron_right</span>";
 			pageNavi += "</a></li>";
 			
-		}pageNavi += "</ul>";
+		}
+		pageNavi += "</ul>";
 		RequestPageData rpd = new RequestPageData(list, pageNavi);
 					 
 		return rpd;

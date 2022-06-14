@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>>후기</title>
+<title>이음 :: 마이페이지</title>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
 <style>

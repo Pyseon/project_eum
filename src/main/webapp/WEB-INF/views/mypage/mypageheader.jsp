@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 마이페이지</title>
 <link rel="stylesheet" href="css/mypage.css" />
 </head>
 <body>

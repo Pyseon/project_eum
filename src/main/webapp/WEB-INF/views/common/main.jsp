@@ -103,8 +103,8 @@
 	}
 	
 	.icon-img {
-		width: 80px;
-   		height: 80px;
+		width: 65px;
+   		height: 65px;
 	}
 	.img-btn-all-wrap{
 		display: flex;
@@ -117,7 +117,7 @@
 		border: none;
 	}
 	.img-btn-wrap {
-		margin-right: 25px;
+		margin-right: 15px;
 	}
 	
 	.blueAdd{
@@ -125,7 +125,7 @@
     }
     
     .productinfo img{
-    	height: 400px;
+    	height: 265px;
     }
 </style>
 <body>

@@ -15,8 +15,6 @@
 	<div class="container">
 		<div class="comm-write-tab-nav" style="margin-top: 40px;">
 			<ul class="tab_title" style="padding-left: 0;">
-				<li class="on">요즘뭐하니?</li>
-				<li>이거어때?!</li>
 			</ul>
 		</div>
 	

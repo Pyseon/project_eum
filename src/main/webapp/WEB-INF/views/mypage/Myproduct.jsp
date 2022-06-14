@@ -231,8 +231,10 @@ li{
 			</ul>
 			</div>
 			<div>		
+
 			
 						<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'"></button>
+
 						<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">주문상세</button>
 						
 						<!-- <button class="btn bc3 modal-open-btn" target="#test-modal" id = "">주문취소</button> -->
@@ -264,10 +266,13 @@ li{
 						
 						
 						<c:if test="${p.productType eq 3}">
+
 							
 								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  >구매완료</button>
 								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+                <button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'">다운로드</button>
 							
+
 						</c:if>
 					
 			</div>

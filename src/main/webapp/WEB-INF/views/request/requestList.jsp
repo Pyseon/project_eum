@@ -122,13 +122,21 @@
 	</div>
 	<div class="container">
 	<h1 style="font-family: fs-bold !important;">개설 요청</h1>
-<button type="button" class="writeButton" id="writeButton" onclick="location.href='/requestWriterFrm.do'">요청하기</button>
+	<c:choose>
+	<c:when test="${memberNo eq 0}">
+	<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">요청하기</button>
+	</c:when>
+	<c:otherwise>
+	<button type="button" class="writeButton" id="writeButton" onclick="location.href='/requestWriterFrm.do'">요청하기</button>
+	</c:otherwise>
+	</c:choose>
 <div class="posting-wrap">
 <c:forEach items="${list }" var="c" varStatus="i">
 <div class="posting-item" style="cursor: pointer;" onclick="location.href='/requestDetail.do?reqNo=${c.reqNo}&memberNo=${c.memberNo }';">
 	<div class="posting-connect">
 		<ul>
 			<li>
+			<h1>${sessionScope.reqask.selectExpert }</h1>
 				<div class="t1" style="font-family: fs-bold !important;">
 					<img src="#">
 					<span class="reqcategory fs-bold">${c.reqCategory}</span>
@@ -166,6 +174,12 @@
 ${pageNavi }
 </body>
 <script>
+function loginNeed(){
+	alert('로그인 후 이용해주세요.');
+	location.href="/loginFrm.do";
+	}
+
+
 $(function(){
 	var selReq = '${selReq}';
 	console.log(selReq);

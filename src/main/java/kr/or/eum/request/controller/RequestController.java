@@ -34,6 +34,7 @@ public class RequestController {
 		
 		HttpSession session = request.getSession(false);
         Member member = null;
+        
         if(session != null) {
             member = (Member)session.getAttribute("member");
         }
@@ -44,6 +45,8 @@ public class RequestController {
 		}else {
 			model.addAttribute("memberNo", 0);
 		}
+   
+        System.out.println("list : " + rpd.getList());
 		return "request/requestList";
 	}
 	
@@ -118,10 +121,14 @@ public class RequestController {
 			if(selectExpertIs != 0) {
 				int selectExpert = service.selectExpert(reqNo);
 				model.addAttribute("se", selectExpert);
+				System.out.println("se : " +selectExpert);
 			}else {
 				model.addAttribute("se", 0);
+				
 			}
 			model.addAttribute("sei", selectExpertIs);
+			System.out.println("sei : "+selectExpertIs);
+			
 		return "request/requestDetail";
 	}
 	

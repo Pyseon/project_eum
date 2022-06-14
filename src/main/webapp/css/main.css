@@ -294,15 +294,6 @@ a#scrollUp i {
   animation: fadeInUp 400ms;
 }
 
-ul.sub-menu > li:hover > ul.sub-menu2 {
-  display: block;
-  -webkit-animation: fadeInUp 400ms;
-  -moz-animation: fadeInUp 400ms;
-  -ms-animation: fadeInUp 400ms;
-  -o-animation: fadeInUp 400ms;
-  animation: fadeInUp 400ms;
-}
-
 ul.sub-menu {
   position: absolute;
   top: 30px;
@@ -316,21 +307,9 @@ ul.sub-menu {
   box-shadow: 0 3px 3px rgba(65, 28, 167, 0.1);
   display: none;
   z-index: 999;
+  overflow: hidden;
+  transition: height .2s;
 }
-ul.sub-menu2 {
-  position: relative;
-  left: 0 auto;
-  background: #fff;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  width: 220px;
-  -webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 3px 3px rgba(65, 28, 167, 0.1);
-  display: none;
-  z-index: 999;
-}
-
 
 
 .dropdown ul.sub-menu li .active {

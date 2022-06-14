@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+        <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +13,6 @@ li{
    list-style:none;
    padding-left:0px;
    }
-
 
 	.posting-wrap {
     	display: flex;
@@ -29,7 +29,6 @@ li{
     	background-color: #ffffff;
     	box-shadow: 3px 3px 3px 3px #e7dede;
 	}
-	
 	
 	.t1{
 	font-size:18px;
@@ -191,12 +190,14 @@ li{
 
 <body>
 	
-
-	<div class="page-content">
+	<div class="page-content" style="min-height:600px;">
 		
-	<div class="posting-wrap">
-		
-	
+	<div class="posting-wrap" >
+		<c:if test="${fn:length(list) eq 0}">
+		<div style="text-align:center; margin: 50px auto; ">
+								<h3>내역이 없습니다.</h3>
+		</div>
+			</c:if>
 		<c:forEach var="w" items="${list }" varStatus="i">
 		
 		<div class="posting-item" style="cursor: pointer;" >
@@ -236,8 +237,8 @@ li{
 		</div>
 	
 		</c:forEach>
-	</table>
-
+	</div>
+	</div>
 </body>
 <%@ include file="/WEB-INF/views/common/footer.jsp" %>
 </html>

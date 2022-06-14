@@ -18,5 +18,5 @@ public class ProductAndEtc {
 	private int sale;
 	private String productImgPath;
 	private int wishCount;
-	private int revscore;
+	private double revscore;
 }

@@ -685,14 +685,23 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	public String main(Model model) {
 		ArrayList<ProductAndEtc> list = productService.selectProductList();
 		model.addAttribute("list",list);
+/*		
 		for (int i = 0; i < list.size(); i++) {
+
+			//System.out.println(list.get(i).getProductTitle());
+
 		}
+		
+*/		
 		return "common/main";
 	}
 	
 	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
 	@ExceptionHandler
 	public String error1(Exception e) {
+
+		//System.out.println(e.getMessage());
+
 		return "common/error";
 	}
 

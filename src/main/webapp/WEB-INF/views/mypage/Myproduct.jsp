@@ -247,6 +247,7 @@ li{
 			
 						<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'"></button>
 
+
 						
 						
 						<c:if test="${p.payState eq 1}">
@@ -268,7 +269,7 @@ li{
 					
 						<c:if test="${p.productType eq 2}">
 							
-								
+
 								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
 							
 						</c:if>

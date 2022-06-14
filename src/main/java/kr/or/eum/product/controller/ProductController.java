@@ -78,6 +78,16 @@ public class ProductController{
             member = (Member)session.getAttribute("member");
         }
         if(member != null) {
+        	int memberNo = member.getMemberNo();
+            Expert expert = productService.selectExpertNo(memberNo);
+            if(expert !=null) {
+            	model.addAttribute("expertNo", expert.getExpertNo());
+            	model.addAttribute("expertApp", expert.getExpertApp());
+            	System.out.println("expert : "+expert);
+            }else {
+            	model.addAttribute("expertNo", 0);
+            	
+            }
         	model.addAttribute("grade", member.getGrade());
 			model.addAttribute("memberNo", member.getMemberNo());
 			System.out.println("memberNo : "+member.getMemberNo());
@@ -193,6 +203,16 @@ public class ProductController{
             member = (Member)session.getAttribute("member");
         }
         if(member != null) {
+        	int memberNo = member.getMemberNo();
+            Expert expert = productService.selectExpertNo(memberNo);
+            if(expert !=null) {
+            	model.addAttribute("expertNo", expert.getExpertNo());
+            	model.addAttribute("expertApp", expert.getExpertApp());
+            	System.out.println("expert : "+expert);
+            }else {
+            	model.addAttribute("expertNo", 0);
+            	
+            }
         	model.addAttribute("grade", member.getGrade());
 			model.addAttribute("memberNo", member.getMemberNo());
 			System.out.println("memberNo : "+member.getMemberNo());

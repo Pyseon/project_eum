@@ -226,24 +226,29 @@ li{
    
    
 <div class="container">
-<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
-	<!-- 실전용
+
 	<c:if test="${grade eq null}">
 		<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
 	</c:if>
 	<c:if test="${grade eq 0}">
 		<button type="button" class="writeButton" id="writeButton" onclick="manager();">등록하기</button>
 	</c:if>
+	<c:if test="${grade eq 1 }">
+		<c:choose>
+		<c:when test="${expertApp eq 1 }">
+			<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+		</c:when>
+		<c:otherwise>
+			<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
+		</c:otherwise>
+		</c:choose>
+		</c:if>
 	<c:if test="${grade eq 2}">
 		<button type="button" class="writeButton" id="writeButton" onclick="expertNeed();">등록하기</button>
-	</c:if>
-	<c:if test="${grade eq 1}">
-		<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
 	</c:if>
 	<c:if test="${grade eq 3}">
 		<button type="button" class="writeButton" id="writeButton" onclick="blacklist();">등록하기</button>
 	</c:if>
-	 -->
 			<div class="posting-wrap">
 
 	<c:forEach items="${list }" var="c" varStatus="i">

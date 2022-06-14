@@ -14,7 +14,7 @@
 <input type="hidden" name="reqNo" value="${req.reqNo }">
 
 	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold">요청 제목을 작성해 주세요
-		<input class="input-form" type="text" name="reqTitle" value="${req.reqTitle }" >
+		<input class="input-form" type="text" name="reqTitle" value="${req.reqTitle }" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 	</div>
 	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold">내용을 작성해 주세요
 		<textarea id="summernote" class="input-form" name="reqContent" >

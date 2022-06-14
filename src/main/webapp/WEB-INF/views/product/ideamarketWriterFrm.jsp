@@ -138,11 +138,11 @@
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>상담명</h3></div>
-			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." required>
+			<input class="input-form" type="text" name="productTitle" placeholder="상담명을 입력해주세요." pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</div>
 		<div class="intro" style="margin-bottom: 20px">
 			<div><h3>상담 간단한 소개</h3></div>
-			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" required>
+			<input class="input-form" type="text" name="productIntro" placeholder="상담에 간단한 소개를 해주세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</div>
 		<div class="content" style="margin-bottom: 30px">
 			<div><h3>상담 상세 설명</h3></div>
@@ -173,7 +173,7 @@
 			<div id="qst-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 				
 				</span>
 			</div>
@@ -181,27 +181,27 @@
 			<div id="ans-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 				</span>
 			</div>
 			
 		</div>
 		<div style="margin-bottom: 20px">
 			<div><h3>클래스 수업 주소</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;"required>
+			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" style="width: 80%;"pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</div>
 			
 		<div style="margin-bottom: 20px">
 			<div><h3>가격설정</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;" required>
+			<input class="input-form" type="text" name="cost" placeholder="가격을 정해주세요(단위 ' , '생략)" style="width: 30%;" oninput="this.value = this.value.replace(/[^0-9.\-]/g, '').replace(/(\..*)\./g, '$1');" required>
 			<span style="line-height: 2.5;">&nbsp; 원</span>
 			</span>
 		</div>
 				<div style="margin-bottom: 20px">
 			<div><h3>할인률</h3></div>
 			<span style="display: flex;">
-			<input class="input-form" type="text" name="sale" style="width: 5%;" required>
+			<input class="input-form" type="text" name="sale" style="width: 5%;" oninput="this.value = this.value.replace(/[^0-9.\-]/g, '').replace(/(\..*)\./g, '$1');" required>
 			<span style="line-height: 2.5;">&nbsp; %(미작성시 0%입니다)</span>
 			</span>
 		</div>
@@ -219,7 +219,7 @@
 			</div>
 			<div id="tag-opt">
 			<span style="display: flex;"> 
-			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 20%; height: 33px"required>
+			<input type="text" name="productTag2" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 20%; height: 33px"pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 			</span>
 			</div>
 		</div>
@@ -328,11 +328,11 @@
         var qstDiv = document.createElement("div");
         qstDiv.setAttribute("class","optBox");
         qstDiv.innerHTML += '<span style="line-height: 2.5;">질문 &nbsp;</span>';
-        qstDiv.innerHTML +='<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="30" required>';
+        qstDiv.innerHTML +='<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="30" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>';
         qstDiv.innerHTML +='<button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span><br>';
         
         qstDiv.innerHTML += '<span style="line-height: 2.5;">답변 &nbsp;</span>';
-        qstDiv.innerHTML += '<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="30" required>';
+        qstDiv.innerHTML += '<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="30" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>';
         
         $("#qna").append(qstDiv);
         qstCount++;
@@ -368,7 +368,7 @@
         if(tagCount >= 20) return;
         var tagDiv = document.createElement("div");
         tagDiv.setAttribute("class","optBox");
-        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" id="tag22" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19.5%;  onkeydown="checkSpacebar();" onkeyup="checkSpacebar();" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+        tagDiv.innerHTML = '<span style="display: flex; margin-left: 0px !important; margin-right: -32px !important; "><input type="text" name="productTag2" id="tag22" class="pro-input tag-val" placeholder="태그를 입력하세요" style="width: 19.5%;  onkeydown="checkSpacebar();" onkeyup="checkSpacebar();" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required"><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
         $("#tag-opt").append(tagDiv);
         tagCount++;
         

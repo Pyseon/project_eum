@@ -671,21 +671,20 @@
 	</select>
 	
 	<!-- 윤지 -->
-	<select id="selectProductList" resultType="pro">
-		select 
-			rnum, 
-			product_no as productNo, 
-			product_title as productTitle,  
-			product_intro as productIntro, 
-			cost, 
-			sale, 
-			product_imgpath as productImgPath
-        from
- 			(select rownum as rnum,n.* from
-				(select product_no, product_title, expert_no, product_intro, cost, sale, product_imgpath,
-    				(select nvl(count(*),0) from wishlist_tbl w where w.product_no = p.product_no) as wishCount
-				from product_tbl p order by wishCount desc)n) 
-		where rnum between 1 and 9
+	<select id="selectProductList" resultType="proEtc">
+		select * from
+			(select rownum as rnum,n.* from
+                (select product_no as productNo, 
+                        product_title as productTitle, 
+                        expert_no as expertNo, 
+                        product_intro as productIntro, 
+                        cost, 
+                        sale, 
+                        product_imgpath as productImgPath,
+                    (select nvl(count(*),0) from wishlist_tbl w where w.product_no = p.product_no) as wishCount,
+                    	(select avg(nvl(review_star, 0)) from review_tbl rev where rev.product_no = p.product_no)as revScore
+                from product_tbl p order by wishCount desc)n)
+                where rnum between 1 and 15
 	</select>
 </mapper>
 	

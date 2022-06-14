@@ -187,6 +187,7 @@
 	  </select>
 	   <select id ="selectWishlist" resultType="productAndPayAndwish">
 	 		select 
+	 			product_tbl.expert_no as expertNo,
 	 			product_tbl.product_no as productNo,
 	 			wishlist_tbl.wish_no as wishNo,
 	 			product_tbl.product_type as productType,

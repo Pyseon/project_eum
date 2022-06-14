@@ -265,6 +265,11 @@
 					const startTime = null;
 					//상담 counsel_tbl추가용
 					const productType = ${product.productType};
+					/*
+					if(productType!=1){
+						payState = 2;
+					}
+					*/
 					console.log("ajax실행");
 					console.log(memberNo);
 					console.log(productNo);

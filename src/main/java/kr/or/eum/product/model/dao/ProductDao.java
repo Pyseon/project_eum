@@ -19,6 +19,7 @@ import kr.or.eum.product.model.vo.Chat;
 import kr.or.eum.product.model.vo.Counsel;
 import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.product.model.vo.Product;
+import kr.or.eum.product.model.vo.ProductAndEtc;
 import kr.or.eum.product.model.vo.Review;
 import kr.or.eum.wishlist.model.vo.Wishlist;
 import kr.or.eum.product.model.vo.ProReviewMember;
@@ -307,9 +308,9 @@ public class ProductDao {
 		//System.out.println("성공4"+list);
 		return list;
 	}
-	public ArrayList<Product> selectProductList() {
+	public ArrayList<ProductAndEtc> selectProductList() {
 		List list = sqlSession.selectList("product.selectProductList");
-		return (ArrayList<Product>) list;
+		return (ArrayList<ProductAndEtc>) list;
 	}
 
 }

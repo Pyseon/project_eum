@@ -14,4 +14,5 @@ public class ProductAndPayAndwish {
 	private String memberNo;
 	private String productImgPath;
 	private String productType;
+	private String expertNo;
 }

@@ -9,7 +9,7 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-	<h1 id="main-title">> 공지사항</h1>
+	<h1 id="main-title">> 자주 묻는 질문</h1>
 	<hr>		
 		<div class="searchBox">
 			<form action="/faqList.do" method="post">
@@ -47,6 +47,7 @@
 				<tr class="tr-2" onclick="location.href='faqDetail.do?faqNo=${faq.FAQNo}'">
 					<td>${(reqPage-1)*10 + i.count }</td>
 					<td>
+					
 					<c:choose>
 						<c:when test="${faq.FAQType == 1 }">
 							서비스 소개
@@ -73,6 +74,7 @@
 							신고 / 패널티
 						</c:when>
 					</c:choose>
+					
 					</td>
 					<td>${faq.FAQTitle }</td>
 					</tr>

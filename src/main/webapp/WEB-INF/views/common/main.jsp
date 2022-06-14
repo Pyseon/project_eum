@@ -317,9 +317,11 @@
 		<h2 class="fs-bold">인기 있는 상담 &amp; 클래스</h2>
     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
+      
+      
 		<c:forEach items="${list}" var="list" varStatus="status">
-        <div class="item active">
-          <div class="col-sm-4">
+        <div class="item active" >
+          <div class="col-sm-4" style="width:20%;">
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
@@ -439,7 +441,7 @@
 		window.location.href ='/ClassList.do?reqPage=1&selPro=전체'
 	});
 	$("#communityView").click(function(){
-		window.location.href ='/commnityList.do?category=2&reqPage=1'
+		window.location.href ='/communityList.do?category=2&reqPage=1'
 	});	
 	
 	$(function() {

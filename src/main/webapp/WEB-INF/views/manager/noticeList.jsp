@@ -5,8 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>이음 :: 공지사항</title>
+
 <link rel="stylesheet" href="css/manager.css" />
+<style>
+.trrr{
+	cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
@@ -37,10 +44,10 @@
 					<th>등록한 매니저</th>
 				</tr>
 				<c:forEach items="${list }" var="ntc" varStatus="i">
-				<tr class="tr-2" onclick="location.href='noticeDetail.do?noticeNo=${ntc.noticeNo}'">
+				<tr class="tr-2" onclick="location.href='noticeDetail.do?noticeNo=${ntc.noticeNo}'" >
 					<td>${(reqPage-1)*10 + i.count }</td>
 					<td>${ntc.noticeNo }</td>
-					<td>${ntc.noticeTitle }</td>
+					<td class="trrr">${ntc.noticeTitle }</td>
 					<td>${ntc.noticeDate }</td>
 					<td>${ntc.memberId }</td>
 					</tr>

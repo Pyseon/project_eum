@@ -45,7 +45,7 @@
 			<h2>${ntc.noticeContent }</h2>
 		</div>
 		<div class="page-end-btn">
-			<button class="btn bc1 bs4">목록으로 돌아가기</button>
+			<button class="btn bc1 bs4" onclick="location.href='/noticeList.do?reqPage=1'">목록으로 돌아가기</button>
 		</div>
 	</div>
 	

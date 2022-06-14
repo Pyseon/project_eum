@@ -74,7 +74,7 @@
 			<h2>${faq.FAQContent }</h2>
 		</div>
 		<div class="page-end-btn">
-			<button class="btn bc1 bs4">목록으로 돌아가기</button>
+			<button class="btn bc1 bs4" onclick="location.href='/faqList.do?reqPage=1&faqType=0'">목록으로 돌아가기</button>
 		</div>
 	</div>
 	

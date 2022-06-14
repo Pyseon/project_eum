@@ -40,7 +40,8 @@
 				</c:if>
 		</div>
 		</div>
-		<div id=comm-content>
+		<div >
+			<div id=comm-content>
 			<c:forEach items="${list }" var="com" varStatus="i">
 				<!--리스트-->
 				<div class="card-wrap" style="cursor: pointer;"
@@ -128,6 +129,7 @@
 					</figcaption>
 				</div>
 			</c:forEach>
+			</div>
 			<div>${pageNavi }</div>
 		</div>
 	  </div>

@@ -8,6 +8,11 @@
 <title>이음 :: 관리자</title>
 <link rel="stylesheet" href="css/manager.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+<style>
+	#salesChartYear{
+		display: hidden;
+	}
+</style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -56,8 +61,6 @@
 		<div class="selectBox">
 			<select name="year" id="salesChartYear">
 				<option value="22">2022</option>
-				<option value="21">2021</option>
-				<option value="20">2020</option>
 			</select>
 		</div>
 			<div class="salesChartBody chartBody">

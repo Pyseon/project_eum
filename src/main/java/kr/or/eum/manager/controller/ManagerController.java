@@ -9,6 +9,8 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -29,6 +31,7 @@ import kr.or.eum.product.model.vo.Payment;
 import kr.or.eum.report.model.vo.AnswerReport;
 import kr.or.eum.report.model.vo.Report;
 
+@ControllerAdvice 
 @Controller
 public class ManagerController {
 	@Autowired
@@ -616,6 +619,13 @@ public class ManagerController {
 		FaQ faq = service.selectFaqDetail(faqNo);
 		model.addAttribute("faq", faq);
 		return "manager/faqDetail";
+	}
+	
+	//컨트롤러에서 발생하는 모든 에러를 처리하는 방식
+	@ExceptionHandler
+	public String error1(Exception e) {
+		System.out.println(e.getMessage());
+		return "common/error";
 	}
 
 }

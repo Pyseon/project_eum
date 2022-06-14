@@ -145,20 +145,17 @@
 			</h3>
 			</span>
 			</div>
+			
+			<div id="qna">
 			<div id="qst-opt">
-				<span style="display: flex;"> 
-				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" required>
-				
-				</span>
+					<span style="line-height: 2.5;">질문 &nbsp;</span>
+					<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="30" required>
 			</div>
-			&nbsp;
 			<div id="ans-opt">
-				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" required>
-				</span>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="30" required>
 			</div>
+		</div>	
 			
 		</div>
 		<div style="margin-bottom: 20px">

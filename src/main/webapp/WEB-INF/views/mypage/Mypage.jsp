@@ -22,6 +22,7 @@
 							<div class="content-all-wrap">
 								<div class="mypage-content">
 									<input type="hidden" name="memberNo" value="${sessionScope.member.memberNo}">
+									<input type="hidden" name="grade" value="${sessionScope.member.grade}">
 									<input type="hidden" name="birth" value="${sessionScope.member.birth}">
 										<input type="hidden" name="enrollDate" value="${sessionScope.member.enrollDate}">
 									<div class="content-box-title-wrap">

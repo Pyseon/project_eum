@@ -128,17 +128,18 @@ public class ProductController{
 	
 	@RequestMapping(value="/classWrite.do")
 		public String classWrite(Product pro, MultipartFile file, HttpServletRequest request) {
-		System.out.println("=======>?>>"+pro);
-		System.out.println(pro.getProductImgname());
-		System.out.println(pro.getProductImgPath());
-		System.out.println(file.getOriginalFilename());
+		String filename = file.getOriginalFilename();
+		if(filename == null) {
+			pro.setProductImgname("class2.png");
+			pro.setProductImgPath("class2.png");
+		}
 		String savePath 
 		= request.getSession().getServletContext().getRealPath("/img/product/ClassList/");
 		
 		//파일명이 기존파일과 겹치는 경우 기존파일을 삭제하고 새파일만 남는 현상이 생김(덮어쓰기)
 		//파일명 중복처리 (뒤에 넘버를 붙인다든가..)
 		//사용자가 업로드한 파일 이름
-		String filename = file.getOriginalFilename();
+		//String filename = file.getOriginalFilename();
 		//test.txt -> text_1.text /  text_1.txt->text_2.txt 중복처리 로직
 		//업로드한 파일명이 test.txt인경우 -> test / .txt 두부분으로 분리함
 		//subString은 매개변수 두개면 첫번쨰부터 두번째까지 잘라서 반환
@@ -252,7 +253,8 @@ public class ProductController{
 
 @RequestMapping(value="/expertWrite.do")
 	public String expertWrite(Product pro, HttpServletRequest request) {
-	System.out.println("expertWirte>>>>>>"+pro);
+		pro.setProductImgname("class2.png");
+		pro.setProductImgPath("class2.png");
 	int result = productService.expertWrite(pro);
 	return "redirect:/ExpertList.do?reqPage=1&selPro=%EC%A0%84%EC%B2%B4";
 

@@ -138,6 +138,7 @@
 		
 		<div class="title" style="margin-bottom: 20px">
 			<div><h3>제목</h3></div>
+
 			<input class="input-form" type="text" name="productTitle" placeholder="제목을 입력해주세요." 
 			pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 		</div>
@@ -145,6 +146,7 @@
 			<div><h3>제품 간단한 소개</h3></div>
 			<input class="input-form" type="text" name="productIntro" placeholder="제품에 간단한 소개를 해주세요" 
 			pattern=".{2,60}" required title="2~60글자 이내로 입력하세요" maxlength="60" required>
+
 		</div>
 		<div class="content" style="margin-bottom: 30px">
 			<div><h3>제품 상세 설명</h3></div>
@@ -177,13 +179,13 @@
 
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>		
+				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" pattern=".{2,1000}" required title="2~1000글자 이내로 입력하세요" maxlength="1000" required>		
 				</span>
 			</div>
 			<div id="ans-opt">
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
 
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" pattern=".{2,1000}" required title="2~1000글자 이내로 입력하세요" maxlength="1000" required>
 				</span>
 			</div>
 		</div>	

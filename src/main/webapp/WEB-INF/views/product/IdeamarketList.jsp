@@ -233,7 +233,7 @@ li{
    	<div class="posting-wrap">
    		<c:forEach items="${list }" var="c" varStatus="i">
    			<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
-   				<img src="./img/product/ExpertList/ba7da2c7fa66b6a81d357df4a4113333.jpg">
+   				<img src="./img/ExpertList/idmar.png">
    				<div class="posting-connect">
    					<ul>
    						<li>

@@ -11,6 +11,16 @@
 		margin-bottom: 50px;
 		width: 100%;
 	}
+	.refuse-tbl{
+		height: 300px;
+	}
+	.cer-img{
+		height: 500px;
+		width: 500px;
+	}
+	.expertTbl_top td{
+		height: 50px;
+	}
 </style>
 </head>
 <body>
@@ -23,19 +33,11 @@
 		<table class="expertTbl expertTbl_top">
 			<tr>
 				<th>상담분야</th>
-				<td>${exp.expertCategory }</td>
-			</tr>
-			<tr>
-				<th>태그</th>
-				<td>${exp.expertTag }</td>
-			</tr>
-			<tr>
-				<th>자격</th>
-				<td>가입자격은 이거이거가 필요하다</td>
+				<td colspan="2">${exp.expertCategory }</td>
 			</tr>
 			<tr>
 				<th>자격증</th>
-				<td>${exp.credential }</td>
+				<td colspan="2">${exp.credential }</td>
 			</tr>
 			<tr>
 				<th>발급기관/취득일시</th>
@@ -44,7 +46,7 @@
 			</tr>
 			<tr>
 				<th>자격증 사본</th>
-				<td>${exp.certificatePath}</td>
+				<td colspan="2"><img class="cer-img" src="/img/expert/${exp.certificatePath }"></td>
 			</tr>
 		</table>
 		<h2>판매자 정보</h2>
@@ -68,14 +70,14 @@
 		</table>
 
 				<h2>기각</h2>
-				<table class="expertTbl">
+				<table class="expertTbl refuse-tbl">
 					<tr>
 						<th>기각 사유</th>
 						<td>${rexp.refuseContent }</td>
 					</tr>
 				</table>
 		<div class="backPage">
-			<button class="btn bc1 bs4" onclick="location.href=/appExpertList.do?memberNo=${sessionScope.member.memberNo}">목록으로</button>
+			<button class="btn bc1 bs4" onclick="location.href='/appExpertList.do?memberNo=${sessionScope.member.memberNo}'">목록으로</button>
 		</div>
 	</div>
 </div>

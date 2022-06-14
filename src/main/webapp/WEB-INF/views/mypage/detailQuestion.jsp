@@ -12,7 +12,7 @@
 	<h1>>1:1 문의 상세</h1>
 	<hr>
 	<div>
-		<h3>질문 번호: ${qst.qstNo }</h3>
+		<h3>문의 번호: ${qst.qstNo }</h3>
 		<h3>제목: ${qst.qstTitle }</h3>
 		<h3>날짜: ${qst.qstDate.substring(0,10) }</h3>
 		<h3>시간: ${qst.qstDate.substring(11,16) }</h3>

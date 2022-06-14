@@ -9,7 +9,7 @@
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="container">
-	<h1 id="main-title">> 공지사항</h1>
+	<h1 id="main-title">> 자주 묻는 질문</h1>
 	<hr>		
 		<div class="searchBox">
 			<form action="/faqList.do" method="post">

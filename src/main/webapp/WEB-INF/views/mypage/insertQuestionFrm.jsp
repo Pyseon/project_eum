@@ -8,11 +8,11 @@
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
+	<div class="container">
 	<h1>>1:1 질문</h1>
 	<hr>
-	<div class="container">
 	<form action="/insertQuestion.do" method="post">
-		<input class="managerTitle" type="text" name="qstTitle" placeholder="제목을 입력하세요.">
+		<input class="managerTitle" type="text" name="qstTitle" placeholder="제목을 입력하세요." maxlength="50">
 		
 		<!-- 썸머노트 -->
 		<div class="pt-1" style="margin-bottom: 50px;">

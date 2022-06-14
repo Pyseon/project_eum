@@ -40,7 +40,7 @@
 				<form action="insertAnswer.do" method="post" class="answerForm">
 			<span class="material-symbols-outlined ansRe">
 				subdirectory_arrow_right</span><h2>답변</h2>
-				<input type="text" class="managerTitle" name="ansTitle" placeholder="제목">
+				<input type="text" class="managerTitle" name="ansTitle" placeholder="제목" maxlength="50">
 				<div class="pt-1" style="margin-bottom: 50px;">
 					<textarea id="summernote" name="ansContent"></textarea>
 				</div>

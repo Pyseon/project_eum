@@ -678,4 +678,15 @@ public class MemberController {
 			return str;
 		}
     }
+    
+    @RequestMapping(value = "/redirectFaq.do")
+	public String manaMember(HttpServletRequest request) {
+		Member member = (Member)request.getSession().getAttribute("member");
+		if(member==null) {
+			request.setAttribute("msg", "로그인이 필요합니다.");
+			request.setAttribute("url", "/");
+			return "common/alert";
+		}
+		return "redirect:/myQuestionList.do?memberNo="+member.getMemberNo()+"&reqPage=1&selectNum=0";
+    }
 }

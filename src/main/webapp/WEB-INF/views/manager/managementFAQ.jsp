@@ -55,7 +55,6 @@
 					<td>${faq.FAQTitle }</td>
 					<td>${faq.FAQDate }</td>
 					<td><button class="bc3 bs6" onclick="location.href='/updateFAQFrm.do?FAQNo=${faq.FAQNo}'">수정</button></td>
-					<!--<td><button class="bc3 bs6" onclick="location.href='/deleteFAQ.do?FAQNo=${faq.FAQNo}'">삭제</button></td> -->
 					<td><button class="btn bc2 bs1 modal-open-btn delFAQ" target="#deleteFAQ-modal" value=${faq.FAQNo }>삭제</button></td>	
 					</tr>
 					</c:forEach>

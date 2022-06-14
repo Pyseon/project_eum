@@ -91,12 +91,13 @@ display: flex;
 		</div>
 		<div style="margin: 70px 0px 0px 680px; display: flex; justify-content: space-between;">
 		
+		<c:if test="${sessionScope.member.memberNo eq req.memberNo }">
 			<c:if test="${sei eq 0 }">
 				<button class="btn bc1 bs4 reqbtn" onclick="location.href='/updateRequestFrm.do?reqNo=${req.reqNo }'" style="width:100%; height:40px;">수정하기</button>
 				
 				<button class="btn bc1 bs4 reqbtn" onclick="location.href='/deleteRequest.do?reqNo=${req.reqNo}'" style="width:100%; height:40px; margin-left:10px;">취소하기</button>	
 			</c:if>
-
+		</c:if>
 	
 		</div>
 		</div>
@@ -106,9 +107,10 @@ display: flex;
 		 ${req.reqContent }
 		 </div>
 		</div>
+		<c:if test="${sessionScope.member.memberNo ne req.memberNo }">
 		<c:if test="${sessionScope.member.grade == 1 }">
 			<c:if test="${se eq 0 }">
-				<c:if test="${existReqAsk eq 0 }">
+				<c:if test="${sei eq 0 }">
 					<form action="/insertreqask.do" method="post"
 						onsubmit="checkForm();return false" enctype="multipart/form-data">
 						<div class="Ask">
@@ -120,6 +122,7 @@ display: flex;
 					</form>
 				</c:if>
 			</c:if>
+		</c:if>
 		</c:if>
 		<div style="display: flex; justify-content: space-between; border-bottom: 2px solid rgba(220, 220, 220, 0.59);">
 		<div class="tag-list-wrap">
@@ -145,7 +148,7 @@ display: flex;
 					</li>
 				</c:when>
 				<c:otherwise>
-					<li><span id="report"><a onclick="loginNeed();">신고하기</a></span></li>
+					<li><span id="report" ><a onclick="loginNeed();" style="cursor: pointer;">신고하기</a></span></li>
 				</c:otherwise>
 			</c:choose>
 			</span>
@@ -159,7 +162,7 @@ display: flex;
 		<h1 style="font-weight:bold;">제안한 전문가</h1>
 	</c:when>
 	<c:otherwise>
-	<h1 style="font-weight:bold;">선택받은 전문가</h1>
+	<h1 style="font-weight:bold;">채택된 전문가</h1>
 	</c:otherwise>
 	</c:choose>
 	<div class="posting-wrap">
@@ -175,7 +178,9 @@ display: flex;
 		</div>
 		<div>
 		<c:if test="${sessionScope.member.memberNo eq req.memberNo}">
+		<c:if test="${c.selectExpert eq 0 }">
 			<button class="btn bc1" onclick="location.href='selectExpert.do?reqNo=${c.reqNo}&expertNo=${c.expertNo }'" >선택하기</button>
+		</c:if>
 		</c:if>
 		
 		</div>

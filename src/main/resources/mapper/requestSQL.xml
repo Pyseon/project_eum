@@ -20,7 +20,7 @@
 		where req_category=#{selReq}
 	</if>
 	order by req_no desc)b)
-	where rnum between 1 and 100
+	where rnum between #{start} and #{end}
 	</select>
 	
 	<insert id="requestWrite" parameterType="reqst">
@@ -37,6 +37,7 @@
 		TO_CHAR(SYSDATE,'YYYY-MM-DD'),
 		0,
 		0
+		
 		)
 	</insert>
 
@@ -71,7 +72,8 @@
  	select 
  	reqask_no as reqaskNo,
  	req_no as reqNo,
- 	expert_no as expertNo
+ 	expert_no as expertNo,
+ 	select_expert as selectExpert
  	from reqask_tbl
  	where req_no = #{value}
 	</select>
@@ -92,7 +94,8 @@
  	expert_no as expertNo,
     expert_name as expertName,
     expert_category as expertCategory,
-    member_picturepath as memberPicturepath
+    member_picturepath as memberPicturepath,
+    select_expert as selectExpert
  	from reqask_tbl
     join expert_tbl using(expert_no)
     join member_tbl using(member_no)

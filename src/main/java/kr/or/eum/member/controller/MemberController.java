@@ -200,6 +200,7 @@ public class MemberController {
 	@RequestMapping(value="/Myproject.do")
 	public String Myproject(Model model, HttpSession session, int memberNo) {
 		ArrayList<ProductAndExpert> list = service.selectMyproject(memberNo);
+		System.out.println(list);
 		model.addAttribute("list", list);
 		return "mypage/Myproject";
 	}

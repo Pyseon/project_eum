@@ -475,7 +475,9 @@
   	</select>
 
 	<select id="selectExpertNo" parameterType="int" resultType="expert">
-		select expert_no as expertNo
+		select 
+		expert_no as expertNo,
+		expert_app as expertApp
 		from expert_tbl where member_no=#{memberNo}
 	</select>
 	

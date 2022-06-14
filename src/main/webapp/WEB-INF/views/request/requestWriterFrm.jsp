@@ -58,7 +58,7 @@
 		<option value="자기계발">자기계발</option>
 		</select>
 	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold " >요청 제목을 작성해 주세요
-		<input class="input-form" type="text" name="reqTitle" required>
+		<input class="input-form" type="text" name="reqTitle" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 	</div>
 	
 	
@@ -70,7 +70,7 @@
 		
 	</div>
 	<div style="margin-top: 50px; font-size:25px; font-family: fs-bold">요청페이지에서 사용할 닉네임을 작성해 주세요
-		<input class="input-form" type="text" name="reqNick" required>
+		<input class="input-form" type="text" name="reqNick" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 	</div>
 	
 	
@@ -81,7 +81,7 @@
 	</div>
 	<div id="tag-opt">
 		<span style="display: flex;">
-		<input type="text" name="reqTag" class="req-input tag-val" placeholder="태그를 작성하세요" required>
+		<input type="text" name="reqTag" class="req-input tag-val" placeholder="태그를 작성하세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 		</span>
 	</div>
 	
@@ -162,7 +162,7 @@ imgTarget.on('change', function(){
 	        if(tagCount >= 5) return;
 	        var tagDiv = document.createElement("div");
 	        tagDiv.setAttribute("class","optBox");
-	        tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="reqTag2" class="req-input tag-val" placeholder="태그를 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
+	        tagDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="reqTag2" class="req-input tag-val" placeholder="태그를 입력하세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
 	        $("#tag-opt").append(tagDiv);
 	        tagCount++;
 	        

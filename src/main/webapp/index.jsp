@@ -119,6 +119,10 @@
 	.img-btn-wrap {
 		margin-right: 25px;
 	}
+	
+	.blueAdd{
+        filter:invert(31%) sepia(87%) saturate(2886%) hue-rotate(219deg) brightness(98%) contrast(94%);
+    }
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -624,14 +628,11 @@
 	});
 	
 	
-	
-	$('#icon-img1').hover(function() {
-		$('#icon-img1').attr("src", "./img/category/전체b.png");
-		$('#icon-name1').css("color", "#3865f2");
-	}, function() {
-		$('#icon-img1').attr("src", "./img/category/전체.png");
-		$('#icon-name1').css("color", "#333333");
-	});
+	$(".icon-img").hover(function(){
+        $(this).addClass("blueAdd");
+    }, function(){
+        $(this).removeClass("blueAdd");
+    });
 	
 </script>
 

@@ -36,6 +36,7 @@
  		
 
 select 
+		p.product_type as productType,
         e.member_no as memberNo,
         p.product_no as productNo,
         p.product_title as productTitle,

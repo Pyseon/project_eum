@@ -247,7 +247,9 @@ li{
 								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
 							</c:if>
 							<c:if test="${p.payState eq 2}">
-								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+								<c:if test="${p.reviewNo eq null}">
+									<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+								</c:if>
 							</c:if>
 						</c:if>
 						<c:if test="${p.productType eq 3}">
@@ -255,10 +257,12 @@ li{
 								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
 							</c:if>
 							<c:if test="${p.payState eq 2}">
-								<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+								<c:if test="${p.reviewNo eq null}">
+									<button class="btn bc5 bs7" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/reviewFrm.do?payNo=${p.payNo}'">후기작성</button>
+								</c:if>
 							</c:if>
 						</c:if>
-						
+					
 			</div>
 		</div>
 		

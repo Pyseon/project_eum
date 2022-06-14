@@ -141,7 +141,7 @@
   	</select>
   		<!-- 재민 내 구매목록 -->
 	  <select id ="selectProductList" resultType="productAndPay">
-	 		select 
+	 	select 
 	 			product_tbl.product_no as productNo,
 	 			product_title as productTitle,
 	 			product_type as productType,
@@ -149,13 +149,24 @@
 	 			market_path as marketPath,
 	 			pay_date as payDate, 
 	 			product_imgPath as productImgPath,
-	 			payment, 
-	 			pay_state as paystate,
+	 			payment as payMent, 
+	 			pay_state as payState,
 	 			pay_No as payNo,
 	 			member_No as memberNo
 			from product_tbl
 			join payment_tbl on (payment_tbl.product_no = product_tbl.product_no)
-			where member_no=#{memberNo}
+			where payment_tbl.member_no=#{memberNo}
+			
+
+	  </select>
+	  <select id ="selectreview" resultType="review">
+	 	
+	 	select 
+		review_tbl.review_no as reviewNo
+		
+		from review_tbl
+       
+        where review_tbl.member_no=#{memberNo}
 			
 
 	  </select>
@@ -164,7 +175,7 @@
 	 			pay_no as payNo,
 	 			product_no as productNo,
 	 			pay_date as payDate,
-	 			payment,
+	 			payment as payMent,
 	 			pay_usepoint as payUsepoint,
 	 			pay_addpoint as payAddpoint
 	 			

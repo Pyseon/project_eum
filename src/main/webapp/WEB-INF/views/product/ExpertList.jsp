@@ -222,11 +222,11 @@ li{
 	</c:if>
 	<c:if test="${grade eq 1 }">
 		<c:choose>
-		<c:when test="${sessionScope.expert.expertApp eq 1 }">
-			<button type="button" class="writeButton" id="writeButton" onclick="location.href='/classWriterFrm.do'">등록하기</button>
+		<c:when test="${expertApp eq 1 }">
+			<button type="button" class="writeButton" id="writeButton" onclick="location.href='/expertWriterFrm.do'">등록하기</button>
 		</c:when>
 		<c:otherwise>
-			<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
+			<button type="button" class="writeButton" id="writeButton" onclick="notapp();">등록하기</button>
 		</c:otherwise>
 		</c:choose>
 		</c:if>
@@ -334,6 +334,10 @@ li{
 			alert('블랙리스트 회원은 등록할 수 없습니다.');
 			location.href="/ExpertList.do?reqPage=1&selPro=전체";
 		}
+		function notapp(){
+			alert('전문가 승인이 되지 않았습니다');
+			location.href="/ExpertList.do?reqPage=1&selPro=전체";
+			}
    
    
 		$(function(){

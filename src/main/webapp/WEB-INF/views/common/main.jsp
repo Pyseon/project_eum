@@ -34,36 +34,36 @@
     height:450px;
 }
 
-.col-sm-6{
-	background-color:transparent;
-}
-.main-slider-wrap>.col-sm-6:first-child{
-	   display:inline-block;
-	   width:60%;
-	   margin-top: 80px;
-	   padding-left:30%;
-}
-.main-slider-wrap>.col-sm-6:last-child{
-		display:inline-block;
-	  width:40%; 
-	   margin: 0 auto;
-}
-.f-white{
-	color:#fff !important;
-}
-#slider{
-/*
-	width: 60%;
-	margin:0 auto;
-	padding: 3%;
-	*/
-}
-#slider-wrap{
+	.col-sm-6{
+		background-color:transparent;
+	}
+	.main-slider-wrap>.col-sm-6:first-child{
+		   display:inline-block;
+		   width:60%;
+		   margin-top: 80px;
+		   padding-left:30%;
+	}
+	.main-slider-wrap>.col-sm-6:last-child{
+			display:inline-block;
+		  width:40%; 
+		   margin: 0 auto;
+	}
+	.f-white{
+		color:#fff !important;
+	}
+	#slider{
 	/*
-	 background-color:#4966f5;
-	 */ 
-}
-
+		width: 60%;
+		margin:0 auto;
+		padding: 3%;
+		*/
+	}
+	#slider-wrap{
+		/*
+		 background-color:#4966f5;
+		 */ 
+	}
+	
     .main-img-btn{
         width: 186px;
         height: 46px;
@@ -127,6 +127,22 @@
     .productinfo img{
     	height: 265px;
     }
+    
+    .col-4{
+    	margin-bottom: 50px;
+    	padding: 15px !important;
+    }
+    
+    .likeTitle{
+    	margin-top: 90px;
+    }
+    
+    .productinfo h2 {
+    	font-size: 18px !important;
+    	font-weight: bold !important;
+    	color: #a7a7a7 !important;
+    }
+    .
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/common/header.jsp"%>
@@ -314,21 +330,21 @@
 	<hr>
 	<div class="recommended_items container">
 		<!--recommended_items-->
-		<h2 class="fs-bold">인기 있는 상담 &amp; 클래스</h2>
+		<h2 class="fs-bold likeTitle">인기 있는 상담 &amp; 클래스</h2>
     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
       
       
 		<c:forEach items="${list}" var="list" varStatus="status">
         <div class="item active" >
-          <div class="col-sm-4" style="width:20%;">
+          <div class="col-sm-4 col-4" style="width:25%;">
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
                   <img src="/img/product/ClassList/${list.productImgPath }" />
-                  	<h2>${list.productTitle }</h2>
                   <a href="#" class="btn">${list.productIntro}</a><br>
-                  ${list.sale }% ${list.cost }원
+                  ${list.productCategory}
+                  ${list.wishCount } ${list.revscore }
                   <!-- 별점추가 -->
                 </div>
               </div>

@@ -157,7 +157,7 @@
 			<div id="qst-opt">
 				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
+				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 				
 				</span>
 
@@ -165,7 +165,7 @@
 			<div id="ans-opt">
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
         
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 				</span>
 
 			</div>
@@ -174,7 +174,7 @@
 		</div>
 			<div style="margin-bottom: 20px">
 			<div><h3>상담예정지역</h3></div>
-			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
+			<input class="input-form" type="text" name="productAddr" placeholder="주소를 입력해주세요" pattern=".{2,50}" required title="2~50글자 이내로 입력하세요" maxlength="50" required>
 		</div>
 		
 		

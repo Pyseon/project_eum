@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 마이페이지</title>
 <style>
 	.backPage{
 		margin-top: 50px;

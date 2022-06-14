@@ -31,10 +31,10 @@
 					<input type="hidden" name="weakness" value="${comm.weakness }">
 						<p class="comm-write-p">제목</p>
 						<input type="text" name="commTitle" class="commTitle comm-input"
-							placeholder="제목을 입력하세요" value="${comm.commTitle }">
+							placeholder="제목을 입력하세요" value="${comm.commTitle }" required>
 						<p class="comm-write-p">간단한 소개</p>
 						<input type="text" name="commIntro" class="commIntro comm-input"
-							placeholder="간단한 소개" value="${comm.commIntro }">
+							placeholder="간단한 소개" value="${comm.commIntro }" required>
 						<!-- 대표이미지 -->
 						<div class="img-box-wrap">
 							<div class="commFileBox preview-image">
@@ -71,12 +71,12 @@
 								<c:forTokens var="adv" items="${comm.advantage}" delims="|" varStatus="i" >
 								 	<c:if test="${i.first }"> <!-- 첫번째값일때 -->
 										<input type="text" name="advantage2" class="comm-input adv-val"
-											value="${adv }"placeholder="내용을 입력하세요." maxlength="51" required>
+											value="${adv }"placeholder="내용을 입력하세요."  pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 								 	</c:if>
 								 	<c:if test="${i.index ge 1}"> <!-- 값이 하나만 있지 않고 두번째값 이상 존재할때-->
 										<div class="optBox">
 											<input type="text" name="advantage2"
-												class="comm-input adv-val" value="${adv }" required>
+												class="comm-input adv-val" value="${adv }"  pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 											<button class="delOptBtn optButton">
 												<i class="fa-solid fa-square-minus fc-9"></i>
 											</button>
@@ -101,12 +101,12 @@
 								<c:forTokens var="weak" items="${comm.weakness}" delims="|" varStatus="i" >
 								 	<c:if test="${i.first }"> <!-- 첫번째값일때 -->
 										<input type="text" name="weakness2" class="comm-input weak-val"
-											value="${weak }"placeholder="내용을 입력하세요." maxlength="51" required>
+											value="${weak }"placeholder="내용을 입력하세요." pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 								 	</c:if>
 								 	<c:if test="${i.index ge 1}"> <!-- 값이 하나만 있지 않고 두번째값 이상 존재할때-->
 										<div class="optBox">
 											<input type="text" name="weakness2"
-												class="comm-input weak-val" value="${weak }" required>
+												class="comm-input weak-val" value="${weak }"  pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required>
 											<button class="delOptBtn2 optButton">
 												<i class="fa-solid fa-square-minus fc-9"></i>
 											</button>
@@ -210,7 +210,7 @@
             if(advCount >= 5) return;
             var advDiv = document.createElement("div");
             advDiv.setAttribute("class","optBox");
-            advDiv.innerHTML = '<input type="text" name="advantage2" class="comm-input adv-val" placeholder="내용을 입력하세요."><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
+            advDiv.innerHTML = '<input type="text" name="advantage2" class="comm-input adv-val" placeholder="내용을 입력하세요." pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
             $("#adv-opt").append(advDiv);
             advCount++;
         });
@@ -226,7 +226,7 @@
             if(weakCount >= 5) return;
             var newDiv = document.createElement("div");
             newDiv.setAttribute("class","optBox");
-            newDiv.innerHTML = '<input type="text" name="weakness2" class="comm-input weak-val" placeholder="내용을 입력하세요."><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
+            newDiv.innerHTML = '<input type="text" name="weakness2" class="comm-input weak-val" placeholder="내용을 입력하세요."  pattern=".{2,20}" required title="2~20글자 이내로 입력하세요" maxlength="20" required><button class="delOptBtn2 optButton"><i class="fa-solid fa-square-minus fc-9"></i></button>';
             $("#weak-opt").append(newDiv);
             weakCount++;
         });

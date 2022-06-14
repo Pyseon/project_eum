@@ -66,7 +66,7 @@
     from product_tbl p
     join expert_tbl e using (expert_no)
     join member_tbl using(member_no)
-<choose>
+	<choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
             where product_Category=#{selPro} and product_type = 1
         </when>
@@ -134,7 +134,7 @@
     product_Tag as productTag,
     cost,
     sale,
-    (cost)*(sale)/100 as salecost,
+    ROUND(((cost)-((cost)*(sale)/100)), -3) as salecost,
     (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
     (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
     product_imgpath as productImgPath,
@@ -666,6 +666,24 @@
 	product_tbl
 	where 
 	product_no=#{productNo}
+	</select>
+	
+	<!-- 윤지 -->
+	<select id="selectProductList" resultType="pro">
+		select 
+			rnum, 
+			product_no as productNo, 
+			product_title as productTitle,  
+			product_intro as productIntro, 
+			cost, 
+			sale, 
+			product_imgpath as productImgPath
+        from
+ 			(select rownum as rnum,n.* from
+				(select product_no, product_title, expert_no, product_intro, cost, sale, product_imgpath,
+    				(select nvl(count(*),0) from wishlist_tbl w where w.product_no = p.product_no) as wishCount
+				from product_tbl p order by wishCount desc)n) 
+		where rnum between 1 and 9
 	</select>
 </mapper>
 	

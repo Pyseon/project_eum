@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>이음 :: 클래스</title>
 <style>
 	#category{
 		font:bold 16px "malgun gothic";
@@ -161,20 +161,18 @@
 			</h3>
 			</span>
 			</div>
+			
+		<div id="qna">
 			<div id="qst-opt">
-				<span style="display: flex;"> 
-				<span style="line-height: 2.5;">질문 &nbsp;</span>
-				<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="1000" required>
-				
-				</span>
+					<span style="line-height: 2.5;">질문 &nbsp;</span>
+					<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="30" required>
 			</div>
-			&nbsp;
 			<div id="ans-opt">
-				<span style="display: flex;"> 
 				<span style="line-height: 2.5;">답변 &nbsp;</span>
-				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="1000" required>
-				</span>
+				<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="30" required>
 			</div>
+		</div>	
+		
 			
 		</div>
 		<div style="margin-bottom: 20px">
@@ -287,6 +285,11 @@
         return str.replace(/[^\d]+/g, '');
     }
     
+    
+    
+    
+    
+    
     var qstList=[];
     $(document).on("change", ".qst-val", function(){
     	var qstStr = $(this).val();
@@ -315,35 +318,35 @@
     var ansCount = 1;
     
     $(".addOptBtn").on("click",function(){
-        if(qstCount >= 10) return;
+        if(qstCount >= 5) return;
+        
         var qstDiv = document.createElement("div");
         qstDiv.setAttribute("class","optBox");
-        qstDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important; "><input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#qst-opt").append(qstDiv);
-        qstCount++;
+        qstDiv.innerHTML += '<span style="line-height: 2.5;">질문 &nbsp;</span>';
+        qstDiv.innerHTML +='<input type="text" name="productQst2" class="pro-input qst-val" placeholder="질문을 입력하세요" maxlength="30" required>';
+        qstDiv.innerHTML +='<button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span><br>';
         
-        if(ansCount >= 10) return;
-        var ansDiv = document.createElement("div");
-        ansDiv.setAttribute("class","optBox");
-        ansDiv.innerHTML = '<span style="display: flex; margin-left: 32px !important; margin-right: -32px !important;"><input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" required"><button class="delOptBtn optButton"><i class="fa-solid fa-square-minus fc-9"></i></button></span>';
-        $("#ans-opt").append(ansDiv);
-        ansCount++;
+        qstDiv.innerHTML += '<span style="line-height: 2.5;">답변 &nbsp;</span>';
+        qstDiv.innerHTML += '<input type="text" name="productAns2" class="pro-input ans-val" placeholder="답변을 입력하세요" maxlength="30" required>';
+        
+        $("#qna").append(qstDiv);
+        qstCount++;
         
         $(".delOptBtn").off().on("click",function(){
         	qstList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productQst]").val(qstList);
               console.log(qstList);
-              $(this).parent().remove();
-              qstCount--;
               
               ansList.splice($(".delOptBtn").index(this)+1, 1);
               $("[name=productAns]").val(ansList);
               console.log(ansList);
-              $(this).parent().remove();
+              qstCount--;
               ansCount--;
+              $(this).parent().remove();
         });
     });
     
+//태그함수    
     var tagCount = 1;
     var tagList=[];
     $(document).on("change", ".tag-val", function(){

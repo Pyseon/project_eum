@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>>1:1문의 상세내역</title>
+<title>이음 :: 마이페이지</title>
 </head>
 <body>
 

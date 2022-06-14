@@ -38,9 +38,8 @@
 										
 									</div>
 									<div class="content-box">	
-										<!--  <input  class="input-form" type="text" name="memberNick" id="nick" placeholder="">							
-										<div class="fs-light" id="memberNick-test"></div><br>-->
-										<input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="${sessionScope.member.memberNick}">
+										
+										<input  class="input-form inputplus" type="text" name="memberNick" id="memberNick" placeholder="${sessionScope.member.memberNick}" required>
 												<div class="fs-light" id="memberNick-test"></div><br>
 									</div>
 								</div> <%--mypage-content --%>
@@ -49,7 +48,7 @@
 										<label for="pw">비밀번호*</label>
 									</div>
 									<div class="content-box">	
-										<input  class="input-form inputplus" type="password" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요.">
+										<input  class="input-form inputplus" type="password" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요." required>
 									</div>
 								</div>								
 								<div class="mypage-content">
@@ -58,7 +57,7 @@
 										
 									</div>
 									<div class="content-box">
-										<input class="input-form inputplus" type="password" name="memberPwRe" id="memberPwRe" placeholder="비밀번호를 다시 입력해주세요.">
+										<input class="input-form inputplus" type="password" name="memberPwRe" id="memberPwRe" placeholder="비밀번호를 다시 입력해주세요." required>
 										<div class="fs-light" id="memberPw-test"></div><br>
 									</div>									
 								</div>
@@ -67,13 +66,13 @@
 										<label for="phone">연락처* </label>
 									</div>
 									<div class="content-box">	
-										<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" placeholder="${sessionScope.member.memberPhone}">
+										<input class="input-form inputplus" type="text" name="memberPhone" id="memberPhone" placeholder="${sessionScope.member.memberPhone}" required>
 										<div class="fs-light" id="memberPhone-test"></div><br>
 									</div>
 									
 									<div class="img-box-wrap" style="margin:30px 10px;">
 							<div class="commFileBox preview-image" style="margin-right: 10px;">
-								<p class="comm-write-p" style="margin-bottom: 5px;">프로필사진 등록</p>
+								<p class="comm-write-p" style="margin-bottom: 5px;">프로필사진 등록(최대 9MB까지 지원됩니다.)</p>
 								<label for="input-file">사진 선택</label> <input type="file"
 									name="file" class="commFile upload-hidden"
 									id="input-file">

@@ -284,7 +284,7 @@ public class MemberController {
 	@RequestMapping(value="/Myproduct.do")
 	public String Myproduct(Model model, HttpSession session, int memberNo) {
 		ArrayList<ProductAndPayment> list = service.selectProductList(memberNo);
-		
+		System.out.println(list);
 		model.addAttribute("list", list);
 		
 		return "mypage/Myproduct";

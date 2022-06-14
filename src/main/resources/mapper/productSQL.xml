@@ -675,6 +675,7 @@
 		select * from
 			(select rownum as rnum,n.* from
                 (select product_no as productNo, 
+                		product_type as productType,
                         product_title as productTitle, 
                         expert_no as expertNo, 
                         product_intro as productIntro, 

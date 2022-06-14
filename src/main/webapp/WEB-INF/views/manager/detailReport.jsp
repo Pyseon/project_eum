@@ -125,6 +125,9 @@
 		$(".single-sidebar-widget").css("display", "none");
 		$(".wish-title-wrap").css("display", "none");
 		$("#purchaseBtn").css("display", "none");
+		$("#icon-report").css("display", "none");
+		$("#report").css("display", "none");
+		$(".title2").css("display", "none");
 		
 		//커뮤니티
 		$(".article-list").css("display", "none");

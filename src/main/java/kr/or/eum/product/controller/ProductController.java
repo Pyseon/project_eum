@@ -244,6 +244,7 @@ public String IdeamarketList(int reqPage, String selPro, Model model, HttpServle
 	model.addAttribute("pageNavi",ppd.getPageNavi());
 	model.addAttribute("reqPage", reqPage);
 	System.out.println("selPro : "+selPro);
+	System.out.println(ppd);
 
 	return "product/IdeamarketList";
 }

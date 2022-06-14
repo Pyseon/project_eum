@@ -684,5 +684,9 @@ public class ProductService {
 		return map;
 	}
 
+	public ArrayList<Product> selectProductList() {
+		return productDao.selectProductList();
+	}
+
 
 }

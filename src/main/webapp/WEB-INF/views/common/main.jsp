@@ -308,115 +308,28 @@
 	</div>
 	
 	<hr>
-	  <div class="recommended_items container">
-    <!--recommended_items-->
-    <h2 class="fs-bold">신규 클래스</h2>
-    <div
-      id="recommended-item-carousel"
-      class="carousel slide"
-      data-ride="carousel"
-    >
+	<div class="recommended_items container">
+		<!--recommended_items-->
+		<h2 class="fs-bold">인기 있는 상담 &amp; 클래스</h2>
+    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
+		<c:forEach items="${list}" var="list" varStatus="status">
         <div class="item active">
           <div class="col-sm-4">
             <div class="product-image-wrapper">
               <div class="single-products">
                 <div class="productinfo text-center">
-                  <img src="images/home/recommend1.jpg" alt="" />
-                  <h2>쉽게배우는 JAVA</h2>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="images/home/recommend2.jpg" alt="" />
-                  <h2>CSS만들기</h2>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="images/home/recommend3.jpg" alt="" />
-                  <h2>jQuery 이렇게만 하면 된다!</h2>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>해당 클래스 바로가기</a
-                  >
+                  <img src="/img/product/ClassList/${list.productImgPath }" />
+                  	<h2>${list.productTitle }</h2>
+                  <a href="#" class="btn">${list.productIntro}</a><br>
+                  ${list.sale }% ${list.cost }원
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="item">
-          <div class="col-sm-4">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="images/home/recommend1.jpg" alt="" />
-                  <h2>$56</h2>
-                  <p>Easy Polo Black Edition</p>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="images/home/recommend2.jpg" alt="" />
-                  <h2>$56</h2>
-                  <p>Easy Polo Black Edition</p>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-4">
-            <div class="product-image-wrapper">
-              <div class="single-products">
-                <div class="productinfo text-center">
-                  <img src="images/home/recommend3.jpg" alt="" />
-                  <h2>$56</h2>
-                  <p>Easy Polo Black Edition</p>
-                  <a href="#" class="btn btn-default add-to-cart"
-                    ><i class="fa fa-shopping-cart"></i>Add to cart</a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+    	</c:forEach> 
       </div>
-      <a
-        class="left recommended-item-control"
-        href="#recommended-item-carousel"
-        data-slide="prev"
-      >
-        <i class="fa fa-angle-left"></i>
-      </a>
-      <a
-        class="right recommended-item-control"
-        href="#recommended-item-carousel"
-        data-slide="next"
-      >
-        <i class="fa fa-angle-right"></i>
-      </a>
     </div>
   </div>
   <!--/recommended_items-->

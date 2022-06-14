@@ -307,5 +307,9 @@ public class ProductDao {
 		//System.out.println("성공4"+list);
 		return list;
 	}
+	public ArrayList<Product> selectProductList() {
+		List list = sqlSession.selectList("product.selectProductList");
+		return (ArrayList<Product>) list;
+	}
 
 }

@@ -447,8 +447,10 @@ public class MemberController {
 	//대권 회원가입
 	@RequestMapping(value="/join.do",method = RequestMethod.POST)
 	public String join(Member m, MultipartFile file, HttpServletRequest request) {
+
 		String filename = file.getOriginalFilename();
 		if(filename == "") {
+
 			m.setMemberPictureName("default-img.png");
 			m.setMemberPicturePath("default-img.png");
 		}else {
@@ -509,7 +511,7 @@ public class MemberController {
 		
 		service.insertMember(m);
 		
-		return "redirect:/";
+		return "member/joinSuccess";
 	}
 	//대권 메일테스트
 	/*

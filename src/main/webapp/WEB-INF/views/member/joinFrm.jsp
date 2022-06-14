@@ -10,6 +10,7 @@
 <style>
 	.firstbox{
 		margin: 0 auto;
+		margin-top: 30px !important;
 		width: 30%;
 	}
 	.joinfrmbox fieldset{
@@ -107,6 +108,7 @@
 	    color : green;
 	}
 	.incorrect{
+		margin-top: 70px !important;
 	    color : red;
 	}	
 	.mail-input-false{
@@ -131,7 +133,7 @@
 
 </style>
 <body>
-<%@ include file="/WEB-INF/views/member/memberheader.jsp"%>
+<%@ include file="/WEB-INF/views/common/header.jsp"%>
 	<div class="firstbox">
 	<div id="maintitle">회원가입</div>
 	<div id="star">*는 필수 입력사항입니다.</div>

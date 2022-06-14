@@ -227,6 +227,8 @@ li{
 			</ul>
 			</div>
 			<div>
+				<button class="btn bc5 bs7" id="login-btn" type="button" onclick="location.href='/imgVerProductDetail.do?productNo=${w.productNo}&&expertNo=${w.expertNo}'">보러가기</button>
+				
 				<button class="btn bc3 bs7" id="login-btn" type="button" onclick="location.href='/DeleteMywish.do?wishNo=${w.wishNo}&&memberNo=${sessionScope.member.memberNo}'">찜삭제</button>
 						
 				

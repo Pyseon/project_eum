@@ -22,7 +22,7 @@ li{
 	
 	.posting-item{
 	    box-sizing: border-box;
-    	width: 241px !important;
+    	width: 245px !important;
     	padding : 0px !important; 
     	height: 315px !important;
     	margin: 25px 10px 25px 10px;
@@ -207,8 +207,13 @@ li{
 	
 		<c:forEach var="p" items="${list }" varStatus="i">
 		
+			<c:if test="${p.payNo eq null}">
+								<h1>구매내역이 없습니다.</h1>
+			</c:if>
+		
+		
 		<div class="posting-item" style="cursor: pointer;" >
-			<!--<img src="./img/test/testimg1.png">-->
+			
 			  
 			 <img src="./img/product/ClassList/${p.productImgPath }">
 			<div class="posting-connect">
@@ -241,24 +246,14 @@ li{
 
 			<div class="marginBtn">		
 						<button class="btn bc3 bs7 sizeBtn" id="login-btn" type="button" onclick="location.href='/Myproductdetail.do?payNo=${p.payNo}'">주문상세</button>
-
-			<div>		
-
-			
-						<button class="btn bc3 bc7" id="file" onclick="location.href='/download.do?marketfile=${p.marketPath}'"></button>
-
-
-						
-						
-						<c:if test="${p.payState eq 1}">
-							<button class="btn bc3 bs7 sizeBtn" id="login-btn" type="button" onclick="location.href='/DeleteMyproduct.do?payNo=${p.payNo}&&memberNo=${sessionScope.member.memberNo}'">주문취소</button>
-						
-						</c:if>
+		
 						
 						
 						<c:if test="${p.productType eq 1}">
 							<c:if test="${p.payState eq 1}">
 								<button class="btn bc5 bs7 sizeBtn" id="login-btn" type="button" value="${p.payNo}"  onclick="location.href='/expertCounsel.do?payNo=${p.payNo}'">시작하기</button>
+								<button class="btn bc3 bs7 sizeBtn" id="login-btn" type="button" onclick="location.href='/DeleteMyproduct.do?payNo=${p.payNo}&&memberNo=${sessionScope.member.memberNo}'">주문취소</button>
+						
 							</c:if>
 							<c:if test="${p.payState eq 2}">
 
@@ -283,12 +278,16 @@ li{
 
 
 						</c:if>
-					
+			
 			</div>
+			
 		</div>
 		
 		</c:forEach>
-	</table>
+		</div>
+	
+		
+	
 <div id="test-modal" class="modal-bg">
 
 	<div class="modal-wrap">

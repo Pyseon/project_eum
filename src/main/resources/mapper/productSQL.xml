@@ -260,7 +260,7 @@
   			#{cost},
   			#{productQst},
   			#{productAns},
-  			#{productAddr},
+  			null,
   			#{sale},
   			#{productOption},
   			0,

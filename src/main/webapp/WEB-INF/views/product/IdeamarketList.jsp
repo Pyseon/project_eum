@@ -216,8 +216,20 @@ li{
           </table>
    </div>
       <div class="container">
+	<c:choose>
+		<c:when test="${grade eq null }">
+			<button type="button" class="writeButton" id="writeButton" onclick="loginNeed();">등록하기</button>
+		</c:when>
+		<c:when test="${grade eq 3}">
+		<button type="button" class="writeButton" id="writeButton" onclick="blacklist();">등록하기</button>
+		</c:when>
+		<c:otherwise>
+			<button type="button" class="writeButton" id="writeButton" onclick="location.href='/ideamarketWriterFrm.do'">등록하기</button>
+		</c:otherwise>
+	</c:choose>
+	
 
-   	
+
    	<div class="posting-wrap">
    		<c:forEach items="${list }" var="c" varStatus="i">
    			<div class="posting-item" style="cursor: pointer;" onclick="location.href='/productDetail.do?productNo=${c.productNo }&expertNo=${c.expertNo }';" >
@@ -301,19 +313,10 @@ li{
 		alert('로그인 후 이용해주세요.');
 		location.href="/loginFrm.do";
 		}
-		
-		function manager(){
-			alert('관리인은 클래스를 등록할 수 없습니다.');
-			location.href="/ClassList.do?reqPage=1&selPro=전체";
-			}
-		
-		function expertNeed(){
-			alert('전문가 인증을 받고 오세요.');
-			location.href="/ClassList.do?reqPage=1&selPro=전체";
-		}
+			
 		function blacklist(){
 			alert('블랙리스트 회원은 등록할 수 없습니다.');
-			location.href="/ClassList.do?reqPage=1&selPro=전체";
+			location.href="/ideamarketWriterFrm.do?reqPage=1&selPro=전체";
 		}
    
 	$(function(){

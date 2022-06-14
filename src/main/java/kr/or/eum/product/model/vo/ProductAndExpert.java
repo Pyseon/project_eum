@@ -14,6 +14,7 @@ public class ProductAndExpert {
 	private String productTitle;
 	private String productImgPath;
 	private String productIntro;
+	private String productType;
 	private String expertName;
 	private String payNo;
 	

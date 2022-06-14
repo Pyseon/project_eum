@@ -20,7 +20,7 @@
     product_Tag as productTag,
     cost,
     sale,
-    (cost)*(sale)/100 as salecost,
+    ROUND(((cost)-((cost)*(sale)/100)), -3) as salecost,
     (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
     (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
     product_imgpath as productImgPath,
@@ -58,7 +58,7 @@
     product_Tag as productTag,
     cost,
     sale,
-    (cost)*(sale)/100 as salecost,
+    ROUND(((cost)-((cost)*(sale)/100)), -3) as salecost,
     (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
     (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
     product_imgpath as productImgPath,
@@ -66,7 +66,7 @@
     from product_tbl p
     join expert_tbl e using (expert_no)
     join member_tbl using(member_no)
-<choose>
+	<choose>
         <when test="selPro!='전체'.toString()">    <!-- 카테고리 지정 -->
             where product_Category=#{selPro} and product_type = 1
         </when>
@@ -95,7 +95,7 @@
     product_Tag as productTag,
     cost,
     sale,
-    (cost)*(sale)/100 as salecost,
+    ROUND(((cost)-((cost)*(sale)/100)), -3) as salecost,
     (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
     (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
     product_imgpath as productImgPath,
@@ -134,7 +134,7 @@
     product_Tag as productTag,
     cost,
     sale,
-    (cost)*(sale)/100 as salecost,
+    ROUND(((cost)-((cost)*(sale)/100)), -3) as salecost,
     (select nvl(count(*),0) from review_tbl rev where rev.product_no = p.product_no) as revCount,
     (select ROUND(avg(nvl(review_star, 0)),1) from review_tbl rev where rev.product_no = p.product_no)as reviewStar,
     product_imgpath as productImgPath,

@@ -47,14 +47,21 @@
       	text-align:right;
   		width: 50%; 
       }
-      
+      #joinSuccess{
+      	margin: 0 auto;
+      	font-size: 20px;
+      	text-align: center;
+      	color: #3865f2;
+      	margin-bottom: 10px;
+      }
     </style>
 </head>
 <body>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <div class="container2">
-	<form class="login-form" id="login-form" action="/login.do" method="post">
+	<form class="login-form" id="login-form" action="/login.do" method="post">			
 		<fieldset>
+		<div class="fs-bold" id="joinSuccess">회원가입 성공 로그인을 해보세요!</div>
 			<input type="text" class="input-form" name="memberId" id="memberId" placeholder="이메일을 입력해주세요." required><br>
 			<input type="password" class="input-form" name="memberPw" id="memberPw" placeholder="비밀번호를 입력해주세요." required><br>
 			<div class="navi-me" id="navi-me">이메일 또는 비밀번호를 확인해주세요</div><br>

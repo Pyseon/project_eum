@@ -455,11 +455,11 @@ public class MemberController {
 	//대권 회원가입
 	@RequestMapping(value="/join.do",method = RequestMethod.POST)
 	public String join(Member m, MultipartFile file, HttpServletRequest request) {
-		System.out.println("컨트롤러 진입!");
-		System.out.println(m);
+		//System.out.println("컨트롤러 진입!");
+		//System.out.println(m);
 		String filename = file.getOriginalFilename();
 		if(filename == "") {
-			System.out.println("등록된이미지 없음!");
+			//System.out.println("등록된이미지 없음!");
 			m.setMemberPictureName("default-img.png");
 			m.setMemberPicturePath("default-img.png");
 		}else {
@@ -520,7 +520,7 @@ public class MemberController {
 		
 		service.insertMember(m);
 		
-		return "redirect:/";
+		return "member/joinSuccess";
 	}
 	//대권 메일테스트
 	/*

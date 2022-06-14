@@ -47,6 +47,7 @@
 				<tr class="tr-2" onclick="location.href='faqDetail.do?faqNo=${faq.FAQNo}'">
 					<td>${(reqPage-1)*10 + i.count }</td>
 					<td>
+					
 					<c:choose>
 						<c:when test="${faq.FAQType == 1 }">
 							서비스 소개
@@ -73,6 +74,7 @@
 							신고 / 패널티
 						</c:when>
 					</c:choose>
+					
 					</td>
 					<td>${faq.FAQTitle }</td>
 					</tr>

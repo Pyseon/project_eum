@@ -12,7 +12,7 @@ public class ProductAndEtc {
 	private String productTitle;
 	private int productType;
 	private String productCategory;
-	private int exeprtNo;
+	private int expertNo;
 	private String productIntro;
 	private int cost;
 	private int sale;

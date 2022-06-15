@@ -419,7 +419,8 @@
 						<div class="col-sm-4 col-4" style="width: 25%;">
 							<div class="product-image-wrapper">
 								<div class="single-products">
-									<div class="productinfo text-center">
+									<div class="productinfo text-center" style="cursor:pointer;"
+									onclick="location.href='/productDetail.do?productNo=${list.productNo }&expertNo=${list.expertNo }'">
 										<c:if test="${list.productType eq 1}">
 											<img src="./img/ExpertList/coun1.png">
 										</c:if>
@@ -457,94 +458,7 @@
 	</div>
 	<!--/recommended_items-->
 
-	<hr>
-	<div class="recommended_items container">
-		<!--recommended_items-->
-		<h2 class="fs-bold">신규 클래스</h2>
-		<div id="recommended-item-carousel" class="carousel slide"
-			data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="item active">
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="/img/product/ClassList/breakfast-4.png" alt="" />
-									<h2>여긴HTML로(상품명)</h2>
-									<a href="#" class="btn">여긴HTML로(상품설명)<br></a>
-									<p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="/img/product/ClassList/breakfast-4.png" alt="" />
-									<h2>여긴HTML로(상품명)</h2>
-									<a href="#" class="btn">여긴HTML로(상품설명)<br></a>
-									<p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="/img/product/ClassList/breakfast-4.png" alt="" />
-									<h2>여긴HTML로(상품명)</h2>
-									<a href="#" class="btn">여긴HTML로(상품설명)<br></a>
-									<p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="item">
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="/img/product/ClassList/breakfast-4.png" alt="" />
-									<h2>여긴HTML로(상품명)</h2>
-									<a href="#" class="btn">여긴HTML로(상품설명)<br></a>
-									<p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="/img/product/ClassList/breakfast-4.png" alt="" />
-									<h2>여긴HTML로(상품명)</h2>
-									<a href="#" class="btn">여긴HTML로(상품설명)<br></a>
-									<p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-sm-4">
-						<div class="product-image-wrapper">
-							<div class="single-products">
-								<div class="productinfo text-center">
-									<img src="/img/product/ClassList/breakfast-4.png" alt="" />
-									<h2>여긴HTML로(상품명)</h2>
-									<a href="#" class="btn">여긴HTML로(상품설명)<br></a>
-									<p>여긴HTML로(할인0% 여긴HTML로(가격)원</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!--/recommended_items-->
-
+	
 	<script>
 	//전문가, 클래스, 커뮤니티
 	$("#expertView").click(function(){

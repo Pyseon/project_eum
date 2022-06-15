@@ -182,6 +182,12 @@ li {
 .selPro-active {
 	border-bottom: 5px solid rgb(56, 101, 242) !important;
 }
+	#p-title-2{
+		overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 180px;
+	}
 </style>
 <%@ include file="/WEB-INF/views/common/header.jsp"%>
 <%@ include file="/WEB-INF/views/mypage/mypageheader.jsp"%>
@@ -191,7 +197,7 @@ li {
 
 
 	<div class="page-content" style="min-height: 600px;">
-
+ㄱ
 		<div class="posting-wrap">
 			<c:if test="${fn:length(list) eq 0}">
 				<div style="text-align: center; margin: 50px auto;">
@@ -205,17 +211,24 @@ li {
 
 				<div class="posting-item" >
 					<!--<img src="./img/test/testimg1.png">-->
-
-					<img src="./img/product/ClassList/${p.productImgPath }">
+ <c:if test="${p.productType eq 1}">
+			 	<img src="./img/ExpertList/coun1.png" style="width:245px; height:180px;">
+			 </c:if>
+			 <c:if test="${p.productType eq 2}">
+				 <img src="./img/product/ClassList/${p.productImgPath }">
+			 </c:if>
+			 <c:if test="${p.productType eq 3}">
+			 	 <img src="./img/ExpertList/idmar.png" style="width:245px; height:180px;">
+			 </c:if>
 					<div class="posting-connect">
 						<ul>
 							<li>
 
-								<div>
+								<div id="p-title-2">
 									<span class="card-category fs-bold">${p.productTitle }</span>
 								</div>
-								<div>
-									<span class="card-category fs-bold">${p.productIntro }</span>
+								<div id="p-title-2">
+									<span class="card-category">${p.productIntro }</span>
 
 								</div>
 

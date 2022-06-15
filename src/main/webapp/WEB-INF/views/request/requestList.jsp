@@ -138,7 +138,7 @@
 			<li>
 			<h1>${sessionScope.reqask.selectExpert }</h1>
 				<div class="t1" style="font-family: fs-bold !important;">
-					<img src="#">
+					<img src="./img/req-img.png">
 					<span class="reqcategory fs-bold">${c.reqCategory}</span>
 
 				</div>

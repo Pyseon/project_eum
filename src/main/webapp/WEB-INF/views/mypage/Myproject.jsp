@@ -197,7 +197,6 @@ li {
 
 
 	<div class="page-content" style="min-height: 600px;">
-ㄱ
 		<div class="posting-wrap">
 			<c:if test="${fn:length(list) eq 0}">
 				<div style="text-align: center; margin: 50px auto;">

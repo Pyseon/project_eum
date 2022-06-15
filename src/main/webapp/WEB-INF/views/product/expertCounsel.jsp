@@ -111,7 +111,7 @@
 					<c:choose>
 						<c:when test="${pay.payState eq 1}">
 						<c:choose>
-							<c:when test="${sessionScope.member.memberNo eq c.memberNo }">
+							<c:when test="${sessionScope.member.memberNo eq c.memberNo }"> 
 								<div class="check-box-allwrap">
 									<div class="check-box-wrap"><input class="checkbox" type="checkbox" id="checkbox" name="agree"></div>
 									<div class="check-agree">위 내용을 확인하셨습니까?</div>
